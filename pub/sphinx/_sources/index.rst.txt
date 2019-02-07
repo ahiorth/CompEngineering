@@ -14,3 +14,5 @@ Contents:
    ._book001
    ._book002
    ._book003
+   ._book004
+   ._book005

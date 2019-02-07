@@ -1,0 +1,8 @@
+.. !split
+
+References
+==========
+
+.. [Ref1]
+   Python Programming Language. `<http://python.org>`_.
+
