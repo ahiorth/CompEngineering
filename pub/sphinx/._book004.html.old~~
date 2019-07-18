@@ -1,0 +1,790 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="1.0">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Numerical integration &#8212; Modeling and Computational Engineering 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Ordinary differential equations" href="._book005.html" />
+    <link rel="prev" title="Linear and nonlinear equations" href="._book003.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  
+       <style type="text/css">
+         div.admonition {
+           background-color: whiteSmoke;
+           border: 1px solid #bababa;
+         }
+       </style>
+      </head>
+    <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="numerical-integration">
+<span id="ch-numint"></span><h1>Numerical integration<a class="headerlink" href="#numerical-integration" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>Numerical Integration<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>Before diving into the details of this section, it is worth pointing out that the derivation of the algorithms in this section follows a general pattern:</p>
+<ol class="arabic simple">
+<li>We start with a mathematical model (in this case an integral)</li>
+<li>The mathematical model is formulated in discrete form</li>
+<li>Then we design an algorithm to solve the model</li>
+<li>The numerical solution for a test case is compared with the true solution (could be an analytical solution or data)</li>
+<li>Error analysis: we investigate the accuracy of the algorithm by changing the number of iterations and/or make changes to the implementation or algorithm</li>
+</ol>
+<p>In practice you would not use your own implementation to calculate an integral, but in order to understand which method to use
+in a specific case, it is important to understand the limitation and advantages of the different algorithms. The only way to achieve this is to
+have a basic understanding of the development. There might also be some cases where you would like to adapt an integration scheme to your specific
+case if there is a special need  that the integration is fast.</p>
+<div class="section" id="the-midpoint-rule">
+<h3>The Midpoint Rule<a class="headerlink" href="#the-midpoint-rule" title="Permalink to this headline">¶</a></h3>
+<p>Numerical integration is encountered in numerous applications in physics and engineering sciences.
+Let us first consider the most simple case, a function <span class="math notranslate nohighlight">\(f(x)\)</span>, which is a function of one variable, <span class="math notranslate nohighlight">\(x\)</span>. The most straight forward way of calculating the area <span class="math notranslate nohighlight">\(\int_a^bf(x)dx\)</span> is
+simply to divide the area under the function into <span class="math notranslate nohighlight">\(N\)</span> equal rectangular slices with size <span class="math notranslate nohighlight">\(h=(b-a)/N\)</span>, as illustrated in figure <a class="reference internal" href="#fig-numint-mid"><span class="std std-ref">Integrating a function with the midpoint rule</span></a>. The area of one box is:</p>
+<div class="math notranslate nohighlight" id="eq-eq-numint-mid0">
+\[\tag{18}
+M(x_k,x_k+h)=f(x_k+\frac{h}{2}) h,\\]</div>
+<p>and the area of all the boxes is:</p>
+<div class="math notranslate nohighlight">
+\[I(a,b)=\int_a^bf(x)dx\simeq\sum_{k=0}^{N-1}M(x_k,x_k+h)\nonumber\]</div>
+<div class="math notranslate nohighlight" id="eq-eq-numint-mid1">
+\[\tag{19}
+=h\sum_{k=0}^{N-1}f(x_k+\frac{h}{2})=h\sum_{k=0}^{N-1}f(a+(k+\frac{1}{2})h).
+    \\]</div>
+<p>Note that the sum goes from <span class="math notranslate nohighlight">\(k=0,1,\ldots,N-1\)</span>, a total of <span class="math notranslate nohighlight">\(N\)</span> elements. We could have chosen to let the sum go from <span class="math notranslate nohighlight">\(k=1,2,\ldots,N\)</span>.
+In Python, C, C++ and many other programming languages the arrays start by indexing the elements from <span class="math notranslate nohighlight">\(0,1,\ldots\)</span> to <span class="math notranslate nohighlight">\(N-1\)</span>,
+therefore we choose the convention of having the first element to start at <span class="math notranslate nohighlight">\(k=0\)</span>.</p>
+<div class="figure" id="id4">
+<span id="fig-numint-mid"></span><a class="reference internal image-reference" href="_images/func_sq.png"><img alt="_images/func_sq.png" src="_images/func_sq.png" style="width: 800px;" /></a>
+<p class="caption"><span class="caption-text"><em>Integrating a function with the midpoint rule</em></span></p>
+</div>
+<p>Below is a Python code, where this algorithm is implemented for <span class="math notranslate nohighlight">\(\int_0^\pi\sin (x)dx\)</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="c1"># Function to be integrated</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">int_midpoint</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">lower_limit</span><span class="p">,</span> <span class="n">upper_limit</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; calculates the area of func over the domain lower_limit</span>
+<span class="sd">        to upper limit using N integration points &quot;&quot;&quot;</span>
+    <span class="n">h</span>    <span class="o">=</span> <span class="p">(</span><span class="n">upper_limit</span><span class="o">-</span><span class="n">lower_limit</span><span class="p">)</span><span class="o">/</span><span class="n">N</span> <span class="c1"># step size</span>
+    <span class="n">area</span> <span class="o">=</span> <span class="mf">0.</span>
+    <span class="k">for</span> <span class="nb">all</span> <span class="n">integration</span> <span class="n">points</span> <span class="n">do</span><span class="p">:</span>
+        <span class="n">estimate</span> <span class="n">integration</span> <span class="n">midpoint</span> <span class="n">value</span><span class="p">,</span> <span class="n">xi</span>
+        <span class="n">add</span> <span class="n">area</span> <span class="n">under</span> <span class="n">curve</span><span class="p">:</span> <span class="n">func</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span><span class="o">*</span><span class="n">h</span>
+    <span class="k">return</span> <span class="n">area</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>There are many ways to calculate loops in a programming language. If you were coding in a lower level programming language like Fortran, C or C++, you would probably implement the loop like (in Python syntax):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">N</span><span class="p">):</span> <span class="c1"># loop over k=0,1,..,N-1</span>
+    <span class="n">val</span> <span class="o">=</span> <span class="n">lower_limit</span><span class="o">+</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mf">0.5</span><span class="p">)</span><span class="o">*</span><span class="n">h</span> <span class="c1"># midpoint value</span>
+    <span class="n">area</span> <span class="o">+=</span> <span class="n">func</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+<span class="k">return</span> <span class="n">area</span><span class="o">*</span><span class="n">h</span>
+</pre></div>
+</div>
+<p>However, in Python, you would always try to avoid loops because they are generally slow. A more efficient way of implementing the above rule would be to replace the loop with:</p>
+<div class="last highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">val</span>  <span class="o">=</span> <span class="p">[</span><span class="n">lower_limit</span><span class="o">+</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mf">0.5</span><span class="p">)</span><span class="o">*</span><span class="n">h</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span>
+<span class="n">ff</span>   <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+<span class="n">area</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ff</span><span class="p">)</span>
+<span class="k">return</span> <span class="n">area</span><span class="o">*</span><span class="n">h</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="the-trapezoidal-rule">
+<h3>The Trapezoidal Rule<a class="headerlink" href="#the-trapezoidal-rule" title="Permalink to this headline">¶</a></h3>
+<p>The numerical error in the above example is quite low, only about 2$%$ for <span class="math notranslate nohighlight">\(N=5\)</span>.
+However, by just looking at the graph above it seems likely that we can develop a better algorithm by using trapezoids instead of rectangles,
+see figure <a class="reference internal" href="#fig-numint-trap"><span class="std std-ref">Integrating a function with the trapezoidal rule</span></a>.</p>
+<div class="figure" id="id5">
+<span id="fig-numint-trap"></span><a class="reference internal image-reference" href="_images/func_tr.png"><img alt="_images/func_tr.png" src="_images/func_tr.png" style="width: 800px;" /></a>
+<p class="caption"><span class="caption-text"><em>Integrating a function with the trapezoidal rule</em></span></p>
+</div>
+<p>Earlier we approximated the area using the midpoint value: <span class="math notranslate nohighlight">\(f(x_k+h/2)\cdot h\)</span>. Now we use <span class="math notranslate nohighlight">\(A=A_1+A_2\)</span>, where <span class="math notranslate nohighlight">\(A_1=f(x_k)\cdot h\)</span>
+and <span class="math notranslate nohighlight">\(A_2=(f(x_k+h)-f(x_k))\cdot h/2\)</span>, hence the area of one trapezoid is:</p>
+<div class="math notranslate nohighlight" id="eq-auto5">
+\[\tag{20}
+A\equiv T(x_k,x_k+h)=(f(x_k+h)+f(x_k))h/2.\]</div>
+<p>This is the trapezoidal rule, and for the whole interval we get:</p>
+<div class="math notranslate nohighlight">
+\[I(a,b)=\int_a^bf(x)dx\simeq\frac{1}{2}h\sum_{k=0}^{N-1}\left[f(x_k+k h)+f(x_k)\right] \nonumber\]</div>
+<div class="math notranslate nohighlight">
+\[=h\left[\frac{1}{2}f(a)+f(a+h) + f(a+2h) +\nonumber\right.\]</div>
+<div class="math notranslate nohighlight">
+\[\left.\qquad\cdots + f(a+(N-2)h)+\frac{1}{2}f(b)\right]\nonumber\]</div>
+<div class="math notranslate nohighlight" id="eq-auto6">
+\[\tag{21}
+=h\left[\frac{1}{2}f(a)+\frac{1}{2}f(b)+\sum_{k=1}^{N-1}f(a+k h)\right].\]</div>
+<p>Note that this formula was bit more involved to derive, but it requires only one more function evaluations compared to the midpoint rule.
+Below is a python implementation:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="c1"># Function to be integrated</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1">#In the implementation below the calculation goes faster</span>
+<span class="c1">#when we avoid unnecessary multiplications by h in the loop</span>
+<span class="k">def</span> <span class="nf">int_trapez</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">lower_limit</span><span class="p">,</span> <span class="n">upper_limit</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; calculates the area of func over the domain lower_limit</span>
+<span class="sd">        to upper limit using N integration points &quot;&quot;&quot;</span>
+    <span class="n">h</span>       <span class="o">=</span> <span class="p">(</span><span class="n">upper_limit</span><span class="o">-</span><span class="n">lower_limit</span><span class="p">)</span><span class="o">/</span><span class="n">N</span> <span class="c1"># step size</span>
+    <span class="n">area</span>    <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">func</span><span class="p">(</span><span class="n">lower_limit</span><span class="p">)</span><span class="o">+</span><span class="n">func</span><span class="p">(</span><span class="n">upper_limit</span><span class="p">))</span>
+    <span class="n">val</span>     <span class="o">=</span> <span class="n">lower_limit</span>
+    <span class="k">for</span> <span class="nb">all</span> <span class="n">integration</span> <span class="n">points</span> <span class="n">do</span><span class="p">:</span>
+        <span class="n">estimate</span> <span class="n">integration</span> <span class="n">midpoint</span> <span class="n">value</span><span class="p">,</span> <span class="n">xi</span>
+        <span class="n">add</span> <span class="n">are</span> <span class="n">under</span> <span class="n">curve</span><span class="p">:</span> <span class="n">func</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span><span class="o">*</span><span class="n">h</span>
+    <span class="k">return</span> <span class="n">area</span>
+</pre></div>
+</div>
+<p>In the table below, we have calculated the numerical error for various values of <span class="math notranslate nohighlight">\(N\)</span>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="18%" />
+<col width="29%" />
+<col width="35%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head"><span class="math notranslate nohighlight">\(N\)</span></th>
+<th class="head"><span class="math notranslate nohighlight">\(h\)</span></th>
+<th class="head">Error Midpoint</th>
+<th class="head">Error Trapezoidal</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>1</td>
+<td>3.14</td>
+<td>-57%</td>
+<td>100%</td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>0.628</td>
+<td>-1.66%</td>
+<td>3.31%</td>
+</tr>
+<tr class="row-even"><td>10</td>
+<td>0.314</td>
+<td>-0.412%</td>
+<td>0.824%</td>
+</tr>
+<tr class="row-odd"><td>100</td>
+<td>0.031</td>
+<td>-4.11E-3%</td>
+<td>8.22E-3%</td>
+</tr>
+</tbody>
+</table>
+<p>Note that we get the surprising result that this algorithm performs poorer, a factor of 2 than the midpoint rule.
+How can this be explained? By just looking at figure <a class="reference internal" href="#fig-numint-mid"><span class="std std-ref">Integrating a function with the midpoint rule</span></a>, we see that the midpoint rule actually over predicts the area from <span class="math notranslate nohighlight">\([x_k,x_k+h/2]\)</span></p>
+<blockquote>
+<div>and under predicts in the interval <span class="math notranslate nohighlight">\([x_k+h/2,x_{k+1}]\)</span> or vice versa. The net effect is that for many cases the midpoint rule give a slightly better
+performance than the trapezoidal rule. In the next section we will investigate this more formally.</div></blockquote>
+</div>
+<div class="section" id="numerical-errors-on-integrals">
+<h3>Numerical Errors on Integrals<a class="headerlink" href="#numerical-errors-on-integrals" title="Permalink to this headline">¶</a></h3>
+<p>It is important to know the accuracy of the methods we are using, otherwise we do not know if the
+computer produce correct results. In the previous examples we were able to estimate the error because we knew the analytical result. However, if we know the
+analytical result there is no reason to use the computer to calculate the result(!). Thus, we need a general method to estimate the error, and let the computer
+run until a desired accuracy is reached.</p>
+<p>In order to analyze the midpoint rule in more detail we approximate the function by a Taylor
+series at the midpoint between <span class="math notranslate nohighlight">\(x_k\)</span> and <span class="math notranslate nohighlight">\(x_k+h\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[f(x)=f(x_k+h/2)+f^\prime(x_k+h/2)(x-(x_k+h/2))\nonumber\]</div>
+<div class="math notranslate nohighlight" id="eq-auto7">
+\[\tag{22}
++\frac{1}{2!}f^{\prime\prime}(x_k+h/2)(x-(x_k+h/2))^2+\mathcal{O}(h^3)\]</div>
+<p>Since <span class="math notranslate nohighlight">\(f(x_k+h/2)\)</span> and its derivatives are constants it is straight forward to integrate <span class="math notranslate nohighlight">\(f(x)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[I(x_k,x_k+h)=\int_{x_k}^{x_k+h}\left[f(x_k+h/2)+f^\prime(x_k+h/2)(x-(x_k+h/2))\right.\nonumber\]</div>
+<div class="math notranslate nohighlight" id="eq-auto8">
+\[\tag{23}
+\left.+\frac{1}{2!}f^{\prime\prime}(x_k+h/2)(x-(x_k+h/2))^2+\mathcal{O}(h^3)\right]dx\]</div>
+<p>The first term is simply the midpoint rule, to evaluate the two other terms we make the substitution: <span class="math notranslate nohighlight">\(u=x-x_k\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[I(x_k,x_k+h)=f(x_k+h/2)\cdot h+f^\prime(x_k+h/2)\int_0^h(u-h/2)du\nonumber\]</div>
+<div class="math notranslate nohighlight">
+\[+\frac{1}{2}f^{\prime\prime}(x_k+h/2)\int_0^h(u-h/2)^2du+\mathcal{O}(h^4)\nonumber\]</div>
+<div class="math notranslate nohighlight" id="eq-auto9">
+\[\tag{24}
+=f(x_k+h/2)\cdot h-\frac{h^3}{24}f^{\prime\prime}(x_k+h/2)+\mathcal{O}(h^4).\]</div>
+<p>Note that all the odd terms cancels out, i.e <span class="math notranslate nohighlight">\(\int_0^h(u-h/2)^m=0\)</span> for <span class="math notranslate nohighlight">\(m=1,3,5\ldots\)</span>. Thus the error for the midpoint rule, <span class="math notranslate nohighlight">\(E_{M,k}\)</span>, on this particular interval is:</p>
+<div class="math notranslate nohighlight" id="eq-auto10">
+\[\tag{25}
+E_{M,k}=I(x_k,x_k+h)-f(x_k+h/2)\cdot h=-\frac{h^3}{24}f^{\prime\prime}(x_k+h/2),\]</div>
+<p>where we have ignored higher order terms. We can easily sum up the error on all the intervals, but clearly <span class="math notranslate nohighlight">\(f^{\prime\prime}(x_k+h/2)\)</span> will
+not, in general, have the same value on all intervals. However, an upper bound for the error can be found by replacing <span class="math notranslate nohighlight">\(f^{\prime\prime}(x_k+h/2)\)</span>
+with the maximal value on the interval <span class="math notranslate nohighlight">\([a,b]\)</span>, <span class="math notranslate nohighlight">\(f^{\prime\prime}(\eta)\)</span>:</p>
+<div class="math notranslate nohighlight" id="eq-eq-numint-em">
+\[\tag{26}
+E_{M}=\sum_{k=0}^{N-1}E_{M,k}=-\frac{h^3}{24}\sum_{k=0}^{N-1}f^{\prime\prime}(x_k+h/2)\leq-\frac{Nh^3}{24}f^{\prime\prime}(\eta),\\]</div>
+<div class="math notranslate nohighlight" id="eq-auto11">
+\[\tag{27}
+E_{M}\leq-\frac{(b-a)^3}{24N^2}f^{\prime\prime}(\eta),\]</div>
+<p>where we have used <span class="math notranslate nohighlight">\(h=(b-a)/N\)</span>. We can do the exact same analysis for the trapezoidal rule, but then we expand the function around <span class="math notranslate nohighlight">\(x_k-h\)</span> instead of the midpoint.
+The error term is then:</p>
+<div class="math notranslate nohighlight" id="eq-auto12">
+\[\tag{28}
+E_T=\frac{(b-a)^3}{12N^2}f^{\prime\prime}(\overline{\eta}).\]</div>
+<p>At the first glance it might look like the midpoint rule always is better than the trapezoidal rule, but note that the second derivative is
+evaluated in different points (<span class="math notranslate nohighlight">\(\eta\)</span> and <span class="math notranslate nohighlight">\(\overline{\eta}\)</span>). Thus it is possible to construct examples where the midpoint rule performs poorer
+than the trapezoidal rule.</p>
+<p>Before we end this section we will rewrite the error terms in a more useful form as it is not so easy to evaluate
+<span class="math notranslate nohighlight">\(f^{\prime\prime}(\eta)\)</span> (since we do not know which value of <span class="math notranslate nohighlight">\(\eta\)</span> to use). By taking a closer look at equation <a class="reference internal" href="#eq-eq-numint-em"><span class="std std-ref">(26)</span></a>,
+we see that it is closely related to the midpoint rule for <span class="math notranslate nohighlight">\(\int_a^bf^{\prime\prime}(x)dx\)</span>, hence:</p>
+<div class="math notranslate nohighlight" id="eq-auto13">
+\[\tag{29}
+E_{M}=-\frac{h^2}{24}h
+    \sum_{k=0}^{N-1}f^{\prime\prime}(x_k+h/2)\simeq-\frac{h^2}{24}\int_a^b
+    f^{\prime\prime}(x)dx\]</div>
+<div class="math notranslate nohighlight" id="eq-auto14">
+\[\tag{30}
+E_M\simeq\frac{h^2}{24}\left[f^\prime(b)-f^\prime(a)\right]=-\frac{(b-a)^2}{24N^2}\left[f^\prime(b)-f^\prime(a)\right]\]</div>
+<p>The corresponding formula for the trapezoid formula is:</p>
+<div class="math notranslate nohighlight" id="eq-auto15">
+\[\tag{31}
+E_T\simeq \frac{h^2}{12}\left[f^\prime(b)-f^\prime(a)\right]=\frac{(b-a)^2}{12N^2}\left[f^\prime(b)-f^\prime(a)\right]\]</div>
+<p>Now, we can make an algorithm that automatically choose the number of steps to reach (at least) a predefined accuracy:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="c1"># Function to be integrated</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="c1">#Numerical derivative of function</span>
+<span class="k">def</span> <span class="nf">df</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">func</span><span class="p">):</span>
+    <span class="n">dh</span><span class="o">=</span><span class="mf">1e-5</span> <span class="c1"># some low step size</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">dh</span><span class="p">)</span><span class="o">-</span><span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">/</span><span class="n">dh</span>
+<span class="c1">#Adaptive midpoint rule, &quot;adaptive&quot; because the number of</span>
+<span class="c1">#function evaluations depends on the integrand</span>
+<span class="k">def</span> <span class="nf">int_adaptive_midpoint</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">lower_limit</span><span class="p">,</span> <span class="n">upper_limit</span><span class="p">,</span> <span class="n">tol</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; calculates the area of func over the domain lower_limit</span>
+<span class="sd">        to upper limit for the specified tolerance tol &quot;&quot;&quot;</span>
+    <span class="n">dfa</span>  <span class="o">=</span> <span class="n">df</span><span class="p">(</span><span class="n">lower_limit</span><span class="p">,</span><span class="n">func</span><span class="p">)</span> <span class="c1"># derivative in point a</span>
+    <span class="n">dfb</span>  <span class="o">=</span> <span class="n">df</span><span class="p">(</span><span class="n">upper_limit</span><span class="p">,</span><span class="n">func</span><span class="p">)</span> <span class="c1"># derivative in point b</span>
+    <span class="n">h</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="mi">24</span><span class="o">*</span><span class="n">tol</span><span class="o">/</span><span class="p">(</span><span class="n">dfb</span><span class="o">-</span><span class="n">dfa</span><span class="p">)))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Number of intervals = &#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">upper_limit</span><span class="o">-</span><span class="n">lower_limit</span><span class="p">)</span><span class="o">/</span><span class="n">h</span><span class="p">)</span>
+    <span class="k">for</span> <span class="nb">all</span> <span class="n">integration</span> <span class="n">points</span> <span class="n">do</span><span class="p">:</span>
+        <span class="n">estimate</span> <span class="n">integration</span> <span class="n">midpoint</span> <span class="n">value</span><span class="p">,</span> <span class="n">xi</span>
+        <span class="n">add</span> <span class="n">area</span> <span class="n">under</span> <span class="n">curve</span><span class="p">:</span> <span class="n">func</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span><span class="o">*</span><span class="n">h</span>
+    <span class="k">return</span> <span class="n">area</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In Python it is sometimes convenient to enter default values for the arguments in a function. In the above example, we could also have written the function definition as\ <code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">int_adaptive_midpoint(func,</span> <span class="pre">lower_limit,</span> <span class="pre">upper_limit,</span></code> \ <code class="docutils literal notranslate"><span class="pre">tol=1e-8):</span></code>. If the <code class="docutils literal notranslate"><span class="pre">tol</span></code> parameter is not given the code will assume an accuracy of <span class="math notranslate nohighlight">\(10^{-8}\)</span>.</p>
+</div>
+</div>
+<div class="section" id="practical-estimation-of-errors-on-integrals">
+<span id="sec-numint-parct"></span><h3>Practical Estimation of Errors on Integrals<a class="headerlink" href="#practical-estimation-of-errors-on-integrals" title="Permalink to this headline">¶</a></h3>
+<p>From the example above we were able to estimate the number of steps needed to reach (at least) a certain precision.
+In many practical cases we do not deal with functions, but with data and it can be difficult to evaluate the derivative.
+We also saw from the example above that the algorithm gives a higher precision than what we asked for.
+How can we avoid doing too many iterations? A very simple solution to this question is to double the number of intervals until
+a desired accuracy is reached. The following analysis holds for both the trapezoid and midpoint method, because in both cases
+the error scale as <span class="math notranslate nohighlight">\(h^2\)</span>.</p>
+<p>Assume that we have evaluated the integral with a step size <span class="math notranslate nohighlight">\(h_1\)</span>, and the computed result is <span class="math notranslate nohighlight">\(I_1\)</span>.
+Then we know that the true integral is <span class="math notranslate nohighlight">\(I=I_1+c h_1^2\)</span>, where <span class="math notranslate nohighlight">\(c\)</span> is a constant that is unknown. If we now half the step size: <span class="math notranslate nohighlight">\(h_2=h_1/2\)</span>,
+then we get a new (better) estimate of the integral, <span class="math notranslate nohighlight">\(I_2\)</span>, which is related to the true integral <span class="math notranslate nohighlight">\(I\)</span> as: <span class="math notranslate nohighlight">\(I=I_2+c h_2^2\)</span>.
+Taking the difference between <span class="math notranslate nohighlight">\(I_2\)</span> and <span class="math notranslate nohighlight">\(I_1\)</span> give us an estimation of the error:</p>
+<div class="math notranslate nohighlight" id="eq-auto16">
+\[\tag{32}
+I_2-I_1=I-c h_2^2-(I-ch_1^2)=3c h_2^2,\]</div>
+<p>where we have used the fact that <span class="math notranslate nohighlight">\(h_1=2h_2\)</span>, Thus the error term is:</p>
+<div class="math notranslate nohighlight" id="eq-auto17">
+\[\tag{33}
+E(a,b)=c h_2^2=\frac{1}{3}(I_2-I_1).\]</div>
+<p>This might seem like we need to evaluate the integral twice as many times as needed. This is not the case, by choosing to exactly
+half the spacing we only need to evaluate for the values that lies halfway between the original points. We will demonstrate how
+to do this by using the trapezoidal rule, because it operates directly on the <span class="math notranslate nohighlight">\(x_k\)</span> values and not the midpoint values.
+The trapezoidal rule can now be written as:</p>
+<div class="math notranslate nohighlight" id="eq-auto18">
+\[\tag{34}
+I_2(a,b)=h_2\left[\frac{1}{2}f(a)+\frac{1}{2}f(b)+\sum_{k=1}^{N_2-1}f(a+k h_2)\right],\]</div>
+<div class="math notranslate nohighlight">
+\[=h_2\left[\frac{1}{2}f(a)+\frac{1}{2}f(b)+\sum_{k=\text{even values}}^{N_2-1}f(a+k h_2)\right.\nonumber\]</div>
+<div class="math notranslate nohighlight" id="eq-auto19">
+\[\tag{35}
+\left.\qquad+\sum_{k=\text{odd values}}^{N_2-1}f(a+k h_2)\right],\]</div>
+<p>in the last equation we have split the sum into odd an even values. The sum over the even values can be rewritten:</p>
+<div class="math notranslate nohighlight" id="eq-auto20">
+\[\tag{36}
+\sum_{k=\text{even values}}^{N_2-1}f(a+k h_2)=\sum_{k=0}^{N_1-1}f(a+2k h_2)=\sum_{k=0}^{N_1-1}f(a+k h_1),\]</div>
+<p>note that <span class="math notranslate nohighlight">\(N_2\)</span> is replaced with <span class="math notranslate nohighlight">\(N_1=N_2/2\)</span>, we can now rewrite <span class="math notranslate nohighlight">\(I_2\)</span> as:</p>
+<div class="math notranslate nohighlight">
+\[I_2(a,b)=h_2\left[\frac{1}{2}f(a)+\frac{1}{2}f(b)+\sum_{k=0}^{N_1-1}f(a+k h_1)\right.\nonumber\]</div>
+<div class="math notranslate nohighlight" id="eq-auto21">
+\[\tag{37}
+\left.+\sum_{k=\text{odd values}}^{N_2-1}f(a+k h_2)\right]\]</div>
+<p>Note that the first terms are actually the trapezoidal rule for <span class="math notranslate nohighlight">\(I_1\)</span>, hence:</p>
+<div class="math notranslate nohighlight" id="eq-auto22">
+\[\tag{38}
+I_2(a,b)=\frac{1}{2}I_1(a,b)+h_2\sum_{k=\text{odd values}}^{N_2-1}f(a+k h_2)\]</div>
+<p>A possible algorithm is then:
+1. Choose a low number of steps to evaluate the integral, <span class="math notranslate nohighlight">\(I_0\)</span>, the first time, e.g. <span class="math notranslate nohighlight">\(N_0=10\)</span></p>
+<ol class="arabic simple" start="2">
+<li>Double the number of steps, <span class="math notranslate nohighlight">\(N_1=2N_0\)</span></li>
+<li>Calculate the missing values by summing over the odd number of steps <span class="math notranslate nohighlight">\(\sum_{k=\text{odd values}}^{N_1-1}f(a+k h_1)\)</span></li>
+<li>Check if <span class="math notranslate nohighlight">\(E_1(a,b)=\frac{1}{3}(I_1-I_0)\)</span> is lower than a specific tolerance</li>
+<li>If yes quit, if not, return to 2, and continue until <span class="math notranslate nohighlight">\(E_i(a,b)=\frac{1}{3}(I_{i+1}-I_{i})\)</span> is lower than the tolerance</li>
+</ol>
+<p>Below is a Python implementation:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="c1"># Function to be integrated</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="c1"># step size is chosen automatically to reach the specified tolerance</span>
+<span class="k">def</span> <span class="nf">int_adaptive_trapez</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">lower_limit</span><span class="p">,</span> <span class="n">upper_limit</span><span class="p">,</span> <span class="n">tol</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; calculates the area of func over the domain lower_limit</span>
+<span class="sd">        to upper limit for the specified tolerance tol &quot;&quot;&quot;</span>
+    <span class="n">h</span>       <span class="o">=</span> <span class="p">(</span><span class="n">upper_limit</span><span class="o">-</span><span class="n">lower_limit</span><span class="p">)</span>
+    <span class="n">area</span>    <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">func</span><span class="p">(</span><span class="n">lower_limit</span><span class="p">)</span><span class="o">+</span><span class="n">func</span><span class="p">(</span><span class="n">upper_limit</span><span class="p">))</span>
+    <span class="n">calc_tol</span> <span class="o">=</span> <span class="n">tol</span> <span class="o">+</span> <span class="mi">1</span> <span class="c1"># just larger than tol to enter the while loop</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">calc_tol</span><span class="o">&gt;</span><span class="n">tol</span><span class="p">):</span>
+        <span class="n">half</span> <span class="n">the</span> <span class="n">step</span> <span class="n">size</span> <span class="n">h</span> <span class="o">/=</span> <span class="mi">2</span>
+        <span class="k">for</span> <span class="nb">all</span> <span class="n">odd</span> <span class="n">integration</span> <span class="n">points</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">domain</span><span class="p">:</span>
+            <span class="nb">sum</span> <span class="n">up</span> <span class="nb">all</span> <span class="n">the</span> <span class="n">odd</span> <span class="n">function</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">odd_terms</span>
+        <span class="n">new_area</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">area</span> <span class="o">+</span> <span class="n">h</span><span class="o">*</span><span class="n">odd_terms</span>
+        <span class="n">calc_tol</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">new_area</span><span class="o">-</span><span class="n">area</span><span class="p">)</span><span class="o">/</span><span class="mi">3</span>
+        <span class="n">area</span>     <span class="o">=</span> <span class="n">new_area</span> <span class="c1"># store new values for next iteration</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Number of intervals = &#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">upper_limit</span><span class="o">-</span><span class="n">lower_limit</span><span class="p">)</span><span class="o">/</span><span class="n">h</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">area</span> <span class="c1">#while loop ended and we can return the area</span>
+</pre></div>
+</div>
+<p>If you compare the number of terms used in the adaptive trapezoidal rule, which was developed by halving the step size, and the adaptive midpoint rule that was derived on the basis of the theoretical error term, you will find the adaptive midpoint rule is more efficient. So why go through all this trouble? In the next section we will see that the development we did for the adaptive trapezoidal rule is closely related to Romberg integration, which is <em>much</em> more effective.</p>
+</div>
+</div>
+<div class="section" id="romberg-integration">
+<h2>Romberg Integration<a class="headerlink" href="#romberg-integration" title="Permalink to this headline">¶</a></h2>
+<p>The adaptive algorithm for the trapezoidal rule in the previous section can be easily improved by remembering
+that the true integral was given by <a class="footnote-reference" href="#romerr" id="id2">[1]</a> : <span class="math notranslate nohighlight">\(I=I_i+ch_i^2+\mathcal{O}(h^4)\)</span>. The error term was in the previous example only used to
+check if the desired tolerance was achieved, but we could also have added it to our estimate of the integral to reach an accuracy to fourth order:</p>
+<table class="docutils footnote" frame="void" id="romerr" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[1]</a></td><td>Note that all odd powers of <span class="math notranslate nohighlight">\(h\)</span> is equal to zero, thus the corrections are always in even powers.</td></tr>
+</tbody>
+</table>
+<div class="math notranslate nohighlight" id="eq-auto23">
+\[\tag{39}
+I=I_{i+1}+ch^2+\mathcal{O}(h^4)=I_{i+1}+\frac{1}{3}\left[I_{i+1}-I_{i}\right]+\mathcal{O}(h^4).\]</div>
+<p>As before the error term <span class="math notranslate nohighlight">\(\mathcal{O}(h^4)\)</span>, can be written as: <span class="math notranslate nohighlight">\(ch^4\)</span>. Now we can proceed as in the previous section: First we estimate the
+integral by one step size <span class="math notranslate nohighlight">\(I_i=I+ch_i^4\)</span>, next we half the step size <span class="math notranslate nohighlight">\(I_{i+1}=I+ch_{i+1}^4\)</span> and use these two estimates to calculate the error term:</p>
+<div class="math notranslate nohighlight">
+\[I_{i+1}-I_{i}=I-c h_{i+1}^4-(I-ch_i^4)=-c h_{i+1}^4+c(2h_{i+1})^4=15c h_{i+1}^4,\nonumber\]</div>
+<div class="math notranslate nohighlight" id="eq-auto24">
+\[\tag{40}
+ch_{i+1}^4=\frac{1}{15}\left[I_{i+1}-I_{i}\right]+\mathcal{O}(h^6).\]</div>
+<p>but now we are in the exact situation as before, we have not only the error term but the correction up to order <span class="math notranslate nohighlight">\(h^4\)</span> for this integral:</p>
+<div class="math notranslate nohighlight" id="eq-eq-numint-rom">
+\[\tag{41}
+I=I_{i+1}+\frac{1}{15}\left[I_{i+1}-I_{i}\right]+\mathcal{O}(h^6).\\]</div>
+<p>Each time we half the step size we also gain a higher order accuracy in our numerical algorithm. Thus, there are two iterations going on at the same time;
+one is the iteration that half the step size (<span class="math notranslate nohighlight">\(i\)</span>), and the other one is the increasing number of higher order terms added (which we will denote <span class="math notranslate nohighlight">\(m\)</span>).
+We need to improve our notation, and replace the approximation of the integral (<span class="math notranslate nohighlight">\(I_i\)</span>) with <span class="math notranslate nohighlight">\(R_{i,m}\)</span>. Equation <a class="reference internal" href="#eq-eq-numint-rom"><span class="std std-ref">(41)</span></a>, can now
+be written:</p>
+<div class="math notranslate nohighlight" id="eq-auto25">
+\[\tag{42}
+I=R_{i+1,2}+\frac{1}{15}\left[R_{i+1,2}-R_{i,2}\right]+\mathcal{O}(h^6).\]</div>
+<p>A general formula valid for any <span class="math notranslate nohighlight">\(m\)</span> can be found by realizing:</p>
+<div class="math notranslate nohighlight" id="eq-eq-numint-rom0">
+\[\tag{43}
+I=R_{i+1,m+1}+c_mh_i^{2m+2}+\mathcal{O}(h_i^{2m+4})\\]</div>
+<div class="math notranslate nohighlight">
+\[I=R_{i,m+1}+c_mh_{i-1}^{2m+2}+\mathcal{O}(h_{i-1}^{2m+4})\nonumber\]</div>
+<div class="math notranslate nohighlight" id="eq-eq-numint-rom1">
+\[\tag{44}
+=R_{i,m+1}+2^{2m+2}c_mh_{i}^{2m+2}+\mathcal{O}(h_{i-1}^{2m+4}),\\]</div>
+<p>where, as before <span class="math notranslate nohighlight">\(h_{i-1}=2h_i\)</span>. Subtracting equation <a class="reference internal" href="#eq-eq-numint-rom0"><span class="std std-ref">(43)</span></a> and <a class="reference internal" href="#eq-eq-numint-rom1"><span class="std std-ref">(44)</span></a>, we find an expression for the error term:</p>
+<div class="math notranslate nohighlight" id="eq-eq-numint-rom2">
+\[\tag{45}
+c_mh_{i}^{2m+2}=\frac{1}{4^{m+1}-1}(R_{i,m}-R_{i-1,m})\\]</div>
+<p>Then the estimate for the integral in equation <a class="reference internal" href="#eq-eq-numint-rom1"><span class="std std-ref">(44)</span></a> is:</p>
+<div class="math notranslate nohighlight" id="eq-auto26">
+\[\tag{46}
+I=R_{i,m+1}+\mathcal{O}(h_i^{2m+2})\]</div>
+<div class="math notranslate nohighlight" id="eq-auto27">
+\[\tag{47}
+R_{i,m+1}=R_{i,m}+\frac{1}{4^{m+1}-1}(R_{i+1,m}-R_{i,m}).\]</div>
+<p>A possible algorithm is then:</p>
+<ol class="arabic simple">
+<li>Evaluate <span class="math notranslate nohighlight">\(R_{0,0}=\frac{1}{2}\left[f(a)+f(b)\right](b-a)\)</span> as the first estimate</li>
+<li>Double the number of steps, <span class="math notranslate nohighlight">\(N_{i+1}=2N_i\)</span> or half the step size <span class="math notranslate nohighlight">\(h_{i+1}=h_i/2\)</span></li>
+<li>Calculate the missing values by summing over the odd number of steps <span class="math notranslate nohighlight">\(\sum_{k=\text{odd values}}^{N_1-1}f(a+k h_{i+1})\)</span></li>
+<li>Correct the estimate by adding <em>all</em> the higher order error term <span class="math notranslate nohighlight">\(R_{i,m+1}=R_{i,m}+\frac{1}{4^m-1}(R_{i+1,m+1}-R_{i,m+1})\)</span></li>
+<li>Check if the error term is lower than a specific tolerance <span class="math notranslate nohighlight">\(E_{i,m}(a,b)=\frac{1}{4^{m+1}-1}(R_{i,m}-R_{i-1,m})\)</span>, if yes quit, if no goto 2, increase <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(m\)</span> by one</li>
+</ol>
+<p>The algorithm is illustrated in figure <a class="reference internal" href="#fig-numint-romberg"><span class="std std-ref">Illustration of the Romberg algorithm. Note that for each new evaluation of the integral R_{i,0}, all the correction terms R_{i,m} (for m&gt;0) must be evaluated again</span></a>.</p>
+<div class="figure" id="id6">
+<span id="fig-numint-romberg"></span><a class="reference internal image-reference" href="_images/romberg.png"><img alt="_images/romberg.png" src="_images/romberg.png" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-text">Illustration of the Romberg algorithm. Note that for each new evaluation of the integral <span class="math notranslate nohighlight">\(R_{i,0}\)</span>, all the correction terms <span class="math notranslate nohighlight">\(R_{i,m}\)</span> (for <span class="math notranslate nohighlight">\(m&gt;0\)</span>) must be evaluated again</span></p>
+</div>
+<p>Note that the tolerance term is not the correct one as it uses the error estimate for the current step,
+which we also use correct the integral in the current step to reach a higher accuracy.
+Thus the error on the integral will always be lower than the user specified tolerance.
+Below is a Python implementation:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="c1"># Function to be integrated</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="c1"># step size is choosen automatically to reach (at least)</span>
+<span class="c1"># the specified tolerance</span>
+<span class="k">def</span> <span class="nf">int_romberg</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">lower_limit</span><span class="p">,</span> <span class="n">upper_limit</span><span class="p">,</span><span class="n">tol</span><span class="p">,</span><span class="n">show</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; calculates the area of func over the domain lower_limit</span>
+<span class="sd">        to upper limit for the given tol, if show=True the triangular</span>
+<span class="sd">        array of intermediate results are printed &quot;&quot;&quot;</span>
+    <span class="n">Nmax</span> <span class="o">=</span> <span class="mi">100</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">([</span><span class="n">Nmax</span><span class="p">,</span><span class="n">Nmax</span><span class="p">])</span> <span class="c1"># storage buffer</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="n">upper_limit</span><span class="o">-</span><span class="n">lower_limit</span><span class="p">)</span> <span class="c1"># step size</span>
+    <span class="n">R</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>    <span class="o">=.</span><span class="mi">5</span><span class="o">*</span><span class="p">(</span><span class="n">func</span><span class="p">(</span><span class="n">lower_limit</span><span class="p">)</span><span class="o">+</span><span class="n">func</span><span class="p">(</span><span class="n">upper_limit</span><span class="p">))</span><span class="o">*</span><span class="n">h</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">Nmax</span><span class="p">):</span>
+        <span class="n">h</span> <span class="o">/=</span> <span class="mi">2</span>
+        <span class="n">N</span> <span class="o">*=</span> <span class="mi">2</span>
+        <span class="n">odd_terms</span><span class="o">=</span><span class="mi">0</span>
+        <span class="k">for</span> <span class="nb">all</span> <span class="n">odd</span> <span class="n">terms</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="n">N</span><span class="o">-</span><span class="mi">1</span> <span class="n">do</span><span class="p">:</span>
+            <span class="n">evaulate</span> <span class="n">function</span> <span class="n">values</span> <span class="n">at</span> <span class="n">odd</span> <span class="n">points</span><span class="p">,</span>
+            <span class="nb">sum</span> <span class="n">them</span> <span class="ow">and</span> <span class="n">store</span> <span class="ow">in</span> <span class="n">odd_terms</span>
+        <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>   <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">h</span><span class="o">*</span><span class="n">odd_terms</span>
+
+        <span class="k">for</span> <span class="nb">all</span> <span class="n">m</span> <span class="ow">in</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>   <span class="o">=</span> <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">m</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">m</span><span class="p">]</span><span class="o">-</span><span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">m</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="mi">4</span><span class="o">**</span><span class="p">(</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># check tolerance, best guess</span>
+        <span class="n">calc_tol</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">estimated</span> <span class="n">tolerance</span> <span class="n">calc_tol</span> <span class="ow">is</span> <span class="n">lower</span> <span class="n">than</span> <span class="n">tol</span><span class="p">:</span>
+            <span class="k">break</span>  <span class="c1"># estimated precision reached</span>
+        <span class="k">if</span> <span class="nb">max</span> <span class="n">number</span> <span class="n">of</span> <span class="n">iterations</span> <span class="n">are</span> <span class="n">reached</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">Nmax</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Romberg routine did not converge after &#39;</span><span class="p">,</span>
+              <span class="n">Nmax</span><span class="p">,</span> <span class="s1">&#39;iterations!&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">show</span><span class="o">==</span><span class="bp">True</span><span class="p">):</span>
+        <span class="k">print</span> <span class="n">out</span> <span class="nb">all</span> <span class="n">triangualar</span> <span class="n">elements</span> <span class="ow">in</span> <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">m</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="c1">#return the best estimate</span>
+</pre></div>
+</div>
+<p>Note that the Romberg integration only uses 32 function evaluations to reach a precision of <span class="math notranslate nohighlight">\(10^{-8}\)</span>, whereas the adaptive midpoint and trapezoidal rule in the previous
+section uses 20480 and 9069 function evaluations, respectively.</p>
+<div class="section" id="gaussian-quadrature">
+<h3>Gaussian Quadrature<a class="headerlink" href="#gaussian-quadrature" title="Permalink to this headline">¶</a></h3>
+<p>Many of the methods we have looked into are of the type:</p>
+<div class="math notranslate nohighlight" id="eq-eq-numint-qq1">
+\[\tag{48}
+\int_a^b f(x) dx = \sum_{k=0}^{N-1} \omega_k f(x_k),\\]</div>
+<p>where the function is evaluated at fixed interval. For the midpoint rule <span class="math notranslate nohighlight">\(\omega_k=h\)</span> for all values of <span class="math notranslate nohighlight">\(k\)</span>, for the trapezoid rule
+<span class="math notranslate nohighlight">\(\omega_k=h/2\)</span> for the endpoints and <span class="math notranslate nohighlight">\(h\)</span> for all the interior points.
+For the Simpsons rule (see exercise) <span class="math notranslate nohighlight">\(\omega_k=h/3, 4h/3,2h/3,4h/3,\ldots,4h/3,h/3\)</span>.
+Note that all the methods we have looked at so far samples the function in equal spaced points, <span class="math notranslate nohighlight">\(f(a+k h)\)</span>,
+for <span class="math notranslate nohighlight">\(k=0, 1, 2\ldots, N-1\)</span>. If we now allow for the function to be evaluated at unevenly spaced points, we can do a lot better.
+This realization is the basis for Gaussian Quadrature. We will explore this in the following,
+but to make the development easier and less cumbersome, we transform the integral from the domain <span class="math notranslate nohighlight">\([a,b]\)</span> to <span class="math notranslate nohighlight">\([-1,1]\)</span>:</p>
+<div class="math notranslate nohighlight" id="eq-auto28">
+\[\tag{49}
+\int_a^bf(t)dt=\frac{b-a}{2}\int_{-1}^{1}f(x)dx\text{ , where:}\]</div>
+<div class="math notranslate nohighlight" id="eq-auto29">
+\[\tag{50}
+x=\frac{2}{b-a}t-\frac{b+a}{b-a}.\]</div>
+<p>The factor in front comes from the fact that <span class="math notranslate nohighlight">\(dt=(b-a)dx/2\)</span>, thus we can develop our algorithms on the domain <span class="math notranslate nohighlight">\([-1,1]\)</span>,
+and then do the transformation back using: <span class="math notranslate nohighlight">\(t=(b-a)x/2+(b+a)/2\)</span>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The idea we will explore is as follows:
+If we can approximate the function to be integrated on the domain <span class="math notranslate nohighlight">\([-1,1]\)</span> (or on <span class="math notranslate nohighlight">\([a,b]\)</span>) as a
+polynomial of as <em>large a degree as possible</em>, then the numerical integral of this polynomial will be very close to the integral of the
+function we are seeking.</p>
+</div>
+<p>This idea is best understood by a couple of examples. Assume that we want to use <span class="math notranslate nohighlight">\(N=1\)</span> in equation <a class="reference internal" href="#eq-eq-numint-qq1"><span class="std std-ref">(48)</span></a>:</p>
+<div class="math notranslate nohighlight" id="eq-auto30">
+\[\tag{51}
+\int_{-1}^{1}f(x)\,dx\simeq\omega_0f(x_0).\]</div>
+<p>We now choose <span class="math notranslate nohighlight">\(f(x)\)</span> to be a polynomial of as large a degree as possible, but with the requirement that the integral is exact. If <span class="math notranslate nohighlight">\(f(x)=1\)</span>, we get:</p>
+<div class="math notranslate nohighlight" id="eq-auto31">
+\[\tag{52}
+\int_{-1}^{1}f(x)\,dx=\int_{-1}^{1}1\,dx=2=\omega_0,\]</div>
+<p>hence <span class="math notranslate nohighlight">\(\omega_0=2\)</span>. If we choose <span class="math notranslate nohighlight">\(f(x)=x\)</span>, we get:</p>
+<div class="math notranslate nohighlight" id="eq-auto32">
+\[\tag{53}
+\int_{-1}^{1}f(x)\,dx=\int_{-1}^{1}x\,dx=0=\omega_0f(x_0)=2x_0,\]</div>
+<p>hence <span class="math notranslate nohighlight">\(x_0=0\)</span>.
+The Gaussian integration rule for <span class="math notranslate nohighlight">\(N=1\)</span> is:</p>
+<div class="math notranslate nohighlight">
+\[\int_{-1}^{1}f(x)\,dx\simeq 2f(0)\text{, or: }\nonumber\]</div>
+<div class="math notranslate nohighlight" id="eq-auto33">
+\[\tag{54}
+\int_{a}^{b}f(t)\,dt\simeq\frac{b-a}{2}\,2f(\frac{b+a}{2})=(b-a)f(\frac{b+a}{2}).\]</div>
+<p>This equation is equal to the midpoint rule, by choosing <span class="math notranslate nohighlight">\(b=a+h\)</span> we reproduce equation <a class="reference internal" href="#eq-eq-numint-mid0"><span class="std std-ref">(18)</span></a>. If we choose <span class="math notranslate nohighlight">\(N=2\)</span>:</p>
+<div class="math notranslate nohighlight" id="eq-auto34">
+\[\tag{55}
+\int_{-1}^{1}f(x)\,dx\simeq\omega_0f(x_0)+\omega_1f(x_1),\]</div>
+<p>we can show that now $ f(x)=1,,x,,x^2,x^3$ can be integrated exact:</p>
+<div class="math notranslate nohighlight" id="eq-auto35">
+\[\tag{56}
+\int_{-1}^{1}1\,dx=2=\omega_0f(x_0)+\omega_1f(x_1)=\omega_0+\omega_1\,,\]</div>
+<div class="math notranslate nohighlight" id="eq-auto36">
+\[\tag{57}
+\int_{-1}^{1}x\,dx=0=\omega_0f(x_0)+\omega_1f(x_1)=\omega_0x_0+\omega_1x_1\,,\]</div>
+<div class="math notranslate nohighlight" id="eq-auto37">
+\[\tag{58}
+\int_{-1}^{1}x^2\,dx=\frac{2}{3}=\omega_0f(x_0)+\omega_1f(x_1)=\omega_0x_0^2+\omega_1x_1^2\,,\]</div>
+<div class="math notranslate nohighlight" id="eq-auto38">
+\[\tag{59}
+\int_{-1}^{1}x^3\,dx=0=\omega_0f(x_0)+\omega_1f(x_1)=\omega_0x_0^3+\omega_1x_1^3\,,\]</div>
+<p>hence there are four unknowns and four equations. The solution is: <span class="math notranslate nohighlight">\(\omega_0=\omega_1=1\)</span> and <span class="math notranslate nohighlight">\(x_0=-x_1=1/\sqrt{3}\)</span>.
+The Gaussian integration rule for <span class="math notranslate nohighlight">\(N=2\)</span> is:</p>
+<div class="math notranslate nohighlight" id="eq-auto39">
+\[\tag{60}
+\int_{-1}^{1}f(x)\,dx\simeq f(-\frac{1}{\sqrt{3}})+f(\frac{1}{\sqrt{3}})\, \text{, or:}\]</div>
+<div class="math notranslate nohighlight" id="eq-auto40">
+\[\tag{61}
+\int_{a}^{b}f(x)\,dx\simeq \frac{b-a}{2}\left[f(-\frac{b-a}{2}\frac{1}{\sqrt{3}}+\frac{b+a}{2})
+    +f(\frac{b-a}{2}\frac{1}{\sqrt{3}}+\frac{b+a}{2})\right].\]</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">int_gaussquad2</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">lower_limit</span><span class="p">,</span> <span class="n">upper_limit</span><span class="p">):</span>
+    <span class="n">x</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">3.</span><span class="p">),</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)])</span>
+    <span class="n">w</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">xp</span>  <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">upper_limit</span><span class="o">-</span><span class="n">lower_limit</span><span class="p">)</span><span class="o">*</span><span class="n">x</span>
+    <span class="n">xp</span> <span class="o">+=</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">upper_limit</span><span class="o">+</span><span class="n">lower_limit</span><span class="p">)</span>
+    <span class="n">area</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">w</span><span class="o">*</span><span class="n">func</span><span class="p">(</span><span class="n">xp</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">area</span><span class="o">*</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">upper_limit</span><span class="o">-</span><span class="n">lower_limit</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="the-case-n-3">
+<h4>The case N=3<a class="headerlink" href="#the-case-n-3" title="Permalink to this headline">¶</a></h4>
+<p>For the case <span class="math notranslate nohighlight">\(N=3\)</span>, we find that <span class="math notranslate nohighlight">\(f(x)=1,x,x^2,x^3,x^4,x^5\)</span> can be integrated exactly:</p>
+<div class="math notranslate nohighlight" id="eq-auto41">
+\[\tag{62}
+\int_{-1}^{1}1\,dx=2=\omega_0+\omega_1+\omega_2\,,\]</div>
+<div class="math notranslate nohighlight" id="eq-auto42">
+\[\tag{63}
+\int_{-1}^{1}x\,dx=0=\omega_0x_0+\omega_1x_1+\omega_2x_2\,,\]</div>
+<div class="math notranslate nohighlight" id="eq-auto43">
+\[\tag{64}
+\int_{-1}^{1}x^2\,dx=\frac{2}{3}=\omega_0x_0^2+\omega_1x_1^2+\omega_2x_2^2\,,\]</div>
+<div class="math notranslate nohighlight" id="eq-auto44">
+\[\tag{65}
+\int_{-1}^{1}x^3\,dx=0=\omega_0x_0^3+\omega_1x_1^3+\omega_2x_2^3\,,\]</div>
+<div class="math notranslate nohighlight" id="eq-auto45">
+\[\tag{66}
+\int_{-1}^{1}x^4\,dx=\frac{2}{5}=\omega_0x_0^4+\omega_1x_1^4+\omega_2x_2^4\,,\]</div>
+<div class="math notranslate nohighlight" id="eq-auto46">
+\[\tag{67}
+\int_{-1}^{1}x^5\,dx=0=\omega_0x_0^5+\omega_1x_1^5+\omega_2x_2^5\,,\]</div>
+<p>the solution to these equations are <span class="math notranslate nohighlight">\(\omega_{0,1,2}=5/9, 8/9, 5/9\)</span> and <span class="math notranslate nohighlight">\(x_{1,2,3}=-\sqrt{3/5},0,\sqrt{3/5}\)</span>. Below is a Python implementation:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">int_gaussquad2</span><span class="p">(</span><span class="n">lower_limit</span><span class="p">,</span> <span class="n">upper_limit</span><span class="p">,</span><span class="n">func</span><span class="p">):</span>
+    <span class="n">x</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">3.</span><span class="o">/</span><span class="mf">5.</span><span class="p">),</span><span class="mf">0.</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">3.</span><span class="o">/</span><span class="mf">5.</span><span class="p">)])</span>
+    <span class="n">w</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">5.</span><span class="o">/</span><span class="mf">9.</span><span class="p">,</span> <span class="mf">8.</span><span class="o">/</span><span class="mf">9.</span><span class="p">,</span> <span class="mf">5.</span><span class="o">/</span><span class="mf">9.</span><span class="p">])</span>
+    <span class="n">xp</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">upper_limit</span><span class="o">-</span><span class="n">lower_limit</span><span class="p">)</span><span class="o">*</span><span class="n">x</span>
+    <span class="n">xp</span> <span class="o">+=</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">upper_limit</span><span class="o">+</span><span class="n">lower_limit</span><span class="p">)</span>
+    <span class="n">area</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">w</span><span class="o">*</span><span class="n">func</span><span class="p">(</span><span class="n">xp</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">area</span><span class="o">*</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">upper_limit</span><span class="o">-</span><span class="n">lower_limit</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that the Gaussian quadrature converges very fast. From <span class="math notranslate nohighlight">\(N=2\)</span> to <span class="math notranslate nohighlight">\(N=3\)</span> function evaluation we reduce the error (in this specific case)
+from 6.5% to 0.1%. Our standard trapezoidal formula needs more than 20 function evaluations to achieve this, the Romberg method uses 4-5 function
+evaluations. How can this be? If we use the standard Taylor formula for the function to be integrated, we know that for <span class="math notranslate nohighlight">\(N=2\)</span> the Taylor
+formula must be integrated up to <span class="math notranslate nohighlight">\(x^3\)</span>, so the error term is proportional to <span class="math notranslate nohighlight">\(h^4f^{(4)}(\xi)\)</span> (where <span class="math notranslate nohighlight">\(\xi\)</span> is some x-value in <span class="math notranslate nohighlight">\([a,b]\)</span>).
+<span class="math notranslate nohighlight">\(h\)</span> is the step size, and we can replace it with <span class="math notranslate nohighlight">\(h\sim (b-a)/N\)</span>, thus the error scale as <span class="math notranslate nohighlight">\(c_N/N^4\)</span> (where <span class="math notranslate nohighlight">\(c_N\)</span> is a constant).
+Following the same argument, we find for <span class="math notranslate nohighlight">\(N=3\)</span> that the error term is <span class="math notranslate nohighlight">\(h^6f^{(6)}(\xi)\)</span> or that the error term scale as <span class="math notranslate nohighlight">\(c_N/N^6\)</span>.
+Each time we increase <span class="math notranslate nohighlight">\(N\)</span> by a factor of one, the error term reduces by <span class="math notranslate nohighlight">\(N^2\)</span>. Thus if we evaluate the integral for <span class="math notranslate nohighlight">\(N=10\)</span>,
+increasing to <span class="math notranslate nohighlight">\(N=11\)</span> will reduce the error by a factor of <span class="math notranslate nohighlight">\(11^2=121\)</span>.</p>
+</div>
+</div>
+<div class="section" id="error-term-on-gaussian-integration">
+<h3>Error term on Gaussian Integration<a class="headerlink" href="#error-term-on-gaussian-integration" title="Permalink to this headline">¶</a></h3>
+<p>The Gaussian integration rule of order <span class="math notranslate nohighlight">\(N\)</span> integrates exactly a polynomial of order <span class="math notranslate nohighlight">\(2N-1\)</span>.
+From Taylors error formula, see equation <a class="reference internal" href="._book002.html#eq-eq-taylor-error"><span class="std std-ref">(4)</span></a> in the chapter <a class="reference internal" href="._book002.html#ch-taylor"><span class="std std-ref">Finite differences</span></a>,
+we can easily see that the error term must be of order <span class="math notranslate nohighlight">\(2N\)</span>, and be proportional to <span class="math notranslate nohighlight">\(f^{(2N)}(\eta)\)</span>, see [Ref1] for more details on the derivation of error terms. The drawback with an analytical error term derived from series expansion is that it involves the derivative of the function. As we have already explained, this is very unpractical and it is much more practical to use the methods described in the section <a class="reference internal" href="#sec-numint-parct"><span class="std std-ref">Practical Estimation of Errors on Integrals</span></a>. Let us consider this in more detail, assume that we evaluate the integral using first a Gaussian integration rule with <span class="math notranslate nohighlight">\(N\)</span> points, and then <span class="math notranslate nohighlight">\(N+1\)</span> points. Our estimates of the &quot;exact&quot; integral, <span class="math notranslate nohighlight">\(I\)</span>,  would then be:</p>
+<div class="math notranslate nohighlight" id="eq-eq-numint-gerr1">
+\[\tag{68}
+I=I_N+ch_{N}^{2N},\]</div>
+<div class="math notranslate nohighlight" id="eq-eq-numint-gerr2">
+\[\tag{69}
+I=I_{N+1}+ch_{N+1}^{2N+1}.\]</div>
+<p>In principle <span class="math notranslate nohighlight">\(h_{N+1}\neq h_{N}\)</span>, but in the following we will assume that <span class="math notranslate nohighlight">\(h_N\simeq h_{N+1}\)</span>, and <span class="math notranslate nohighlight">\(h\ll 1\)</span>. Subtracting equation <a class="reference internal" href="#eq-eq-numint-gerr1"><span class="std std-ref">(68)</span></a> and <a class="reference internal" href="#eq-eq-numint-gerr2"><span class="std std-ref">(69)</span></a> we can show that a reasonable estimate for the error term <span class="math notranslate nohighlight">\(ch^{2N}\)</span> would be:</p>
+<div class="math notranslate nohighlight" id="eq-auto47">
+\[\tag{70}
+ch^N= I_{N+1}-I_N.\]</div>
+<p>If this estimate is lower than a given tolerance we can be quite confident that the higher order estimate <span class="math notranslate nohighlight">\(I_{N+1}\)</span> approximate the true integral within our error estimate. This is the method implemented in SciPy, <a class="reference external" href="https://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.integrate.quadrature.html">integrate.quadrature</a>
+Common Weight functions for Classical Gaussian Quadratures
+----------------------------------------------------------
+Which method to use in a specific case?
+---------------------------------------
+There are no general answers to this question, and one need to decide from case to case. If computational speed is not an issue,
+and the function to be integrated can be evaluated at any points all the methods above can be used. If the function to be integrated
+is a set of observations at different times, that might be unevenly spaced, I would use the midpoint rule:</p>
+<div class="math notranslate nohighlight" id="eq-auto48">
+\[\tag{71}
+I(a,b)=\int_a^bf(x)dx\simeq\sum_{k=0}^{N-1}M(x_k,x_k+h)=\sum_{k=0}^{N-1}h_if(x_k+\frac{h_i}{2})\]</div>
+<p>This is because we do not know anything about the function between the points, only when it is observed, and the formula uses only
+the information at the observation points. There is a second more subtle reason, and that is the fact that in many cases the
+observations a different times are the {it average} value of the observable quantity and it those cases the midpoint
+rule would be the exact answer.</p>
+</div>
+<div class="section" id="exercise-3-1-numerical-integration">
+<h3>Exercise 3.1: Numerical Integration<a class="headerlink" href="#exercise-3-1-numerical-integration" title="Permalink to this headline">¶</a></h3>
+<p><strong>a)</strong>
+Show that for a linear function, <span class="math notranslate nohighlight">\(y=a\cdot x+b\)</span> both the trapezoidal rule and the rectangular rule are exact</p>
+<p><strong>b)</strong>
+Consider <span class="math notranslate nohighlight">\(I(a,b)=\int_a^bf(x)dx\)</span> for <span class="math notranslate nohighlight">\(f(x)=x^2\)</span>. The analytical result is <span class="math notranslate nohighlight">\(I(a,b)=\frac{b^3-a^3}{3}\)</span>. Use the Trapezoidal and</p>
+<blockquote>
+<div>Midpoint rule to evaluate these integrals and show that the error for the Trapezoidal rule is exactly twice as big as the Midpoint rule.</div></blockquote>
+<p><strong>c)</strong>
+Use the fact that the error term on the trapezoidal rule is twice as big as the midpoint rule to derive Simpsons formula: <span class="math notranslate nohighlight">\(I(a,b)=\sum_{k=0}^{N-1}I(x_k,x_k+h)=\frac{h}{6}\left[f(a)+ 4f(a+\frac{h}{2})+2f(a+h)+4f(a+3\frac{h}{2})+2f(a+2h)+\cdots+f(b)\right]\)</span> Hint: <span class="math notranslate nohighlight">\(I(x_k,x_k+h)=M(x_k,x_k+h)+E_M\)</span> (midpoint rule) and <span class="math notranslate nohighlight">\(I(x_k,x_k+h)=T(x_k,x_k+h)+E_T=T(x_k,x_k+h)-2E_M\)</span> (trapezoidal rule).</p>
+<p><strong>Solution.</strong>
+Simpsons rule is an improvement over the midpoint and trapezoidal rule. It can be derived in different ways, we will make use of
+the results in the previous section. If we assume that the second derivative is reasonably well behaved on the interval <span class="math notranslate nohighlight">\(x_k\)</span>
+and <span class="math notranslate nohighlight">\(x_k+h\)</span> and fairly constant we can assume that <span class="math notranslate nohighlight">\(f^{\prime\prime}(\eta)\simeq f^{\prime\prime}(\overline{\eta})\)</span>, hence <span class="math notranslate nohighlight">\(E_T=-2E_M\)</span>.</p>
+<div class="math notranslate nohighlight" id="eq-auto49">
+\[\tag{72}
+I(x_k,x_k+h)=M(x_k,x_k+h)+E_M\text{ (midpoint rule)}\]</div>
+<div class="math notranslate nohighlight">
+\[I(x_k,x_k+h)=T(x_k,x_k+h)+E_T\nonumber\]</div>
+<div class="math notranslate nohighlight" id="eq-auto50">
+\[\tag{73}
+=T(x_k,x_k+h)-2E_M\text{ (trapezoidal rule)},\]</div>
+<p>we can now cancel out the error term by multiplying the first equation with 2 and adding the equations:</p>
+<div class="math notranslate nohighlight" id="eq-auto51">
+\[\tag{74}
+3I(x_k,x_k+h)=2M(x_k,x_k+h)+T(x_k,x_k+h)\]</div>
+<div class="math notranslate nohighlight" id="eq-auto52">
+\[\tag{75}
+=2f(x_k+\frac{h}{2}) h+\left[f(x_k+h)+f(x_k)\right] \frac{h}{2}\]</div>
+<div class="math notranslate nohighlight" id="eq-auto53">
+\[\tag{76}
+I(x_k,x_k+h)=\frac{h}{6}\left[f(x_k)+4f(x_k+\frac{h}{2})+f(x_k+h)\right].\]</div>
+<p>Now we can do as we did in the case of the trapezoidal rule, sum over all the elements:</p>
+<div class="math notranslate nohighlight">
+\[I(a,b)=\sum_{k=0}^{N-1}I(x_k,x_k+h)\nonumber\]</div>
+<div class="math notranslate nohighlight">
+\[=\frac{h}{6}\left[f(a)+ 4f(a+\frac{h}{2})+2f(a+h)+4f(a+3\frac{h}{2})\right.\nonumber\]</div>
+<div class="math notranslate nohighlight" id="eq-auto54">
+\[\tag{77}
+\left.\qquad+2f(a+2h)+\cdots+f(b)\right]\]</div>
+<div class="math notranslate nohighlight" id="eq-auto55">
+\[\tag{78}
+=\frac{h^\prime}{3}\left[f(a)+ f(b) + 4\sum_{k= \text{odd}}^{N-2}f(a+k h^\prime)+2\sum_{k= \text{even}}^{N-2}f(a+k h^\prime)\right],\]</div>
+<p>note that in the last equation we have changed the step size <span class="math notranslate nohighlight">\(h=2h^\prime\)</span>.</p>
+<p><strong>d)</strong>
+Show that for <span class="math notranslate nohighlight">\(N=2\)</span> (<span class="math notranslate nohighlight">\(f(x)=1,x,x^3\)</span>), the points and Gaussian quadrature rule for <span class="math notranslate nohighlight">\(\int_{0}^{1}x^{1/2}f(x)\,dx\)</span>
+is <span class="math notranslate nohighlight">\(\omega_{0,1}=-\sqrt{70}{150} + 1/3, \sqrt{70}{150} + 1/3\)</span>
+and <span class="math notranslate nohighlight">\(x_{0,1}=-2\sqrt{70}{63} + 5/9, 2\sqrt{70}{63} + 5/9\)</span>
+1. Integrate <span class="math notranslate nohighlight">\(\int_0^1x^{1/2}\cos x\,dx\)</span> using the rule derived in the exercise above and compare with the standard Gaussian quadrature rule for (<span class="math notranslate nohighlight">\(N=2\)</span>, and <span class="math notranslate nohighlight">\(N=3\)</span>).</p>
+<p><strong>e)</strong>
+Make a Python program that uses the Midpoint rule to integrate experimental data that are unevenly spaced and given in the form of two arrays.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Modeling and Computational Engineering</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="._book000.html">Modeling and Computational Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._book001.html">Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._book002.html">Finite differences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._book003.html">Linear and nonlinear equations</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Numerical integration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">Numerical Integration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#the-midpoint-rule">The Midpoint Rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-trapezoidal-rule">The Trapezoidal Rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#numerical-errors-on-integrals">Numerical Errors on Integrals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#practical-estimation-of-errors-on-integrals">Practical Estimation of Errors on Integrals</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#romberg-integration">Romberg Integration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gaussian-quadrature">Gaussian Quadrature</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#error-term-on-gaussian-integration">Error term on Gaussian Integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#exercise-3-1-numerical-integration">Exercise 3.1: Numerical Integration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="._book005.html">Ordinary differential equations</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="._book003.html" title="previous chapter">Linear and nonlinear equations</a></li>
+      <li>Next: <a href="._book005.html" title="next chapter">Ordinary differential equations</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Aksel Hiorth, the National IOR Centre & Institute for Energy Resources,.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/._book004.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

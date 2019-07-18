@@ -1,0 +1,7 @@
+.. !split
+
+.. _ch:ode:
+
+Ordinary differential equations
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+

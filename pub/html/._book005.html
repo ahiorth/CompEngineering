@@ -6,6 +6,7 @@ Automatically generated HTML file from DocOnce source
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="Modeling and Computational Engineering">
 
 <title>Modeling and Computational Engineering</title>
@@ -47,46 +48,40 @@ code { color: inherit; background-color: transparent; }
                'table_of_contents',
                'table_of_contents'),
               ('Preface', 0, 'ch:preface', 'ch:preface'),
-              ('Numerical derivatives', 0, 'ch:numder', 'ch:numder'),
-              ('Finite Differences', 1, None, '___sec2'),
+              ('Finite differences', 0, 'ch:taylor', 'ch:taylor'),
+              ('Numerical derivatives', 1, None, '___sec2'),
               ('Taylor Polynomial Approximation', 1, None, '___sec3'),
               ('Evaluation of polynomials', 2, None, '___sec4'),
               ('Calculating Derivatives of Functions',
                1,
                'ch:taylor:der',
                'ch:taylor:der'),
-              ('Round off Errors', 2, None, '___sec6'),
-              ('Higher Order Derivatives', 1, None, '___sec7'),
+              ('Big $\\mathcal{O}$ notation', 2, None, '___sec6'),
+              ('Round off Errors', 2, None, '___sec7'),
+              ('Higher Order Derivatives', 1, None, '___sec8'),
+              ('Linear and nonlinear equations', 0, 'ch:nlin', 'ch:nlin'),
               ('Numerical integration', 0, 'ch:numint', 'ch:numint'),
-              ('Numerical Integration', 1, None, '___sec9'),
-              ('The Midpoint Rule', 2, None, '___sec10'),
-              ('The Trapezoidal Rule', 2, None, '___sec11'),
-              ('Numerical Errors on Integrals', 2, None, '___sec12'),
+              ('Numerical Integration', 1, None, '___sec11'),
+              ('The Midpoint Rule', 2, None, '___sec12'),
+              ('The Trapezoidal Rule', 2, None, '___sec13'),
+              ('Numerical Errors on Integrals', 2, None, '___sec14'),
               ('Practical Estimation of Errors on Integrals',
                2,
-               None,
-               '___sec13'),
-              ('Romberg Integration', 1, None, '___sec14'),
-              ('Gaussian Quadrature', 2, None, '___sec15'),
-              ('The case N=3', 3, None, '___sec16'),
-              ('Which method to use in a specific case?', 2, None, '___sec17'),
-              ('Exercise 2.1: Numerical Integration', 2, None, '___sec18'),
-              ('Ordinary differential equations', 0, 'ch:ode', 'ch:ode'),
-              ('Ordinary Differential Equations', 1, None, '___sec20'),
-              ('A Simple Model for Fluid Flow', 1, None, '___sec21'),
-              ('Eulers Method', 1, None, '___sec22'),
-              ('Error Analysis - Eulers Method', 2, None, '___sec23'),
-              ('Adaptive step size - Eulers Method', 2, None, '___sec24'),
-              ('Runge-Kutta Methods', 1, None, '___sec25'),
-              ('Adaptive step size - Runge-Kutta Method', 2, None, '___sec26'),
-              ('Conservation of Mass', 2, None, '___sec27'),
-              ('Solving a set of ODE equations', 1, None, '___sec28'),
-              ('Stiff sets of ODE  and implicit methods', 1, None, '___sec29'),
-              ('Exercise 3.1: Truncation Error in Eulers Method',
+               'sec:numint:parct',
+               'sec:numint:parct'),
+              ('Romberg Integration', 1, None, '___sec16'),
+              ('Gaussian Quadrature', 2, None, '___sec17'),
+              ('The case N=3', 3, None, '___sec18'),
+              ('Error term on Gaussian Integration', 2, None, '___sec19'),
+              ('Common Weight functions for Classical Gaussian Quadratures',
                2,
                None,
-               '___sec30'),
-              ('References', 1, None, '___sec31')]}
+               '___sec20'),
+              ('Which method to use in a specific case?', 2, None, '___sec21'),
+              ('Exercise 3.1: Numerical Integration', 2, None, '___sec22'),
+              ('Ordinary differential equations', 0, 'ch:ode', 'ch:ode'),
+              ('Monte Carlo Methods', 0, 'ch:mc', 'ch:mc'),
+              ('References', 1, None, '___sec25')]}
 end of tocinfo -->
 
 <body>
@@ -126,37 +121,31 @@ MathJax.Hub.Config({
         <ul class="dropdown-menu">
      <!-- navigation toc: --> <li><a href="._book001.html#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
      <!-- navigation toc: --> <li><a href="._book001.html#ch:preface" style="font-size: 80%;"><b>Preface</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#ch:numder" style="font-size: 80%;"><b>Numerical derivatives</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Finite Differences</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#ch:taylor" style="font-size: 80%;"><b>Finite differences</b></a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#___sec2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Numerical derivatives</a></li>
      <!-- navigation toc: --> <li><a href="._book002.html#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Taylor Polynomial Approximation</a></li>
      <!-- navigation toc: --> <li><a href="._book002.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Evaluation of polynomials</a></li>
      <!-- navigation toc: --> <li><a href="._book002.html#ch:taylor:der" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Calculating Derivatives of Functions</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Round off Errors</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Higher Order Derivatives</a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#ch:numint" style="font-size: 80%;"><b>Numerical integration</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Numerical Integration</a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Midpoint Rule</a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Trapezoidal Rule</a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Numerical Errors on Integrals</a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Practical Estimation of Errors on Integrals</a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Romberg Integration</a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gaussian Quadrature</a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The case N=3</a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Which method to use in a specific case?</a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 2.1: Numerical Integration</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#ch:ode" style="font-size: 80%;"><b>Ordinary differential equations</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ordinary Differential Equations</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec21" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;A Simple Model for Fluid Flow</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Eulers Method</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Error Analysis - Eulers Method</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adaptive step size - Eulers Method</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Runge-Kutta Methods</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec26" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adaptive step size - Runge-Kutta Method</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec27" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Conservation of Mass</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec28" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Solving a set of ODE equations</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec29" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Stiff sets of ODE  and implicit methods</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec30" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 3.1: Truncation Error in Eulers Method</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;References</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Big \( \mathcal{O} \) notation</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#___sec7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Round off Errors</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Higher Order Derivatives</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#ch:nlin" style="font-size: 80%;"><b>Linear and nonlinear equations</b></a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#ch:numint" style="font-size: 80%;"><b>Numerical integration</b></a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Numerical Integration</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Midpoint Rule</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Trapezoidal Rule</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Numerical Errors on Integrals</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#sec:numint:parct" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Practical Estimation of Errors on Integrals</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Romberg Integration</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gaussian Quadrature</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The case N=3</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Error term on Gaussian Integration</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#___sec20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Common Weight functions for Classical Gaussian Quadratures</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#___sec21" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Which method to use in a specific case?</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#___sec22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 3.1: Numerical Integration</a></li>
+     <!-- navigation toc: --> <li><a href="#ch:ode" style="font-size: 80%;"><b>Ordinary differential equations</b></a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#ch:mc" style="font-size: 80%;"><b>Monte Carlo Methods</b></a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#___sec25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;References</a></li>
 
         </ul>
       </li>
@@ -172,24 +161,17 @@ MathJax.Hub.Config({
 <a name="part0005"></a>
 <!-- !split -->
 
-<h1 id="___sec31" class="anchor">References </h1>
-
-<p>
-<!-- begin bibliography -->
-
-<ol>
- <li> <div id="Python"></div> Python Programming Language. 
-    <a href="http://python.org" target="_self"><tt>http://python.org</tt></a>.</li>
-</ol>
-
-<!-- end bibliography -->
-
+<center><h1 id="ch:ode" class="anchor">Ordinary differential equations</h1></center> <!-- chapter heading -->
 <p>
 <!-- navigation buttons at the bottom of the page -->
 <ul class="pager">
 
   <li class="previous">
     <a href="._book004.html">&larr; Prev</a>
+  </li>
+
+  <li class="next">
+    <a href="._book006.html">Next &rarr;</a>
   </li>
 </ul>
 <!-- ------------------- end of main content --------------- -->
