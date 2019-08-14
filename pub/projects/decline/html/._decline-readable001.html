@@ -6,7 +6,6 @@ Automatically generated HTML file from DocOnce source
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="Decline Analysis of Oil field production data from the NCS">
 
 <title>Decline Analysis of Oil field production data from the NCS</title>
@@ -163,7 +162,14 @@ found by comparing the model to data.
 <li> Import data from  <code>field_production_gross_monthly.xls</code>,
   in the catalog or from the <a href="http://factpages.npd.no/factpages/" target="_self">NPD web site</a>, into a database</li>
 <li> Extract production data from the Draugen field, and store them in a text file called
-  <code>draugen.txt</code>. The format should be: <code>Year</code> (first column), <code>Month</code> (second column) , and <code>OilProd</code> (third column).</li> 
+  <code>draugen.txt</code>. The format should be: <code>Year</code> (first column), <code>Month</code>
+  (second column), and <code>OilProd</code> (third column).</li>
+<li> If you do not want to use databases: Simply open the file
+  <code>field_production_gross_monthly.xls</code>, in the catalog or from the
+  <a href="http://factpages.npd.no/factpages/" target="_self">NPD web site</a>. Search in the
+  Excel file after "Draugen", copy the data from all the rows relevant
+  for Draugen (row 1623 to 1921) and paste it into a file (using
+  e.g. notepad or some other text editor). Save the file as 'draugen.txt'.</li> 
 </ul>
 
 <h1 id="___sec2" class="anchor">Exercise 2: Importing and plotting data with Python    </h1>
@@ -187,8 +193,8 @@ reference how to use this function if you are unfamiliar:
 <b>Step 2.</b>
 It is more practical to have the production data to start at \( t=0 \). In
 the following we will assume that you have organized the oil production
-data from Draugen into Numpy arrays, e.g. <code>Year</code> (first column), <code>Month</code>
-(second column) , and <code>OilProd</code> (third column).
+data from Draugen into Numpy arrays, e.g. <code>Year</code>, <code>Month</code>, and
+<code>OilProd</code>.
 
 <p>
 
