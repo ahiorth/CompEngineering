@@ -1,0 +1,2717 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Modeling and Computational Engineering">
+
+<title>Modeling and Computational Engineering</title>
+
+<!-- Bootstrap style: bootswatch_journal -->
+<link href="https://netdna.bootstrapcdn.com/bootswatch/3.1.1/journal/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:60px;      /* fixed header height for style bootswatch_journal */
+  margin:-60px 0 0; /* negative fixed header height */
+}
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 0,
+ 'sections': [('Table of contents',
+               0,
+               'table_of_contents',
+               'table_of_contents'),
+              ('Preface', 0, 'ch:preface', 'ch:preface'),
+              ('Numerical derivatives', 0, 'ch:numder', 'ch:numder'),
+              ('Finite Differences', 1, None, '___sec2'),
+              ('Taylor Polynomial Approximation', 1, None, '___sec3'),
+              ('Evaluation of polynomials', 2, None, '___sec4'),
+              ('Calculating Derivatives of Functions',
+               1,
+               'ch:taylor:der',
+               'ch:taylor:der'),
+              ('Round off Errors', 2, None, '___sec6'),
+              ('Higher Order Derivatives', 1, None, '___sec7'),
+              ('Numerical integration', 0, 'ch:numint', 'ch:numint'),
+              ('Numerical Integration', 1, None, '___sec9'),
+              ('The Midpoint Rule', 2, None, '___sec10'),
+              ('The Trapezoidal Rule', 2, None, '___sec11'),
+              ('Numerical Errors on Integrals', 2, None, '___sec12'),
+              ('Practical Estimation of Errors on Integrals',
+               2,
+               None,
+               '___sec13'),
+              ('Romberg Integration', 1, None, '___sec14'),
+              ('Gaussian Quadrature', 2, None, '___sec15'),
+              ('The case N=3', 3, None, '___sec16'),
+              ('Which method to use in a specific case?', 2, None, '___sec17'),
+              ('Exercise 2.1: Numerical Integration', 2, None, '___sec18'),
+              ('Ordinary differential equations', 0, 'ch:ode', 'ch:ode'),
+              ('Ordinary Differential Equations', 1, None, '___sec20'),
+              ('A Simple Model for Fluid Flow', 1, None, '___sec21'),
+              ('Eulers Method', 1, None, '___sec22'),
+              ('Error Analysis - Eulers Method', 2, None, '___sec23'),
+              ('Adaptive step size - Eulers Method', 2, None, '___sec24'),
+              ('Runge-Kutta Methods', 1, None, '___sec25'),
+              ('Adaptive step size - Runge-Kutta Method', 2, None, '___sec26'),
+              ('Conservation of Mass', 2, None, '___sec27'),
+              ('Solving a set of ODE equations', 1, None, '___sec28'),
+              ('Stiff sets of ODE  and implicit methods', 1, None, '___sec29'),
+              ('Exercise 3.1: Truncation Error in Eulers Method',
+               2,
+               None,
+               '___sec30'),
+              ('References', 1, None, '___sec31')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript" async
+ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="book.html">Modeling and Computational Engineering</a>
+  </div>
+
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._book001.html#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
+     <!-- navigation toc: --> <li><a href="._book001.html#ch:preface" style="font-size: 80%;"><b>Preface</b></a></li>
+     <!-- navigation toc: --> <li><a href="#ch:numder" style="font-size: 80%;"><b>Numerical derivatives</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Finite Differences</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Taylor Polynomial Approximation</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Evaluation of polynomials</a></li>
+     <!-- navigation toc: --> <li><a href="#ch:taylor:der" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Calculating Derivatives of Functions</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Round off Errors</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Higher Order Derivatives</a></li>
+     <!-- navigation toc: --> <li><a href="#ch:numint" style="font-size: 80%;"><b>Numerical integration</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Numerical Integration</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Midpoint Rule</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Trapezoidal Rule</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Numerical Errors on Integrals</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Practical Estimation of Errors on Integrals</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Romberg Integration</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gaussian Quadrature</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The case N=3</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Which method to use in a specific case?</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 2.1: Numerical Integration</a></li>
+     <!-- navigation toc: --> <li><a href="#ch:ode" style="font-size: 80%;"><b>Ordinary differential equations</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ordinary Differential Equations</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec21" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;A Simple Model for Fluid Flow</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Eulers Method</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Error Analysis - Eulers Method</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adaptive step size - Eulers Method</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Runge-Kutta Methods</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec26" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adaptive step size - Runge-Kutta Method</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec27" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Conservation of Mass</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec28" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Solving a set of ODE equations</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec29" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Stiff sets of ODE  and implicit methods</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec30" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 3.1: Truncation Error in Eulers Method</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#___sec31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;References</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0002"></a>
+<!-- !split -->
+
+<center><h1 id="ch:numder" class="anchor">Numerical derivatives</h1></center> <!-- chapter heading -->
+
+<h1 id="___sec2" class="anchor">Finite Differences </h1>
+The computer does not have any concept of continuous functions. Functions are always evaluated at some point in space and/or time.
+As a simple example is to make a plot of the function \( f(x)=\sin x \) or \( f(x)=1+3x \) in a graph, 
+how many points do we need in order to make a figure that approximate the true function?
+Clearly for a linear function, we only need two points, but for a general function it is not so easy to give a general answer.
+In figure <a href="#fig:taylor:sinx">1</a>, there is a plot of \( \sin x \) on the interval \( [-\pi,\pi] \).
+
+<p>
+<center> <!-- figure label: --> <div id="fig:taylor:sinx"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 1:  A plot of \( \sin x \) for different spacing of the \( x \)-values.  <!-- caption label: fig:taylor:sinx --> </p></center>
+<p><img src="fig-taylor/func_plot.png" align="bottom" width=800></p>
+</center>
+
+<p>
+Clearly, in some areas a few number of points is needed in order to
+represent the function well, and in some areas more points are needed. To state it more clearly; between \( [-1,1] \) a linear function (few points) approximate \( \sin x \) well, 
+whereas in the area where the derivative of the function changes e.g. in \( [-2,-1] \), we need the points to be more closely spaced to capture the behavior
+of the true function.  Sometimes simulation time is not an issue, then we can use a large number of function
+evaluations. However, in many applications simulation time <em>is an issue</em>, and it would be good to know where where the points needs to be closely spaced, and where we can 
+mange with only a few points.  This simple example also illustrate that we need some way of knowing where our function is constant, and where it changes more 
+rapidly.
+
+<h1 id="___sec3" class="anchor">Taylor Polynomial Approximation </h1>
+There are many ways of representing a function, but perhaps one of the most widely used is Taylor polynomials. 
+Taylor series are the basis for solving ordinary and differential equations, simply because it makes it possible to evaluate any function with a set
+of limited operations: <em>addition, subtraction, and multiplication</em>. The Taylor polynomial, \( P_n(x) \) of degree \( n \) of a function \( f(x) \) at the point \( c \) is defined as:
+<div class="alert alert-block alert-success alert-text-normal"><b>Taylor polynomial:</b>
+$$
+\begin{align}
+ P_n(x) &= f(c)+f^\prime(c)(x-c)+\frac{f^{\prime\prime}(c)}{2!}(x-c)^2+\cdots+\frac{f^{(n)}(c)}{n!}(x-c)^n\nonumber\\ 
+&=\sum_{k=0}^n\frac{f^{(n)}}{k!}(x-c)^k.\tag{1.1}
+\end{align}
+$$
+</div>
+
+If the series is around the point \( c=0 \), the Taylor polynomial \( P_n(x) \) is often called a Maclaurin polynomial, more examples can be found 
+<a href="https://en.wikipedia.org/wiki/Taylor_series" target="_self">here</a>. If the series converge (i.e. that the higher order terms approach zero), then we can represent the
+function \( f(x) \) with its corresponding Taylor series around the point \( x=c \):
+$$
+\begin{align}
+ f(x) &= f(c)+f^\prime(c)(x-c)+\frac{f^{\prime\prime}(c)}{2!}(x-c)^2+\cdots
+=\sum_{k=0}^\infty\frac{f^{(n)}}{k!}(x-c)^k.\tag{1.2}
+\end{align}
+$$
+
+The Maclaurin series of \( \sin x \) is:
+$$
+\begin{align}
+\sin x = x-\frac{x^3}{3!}+\frac{x^5}{5!}-\frac{x^7}{7!}+\cdots=\sum_{k=0}^{\infty}\frac{(-1)^n}{(2n+1)!}x^{2n+1}.
+\tag{1.3}
+\end{align}
+$$
+
+<p>
+In figure <a href="#fig:mac_sin">2</a>, we show the first nine terms in the Maclaurin series for \( \sin x \) (all even terms are zero).
+
+<p>
+<center> <!-- figure label: --> <div id="fig:mac_sin"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 2:  Up to ninth order in the Maclaurin series of \( \sin x \).  <!-- caption label: fig:mac_sin --> </p></center>
+<p><img src="fig-taylor/mac_sin.png" align="bottom" width=800></p>
+</center>
+
+<p>
+Note that we get a decent representation of \( \sin x \) on the domain, by <em>only knowing the function and its derivative in a single point</em>. 
+The error term in Taylors formula, when we represent a function with a finite number of polynomial elements is given by:
+<div class="alert alert-block alert-danger alert-text-normal"><b>Error term in Taylors formula:</b>
+$$
+\begin{align}
+R_n(x)&=f(x)-P_n(x)=\frac{f^{(n+1)}(\eta)}{(n+1)!}(x-c)^{n+1}\nonumber\\ 
+&=\frac{1}{n!}\int_c^x(x-\tau)^{n}f^{(n+1)}(\tau)d\tau,\tag{1.4}
+\end{align}
+$$
+
+for some \( \eta \) in the domain \( [x,c] \).
+</div>
+
+If we want to calculate 
+\( \sin x \) to a precision lower than a specified value we can do it as follows:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+
+<span style="color: #408080; font-style: italic"># Sinus implementation using the Maclaurin Serie</span>
+<span style="color: #408080; font-style: italic"># By setting a value for eps this value will be used</span>
+<span style="color: #408080; font-style: italic"># if not provided</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">my_sin</span>(x,eps<span style="color: #666666">=1e-16</span>):
+    f <span style="color: #666666">=</span> power <span style="color: #666666">=</span> x
+    x2 <span style="color: #666666">=</span> x<span style="color: #666666">*</span>x
+    sign <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+    i<span style="color: #666666">=0</span>
+    <span style="color: #008000; font-weight: bold">while</span>(power<span style="color: #666666">&gt;=</span>eps):
+        sign <span style="color: #666666">=</span> <span style="color: #666666">-</span> sign
+        power <span style="color: #666666">*=</span> x2<span style="color: #666666">/</span>(<span style="color: #666666">2*</span>i<span style="color: #666666">+2</span>)<span style="color: #666666">/</span>(<span style="color: #666666">2*</span>i<span style="color: #666666">+3</span>)
+        f <span style="color: #666666">+=</span> sign<span style="color: #666666">*</span>power
+        i <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+    <span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&#39;No function evaluations: &#39;</span>, i)
+    <span style="color: #008000; font-weight: bold">return</span> f
+
+x<span style="color: #666666">=0.8</span>
+eps <span style="color: #666666">=</span> <span style="color: #666666">1e-9</span>
+<span style="color: #008000; font-weight: bold">print</span>(my_sin(x,eps), <span style="color: #BA2121">&#39;error = &#39;</span>, np<span style="color: #666666">.</span>sin(x)<span style="color: #666666">-</span>my_sin(x,eps))
+</pre></div>
+<p>
+This implementation needs some explanation:
+
+<ul>
+<li> The error term is given in equation <a href="#mjx-eqn-1.4">(1.4)</a>, in this case it reduces to \( R_{2n}=(-1)^{n+1}x^{2n+1}\cos\eta/(2n+1)! \) for terms up to \( k=n-1 \) in equation <a href="#mjx-eqn-1.3">(1.3)</a>. Since we do not know
+  where to evaluate \( \eta \) we just replace \( \cos\eta \) with one (since \( \cos\eta\leq1 \)). We then add the higher order terms and check if the error term is low enough, since we add the error term 
+  to the function evaluation our estimate will always be better than the specified accuracy.</li>
+<li> We evaluate the polynomials in the Taylor series by using the previous values too avoid too many multiplications within the loop, we do this by using the following identity:</li>
+</ul>
+
+$$
+  \begin{align}
+  \sin x&=\sum_{k=0}^{\infty} (-1)^nt_n, \text{ where: } t_n\equiv\frac{x^{2n+1}}{(2n+1)!}, \text{ hence :}\nonumber\\ 
+  t_{n+1}&=\frac{x^{2(n+1)+1}}{(2(n+1)+1)!}=\frac{x^{2n+1}x^2}{(2n+1)! (2n+2)(2n+3)}\nonumber\\ 
+  &=t_n\frac{x^2}{(2n+2)(2n+3)}
+\tag{1.5}
+\end{align}
+$$
+
+<h2 id="___sec4" class="anchor">Evaluation of polynomials </h2>
+How to evaluate a polynomial of the type: \( p_n(x)=a_0+a_1x+a_2x^2+\cdots+a_nx^n \)? We already saw a hint in the previous section that it can be done in different ways. One way is simply to 
+do:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>pol <span style="color: #666666">=</span> a[<span style="color: #666666">0</span>]
+<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>,n<span style="color: #666666">+1</span>):
+	pol <span style="color: #666666">=</span> pol <span style="color: #666666">+</span> a[i]<span style="color: #666666">*</span>x<span style="color: #666666">**</span>i
+</pre></div>
+<p>
+Note that there are \( n \) additions, whereas there are \( 1 + 2 +3+\cdots+n=n(n+1)/2 \) multiplications for all the iterations. Instead of evaluating the powers all over in 
+each loop, we can use the previous calculation to save the number of multiplications:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>pol <span style="color: #666666">=</span> a[<span style="color: #666666">0</span>] <span style="color: #666666">+</span> a[<span style="color: #666666">1</span>]<span style="color: #666666">*</span>x
+power <span style="color: #666666">=</span> x
+<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">2</span>,n<span style="color: #666666">+1</span>):
+	power  <span style="color: #666666">=</span> power<span style="color: #666666">*</span>x
+	pol    <span style="color: #666666">=</span> pol <span style="color: #666666">+</span> a[i]<span style="color: #666666">*</span>power
+</pre></div>
+<p>
+In this case there are still \( n \) additions, but now there are \( 2n-1 \) multiplications. For \( n=15 \), this amounts to 120 for the first, and 29 for the second method. 
+Polynomials can also be evaluated using <em>nested multiplication</em>:
+$$
+\begin{align}
+p_1 & = a_0+a_1x\nonumber\\ 
+p_2 & = a_0+a_1x+a_2x^2=a_0+x(a_1+a_2x)\nonumber\\ 
+p_3 & = a_0+a_1x+a_2x^2+a_3x^3=a_0+x(a_1+x(a_2+a_3x))\nonumber\\ 
+\vdots
+\tag{1.6}
+\end{align}   
+$$
+
+and so on. This can be implemented as:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>pol <span style="color: #666666">=</span> a[n]
+<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(n<span style="color: #666666">-1</span>,<span style="color: #666666">1</span>,<span style="color: #666666">-1</span>):
+	pol  <span style="color: #666666">=</span> a[i] <span style="color: #666666">+</span> pol<span style="color: #666666">*</span>x
+</pre></div>
+<p>
+In this case we only have \( n \) multiplications. So if you know beforehand exactly how many terms is needed to calculate the series, this method would be the preferred method.
+
+<h1 id="ch:taylor:der" class="anchor">Calculating Derivatives of Functions</h1>
+The derivative of a function can be calculated using the definition from calculus:
+$$
+\begin{align}
+f^\prime(x)=\lim_{h\to 0}\frac{f(x+h)-f(x)}{h}\simeq \frac{f(x+h)-f(x)}{h}.\tag{1.7}
+\end{align}  
+$$
+
+In the computer we cannot take the limit, \( h\to 0 \), a natural question is then: What value to use for \( h \)? 
+In figure <a href="#fig:taylor:df">3</a>, we have evaluated the numerical derivative of \( \sin x \), using the formula in equation <a href="#mjx-eqn-1.7">(1.7)</a> for different step sizes \( h \).
+
+<p>
+<center> <!-- figure label: --> <div id="fig:taylor:df"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 3:  Error in the numerical derivative of \( \sin x \) at \( x=0.2 \) for different step size.  <!-- caption label: fig:taylor:df --> </p></center>
+<p><img src="fig-taylor/df.png" align="bottom" width=800></p>
+</center>
+
+<p>
+We clearly see that the error depends on the step size, but there is a minimum; choosing a step size too large give a poor estimate and choosing a too low step size give an 
+even worse estimate. The explanation for this behavior is two competing effects: <em>mathematical approximation</em> and <em>round off errors</em>. Let us consider approximation or truncation error
+first. By using the Taylor expansion in equation <a href="#mjx-eqn-1.2">(1.2)</a> and expand about \( x \) and the error formula <a href="#mjx-eqn-1.4">(1.4)</a>, we get:
+$$
+\begin{align}
+f(x+h)&=f(x)+f^\prime(x)h + \frac{h^2}{2}f^{\prime\prime}(\eta)\text{ , hence:}\nonumber\\ 
+f^\prime(x)&=\frac{f(x+h)-f(x)}{h}-\frac{h}{2}f^{\prime\prime}(\eta),\tag{1.8}
+\end{align}
+$$
+
+for some \( \eta \) in \( [x,x+h] \). Thus the error to our approximation is \( hf^{\prime\prime}(\eta)/2 \), if we reduce the step size by a factor of 10 the error is reduced by a factor of 10. 
+Inspecting the graph, we clearly see that this is correct as the step size decreases from \( 10^{-1} \) to \( 10^{-8} \). When the step size decreases more, there is an increase in the error. This
+is due to round off errors, and can be understood by looking into how numbers are stored in a computer.
+
+<h2 id="___sec6" class="anchor">Round off Errors </h2>
+In a computer a floating point number,$x$, is represented as:
+$$
+\begin{align}
+x=\pm q2^m.
+\tag{1.9}
+\end{align}
+$$
+
+Most computers are 64-bits, then one bit is reserved for the sign, 52 for the fraction (\( q \)) and 11 for
+the exponent (\( m \))  (for a graphic illustration see <a href="https://en.wikipedia.org/wiki/Double-precision_floating-point_format" target="_self">Wikipedia</a>).
+what is the largest <em>floating point</em> number the computer can represent? 
+Since \( m \) contains 11 bits, \( m \) can have the maximal value \( m=2^{11}=1024 \), and then the larges value is close to \( 2^{1024}\simeq 10^{308} \).
+If you enter <code>print(10.1*10**(308))</code> in Python the answer will be <code>Inf</code>. If you enter <code>print(10*10**(308))</code>, Python will give an answer. This is because 
+the number \( 10.1\cdot10^{308} \) is floating point number, whereas \( 10^{309} \) is an <em>integer</em>, and Python does something clever when it comes to representing integers. 
+Python has a third numeric type called long int, which can use the available memory to represent an integer.
+
+<p>
+\( 10^{308} \) is the largest number, but what is the highest precision we can use, or how many decimal places can we use for a floating point number? 
+Since there are 52 bits for the fraction, there are \( 1/2^{52}\simeq10^{-16} \) decimal places. As an example
+the value of \( \pi \) is \( 3.14159265358979323846264338\ldots \), but in Python it can only be represented by 16 digits: \( 3.141592653589793 \). In principle 
+it does not sound so bad to have an answer accurate to 16 digits, and it is much better than most experimental results. 
+So what is the problem? One problem that you should be aware of is that round off errors can be a serious problem when we subtract two numbers that 
+are very close to one another. If we implement the following program in Python:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>h<span style="color: #666666">=1e-16</span>
+x <span style="color: #666666">=</span> <span style="color: #666666">2.1</span> <span style="color: #666666">+</span> h
+y <span style="color: #666666">=</span> <span style="color: #666666">2.1</span> <span style="color: #666666">-</span> h
+<span style="color: #008000; font-weight: bold">print</span>((x<span style="color: #666666">-</span>y)<span style="color: #666666">/</span>h)
+</pre></div>
+<p>
+we expect to get the answer 2, but instead we get zero. By changing \( h \) to a higher value, the answer will get closer to 2.
+
+<p>
+Armed with this knowledge of round off errors, we can continue to analyze
+the result in figure <a href="#fig:taylor:df">3</a>.
+The round off error when we represent a floating point number \( x \) in the 
+machine will be of the order \( x/10^{16} \) (<em>not</em> \( 10^{-16} \)). In general, when we evaluate a function the error will be of the order 
+\( \epsilon|f(x)| \), where \( \epsilon\sim10^{-16} \). Thus equation <a href="#mjx-eqn-1.8">(1.8)</a> is modified in the following way when we take into account the round off errors:
+$$
+\begin{align}
+f^\prime(x)=\frac{f(x+h)-f(x)}{h}\pm\frac{2\epsilon|f(x)|}{h}-\frac{h}{2}f^{\prime\prime}(\eta),\tag{1.10}
+\end{align}
+$$
+
+we do not know the sign of the round off error, so the total error \( R_2 \) is:
+$$
+\begin{align}
+R_2=\frac{2\epsilon|f(x)|}{h}+\frac{h}{2}|f^{\prime\prime}(\eta)|.\tag{1.11}
+\end{align}
+$$
+
+We have put absolute values around the function and its derivative to get the maximal error, it might be the case that the round off error cancel part of the 
+truncation error. However, the round off error is random in nature and will change from machine to machine, and each time we run the program. 
+Note that the round off error increases when \( h \) decreases, and the approximation error decreases when \( h \) decreases. This is exactly what we see in the figure above. We can find the 
+best step size, by differentiating \( R_2 \) and put it equal to zero:
+$$
+\begin{align}
+\frac{dR_2}{dh}&=-\frac{2\epsilon|f(x)|}{h^2}+\frac{1}{2}f^{\prime\prime}(\eta)=0\nonumber\\ 
+h&=2\sqrt{\epsilon\left|\frac{f(x)}{f^{\prime\prime}(\eta)}\right|}\simeq 2\cdot10^{-8},\tag{1.12}
+\end{align}
+$$
+
+In the last equation we have assumed that \( f(x) \) and its derivative is \( ~1 \). This step size corresponds to an error of order \( R_2\sim10^{-8} \). 
+Inspecting 
+the result in figure <a href="#fig:taylor:df">3</a>.
+we see that the minimum is located at \( h\sim10^{-8} \).
+
+<h1 id="___sec7" class="anchor">Higher Order Derivatives </h1>
+There are more ways to calculate the derivative of a function, than the formula given in equation <a href="#mjx-eqn-1.8">(1.8)</a>. Different formulas can be
+derived by using Taylors formula in <a href="#mjx-eqn-1.2">(1.2)</a>, usually one expands about \( x\pm h \):
+$$
+\begin{align}
+f(x+h)&=f(x)+f^\prime(x)h + \frac{h^2}{2}f^{\prime\prime}(x)+ \frac{h^3}{3!}f^{(3)}(x)+ \frac{h^4}{4!}f^{(4)}(x)+\cdots\nonumber\\ 
+f(x-h)&=f(x)-f^\prime(x)h + \frac{h^2}{2}f^{\prime\prime}(x)- \frac{h^3}{3!}f^{(3)}(x)+ \frac{h^4}{4!}f^{(3)}(x)-\cdots.
+\tag{1.13}
+\end{align}
+$$
+
+If we add these two equations, we get an expression for the second derivative, because the first derivative cancels out. But we also observe that if we subtract these two equations we get 
+an expression for the first derivative that is accurate to a higher order than the formula in equation <a href="#mjx-eqn-1.7">(1.7)</a>, hence:
+$$
+\begin{align}
+f^\prime(x)&=\frac{f(x+h)-f(x-h)}{2h} -\frac{h^2}{6}f^{(3)}(\eta),\tag{1.14}\\ 
+f^{\prime\prime}(x) &= \frac{f(x+h)+f(x-h)-2f(x)}{h^2}+ \frac{h^2}{12}f^{(4)}(\eta)\tag{1.15},
+\end{align}
+$$
+
+for some \( \eta \) in \( [x,x+h] \). In figure <a href="#fig:taylor:df2">4</a>, we have plotted equation <a href="#mjx-eqn-1.8">(1.8)</a>, <a href="#mjx-eqn-1.14">(1.14)</a>, and <a href="#mjx-eqn-1.15">(1.15)</a> for 
+different step sizes. The derivative in equation <a href="#mjx-eqn-1.14">(1.14)</a>, gives a higher accuracy than equation <a href="#mjx-eqn-1.8">(1.8)</a> for a larger step size,
+as can bee seen in figure <a href="#fig:taylor:df2">4</a>.
+
+<p>
+<center> <!-- figure label: --> <div id="fig:taylor:df2"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 4:  Error in the numerical derivative and second derivative of \( \sin x \) at \( x=0.2 \) for different step size.  <!-- caption label: fig:taylor:df2 --> </p></center>
+<p><img src="fig-taylor/df2.png" align="bottom" width=800></p>
+</center>
+
+<p>
+We can perform a similar error analysis as we did before, and then we find for equation <a href="#mjx-eqn-1.14">(1.14)</a> and <a href="#mjx-eqn-1.15">(1.15)</a> that the total
+numerical error is:
+$$
+\begin{align}
+R_3&=\frac{\epsilon|f(x)|}{h}+\frac{h^2}{6}f^{(3)}(\eta),\tag{1.16}\\ 
+R_4&=\frac{4\epsilon|f(x)|}{h^2}+\frac{h^2}{12}f^{(4)}(\eta),\tag{1.17}
+\end{align}
+$$
+
+respectively. Differentiating these two equations with respect to \( h \), and set the equations equal to zero, we find an optimal step size of
+\( h\sim10^{-5} \) for equation <a href="#mjx-eqn-1.16">(1.16)</a>, which gives an error of \( R_2\sim 10^{-16}/10^{-5}+(10^{-5})^2/6\simeq10^{-10} \), and \( h\sim10^{-4} \) for equation
+<a href="#mjx-eqn-1.17">(1.17)</a>, which gives an error of \( R_4\sim 4\cdot10^{-16}/(10^{-4})^2+(10^{-4})^2/12\simeq10^{-8} \). Note that we get the surprising result for the first order 
+derivative in equation <a href="#mjx-eqn-1.14">(1.14)</a>, that a higher step size gives a more accurate result.
+
+<p>
+
+<center><h1 id="ch:numint" class="anchor">Numerical integration</h1></center> <!-- chapter heading -->
+
+<h1 id="___sec9" class="anchor">Numerical Integration </h1>
+
+<p>
+Before diving into the details of this section, it is worth pointing out that the derivation of the algorithms in this section follows a general pattern:
+
+<ol>
+<li> We start with a mathematical model (in this case an integral)</li>
+<li> The mathematical model is formulated in discrete form</li> 
+<li> Then we design an algorithm to solve the model</li> 
+<li> The numerical solution for a test case is compared with the true solution (could be an analytical solution or data)</li>
+<li> Error analysis: we investigate the accuracy of the algorithm by changing the number of iterations and/or make changes to the implementation or algorithm</li>
+</ol>
+
+In practice you would not use your own implementation to calculate an integral, but in order to understand which method to use 
+in a specific case, it is important to understand the limitation and advantages of the different algorithms. The only way to achieve this is to 
+have a basic understanding of the development. There might also be some cases where you would like to adapt an integration scheme to your specific
+case if there is a special need  that the integration is fast.
+
+<h2 id="___sec10" class="anchor">The Midpoint Rule </h2>
+
+<p>
+Numerical integration is encountered in numerous applications in physics and engineering sciences. 
+Let us first consider the most simple case, a function \( f(x) \), which is a function of one variable, \( x \). The most straight forward way of calculating the area \( \int_a^bf(x)dx \) is 
+simply to divide the area under the function into \( N \) equal rectangular slices with size \( h=(b-a)/N \), as illustrated in figure <a href="#fig:numint:mid">5</a>. The area of one box is:
+$$
+\begin{equation}
+M(x_k,x_k+h)=f(x_k+\frac{h}{2}) h,\tag{2.1}
+\end{equation}
+$$
+
+and the area of all the boxes is:
+$$
+\begin{align}
+I(a,b)&=\int_a^bf(x)dx\simeq\sum_{k=0}^{N-1}M(x_k,x_k+h)\nonumber\\ 
+&=h\sum_{k=0}^{N-1}f(x_k+\frac{h}{2})=h\sum_{k=0}^{N-1}f(a+(k+\frac{1}{2})h).
+\tag{2.2}
+\end{align}
+$$
+
+Note that the sum goes from \( k=0,1,\ldots,N-1 \), a total of \( N \) elements. We could have chosen to let the sum go from \( k=1,2,\ldots,N \). 
+In Python, C, C++ and many other programming languages the arrays start by indexing the elements from \( 0,1,\ldots \) to \( N-1 \), 
+therefore we choose the convention of having the first element to start at \( k=0 \).
+
+<p>
+<center> <!-- figure label: --> <div id="fig:numint:mid"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 5:  Integrating a function with the midpoint rule.  <!-- caption label: fig:numint:mid --> </p></center>
+<p><img src="fig-numint/func_sq.png" align="bottom" width=800></p>
+</center>
+
+<p>
+Below is a Python code, where this algorithm is implemented for \( f(x)=\sin (x) \)
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+<span style="color: #408080; font-style: italic"># Function to be integrated</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
+    <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>sin(x)
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">int_midpoint</span>(lower_limit, upper_limit,func,N):
+    h    <span style="color: #666666">=</span> (upper_limit<span style="color: #666666">-</span>lower_limit)<span style="color: #666666">/</span>N
+    area <span style="color: #666666">=</span> <span style="color: #666666">0.</span>
+    <span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>,N): <span style="color: #408080; font-style: italic"># loop over k=0,1,..,N-1</span>
+        val <span style="color: #666666">=</span> lower_limit<span style="color: #666666">+</span>(k<span style="color: #666666">+0.5</span>)<span style="color: #666666">*</span>h <span style="color: #408080; font-style: italic"># midpoint value </span>
+        area <span style="color: #666666">+=</span> func(val)<span style="color: #666666">*</span>h
+    <span style="color: #008000; font-weight: bold">return</span> area        
+N<span style="color: #666666">=5</span>
+a<span style="color: #666666">=0</span>
+b<span style="color: #666666">=</span>np<span style="color: #666666">.</span>pi
+Area <span style="color: #666666">=</span> int_midpoint(a,b,f,N)
+<span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&#39;Numerical value= &#39;</span>, Area)
+<span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&#39;Error= &#39;</span>, (<span style="color: #666666">2-</span>Area)<span style="color: #666666">/2</span>) <span style="color: #408080; font-style: italic"># Analytical result is 2</span>
+</pre></div>
+
+<h2 id="___sec11" class="anchor">The Trapezoidal Rule </h2>
+The numerical error in the above example is quite low, only about 2$\%$ for \( N=5 \). 
+However, by just looking at the graph above it seems likely that we can develop a better algorithm by using trapezoids instead of rectangles, 
+see figure <a href="#fig:numint:trap">6</a>.
+
+<p>
+<center> <!-- figure label: --> <div id="fig:numint:trap"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 6:  Integrating a function with the trapezoidal rule.  <!-- caption label: fig:numint:trap --> </p></center>
+<p><img src="fig-numint/func_tr.png" align="bottom" width=800></p>
+</center>
+
+<p>
+Earlier we approximated the area using the midpoint value: \( f(x_k+h/2)\cdot h \). Now we use \( A=A_1+A_2 \), where \( A_1=f(x_k)\cdot h \) 
+and \( A_2=(f(x_k+h)-f(x_k))\cdot h/2 \), hence the area of one trapezoid is:
+$$
+\begin{equation}
+A\equiv T(x_k,x_k+h)=(f(x_k+h)+f(x_k))h/2.
+\tag{2.3}
+\end{equation}
+$$
+
+This is the trapezoidal rule, and for the whole interval we get:
+$$
+\begin{align}
+I(a,b)&=\int_a^bf(x)dx\simeq\frac{1}{2}h\sum_{k=0}^{N-1}\left[f(x_k+k h)+f(x_k)\right] \nonumber \\ 
+&=h\left[\frac{1}{2}f(a)+f(a+h) + f(a+2h) +\nonumber\right. \\ 
+&\left.\qquad\cdots + f(a+(N-2)h)+\frac{1}{2}f(b)\right]\nonumber \\ 
+&=h\left[\frac{1}{2}f(a)+\frac{1}{2}f(b)+\sum_{k=1}^{N-1}f(a+k h)\right].
+\tag{2.4}
+\end{align}
+$$
+
+Note that this formula was bit more involved to derive, but it requires only one more function evaluations compared to the midpoint rule. 
+Below is a python implementation:
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+<span style="color: #408080; font-style: italic"># Function to be integrated</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
+    <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>sin(x)
+
+<span style="color: #408080; font-style: italic">#In the implementation below the calculation goes faster </span>
+<span style="color: #408080; font-style: italic">#when we avoid unnecessary multiplications by h in the loop</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">int_trapez</span>(lower_limit, upper_limit,func,N):
+    h       <span style="color: #666666">=</span> (upper_limit<span style="color: #666666">-</span>lower_limit)<span style="color: #666666">/</span>N
+    area    <span style="color: #666666">=</span> func(lower_limit)<span style="color: #666666">+</span>func(upper_limit)
+    area   <span style="color: #666666">*=</span> <span style="color: #666666">0.5</span>
+    val     <span style="color: #666666">=</span> lower_limit
+    <span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>,N): <span style="color: #408080; font-style: italic"># loop over k=1,..,N-1</span>
+        val  <span style="color: #666666">+=</span> h <span style="color: #408080; font-style: italic"># midpoint value </span>
+        area <span style="color: #666666">+=</span> func(val)
+    <span style="color: #008000; font-weight: bold">return</span> area<span style="color: #666666">*</span>h
+
+N<span style="color: #666666">=5</span>
+a<span style="color: #666666">=0</span>
+b<span style="color: #666666">=</span>np<span style="color: #666666">.</span>pi
+Area <span style="color: #666666">=</span> int_trapez(a,b,f,N)
+<span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&#39;Numerical value= &#39;</span>, Area)
+<span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&#39;Error= &#39;</span>, (<span style="color: #666666">2-</span>Area)<span style="color: #666666">/2</span>) <span style="color: #408080; font-style: italic"># Analytical result is 2</span>
+</pre></div>
+<p>
+In the table below, we have calculated the numerical error for various values of \( N \).
+
+<div class="row">
+  <div class="col-xs-5">
+    <table class="table table-striped table-hover table-condensed">
+<thead>
+<tr><td align="center">\( N \)</td> <td align="center">\( h \)</td> <td align="center"><b>Error Midpoint</b></td> <td align="center"><b>Error Trapezoidal</b></td> </tr>
+</thead>
+<tbody>
+<tr><td align="center">   1          </td> <td align="center">   3.14       </td> <td align="center">   -57\%             </td> <td align="center">   100\%                </td> </tr>
+<tr><td align="center">   5          </td> <td align="center">   0.628      </td> <td align="center">   -1.66\%           </td> <td align="center">   3.31\%               </td> </tr>
+<tr><td align="center">   10         </td> <td align="center">   0.314      </td> <td align="center">   -0.412\%          </td> <td align="center">   0.824\%              </td> </tr>
+<tr><td align="center">   100        </td> <td align="center">   0.031      </td> <td align="center">   -4.11E-3\%        </td> <td align="center">   8.22E-3\%            </td> </tr>
+</tbody>
+    </table>
+  </div> <!-- col-xs-5 -->
+</div> <!-- cell row -->
+<p>
+Note that we get the surprising result that this algorithm performs poorer, a factor of 2 than the midpoint rule.
+How can this be explained? By just looking at figure <a href="#fig:numint:mid">5</a>, we see that the midpoint rule actually over predicts the area from \( [x_k,x_k+h/2] \) 
+ and under predicts in the interval \( [x_k+h/2,x_{k+1}] \) or vice versa. The net effect is that for many cases the midpoint rule give a slightly better 
+ performance than the trapezoidal rule. In the next section we will investigate this more formally.
+
+<h2 id="___sec12" class="anchor">Numerical Errors on Integrals </h2>
+It is important to know the accuracy of the methods we are using, otherwise we do not know if the
+computer produce correct results. In the previous examples we were able to estimate the error because we knew the analytical result. However, if we know the 
+analytical result there is no reason to use the computer to calculate the result(!). Thus, we need a general method to estimate the error, and let the computer 
+run until a desired accuracy is reached.
+
+<p>
+In order to analyze the midpoint rule in more detail we approximate the function by a Taylor 
+series at the midpoint between \( x_k \) and \( x_k+h \): 
+$$
+\begin{align}
+f(x)&=f(x_k+h/2)+f^\prime(x_k+h/2)(x-(x_k+h/2))\nonumber\\ 
+&+\frac{1}{2!}f^{\prime\prime}(x_k+h/2)(x-(x_k+h/2))^2+\mathcal{O}(h^3)
+\tag{2.5}
+\end{align}
+$$
+
+Since \( f(x_k+h/2) \) and its derivatives are constants it is straight forward to integrate \( f(x) \):
+$$
+\begin{align}
+I(x_k,x_k+h)&=\int_{x_k}^{x_k+h}\left[f(x_k+h/2)+f^\prime(x_k+h/2)(x-(x_k+h/2))\right.\nonumber\\ 
+&\left.+\frac{1}{2!}f^{\prime\prime}(x_k+h/2)(x-(x_k+h/2))^2+\mathcal{O}(h^3)\right]dx
+\tag{2.6}
+\end{align}
+$$
+
+The first term is simply the midpoint rule, to evaluate the two other terms we make the substitution: \( u=x-x_k \):
+$$
+\begin{align}
+I(x_k,x_k+h)&=f(x_k+h/2)\cdot h+f^\prime(x_k+h/2)\int_0^h(u-h/2)du\nonumber\\ 
+&+\frac{1}{2}f^{\prime\prime}(x_k+h/2)\int_0^h(u-h/2)^2du+\mathcal{O}(h^4)\nonumber\\ 
+&=f(x_k+h/2)\cdot h-\frac{h^3}{24}f^{\prime\prime}(x_k+h/2)+\mathcal{O}(h^4).
+\tag{2.7}
+\end{align}
+$$
+
+Note that all the odd terms cancels out, i.e \( \int_0^h(u-h/2)^m=0 \) for \( m=1,3,5\ldots \). Thus the error for the midpoint rule, \( E_{M,k} \), on this particular interval is:
+$$
+\begin{equation}
+E_{M,k}=I(x_k,x_k+h)-f(x_k+h/2)\cdot h=-\frac{h^3}{24}f^{\prime\prime}(x_k+h/2),
+\tag{2.8}
+\end{equation}
+$$
+
+where we have ignored higher order terms. We can easily sum up the error on all the intervals, but clearly \( f^{\prime\prime}(x_k+h/2) \) will 
+not, in general, have the same value on all intervals. However, an upper bound for the error can be found by replacing \( f^{\prime\prime}(x_k+h/2) \) 
+with the maximal value on the interval \( [a,b] \), \( f^{\prime\prime}(\eta) \):
+$$
+\begin{align}
+E_{M}&=\sum_{k=0}^{N-1}E_{M,k}=-\frac{h^3}{24}\sum_{k=0}^{N-1}f^{\prime\prime}(x_k+h/2)\leq-\frac{Nh^3}{24}f^{\prime\prime}(\eta),\tag{2.9}\\ 
+E_{M}&\leq-\frac{(b-a)^3}{24N^2}f^{\prime\prime}(\eta),
+\tag{2.10}
+\end{align}
+$$
+
+where we have used \( h=(b-a)/N \). We can do the exact same analysis for the trapezoidal rule, but then we expand the function around \( x_k-h \) instead of the midpoint. 
+The error term is then:
+$$
+\begin{equation}
+E_T=\frac{(b-a)^3}{12N^2}f^{\prime\prime}(\overline{\eta}).
+\tag{2.11}
+\end{equation}
+$$
+
+At the first glance it might look like the midpoint rule always is better than the trapezoidal rule, but note that the second derivative is 
+evaluated in different points (\( \eta \) and \( \overline{\eta} \)). Thus it is possible to construct examples where the midpoint rule performs poorer 
+than the trapezoidal rule.
+
+<p>
+Before we end this section we will rewrite the error terms in a more useful form as it is not so easy to evaluate 
+\( f^{\prime\prime}(\eta) \) (since we do not know which value of \( \eta \) to use). By taking a closer look at equation <a href="#mjx-eqn-2.9">(2.9)</a>, 
+we see that it is closely related to the midpoint rule for \( \int_a^bf^{\prime\prime}(x)dx \), hence:
+$$
+\begin{align}
+E_{M}&=-\frac{h^2}{24}h
+\sum_{k=0}^{N-1}f^{\prime\prime}(x_k+h/2)\simeq-\frac{h^2}{24}\int_a^b
+f^{\prime\prime}(x)dx
+\tag{2.12}\\ 
+E_M&\simeq\frac{h^2}{24}\left[f^\prime(b)-f^\prime(a)\right]=-\frac{(b-a)^2}{24N^2}\left[f^\prime(b)-f^\prime(a)\right]
+\tag{2.13}
+\end{align}
+$$
+
+The corresponding formula for the trapezoid formula is:
+$$
+\begin{equation}
+E_T\simeq \frac{h^2}{12}\left[f^\prime(b)-f^\prime(a)\right]=\frac{(b-a)^2}{12N^2}\left[f^\prime(b)-f^\prime(a)\right]
+\tag{2.14}
+\end{equation}
+$$
+
+Now, we can make an algorithm that automatically choose the number of steps to reach (at least) a prespecified accuracy:
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+<span style="color: #408080; font-style: italic"># Function to be integrated</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
+    <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>sin(x)
+<span style="color: #408080; font-style: italic">#Numerical derivative of function</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">df</span>(x,func):
+    dh<span style="color: #666666">=1e-5</span> <span style="color: #408080; font-style: italic"># some low step size</span>
+    <span style="color: #008000; font-weight: bold">return</span> (func(x<span style="color: #666666">+</span>dh)<span style="color: #666666">-</span>func(x))<span style="color: #666666">/</span>dh 
+
+<span style="color: #408080; font-style: italic">#Adaptive midpoint rule, &quot;adaptive&quot; because the number of </span>
+<span style="color: #408080; font-style: italic">#function evaluations depends on the integrand</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">int_adaptive_midpoint</span>(lower_limit, upper_limit,func,tol):
+    dfa  <span style="color: #666666">=</span> df(lower_limit,func) <span style="color: #408080; font-style: italic"># derivative in point a </span>
+    dfb  <span style="color: #666666">=</span> df(upper_limit,func) <span style="color: #408080; font-style: italic"># derivative in point b</span>
+    N    <span style="color: #666666">=</span> <span style="color: #008000">abs</span>((upper_limit<span style="color: #666666">-</span>lower_limit)<span style="color: #666666">**2*</span>(dfb<span style="color: #666666">-</span>dfa)<span style="color: #666666">/24/</span>tol)
+    N    <span style="color: #666666">=</span> <span style="color: #008000">int</span>(np<span style="color: #666666">.</span>sqrt(N)) <span style="color: #666666">+</span> <span style="color: #666666">1</span>  <span style="color: #408080; font-style: italic"># +1 as int rounds down</span>
+    h    <span style="color: #666666">=</span> (upper_limit<span style="color: #666666">-</span>lower_limit)<span style="color: #666666">/</span>N
+    area <span style="color: #666666">=</span> <span style="color: #666666">0.</span>
+    <span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&#39;Number of intervals = &#39;</span>, N)
+    <span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>,N): <span style="color: #408080; font-style: italic"># loop over k=0,1,..,N-1</span>
+        val <span style="color: #666666">=</span> lower_limit<span style="color: #666666">+</span>(k<span style="color: #666666">+0.5</span>)<span style="color: #666666">*</span>h <span style="color: #408080; font-style: italic"># midpoint value </span>
+        area <span style="color: #666666">+=</span> func(val)
+    <span style="color: #008000; font-weight: bold">return</span> area<span style="color: #666666">*</span>h
+                
+prec<span style="color: #666666">=1e-8</span>
+a<span style="color: #666666">=0</span>
+b<span style="color: #666666">=</span>np<span style="color: #666666">.</span>pi
+Area <span style="color: #666666">=</span> int_adaptive_midpoint(a,b,f,prec)
+<span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&#39;Numerical value = &#39;</span>, Area)
+<span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&#39;Error           = &#39;</span>, (<span style="color: #666666">2-</span>Area)) <span style="color: #408080; font-style: italic"># Analytical result is 2</span>
+</pre></div>
+
+<h2 id="___sec13" class="anchor">Practical Estimation of Errors on Integrals </h2>
+
+<p>
+From the example above we were able to estimate the number of steps needed to reach (at least) a certain precision. 
+In many practical cases we do not deal with functions, but with data and it can be difficult to evaluate the derivative. 
+We also saw from the example above that the algorithm gives a higher precision than what we asked for. 
+How can we avoid doing too many iterations? A very simple solution to this question is to double the number of intervals until 
+a desired accuracy is reached. The following analysis holds for both the trapezoid and midpoint method, because in both cases 
+the error scale as \( h^2 \).
+
+<p>
+Assume that we have evaluated the integral with a step size \( h_1 \), and the computed result is \( I_1 \). 
+Then we know that the true integral is \( I=I_1+c h_1^2 \), where \( c \) is a constant that is unknown. If we now half the step size: \( h_2=h_1/2 \), 
+then we get a new (better) estimate of the integral, \( I_2 \), which is related to the true integral \( I \) as: \( I=I_2+c h_2^2 \). 
+Taking the difference between \( I_2 \) and \( I_1 \) give us an estimation of the error:
+$$
+\begin{equation}
+I_2-I_1=I-c h_2^2-(I-ch_1^2)=3c h_2^2,
+\tag{2.15}
+\end{equation}
+$$
+
+where we have used the fact that \( h_1=2h_2 \), Thus the error term is:
+$$
+\begin{equation}
+E(a,b)=c h_2^2=\frac{1}{3}(I_2-I_1).
+\tag{2.16}
+\end{equation}
+$$
+
+This might seem like we need to evaluate the integral twice as many times as needed. This is not the case, by choosing to exactly 
+half the spacing we only need to evaluate for the values that lies halfway between the original points. We will demonstrate how 
+to do this by using the trapezoidal rule, because it operates directly on the \( x_k \) values and not the midpoint values. 
+The trapezoidal rule can now be written as:
+$$
+\begin{align}
+I_2(a,b)&=h_2\left[\frac{1}{2}f(a)+\frac{1}{2}f(b)+\sum_{k=1}^{N_2-1}f(a+k h_2)\right],
+\tag{2.17}\\ 
+&=h_2\left[\frac{1}{2}f(a)+\frac{1}{2}f(b)+\sum_{k=\text{even values}}^{N_2-1}f(a+k h_2)\right.\nonumber\\ 
+&\left.\qquad+\sum_{k=\text{odd values}}^{N_2-1}f(a+k h_2)\right],
+\tag{2.18}
+\end{align}
+$$
+
+in the last equation we have split the sum into odd an even values. The sum over the even values can be rewritten:
+$$
+\begin{equation}
+\sum_{k=\text{even values}}^{N_2-1}f(a+k h_2)=\sum_{k=0}^{N_1-1}f(a+2k h_2)=\sum_{k=0}^{N_1-1}f(a+k h_1),
+\tag{2.19}
+\end{equation}
+$$
+
+note that \( N_2 \) is replaced with \( N_1=N_2/2 \), we can now rewrite \( I_2 \) as:
+$$
+\begin{align}
+I_2(a,b)&=h_2\left[\frac{1}{2}f(a)+\frac{1}{2}f(b)+\sum_{k=0}^{N_1-1}f(a+k h_1)\right.\nonumber\\ 
+&\left.+\sum_{k=\text{odd values}}^{N_2-1}f(a+k h_2)\right]
+\tag{2.20}
+\end{align}
+$$
+
+Note that the first terms are actually the trapezoidal rule for \( I_1 \), hence:
+$$
+\begin{equation}
+I_2(a,b)=\frac{1}{2}I_1(a,b)+h_2\sum_{k=\text{odd values}}^{N_2-1}f(a+k h_2)
+\tag{2.21}
+\end{equation}
+$$
+
+A possible algorithm is then:
+
+<ol>
+<li> Choose a low number of steps to evaluate the integral, \( I_0 \), the first time, e.g. \( N_0=10 \)</li>
+<li> Double the number of steps, \( N_1=2N_0 \)</li> 
+<li> Calculate the missing values by summing over the odd number of steps \( \sum_{k=\text{odd values}}^{N_1-1}f(a+k h_1) \)</li>
+<li> Check if \( E_1(a,b)=\frac{1}{3}(I_1-I_0) \) is lower than a specific tolerance</li>
+<li> If yes quit, if not, return to 2, and continue until \( E_i(a,b)=\frac{1}{3}(I_{i+1}-I_{i}) \) is lower than the tolerance</li>  
+</ol>
+
+Below is a Python implementation:
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+<span style="color: #408080; font-style: italic"># Function to be integrated</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
+    <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>sin(x)
+<span style="color: #408080; font-style: italic"># step size is chosen automatically to reach the specified tolerance </span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">int_adaptive_trapez</span>(lower_limit, upper_limit,func,tol):
+    N0      <span style="color: #666666">=</span> <span style="color: #666666">10</span>
+    h       <span style="color: #666666">=</span> (upper_limit<span style="color: #666666">-</span>lower_limit)<span style="color: #666666">/</span>N0
+    area    <span style="color: #666666">=</span> func(lower_limit)<span style="color: #666666">+</span>func(upper_limit)
+    area   <span style="color: #666666">*=</span> <span style="color: #666666">0.5</span>
+    val     <span style="color: #666666">=</span> lower_limit
+    <span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>,N0): <span style="color: #408080; font-style: italic"># loop over k=1,..,N-1</span>
+        val   <span style="color: #666666">+=</span> h <span style="color: #408080; font-style: italic"># midpoint value </span>
+        area  <span style="color: #666666">+=</span> func(val)
+    area   <span style="color: #666666">*=</span>h
+    calc_tol <span style="color: #666666">=</span> <span style="color: #666666">2*</span>tol <span style="color: #666666">+</span> <span style="color: #666666">1</span> <span style="color: #408080; font-style: italic"># just larger than tol to enter the while loop </span>
+    <span style="color: #008000; font-weight: bold">while</span>(calc_tol<span style="color: #666666">&gt;</span>tol):
+        N <span style="color: #666666">=</span> N0<span style="color: #666666">*2</span>
+        h <span style="color: #666666">=</span> (upper_limit<span style="color: #666666">-</span>lower_limit)<span style="color: #666666">/</span>N
+        odd_terms<span style="color: #666666">=0</span>
+        <span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span> (<span style="color: #666666">1</span>,N,<span style="color: #666666">2</span>): <span style="color: #408080; font-style: italic"># 1, 3, 5, ... , N-1</span>
+            val  <span style="color: #666666">=</span> lower_limit <span style="color: #666666">+</span> k<span style="color: #666666">*</span>h
+            odd_terms <span style="color: #666666">+=</span> func(val)
+        new_area <span style="color: #666666">=</span> <span style="color: #666666">0.5*</span>area <span style="color: #666666">+</span> h<span style="color: #666666">*</span>odd_terms
+        calc_tol <span style="color: #666666">=</span> <span style="color: #008000">abs</span>(new_area<span style="color: #666666">-</span>area)<span style="color: #666666">/3</span> 
+        area     <span style="color: #666666">=</span> new_area <span style="color: #408080; font-style: italic"># store new values for next iteration</span>
+        N0       <span style="color: #666666">=</span> N        <span style="color: #408080; font-style: italic"># update number of slices</span>
+    <span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&#39;Number of intervals = &#39;</span>, N)
+    <span style="color: #008000; font-weight: bold">return</span> area <span style="color: #408080; font-style: italic">#while loop ended and we can return the area</span>
+        
+prec<span style="color: #666666">=1e-8</span>
+a<span style="color: #666666">=0</span>
+b<span style="color: #666666">=</span>np<span style="color: #666666">.</span>pi
+Area <span style="color: #666666">=</span> int_adaptive_trapez(a,b,f,prec)
+<span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&#39;Numerical value = &#39;</span>, Area)
+<span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&#39;Error           = &#39;</span>, (<span style="color: #666666">2-</span>Area)) <span style="color: #408080; font-style: italic"># Analytical result is 2</span>
+</pre></div>
+<p>
+If you compare the number of terms used in the adaptive trapezoidal rule, which was developed by halving the step size,
+ and the adaptive midpoint rule that was derived on the basis of the theoretical error term, you will find the the 
+adaptive midpoint rule is more efficient. So why go through all this trouble? In the next section we will see that the development we
+did for the adaptive trapezoidal rule is closely related to Romberg integration, which is <em>much</em> more effective.
+
+<h1 id="___sec14" class="anchor">Romberg Integration </h1>
+The adaptive algorithm for the the trapezoidal rule in the previous section can be easily improved by remembering 
+that the true integral was given by <button type="button" class="btn btn-primary btn-xs" rel="tooltip" data-placement="top" title="Note that all odd powers of \( h \) is equal to zero, thus the corrections are always in even powers."><a href="#def_footnote_1" id="link_footnote_1" style="color: white">1</a></button> : \( I=I_i+ch_i^2+\mathcal{O}(h^4) \). The error term was in the previous example only used to 
+check if the desired tolerance was achieved, but we could also have added it to our estimate of the integral to reach an accuracy to fourth order:
+
+<p id="def_footnote_1"><a href="#link_footnote_1"><b>1:</b></a> Note that all odd powers of \( h \) is equal to zero, thus the corrections are always in even powers.</p>
+
+$$
+\begin{equation}
+I=I_{i+1}+ch^2+\mathcal{O}(h^4)=I_{i+1}+\frac{1}{3}\left[I_{i+1}-I_{i}\right]+\mathcal{O}(h^4).
+\tag{2.22}
+\end{equation}
+$$
+
+As before the error term \( \mathcal{O}(h^4) \), can be written as: \( ch^4 \). Now we can proceed as in the previous section: First we estimate the 
+integral by one step size \( I_i=I+ch_i^4 \), next we half the step size \( I_{i+1}=I+ch_{i+1}^4 \) and use these two estimates to calculate the error term:
+$$
+\begin{align}
+I_{i+1}-I_{i}&=I-c h_{i+1}^4-(I-ch_i^4)=-c h_{i+1}^4+c(2h_{i+1})^4=15c h_{i+1}^4,\nonumber\\ 
+ch_{i+1}^4&=\frac{1}{15}\left[I_{i+1}-I_{i}\right]+\mathcal{O}(h^6).
+\tag{2.23}
+\end{align}
+$$
+
+but now we are in the exact situation as before, we have not only the error term but the correction up to order \( h^4 \) for this integral:
+$$
+\begin{equation}
+I=I_{i+1}+\frac{1}{15}\left[I_{i+1}-I_{i}\right]+\mathcal{O}(h^6).\tag{2.24}
+\end{equation}
+$$
+
+Each time we half the step size we also gain a higher order accuracy in our numerical algorithm. Thus, there are two iterations going on at the same time; 
+one is the iteration that half the step size (\( i \)), and the other one is the increasing number of higher order terms added (which we will denote \( m \)). 
+We need to improve our notation, and replace the approximation of the integral (\( I_i \)) with \( R_{i,m} \). Equation <a href="#mjx-eqn-2.24">(2.24)</a>, can now 
+be written:
+$$
+\begin{equation}
+I=R_{i+1,2}+\frac{1}{15}\left[R_{i+1,2}-R_{i,2}\right]+\mathcal{O}(h^6).
+\tag{2.25}
+\end{equation}
+$$
+
+A general formula valid for any \( m \) can be found by realizing:
+$$
+\begin{align}
+I&=R_{i+1,m+1}+c_mh_i^{2m+2}+\mathcal{O}(h_i^{2m+4})\tag{2.26}\\ 
+I&=R_{i,m+1}+c_mh_{i-1}^{2m+2}+\mathcal{O}(h_{i-1}^{2m+4})\nonumber\\ 
+&=R_{i,m+1}+2^{2m+2}c_mh_{i}^{2m+2}+\mathcal{O}(h_{i-1}^{2m+4}),\tag{2.27}
+\end{align}
+$$
+
+where, as before \( h_{i-1}=2h_i \). Subtracting equation <a href="#mjx-eqn-2.26">(2.26)</a> and <a href="#mjx-eqn-2.27">(2.27)</a>, we find an expression for the error term:
+$$
+\begin{align}
+c_mh_{i}^{2m+2}&=\frac{1}{4^{m+1}-1}(R_{i,m}-R_{i-1,m})\tag{2.28}
+\end{align}
+$$
+
+Then the estimate for the integral in equation <a href="#mjx-eqn-2.27">(2.27)</a> is:
+$$
+\begin{align}
+I&=R_{i,m+1}+\mathcal{O}(h_i^{2m+2})
+\tag{2.29}\\ 
+R_{i,m+1}&=R_{i,m}+\frac{1}{4^{m+1}-1}(R_{i+1,m+1}-R_{i,m+1})
+\tag{2.30}
+\end{align}
+$$
+
+A possible algorithm is then:
+
+<ol>
+<li> Evaluate \( R_{0,0}=\frac{1}{2}\left[f(a)+f(b)\right] \) as the first evaluation</li>
+<li> Double the number of steps, \( N_{i+1}=2N_i \) or half the step size \( h_{i+1}=h_i/2 \)</li> 
+<li> Calculate the missing values by summing over the odd number of steps \( \sum_{k=\text{odd values}}^{N_1-1}f(a+k h_{i+1}) \)</li>
+<li> Correct the estimate by adding the higher order error term \( R_{i,m+1}=R_{i,m}+\frac{1}{4^m-1}(R_{i+1,m+1}-R_{i,m+1}) \)</li>
+<li> Check if the error term is lower than a specific tolerance \( E_{i,m}(a,b)=\frac{1}{4^{m+1}-1}(R_{i,m}-R_{i-1,m}) \), if yes quit, if no goto 2, increase \( i \) and \( m \) by one</li>  
+</ol>
+
+Note that the tolerance term is not the correct one as it uses the error estimate for the current step, 
+which we also use correct the integral in the current step to reach a higher accuracy. 
+Thus the error on the integral will always be lower than the user specified tolerance.
+Below is a Python implementation:
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+<span style="color: #408080; font-style: italic"># Function to be integrated</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
+    <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>sin(x)
+<span style="color: #408080; font-style: italic"># step size is choosen automatically to reach (at least) </span>
+<span style="color: #408080; font-style: italic"># the specified tolerance </span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">int_romberg</span>(lower_limit, upper_limit,func,tol):
+    Nmax <span style="color: #666666">=</span> <span style="color: #666666">100</span>
+    R <span style="color: #666666">=</span> np<span style="color: #666666">.</span>empty([Nmax,Nmax]) <span style="color: #408080; font-style: italic"># storage buffer</span>
+    R[<span style="color: #666666">0</span>,<span style="color: #666666">0</span>]    <span style="color: #666666">=.5*</span>(func(lower_limit)<span style="color: #666666">+</span>func(upper_limit))
+    N         <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>,Nmax):
+        N <span style="color: #666666">=</span> N<span style="color: #666666">*2</span>
+        h <span style="color: #666666">=</span> (upper_limit<span style="color: #666666">-</span>lower_limit)<span style="color: #666666">/</span>N
+        odd_terms<span style="color: #666666">=0</span>
+        <span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span> (<span style="color: #666666">1</span>,N,<span style="color: #666666">2</span>): <span style="color: #408080; font-style: italic"># 1, 3, 5, ... , N-1</span>
+            val        <span style="color: #666666">=</span> lower_limit <span style="color: #666666">+</span> k<span style="color: #666666">*</span>h
+            odd_terms <span style="color: #666666">+=</span> func(val)
+		<span style="color: #408080; font-style: italic"># add the odd terms to the previous estimate	</span>
+        R[i,<span style="color: #666666">0</span>]   <span style="color: #666666">=</span> <span style="color: #666666">0.5*</span>R[i<span style="color: #666666">-1</span>,<span style="color: #666666">0</span>] <span style="color: #666666">+</span> h<span style="color: #666666">*</span>odd_terms 
+        <span style="color: #008000; font-weight: bold">for</span> m <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>,i): <span style="color: #408080; font-style: italic"># m = 0, 1, ..., i-1</span>
+			<span style="color: #408080; font-style: italic"># add all higher order terms in h</span>
+            R[i,m<span style="color: #666666">+1</span>]   <span style="color: #666666">=</span> R[i,m] <span style="color: #666666">+</span> (R[i,m]<span style="color: #666666">-</span>R[i<span style="color: #666666">-1</span>,m])<span style="color: #666666">/</span>(<span style="color: #666666">4**</span>(m<span style="color: #666666">+1</span>)<span style="color: #666666">-1</span>)                  
+		<span style="color: #408080; font-style: italic"># check tolerance, best guess			</span>
+        calc_tol <span style="color: #666666">=</span> <span style="color: #008000">abs</span>(R[i,i]<span style="color: #666666">-</span>R[i,i<span style="color: #666666">-1</span>])       
+        <span style="color: #008000; font-weight: bold">if</span>(calc_tol<span style="color: #666666">&lt;</span>tol):
+            <span style="color: #008000; font-weight: bold">break</span>  <span style="color: #408080; font-style: italic"># estimated precision reached </span>
+    <span style="color: #008000; font-weight: bold">if</span>(i <span style="color: #666666">==</span> Nmax<span style="color: #666666">-1</span>):
+        <span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&#39;Romberg routine did not converge after &#39;</span>,
+              Nmax, <span style="color: #BA2121">&#39;iterations!&#39;</span>)
+    <span style="color: #008000; font-weight: bold">else</span>:      
+        <span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&#39;Number of intervals = &#39;</span>, N)
+    
+    <span style="color: #008000; font-weight: bold">return</span> R[i,i] <span style="color: #408080; font-style: italic">#while loop ended and we can return the best estimate</span>
+        
+prec<span style="color: #666666">=1e-8</span>
+a<span style="color: #666666">=0</span>
+b<span style="color: #666666">=</span>np<span style="color: #666666">.</span>pi
+Area <span style="color: #666666">=</span> int_romberg(a,b,f,prec)
+<span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&#39;Numerical value = &#39;</span>, Area)
+<span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&#39;Error           = &#39;</span>, (<span style="color: #666666">2-</span>Area)) <span style="color: #408080; font-style: italic"># Analytical result is 2</span>
+</pre></div>
+<p>
+Note that the Romberg integration only uses 32 function evaluations to reach a precision of \( 10^{-8} \), whereas the adaptive midpoint and trapezoidal rule in the previous
+section uses 20480 and 9069 function evaluations, respectively.
+
+<h2 id="___sec15" class="anchor">Gaussian Quadrature </h2>
+Many of the methods we have looked into are of the type:
+$$
+\begin{align}
+	\int_a^b f(x) dx = \sum_{k=0}^{N-1} \omega_k f(x_k),\tag{2.31}
+\end{align}
+$$
+
+where the function is evaluated at fixed interval. For the midpoint rule \( \omega_k=h \) for all values of \( k \), for the trapezoid rule 
+\( \omega_k=h/2 \) for the endpoints and \( h \) for all the interior points. 
+For the Simpsons rule (see exercise) \( \omega_k=h/3, 4h/3,2h/3,4h/3,\ldots,4h/3,h/3 \). 
+Note that all the methods we have looked at so far samples the function in equal spaced points, \( f(a+k h) \), 
+for \( k=0, 1, 2\ldots, N-1 \). If we now allow for the function to be evaluated at unevenly spaced points, we can do a lot better. 
+This realization is the basis for Gaussian Quadrature. We will explore this in the following, 
+but to make the development easier and less cumbersome, we transform the integral from the domain \( [a,b] \) to \( [-1,1] \):
+$$
+\begin{align}
+\int_a^bf(t)dt&=\frac{b-a}{2}\int_{-1}^{1}f(x)dx\text{ , where:}
+\tag{2.32}\\ 
+x&=\frac{2}{b-a}t-\frac{b+a}{b-a}.
+\tag{2.33}
+\end{align}
+$$
+
+The factor in front comes from the fact that \( dt=(b-a)dx/2 \), thus we can develop our algorithms on the domain \( [-1,1] \), 
+and then do the transformation back using: \( t=(b-a)x/2+(b+a)/2 \).
+
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b>Notice.</b>
+The idea we will explore is as follows:
+If we can approximate the function to be integrated on the domain \( [-1,1] \) (or on \( [a,b] \)) as a 
+polynomial of as <em>large a degree as possible</em>, then the numerical integral of this polynomial will be very close to the integral of the 
+function we are seeking.
+</div>
+
+This idea is best understood by a couple of examples. Assume that we want to use \( N=1 \) in equation <a href="#mjx-eqn-2.31">(2.31)</a>:
+$$
+\begin{equation}
+\int_{-1}^{1}f(x)\,dx\simeq\omega_0f(x_0).
+\tag{2.34}
+\end{equation}
+$$
+
+We now choose \( f(x) \) to be a polynomial of as large a degree as possible, but with the requirement that the integral is exact. If \( f(x)=1 \), we get:
+$$
+\begin{equation}
+\int_{-1}^{1}f(x)\,dx=\int_{-1}^{1}1\,dx=2=\omega_0,
+\tag{2.35}
+\end{equation}
+$$
+
+hence \( \omega_0=2 \). If we choose \( f(x)=x \), we get:
+$$
+\begin{equation}
+\int_{-1}^{1}f(x)\,dx=\int_{-1}^{1}x\,dx=0=\omega_0f(x_0)=2x_0,
+\tag{2.36}
+\end{equation}
+$$
+
+hence \( x_0=0 \). 
+<div class="alert alert-block alert-success alert-text-normal"><b>The Gaussian integration rule for \( N=1 \) is:</b>
+$$
+\begin{align}
+&\int_{-1}^{1}f(x)\,dx\simeq 2f(0)\text{, or: }\nonumber\\ 
+&\int_{a}^{b}f(t)\,dt\simeq\frac{b-a}{2}\,2f(\frac{b+a}{2})=(b-a)f(\frac{b+a}{2}).
+\tag{2.37}
+\end{align}
+$$
+</div>
+
+This equation is equal to the midpoint rule, by choosing \( b=a+h \) we reproduce equation <a href="#mjx-eqn-2.1">(2.1)</a>. If we choose \( N=2 \):
+$$
+\begin{equation}
+\int_{-1}^{1}f(x)\,dx\simeq\omega_0f(x_0)+\omega_1f(x_1),
+\tag{2.38}
+\end{equation}
+$$
+
+we can show that now $ f(x)=1,\,x,\,x^2\,x^3$ can be integrated exact:
+$$
+\begin{align}
+\int_{-1}^{1}1\,dx&=2=\omega_0f(x_0)+\omega_1f(x_1)=\omega_0+\omega_1\,,
+\tag{2.39}\\ 
+\int_{-1}^{1}x\,dx&=0=\omega_0f(x_0)+\omega_1f(x_1)=\omega_0x_0+\omega_1x_1\,,
+\tag{2.40}\\ 
+\int_{-1}^{1}x^2\,dx&=\frac{2}{3}=\omega_0f(x_0)+\omega_1f(x_1)=\omega_0x_0^2+\omega_1x_1^2\,,
+\tag{2.41}\\ 
+\int_{-1}^{1}x^3\,dx&=0=\omega_0f(x_0)+\omega_1f(x_1)=\omega_0x_0^3+\omega_1x_1^3\,,
+\tag{2.42}
+\end{align}
+$$
+
+hence there are four unknowns and four equations. The solution is: \( \omega_0=\omega_1=1 \) and \( x_0=-x_1=1/\sqrt{3} \).
+<div class="alert alert-block alert-success alert-text-normal"><b>The Gaussian integration rule for \( N=2 \) is:</b>
+$$
+\begin{align}
+\int_{-1}^{1}f(x)\,dx&\simeq f(-\frac{1}{\sqrt{3}})+f(\frac{1}{\sqrt{3}})\, \text{, or:}
+\tag{2.43}\\ 
+\int_{a}^{b}f(x)\,dx&\simeq \frac{b-a}{2}\left[f(-\frac{b-a}{2}\frac{1}{\sqrt{3}}+\frac{b+a}{2})
++f(\frac{b-a}{2}\frac{1}{\sqrt{3}}+\frac{b+a}{2})\right].
+\tag{2.44}
+\end{align}
+$$
+</div>
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+<span style="color: #408080; font-style: italic"># Function to be integrated</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
+    <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>sin(x)
+<span style="color: #408080; font-style: italic"># Gaussian Quadrature for N=2</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">int_gaussquad2</span>(lower_limit, upper_limit,func):
+    N<span style="color: #666666">=2</span>
+    x <span style="color: #666666">=</span> [<span style="color: #666666">-1/</span>np<span style="color: #666666">.</span>sqrt(<span style="color: #666666">3.</span>),<span style="color: #666666">1/</span>np<span style="color: #666666">.</span>sqrt(<span style="color: #666666">3</span>)]
+    w <span style="color: #666666">=</span> [<span style="color: #666666">1</span>, <span style="color: #666666">1</span>]
+    area <span style="color: #666666">=</span> <span style="color: #666666">0.</span>
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>,N):
+        xp <span style="color: #666666">=</span> <span style="color: #666666">0.5*</span>(upper_limit<span style="color: #666666">-</span>lower_limit)<span style="color: #666666">*</span>x[i]
+        <span style="color: #666666">+0.5*</span>(upper_limit<span style="color: #666666">+</span>lower_limit)
+        area <span style="color: #666666">+=</span> w[i]<span style="color: #666666">*</span>func(xp)
+    <span style="color: #008000; font-weight: bold">return</span> area<span style="color: #666666">*0.5*</span>(upper_limit<span style="color: #666666">-</span>lower_limit)
+                
+a<span style="color: #666666">=0</span>
+b<span style="color: #666666">=</span>np<span style="color: #666666">.</span>pi
+Area <span style="color: #666666">=</span> int_gaussquad2(a,b,f)
+<span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&#39;Numerical value = &#39;</span>, Area)
+<span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&#39;Error           = &#39;</span>, (<span style="color: #666666">2-</span>Area)) <span style="color: #408080; font-style: italic"># Analytical result is 2</span>
+</pre></div>
+
+<h3 id="___sec16" class="anchor">The case N=3 </h3>
+
+For the case \( N=3 \), we find that \( f(x)=1,x,x^2,x^3,x^4,x^5 \) can be integrated exactly:
+$$
+\begin{align}
+\int_{-1}^{1}1\,dx&=2=\omega_0+\omega_1+\omega_2\,,
+\tag{2.45}\\ 
+\int_{-1}^{1}x\,dx&=0=\omega_0x_0+\omega_1x_1+\omega_2x_2\,,
+\tag{2.46}\\ 
+\int_{-1}^{1}x^2\,dx&=\frac{2}{3}=\omega_0x_0^2+\omega_1x_1^2+\omega_2x_2^2\,,
+\tag{2.47}\\ 
+\int_{-1}^{1}x^3\,dx&=0=\omega_0x_0^3+\omega_1x_1^3+\omega_2x_2^3\,,
+\tag{2.48}\\ 
+\int_{-1}^{1}x^4\,dx&=\frac{2}{5}=\omega_0x_0^4+\omega_1x_1^4+\omega_2x_2^4\,,
+\tag{2.49}\\ 
+\int_{-1}^{1}x^5\,dx&=0=\omega_0x_0^5+\omega_1x_1^5+\omega_2x_2^5\,,
+\tag{2.50}
+\end{align}
+$$
+
+the solution to these equations are \( \omega_{0,1,2}=5/9, 8/9, 5/9 \) and \( x_{1,2,3}=-\sqrt{3/5},0,\sqrt{3/5} \). Below is a Python implementation:
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+<span style="color: #408080; font-style: italic"># Function to be integrated</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
+    <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>sin(x)
+<span style="color: #408080; font-style: italic"># Gaussian Quadrature for N=3</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">int_gaussquad2</span>(lower_limit, upper_limit,func):
+    N<span style="color: #666666">=3</span>
+    x <span style="color: #666666">=</span> [<span style="color: #666666">-</span>np<span style="color: #666666">.</span>sqrt(<span style="color: #666666">3./5.</span>),<span style="color: #666666">0.</span>,np<span style="color: #666666">.</span>sqrt(<span style="color: #666666">3./5.</span>)]
+    w <span style="color: #666666">=</span> [<span style="color: #666666">5./9.</span>, <span style="color: #666666">8./9.</span>, <span style="color: #666666">5./9.</span>]
+    area <span style="color: #666666">=</span> <span style="color: #666666">0.</span>
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>,N):
+        xp <span style="color: #666666">=</span> <span style="color: #666666">0.5*</span>(upper_limit<span style="color: #666666">-</span>lower_limit)<span style="color: #666666">*</span>x[i]
+        xp<span style="color: #666666">+=</span> <span style="color: #666666">0.5*</span>(upper_limit<span style="color: #666666">+</span>lower_limit)
+        area <span style="color: #666666">+=</span> w[i]<span style="color: #666666">*</span>func(xp)
+    <span style="color: #008000; font-weight: bold">return</span> area<span style="color: #666666">*0.5*</span>(upper_limit<span style="color: #666666">-</span>lower_limit)
+        
+        
+a<span style="color: #666666">=0</span>
+b<span style="color: #666666">=</span>np<span style="color: #666666">.</span>pi
+Area <span style="color: #666666">=</span> int_gaussquad2(a,b,f)
+<span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&#39;Numerical value = &#39;</span>, Area)
+<span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&#39;Error           = &#39;</span>, (<span style="color: #666666">2-</span>Area)) <span style="color: #408080; font-style: italic"># Analytical result is 2</span>
+</pre></div>
+<p>
+Note that the Gaussian quadrature converges very fast. From \( N=2 \) to \( N=3 \) function evaluation we reduce the error (in this specific case) 
+from 6.5% to 0.1%. Our standard trapezoidal formula needs more than 20 function evaluations to achieve this, the Romberg method uses 4-5 function
+evaluations. How can this be? If we use the standard Taylor formula for the function to be integrated, we know that for \( N=2 \) the Taylor 
+formula must be integrated up to \( x^3 \), so the error term is proportional to \( h^4f^{(4)}(\xi) \) (where \( \xi \) is some x-value in \( [a,b] \)). 
+\( h \) is the step size, and we can replace it with \( h\sim (b-a)/N \), thus the error scale as \( c_N/N^4 \) (where \( c_N \) is a constant). 
+Following the same argument, we find for \( N=3 \) that the error term is \( h^6f^{(6)}(\xi) \) or that the error term scale as \( c_N/N^6 \). 
+Each time we increase \( N \) by a factor of one, the error term reduces by \( N^2 \). Thus if we evaluate the integral for \( N=10 \), 
+increasing to \( N=11 \) will reduce the error by a factor of \( 11^2=121 \).
+
+<h2 id="___sec17" class="anchor">Which method to use in a specific case? </h2>
+There are no general answers to this question, and one need to decide from case to case. If computational speed is not an issue, 
+and the function to be integrated can be evaluated at any points all the methods above can be used. If the function to be integrated 
+is a set of observations at different times, that might be unevenly spaced, I would use the midpoint rule:
+$$
+\begin{equation}
+I(a,b)=\int_a^bf(x)dx\simeq\sum_{k=0}^{N-1}M(x_k,x_k+h)=\sum_{k=0}^{N-1}h_if(x_k+\frac{h_i}{2})
+\tag{2.51}
+\end{equation}
+$$
+
+This is because we do not know anything about the function between the points, only when it is observed, and the formula uses only 
+the information at the observation points. There is a second more subtle reason, and that is the fact that in many cases the 
+observations a different times are the {\it average} value of the observable quantity and it those cases the midpoint 
+rule would be the exact answer.
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="___sec18" class="anchor">Exercise 2.1: Numerical Integration </h2>
+
+<p>
+<b>a)</b>
+Show that for a linear function, \( y=a\cdot x+b \) both the trapezoidal rule and the rectangular rule are exact
+
+<p>
+<b>b)</b>
+Consider \( I(a,b)=\int_a^bf(x)dx \) for \( f(x)=x^2 \). The analytical result is \( I(a,b)=\frac{b^3-a^3}{3} \). Use the Trapezoidal and 
+  Midpoint rule to evaluate these integrals and show that the error for the Trapezoidal rule is exactly twice as big as the Midpoint rule.
+
+<p>
+<b>c)</b>
+Use the fact that the error term on the trapezoidal rule is twice as big as the midpoint rule to derive Simpsons formula: \( I(a,b)=\sum_{k=0}^{N-1}I(x_k,x_k+h)=\frac{h}{6}\left[f(a)+ 4f(a+\frac{h}{2})+2f(a+h)+4f(a+3\frac{h}{2})+2f(a+2h)+\cdots+f(b)\right] \) (Hint: $I(x_k,x_k+h)=M(x_k,x_k+h)+E_M$(midpoint rule) and
+  $I(x_k,x_k+h)=T(x_k,x_k+h)+E_T=T(x_k,x_k+h)-2E_M$(trapezoidal rule).)
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_1_1" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_1_1">
+
+<p>
+Simpsons rule is an improvement over the midpoint and trapezoidal rule. It can be derived in different ways, we will make use of 
+the results in the previous section. If we assume that the second derivative is reasonably well behaved on the interval \( x_k \) 
+and \( x_k+h \) and fairly constant we can assume that \( f^{\prime\prime}(\eta)\simeq f^{\prime\prime}(\overline{\eta}) \), hence \( E_T=-2E_M \).
+$$
+\begin{align}
+I(x_k,x_k+h)&=M(x_k,x_k+h)+E_M\text{ (midpoint rule)}
+\tag{2.52}\\ 
+I(x_k,x_k+h)&=T(x_k,x_k+h)+E_T\nonumber\\ 
+&=T(x_k,x_k+h)-2E_M\text{ (trapezoidal rule)},
+\tag{2.53}
+\end{align}
+$$
+
+we can now cancel out the error term by multiplying the first equation with 2 and adding the equations:
+$$
+\begin{align}
+3I(x_k,x_k+h)&=2M(x_k,x_k+h)+T(x_k,x_k+h)
+\tag{2.54}\\ 
+&=2f(x_k+\frac{h}{2}) h+\left[f(x_k+h)+f(x_k)\right] \frac{h}{2}
+\tag{2.55}\\ 
+I(x_k,x_k+h)&=\frac{h}{6}\left[f(x_k)+4f(x_k+\frac{h}{2})+f(x_k+h)\right].
+\tag{2.56}
+\end{align}
+$$
+
+Now we can do as we did in the case of the trapezoidal rule, sum over all the elements:
+$$
+\begin{align}
+I(a,b)&=\sum_{k=0}^{N-1}I(x_k,x_k+h)\nonumber\\ 
+&=\frac{h}{6}\left[f(a)+ 4f(a+\frac{h}{2})+2f(a+h)+4f(a+3\frac{h}{2})\right.\nonumber\\ 
+&\left.\qquad+2f(a+2h)+\cdots+f(b)\right]
+\tag{2.57}\\ 
+&=\frac{h^\prime}{3}\left[f(a)+ f(b) + 4\sum_{k= \text{odd}}^{N-2}f(a+k h^\prime)+2\sum_{k= \text{even}}^{N-2}f(a+k h^\prime)\right],
+\tag{2.58}
+\end{align}
+$$
+
+note that in the last equation we have changed the step size \( h=2h^\prime \).
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>d)</b>
+Derive a \( N=2 \) (\( f(x)=1,x,x^3 \)) Gaussian quadrature rule for \( \int_{a}^{b}x^{1/3}f(x)\,dx \):
+
+<ol>
+<li> Integrate \( \int_0^1x^{1/3}\cos x\,dx \) using the rule derived in the exercise above and compare with the standard Gaussian quadrature rule.</li>
+</ol>
+
+<b>e)</b>
+Make a Python program that uses the Midpoint rule to integrate experimental data that are unevenly spaced and given in the form of two arrays.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+
+<center><h1 id="ch:ode" class="anchor">Ordinary differential equations</h1></center> <!-- chapter heading -->
+
+<h1 id="___sec20" class="anchor">Ordinary Differential Equations </h1>
+Physical systems evolves in space and time, and very often they are described by a ordinary differential equations (ODE) and/or
+partial differential equations (PDE). The difference between an ODE and a PDE is that an ODE only describes 
+the changes in one spatial dimension <em>or</em> time, whereas a PDE describes a system that evolves in the \( x- \), \( y- \), \( z- \) dimension 
+and/or in time. In the following we will spend a significant
+amount of time to explore one of the simplest algorithm, Eulers method.
+Sometimes this is exactly the algorithm you would like to use, but with very 
+little extra effort much more sophisticated algorithms can easily be implemented, such as the Runge-Kutta fourth order method.
+However, all these algorithms, will at some point run into the same
+kind of troubles if used reckless. Thus we will use the Eulers method as a playground,
+investigate when the algorithm run into trouble and
+suggests ways to fix it, these approaches can easily be extended to the higher order methods. Most of the other algorithms boils down to the same idea of extrapolating
+a function using derivatives multiplied with a small step size.
+
+<h1 id="___sec21" class="anchor">A Simple Model for Fluid Flow </h1>
+Let us consider a simple example from chemical engineering, a continuous stirred tank reactor (CSTR), see figure <a href="#fig:ode:cstr">7</a>. 
+The flow is incompressible (\( q_\text{out}=q_\text{in} \)), a fluid is entering
+on the top and exiting at the bottom, the tank has a fixed volume \( V \). Assume that the tank is filled with saltwater, and that freshwater is pumped into it, how much time does it 
+take before \( 90\% \) of the saltwater is replaced with freshwater? The tank is <em>well mixed</em>, illustrated with the propeller, this means that at every time the 
+concentration is uniform in the tank, i.e. that \( C(t)=C_\text{out}(t) \).
+
+<p>
+<center> <!-- figure label: --> <div id="fig:ode:cstr"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 7:  A continuous stirred tank model, \( C(t)=C_\text{out}(t) \), and \( q_\text{out}=q_\text{in} \).  <!-- caption label: fig:ode:cstr --> </p></center>
+<p><img src="fig-ode/cstr.png" align="bottom" width=800></p>
+</center>
+
+<p>
+The concentration \( C \) is measured in gram of salt per liter water, and the flow rate \( q \) is liter of water per day. The model for the salt balance in this system can be described in words by:
+$$
+\begin{align}
+[\text{accumulation of salt}] &= [\text{salt into the system}] - [\text{salt out of the system}]\nonumber\\ 
+& + [\text{generation of salt}].\tag{3.1}
+\end{align}
+$$
+
+In our case there are no generation of salt within the system so this term is zero. The flow of salt into the system during a time \( \Delta t \) is: 
+\( q_\text{in}(t)\cdot C_\text{in}(t)\cdot \Delta t=q(t)\cdot C_\text{in}(t)\cdot \Delta t \), 
+the flow of salt out of the system is: \( q_\text{out}(t)\cdot C_\text{out}(t)\cdot \Delta t=q(t)\cdot C(t)\cdot \Delta t \), and the accumulation during a time step is:
+\( C(t+\Delta t)\cdot V - C(t)\cdot V \), hence:
+$$
+\begin{equation}
+C(t+\Delta t)\cdot V - C(t)\cdot V = q(t)\cdot C_\text{in}(t)\cdot \Delta t - q(t)\cdot C(t)\cdot \Delta t.\tag{3.2}
+\end{equation}
+$$
+
+Note that it is not a priori apparent, which time the concentrations and flow rates on the right hand side should be evaluated at, 
+we could have chosen to evaluate them at \( t+\Delta t \), or at any time \( t\in [t,t+\Delta t] \). We will return to this point later in this chapter. Dividing by \( \Delta t \), and taking the limit
+\( \Delta t\to 0 \), we can write equation <a href="#mjx-eqn-3.2">(3.2)</a> as:
+$$
+\begin{equation}
+V\frac{dC(t)}{dt} = q(t)\left[C_\text{in}(t) - C(t)\right].\tag{3.3}
+\end{equation}
+$$
+
+Seawater contains about 35 gram salt/liter fluid, if we assume that the fresh water contains no salt, we have the boundary conditions
+\( C_\text{in}(t)=0 \), $C(0)=$35gram/l. The equation <a href="#mjx-eqn-3.3">(3.3)</a> the reduces to:
+$$
+\begin{equation}
+V\frac{dC(t)}{dt} = -qC(t),\tag{3.4}
+\end{equation}
+$$
+
+this equation can easily be solved, by dividing by \( C \), multiplying by \( dt \) and integrating:
+$$
+\begin{align}
+V\int_{C_0}^C\frac{dC}{C} &= -q\int_0^tdt,\nonumber\\ 
+C(t)&=C_0e^{-t/\tau},\text{ where } \tau\equiv \frac{V}{q}.\tag{3.5}
+\end{align}
+$$
+
+This equation can be inverted to give \( t=-\tau\ln[C(t)/C] \). If we assume that the volume of the tank is 1m$^3$=1000liters, 
+and that the flow rate is 1 liter/min, we find that $\tau$=1000min=0.69days and that it takes about $-0.69\ln0.9\simeq1.6$days to reduce the concentration
+by 90$\%$ to 3.5 gram/liter.
+
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b>The CSTR.</b>
+You might think that the CSTR is a very simple model, and it is, but this type of model is the basic building blocks in chemical engineering.
+By putting CSTR tanks in series and/or connecting them with pipes, the efficiency of manufacturing various type of chemicals
+can be investigated. Altough the CSTR is an idealized model for the part of a chemical factory, it is actually a <em>very good</em> model 
+for fluid flow in a porous media. By connecting CSTR tanks in series, one can model how chemical tracers propagate in the subsurface. 
+The physical reason for this is that dispersion in porous media will play the role of the propellers and mix the concentration
+uniformly.
+</div>
+
+
+<h1 id="___sec22" class="anchor">Eulers Method </h1>
+If the system gets slightly more complicated, e.g several tanks in series with a varying flow rate or if salt was generated in the tank, there is a
+good chance that we have to solve the equations numerically to obtain a solution.
+Actually, we have already developed a numerical algorithm to solve equation <a href="#mjx-eqn-3.3">(3.3)</a>, 
+before we arrived at equation <a href="#mjx-eqn-3.3">(3.3)</a> in equation <a href="#mjx-eqn-3.2">(3.2)</a>. This is a special case of Eulers method, which is basically to 
+replace the derivative in equation <a href="#mjx-eqn-3.3">(3.3)</a>, with \( (C(t+\Delta t)-C(t))/\Delta t \). By rewriting equation <a href="#mjx-eqn-3.2">(3.2)</a>, so that we
+keep everything related to the new time step, \( t+\Delta t \), on one side, we get:
+$$
+\begin{align}
+VC(t+\Delta t) &= VC(t) + qC_\text{in}(t) - qC(t),\tag{3.6}\\ 
+C(t+\Delta t) &= C(t) + \frac{\Delta t}{\tau}\left[C_\text{in}(t) - C(t)\right]\tag{3.7},
+\end{align}
+$$
+
+we introduce the short hand notation: \( C(t)=C_n \), and \( C(t+\Delta t)=C_{n+1} \), hence the algorithm can be written more compact as:
+$$
+\begin{equation}
+C_{n+1} = \left(1-\frac{\Delta t}{\tau}\right)C_n + \frac{\Delta t}{\tau}C_{\text{in},n}\tag{3.8},
+\end{equation}
+$$
+
+In the script below, we have implemented equation <a href="#mjx-eqn-3.8">(3.8)</a>.
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">analytical</span>(x):
+    <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>exp(<span style="color: #666666">-</span>x)
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">euler_step</span>(c_old, c_in, tau_inv,dt):
+    fact<span style="color: #666666">=</span>dt<span style="color: #666666">*</span>tau_inv
+    <span style="color: #008000; font-weight: bold">return</span> (<span style="color: #666666">1-</span>fact)<span style="color: #666666">*</span>c_old<span style="color: #666666">+</span>fact<span style="color: #666666">*</span>c_in
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">ode_solv</span>(c_into,c_init,t_final,vol,q,dt):
+    f<span style="color: #666666">=</span>[];t<span style="color: #666666">=</span>[]
+    tau_inv <span style="color: #666666">=</span> q<span style="color: #666666">/</span>vol
+    c_in    <span style="color: #666666">=</span> c_into <span style="color: #408080; font-style: italic">#freshwater into tank</span>
+    c_old   <span style="color: #666666">=</span> c_init <span style="color: #408080; font-style: italic">#seawater present </span>
+    ti<span style="color: #666666">=0.</span>
+    <span style="color: #008000; font-weight: bold">while</span>(ti <span style="color: #666666">&lt;=</span> t_final):
+        t<span style="color: #666666">.</span>append(ti); f<span style="color: #666666">.</span>append(c_old)
+        c_new <span style="color: #666666">=</span> euler_step(c_old,c_in,tau_inv,dt)     
+        c_old <span style="color: #666666">=</span> c_new
+        ti   <span style="color: #666666">+=</span> dt
+    <span style="color: #008000; font-weight: bold">return</span> t,f
+</pre></div>
+<p>
+<center> <!-- figure label: --> <div id="fig:ode:euler"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 8:  The concentration in the tank for different step size \( \Delta t \).  <!-- caption label: fig:ode:euler --> </p></center>
+<p><img src="fig-ode/euler.png" align="bottom" width=800></p>
+</center>
+
+<p>
+In figure <a href="#fig:ode:euler">8</a> the result of the implementation is shown for different values of \( \Delta t \) 
+Clearly we see that the results are dependent on the step size, as the step increases the numerical solution deviates from the analytical solution. At some point the 
+numerical algorithm fails completely, and produces results that have no meaning.
+
+<h2 id="___sec23" class="anchor">Error Analysis - Eulers Method </h2>
+There are two obvious questions:
+
+<ol>
+<li> When does the algorithm produce unphysical results?</li>  
+<li> What is an appropriate step size?</li> 
+</ol>
+
+Let us consider the first question, clearly when the concentrations gets negative the solution is unphysical. From equation <a href="#mjx-eqn-3.8">(3.8)</a>, 
+we see that when \( \Delta t/\tau > 1 \), the concentration 
+become negative. For this specific case (the CSTR), there is a clear physical interpretation of this condition. Inserting \( \tau=V/q \), we can rewrite
+the condition \( \Delta t/\tau < 1 \) as \( q\Delta t < V \). The volume into the tank during one time step is: \( q\Delta t \), which means that
+whenever we <em>flush more than one tank volume through the tank during one time step, the algorithm fails</em>.
+When this happens the new concentration in the tank cannot be predicted from the old one. This makes sense, because we could have switched to a
+new solution (e.g. seawater) during that time step, then the new solution does not have any relation to the old solution.
+
+<p>
+The second question, "what is an appropriate step size?",  is a bit more difficult to answer.
+One strategy could be to simply use the results from chapter [Taylor], where we showed that the truncation error had a minimum value
+with a step size of \( 10^{-8} \)  (when using a first order Taylor approximation).
+How does the value \( 10^{-8} \) relate to the step sizes in minutes used in our Euler implementation?
+In order to see the connection, we need to rewrite equation <a href="#mjx-eqn-3.3">(3.3)</a> in a dimensionless form,
+by making the following substitution:
+ \( t\to t/\tau \):
+$$
+\begin{equation}
+\frac{dC(\tau)}{d\tau} = \left[C_\text{in}(\tau) - C(\tau)\right].\tag{3.9}
+\end{equation}
+$$
+
+As we found earlier $\tau = 1000$min, thus a step size of e.g. 1 min would correspond to a dimensionless time step of 
+$\Delta t\to$1min/1000min$=10^{-3}$. This number can be directly compared to the value \( 10^{-8} \), which is the lowest value we can
+choose without getting into trouble with round off errors on the machine. 
+<div class="alert alert-block alert-success alert-text-normal"><b>Dimensionless variables.</b>
+It is a  good idea (necessary) to formulate our equations in terms of dimensionless variables.
+The algorithms we develop can then be used in the same form regradless of changes in the system size and flow rates.
+Thus we do not need to rewrite the algorithm each time the physical system changes. This also means that if you use
+an algorithm developed by someone else (e.g. in Matlab or Python), you should always formulate the ODE system in dimensionless
+form before using the algorithm.
+
+<p>
+A second reason is that from a pure modeling point of view, dimensionless variables is a way of getting some
+understanding of what kind of combination of the physical parameters that describes the behavior of the system.
+For the case of the CSTR, there is a time scale \( \tau=V/q \), which 
+is an intrinsic measure of time in the system. No matter what the flow rate through the tank or the volume of the tank is,
+it will always take  0.1$\tau$ before
+the concentration in the tank is reduced by 90%.
+</div>
+
+As already mentioned a step size of \( 10^{-8} \), is probably the smallest we can choose with respect to round off errors, 
+but it is smaller than necessary and would lead to large simulation times. 
+If it takes 1 second to run the simulation with a step size of \( 10^{-3} \), it would take \( 10^5 \) seconds or 1 day
+with a step size of \( 10^{-8} \). 
+To continue the error analyses, we write our ODE for a general system as:
+$$
+\begin{align}
+\frac{dy}{dt}=f(y,t),\tag{3.10}
+\end{align}
+$$
+
+or in discrete form:
+$$
+\begin{align}
+\frac{y_{n+1}-y_n}{h}-\frac{h}{2}y^{\prime\prime}(\eta_n)&=f(y,t).\nonumber\\ 
+y_{n+1}&=y_n+hf(y,t)+\frac{h^2}{2}y^{\prime\prime}(\eta_n).
+\tag{3.11}
+\end{align}
+$$
+
+\( h \) is now the (dimmensionless) step size, equal to \( \Delta t \) if the derivative is with respect to \( t \) or \( \Delta x \) if the derivative is respect to \( x \) etc. Note that we
+have also included the error term related to the numerical derivative, \( \eta_n\in[t_n,t_n+h] \). At each step we get an error term,
+and the distance between the true solution and our estimate, the <em>local error</em>, after \( N \) steps is:
+$$
+\begin{align}
+\epsilon=\sum_{n=0}^{N-1}\frac{h^2}{2}y^{\prime\prime}(\eta_n)&=\frac{h^2}{2}\sum_{n=0}^{N-1}f^\prime(y_n,\eta_n)\simeq\frac{h}{2}\int_{t_0}^{t_f}f^\prime(y,\eta)d\eta\nonumber\\ 
+&=\frac{h}{2}\left[f(y(t_f),t_f)-f(y(t_0),t_0)\right].\tag{3.12}
+\end{align}
+$$
+
+Note that when we replace the sum with an integral in the equation above, this is only correct if the step size is not too large.
+From equation <a href="#mjx-eqn-3.12">(3.12)</a>
+we see that even if the error term on the numerical derivative is \( h^2 \), the local error is proportional to \( h \)
+(one order lower). This is because we accumulate errors for each step.
+
+<p>
+In the following we specialize to the CSTR, to see if we can gain some additional insight. First we change variables in 
+equation <a href="#mjx-eqn-3.4">(3.4)</a>: \( y=C(t)/C_0 \), and \( x=t/\tau \), hence:
+$$
+\begin{equation}
+\frac{dy}{dx}=-y.\tag{3.13}
+\end{equation}
+$$
+
+The solution to this equation is \( y(x)=e^{-x} \), substituting back for the new variables \( y \) and \( x \), we reproduce the result in equation <a href="#mjx-eqn-3.5">(3.5)</a>. 
+The local error, equation <a href="#mjx-eqn-3.12">(3.12)</a>, reduces to:
+$$
+\begin{align}
+\epsilon=\frac{h}{2}\left[-y(x_f)+y(x_0)\right]=\frac{h}{2}\left[1-e^{-x_f}\right],\tag{3.14}
+\end{align}
+$$
+
+we have assumed that \( x_0=t_0/\tau=0 \). This gives the estimated local error at time \( x_f \). For \( x_f=0 \), the 
+numerical error is zero, this makes sense because at \( x=0 \) we know the exact solution because of the initial conditions. When we move further away from the initial conditions, the
+numerical error increases, but equation <a href="#mjx-eqn-3.14">(3.14)</a> ensures us that as long as the step size is low enough we can get as
+close as possible to the true solution, since the error scales as \( h \) (at some point we might run into trouble with round off error in the computer).
+
+<p>
+Can we prove directly that we get the analytical result? In this 
+case it is fairly simple, if we use Eulers method on equation <a href="#mjx-eqn-3.13">(3.13)</a>, we get:
+$$
+\begin{align}
+\frac{y_{n+1}-y_n}{h}&=-y_nf.\nonumber\\ 
+y_{n+1}&=(1-h)y_n,
+\tag{3.15}
+\end{align}
+$$
+
+or alternatively:
+$$
+\begin{align}
+y_1&=(1-h)y_0,\nonumber\\ 
+y_2&=(1-h)y_1=(1-h)^2y_0,\nonumber\\ 
+\vdots\nonumber\\ 
+y_{N+1}&=(1-h)^{N}y_0=(1-h)^{x_f/h}y_0.
+\tag{3.16}
+\end{align}
+$$
+
+In the last equation, we have used the the fact the number of steps, \( N \), is equal to the simulation time divided by the step size, hence: \( N=x_f/h \). From calculus,
+the equation above is one of the well known limits for the exponential function: \( \lim_{x\to\infty}(1+k/x)^{mx}=e^{mk} \), hence:
+$$
+\begin{align}
+y_n&=(1-h)^{x_f/h}y_0\to e^{-x_f},
+\tag{3.17}
+\end{align}
+$$
+
+when \( h\to0 \). Below is an implementation of the Euler algorithm in this simple case, we also estimate the local error, and global error after \( N \) steps. 
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">euler</span>(tf,h):
+    t<span style="color: #666666">=</span>[];f<span style="color: #666666">=</span>[]
+    ti<span style="color: #666666">=0.</span>;fi<span style="color: #666666">=1.</span>
+    t<span style="color: #666666">.</span>append(ti);f<span style="color: #666666">.</span>append(fi)
+    global_err<span style="color: #666666">=0.</span>
+    <span style="color: #008000; font-weight: bold">while</span>(ti<span style="color: #666666">&lt;=</span> tf):
+        ti<span style="color: #666666">+=</span>h
+        fi<span style="color: #666666">=</span>fi<span style="color: #666666">*</span>(<span style="color: #666666">1-</span>h)
+        global_err <span style="color: #666666">+=</span> <span style="color: #008000">abs</span>(np<span style="color: #666666">.</span>exp(<span style="color: #666666">-</span>ti)<span style="color: #666666">-</span>fi)
+        t<span style="color: #666666">.</span>append(ti);f<span style="color: #666666">.</span>append(fi)
+    <span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&quot;error= &quot;</span>, np<span style="color: #666666">.</span>exp(<span style="color: #666666">-</span>ti)<span style="color: #666666">-</span>fi,<span style="color: #BA2121">&quot; est.err=&quot;</span>, <span style="color: #666666">.5*</span>h<span style="color: #666666">*</span>(<span style="color: #666666">1-</span>np<span style="color: #666666">.</span>exp(<span style="color: #666666">-</span>ti)))
+    <span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&quot;global error=&quot;</span>,global_err)
+    <span style="color: #008000; font-weight: bold">return</span> t,f
+                                        
+t,f<span style="color: #666666">=</span>euler(<span style="color: #666666">1.</span>,<span style="color: #666666">1e-5</span>)
+</pre></div>
+<p>
+By changing the step size \( h \), you can easily verify that the local error systematically increases or decreases proportional to \( h \).
+Something curious happens with the global error when the 
+step size is changed, it does not change very much. The global error involves a second sum over the local error for each step,
+which can be approximated as a second integration in equation <a href="#mjx-eqn-3.14">(3.14)</a>:
+$$
+\begin{align}
+\epsilon_\text{global}=\frac{1}{2}\int_{0}^{x_f}\left[-y(x)+y(0)\right]dx=\frac{1}{2}\left[x_f+e^{-x_f}-1\right].\tag{3.18}
+\end{align}
+$$
+
+Note that the global error does not go to zero when the step size decreases, which can easily be verified by changing the step size. This is strange, but can be understood
+by the following argument: when the step size decreases the local error scales as \( \sim h \), but the number of steps scales as \( 1/h \), so the global error must scale as \( h\times 1/h \)
+or some constant value. Usually it is much easier to control the local error than the global error, this should be kept in mind if you ever encounter a problem where it is 
+important control the global error. For the higher order methods that we will discuss later in this chapter, the global error will go to zero when \( h \) decreases.
+
+<p>
+The answer to our original question, ''What is an appropriate step size?'', will depend on what you want to achieve in terms of local or global error.
+In most practical situations you would
+specify a local error that is acceptable for the problem under investigation and then choose a step size where the local error always is lower than this value. In the 
+next subsection we will investigate how to achieve this in practice.
+
+<h2 id="___sec24" class="anchor">Adaptive step size - Eulers Method </h2>
+We want to be sure that we use a step size that achieves a certain accuracy in our numerical solution, but at
+the same time that we do not waste simulation time using a too low step size. The following approach is similar to the one we derived for the Romberg integration, and
+a special case of what is known as Richardson Extrapolation. The method is easily extended to higher order methods.
+
+<p>
+We know that Eulers algorithm is accurate to second order. Our estimate of the new value, \( y_1^* \)  
+(where we have used a$\,{}^*$ to indicate that we have used a step size of size \( h \)), should then be related to the true solution \( y(t_1) \) in the following way:
+$$
+\begin{align}
+y^*_1=y(t_1)+ch^2.\tag{3.19}
+\end{align}
+$$
+
+The constant \( c \) is unknown, but it can be found by taking two smaller steps of size \( h/2 \). If the steps are not too large, our new estimate
+of the value \( y_1 \) will be related to the true solution as:
+$$
+\begin{align}
+y_1=y(t_1)+2c\left(\frac{h}{2}\right)^2.\tag{3.20}
+\end{align}
+$$
+
+The factor 2 in front of \( c \) is because we now need to take two steps, and we accumulate a total error of \( 2c(h/2)^2=ch^2/2 \). It might not be completely 
+obvious that the constant \( c \) should be the same in equation <a href="#mjx-eqn-3.19">(3.19)</a> and <a href="#mjx-eqn-3.20">(3.20)</a>. If you are not convinced, there is an exercise at the end 
+of the chapter.  
+We define:
+$$
+\begin{align}
+\Delta\equiv y^*_1-y_1=c\frac{h^2}{2}.\tag{3.21}
+\end{align}
+$$
+
+The truncation error in equation <a href="#mjx-eqn-3.20">(3.20)</a> is:
+$$
+\begin{align}
+\epsilon=y(t_1)-y_1=2c\left(\frac{h}{2}\right)^2=\Delta.\tag{3.22}
+\end{align}
+$$
+
+Now we have everything we need: We want the local error to be smaller than some prespecified tolerance, \( \epsilon^\prime \), or equivalently 
+that \( \epsilon\le\epsilon^\prime \). 
+To achieve this we need to use an optimal step size, \( h^\prime \),  that gives us exactly the desired error:
+$$
+\begin{align}
+\epsilon^\prime=c\frac{{h^\prime}^2}{2}.\tag{3.23}
+\end{align}
+$$
+
+Dividing equation <a href="#mjx-eqn-3.23">(3.23)</a> by equation <a href="#mjx-eqn-3.22">(3.22)</a>, we can estimate the optimal step size:
+$$
+\begin{align}
+h^\prime=h\sqrt{\left|\frac{\epsilon^\prime}{\epsilon}\right|},\tag{3.24}
+\end{align}
+$$
+
+where the estimated error, \( \epsilon \), is calculated from equation <a href="#mjx-eqn-3.22">(3.22)</a>.
+Equation <a href="#mjx-eqn-3.24">(3.24)</a> serves two purposes, if the estimated error \( \epsilon \) is higher than the tolerance, \( \epsilon^\prime \), we have specified it will 
+give us an estimate for the step size we should choose in order to achieve a higher accuracy, if on the other hand \( \epsilon^\prime > \epsilon \), then we 
+get an estimate for the next, larger step. Before the implementation we note, as we did for the Romberg integration, that equation <a href="#mjx-eqn-3.22">(3.22)</a> 
+also gives us an estimate for the error term in equation <a href="#mjx-eqn-3.20">(3.20)</a> as an improved estimate of \( y_1 \). This we get for
+free and will make our Euler algorithm accurate to \( h^3 \), hence the improved Euler step, \( \hat{y_1} \), is to <em>subtract</em> the error
+term from our previous estimate:
+$$
+\begin{align}
+\hat{y_1}=y_1-\epsilon=2y_1-y_1^*.
+\tag{3.25}
+\end{align}
+$$
+
+Below is an implementation of the adaptive Euler algorithm:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">one_step</span>(c_old, c_in,h):
+    <span style="color: #008000; font-weight: bold">return</span> (<span style="color: #666666">1-</span>h)<span style="color: #666666">*</span>c_old<span style="color: #666666">+</span>h<span style="color: #666666">*</span>c_in
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">adaptive_euler</span>(c_into,c_init,t_final,tol<span style="color: #666666">=1e-4</span>):
+    f<span style="color: #666666">=</span>[];t<span style="color: #666666">=</span>[]
+    c_in    <span style="color: #666666">=</span> c_into <span style="color: #408080; font-style: italic">#freshwater into tank</span>
+    c_old   <span style="color: #666666">=</span> c_init <span style="color: #408080; font-style: italic">#seawater present </span>
+    ti<span style="color: #666666">=0.</span>; h_new<span style="color: #666666">=1e-3</span>;
+    toli<span style="color: #666666">=1.</span>; <span style="color: #408080; font-style: italic"># a high init tolerance to enter while loop</span>
+    no_steps<span style="color: #666666">=0</span>
+    global_err<span style="color: #666666">=0.</span>
+    <span style="color: #008000; font-weight: bold">while</span>(ti <span style="color: #666666">&lt;=</span> t_final):
+        t<span style="color: #666666">.</span>append(ti); f<span style="color: #666666">.</span>append(c_old)
+        <span style="color: #008000; font-weight: bold">while</span>(toli<span style="color: #666666">&gt;</span>tol):<span style="color: #408080; font-style: italic"># first two small steps</span>
+            hi<span style="color: #666666">=</span>h_new
+            k1 <span style="color: #666666">=</span> one_step(c_old,c_in,hi<span style="color: #666666">*.5</span>)
+            k2 <span style="color: #666666">=</span> one_step(k1,c_in,hi<span style="color: #666666">*.5</span>)
+            <span style="color: #408080; font-style: italic"># ... and one large step</span>
+            k3 <span style="color: #666666">=</span> one_step(c_old,c_in,hi)
+            toli <span style="color: #666666">=</span> <span style="color: #008000">abs</span>(k3<span style="color: #666666">-</span>k2)
+            h_new<span style="color: #666666">=</span>hi<span style="color: #666666">*</span>np<span style="color: #666666">.</span>sqrt(tol<span style="color: #666666">/</span>toli)
+            no_steps<span style="color: #666666">+=3</span>
+        toli<span style="color: #666666">=1.</span>
+        c_old<span style="color: #666666">=2*</span>k2<span style="color: #666666">-</span>k3 <span style="color: #408080; font-style: italic"># higher order correction</span>
+ <span style="color: #408080; font-style: italic"># normal Euler, uncomment and inspect the global error</span>
+ <span style="color: #408080; font-style: italic">#       c_old = k2 </span>
+        ti   <span style="color: #666666">+=</span> hi
+        global_err <span style="color: #666666">+=</span> <span style="color: #008000">abs</span>(np<span style="color: #666666">.</span>exp(<span style="color: #666666">-</span>ti)<span style="color: #666666">-</span>c_old)
+    <span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&quot;No steps=&quot;</span>, no_steps, <span style="color: #BA2121">&quot;Global Error=&quot;</span>, global_err)
+    <span style="color: #008000; font-weight: bold">return</span> t,f
+</pre></div>
+<p>
+<center> <!-- figure label: --> <div id="fig:ode:adapt_euler"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 9:  The concentration in the tank using adaptive Euler. Number of Euler steps are: 3006, 117, 48 and 36 for the different step sizes.  <!-- caption label: fig:ode:adapt_euler --> </p></center>
+<p><img src="fig-ode/adaptive_euler.png" align="bottom" width=800></p>
+</center>
+
+<p>
+In figure <a href="#fig:ode:adapt_euler">9</a> the result of the implementation is shown. 
+Note that the number of steps for an accuracy of \( 10^{-6} \) is only about 3000. Without knowing anything about the accuracy, we would have to assume
+that we needed a step size of the order of \( h \) in order to reach a local accuracy of \( h \) because of equation <a href="#mjx-eqn-3.12">(3.12)</a>. In the current case,
+we would have needed \( 10^7 \) steps, which would lead to unnecessary long simulation times.
+<div class="alert alert-block alert-success alert-text-normal"><b>Local error and bounds.</b>
+In the previous example we set an absolute tolerance, and required that our estimate \( y_n \) always is within a certain bound
+of the true  solution \( y(t_n) \), i.e. \( |y(t_n)-y_n|\le\epsilon^\prime \). This is a very strong demand, and sometimes it makes more 
+sense to require that we also accept a relative tolerance proportional to function value. In some areas the solution might have a very large
+value, and then another possibility would be to have an \( \epsilon^\prime \) that varied with the function value: 
+$$
+\begin{equation}
+\epsilon^\prime = atol +|y|rtol,
+\tag{3.26}
+\end{equation}
+$$
+
+where 'atol' is the absolute tolerance and 'rtol' is the relative tolerance. A sensible choice would be to set 'atol=rtol' (e.g. = \( 10^{-4} \)).
+</div>
+
+
+<h1 id="___sec25" class="anchor">Runge-Kutta Methods </h1>
+
+<p>
+<center> <!-- figure label: --> <div id="fig:ode:rk"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 10:  Illustration of the Euler algorithm, and a motivation for using the slope a distance from the \( t_n \). <!-- caption label: fig:ode:rk --> </p></center>
+<p><img src="fig-ode/rk_fig.png" align="bottom" width=800></p>
+</center>
+
+<p>
+The Euler method only have an accuracy of order \( h \), and a global error that do not go to zero as the step size decrease. 
+The Runge-Kutta methods may be motivated by inspecting the Euler method in figure <a href="#fig:ode:rk">10</a>. The Euler method uses information from
+the previous time step to estimate the value at the new time step. The Runge Kutta methods uses the information about the slope between the
+points \( t_n \) and \( t_n+h \). By inspecting figure <a href="#fig:ode:rk">10</a>, we clearly see that by using the slope at \( t_n+h/2 \) would give us a
+significant improvement. The 2. order Runge-Kutta method can be derived by Taylor expanding the solution around \( t_n+h/2 \), we do this by
+setting \( t_n+h=t_n+h/2+h/2 \):
+$$
+\begin{align}
+y(t_n+h)=y(t_n+\frac{h}{2})+\frac{h}{2}\left.\frac{dy}{dt}\right|_{t=t_n+h/2}+\frac{h^2}{4}\left.\frac{d^2y}{dt^2}\right|_{t=t_n+h/2}
++\mathcal{O}(h^3).\tag{3.27}
+\end{align}
+$$
+
+Similarly we can expand the solution in \( y(t_n) \) about \( t_n+h/2 \), by setting \( t_n=t_n+h/2-h/2 \):
+$$
+\begin{align}
+y(t_n)=y(t_n+\frac{h}{2})-\frac{h}{2}\left.\frac{dy}{dt}\right|_{t=t_n+h/2}+\frac{h^2}{4}\left.\frac{d^2y}{dt^2}\right|_{t=t_n+h/2}
+-\mathcal{O}(h^3).\tag{3.28}
+\end{align}
+$$
+
+Substracting these two equations the term \( y(t_n+\frac{h}{2}) \), and all even powers in the derivative cancels out:
+$$
+\begin{align}
+y(t_n+h)&=y(t_n)+h\left.\frac{dy}{dt}\right|_{t=t_n+h/2}+\mathcal{O}(h^3),\nonumber\\ 
+y(t_n+h)&=y(t_n)+hf(y_{n+h/2},t_n+h/2)+\mathcal{O}(h^3).\tag{3.29}
+\end{align}
+$$
+
+In the last equation, we have used equation <a href="#mjx-eqn-3.10">(3.10)</a>. Note that we now have an expression that is very similar to Eulers algorithm,
+but it is accurate to order \( h^3 \). There is one problem, and that is that the function \( f \) is to be evaluated at the point \( y_{n+1/2}=y(t_n+h/2) \)
+which we do not know. This can be fixed by using Eulers algorithm: \( y_{n+1/2}=y_n+h/2f(y_n,t_n) \). We can do this even if Eulers algorithm is
+only accurate to order \( h^2 \), because the \( f \) in equation <a href="#mjx-eqn-3.29">(3.29)</a> is multiplied by \( h \), and thus our algorithm is still accurate
+up to order \( h^3 \). 
+<div class="alert alert-block alert-success alert-text-normal"><b>The 2. order Runge-Kutta:</b>
+$$
+\begin{align}
+k_1&=hf(y_n,t_n)\nonumber\\ 
+k_2&=hf(y_n+\frac{1}{2}k_1,t_n+h/2)\nonumber\\ 
+y_{n+1}&=y_n+k_2\tag{3.30}
+\end{align}
+$$
+</div>
+
+Below is a Python implementation of equation <a href="#mjx-eqn-3.30">(3.30)</a>:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">fm</span>(c_old,c_in):
+    <span style="color: #008000; font-weight: bold">return</span> c_in<span style="color: #666666">-</span>c_old
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">rk2_step</span>(c_old, c_in, h):
+    k1<span style="color: #666666">=</span>h<span style="color: #666666">*</span>fm(c_old,c_in)
+    k2<span style="color: #666666">=</span>h<span style="color: #666666">*</span>fm(c_old<span style="color: #666666">+0.5*</span>k1,c_in)
+    <span style="color: #008000; font-weight: bold">return</span> c_old<span style="color: #666666">+</span>k2
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">ode_solv</span>(c_into,c_init,t_final,h):
+    f<span style="color: #666666">=</span>[];t<span style="color: #666666">=</span>[]
+    c_in  <span style="color: #666666">=</span> c_into <span style="color: #408080; font-style: italic">#freshwater into tank</span>
+    c_old <span style="color: #666666">=</span> c_init <span style="color: #408080; font-style: italic">#seawater present </span>
+    ti<span style="color: #666666">=0.</span>
+    <span style="color: #008000; font-weight: bold">while</span>(ti <span style="color: #666666">&lt;=</span> t_final):
+        t<span style="color: #666666">.</span>append(ti); f<span style="color: #666666">.</span>append(c_old)
+        c_new <span style="color: #666666">=</span> rk2_step(c_old,c_in,h)     
+        c_old <span style="color: #666666">=</span> c_new
+        ti   <span style="color: #666666">+=</span> h
+    <span style="color: #008000; font-weight: bold">return</span> t,f
+</pre></div>
+<p>
+<center> <!-- figure label: --> <div id="fig:ode:rk2"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 11:  The concentration in the tank for different step size \( \Delta t \).  <!-- caption label: fig:ode:rk2 --> </p></center>
+<p><img src="fig-ode/rk2.png" align="bottom" width=800></p>
+</center>
+
+<p>
+In figure <a href="#fig:ode:rk2">11</a> the result of the implementation is shown. 
+Note that when comparing Runge-Kutta 2. order with Eulers method,
+see figure <a href="#fig:ode:rk2">11</a> and <a href="#fig:ode:euler">8</a>,
+we of course have 
+the obvious result that a larger step size can be taken, without loosing numerical accuracy. It is also worth noting that we can take steps that
+is larger than the tank volume. Eulers method failed whenever the time step was larger than one tank volume (\( h=t/\tau>1 \)), whereas the Runge-Kutta 
+method finds a physical solution for step sizes lower than twice the tank volume. If the step size is larger, we see that the concentration in the tank
+increases, which is clearly unphysical.
+
+<p>
+The Runge-Kutta fourth order method is one of he most used methods, it is accurate to order \( h^4 \), and has an error of order \( h^5 \). The development of the 
+algorithm itself is similar to the 2. order method, but of course more involved. We just quote the result:
+<div class="alert alert-block alert-success alert-text-normal"><b>The 4. order Runge-Kutta:</b>
+$$
+\begin{align}
+k_1&=hf(y_n,t_n)\nonumber\\ 
+k_2&=hf(y_n+\frac{1}{2}k_1,t_n+h/2)\nonumber\\ 
+k_3&=hf(y_n+\frac{1}{2}k_2,t_n+h/2)\nonumber\\ 
+k_4&=hf(y_n+k_3,t_n+h)\nonumber\\ 
+y_{n+1}&=y_n+\frac{1}{6}(k_1+2k_2+2k_3+k_4)\tag{3.31}
+\end{align}
+$$
+</div>
+
+
+<p>
+Below is a Python implementation of equation <a href="#mjx-eqn-3.31">(3.31)</a>:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">fm</span>(c_old,c_in):
+    <span style="color: #008000; font-weight: bold">return</span> c_in<span style="color: #666666">-</span>c_old
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">rk4_step</span>(c_old, c_in, h):
+    k1<span style="color: #666666">=</span>h<span style="color: #666666">*</span>fm(c_old,c_in)
+    k2<span style="color: #666666">=</span>h<span style="color: #666666">*</span>fm(c_old<span style="color: #666666">+0.5*</span>k1,c_in)
+    k3<span style="color: #666666">=</span>h<span style="color: #666666">*</span>fm(c_old<span style="color: #666666">+0.5*</span>k2,c_in)
+    k4<span style="color: #666666">=</span>h<span style="color: #666666">*</span>fm(c_old<span style="color: #666666">+</span>    k3,c_in)
+    <span style="color: #008000; font-weight: bold">return</span> c_old<span style="color: #666666">+</span>(k1<span style="color: #666666">+2*</span>k2<span style="color: #666666">+2*</span>k3<span style="color: #666666">+</span>k4)<span style="color: #666666">/6</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">ode_solv</span>(c_into,c_init,t_final,h):
+    f<span style="color: #666666">=</span>[];t<span style="color: #666666">=</span>[]
+    c_in  <span style="color: #666666">=</span> c_into <span style="color: #408080; font-style: italic">#freshwater into tank</span>
+    c_old <span style="color: #666666">=</span> c_init <span style="color: #408080; font-style: italic">#seawater present </span>
+    ti<span style="color: #666666">=0.</span>
+    <span style="color: #008000; font-weight: bold">while</span>(ti <span style="color: #666666">&lt;=</span> t_final):
+        t<span style="color: #666666">.</span>append(ti); f<span style="color: #666666">.</span>append(c_old)
+        c_new <span style="color: #666666">=</span> rk4_step(c_old,c_in,h)     
+        c_old <span style="color: #666666">=</span> c_new
+        ti   <span style="color: #666666">+=</span> h
+    <span style="color: #008000; font-weight: bold">return</span> t,f
+</pre></div>
+<p>
+<center> <!-- figure label: --> <div id="fig:ode:rk4"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 12:  The concentration in the tank for different step size \( \Delta t \).  <!-- caption label: fig:ode:rk4 --> </p></center>
+<p><img src="fig-ode/rk4.png" align="bottom" width=800></p>
+</center>
+
+<p>
+In figure <a href="#fig:ode:rk4">12</a> the result of the implementation is shown.
+
+<h2 id="___sec26" class="anchor">Adaptive step size - Runge-Kutta Method </h2>
+
+<p>
+Just as we did with Eulers method, we can implement an adaptive method. The derivation is exactly the same, but this time our method is accurate to
+fourth order, hence the error term is of order \( h^5 \). We start by taking one large step of size \( h \), our estimate, \( y_1^* \) is related to the true 
+solution, \( y(t_1) \), in the following way:
+$$
+\begin{align}
+y^*_1&=y(t_1)+ch^5,\tag{3.32}
+\end{align}
+$$
+
+Next, we take two steps of half the size, \( h/2 \), hence:
+$$
+\begin{align}
+y_1&=y(t)+2c\left(\frac{h}{2}\right)^5.\tag{3.33}
+\end{align}
+$$
+
+Subtracting equation <a href="#mjx-eqn-3.32">(3.32)</a> and <a href="#mjx-eqn-3.33">(3.33)</a>, we find an expression similar to equation <a href="#mjx-eqn-3.21">(3.21)</a>:
+$$
+\begin{align}
+\Delta\equiv& y_1^*-y_1=c\frac{15}{16}h^5,\tag{3.34}
+\end{align}
+$$
+
+or \( c=16\Delta/(15h^5) \). For the Euler scheme, \( \Delta \) also happened to be equal to the truncation error, but in this case it is:
+$$
+\begin{align}
+\epsilon=2c\left(\frac{h}{2}\right)^5=\frac{\Delta}{15}\tag{3.35}
+\end{align}
+$$
+
+we want the local error, \( \epsilon \), to be smaller than some tolerance, \( \epsilon^\prime \).  
+The optimal step size, \( h^\prime \),  that gives us exactly the desired error is then:
+$$
+\begin{align}
+\epsilon^\prime=2c\left(\frac{{h^\prime}}{2}\right)^5.\tag{3.36}
+\end{align}
+$$
+
+Dividing equation <a href="#mjx-eqn-3.36">(3.36)</a> by equation <a href="#mjx-eqn-3.35">(3.35)</a>, we can estimate the optimal step size:
+$$
+\begin{align}
+h^\prime=h\left|\frac{\epsilon}{\epsilon}\right|^{1/5},\tag{3.37}
+\end{align}
+$$
+
+\( \epsilon \) can be calculated from equation <a href="#mjx-eqn-3.35">(3.35)</a>. Below is an implementation
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">fm</span>(c_old,c_in):
+    <span style="color: #008000; font-weight: bold">return</span> c_in<span style="color: #666666">-</span>c_old
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">rk4_step</span>(c_old, c_in, h):
+    k1<span style="color: #666666">=</span>h<span style="color: #666666">*</span>fm(c_old,c_in)
+    k2<span style="color: #666666">=</span>h<span style="color: #666666">*</span>fm(c_old<span style="color: #666666">+0.5*</span>k1,c_in)
+    k3<span style="color: #666666">=</span>h<span style="color: #666666">*</span>fm(c_old<span style="color: #666666">+0.5*</span>k2,c_in)
+    k4<span style="color: #666666">=</span>h<span style="color: #666666">*</span>fm(c_old<span style="color: #666666">+</span>    k3,c_in)
+    <span style="color: #008000; font-weight: bold">return</span> c_old<span style="color: #666666">+</span>(k1<span style="color: #666666">+2*</span>k2<span style="color: #666666">+2*</span>k3<span style="color: #666666">+</span>k4)<span style="color: #666666">/6</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">adaptive_ode_solv</span>(c_into,c_init,t_final,tol<span style="color: #666666">=1e-4</span>):
+    f<span style="color: #666666">=</span>[];t<span style="color: #666666">=</span>[]
+    tau_inv <span style="color: #666666">=</span> q<span style="color: #666666">/</span>vol
+    c_in    <span style="color: #666666">=</span> c_into <span style="color: #408080; font-style: italic">#freshwater into tank</span>
+    c_old   <span style="color: #666666">=</span> c_init <span style="color: #408080; font-style: italic">#seawater present </span>
+    ti<span style="color: #666666">=0.</span>; h_new<span style="color: #666666">=1</span>;
+    toli<span style="color: #666666">=1.</span>; <span style="color: #408080; font-style: italic"># a high init tolerance to enter while loop</span>
+    no_steps<span style="color: #666666">=0</span>
+    global_err<span style="color: #666666">=0.</span>
+    <span style="color: #008000; font-weight: bold">while</span>(ti <span style="color: #666666">&lt;=</span> t_final):
+        t<span style="color: #666666">.</span>append(ti); f<span style="color: #666666">.</span>append(c_old)
+        tol <span style="color: #666666">=</span> tol <span style="color: #666666">+</span> tol<span style="color: #666666">*</span>c_old 
+        <span style="color: #008000; font-weight: bold">while</span>(toli<span style="color: #666666">&gt;</span>tol):<span style="color: #408080; font-style: italic"># first two small steps</span>
+            hi<span style="color: #666666">=</span>h_new
+            k1 <span style="color: #666666">=</span> rk4_step(c_old,c_in,hi<span style="color: #666666">*.5</span>)
+            k2 <span style="color: #666666">=</span> rk4_step(k1,c_in,hi<span style="color: #666666">*.5</span>)
+            <span style="color: #408080; font-style: italic"># ... and one large step</span>
+            k3 <span style="color: #666666">=</span> rk4_step(c_old,c_in,hi)
+            toli <span style="color: #666666">=</span> <span style="color: #008000">abs</span>(k3<span style="color: #666666">-</span>k2)<span style="color: #666666">/15</span>
+            h_new<span style="color: #666666">=</span><span style="color: #008000">min</span>(hi<span style="color: #666666">*</span>(tol<span style="color: #666666">/</span>toli)<span style="color: #666666">**</span>(<span style="color: #666666">0.2</span>),<span style="color: #666666">1</span>)
+            no_steps<span style="color: #666666">+=3</span>
+        toli<span style="color: #666666">=1.</span>
+        c_old<span style="color: #666666">=</span>k2<span style="color: #666666">-</span>(k3<span style="color: #666666">-</span>k2)<span style="color: #666666">/15</span>
+        ti   <span style="color: #666666">+=</span> hi
+        global_err <span style="color: #666666">+=</span> <span style="color: #008000">abs</span>(np<span style="color: #666666">.</span>exp(<span style="color: #666666">-</span>ti)<span style="color: #666666">-</span>c_old)
+    <span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&quot;No steps=&quot;</span>, no_steps, <span style="color: #BA2121">&quot;Global Error=&quot;</span>, global_err)
+    <span style="color: #008000; font-weight: bold">return</span> t,f
+</pre></div>
+<p>
+<center> <!-- figure label: --> <div id="fig:ode:adaptive_rk4"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 13:  The concentration in the tank for different step size \( \Delta t \). Number of rk4 steps are: 138, 99, 72 and 66 for the different step sizes and 'rtol=0', for 'rtol=tol' the number of rk4 steps are 81, 72, 63, 63. <!-- caption label: fig:ode:adaptive_rk4 --> </p></center>
+<p><img src="fig-ode/adaptive_rk4.png" align="bottom" width=800></p>
+</center>
+
+<p>
+In figure <a href="#fig:ode:adaptive_rk4">13</a> the result of the implementation is shown. 
+Note that we put a safety limit on the step size 'min(hi*(tol/toli)**(0.2),1)'.
+
+<p>
+In general we can use the same procedure any method accurate to order \( h^p \), and you can easily verify that:
+<div class="alert alert-block alert-success alert-text-normal"><b>Error term and step size for a \( h^p \) method:</b>
+$$
+\begin{align}
+\epsilon&=\frac{|\Delta|}{2^p-1}=\frac{|y_1^*-y_1|}{2^p-1},
+\tag{3.38}\\ 
+h^\prime&=\beta h\left|\frac{\epsilon}{\epsilon_0}\right|^{\frac{1}{p+1}},
+\tag{3.39}\\ 
+\hat{y_1}&=y_1-\epsilon=\frac{2^{p-1}y_1-y_1^*}{2^{p-1}-1},
+\tag{3.40}
+\end{align}
+$$
+
+where \( \beta \) is a safety factor \( \beta\simeq0.8,0.9 \), and you should always be careful that the step size do not become too large so that
+the method breaks down. This can happens when \( \epsilon \) is very low, which may happen if \( y_1^*\simeq y_1 \) and/or if \( y_1^*\simeq y_1\simeq 0 \).
+</div>
+
+
+<h2 id="___sec27" class="anchor">Conservation of Mass </h2>
+A mathematical model of a physical system should always be formulated in such a way that it is
+consistent with the laws of nature. In practical situations this statement is usually equivalent to state that
+the mathematical model should respect conservation laws. The conservation laws can be conservation of mass, energy, momentum, 
+electrical charge, etc. In our
+example with the mixing tank, we were able to derive an expression for the concentration of salt out of
+the tank, equation <a href="#mjx-eqn-3.5">(3.5)</a>, by <em>demanding</em> conservation of mass (see equation <a href="#mjx-eqn-3.2">(3.2)</a>).
+
+<p>
+A natural question to ask is then: If our mathematical model respect conservation of mass, are we sure that our 
+solution method respect conservation of mass? We of course expect that
+when the grid spacing approaches zero our numerical solution will get closer and closer to the analytical
+solution. Clearly when \( \Delta x\to 0 \), the mass is conserved. So what is the problem? The problem is that in many practical problems
+we cannot always have a step size that is small enough to ensure that our solution always is close enough to the analytical 
+solution. The physical system we consider might be very complicated (e.g. a model for the earth climate), and our ODE system could
+be a very small part of a very big system. A very good test of any code is to investigate if the code respect
+the conservation laws. If we know that our implementation respect e.g. mass conservation at the discrete level, we can easily
+test mass conservation by summing up all the mass entering, and subtracting the mass out of and present in our system.
+If the mass is not conserved exactly, there is a good chance that there is a bug in our implementation.
+
+<p>
+If we now turn to our system, we know that the total amount of salt in the system when we start is \( C(0)V \).
+The amount entering is zero, and the amount leaving each time step is \( q(t)C(t)\Delta t \). Thus we should
+expect that if we add the amount of salt in the tank to the amount that has left the system
+we should always get an amount that is equal to the original amount. Alternatively, we expect
+\( \int_{t_0}^t qC(t)dt + C(t)V -C(0)V=0 \). Adding the following code in the <code>while(ti &lt;= t_final):</code> loop:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>mout <span style="color: #666666">+=</span> <span style="color: #666666">0.5*</span>(c_old<span style="color: #666666">+</span>c_new)<span style="color: #666666">*</span>q<span style="color: #666666">*</span>dt
+mbal  <span style="color: #666666">=</span> (c_new<span style="color: #666666">*</span>vol<span style="color: #666666">+</span>mout<span style="color: #666666">-</span>vol<span style="color: #666666">*</span>c_init)<span style="color: #666666">/</span>(vol<span style="color: #666666">*</span>c_init)
+</pre></div>
+<p>
+it is possible to calculate the amount of mass lost (note that we have used the
+trapezoidal formula to calculate the integral). In the table below the fraction of mass lost relative to the original
+amount is shown for the various numerical methods.
+
+<p>
+
+<div class="row">
+  <div class="col-xs-6">
+    <table class="table table-striped table-hover table-condensed">
+<thead>
+<tr><td align="center"><b>&#65279;$\Delta t$</b></td> <td align="center">\( h \)</td> <td align="center"><b> Euler </b></td> <td align="center"><b>RK 2. order</b></td> <td align="center"><b>RK 4. order</b></td> </tr>
+</thead>
+<tbody>
+<tr><td align="center">   900                   </td> <td align="center">   0.9        </td> <td align="center">   -0.4500    </td> <td align="center">   0.3682         </td> <td align="center">   0.0776         </td> </tr>
+<tr><td align="center">   500                   </td> <td align="center">   0.5        </td> <td align="center">   -0.2500    </td> <td align="center">   0.0833         </td> <td align="center">   0.0215         </td> </tr>
+<tr><td align="center">   100                   </td> <td align="center">   0.1        </td> <td align="center">   -0.0500    </td> <td align="center">   0.0026         </td> <td align="center">   0.0008         </td> </tr>
+<tr><td align="center">   10                    </td> <td align="center">   0.01       </td> <td align="center">   -0.0050    </td> <td align="center">   2.5E-05        </td> <td align="center">   8.3E-06        </td> </tr>
+</tbody>
+    </table>
+  </div> <!-- col-xs-6 -->
+</div> <!-- cell row -->
+<p>
+We clearly see from the table that the Runge-Kutta methods performs better than Eulers method, but
+<em>all of the methods violates mass balance</em>.
+
+<p>
+This might not be a surprise as we know that our numerical solution is always an approximation to the analytical solution. How can 
+we then formulate an algorithm that will respect conservation laws at the discrete level? It turns out that for Eulers method it is not
+so difficult. Eulers algorithm at the discrete level (see equation <a href="#mjx-eqn-3.6">(3.6)</a>) is actually a two-step process: first we inject the fresh water while we remove the &quot;old`` fluid <em>and then we mix</em>. By thinking about the
+problem this way, it makes more sense to calculate the mass out of the tank as \( \sum_kq_kC_k\Delta t_k \). If we in our implementation calculates the mass out of the tank as:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>mout <span style="color: #666666">+=</span> c_old<span style="color: #666666">*</span>q<span style="color: #666666">*</span>dt
+mbal  <span style="color: #666666">=</span> (c_new<span style="color: #666666">*</span>vol<span style="color: #666666">+</span>mout<span style="color: #666666">-</span>vol<span style="color: #666666">*</span>c_init)<span style="color: #666666">/</span>(vol<span style="color: #666666">*</span>c_init)
+</pre></div>
+<p>
+We easily find that the mass is exactly conserved at every time for Eulers method. The concentration in the tank will of course not be any closer to the 
+analytical solution, but if our mixing tank was part of a much bigger system we could make sure that the mass would always be conserved if we make
+sure that the mass out of the tank and into the next part of the system was equal to \( qC(t)\Delta t \).
+
+<h1 id="___sec28" class="anchor">Solving a set of ODE equations </h1>
+What happens if we have more than one equation that needs to be solved? If we continue with our current example, we might be interested in what would happen 
+if we had multiple tanks in series. This could be a very simple model to describe the cleaning  of a salty lake by injecting fresh water into it, but at 
+the same time this lake was connected to two nearby fresh water lakes, as illustrated in figure <a href="#fig:ode:cstr3">14</a>. The weakest part of the model is the assumption about 
+complete mixing, in a practical situation we could enforce complete mixing with the salty water in the first tank by injecting fresh water at multiple point in the 
+lake. For the two next lakes, the degree of mixing is not obvious, but salt water is heavier than fresh water and therefore it would sink and mix with the fresh water. Thus
+if the flow rate was slow, one might imaging that a more or less complete mixing could occur. Our model then could answer questions like, how long time would it take before most
+of the salt water is removed from the first lake, and how much time would it take before most of the salt water was cleared from the whole system? The answer to 
+these questions would give practical input on how much and how fast one should inject the fresh water to clean up the system. If we had 
+data from an actual system, we could compare our model predictions with data from the physical system, and investigate if our model description was correct.
+
+<p>
+<center> <!-- figure label: --> <div id="fig:ode:cstr3"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 14:  A simple model for cleaning a salty lake that is connected to two lakes down stream.  <!-- caption label: fig:ode:cstr3 --> </p></center>
+<p><img src="fig-ode/cstr3.png" align="bottom" width=800></p>
+</center>
+
+<p>
+For simplicity we will assume that all the lakes have the same volume, \( V \). The governing equations follows
+as before, by assuming mass balance (equation <a href="#mjx-eqn-3.1">(3.1)</a>):
+$$
+\begin{align}
+C_0(t+\Delta t)\cdot V - C_0(t)\cdot V &= q(t)\cdot C_\text{in}(t)\cdot \Delta t - q(t)\cdot C_0(t)\cdot \Delta t,\nonumber\\ 
+C_1(t+\Delta t)\cdot V - C_1(t)\cdot V &= q(t)\cdot C_0(t)\cdot \Delta t - q(t)\cdot C_1(t)\cdot \Delta t,\nonumber\\ 
+C_2(t+\Delta t)\cdot V - C_2(t)\cdot V &= q(t)\cdot C_1(t)\cdot \Delta t - q(t)\cdot C_2(t)\cdot \Delta t.\tag{3.41}
+\end{align}
+$$
+
+Taking the limit \( \Delta t\to 0 \), we can write equation <a href="#mjx-eqn-3.41">(3.41)</a> as:
+$$
+\begin{align}
+V\frac{dC_0(t)}{dt} &= q(t)\left[C_\text{in}(t) - C_0(t)\right],\tag{3.42}\\ 
+V\frac{dC_1(t)}{dt} &= q(t)\left[C_0(t) - C_1(t)\right],\tag{3.43}\\ 
+V\frac{dC_2(t)}{dt} &= q(t)\left[C_1(t) - C_2(t)\right].\tag{3.44}
+\end{align}
+$$
+
+Let us first derive the analytical solution: Only the first tank is filled with salt water \( C_0(0)=C_{0,0} \), \( C_1(0)=C_2(0)=0 \), and \( C_\text{in}=0 \). 
+The solution to equation <a href="#mjx-eqn-3.42">(3.42)</a> is, as before \( C_0(t)=C_{0,0}e^{-t/\tau} \), inserting this equation into equation <a href="#mjx-eqn-3.43">(3.43)</a> we find:
+$$
+\begin{align}
+V\frac{dC_1(t)}{dt} &= q(t)\left[C_{0,0}e^{-t/\tau} - C_1(t)\right]\tag{3.45},\\ 
+\frac{d}{dt}\left[e^{t/\tau}C_1\right]&= \frac{C_{0,0}}{\tau}\tag{3.46},\\ 
+C_1(t)&=\frac{C_{0,0}t}{\tau}e^{-t/\tau}\tag{3.47}.
+\end{align}
+$$
+
+where we have use the technique of <a href="https://en.wikipedia.org/wiki/Integrating_factor" target="_self">integrating factors</a> when going from equation <a href="#mjx-eqn-3.45">(3.45)</a> to <a href="#mjx-eqn-3.46">(3.46)</a>. 
+Inserting equation <a href="#mjx-eqn-3.47">(3.47)</a> into equation <a href="#mjx-eqn-3.44">(3.44)</a>, solving the equation in a similar way as for \( C_1 \) we find:
+$$
+\begin{align}
+V\frac{dC_2(t)}{dt} &= q(t)\left[\frac{C_{0,0}t}{\tau}e^{-t/\tau} - C_2(t)\right],\tag{3.48}\\ 
+\frac{d}{dt}\left[e^{t/\tau}C_2\right]&= \frac{C_{0,0}t}{\tau},\tag{3.49}\\ 
+C_2(t)&=\frac{C_{0,0}t^2}{2\tau^2}e^{-t/\tau}.\tag{3.50}
+\end{align}
+$$
+
+The numerical solution follows the exact same pattern as before if we introduce a vector notation. Before doing that, we rescale the time \( t\to t/\tau \) and the concentrations,
+ \( \hat{C_i}=C_i/C_{0,0} \) for \( i=0,1,2 \), hence:
+$$
+\begin{align}
+\frac{d}{dt}
+\begin{bmatrix} 
+ \hat{C_0}(t)
+\tag{3.51}\\ 
+ \hat{C_1}(t)
+\tag{3.52}\\ 
+ \hat{C_2}(t)
+ \end{bmatrix}
+&=  \begin{bmatrix} 
+ \hat{C_\text{in}}(t) - \hat{C_0}(t)
+\tag{3.53}\\ 
+ \hat{C_0}(t) - \hat{C_1}(t)
+\tag{3.54}\\ 
+ \hat{C_1}(t) - \hat{C_2}(t)
+ \end{bmatrix},\nonumber
+ \\ 
+ \frac{d\mathbf{\hat{C}}(t)}{dt}&=\mathbf{f}(\mathbf{\hat{C}},t).
+\tag{3.55}
+\end{align}
+$$
+
+Below is an implementation using the Runge Kutta 4. order method:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">fm</span>(c_old,c_in,tau):
+    <span style="color: #008000; font-weight: bold">return</span> (c_in<span style="color: #666666">-</span>c_old)<span style="color: #666666">/</span>tau
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">rk4_step</span>(c_old, c_in, tau, h):
+    c_next<span style="color: #666666">=</span>[]
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(c_old)):
+        k1<span style="color: #666666">=</span>h<span style="color: #666666">*</span>fm(c_old[i],c_in[i],tau[i])
+        k2<span style="color: #666666">=</span>h<span style="color: #666666">*</span>fm(c_old[i]<span style="color: #666666">+0.5*</span>k1,c_in[i],tau[i])
+        k3<span style="color: #666666">=</span>h<span style="color: #666666">*</span>fm(c_old[i]<span style="color: #666666">+0.5*</span>k2,c_in[i],tau[i])
+        k4<span style="color: #666666">=</span>h<span style="color: #666666">*</span>fm(c_old[i]<span style="color: #666666">+</span>    k3,c_in[i],tau[i])
+        c_next<span style="color: #666666">.</span>append(c_old[i]<span style="color: #666666">+</span>(k1<span style="color: #666666">+2*</span>k2<span style="color: #666666">+2*</span>k3<span style="color: #666666">+</span>k4)<span style="color: #666666">/6</span>)
+    <span style="color: #008000; font-weight: bold">return</span> c_next
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">ode_solv</span>(c_into,c_init,t_final,tau,h):
+    f<span style="color: #666666">=</span>[];t<span style="color: #666666">=</span>[]
+    c_in  <span style="color: #666666">=</span> c_into <span style="color: #408080; font-style: italic">#freshwater into first tank</span>
+    c_old <span style="color: #666666">=</span> c_init <span style="color: #408080; font-style: italic">#seawater present </span>
+    ti<span style="color: #666666">=0.</span>
+    <span style="color: #008000; font-weight: bold">while</span>(ti <span style="color: #666666">&lt;=</span> t_final):
+        t<span style="color: #666666">.</span>append(ti); f<span style="color: #666666">.</span>append(c_old)
+        c_new <span style="color: #666666">=</span> rk4_step(c_old,c_in,tau,h)     
+        c_old <span style="color: #666666">=</span> c_new
+        <span style="color: #408080; font-style: italic"># put concentration of tank 0 into tank 1 etc.</span>
+        <span style="color: #008000; font-weight: bold">for</span> i,ci <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">enumerate</span>(c_old[:<span style="color: #008000">len</span>(c_old)<span style="color: #666666">-1</span>]):
+            c_in[i<span style="color: #666666">+1</span>]<span style="color: #666666">=</span>ci
+        ti   <span style="color: #666666">+=</span> h
+    <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>array(t),np<span style="color: #666666">.</span>array(f)
+h <span style="color: #666666">=</span> <span style="color: #666666">1e-2</span>
+<span style="color: #408080; font-style: italic"># initial values</span>
+vol<span style="color: #666666">=1</span>;q<span style="color: #666666">=1</span>;c_into <span style="color: #666666">=</span> [<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>]; c_init <span style="color: #666666">=</span> [<span style="color: #666666">1</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>]
+tau<span style="color: #666666">=</span>[<span style="color: #666666">1</span>,<span style="color: #666666">1</span>,<span style="color: #666666">1</span>];t_final<span style="color: #666666">=10</span> <span style="color: #408080; font-style: italic"># end of simulation </span>
+t,f <span style="color: #666666">=</span> ode_solv(c_into,c_init,t_final,tau,h)
+</pre></div>
+<p>
+<center> <!-- figure label: --> <div id="fig:ode:rk4_2"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 15:  The concentration in the tanks.  <!-- caption label: fig:ode:rk4_2 --> </p></center>
+<p><img src="fig-ode/rk4_2.png" align="bottom" width=800></p>
+</center>
+
+<p>
+In figure <a href="#fig:ode:rk4_2">15</a> the result of the implementation is shown.
+
+<h1 id="___sec29" class="anchor">Stiff sets of ODE  and implicit methods </h1>
+As already mentioned a couple of times, our system could be part of a much larger system. To illustrate this, let us now assume that we have two 
+tanks in series. The first tank is similar to our original tank, but the second tank is a sampling tank, 1000 times smaller.
+
+<p>
+<center> <!-- figure label: --> <div id="fig:ode:cstr2"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 16:  A continuous stirred tank model with a sampling vessel.  <!-- caption label: fig:ode:cstr2 --> </p></center>
+<p><img src="fig-ode/cstr2.png" align="bottom" width=800></p>
+</center>
+
+<p>
+The governing equations can be found by requiring mass balance for each of the tanks (see equation <a href="#mjx-eqn-3.1">(3.1)</a>:
+$$
+\begin{align}
+C_0(t+\Delta t)\cdot V_0 - C_0(t)\cdot V_0 &= q(t)\cdot C_\text{in}(t)\cdot \Delta t - q(t)\cdot C_0(t)\cdot \Delta t.\nonumber\\ 
+C_1(t+\Delta t)\cdot V_1 - C_1(t)\cdot V_1 &= q(t)\cdot C_0(t)\cdot \Delta t - q(t)\cdot C_1(t)\cdot \Delta t.
+\tag{3.56}
+\end{align}
+$$
+
+Taking the limit \( \Delta t\to 0 \), we can write equation <a href="#mjx-eqn-3.56">(3.56)</a> as:
+$$
+\begin{align}
+V_0\frac{dC_0(t)}{dt} &= q(t)\left[C_\text{in}(t) - C_0(t)\right].\tag{3.57}\\ 
+V_1\frac{dC_1(t)}{dt} &= q(t)\left[C_0(t) - C_1(t)\right].\tag{3.58}
+\end{align}
+$$
+
+Assume that the first tank is filled with seawater, \( C_0(0)=C_{0,0} \), and fresh water is flooded into the tank, i.e. \( C_\text{in}=0 \). Before we start to consider a numerical
+solution, let us first find the analytical solution: As before the solution for the first tank (equation <a href="#mjx-eqn-3.57">(3.57)</a>) is:
+$$
+\begin{equation}
+C_0(t)=C_{0,0}e^{-t/\tau_0},
+\tag{3.59}
+\end{equation}
+$$
+
+where \( \tau_0\equiv V_0/q \). Inserting this equation into equation <a href="#mjx-eqn-3.58">(3.58)</a>, we get:
+$$
+\begin{align}
+\frac{dC_1(t)}{dt} &= \frac{1}{\tau_1}\left[C_{0,0}e^{-t/\tau_0} - C_1(t)\right],\nonumber\\ 
+\frac{d}{dt}\left[e^{t/\tau_2}C_1\right]&= \frac{C_{0,0}}{\tau_1}e^{-t(1/\tau_0-1/\tau_1)}\tag{3.60},\\ 
+C_1(t)&=\frac{C_{0,0}}{1-\frac{\tau_1}{\tau_0}}\left[e^{-t/\tau_0}-e^{-t/\tau_1}\right],\tag{3.61}
+\end{align}
+$$
+
+where \( \tau_1\equiv V_1/q \).
+
+<p>
+Next, we will consider the numerical solution. You might think that these equations are more simple to solve numerically than the equations with three tanks
+in series discussed in the previous section. Actually, this system is much harder to solve with the methods we have discussed so far.
+The reason is that there are now <em>two time scales</em> in the system, \( \tau_1 \) and \( \tau_2 \). The smaller tank sets a strong limitation on the step size
+we can use, because we should never use step sizes larger than a tank volume. Thus if you use the code in the previous section to solve equation
+<a href="#mjx-eqn-3.57">(3.57)</a> and <a href="#mjx-eqn-3.58">(3.58)</a>, it will not find the correct solution, unless the step size is lower than \( 10^{-3} \). Equations of this type
+are known as <em>stiff</em>. 
+<div class="alert alert-block alert-success alert-text-normal"><b>Stiff equations.</b>
+There is no precise definition of &quot;stiff'', but it is used to describe a system of differential equations, where the numerical solution becomes unstable unless
+a very small step size is chosen. Such systems occurs because there are several (length, time) scales in the system, and the numerical solution is constrained
+by the shortest length scale. You should always be careful on how you scale your variables in order to make the system dimensionless, which is of 
+particular importance when you use adaptive methods.
+</div>
+
+
+<p>
+These types of equations are often encountered in practical applications. If our sampling tank was extremely small, maybe \( 10^6 \) smaller than the chemical
+reactor, then we would need a step size of the order of \( 10^{-8} \) or lower to solve the system. This step size is so low that we easily run into trouble
+with round off errors in the computer. In addition the simulation time is extremely long.  How do we deal with this problem? The solution is actually
+quite simple. The reason we run into trouble is that we require that the concentration leaving the tank must be a small perturbation of the old one.
+This is not necessary, and it is best illustrated with Eulers method. As explained earlier Eulers method can be viewed as a two step process:
+first we inject a volume (and remove an equal amount: \( qC(t)\Delta t \)), and then we mix. Clearly when we try to remove more than what is left, we run into
+trouble. What we want to do is to remove or flood much more than one tank volume through the tank during one time step, this can be achieved by
+\( q(t)C(t)\Delta t\to q(t+\Delta t)C(t+\Delta t)\Delta t \). The term \( q(t+\Delta t)C(t+\Delta t)\Delta t \) now represents
+<em>the mass out of the system during the time step \( \Delta t \)</em>.
+
+<p>
+The methods we have considered so far are known as <em>explicit</em>, whenever we replace the solution in the right hand side of our algorithm with \( y(t+\Delta t) \)
+or (\( y_{n+1} \)),
+the method is known as <em>implicit</em>. Implicit methods are always stable, meaning that we can take as large a time step that we would like, without
+getting oscillating solution. It does not mean that we will get a more accurate solution, actually explicit methods are usually more accurate.
+
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b>Explicit and Implicit methods.</b>
+Explicit methods are often called <em>forward</em> methods, as they use only information from the previous step to estimate the next value. The explicit
+methods are easy to implement, but get into trouble if the step size is too large. Implicit methods are often called <em>backward</em> methods as the next 
+step cannot be calculated directly from the previous solution, usually a non-linear equation has to be solved. Implicit methods are generally much
+more stable, but the price is often lower accuracy. Many commercial simulators uses implicit methods extensively because they are stable, and stability is often viewed
+as a much more important criterion than numerical accuracy.
+</div>
+
+Let us consider our example further, and for simplicity use the implicit Eulers method:
+$$
+\begin{align}
+{C_0}_{n+1}V_0 - {C_0}_nV_0 &= q(t+\Delta t){C_\text{in}}_{n+1}\Delta t -
+q(t+\Delta t){C_0}_{n+1}\Delta t.\nonumber\\ 
+{C_1}_{n+1}V_1 - {C_1}_nV_1 &= q(t+\Delta t){C_0}_{n+1}\Delta t - q(t+\Delta t){C_1}_{n+1}\Delta t.
+\tag{3.62}
+\end{align}
+$$
+
+This equation is equal to equation <a href="#mjx-eqn-3.56">(3.56)</a>, but the concentrations on the right hand side are now evaluated at the next time step.
+The immediate problem is now that we have to find an expression for \( C_{n+1} \) that is given in terms of known variables. In most cases one needs
+to use a root finding method, like Newtons method, in order to solve equation <a href="#mjx-eqn-3.62">(3.62)</a>. In this case it is straight forward to show:
+$$
+\begin{align}
+{C_0}_{n+1}&=\frac{{C_0}_n + \frac{\Delta t}{\tau_0}{C_\text{in}}_{n+1}}{1+\frac{\Delta t}{\tau_0}},\nonumber\\ 
+{C_2}_{n+1}&=\frac{{C_1}_n + \frac{\Delta t}{\tau_1}{C_0}_{n+1}}{1+\frac{\Delta t}{\tau_1}}.\tag{3.63}
+\end{align}
+$$
+
+Below is an implementation
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">fm</span>(c_old,c_in,tau,h):
+    <span style="color: #008000; font-weight: bold">return</span> (c_old<span style="color: #666666">+</span>c_in<span style="color: #666666">*</span>h<span style="color: #666666">/</span>tau)<span style="color: #666666">/</span>(<span style="color: #666666">1+</span>h<span style="color: #666666">/</span>tau)
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">euler_step</span>(c_old, c_in, tau, h):
+    c_next<span style="color: #666666">=</span>[]
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(c_old)):
+        <span style="color: #008000; font-weight: bold">if</span>(i<span style="color: #666666">&gt;0</span>): c_in[i]<span style="color: #666666">=</span>c_next[i<span style="color: #666666">-1</span>] <span style="color: #408080; font-style: italic"># c_new in next tank</span>
+        c_next<span style="color: #666666">.</span>append(fm(c_old[i],c_in[i],tau[i],h))
+    <span style="color: #008000; font-weight: bold">return</span> c_next
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">ode_solv</span>(c_into,c_init,t_final,tau,h):
+    f<span style="color: #666666">=</span>[];t<span style="color: #666666">=</span>[]
+    c_in  <span style="color: #666666">=</span> c_into <span style="color: #408080; font-style: italic">#freshwater into first tank</span>
+    c_old <span style="color: #666666">=</span> c_init <span style="color: #408080; font-style: italic">#seawater present </span>
+    ti<span style="color: #666666">=0.</span>
+    <span style="color: #008000; font-weight: bold">while</span>(ti <span style="color: #666666">&lt;=</span> t_final):
+        t<span style="color: #666666">.</span>append(ti); f<span style="color: #666666">.</span>append(c_old)
+        c_new <span style="color: #666666">=</span> euler_step(c_old,c_in,tau,h)     
+        c_old <span style="color: #666666">=</span> c_new
+        <span style="color: #408080; font-style: italic"># put concentration of tank 0 into tank 1 etc.</span>
+        <span style="color: #008000; font-weight: bold">for</span> i,ci <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">enumerate</span>(c_old[:<span style="color: #008000">len</span>(c_old)<span style="color: #666666">-1</span>]):
+            c_in[i<span style="color: #666666">+1</span>]<span style="color: #666666">=</span>ci
+        ti   <span style="color: #666666">+=</span> h
+    <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>array(t),np<span style="color: #666666">.</span>array(f)
+h <span style="color: #666666">=</span> <span style="color: #666666">0.01</span>
+<span style="color: #408080; font-style: italic"># initial values</span>
+vol<span style="color: #666666">=1</span>;q<span style="color: #666666">=1</span>;c_into <span style="color: #666666">=</span> [<span style="color: #666666">0</span>,<span style="color: #666666">0</span>]; c_init <span style="color: #666666">=</span> [<span style="color: #666666">1</span>,<span style="color: #666666">0</span>]
+tau<span style="color: #666666">=</span>[<span style="color: #666666">1</span>,<span style="color: #666666">1e-3</span>];t_final<span style="color: #666666">=10</span> <span style="color: #408080; font-style: italic"># end of simulation </span>
+t,f <span style="color: #666666">=</span> ode_solv(c_into,c_init,t_final,tau,h)
+</pre></div>
+<p>
+<center> <!-- figure label: --> <div id="fig:ode:euler_imp"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 17:  The concentration in the tanks for \( h=0.01 \). <!-- caption label: fig:ode:euler_imp --> </p></center>
+<p><img src="fig-ode/euler_imp.png" align="bottom" width=800></p>
+</center>
+
+<p>
+In figure <a href="#fig:ode:euler_imp">17</a> the result of the implementation is shown.
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="___sec30" class="anchor">Exercise 3.1: Truncation Error in Eulers Method </h2>
+
+<p>
+In the following we will take a closer look at the adaptive Eulers algorithm and show that the 
+constant \( c \) is indeed the same in equation <a href="#mjx-eqn-3.19">(3.19)</a> and <a href="#mjx-eqn-3.20">(3.20)</a>. 
+The true solution \( y(t) \), obeys the following equation:
+$$
+\begin{align}
+\frac{dy}{dt}&=f(y,t),\tag{3.64}
+\end{align}
+$$
+
+and Eulers method to get from \( y_0 \) to \( y_1 \) by taking one (large) step, \( h \) is:
+$$
+\begin{align}
+y^*_1&=y_0+hf(y_0,t_0),\tag{3.65}
+\end{align}
+$$
+
+We will also assume (for simplicity) that in our starting point \( t=t_0 \), the numerical solution, \( y_0 \), is equal to the true solution, \( y(t_0) \), hence \( y(t_0)=y_0 \).
+
+<p>
+<b>a)</b>
+Show that when we take one step of size \( h \) from \( t_0 \) to \( t_1=t_0+h \), \( c=y^{\prime\prime}(t_0)/2 \) in equation <a href="#mjx-eqn-3.19">(3.19)</a>.
+
+<p>
+<!-- --- begin answer of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_2_1" style="font-size: 80%;"></a>
+<b>Answer.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_2_1">
+
+<p>
+The local error, is the difference between the numerical solution and the true solution:
+$$
+\begin{align}
+\epsilon^*&=y(t_0+h)-y_{1}^*=y(t_0)+y^{\prime}(t_0)h+\frac{1}{2}y^{\prime\prime}(t_0)h^2+\mathcal{O}(h^3)\nonumber\\ 
+&-\left[y_0+hf(y_0,t_0+h)\right],
+\tag{3.66}
+\end{align}
+$$
+
+where we have used Taylor expansion to expand the true solution around \( t_0 \), and equation <a href="#mjx-eqn-3.65">(3.65)</a>.
+Using equation <a href="#mjx-eqn-3.64">(3.64)</a> to replace \( y^\prime(t_0) \) with \( f(y_0,t_0) \), we find:
+$$
+\begin{align}
+\epsilon^*=&y(t_0+h)-y_{1}^*=\frac{1}{2}y^{\prime\prime}(t_0)h^2\equiv ch^2,
+\tag{3.67}
+\end{align}
+$$
+
+hence \( c=y^{\prime\prime}(t_0)/2 \).
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end answer of exercise --- -->
+
+<p>
+<b>b)</b>
+Show that when we take two steps of size \( h/2 \) from \( t_0 \) to \( t_1=t_0+h \), Eulers algorithm is:
+$$
+\begin{align}
+y_{1}&=y_{0}+\frac{h}{2}f(y_0,t_0)+\frac{h}{2}f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2).
+\tag{3.68}
+\end{align}
+$$
+
+<p>
+<!-- --- begin answer of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_2_2" style="font-size: 80%;"></a>
+<b>Answer.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_2_2">
+
+$$
+\begin{align}
+y_{1/2}&=y_0+\frac{h}{2}f(y_0,t_0),\tag{3.69}\\ 
+y_{1}&=y_{1/2}+\frac{h}{2}f(y_{1/2},t_0+h/2),\tag{3.70}\\ 
+y_{1}&=y_{0}+\frac{h}{2}f(y_0,t_0)+\frac{h}{2}f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2).\tag{3.71}
+\end{align}
+$$
+
+Note that we have inserted
+equation <a href="#mjx-eqn-3.69">(3.69)</a> into equation <a href="#mjx-eqn-3.70">(3.70)</a> to arrive at equation <a href="#mjx-eqn-3.71">(3.71)</a>.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end answer of exercise --- -->
+
+<p>
+<b>c)</b>
+Find an expression for the local error when using two steps of size \( h/2 \), and show that the local error is: \( \frac{1}{2}ch^2 \)
+
+<p>
+<!-- --- begin answer of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_2_3" style="font-size: 80%;"></a>
+<b>Answer.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_2_3">
+
+$$
+\begin{align}
+\epsilon&=y(t_0+h)-y_{1}=y(t_0)+y^{\prime}(t_0)h+\frac{1}{2}y^{\prime\prime}(t_0)h^2+\mathcal{O}(h^3)\nonumber\\ 
+&-\left[y_{0}+\frac{h}{2}f(y_0,t_0)+\frac{h}{2}f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2)\right].\tag{3.72}
+\end{align}
+$$
+
+This equation is slightly more complicated, due to the term involving \( f \) inside the last parenthesis, we can use Taylor expansion to expand it about \( (y_0,t_0) \):
+$$
+\begin{align}
+&f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2)=f(y_0,t_0)\nonumber\\ 
+&+\frac{h}{2}\left[f(y_0,t_0)\left.\frac{\partial f}{\partial y}\right|_{y=y_0,t=t_0}
++\frac{h}{2}\left.\frac{\partial f}{\partial t}\right|_{y=y_0,t=t_0}\right]+\mathcal{O}(h^2).\tag{3.73}
+\end{align}
+$$
+
+It turns out that this equation is related to \( y^{\prime\prime}(t_0,y_0) \), which can be seen by differentiating equation <a href="#mjx-eqn-3.64">(3.64)</a>:
+$$
+\begin{align}
+\frac{d^2y}{dt^2}&=\frac{df(y,t)}{dt}=\frac{\partial f(y,t)}{\partial y}\frac{dy}{dt}+\frac{\partial f(y,t)}{\partial t}
+=\frac{\partial f(y,t)}{\partial y}f(y,t)+\frac{\partial f(y,t)}{\partial t}.\tag{3.74}
+\end{align}
+$$
+
+Hence, equation <a href="#mjx-eqn-3.73">(3.73)</a> can be written:
+$$
+\begin{align}
+f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2)=f(y_0,t_0)+\frac{h}{2}y^{\prime\prime}(t_0,y_0),\tag{3.75}
+\end{align}
+$$
+
+hence the truncation error in equation <a href="#mjx-eqn-3.72">(3.72)</a> can finally be written:
+$$
+\begin{align}
+\epsilon=&y(t_1)-y_{1}=\frac{h^2}{4} y^{\prime\prime}(y_0,t_0)=\frac{1}{2}ch^2,\tag{3.76}
+\end{align}
+$$
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end answer of exercise --- -->
+
+<p>
+<a href="._book003.html#Python">[1]</a>
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_2_7" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_2_7">
+
+<p>
+The local error, is the difference between the numerical solution and the true solution:
+$$
+\begin{align}
+\epsilon^*&=y(t_0+h)-y_{1}^*=y(t_0)+y^{\prime}(t_0)h+\frac{1}{2}y^{\prime\prime}(t_0)h^2+\mathcal{O}(h^3)\nonumber\\ 
+&-\left[y_0+hf(y_0,t_0+h)\right],
+\tag{3.77}
+\end{align}
+$$
+
+where we have used Taylor expansion to expand the true solution around \( t_0 \), and equation <a href="#mjx-eqn-3.65">(3.65)</a>.
+Using equation <a href="#mjx-eqn-3.64">(3.64)</a> to replace \( y^\prime(t_0) \) with \( f(y_0,t_0) \), we find:
+$$
+\begin{align}
+\epsilon^*=&y(t_0+h)-y_{1}^*=\frac{1}{2}y^{\prime\prime}(t_0)h^2\equiv ch^2,
+\tag{3.78}
+\end{align}
+$$
+
+where we have ignored terms of higher order than \( h^2 \), and defined \( c \) as \( c=y^{\prime\prime}(t_0)/2 \). Next we take two steps of size \( h/2 \) to
+reach \( y_1 \):  
+$$
+\begin{align}
+y_{1/2}&=y_0+\frac{h}{2}f(y_0,t_0),\tag{3.79}\\ 
+y_{1}&=y_{1/2}+\frac{h}{2}f(y_{1/2},t_0+h/2),\tag{3.80}\\ 
+y_{1}&=y_{0}+\frac{h}{2}f(y_0,t_0)+\frac{h}{2}f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2).\tag{3.81}
+\end{align}
+$$
+
+Note that we have inserted
+equation <a href="#mjx-eqn-3.79">(3.79)</a> into equation <a href="#mjx-eqn-3.80">(3.80)</a> to arrive at equation <a href="#mjx-eqn-3.81">(3.81)</a>. The truncation error in this case is, as before:
+$$
+\begin{align}
+\epsilon&=y(t_0+h)-y_{1}=y(t_0)+y^{\prime}(t_0)h+\frac{1}{2}y^{\prime\prime}(t_0)h^2+\mathcal{O}(h^3)\nonumber\\ 
+&-\left[y_{0}+\frac{h}{2}f(y_0,t_0)+\frac{h}{2}f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2)\right].\tag{3.82}
+\end{align}
+$$
+
+This equation is slightly more complicated, due to the term involving \( f \) inside the last parenthesis, we can use Taylor expansion to expand it about \( (y_0,t_0) \):
+$$
+\begin{align}
+&f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2)=f(y_0,t_0)\nonumber\\ 
+&+\frac{h}{2}\left[f(y_0,t_0)\left.\frac{\partial f}{\partial y}\right|_{y=y_0,t=t_0}
++\left.\frac{\partial f}{\partial t}\right|_{y=y_0,t=t_0}\right]+\mathcal{O}(h^2).\tag{3.83}
+\end{align}
+$$
+
+It turns out that this equation is related to \( y^{\prime\prime}(t_0,y_0) \), which can be seen by differentiating equation <a href="#mjx-eqn-3.64">(3.64)</a>:
+$$
+\begin{align}
+\frac{d^2y}{dt^2}&=\frac{df(y,t)}{dt}=\frac{\partial f(y,t)}{\partial y}\frac{dy}{dt}+\frac{\partial f(y,t)}{\partial t}
+=\frac{\partial f(y,t)}{\partial y}f(y,t)+\frac{\partial f(y,t)}{\partial t}.\tag{3.84}
+\end{align}
+$$
+
+Hence, equation <a href="#mjx-eqn-3.83">(3.83)</a> can be written:
+$$
+\begin{align}
+f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2)=f(y_0,t_0)+\frac{h}{2}y^{\prime\prime}(t_0,y_0),\tag{3.85}
+\end{align}
+$$
+
+hence the truncation error in equation <a href="#mjx-eqn-3.82">(3.82)</a> can finally be written:
+$$
+\begin{align}
+\epsilon=&y(t_1)-y_{1}=\frac{h^2}{4} y^{\prime\prime}(y_0,t_0)=\frac{1}{2}ch^2,\tag{3.86}
+\end{align}
+$$
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+
+  <li class="previous">
+    <a href="._book001.html">&larr; Prev</a>
+  </li>
+
+  <li class="next">
+    <a href="._book003.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

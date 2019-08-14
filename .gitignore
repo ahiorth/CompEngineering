@@ -1,2 +1,6 @@
 .DS_Store
 .ipynb_checkpoints
+
+#word files
+*.doc
+*.docx
