@@ -6,6 +6,7 @@ Automatically generated HTML file from DocOnce source
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="Modeling and Computational Engineering">
 
 <title>Modeling and Computational Engineering</title>
@@ -394,7 +395,7 @@ $$
 Most computers are 64-bits, then one bit is reserved for the sign, 52 for the fraction (\( q \)) and 11 for
 the exponent (\( m \))  (for a graphic illustration see <a href="https://en.wikipedia.org/wiki/Double-precision_floating-point_format" target="_self">Wikipedia</a>).
 what is the largest <em>floating point</em> number the computer can represent? 
-Since \( m \) contains 11 bits, \( m \) can have the maximal value \( m=2^{11}=1024 \), and then the larges value is close to \( 2^{1024}\simeq 10^{308} \).
+Since \( m \) contains 11 bits, \( m \) can have the maximal value \( m=2^{11}=1024 \), and then the largest value is close to \( 2^{1024}\simeq 10^{308} \).
 If you enter <code>print(10.1*10**(308))</code> in Python the answer will be <code>Inf</code>. If you enter <code>print(10*10**(308))</code>, Python will give an answer. This is because 
 the number \( 10.1\cdot10^{308} \) is floating point number, whereas \( 10^{309} \) is an <em>integer</em>, and Python does something clever when it comes to representing integers. 
 Python has a third numeric type called long int, which can use the available memory to represent an integer.

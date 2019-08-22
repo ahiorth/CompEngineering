@@ -6,6 +6,7 @@ Automatically generated HTML file from DocOnce source
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="Decline Analysis of Oil field production data from the NCS">
 
 <title>Decline Analysis of Oil field production data from the NCS</title>
@@ -51,25 +52,26 @@ code { color: inherit; background-color: transparent; }
                1,
                None,
                '___sec1'),
+              ('Using Pandas to access data', 2, None, '___sec2'),
               ('Exercise 2: Importing and plotting data with Python',
                1,
                None,
-               '___sec2'),
+               '___sec3'),
               ('Exercise 3: Decline analysis, exponential case: $\\beta=0$',
                1,
                None,
-               '___sec3'),
+               '___sec4'),
               ('Exercise 4: Decline analysis, hyperbolic case: $\\beta\\in '
                '<0,1>$',
                1,
                None,
-               '___sec4'),
+               '___sec5'),
               ('Exercise 5: The Jotun field, hyperbolic case: $\\beta\\in '
                '<0,1>$',
                1,
                None,
-               '___sec5'),
-              ('Bibliography', 1, None, '___sec6')]}
+               '___sec6'),
+              ('Bibliography', 1, None, '___sec7')]}
 end of tocinfo -->
 
 <body>
@@ -107,14 +109,15 @@ MathJax.Hub.Config({
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
-     <!-- navigation toc: --> <li><a href="._decline-readable000.html#table_of_contents" style="font-size: 80%;">Table of contents</a></li>
-     <!-- navigation toc: --> <li><a href="#deca" style="font-size: 80%;">Introduction to Decline Analysis</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec1" style="font-size: 80%;">Exercise 1: Import data into a database and access them</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec2" style="font-size: 80%;">Exercise 2: Importing and plotting data with Python</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec3" style="font-size: 80%;">Exercise 3: Decline analysis, exponential case: \( \beta=0 \)</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec4" style="font-size: 80%;">Exercise 4: Decline analysis, hyperbolic case: \( \beta\in <0,1> \)</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec5" style="font-size: 80%;">Exercise 5: The Jotun field, hyperbolic case: \( \beta\in <0,1> \)</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec6" style="font-size: 80%;">Bibliography</a></li>
+     <!-- navigation toc: --> <li><a href="._decline-readable000.html#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
+     <!-- navigation toc: --> <li><a href="#deca" style="font-size: 80%;"><b>Introduction to Decline Analysis</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec1" style="font-size: 80%;"><b>Exercise 1: Import data into a database and access them</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Using Pandas to access data</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec3" style="font-size: 80%;"><b>Exercise 2: Importing and plotting data with Python</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec4" style="font-size: 80%;"><b>Exercise 3: Decline analysis, exponential case: \( \beta=0 \)</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec5" style="font-size: 80%;"><b>Exercise 4: Decline analysis, hyperbolic case: \( \beta\in <0,1> \)</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec6" style="font-size: 80%;"><b>Exercise 5: The Jotun field, hyperbolic case: \( \beta\in <0,1> \)</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec7" style="font-size: 80%;"><b>Bibliography</b></a></li>
 
         </ul>
       </li>
@@ -172,7 +175,32 @@ found by comparing the model to data.
   e.g. notepad or some other text editor). Save the file as 'draugen.txt'.</li> 
 </ul>
 
-<h1 id="___sec2" class="anchor">Exercise 2: Importing and plotting data with Python    </h1>
+<h2 id="___sec2" class="anchor">Using Pandas to access data </h2>
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">pandas</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">pd</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">pathlib</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
+<span style="color: #008000; font-weight: bold">print</span>(pathlib<span style="color: #666666">.</span>Path<span style="color: #666666">.</span>cwd())
+folder <span style="color: #666666">=</span> pathlib<span style="color: #666666">.</span>Path<span style="color: #666666">.</span>cwd()<span style="color: #666666">.</span>parent<span style="color: #666666">.</span>joinpath(<span style="color: #BA2121">&#39;data&#39;</span>)
+filename <span style="color: #666666">=</span> folder<span style="color: #666666">.</span>joinpath(<span style="color: #BA2121">&#39;field_production_gross_monthly.xls&#39;</span>)
+df <span style="color: #666666">=</span> pd<span style="color: #666666">.</span>read_excel(filename)
+columns <span style="color: #666666">=</span> df<span style="color: #666666">.</span>columns
+
+fields <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;DRAUGEN&#39;</span>]
+
+<span style="color: #008000; font-weight: bold">for</span> field <span style="color: #AA22FF; font-weight: bold">in</span> fields:
+    df2 <span style="color: #666666">=</span> df[df[df<span style="color: #666666">.</span>columns[<span style="color: #666666">0</span>]] <span style="color: #666666">==</span> field]
+    Year <span style="color: #666666">=</span> df2[<span style="color: #666666">...</span>]
+    Month <span style="color: #666666">=</span> df2[<span style="color: #666666">...</span>]
+    OilProd<span style="color: #666666">=</span>df2[<span style="color: #666666">...</span>]
+    
+    <span style="color: #408080; font-style: italic">#Assume 30 days in each month and 365 in year</span>
+    Year <span style="color: #666666">=</span> Year <span style="color: #666666">+</span> Month<span style="color: #666666">*30/365</span>
+</pre></div>
+
+<h1 id="___sec3" class="anchor">Exercise 2: Importing and plotting data with Python    </h1>
 
 <p>
 <b>Step 1.</b>
@@ -246,7 +274,7 @@ Compare your plot with the one that is reported under Draugen at the <a href="ht
 <b>Step 5.</b>
 For the same fields plot the production vs the cumulative production
 
-<h1 id="___sec3" class="anchor">Exercise 3: Decline analysis, exponential case: \( \beta=0 \)    </h1>
+<h1 id="___sec4" class="anchor">Exercise 3: Decline analysis, exponential case: \( \beta=0 \)    </h1>
 
 <p>
 <b>Step 1.</b>
@@ -309,7 +337,7 @@ A successful fit should produce a similar result as shown in the figure below.
 <b>Step 4.</b>
 Use data from Norne, Oseberg &#216;st, and Jotun, fit the model to the decline phase of the production. Report the values for the decline parameter, compare them.
 
-<h1 id="___sec4" class="anchor">Exercise 4: Decline analysis, hyperbolic case: \( \beta\in < 0,1> \)  </h1>
+<h1 id="___sec5" class="anchor">Exercise 4: Decline analysis, hyperbolic case: \( \beta\in < 0,1> \)  </h1>
 
 <p>
 <b>Step 1.</b>
@@ -349,7 +377,7 @@ use of the <code>bounds</code> keyword.
 </div>
 
 
-<h1 id="___sec5" class="anchor">Exercise 5: The Jotun field, hyperbolic case: \( \beta\in < 0,1> \)  </h1>
+<h1 id="___sec6" class="anchor">Exercise 5: The Jotun field, hyperbolic case: \( \beta\in < 0,1> \)  </h1>
 
 <p>
 In this exercise we will take a closer look at the Jotun field. Use the hyperbolic decline function with the parameters you found in the previous exercise.
@@ -370,7 +398,7 @@ Use the decline model to estimate the recovery at the end of 2017 (use e.g. the 
 Assume an oil price of 50$\$$ per barrel, was it a good decision to drill these infill wells? (Hint: On the <a href="http://factpages.npd.no/factpages/" target="_self">NPD web site</a> you can
   find information about the  yearly field investments)
 
-<h1 id="___sec6" class="anchor">Bibliography </h1>
+<h1 id="___sec7" class="anchor">Bibliography </h1>
 
 <p>
 <!-- begin bibliography -->

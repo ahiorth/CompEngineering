@@ -289,7 +289,7 @@ In a computer a floating point number,$x$, is represented as:
 Most computers are 64-bits, then one bit is reserved for the sign, 52 for the fraction (:math:`q`) and 11 for
 the exponent (:math:`m`)  (for a graphic illustration see `Wikipedia <https://en.wikipedia.org/wiki/Double-precision_floating-point_format>`__).
 what is the largest *floating point* number the computer can represent? 
-Since :math:`m` contains 11 bits, :math:`m` can have the maximal value :math:`m=2^{11}=1024`, and then the larges value is close to :math:`2^{1024}\simeq 10^{308}`.
+Since :math:`m` contains 11 bits, :math:`m` can have the maximal value :math:`m=2^{11}=1024`, and then the largest value is close to :math:`2^{1024}\simeq 10^{308}`.
 If you enter ``print(10.1*10**(308))`` in Python the answer will be ``Inf``. If you enter ``print(10*10**(308))``, Python will give an answer. This is because 
 the number :math:`10.1\cdot10^{308}` is floating point number, whereas :math:`10^{309}` is an *integer*, and Python does something clever when it comes to representing integers. 
 Python has a third numeric type called long int, which can use the available memory to represent an integer. 

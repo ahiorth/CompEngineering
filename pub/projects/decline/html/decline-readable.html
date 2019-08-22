@@ -6,6 +6,7 @@ Automatically generated HTML file from DocOnce source
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="Decline Analysis of Oil field production data from the NCS">
 
 <title>Decline Analysis of Oil field production data from the NCS</title>
@@ -51,25 +52,26 @@ code { color: inherit; background-color: transparent; }
                1,
                None,
                '___sec1'),
+              ('Using Pandas to access data', 2, None, '___sec2'),
               ('Exercise 2: Importing and plotting data with Python',
                1,
                None,
-               '___sec2'),
+               '___sec3'),
               ('Exercise 3: Decline analysis, exponential case: $\\beta=0$',
                1,
                None,
-               '___sec3'),
+               '___sec4'),
               ('Exercise 4: Decline analysis, hyperbolic case: $\\beta\\in '
                '<0,1>$',
                1,
                None,
-               '___sec4'),
+               '___sec5'),
               ('Exercise 5: The Jotun field, hyperbolic case: $\\beta\\in '
                '<0,1>$',
                1,
                None,
-               '___sec5'),
-              ('Bibliography', 1, None, '___sec6')]}
+               '___sec6'),
+              ('Bibliography', 1, None, '___sec7')]}
 end of tocinfo -->
 
 <body>
@@ -107,14 +109,15 @@ MathJax.Hub.Config({
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
-     <!-- navigation toc: --> <li><a href="#table_of_contents" style="font-size: 80%;">Table of contents</a></li>
-     <!-- navigation toc: --> <li><a href="._decline-readable001.html#deca" style="font-size: 80%;">Introduction to Decline Analysis</a></li>
-     <!-- navigation toc: --> <li><a href="._decline-readable001.html#___sec1" style="font-size: 80%;">Exercise 1: Import data into a database and access them</a></li>
-     <!-- navigation toc: --> <li><a href="._decline-readable001.html#___sec2" style="font-size: 80%;">Exercise 2: Importing and plotting data with Python</a></li>
-     <!-- navigation toc: --> <li><a href="._decline-readable001.html#___sec3" style="font-size: 80%;">Exercise 3: Decline analysis, exponential case: \( \beta=0 \)</a></li>
-     <!-- navigation toc: --> <li><a href="._decline-readable001.html#___sec4" style="font-size: 80%;">Exercise 4: Decline analysis, hyperbolic case: \( \beta\in <0,1> \)</a></li>
-     <!-- navigation toc: --> <li><a href="._decline-readable001.html#___sec5" style="font-size: 80%;">Exercise 5: The Jotun field, hyperbolic case: \( \beta\in <0,1> \)</a></li>
-     <!-- navigation toc: --> <li><a href="._decline-readable001.html#___sec6" style="font-size: 80%;">Bibliography</a></li>
+     <!-- navigation toc: --> <li><a href="#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
+     <!-- navigation toc: --> <li><a href="._decline-readable001.html#deca" style="font-size: 80%;"><b>Introduction to Decline Analysis</b></a></li>
+     <!-- navigation toc: --> <li><a href="._decline-readable001.html#___sec1" style="font-size: 80%;"><b>Exercise 1: Import data into a database and access them</b></a></li>
+     <!-- navigation toc: --> <li><a href="._decline-readable001.html#___sec2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Using Pandas to access data</a></li>
+     <!-- navigation toc: --> <li><a href="._decline-readable001.html#___sec3" style="font-size: 80%;"><b>Exercise 2: Importing and plotting data with Python</b></a></li>
+     <!-- navigation toc: --> <li><a href="._decline-readable001.html#___sec4" style="font-size: 80%;"><b>Exercise 3: Decline analysis, exponential case: \( \beta=0 \)</b></a></li>
+     <!-- navigation toc: --> <li><a href="._decline-readable001.html#___sec5" style="font-size: 80%;"><b>Exercise 4: Decline analysis, hyperbolic case: \( \beta\in <0,1> \)</b></a></li>
+     <!-- navigation toc: --> <li><a href="._decline-readable001.html#___sec6" style="font-size: 80%;"><b>Exercise 5: The Jotun field, hyperbolic case: \( \beta\in <0,1> \)</b></a></li>
+     <!-- navigation toc: --> <li><a href="._decline-readable001.html#___sec7" style="font-size: 80%;"><b>Bibliography</b></a></li>
 
         </ul>
       </li>
@@ -147,7 +150,7 @@ MathJax.Hub.Config({
 
 <br>
 <p>
-<center><h4>Aug 14, 2019</h4></center> <!-- date -->
+<center><h4>Aug 22, 2019</h4></center> <!-- date -->
 <br>
 <p>
 <b>Summary.</b> In this exercise we will look closer at some of the data that is
@@ -172,11 +175,12 @@ Table of contents</h2>
 <p>
 <a href="._decline-readable001.html#deca"> Introduction to Decline Analysis </a><br>
 <a href="._decline-readable001.html#___sec1"> Exercise 1: Import data into a database and access them </a><br>
-<a href="._decline-readable001.html#___sec2"> Exercise 2: Importing and plotting data with Python    </a><br>
-<a href="._decline-readable001.html#___sec3"> Exercise 3: Decline analysis, exponential case: \( \beta=0 \)    </a><br>
-<a href="._decline-readable001.html#___sec4"> Exercise 4: Decline analysis, hyperbolic case: \( \beta\in < 0,1> \)  </a><br>
-<a href="._decline-readable001.html#___sec5"> Exercise 5: The Jotun field, hyperbolic case: \( \beta\in < 0,1> \)  </a><br>
-<a href="._decline-readable001.html#___sec6"> Bibliography </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._decline-readable001.html#___sec2"> Using Pandas to access data </a><br>
+<a href="._decline-readable001.html#___sec3"> Exercise 2: Importing and plotting data with Python    </a><br>
+<a href="._decline-readable001.html#___sec4"> Exercise 3: Decline analysis, exponential case: \( \beta=0 \)    </a><br>
+<a href="._decline-readable001.html#___sec5"> Exercise 4: Decline analysis, hyperbolic case: \( \beta\in < 0,1> \)  </a><br>
+<a href="._decline-readable001.html#___sec6"> Exercise 5: The Jotun field, hyperbolic case: \( \beta\in < 0,1> \)  </a><br>
+<a href="._decline-readable001.html#___sec7"> Bibliography </a><br>
 </p>
 <p>
 <p>
