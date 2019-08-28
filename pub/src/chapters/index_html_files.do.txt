@@ -1,0 +1,51 @@
+## File used by make_html.sh for listing HTML versions of a chapter.
+
+## CHAPTER is a command-line variable that must be set to the nick
+## name of the chapter when running doconce format, e.g.,
+## doconce format html index_html_files --html_style=bootstrap_FlatUI CHAPTER=name
+
+## As alternative to this file, one may have a single file that lists
+## all chapters in all their versions.
+
+# #include "../mako_code.txt"
+
+<%
+import os
+def has_slides():
+    """Can we find slides for the given CHAPTER?"""
+    return os.path.isdir('slides-'+ CHAPTER)
+
+# Error check (if chapters above is appropriately defined)
+if CHAPTER not in chapters:
+    print ("""
+*** error: 'chapters' dictionary in index_html_files_do.txt does not
+    contain the key "%s". Fill in that chapter nickname and the
+    corresponding chapter title!
+""" % CHAPTER)
+    import sys; sys.exit(1)
+%>
+
+TITLE: ${chapters[str(CHAPTER)]}
+AUTHOR: Hans Petter Langtangen at Center for Biomedical Computing, Simula Research Laboratory & Department of Informatics, University of Oslo
+DATE: today
+
+The document _${chapters[str(CHAPTER)]}_ is here available in the following
+formats:
+
+ * "HTML plain bootstrap style": "${CHAPTER}-bootstrap.html"
+ * "HTML bootswatch readable style": "${CHAPTER}-readable.html"
+ * "HTML solarized color style": "${CHAPTER}-solarized.html"
+ * "HTML Sphinx style": "sphinx/index.html"
+
+% if has_slides():
+Slides:
+
+ * "HTML5 reveal.js dark": "slides_${CHAPTER}-reveal.html"
+ * "HTML5 reveal.js beige": "slides_${CHAPTER}-reveal-beige.html"
+ * "HTML5 deck.js": "slides_${CHAPTER}-deck.html"
+ * "HTML5 Remark": "slides_${CHAPTER}-remark.html"
+ * "Plain HTML, one big file": "slides_${CHAPTER}-1.html"
+ * "Solarized HTML, one big file": "slides_${CHAPTER}-solarized.html"
+ * "LaTeX Beamer": "../pdf/slides_${CHAPTER}-beamer.pdf"
+ * "LaTeX Beamer handouts": "../pdf/slides_${CHAPTER}-beamer-handouts2x3.pdf"
+% endif

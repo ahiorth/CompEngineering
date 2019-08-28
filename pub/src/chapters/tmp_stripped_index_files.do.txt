@@ -1,0 +1,38 @@
+
+
+
+
+
+
+
+TITLE: How to Use DocOnce to Write Books LaTeX PDF: for printing, for electronic viewing HTML: plain bootstrap style, bootswatch readable style, solarized color style, Sphinx style </%def>
+HTML5: js dark, js beige, remark, plain HTML one big file, solarized HTML one big file LaTeX Beamer: slides for electronic viewing, handouts </%def>
+
+
+
+Preliminary notes for a future textbook 
+Traditional LaTeX PDF book HTML Bootstrap ebook Sphinx ebook RunestoneInteractive ebook
+
+
+
+
+
+
+
+
+Study guides (slides for lectures) 
+
+The study guides are summaries of the main points in the course material. The guides are made such that they can be used as slides in lectures.
+
+
+
+
+
+
+
+
+
+
+
+The PDF files are based on LaTeX and seldom have technical failures that cannot be easily corrected. The HTML-based files, however, apply MathJax for rendering LaTeX formulas, and sometimes this technology gives rise to unexpected failures (g., incorrect rendering in a web page despite correct LaTeX syntax in the formula). Consult the corresponding PDF file if you find missing or incorrectly rendered formulas in HTML or Sphinx files.
+

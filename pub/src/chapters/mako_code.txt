@@ -1,0 +1,23 @@
+## Mako variables and functions common to a lot of files
+## (this file is included in, e.g., flow/main_flow.do.txt).
+
+<%
+# Note that goo.gl and bitly URLs cannot have slashes and continuation,
+# therefore we use tinyurl.
+
+src_path = 'https://github.com/hplgit/setup4book-doconce/tree/master/doc/src/chapters'
+src_path = 'http://tinyurl.com/kukz8pt'
+
+doc_path = 'http://hplgit.github.io/setup4book-doconce/doc/pub'
+doc_path = 'http://tinyurl.com/oul3xhn'
+
+#doc_index = doc_path + '/index.html'
+
+# All chapters: nickname -> title dict
+chapters = {
+ 'rules': 'Directory and file structure',
+ 'fake': 'Some document',
+ 'mako': 'Use of Mako to aid book writing',
+}
+
+%>

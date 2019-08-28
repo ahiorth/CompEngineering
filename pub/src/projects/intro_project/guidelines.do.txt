@@ -1,0 +1,22 @@
+TITLE: MOD510: Guidelines for mandatory assignments
+AUTHOR: Prepared as part of MOD510
+DATE: today
+
+Each assignment is provided both as a PDF, and as a Jupyter notebook.
+However, the work done to answer the exercises should be recorded in
+the notebook, and then handed back for grading. You should bear the following
+points in mind when working on any given project:
+* Start your notebook by providing a short introduction in which you outline the nature of the problem(s) to be investigated.
+* End your notebook with a brief summary of what you feel you learnt from the project (if anything). Also, if you have any general comments or suggestions for what could be improved in future assignments, this is the place to do it.
+* All code that you make use of should be present in the notebook, and it should (ideally) execute without any run-time errors. However, if you are not able to fix everything before the deadline, you should provide your best understanding of what is not working, and how you might fix it.
+* If you use an algorithm that is not fully described in the handed-out exercises, you should try to explain it in your own words. This also applies if the method is described elsewhere in the course material.
+* In some cases it may suffice to explain your work via comments in the code itself, but other times you might want to include a more elaborate explanation in terms of mathematics and/or pseudocode.
+* In general, it is a good habit to comment your code (though it can be overdone).
+* When working with approximate solutions to equations, it is always useful to check your results against known exact (analytical) solutions, should they be available.
+* It is also a good test of a model implementation to study what happens at known limits.
+* Any figures you include should be easily understandable. You should label axes appropriately, and depending on the problem, include other legends etc. Also, you should discuss your figures in the main text.
+* It is always good if you can reflect a little bit around *why* you see what you see. For example, you should try to relate observed numerical results to the theory covered in the course.
+TOC: off
+
+##!split
+##======= Header =======

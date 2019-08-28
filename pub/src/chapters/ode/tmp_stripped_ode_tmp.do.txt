@@ -1,0 +1,276 @@
+
+
+
+
+
+Ordinary Differential Equations 
+Physical systems evolves in space and time, and very often they are described by a ordinary differential equations (ODE) and/or partial differential equations (PDE). The difference between an ODE and a PDE is that an ODE only describes 
+the changes in one spatial dimension or time, whereas a PDE describes a system that evolves in the dimension 
+and/or in time. In the following we will spend a significant amount of time to explore one of the simplest algorithm, Eulers method. Sometimes this is exactly the algorithm you would like to use, but with very 
+little extra effort much more sophisticated algorithms can easily be implemented, such as the Runge-Kutta fourth order method. However, all these algorithms, will at some point run into the same kind of troubles if used reckless. Thus we will use the Eulers method as a playground, investigate when the algorithm run into trouble and suggests ways to fix it, these approaches can easily be extended to the higher order methods. Most of the other algorithms boils down to the same idea of extrapolating a function using derivatives multiplied with a small step size. 
+A Simple Model for Fluid Flow 
+Let us consider a simple example from chemical engineering, a continuous stirred tank reactor (CSTR), see figure. 
+The flow is incompressible, a fluid is entering on the top and exiting at the bottom, the tank has a fixed volume. Assume that the tank is filled with saltwater, and that freshwater is pumped into it, how much time does it 
+take before of the saltwater is replaced with freshwater? The tank is well mixed, illustrated with the propeller, this means that at every time the 
+concentration is uniform in the tank, e. that. 
+A continuous stirred tank model and. 
+
+The concentration is measured in gram of salt per liter water, and the flow rate is liter of water per day. The model for the salt balance in this system can be described in words by:
+
+In our case there are no generation of salt within the system so this term is zero. The flow of salt into the system during a time is:  the flow of salt out of the system is, and the accumulation during a time step is: hence:
+
+Note that it is not a priori apparent, which time the concentrations and flow rates on the right hand side should be evaluated at, 
+we could have chosen to evaluate them at, or at any time. We will return to this point later in this chapter. Dividing by, and taking the limit we can write equation as:
+
+Seawater contains about 35 gram salt/liter fluid, if we assume that the fresh water contains no salt, we have the boundary conditions 35gram/l. The equation the reduces to: this equation can easily be solved, by dividing by, multiplying by and integrating:
+
+This equation can be inverted to give. If we assume that the volume of the tank is 1m=1000liters, 
+and that the flow rate is 1 liter/min, we find that =1000min=69days and that it takes about days to reduce the concentration by 90 to 5 gram/liter. 
+
+The CSTR You might think that the CSTR is a very simple model, and it is, but this type of model is the basic building blocks in chemical engineering. By putting CSTR tanks in series and/or connecting them with pipes, the efficiency of manufacturing various type of chemicals can be investigated. Altough the CSTR is an idealized model for the part of a chemical factory, it is actually a very good model 
+for fluid flow in a porous media. By connecting CSTR tanks in series, one can model how chemical tracers propagate in the subsurface. 
+The physical reason for this is that dispersion in porous media will play the role of the propellers and mix the concentration uniformly. 
+
+
+Eulers Method 
+If the system gets slightly more complicated, g several tanks in series with a varying flow rate or if salt was generated in the tank, there is a good chance that we have to solve the equations numerically to obtain a solution. Actually, we have already developed a numerical algorithm to solve equation, 
+before we arrived at equation in equation. This is a special case of Eulers method, which is basically to 
+replace the derivative in equation, with. By rewriting equation, so that we keep everything related to the new time step on one side, we get: we introduce the short hand notation, and, hence the algorithm can be written more compact as:
+
+In the script below, we have implemented equation.
+
+Run the script below and look at the results.
+
+
+
+The concentration in the tank for different step size. 
+
+In figure the result of the implementation is shown for different values of 
+
+Clearly we see that the results are dependent on the step size, as the step increases the numerical solution deviates from the analytical solution. At some point the 
+numerical algorithm fails completely, and produces results that have no meaning. 
+Error Analysis - Eulers Method 
+There are two obvious questions: o When does the algorithm produce unphysical results? 
+o What is an appropriate step size? 
+Let us consider the first question, clearly when the concentrations gets negative the solution is unphysical. From equation, 
+we see that when, the concentration 
+become negative. For this specific case (the CSTR), there is a clear physical interpretation of this condition. Inserting, we can rewrite the condition as. The volume into the tank during one time step is, which means that whenever we flush more than one tank volume through the tank during one time step, the algorithm fails. When this happens the new concentration in the tank cannot be predicted from the old one. This makes sense, because we could have switched to a new solution (g. seawater) during that time step, then the new solution does not have any relation to the old solution. 
+
+The second question, "what is an appropriate step size?", is a bit more difficult to answer. One strategy could be to simply use the results from chapter Taylor, where we showed that the truncation error had a minimum value with a step size of (when using a first order Taylor approximation). How does the value relate to the step sizes in minutes used in our Euler implementation? In order to see the connection, we need to rewrite equation in a dimensionless form, by making the following substitution:
+
+As we found earlier min, thus a step size of g. 1 min would correspond to a dimensionless time step of 
+1min/1000min. This number can be directly compared to the value, which is the lowest value we can choose without getting into trouble with round off errors on the machine. 
+Dimensionless variables It is a good idea (necessary) to formulate our equations in terms of dimensionless variables. The algorithms we develop can then be used in the same form regradless of changes in the system size and flow rates. Thus we do not need to rewrite the algorithm each time the physical system changes. This also means that if you use an algorithm developed by someone else (g. in Matlab or Python), you should always formulate the ODE system in dimensionless form before using the algorithm.
+
+A second reason is that from a pure modeling point of view, dimensionless variables is a way of getting some understanding of what kind of combination of the physical parameters that describes the behavior of the system. For the case of the CSTR, there is a time scale, which 
+is an intrinsic measure of time in the system. No matter what the flow rate through the tank or the volume of the tank is, it will always take 1 before the concentration in the tank is reduced by 90%.
+
+As already mentioned a step size of, is probably the smallest we can choose with respect to round off errors, 
+but it is smaller than necessary and would lead to large simulation times. 
+If it takes 1 second to run the simulation with a step size of, it would take seconds or 1 day with a step size of. 
+To continue the error analyses, we write our ODE for a general system as: or in discrete form: is now the (dimmensionless) step size, equal to if the derivative is with respect to or if the derivative is respect to etc. Note that we have also included the error term related to the numerical derivative, . At each step we get an error term, and the distance between the true solution and our estimate, the local error, after steps is:
+
+Note that when we replace the sum with an integral in the equation above, this is only correct if the step size is not too large. From equation 
+we see that even if the error term on the numerical derivative is, the local error is proportional to 
+(one order lower). This is because we accumulate errors for each step.
+
+In the following we specialize to the CSTR, to see if we can gain some additional insight. First we change variables in 
+equation: , and, hence:
+
+The solution to this equation is, substituting back for the new variables and, we reproduce the result in equation. 
+The local error, equation, reduces to: we have assumed that. This gives the estimated local error at time. For, the 
+numerical error is zero, this makes sense because at we know the exact solution because of the initial conditions. When we move further away from the initial conditions, the numerical error increases, but equation ensures us that as long as the step size is low enough we can get as close as possible to the true solution, since the error scales as (at some point we might run into trouble with round off error in the computer).
+
+Can we prove directly that we get the analytical result? In this 
+case it is fairly simple, if we use Eulers method on equation, we get: or alternatively:
+
+In the last equation, we have used the the fact the number of steps is equal to the simulation time divided by the step size, hence. From calculus, the equation above is one of the well known limits for the exponential function, hence: when. Below is an implementation of the Euler algorithm in this simple case, we also estimate the local error, and global error after steps. 
+
+By changing the step size, you can easily verify that the local error systematically increases or decreases proportional to. Something curious happens with the global error when the 
+step size is changed, it does not change very much. The global error involves a second sum over the local error for each step, which can be approximated as a second integration in equation:
+
+Note that the global error does not go to zero when the step size decreases, which can easily be verified by changing the step size. This is strange, but can be understood by the following argument: when the step size decreases the local error scales as, but the number of steps scales as, so the global error must scale as 
+or some constant value. Usually it is much easier to control the local error than the global error, this should be kept in mind if you ever encounter a problem where it is 
+important control the global error. For the higher order methods that we will discuss later in this chapter, the global error will go to zero when decreases. 
+
+The answer to our original question, ''What is an appropriate step size?'', will depend on what you want to achieve in terms of local or global error. In most practical situations you would specify a local error that is acceptable for the problem under investigation and then choose a step size where the local error always is lower than this value. In the 
+next subsection we will investigate how to achieve this in practice.
+
+Adaptive step size - Eulers Method 
+We want to be sure that we use a step size that achieves a certain accuracy in our numerical solution, but at the same time that we do not waste simulation time using a too low step size. The following approach is similar to the one we derived for the Romberg integration, and a special case of what is known as Richardson Extrapolation. The method is easily extended to higher order methods. 
+
+We know that Eulers algorithm is accurate to second order. Our estimate of the new value, 
+(where we have used a to indicate that we have used a step size of size), should then be related to the true solution in the following way:
+
+The constant is unknown, but it can be found by taking two smaller steps of size. If the steps are not too large, our new estimate of the value will be related to the true solution as:
+
+The factor 2 in front of is because we now need to take two steps, and we accumulate a total error of. It might not be completely 
+obvious that the constant should be the same in equation and. If you are not convinced, there is an exercise at the end 
+of the chapter. 
+We define:
+
+The truncation error in equation is:
+
+Now we have everything we need: We want the local error to be smaller than some prespecified tolerance or equivalently 
+that. 
+To achieve this we need to use an optimal step size that gives us exactly the desired error:
+
+
+
+Dividing equation by equation, we can estimate the optimal step size: where the estimated error is calculated from equation. Equation serves two purposes, if the estimated error is higher than the tolerance we have specified it will 
+give us an estimate for the step size we should choose in order to achieve a higher accuracy, if on the other hand, then we 
+get an estimate for the next, larger step. Before the implementation we note, as we did for the Romberg integration, that equation 
+also gives us an estimate for the error term in equation as an improved estimate of. This we get for free and will make our Euler algorithm accurate to, hence the improved Euler step is to subtract the error term from our previous estimate:
+
+Below is an implementation of the adaptive Euler algorithm:
+
+
+
+
+The concentration in the tank using adaptive Euler. Number of Euler steps are: 3006, 117, 48 and 36 for the different step sizes. 
+
+In figure the result of the implementation is shown. 
+
+Note that the number of steps for an accuracy of is only about 3000. Without knowing anything about the accuracy, we would have to assume that we needed a step size of the order of in order to reach a local accuracy of because of equation. In the current case, we would have needed steps, which would lead to unnecessary long simulation times. Local error and bounds In the previous example we set an absolute tolerance, and required that our estimate always is within a certain bound of the true solution, e. This is a very strong demand, and sometimes it makes more 
+sense to require that we also accept a relative tolerance proportional to function value. In some areas the solution might have a very large value, and then another possibility would be to have an that varied with the function value:  where 'atol' is the absolute tolerance and 'rtol' is the relative tolerance. A sensible choice would be to set 'atol=rtol' (g. =). 
+
+Runge-Kutta Methods 
+Illustration of the Euler algorithm, and a motivation for using the slope a distance from the.
+
+The Euler method only have an accuracy of order, and a global error that do not go to zero as the step size decrease. 
+The Runge-Kutta methods may be motivated by inspecting the Euler method in figure. The Euler method uses information from the previous time step to estimate the value at the new time step. The Runge Kutta methods uses the information about the slope between the points and. By inspecting figure, we clearly see that by using the slope at would give us a significant improvement. The 2. order Runge-Kutta method can be derived by Taylor expanding the solution around, we do this by setting:
+
+Similarly we can expand the solution in about, by setting:
+
+Substracting these two equations the term, and all even powers in the derivative cancels out:
+
+In the last equation, we have used equation. Note that we now have an expression that is very similar to Eulers algorithm, but it is accurate to order. There is one problem, and that is that the function is to be evaluated at the point 
+which we do not know. This can be fixed by using Eulers algorithm. We can do this even if Eulers algorithm is only accurate to order, because the in equation is multiplied by, and thus our algorithm is still accurate up to order. 
+The 2. order Runge-Kutta:
+
+
+
+Run the script below and inspect the results.
+
+
+
+Below is a Python implementation of equation: The concentration in the tank for different step size. 
+
+In figure the result of the implementation is shown. 
+
+Note that when comparing Runge-Kutta 2. order with Eulers method, %if FORMAT != 'ipynb': see figure and, we of course have 
+the obvious result that a larger step size can be taken, without loosing numerical accuracy. It is also worth noting that we can take steps that is larger than the tank volume. Eulers method failed whenever the time step was larger than one tank volume, whereas the Runge-Kutta 
+method finds a physical solution for step sizes lower than twice the tank volume. If the step size is larger, we see that the concentration in the tank increases, which is clearly unphysical. 
+
+The Runge-Kutta fourth order method is one of he most used methods, it is accurate to order, and has an error of order. The development of the 
+algorithm itself is similar to the 2. order method, but of course more involved. We just quote the result: The 4. order Runge-Kutta:
+
+
+
+
+Run the script below and inspect the results.
+
+
+
+Below is a Python implementation of equation: The concentration in the tank for different step size. 
+
+In figure the result of the implementation is shown. 
+
+Adaptive step size - Runge-Kutta Method 
+Just as we did with Eulers method, we can implement an adaptive method. The derivation is exactly the same, but this time our method is accurate to fourth order, hence the error term is of order. We start by taking one large step of size, our estimate, is related to the true 
+solution in the following way:
+
+Next, we take two steps of half the size hence:
+
+Subtracting equation and, we find an expression similar to equation: or. For the Euler scheme, also happened to be equal to the truncation error, but in this case it is: we want the local error to be smaller than some tolerance, . 
+The optimal step size that gives us exactly the desired error is then:
+
+Dividing equation by equation, we can estimate the optimal step size: can be calculated from equation. Below is an implementation
+
+Run the script below and inspect the results.
+
+
+
+The concentration in the tank for different step size. Number of rk4 steps are: 138, 99, 72 and 66 for the different step sizes and 'rtol=0', for 'rtol=tol' the number of rk4 steps are 81, 72, 63, 63.
+
+In figure the result of the implementation is shown. 
+
+Note that we put a safety limit on the step size 'min(hi(tol/toli)(2),1)'. 
+
+In general we can use the same procedure any method accurate to order, and you can easily verify that: Error term and step size for a method:
+
+
+
+Conservation of Mass 
+A mathematical model of a physical system should always be formulated in such a way that it is consistent with the laws of nature. In practical situations this statement is usually equivalent to state that the mathematical model should respect conservation laws. The conservation laws can be conservation of mass, energy, momentum, 
+electrical charge, etc. In our example with the mixing tank, we were able to derive an expression for the concentration of salt out of the tank, equation, by demanding conservation of mass (see equation).
+
+A natural question to ask is then: If our mathematical model respect conservation of mass, are we sure that our 
+solution method respect conservation of mass? We of course expect that when the grid spacing approaches zero our numerical solution will get closer and closer to the analytical solution. Clearly when, the mass is conserved. So what is the problem? The problem is that in many practical problems we cannot always have a step size that is small enough to ensure that our solution always is close enough to the analytical 
+solution. The physical system we consider might be very complicated (g. a model for the earth climate), and our ODE system could be a very small part of a very big system. A very good test of any code is to investigate if the code respect the conservation laws. If we know that our implementation respect g. mass conservation at the discrete level, we can easily test mass conservation by summing up all the mass entering, and subtracting the mass out of and present in our system. If the mass is not conserved exactly, there is a good chance that there is a bug in our implementation.
+
+If we now turn to our system, we know that the total amount of salt in the system when we start is. The amount entering is zero, and the amount leaving each time step is. Thus we should expect that if we add the amount of salt in the tank to the amount that has left the system we should always get an amount that is equal to the original amount. Alternatively, we expect Adding the following code in the loop: it is possible to calculate the amount of mass lost (note that we have used the trapezoidal formula to calculate the integral). In the table below the fraction of mass lost relative to the original amount is shown for the various numerical methods.
+
+
+ ﻿ Euler RK 2. order RK 4. order 
+
+ 900 9 -4500 3682 0776 
+ 500 5 -2500 0833 0215 
+ 100 1 -0500 0026 0008 
+ 10 01 -0050 5E-05 3E-06 
+
+
+We clearly see from the table that the Runge-Kutta methods performs better than Eulers method, but all of the methods violates mass balance. 
+
+This might not be a surprise as we know that our numerical solution is always an approximation to the analytical solution. How can 
+we then formulate an algorithm that will respect conservation laws at the discrete level? It turns out that for Eulers method it is not so difficult. Eulers algorithm at the discrete level (see equation) is actually a two-step process: first we inject the fresh water while we remove the old`` fluid and then we mix. By thinking about the problem this way, it makes more sense to calculate the mass out of the tank as. If we in our implementation calculates the mass out of the tank as:
+
+We easily find that the mass is exactly conserved at every time for Eulers method. The concentration in the tank will of course not be any closer to the 
+analytical solution, but if our mixing tank was part of a much bigger system we could make sure that the mass would always be conserved if we make sure that the mass out of the tank and into the next part of the system was equal to. 
+
+Solving a set of ODE equations 
+What happens if we have more than one equation that needs to be solved? If we continue with our current example, we might be interested in what would happen 
+if we had multiple tanks in series. This could be a very simple model to describe the cleaning of a salty lake by injecting fresh water into it, but at 
+the same time this lake was connected to two nearby fresh water lakes, as illustrated in figure. The weakest part of the model is the assumption about 
+complete mixing, in a practical situation we could enforce complete mixing with the salty water in the first tank by injecting fresh water at multiple point in the 
+lake. For the two next lakes, the degree of mixing is not obvious, but salt water is heavier than fresh water and therefore it would sink and mix with the fresh water. Thus if the flow rate was slow, one might imaging that a more or less complete mixing could occur. Our model then could answer questions like, how long time would it take before most of the salt water is removed from the first lake, and how much time would it take before most of the salt water was cleared from the whole system? The answer to 
+these questions would give practical input on how much and how fast one should inject the fresh water to clean up the system. If we had 
+data from an actual system, we could compare our model predictions with data from the physical system, and investigate if our model description was correct. 
+A simple model for cleaning a salty lake that is connected to two lakes down stream. 
+
+For simplicity we will assume that all the lakes have the same volume, . The governing equations follows as before, by assuming mass balance (equation):
+
+Taking the limit, we can write equation as:
+
+Let us first derive the analytical solution: Only the first tank is filled with salt water and. 
+The solution to equation is, as before, inserting this equation into equation we find: where we have use the technique of integrating factors when going from equation to. 
+Inserting equation into equation, solving the equation in a similar way as for we find:
+
+The numerical solution follows the exact same pattern as before if we introduce a vector notation. Before doing that, we rescale the time and the concentrations, for, hence:
+
+Below is an implementation using the Runge Kutta 4. order method: % if FORMAT == 'ipynb': Run the script below and inspect the results.
+
+
+
+The concentration in the tanks. 
+
+In figure the result of the implementation is shown. 
+
+
+Stiff sets of ODE and implicit methods 
+As already mentioned a couple of times, our system could be part of a much larger system. To illustrate this, let us now assume that we have two 
+tanks in series. The first tank is similar to our original tank, but the second tank is a sampling tank, 1000 times smaller. 
+A continuous stirred tank model with a sampling vessel. 
+
+The governing equations can be found by requiring mass balance for each of the tanks (see equation:
+
+Taking the limit, we can write equation as:
+
+Assume that the first tank is filled with seawater and fresh water is flooded into the tank, e. Before we start to consider a numerical solution, let us first find the analytical solution: As before the solution for the first tank (equation) is: where. Inserting this equation into equation, we get: where.
+
+Next, we will consider the numerical solution. You might think that these equations are more simple to solve numerically than the equations with three tanks in series discussed in the previous section. Actually, this system is much harder to solve with the methods we have discussed so far. The reason is that there are now two time scales in the system, and. The smaller tank sets a strong limitation on the step size we can use, because we should never use step sizes larger than a tank volume. Thus if you use the code in the previous section to solve equation and, it will not find the correct solution, unless the step size is lower than. Equations of this type are known as stiff. 
+Stiff equations There is no precise definition of ''stiff, but it is used to describe a system of differential equations, where the numerical solution becomes unstable unless a very small step size is chosen. Such systems occurs because there are several (length, time) scales in the system, and the numerical solution is constrained by the shortest length scale. You should always be careful on how you scale your variables in order to make the system dimensionless, which is of 
+particular importance when you use adaptive methods. 
+
+
+

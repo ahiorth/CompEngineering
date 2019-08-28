@@ -1,0 +1,42 @@
+
+
+
+Monte Carlo Methods 
+Usually we use differential equations to describe physical systems, the solution to these equations are continuous functions. In order for these solutions 
+to be useful, they require that the differential equation describes our physical sufficiently. In many practical cases we have no control over many 
+of the parameters entering the differential equation, or stated differently our system is not deterministic. This means that there could be some random fluctuations, occurring at different times and points in space, that we have no control over. In a practical situation we might would like to investigate how these fluctuations would affect the behavior of our system. 
+
+Monte Carlo Integration 
+Let us start with a simple illustration of one uses of the Monte Carlo Method (MCM), Monte Carlo integration. To the left in figure there is a shape of a pond. Imagine that we wanted to estimate the area of the pond, how could we do it? Assume further that you did not have you phone or any other electronic devices to help you. 
+Two ponds to illustrate the MCM. 
+
+One possible approach is: First to walk around it, and put up some bands (illustrated by the black dotted line). Then estimate the area inside the bands (g. 43 meters). Then we would know that the area was less than 12m. Finally, and this is the difficult part, throw rocks uniformly inside the bands. If we are able to throw rocks randomly, and count the number of rocks hitting the water, the area of the pond should be:
+
+It is important that we throw the rocks randomly, otherwise equation is not correct. Now, let us investigate this in more detail, and use the idea of throwing rocks to estimate. To the right in figure, there is a well known shape, a circle. The area of the circle is, and the shape is given by. Assume that the circle is inscribed in a square with sides of. To throw rocks randomly inside the square, is equivalent pick random numbers with coordinates, where and. We want all the and values to be chosen with equal probability, which is equivalent to pick random numbers from a uniform distribution. Below is a Python implementation:
+
+
+In the table below, we have run the code for and different values of. 
+
+
+ MC estimate Error 
+
+ 04 -10159 10 100 
+ 176 03441 10 032 
+ 1584 01681 10 010 
+ 14072 -00087 10 003 
+
+
+We clearly see that a fair amount of rocks or numbers needs to be used in order to get a good estimate. If you run this code several times you will see that the results changes from time to time. This makes sense as the coordinates and are chosen at random. There are much to be said about random number generators. The MCM depends on a good random number generator, otherwise we cannot use the results from statistics to develop our algorithms. Below, we briefly summarize some important points that you should be aware of: o Random number generators are generally of two types: hardware random number generator (HRNG) or pseudo random number generator (PRNG). o HRNG uses a physical process to generate random numbers, this could atmospheric noise, radioactive decay, microscopic fluctuations, which is translated to an electrical signal. The electrical signal is converted to a digital number (1 or 0), by sampling the random signal random numbers can be generated. The HRNG are often named true random number generators, and their main use are in cryptography. o PRNG uses a mathematical algorithm to generate an (apparent) random sequence. The algorithm uses an initial number, or a seed, to start the sequence of random number. The sequence is deterministic, and it will generate the same sequence of numbers if the same seed is used. At some point the algorithm will reproduce itself, e. it will have certain period. For some seeds the period may be much shorter. o Many of the PRNG are not considered to be cryptographically secure, because if a sufficiently long sequence of random numbers are generated from them, the rest of the sequence can be predicted. 
+o Python uses the Mersenne Twister algorithm to generate random numbers, and has a period of. It is not considered to be cryptographically secure.
+
+In Pythons function, a random seed is chosen each time the code is run, but if we set g, the code will generate the same sequence of numbers each time it is called. 
+
+Errors on Monte Carlo Integration and the Binomial Distribution 
+How many rocks do we need to throw in order to reach a certain accuracy? To answer this question we need some results from statistics. Our problem of calculating the integral is closely related to the binomial distribution. When we throw a rock one of two things can happen i) the rock falls into the water, or ii) it falls outside the pond. If we denote the probability that the rock falls into the pond as, then the probability that it falls outside the pond has to be. This is simply because there are no other possibilities and the sum of the two probabilities has to be one. The binomial distribution is given by: is the probability that an event happens times after trials. The mean and the variance of the binomial distribution is:
+
+Before we proceed, we should take a moment and look a little more into the meaning of the formulas above, to appreciate it usefulness. A classical example of the use of the binomial formula is to toss a coin, if the coin is fair it will have an equal probability of giving us a head or tail, hence. Equation, can answer questions like: "What is the probability to get only heads after 4 tosses?". Let us calculate this answer using equation, the number of tosses is 4, the number of success is 5 (only heads each time) and in a more explicit manner:
+
+The mathematical formulas 
+In our case we throw rocks into the square times, and record each time it falls into the pond 
+
+

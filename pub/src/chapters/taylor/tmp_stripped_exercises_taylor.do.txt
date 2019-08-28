@@ -1,0 +1,54 @@
+TITLE: Finite Differences 
+AUTHOR: Prepared as part of MOD510 Computational Engineering and Modeling DATE: today
+
+Getting familiar with Taylors formula 
+
+Learning objectives: o Understand how Taylors formula can be used to approximate a function, for more information on Taylors formula, see the book or Wikipedia 
+o Understand approximation and numerical error 
+
+Below are suggestions for Python code, it is not the most optimal or elegant code, but meant as an inspiration. As a general rule, we always make the code as simple as possible (and as a consequence, usually, inefficient) the first time. When the code is working we can make it more elegant and/or efficient. The most important point is always to get a code that does what it is supposed to do.
+
+Efficiency is usually lost whenever you write a for loop. For loops usually looks the same in any language and are easy to understand. As an example, let us consider the classical example of adding all integers from 1 to 100 (the answer is for), we can do this in Python several ways:
+
+If you are unfamiliar with, we refer to the official documentation here. 
+The first implementation is how you would to the summation in most low level languages as C, C++ or Fortran. It is straight forward to read, and it will give you the correct answer. How fast are the methods? This can be checked with the following code:
+
+The command is a built-in magic command, and will work in Jupyter notebooks and with iPython. You can read more about here. Notice that there is hardly any difference in speed between the methods. However if you increase to g. 1000, you will see that the NumPy implementation is superior.
+
+Observe: Testing the efficiency of code should always be done on large samples.
+
+Exercise: Plot 
+Run the script below, and you will see a plot of on the interval.
+
+
+Is this a good plot of ? Improve the code above to produce a better plot of. o How many points are needed? o Do we need the same number of points in the whole domain? Which properties of the function determines where we need more points?
+
+Exercise: Taylor Polynomial Approximation 
+There are many ways of representing a function, but perhaps one of the most widely used is Taylor polynomials. 
+Taylor series are the basis for solving ordinary and differential equations, simply because it makes it possible to evaluate any function with a set of limited operations: addition, subtraction, and multiplication. The Taylor polynomial, of degree of a function at the point is defined as: Taylor polynomial:
+
+
+If the series is around the point, the Taylor polynomial is often called a Maclaurin polynomial, more examples can be found 
+here. If the series converge (e. that the higher order terms approach zero), then we can represent the function with its corresponding Taylor series around the point:
+
+Exercise: Maclaurin series of 
+Use equation to show that the Maclaurin series of is:
+
+Make a plot of, and the first 7 terms of the Maclaurin series for:
+
+
+Exercise: Calculating up to a certain error 
+The error term in Taylors formula, when we represent a function with a finite number of polynomial elements is given by: for some in the domain.
+
+Write an implementation of, that calculates up to a certain accuracy, using the error formula in equation.
+
+Exercise: Calculating derivative of functions 
+The derivative of a function can be calculated using the definition from calculus:
+
+In the computer we cannot take the limit a natural question is then: What value to use for ? Make a Python script that calculates the derivative of for different step sizes. Vary between and 1, and make a plot of the error versus the step size. Explain the shape of the plot you have made. Why does the numerical not go to zero as the step size is decreasing? Use equation, expand about and show that you can derive a higher order formula for the numerical derivative: Make a similar plot as before but this time also with equation.
+
+Exercise: Round off errors vs numerical errors 
+The numerical error is given in equation, show that for the numerical derivatives in the previous exercise: o What is the value of ? Is it the same for equation and ? o What is round off errors? o Show that the total error, including round off errors for and is:
+
+
+Which value of would minimize and ? Compare with the plot in the previous exercise. 

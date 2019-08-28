@@ -1,0 +1,39 @@
+Solving systems of equations are one of the most common tasks that we use computers for within modeling. A typical task is that we have have a model that contains a set of unknown parameters which we want to determine. To determine these parameters we need to solve a set of equations. In many cases these equations are nonlinear, but often a nonlinear problem is solved by linearize the nonlinear equations, and thereby reducing it to a sequence of linear algebra problems. Thus the topic of solving linear systems of equations have been extensively studied, and sophisticated linear equation solving packages have been developed. Python uses functions from the LAPACK library. In this course we will only cover the theory behind numerical linear algebra superficially, and the main purpose is to shed some light on some of the challenges one might encounter solving linear systems.
+
+After covering some basics of numerical linear algebra, we will shift focus to nonlinear equations. Contrary to linear equations, you will most likely find that the functions available in various Python library will not cover your needs and in many cases fail to give you the correct solution. The reason for this is that the solution of a nonlinear equation is greatly dependent on the starting point, and a combination of various techniques must be used. 
+
+Solving linear equations 
+There are a number of excellent books covering this topic, see g. The purpose of this section is to get insight into some of the challenges when solving linear equations numerically, and for you to understand when it is stated in the NumPy documentation that the standard linear solver: function uses LU-decomposition and partial pivoting. 
+
+In most of the examples covered in this course we will encounter problems where we have a set of linearly independent equations and one equation for each unknown. For these type of problems there are a number of methods that can be used, and they will find a solution in a finite number of steps. If a solution cannot be found it is usually because the equations are not linearly independent, and our formulation of the physical problem is wrong.
+
+Assume that we would like to solve the following set of equations:
+
+These equations can be written in matrix form as: where:
+
+You can easily verify that is the solution to the above equations by direct substitution. If we were to replace one of the above equations with a linear combination of any of the other equations, g. replace equation with, there would be no solution. This can be checked by calculating the determinant of the matrix, if, 
+What is the difficulty in solving these equations? Clearly if none of the equations are linearly dependent, and we have independent linear equations, it should be straight forward to solve them? Two major numerical problems are i) even if the equations are not exact linear combinations of each other, they could be very close, and as the numerical algorithm progresses they could at some stage become linearly dependent due to roundoff errors. ii) roundoff errors may accumulate if the number of equations are large.
+
+Gauss-Jordan elimination 
+Let us continue the discussion by consider Gauss-Jordan elimination, which is a direct method. A direct method uses a final set of operations to obtain a solution. According to Gauss-Jordan elimination is the method of choice if we want to find the inverse of. However, it is slow when it comes to calculate the solution of equation. Even if speed and memory use is not an issue, it is also not advised to first find the inverse of, then multiply it with to obtain the solution, due to roundoff errors (Roundoff errors occur whenever we subtract to numbers that are very close to each other). To simplify our notation, we write equation as:
+
+The numbers to the left of the vertical dash is the matrix, and to the right is the vector. The Gauss-Jordan elimination procedure proceeds by doing the same operation on the right and left side of the dash, and the goal is to get only zeros on the lower triangular part of the matrix. This is achieved by multiplying rows with the same (nonzero) number, swapping rows, adding a multiple of a row to another:
+
+The operations done are: multiply first row with and add to second, third and the fourth row, multiply second row with, and add to third row, multiply second row with and add to fourth row, multiply third row with and add to fourth row. These operations can easily be coded into Python:
+
+Notice that the final matrix has only zeros beyond the diagonal, such a matrix is called upper triangular. We still have not found the final solution, but from an upper triangular (or lower triangular) matrix it is trivial to determine the solution. The last row immediately gives us or, now we have the solution for z and the next row gives: or, and so on. In a more general form, we can write our solution of the matrix after making it upper triangular as:
+
+The backsubstitution can then be written formally as:
+
+The backsubstitution can now easily be implemented in Python as:
+
+Notice that in the Python implementation, we have used vector operations instead of for loops. This makes the code more efficient, but it could also be implemented with for loops: 
+
+There are at least two things to notice with our implementation:  Matrix and vector notation makes the code more compact and efficient. In order to understand the implementation it is advised to put, and then execute the statements in the Gauss-Jordan elimination and compare with equation.  The implementation of the Gauss-Jordan elimination is not robust, in particular one could easily imagine cases where one of the leading coefficients turned out as zero, and the routine would fail when we divide by. By simply changing equation to, when doing the first Gauss-Jordan elimination, both and would be cancelled. In the next iteration we try to divide next equation by the leading coefficient of, which is zero, and the whole procedure fails.
+
+The solution to the last problem is solved by what is called pivoting. The element that we divide on is called the pivot element. It actually turns out that even if we do Gauss-Jordan elimination without encountering a zero pivot element, the Gauss-Jordan procedure is numerically unstable in the presence of roundoff errors. There are two versions of pivoting, full pivoting and partial pivoting. In partial pivoting we only interchange rows, while in full pivoting we also interchange rows and columns. Partial pivoting is much easier  then multiply first row with and add to 
+There, there is a good explanation of why there can be 
+In the case of a linearly independent matrix, of a reasonable size, we can use Gaussian elimination. 
+
+Solving nonlinear equations 
+The purpose of this section is to introduce a handful of techniques for solving a nonlinear equation. In many cases a combination of methods must be used, and the algorithm must be adopted to your specific problem. 

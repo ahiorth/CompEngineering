@@ -1,0 +1,15 @@
+Aksel
+Centre
+Gausian
+Hiorth
+IOR
+Romberg
+Rombergs
+SciPy
+Simpsons
+Stavanger
+SymPy
+analyse
+endif
+realising
+unpractical

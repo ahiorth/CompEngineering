@@ -1,0 +1,2910 @@
+# Note on the Springer T4 style: here we use the modifications
+# introduced in t4do.sty and svmonodo.sty (both are bundled with DocOnce).
+
+TITLE:  Modeling and Computational Engineering 
+AUTHOR: Aksel Hiorth, the National IOR Centre & Institute for Energy Resources,
+University of Stavanger
+DATE: today
+
+<% book = True%>
+<% all  = False%>
+__Summary.__
+(Work in Progress) The purpose of this document is to explain how computers solve mathematical models.
+Many of the most common numerical methods is presented, we show how to implement them in Python, and discuss the limitations.
+The mathemathical formalism is kept to a minimum. All the material is available at
+"github":"https://github.com/ahiorth/CompEngineering". For each of the chapter there is a Jupyter "notebook":"https://github.com/ahiorth/CompEngineering/tree/master/pub/chapters". This makes it possible to run all the codes in this document.
+We strongly recommend to install Python from "Anaconda":"https://www.anaconda.com/". All documents have been prepared using "doconce":"https://github.com/ahiorth/CompEngineering/tree/master/pub/chapters". 
+##% if FORMAT == 'html':
+##FIGURE: [wip, width=200]
+##Work in progress
+##% endif
+
+## Handy mako variables and functions for the preprocessing step
+## Mako variables and functions common to a lot of files
+## (this file is included in, e.g., flow/main_flow.do.txt).
+
+<%
+# Note that goo.gl and bitly URLs cannot have slashes and continuation,
+# therefore we use tinyurl.
+
+src_path = 'https://github.com/hplgit/setup4book-doconce/tree/master/doc/src/chapters'
+src_path = 'http://tinyurl.com/kukz8pt'
+
+doc_path = 'http://hplgit.github.io/setup4book-doconce/doc/pub'
+doc_path = 'http://tinyurl.com/oul3xhn'
+
+#doc_index = doc_path + '/index.html'
+
+# All chapters: nickname -> title dict
+chapters = {
+ 'rules': 'Directory and file structure',
+ 'fake': 'Some document',
+ 'mako': 'Use of Mako to aid book writing',
+}
+
+%>
+
+## Externaldocuments: ../chapters/fake/main_fake
+
+!split
+========= Preface  =========
+label{ch:preface}
+
+
+What does computers do better than humans? What is it possible to
+compute? These questions have not been fully answered yet, and in the
+coming years we will most likely see that the boundaries for what
+computers can do will expand significantly. Many of the  fundamental laws in
+nature have been known for quite some time, but still it is almost
+impossible to predict the behavior of water (H$_2$O) from quantum
+mechanics. The most sophisticated super computers runs for days and are
+only able to simulate  the behavior of molecules in a couple of
+seconds, almost too short to extract meaningful thermodynamic
+properties. This leads to another interesting question: What does humans do better
+than machines? A large part of
+the answer to this question is *modeling*. Modeling is the ability to 
+break a complicated, unstructured problem into smaller pieces that can
+be solved by computers or by other means. Modeling requires *domain knowledge*, one need to
+understand the system well enough to make the correct or the most efficient simplifications. The process usually starts
+with some experimental data that one would like to understand, it could be the increasing temperature in the atmosphere or sea, it could 
+be changes in the chemical composition of a fluid passing through a rock. The modeler then makes a mental image, which includes a set of 
+mechanisms that could be the cause of the observed data. These mechanisms then needs to be formulated mathematically.   
+How can we know if a model of a system is good? First of all, a good model is a model that do not break 
+any of the fundamental laws of nature, such as mass (assuming non relativistic effects) and energy conservation. Even if you are searching 
+for new laws of nature, you have to make sure that your model respect the existing laws, because then a deviation from your model and
+the observations could be a hint of the new physics you are searching for.  
+Secondly, the model must be able to match the observable data, with a limited set of variables. The variables should 
+be determined from data, and then the model should be able to make some predictions that can be tested. Thus, the true
+purpose of the model is not only to match experimental data, but serve as a framework where the underlying
+mechanisms of the process can be understood. This is done by making model predictions, test them, and improve the model.
+
+In this course our main focus will be on how to use computers to solve models. We will show you through exercises how a mathematical model of
+a physical system can be made, and you will have the possibility to explore the model. Computers are extremely useful, they can solve problems that
+would be impossible to solve by hand. However, it is extremely important to know about the limitations and strength of various algorithms. One need
+to have a toolbox of various algorithms that can be employed depending on the problem one are studying. Sometimes speed is not an issue, and one can use
+simpler algorithms, but in many cases *speed is an issue*. Thus it is important to not waste computational time when it is not needed, we will encounter 
+examples of this many times in this course. Why should you spend time learning about algorithms that have been implemented already in a software that 
+most likely can be downloaded for free? There are many answers to this question, some more practical and some that goes deeper. Lets start with the
+practical considerations: Often you encounter a problem that needs to be solved by a computer, it could be as simple as to integrate some production data 
+in a spreadsheet to calculate the total production, or it could be to fit a function with more than one variable to some data. Once you have this problem, and 
+starting to ask Mr. Google for a solution, you will quickly realize that there are numerous ways of achieving what you want. By educating yourself 
+within the most basic numerical methods, presented in this course, you will be able to judge for yourself which method to use in a specific case. 
+Another motivation is that development of most of the different numerical methods are *not that difficult*, they usually follow a very similar pattern, but
+there are some ''tricks''. It is extremely useful to learn these tricks, they can be adopted to a range of different problems, many are easily implemented
+in a spreadsheet. There are some more deeper arguments, and that is that the numerical methods are developed to solve a *general* problem. Most of the 
+time we work with *specific* problems, and we would like to have an algorithm that is optimal for our problem that goes beyond only choosing the right one. 
+Having understood and learned all the cool tricks that was used in the development of the algorithm in the general case, 
+is a starting point for adopting the algorithm to your specific situation. Secondly development of an algorithm is a concrete case of *Computational Thinking*.
+Computational thinking is not necessarily related to computers and programming, but it is a way of structuring your work 
+into precise statements that are being executed one at a time in a specific order. By learning about algorithmic development, you 
+will train yourself in the art of computational thinking, which is a useful skill in all kind of problem solving. 
+
+##* Quote Einstein? ´´If I had one hour to solve a problem related to the
+##earth future, I would spend the first 50 minutes to define the
+##problem.´´  This
+##* Figure med someone that baker med ingredients : modeling, domain
+##knowledge, computational thinking - få Kaja to å make someone? (Rick & Marty?)
+
+## Just dump native latex
+\noindent
+{\it November 2018}  \hfill  {\it Aksel Hiorth}
+
+TOC: on
+
+%if all:
+!split
+ ========= Python Basics =========
+label{ch:pyt}
+
+======= Introduction to Python programming  =======
+This chapter is not meant as a full introduction to Python
+programming. We will assume that you have some knowledge of
+programming, and focus on the things that will be of most use in this
+course. One of the great things with Python is that there is a wealth
+of information and introductory courses freely available on the web.
+Most of the time you can simply type a question into the web browser,
+and there is a high chance that someone has asked it before you. The "stackoverflow":"https://stackoverflow.com/"
+is particularly useful, the answers to questions are voted and the
+most helpful solution is at the top.
+
+Useful python course "python":"https://www.python-course.eu/recursive_functions.php"
+===== Types in Python =====
+
+===== Functions in Python =====
+When to use functions? There is no particular rule, *but whenever you
+start to copy and paste code from one place to another, you should
+consider to use a function*. Functions makes the code easier to read.
+It is not easy to identify which part of a program is a good candidate
+for a function, it requires skill and experience. Most likely you will
+end up changing the function definitions as your program develops.
+===== Example: Defining a mathematical function =====
+##label{}
+##file=solution.pdf
+The following function describes the fluid potential, $\Phi$, from a vertical well
+that inject or produce a fluid from a homogeneous reservoir with
+thickness $h$:
+!bt
+\begin{equation}
+\Phi_\text{well}=-\frac{Q}{2\pi h}\ln r,
+label{eq:py:phi}
+\end{equation}
+!et
+where $Q$ is the injection rate (volume of fluid per time), and $r$ is
+the radial distance from the well.
+
+Write a Python function that returns the fluid potential for any value
+of $r$, $h$, and $Q$. 
+
+# !bsol
+# !esol
+
+# !bsubex
+# subexercise...
+
+# !bsol
+# !esol
+# !esubex
+
+Tips for python programming
+## o use of __main__ if __name__ == '__main__':
+o "Use of underscore":"https://hackernoon.com/understanding-the-underscore-of-python-309d1a029edc"
+o get index in loop: for idx,item in enumerate(list):
+o default argument list
+o profiling: timeit 
+!bc pycod
+# test out the following two codes
+t=[0.,0.,0.,0.,0.]
+for i in range(10):
+	pidmm.append(t)
+
+for i in range(10):
+	pidmm.append([0.,0.,0.,0.,0.])
+!ec
+%endif
+!split
+========= Finite differences =========
+label{ch:taylor}
+
+###### Content provided under a Creative Commons Attribution license, CC-BY 4.0; code under MIT License. (c)2018 Aksel Hiorth
+The mathematics introduced in this chapter is absolutely essential in order to understand the development of numerical algorithms. We strongly advice you to study it carefully, implement python scripts and investigate the results, reproduce the analytical derivations and compare with the numerical solutions.
+
+======= Numerical derivatives =======
+The solution to a physical model is usually a function. The function could describe the temperature evolution of the earth, it could be growth of cancer cells, the water pressure in an oil reservoir, the list is endless. If we can solve the model analytically, the answer is given in terms of a continuous function. Most of the models cannot be solved analytically, then we have to rely on computers to help us. The computer does not have any concept of continuous functions, a function is always evaluated at some point in space and/or time. Assume for simplicity that the solution to our problem is $f(x)=\sin x$, and we would like to visualize the solution. How many points do we need in our plot to approximate the true function? 
+% if FORMAT == 'ipynb':
+Run the script below, and you will 
+see a plot of $\sin x$ on the interval $[-\pi,\pi]$, and $[-2.2,-1]$.
+@@@CODE src-taylor/func_plot.py
+% endif
+% if FORMAT != 'ipynb':
+In figure ref{fig:taylor:sinx}, there is a plot of $\sin x$ on the interval $[-\pi,\pi]$.
+FIGURE: [fig-taylor/func_plot, width=600] A plot of $\sin x$ for different spacing of the $x$-values. label{fig:taylor:sinx}
+% endif
+
+From the figure we see that in some areas only a couple of points are needed in order to
+represent the function well, and in some areas more points are needed. To state it more clearly; between $[-1,1]$ a linear function (few points) approximate $\sin x$ well, 
+whereas in the area where the derivative of the function changes e.g. in $[-2,-1]$, we need the points to be more closely spaced to capture the behavior of the true function.
+
+!bnotice Discretization
+To represent a function of space and/or time in a computer, the function needs to be discretized. When a function is discretized it leads to discretization errors. 
+!enotice
+
+Why do we care about the number of points? In many cases the function we would like to evaluate can take a very long time to evaluate. Sometimes simulation time is not an issue, then we can use a large number of function
+evaluations. However, in many applications simulation time *is an issue*, and it would be good to know where the points needs to be closely spaced, and where we can 
+manage with only a few points.
+
+What is a *good representation* representation of the true function? We cannot rely on visual inspection. In the next section we will show how Taylor polynomial representation of a function is a natural starting point to answer this question.
+                                                                                  
+======= Taylor Polynomial Approximation =======
+There are many ways of representing a function, but perhaps one of the most widely used is Taylor polynomials. 
+Taylor series are the basis for solving ordinary and differential equations, simply because it makes it possible to evaluate any function with a set
+of limited operations: *addition, subtraction, and multiplication*. The Taylor polynomial, $P_n(x)$ of degree $n$ of a function $f(x)$ at the point $c$ is defined as:
+!bnotice Taylor polynomial:
+
+!bt
+\begin{align}
+ P_n(x) &= f(c)+f^\prime(c)(x-c)+\frac{f^{\prime\prime}(c)}{2!}(x-c)^2+\cdots+\frac{f^{(n)}(c)}{n!}(x-c)^n\nonumber\\
+&=\sum_{k=0}^n\frac{f^{(n)}(c)}{k!}(x-c)^k.\label{eq:taylor:taylori}
+\end{align}
+!et
+
+!enotice
+If the series is around the point $c=0$, the Taylor polynomial $P_n(x)$ is often called a Maclaurin polynomial, more examples can be found 
+"here":"https://en.wikipedia.org/wiki/Taylor_series". If the series converge (i.e. that the higher order terms approach zero), then we can represent the
+function $f(x)$ with its corresponding Taylor series around the point $x=c$:
+!bt
+\begin{align}
+ f(x) &= f(c)+f^\prime(c)(x-c)+\frac{f^{\prime\prime}(c)}{2!}(x-c)^2+\cdots
+=\sum_{k=0}^\infty\frac{f^{(n)}}{k!}(x-c)^k.\label{eq:taylor:taylor}
+\end{align}
+!et 
+The Maclaurin series of $\sin x$ is:
+!bt
+\begin{align}
+\sin x = x-\frac{x^3}{3!}+\frac{x^5}{5!}-\frac{x^7}{7!}+\cdots=\sum_{k=0}^{\infty}\frac{(-1)^n}{(2n+1)!}x^{2n+1}.
+\label{sin}
+\end{align}
+!et
+
+% if FORMAT != 'ipynb':
+In figure ref{fig:mac_sin}, we show the first nine terms in the Maclaurin series for $\sin x$ (all even terms are zero). 
+FIGURE: [fig-taylor/mac_sin, width=600] Up to ninth order in the Maclaurin series of $\sin x$. label{fig:mac_sin}
+% endif
+% if FORMAT == 'ipynb':
+In the script below we calculate different orders of the Maclaurin series of $\sin x$.    
+@@@CODE src-taylor/mac_sin.py 
+% endif
+Note that we get a decent representation of $\sin x$ on the domain, by *only knowing the function and its derivative in a single point*. 
+The error term in Taylors formula, when we represent a function with a finite number of polynomial elements is given by:
+% if FORMAT != 'sphinx':
+!bwarning Error term in Taylors formula:
+% endif
+!bt
+\begin{align}
+R_n(x)&=f(x)-P_n(x)=\frac{f^{(n+1)}(\eta)}{(n+1)!}(x-c)^{n+1}\nonumber\\
+      &=\frac{1}{n!}\int_c^x(x-\tau)^{n}f^{(n+1)}(\tau)d\tau,\label{eq:taylor:error}
+\end{align}
+!et 
+for some $\eta$ in the domain $[x,c]$.
+% if FORMAT != 'sphinx':
+!ewarning
+% endif
+If we want to calculate 
+$\sin x$ to a precision lower than a specified value we can do it as follows:
+
+ @@@CODE src-taylor/mac_sin_eps.py 
+ 
+This implementation needs some explanation:
+
+* The error term is given in equation (ref{eq:taylor:error}), and it is a even power in $x$. We do not which $\eta$ to use in equation (ref{eq:taylor:error}), thus we use a trick and simply say that the error term is smaller than the highest order term. Thus, we stop the evaluation if the highest order term in the series is lower than the uncertainty. Thus, in practice we add the error term to the function evaluation, our estimate will always be better than the specified accuracy.
+* We evaluate the polynomials in the Taylor series by using the previous values too avoid too many multiplications within the loop, we do this by using the following identity:
+!bt
+  \begin{align}
+  \sin x&=\sum_{k=0}^{\infty} (-1)^nt_n, \text{ where: } t_n\equiv\frac{x^{2n+1}}{(2n+1)!}, \text{ hence :}\nonumber\\
+  t_{n+1}&=\frac{x^{2(n+1)+1}}{(2(n+1)+1)!}=\frac{x^{2n+1}x^2}{(2n+1)! (2n+2)(2n+3)}\nonumber\\
+  &=t_n\frac{x^2}{(2n+2)(2n+3)}
+  \end{align}
+!et 
+
+===== Evaluation of polynomials =====
+How to evaluate a polynomial of the type: $p_n(x)=a_0+a_1x+a_2x^2+\cdots+a_nx^n$? We already saw a hint in the previous section that it can be done in different ways. One way is simply to 
+do:
+!bc pycod
+pol = a[0]
+for i in range(1,n+1):
+	pol = pol + a[i]*x**i
+!ec 
+Note that there are $n$ additions, whereas there are $1 + 2 +3+\cdots+n=n(n+1)/2$ multiplications for all the iterations. Instead of evaluating the powers all over in 
+each loop, we can use the previous calculation to save the number of multiplications:
+!bc pycod
+pol = a[0] + a[1]*x
+power = x
+for i in range(2,n+1):
+	power  = power*x
+	pol    = pol + a[i]*power
+!ec 
+In this case there are still $n$ additions, but now there are $2n-1$ multiplications. For $n=15$, this amounts to 120 for the first, and 29 for the second method. 
+Polynomials can also be evaluated using *nested multiplication*:
+!bt
+\begin{align}
+p_1 & = a_0+a_1x\nonumber\\
+p_2 & = a_0+a_1x+a_2x^2=a_0+x(a_1+a_2x)\nonumber\\
+p_3 & = a_0+a_1x+a_2x^2+a_3x^3=a_0+x(a_1+x(a_2+a_3x))\nonumber\\
+\vdots
+\end{align}   
+!et
+and so on. This can be implemented as:
+!bc pycod
+pol = a[n]
+for i in range(n-1,1,-1):
+	pol  = a[i] + pol*x
+!ec
+In this case we only have $n$ multiplications. So if you know beforehand exactly how many terms is needed to calculate the series, this method would be the preferred method, and is implemented in NumPy as "`polyval`":"https://docs.scipy.org/doc/numpy/reference/generated/numpy.polyval.html#r138ee7027ddf-1". 
+
+======= Calculating Derivatives of Functions =======
+label{ch:taylor:der}
+
+index{forward difference}
+
+##index{backward difference}
+
+The derivative of a function can be calculated using the definition from calculus:
+!bt
+\begin{align}
+f^\prime(x)=\lim_{h\to 0}\frac{f(x+h)-f(x)}{h}\simeq \frac{f(x+h)-f(x)}{h}.\label{eq:taylor:der1}
+\end{align}  
+!et
+Not that $h$ can be both positive and negative, if $h$ is positive equation (ref{eq:taylor:der1}) is termed *forward difference*, because we use the function value on the right ($f(x+|h|)$). If on the other hand $h$ is negative equation (ref{eq:taylor:der1}) is termed *backward difference*, because we use the value to the left ($f(x-|h|)$). ($|h|$ is the absolute value of $h$).
+In the computer we cannot take the limit, $h\to 0$, a natural question is then: What value to use for $h$? 
+% if FORMAT != 'ipynb':
+In figure ref{fig:taylor:df}, we have evaluated the numerical derivative of $\sin x$, using the formula in equation (ref{eq:taylor:der1}) for different step sizes $h$. 
+FIGURE: [fig-taylor/df, width=600] Error in the numerical derivative of $\sin x$ at $x=0.2$ for different step size. label{fig:taylor:df}
+
+% endif
+% if FORMAT == 'ipynb':
+Run the script below and investigate the result.     
+@@@CODE src-taylor/df.py 
+% endif
+
+We clearly see that the error depends on the step size, but there is a minimum; choosing a step size too large give a poor estimate and choosing a too low step size give an 
+even worse estimate. The explanation for this behavior is two competing effects: *mathematical approximation* and *round off errors*. Let us consider approximation or truncation error
+first. By using the Taylor expansion in equation (ref{eq:taylor:taylor}) and expand about $x$ and the error formula (ref{eq:taylor:error}), we get:
+!bt
+\begin{align}
+f(x+h)&=f(x)+f^\prime(x)h + \frac{h^2}{2}f^{\prime\prime}(\eta)\text{ , hence:}\nonumber\\
+f^\prime(x)&=\frac{f(x+h)-f(x)}{h}-\frac{h}{2}f^{\prime\prime}(\eta),\label{eq:taylor:derr}
+\end{align}
+!et
+for some $\eta$ in $[x,x+h]$. Thus the error to our approximation is $hf^{\prime\prime}(\eta)/2$, if we reduce the step size by a factor of 10 the error is reduced by a factor of 10. 
+Inspecting the graph, we clearly see that this is correct as the step size decreases from $10^{-1}$ to $10^{-8}$. When the step size decreases more, there is an increase in the error. This
+is due to round off errors, and can be understood by looking into how numbers are stored in a computer.  
+
+=====  Big $\mathcal{O}$ notation =====
+"example":"https://rob-bell.net/2009/06/a-beginners-guide-to-big-o-notation/"
+
+===== Round off Errors =====
+In a computer a floating point number,$x$, is represented as:
+!bt
+\begin{align}
+x=\pm q2^m.
+\end{align}
+!et
+Most computers are 64-bits, then one bit is reserved for the sign, 52 for the fraction ($q$) and 11 for
+the exponent ($m$)  (for a graphic illustration see "Wikipedia":"https://en.wikipedia.org/wiki/Double-precision_floating-point_format").
+what is the largest *floating point* number the computer can represent? 
+Since $m$ contains 11 bits, $m$ can have the maximal value $m=2^{11}=1024$, and then the largest value is close to $2^{1024}\simeq 10^{308}$.
+If you enter `print(10.1*10**(308))` in Python the answer will be `Inf`. If you enter `print(10*10**(308))`, Python will give an answer. This is because 
+the number $10.1\cdot10^{308}$ is floating point number, whereas $10^{309}$ is an *integer*, and Python does something clever when it comes to representing integers. 
+Python has a third numeric type called long int, which can use the available memory to represent an integer. 
+
+$10^{308}$ is the largest number, but what is the highest precision we can use, or how many decimal places can we use for a floating point number? 
+Since there are 52 bits for the fraction, there are $1/2^{52}\simeq10^{-16}$ decimal places. As an example
+the value of $\pi$ is $3.14159265358979323846264338\ldots$, but in Python it can only be represented by 16 digits: $3.141592653589793$. In principle 
+it does not sound so bad to have an answer accurate to 16 digits, and it is much better than most experimental results. 
+So what is the problem? One problem that you should be aware of is that round off errors can be a serious problem when we subtract two numbers that 
+are very close to one another. If we implement the following program in Python:
+!bc pycod 
+h=1e-16
+x = 2.1 + h
+y = 2.1 - h
+print((x-y)/h)
+!ec 
+we expect to get the answer 2, but instead we get zero. By changing $h$ to a higher value, the answer will get closer to 2. 
+
+Armed with this knowledge of round off errors, we can continue to analyze
+% if FORMAT != 'ipynb':
+the result in figure ref{fig:taylor:df}.
+% endif
+% if FORMAT == 'ipynb':
+the results from the script.
+% endif
+The round off error when we represent a floating point number $x$ in the 
+machine will be of the order $x/10^{16}$ (*not* $10^{-16}$). In general, when we evaluate a function the error will be of the order 
+$\epsilon|f(x)|$, where $\epsilon\sim10^{-16}$. Thus equation (ref{eq:taylor:derr}) is modified in the following way when we take into account the round off errors:
+!bt
+\begin{align}
+f^\prime(x)=\frac{f(x+h)-f(x)}{h}\pm\frac{2\epsilon|f(x)|}{h}-\frac{h}{2}f^{\prime\prime}(\eta),\label{eq:taylor:derr2}
+\end{align}
+!et
+we do not know the sign of the round off error, so the total error $R_2$ is:
+!bt
+\begin{align}
+R_2=\frac{2\epsilon|f(x)|}{h}+\frac{h}{2}|f^{\prime\prime}(\eta)|.\label{eq:taylor:derr3}
+\end{align}
+!et
+We have put absolute values around the function and its derivative to get the maximal error, it might be the case that the round off error cancel part of the 
+truncation error. However, the round off error is random in nature and will change from machine to machine, and each time we run the program. 
+Note that the round off error increases when $h$ decreases, and the approximation error decreases when $h$ decreases. This is exactly what we see in the figure above. We can find the 
+best step size, by differentiating $R_2$ and put it equal to zero:
+!bt
+\begin{align}
+\frac{dR_2}{dh}&=-\frac{2\epsilon|f(x)|}{h^2}+\frac{1}{2}f^{\prime\prime}(\eta)=0\nonumber\\
+h&=2\sqrt{\epsilon\left|\frac{f(x)}{f^{\prime\prime}(\eta)}\right|}\simeq 2\cdot10^{-8},\label{eq:taylor:derr4}
+\end{align}
+!et
+In the last equation we have assumed that $f(x)$ and its derivative is $~1$. This step size corresponds to an error of order $R_2\sim10^{-8}$. 
+Inspecting 
+% if FORMAT != 'ipynb':
+the result in figure ref{fig:taylor:df}.
+% endif
+% if FORMAT == 'ipynb':
+the results from the script.
+% endif
+we see that the minimum is located at $h\sim10^{-8}$.      
+
+======= Higher Order Derivatives =======
+There are more ways to calculate the derivative of a function, than the formula given in equation (ref{eq:taylor:derr}). Different formulas can be
+derived by using Taylors formula in (ref{eq:taylor:taylor}), usually one expands about $x\pm h$:
+!bt
+\begin{align}
+f(x+h)&=f(x)+f^\prime(x)h + \frac{h^2}{2}f^{\prime\prime}(x)+ \frac{h^3}{3!}f^{(3)}(x)+ \frac{h^4}{4!}f^{(4)}(x)+\cdots\nonumber\\
+f(x-h)&=f(x)-f^\prime(x)h + \frac{h^2}{2}f^{\prime\prime}(x)- \frac{h^3}{3!}f^{(3)}(x)+ \frac{h^4}{4!}f^{(3)}(x)-\cdots.
+\end{align}
+!et
+If we add these two equations, we get an expression for the second derivative, because the first derivative cancels out. But we also observe that if we subtract these two equations we get 
+an expression for the first derivative that is accurate to a higher order than the formula in equation (ref{eq:taylor:der1}), hence:
+!bt
+\begin{align}
+f^\prime(x)&=\frac{f(x+h)-f(x-h)}{2h} -\frac{h^2}{6}f^{(3)}(\eta),\label{eq:taylor:der2}\\
+f^{\prime\prime}(x) &= \frac{f(x+h)+f(x-h)-2f(x)}{h^2}+ \frac{h^2}{12}f^{(4)}(\eta)\label{eq:taylor:2der},
+\end{align}
+!et
+for some $\eta$ in $[x,x+h]$. In figure ref{fig:taylor:df2}, we have plotted equation (ref{eq:taylor:derr}), (ref{eq:taylor:der2}), and (ref{eq:taylor:2der}) for 
+different step sizes. The derivative in equation (ref{eq:taylor:der2}), gives a higher accuracy than equation (ref{eq:taylor:derr}) for a larger step size,
+as can bee seen in figure ref{fig:taylor:df2}.
+
+FIGURE: [fig-taylor/df2, width=600] Error in the numerical derivative and second derivative of $\sin x$ at $x=0.2$ for different step size. label{fig:taylor:df2}
+
+We can perform a similar error analysis as we did before, and then we find for equation (ref{eq:taylor:der2}) and (ref{eq:taylor:2der}) that the total
+numerical error is:
+!bt
+\begin{align}
+R_3&=\frac{\epsilon|f(x)|}{h}+\frac{h^2}{6}f^{(3)}(\eta),\label{eq:taylor:derr3b}\\
+R_4&=\frac{4\epsilon|f(x)|}{h^2}+\frac{h^2}{12}f^{(4)}(\eta),\label{eq:taylor:derr4b}
+\end{align}
+!et
+respectively. Differentiating these two equations with respect to $h$, and set the equations equal to zero, we find an optimal step size of
+$h\sim10^{-5}$ for equation (ref{eq:taylor:derr3b}), which gives an error of $R_2\sim 10^{-16}/10^{-5}+(10^{-5})^2/6\simeq10^{-10}$, and $h\sim10^{-4}$ for equation
+(ref{eq:taylor:derr4b}), which gives an error of $R_4\sim 4\cdot10^{-16}/(10^{-4})^2+(10^{-4})^2/12\simeq10^{-8}$. Note that we get the surprising result for the first order 
+derivative in equation (ref{eq:taylor:der2}), that a higher step size gives a more accurate result. 
+
+
+##======= Bibliography =======
+
+## Publish (https://bitbucket.org/logg/publish is used to
+## handle references. The line below specifies the name of
+## the Publish database file (see the doconce manual for details).
+
+##BIBFILE: ../papers.pub
+
+
+
+!split
+========= Linear and nonlinear equations =========
+label{ch:nlin}
+##%if all:
+Solving systems of equations are one of the most common tasks that we use computers for within modeling. A typical task is that we have have a model that contains a set of unknown parameters which we want to determine. To determine these parameters we need to solve a set of equations. In many cases these equations are nonlinear, but often a nonlinear problem is solved
+*by linearize* the nonlinear equations, and thereby reducing it to a sequence of linear algebra problems. Thus the topic of solving linear systems of equations have been extensively studied, and sophisticated linear equation solving packages have been developed. Python uses functions from the "LAPACK":"https://en.wikipedia.org/wiki/LAPACK" library. In this course we will only cover the theory behind numerical linear algebra superficially, and the main purpose is to shed some light on some of the challenges one might encounter solving linear systems. In particular it is important for you to understand when it is stated in the NumPy documentation that the standard linear solver: "`solve`":"https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.solve.html" function uses *LU-decomposition* and *partial pivoting*. 
+
+After covering some basics of numerical linear algebra, we will shift focus to nonlinear equations. Contrary to linear equations, you will most likely find that the functions available in various Python library will *not* cover your needs and in many cases fail to give you the correct solution. The reason for this is that the solution of a nonlinear equation is greatly dependent on the starting point, and a combination of various techniques must be used.  
+
+======= Solving linear equations =======
+There are a number of excellent books covering this topic, see e.g. cite{press2007,trefethen1997,stoer2013,strang2019}.
+In most of the examples covered in this course we will encounter problems where we have a set of *linearly independent* equations and one equation for each unknown. For these type of problems there are a number of methods that can be used, and they will find a solution in a finite number of steps. If a solution cannot be found it is usually because the equations are not linearly independent, and our formulation of the physical problem is wrong.
+
+Assume that we would like to solve the following set of equations:
+!bt
+\begin{align}
+2x_0+x_1+x_2+3x_3&=1,label{eq:nlin:la} \\
+x_0+x_1+3x_2+x_3&=-3,label{eq:nlin:lb} \\
+x_0+4x_1+x_2+x_3&=2,label{eq:nlin:lc} \\
+x_0+x_1+x_2+x_3&=1.label{eq:nlin:ld} 
+\end{align}
+!et
+These equations can be written in matrix form as:
+!bt
+\begin{equation}
+\mathbf{A\cdot x}=\mathbf{b},
+label{eq:nlin:mat}
+\end{equation}
+!et
+where:
+!bt
+\begin{equation}
+\mathbf{A}\equiv\begin{pmatrix}
+2&1&1&3\\
+1&1&3&1\\
+1&4&1&1\\
+1&1&2&2
+\end{pmatrix}
+\qquad
+\mathbf{b}\equiv
+\begin{pmatrix}
+1\\-3\\2\\1
+\end{pmatrix}
+\qquad
+\mathbf{x}\equiv
+\begin{pmatrix}
+x_0\\x_1\\x_2\\x_3
+\end{pmatrix}.
+label{eq:nlin:matA}
+\end{equation}
+!et
+You can easily verify that $x_0=-4, x_1=1, x_2=-1, x_3= 3$ is the solution to the above equations by direct substitution. If we were to replace one of the above equations with a linear combination of any of the other equations, e.g. replace equation (ref{eq:nlin:ld}) with $3x_0+2x_1+4x_2+4x_3=-2$, there would be no solution. This can be checked by calculating the determinant of the matrix $\mathbf{A}$, if $\det \mathbf{A}=0 $,  
+What is the difficulty in solving these equations? Clearly if none of the equations are linearly dependent, and we have $N$ independent linear equations, it should be straight forward to solve them? Two major numerical problems are i) even if the equations are not exact linear combinations of each other, they could be very close, and as the numerical algorithm progresses they could at some stage become linearly dependent due to roundoff errors. ii) roundoff errors may accumulate if the number of equations are large cite{press2007}.
+
+===== Gauss-Jordan elimination =====
+Let us continue the discussion by consider Gauss-Jordan elimination, which is a *direct* method. A direct method uses a final set of operations to obtain a solution. According to cite{press2007} Gauss-Jordan elimination is the method of choice if we want to find the inverse of $\mathbf{A}$. However, it is slow when it comes to calculate the solution of equation
+(ref{eq:nlin:mat}). Even if speed and memory use is not an issue, it is also not advised to first find the inverse, $\mathbf{A}^{-1}$, of $\mathbf{A}$, then multiply it with $\mathbf{b}$ to obtain the solution, due to roundoff errors (Roundoff errors occur whenever we subtract to numbers that are very close to each other). To simplify our notation, we write equation (ref{eq:nlin:matA}) as:
+!bt
+\begin{equation}
+\left(
+\begin{array}{cccc|c}
+2&1&1&3&1\\
+1&1&3&1&-3\\
+1&4&1&1&2\\
+1&1&2&2&1
+\end{array}
+\right).
+\end{equation}
+!et
+The numbers to the left of the vertical dash is the matrix $\mathbf{A}$, and to the right is the vector $\mathbf{b}$. The Gauss-Jordan elimination procedure proceeds by doing the same operation on the right and left side of the dash, and the goal is to get only zeros on the lower triangular part of the matrix. This is achieved by multiplying rows with the same (nonzero) number, swapping rows, adding a multiple of a row to another:
+!bt
+\begin{align}
+&\left(
+\begin{array}{cccc|c}
+2&1&1&3&1\\
+1&1&3&1&-3\\
+1&4&1&1&2\\
+1&1&2&2&1
+\end{array}
+\right)\to
+\left(
+\begin{array}{cccc|c}
+2&1&1&3&1\\
+0&1/2&5/2&-1/2&-7/2\\
+0&7/2&1/2&-1/2&3/2\\
+0&1/2&3/2&1/2&1/2
+\end{array}
+\right)\to\label{eq:nlin:gj1}\\
+&\left(
+\begin{array}{cccc|c}
+2&1&1&3&1\\
+0&1/2&5/2&-1/2&-7/2\\
+0&0&-17&3&26\\
+0&0&1&-1&4
+\end{array}
+\right)
+\to
+\left(
+\begin{array}{cccc|c}
+2&1&1&3&1\\
+0&1/2&5/2&-1/2&-7/2\\
+0&0&-17&3&26\\
+0&0&0&14/17&42/17
+\end{array}
+\right)\no
+\end{align}
+!et
+The operations done are: ($1\to2$) multiply first row with $-1/2$ and add to second, third and the fourth row, ($2\to 3$) multiply second row with $-7$, and add to third row, multiply second row with $-1$ and add to fourth row, ($3\to4$) multiply third row with $-1/17$ and add to fourth row. These operations can easily be coded into Python:
+@@@CODE src-nlin/nlin_sym.py fromto: A = np.array@# Back
+Notice that the final matrix has only zeros beyond the diagonal, such a matrix is called *upper triangular*. We still have not found the final solution, but from an upper triangular (or lower triangular) matrix it is trivial to determine the solution. The last row immediately gives us $14/17z=42/17$ or $z=3$, now we have the solution for z and the next row gives: $-17y+3z=26$ or $y=(26-3\cdot3)/(-17)=-1$, and so on. In a more general form, we can write our solution of the matrix $\mathbf{A}$ after making it upper triangular as:
+!bt
+\begin{equation}
+\begin{pmatrix}
+a^\prime_{0,0}&a^\prime_{0,1}&a^\prime_{0,2}&a^\prime_{0,3}\\
+0&a^\prime_{1,1}&a^\prime_{1,2}&a^\prime_{1,3}\\
+0&0&a^\prime_{2,2}&a^\prime_{2,3}\\
+0&0&0&a^\prime_{3,3}
+\end{pmatrix}
+\cdot
+\begin{pmatrix}
+x_0\\
+x_1\\
+x_2\\
+x_3
+\end{pmatrix}
+=
+\begin{pmatrix}
+b^\prime_{0}\\
+b^\prime_{1}\\
+b^\prime_{2}\\
+b^\prime_{3}
+\end{pmatrix}
+label{eq:nlin:back}
+\end{equation}
+!et
+The backsubstitution can then be written formally as:
+!bt
+\begin{equation}
+x_i=\frac{1}{a^\prime_{ii}}\left[b_i^\prime-\sum_{j=i+1}^{N-1}a^\prime_{ij}x_j\right],\quad i=N-1,N-2,\ldots,0
+label{eq:nlin:back2}
+\end{equation}
+!et
+The backsubstitution can now easily be implemented in Python as:
+@@@CODE src-nlin/nlin_sym.py fromto: # Back@# Backsubstitution - for loop
+Notice that in the Python implementation, we have used vector operations instead of for loops. This makes the code more efficient, but it could also be implemented with for loops: 
+@@@CODE src-nlin/nlin_sym.py fromto: # Backsubstitution - for loop@print
+There are at least two things to notice with our implementation:
+* Matrix and vector notation makes the code more compact and efficient. In order to understand the implementation it is advised to put $i=1, 2, 3, 4$, and then execute the statements in the Gauss-Jordan elimination and compare with equation (ref{eq:nlin:gj1}).
+* The implementation of the Gauss-Jordan elimination is not robust, in particular one could easily imagine cases where one of the leading coefficients turned out as zero, and the routine would fail when we divide by `A[i-1,i-1]`. By simply changing equation (ref{eq:nlin:lb}) to $2x_0+x_1+3x_2+x_3=-3$, when doing the first Gauss-Jordan elimination, both $x_0$ and $x_1$ would be canceled. In the next iteration we try to divide next equation by the leading coefficient of $x_1$, which is zero, and the whole procedure fails.
+===== Pivoting =====
+The solution to the last problem is solved by what is called *pivoting*. The element that we divide on is called the *pivot element*. It actually turns out that even if we do Gauss-Jordan elimination *without* encountering a zero pivot element, the Gauss-Jordan procedure is numerically unstable in the presence of roundoff errors cite{press2007}. There are two versions of pivoting, *full pivoting* and *partial pivoting*. In partial pivoting we only interchange rows, while in full pivoting we also interchange rows and columns. Partial pivoting is much easier to implement, and the algorithm is as follows:
+o Find the row in $\mathbf{A}$ with largest absolute value in front of $x_0$ and change with the first equation, switch corresponding elements in $\mathbf{b}$
+o Do one Gauss-Jordan elimination, find the row in $\mathbf{A}$ with the largest absolute value in front of $x_1$ and switch with the second (same for $\mathbf{b}$), and so on.
+For a linear equation we can multiply with a number on each side and the equation would be unchanged, so if we where to multiply one of the equations with a large value, we are almost sure that this equation would be placed first by our algorithm. This seems a bit strange as our mathematical problem is the same. Sometimes the linear algebra routines tries to normalize the equations to find the pivot element that would have been the largest element if all equations were normalized according to some rule, this is called *implicit pivoting*.  
+===== LU decomposition =====
+As we have already seen, if the matrix $\mathbf{A}$ is reduced to a triangular form it is trivial to calculate the solution by using backsubstitution. Thus if it was possible to decompose the matrix $\mathbf{A}$ as follows:
+!bt
+\begin{align}
+&\mathbf{A}=\mathbf{L}\cdot\mathbf{U}label{eq:nlin:lu}\\
+&\begin{pmatrix}
+a_{0,0}&a_{0,1}&a_{0,2}&a_{0,3}\\
+a_{1,0}&a_{1,1}&a_{1,2}&a_{1,3}\\
+a_{2,0}&a_{2,0}&a_{2,2}&a_{2,3}\\
+a_{3,0}&a_{3,0}&a_{3,0}&a_{3,3}
+\end{pmatrix}
+=
+\begin{pmatrix}
+l_{0,0}&0&0&0\\
+l_{1,0}&l_{1,1}&0&0\\
+l_{2,0}&l_{2,0}&l_{2,2}&0\\
+l_{3,0}&l_{3,0}&l_{3,0}&l_{3,3}
+\end{pmatrix}
+\cdot
+\begin{pmatrix}
+u_{0,0}&u_{0,1}&u_{0,2}&u_{0,3}\\
+0&u_{1,1}&u_{1,2}&u_{1,3}\\
+0&0&u_{2,2}&u_{2,3}\\
+0&0&0&u_{3,3}
+\end{pmatrix}.\no
+\end{align}
+!et
+The solution procedure would then be to rewrite equation (ref{eq:nlin:mat}) as:
+!bt
+\begin{align}
+\mathbf{A\cdot x}=\mathbf{L}\cdot\mathbf{U}\cdot\mathbf{x}=\mathbf{b},label{eq:nlin:matb}
+\end{align}
+!et
+If we define a new vector $\mathbf{y}$:
+!bt
+\begin{align}
+\mathbf{y}\equiv\mathbf{U}\cdot\mathbf{x},
+\end{align}
+!et
+we can first solve for the $\mathbf{y}$ vector:
+!bt
+\begin{align}
+\mathbf{L}\cdot\mathbf{y}=\mathbf{b},label{eq:nlin:for}
+\end{align}
+!et
+and then for $\mathbf{x}$:
+!bt
+\begin{align}
+\mathbf{U}\cdot\mathbf{x}=\mathbf{y}.
+\end{align}
+!et
+Note that the solution to equation (ref{eq:nlin:for}) would be done by *forward substitution*:
+!bt
+\begin{equation}
+y_i=\frac{1}{l_{ii}}\left[b_i-\sum_{j=0}^{i-1}l_{ij}x_j\right],\quad i=1,2,\ldots N-1.
+label{eq:nlin:back3}
+\end{equation}
+!et
+Why go to all this trouble? First of all it requires (slightly) less operations to calculate the LU decomposition and doing the forward and backward substitution than the Gauss-Jordan procedure discussed earlier. Secondly, and more importantly, is the fact that in many cases one would like to calculate the solution for different values of the $\mathbf{b}$ vector in equation (ref{eq:nlin:matb}). If we do the LU decomposition first we can calculate the solution quite fast using backward and forward substitution for any value of the $\mathbf{b}$ vector.
+
+The NumPy function "`solve`":"https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.solve.html", uses LU decomposition and partial pivoting, and we can find the solution to our previous problem simply by the following code:
+@@@CODE src-nlin/nlin_sym.py fromto: from numpy.linalg@#end
+
+======= Example: Linear regression =======
+In the previous section, we considered a system of $N$ equations and $N$ unknown ($x_0, x_1,\ldots, x_N$). In general we might have more equations than unknowns or more unknowns than equations. An example of the former is linear regression, we might have many data points and we would like to fit a line through the points. How do you fit a single lines to more than two points that does not line on the same line? One way to do it is to minimize the distance from the line to the points, as illustrated in figure ref{fig:nlin:reg}.
+FIGURE: [fig-nlin/reg.png, width=400 frac=.5] Linear regression by minimizing the total distance to all the points. label{fig:nlin:reg}
+Mathematically we can express the distance between a data point $(x_i,y_i)$ and the line $f(x)$ as $y_i-f(x_i)$. Note that this difference can be negative or positive depending if the data point lies below or above the line. We can then take the absolute value of all the distances, and try to minimize them. When we minimize something we take the derivative of the expression and put it equal to zero.  As you might remember from Calculus it is extremely hard to work with the derivative of the absolute value, because it is discontinuous. A much better approach is to square each distance and sum them:
+!bt
+\begin{equation}
+S=\sum_{i=0}^3(y_i-f(x_i))^2=\sum_{i=0}^3(y_i-a_0-a_1x_i)^2.
+label{eq:nlin:lsq}
+\end{equation}
+!et
+This is the idea behind *least square*, and linear regression. One thing you should be aware of is that points lying far from the line will contribute more to equation (ref{eq:nlin:lsq}). The underlying assumption is that each data point provides equally precise information about the process, this is often not the case. When analyzing experimental data, there may be points deviating from the expected behaviour, it is then important to investigate if these points are more affected by measurements errors than the others. If that is the case one should give them less weight in the least square estimate, by extending the formula above:
+!bt
+\begin{equation}
+S=\sum_{i=0}^3\omega_i(y_i-f(x_i))^2=\sum_{i=0}^3\omega_i(y_i-a_0-a_1x_i)^2,
+label{eq:nlin:lsqm}
+\end{equation}
+!et
+$\omega_i$ is a weight factor.
+
+Let us continue with equation (ref{eq:nlin:lsq})
+
+Two great explanations "linear regression by
+matrices":"https://medium.com/@andrew.chamberlain/the-linear-algebra-view-of-least-squares-regression-f67044b7f39b",
+and 
+"$R^2$-squared":"https://medium.com/@andrew.chamberlain/a-more-elegant-view-of-r-squared-a0a14c177dc3"
+
+======= Example: Solving the heat equation regression =======
+
+======= Singular Value Decomposition =======
+
+======= QR factorization =======
+
+======= Solving nonlinear equations =======
+The purpose of this section is to introduce a handful of techniques for solving a nonlinear equation. In many cases a combination of methods must be used, and the algorithm must be adopted to your specific problem. 
+##%endif
+!split
+========= Numerical integration =========
+label{ch:numint}
+
+###### Content provided under a Creative Commons Attribution license, CC-BY 4.0; code under MIT License. (c)2018 Aksel Hiorth
+
+% if FORMAT == 'ipynb':
+!bc pycod
+from IPython.core.display import HTML
+css_file = 'style.css'
+HTML(open(css_file, "r").read())
+!ec
+% endif
+
+======= Numerical Integration =======
+Before diving into the details of this section, it is worth pointing out that the derivation of the algorithms in this section follows a general pattern:
+
+o We start with a mathematical model (in this case an integral)
+o The mathematical model is formulated in discrete form 
+o Then we design an algorithm to solve the model 
+o The numerical solution for a test case is compared with the true solution (could be an analytical solution or data)
+o Error analysis: we investigate the accuracy of the algorithm by changing the number of iterations and/or make changes to the implementation or algorithm
+
+In practice you would not use your own implementation to calculate an integral, but in order to understand which method to use 
+in a specific case, it is important to understand the limitation and advantages of the different algorithms. The only way to achieve this is to 
+have a basic understanding of the development. There might also be some cases where you would like to adapt an integration scheme to your specific
+case if there is a special need  that the integration is fast. 
+
+===== The Midpoint Rule =====
+Numerical integration is encountered in numerous applications in physics and engineering sciences. 
+Let us first consider the most simple case, a function $f(x)$, which is a function of one variable, $x$. The most straight forward way of calculating the area $\int_a^bf(x)dx$ is 
+simply to divide the area under the function into $N$ equal rectangular slices with size $h=(b-a)/N$, as illustrated in figure ref{fig:numint:mid}. The area of one box is:
+!bt
+\begin{equation}
+M(x_k,x_k+h)=f(x_k+\frac{h}{2}) h,\label{eq:numint:mid0}
+\end{equation}
+!et
+and the area of all the boxes is:
+!bt
+\begin{align}
+I(a,b)&=\int_a^bf(x)dx\simeq\sum_{k=0}^{N-1}M(x_k,x_k+h)\nonumber\\
+&=h\sum_{k=0}^{N-1}f(x_k+\frac{h}{2})=h\sum_{k=0}^{N-1}f(a+(k+\frac{1}{2})h).
+\label{eq:numint:mid1}
+\end{align}
+!et
+Note that the sum goes from $k=0,1,\ldots,N-1$, a total of $N$ elements. We could have chosen to let the sum go from $k=1,2,\ldots,N$. 
+In Python, C, C++ and many other programming languages the arrays start by indexing the elements from $0,1,\ldots$ to $N-1$, 
+therefore we choose the convention of having the first element to start at $k=0$.
+
+FIGURE: [fig-numint/func_sq.png, width=800] Integrating a function with the midpoint rule. label{fig:numint:mid}
+
+Below is a Python code, where this algorithm is implemented for $\int_0^\pi\sin (x)dx$
+@@@CODE src-numint/midpoint_pc.py
+!bnotice
+There are many ways to calculate loops in a programming language. If you were coding in a lower level programming language like Fortran, C or C++, you would probably implement the loop like (in Python syntax):
+!bc pycod
+for k in range(0,N): # loop over k=0,1,..,N-1
+    val = lower_limit+(k+0.5)*h # midpoint value
+    area += func(val)
+return area*h
+!ec
+However, in Python, you would always try to avoid loops because they are generally slow. A more efficient way of implementing the above rule would be to replace the loop with:
+!bc pycod
+val  = [lower_limit+(k+0.5)*h for k in range(N)]
+ff   = func(val)
+area = np.sum(ff)
+return area*h
+!ec
+!enotice
+
+% if FORMAT == 'ipynb':
+By increasing $N$ the numerical result will get closer to the true answer. How much do you need to increase $N$ in order to reach an accuracy higher than $10^{-8}$.
+ What happens when $N$ increases?
+% endif
+
+===== The Trapezoidal Rule =====
+The numerical error in the above example is quite low, only about 2$\%$ for $N=5$. 
+However, by just looking at the graph above it seems likely that we can develop a better algorithm by using trapezoids instead of rectangles, 
+see figure ref{fig:numint:trap}.
+
+FIGURE: [fig-numint/func_tr.png, width=800] Integrating a function with the trapezoidal rule. label{fig:numint:trap}
+
+Earlier we approximated the area using the midpoint value: $f(x_k+h/2)\cdot h$. Now we use $A=A_1+A_2$, where $A_1=f(x_k)\cdot h$ 
+and $A_2=(f(x_k+h)-f(x_k))\cdot h/2$, hence the area of one trapezoid is:
+!bt
+\begin{equation}
+A\equiv T(x_k,x_k+h)=(f(x_k+h)+f(x_k))h/2.
+\end{equation}
+!et
+This is the trapezoidal rule, and for the whole interval we get:
+!bt
+\begin{align}
+I(a,b)&=\int_a^bf(x)dx\simeq\frac{1}{2}h\sum_{k=0}^{N-1}\left[f(x_k+k h)+f(x_k)\right] \nonumber \\
+&=h\left[\frac{1}{2}f(a)+f(a+h) + f(a+2h) +\nonumber\right. \\
+&\left.\qquad\cdots + f(a+(N-2)h)+\frac{1}{2}f(b)\right]\nonumber \\
+&=h\left[\frac{1}{2}f(a)+\frac{1}{2}f(b)+\sum_{k=1}^{N-1}f(a+k h)\right].
+\end{align}
+!et
+Note that this formula was bit more involved to derive, but it requires only one more function evaluations compared to the midpoint rule. 
+Below is a python implementation:
+@@@CODE src-numint/trapez_pc.py 
+
+In the table below, we have calculated the numerical error for various values of $N$.
+
+|--------c-------------------c-------------------c-------------------c----------|
+| $N$               | $h$               | Error Midpoint    | Error Trapezoidal |
+|--------c-------------------c-------------------c-------------------c----------|
+| 1                 | 3.14              | -57\%             | 100\%             |
+| 5                 | 0.628             | -1.66\%           | 3.31\%            |
+| 10                | 0.314             | -0.412\%          | 0.824\%           |
+| 100               | 0.031             | -4.11E-3\%        | 8.22E-3\%         |
+|-------------------------------------------------------------------------------|
+
+
+Note that we get the surprising result that this algorithm performs poorer, a factor of 2 than the midpoint rule.
+How can this be explained? By just looking at figure ref{fig:numint:mid}, we see that the midpoint rule actually over predicts the area from $[x_k,x_k+h/2]$ 
+ and under predicts in the interval $[x_k+h/2,x_{k+1}]$ or vice versa. The net effect is that for many cases the midpoint rule give a slightly better 
+ performance than the trapezoidal rule. In the next section we will investigate this more formally.
+
+===== Numerical Errors on Integrals =====
+It is important to know the accuracy of the methods we are using, otherwise we do not know if the
+computer produce correct results. In the previous examples we were able to estimate the error because we knew the analytical result. However, if we know the 
+analytical result there is no reason to use the computer to calculate the result(!). Thus, we need a general method to estimate the error, and let the computer 
+run until a desired accuracy is reached. 
+
+In order to analyze the midpoint rule in more detail we approximate the function by a Taylor 
+series at the midpoint between $x_k$ and $x_k+h$: 
+!bt
+\begin{align}
+f(x)&=f(x_k+h/2)+f^\prime(x_k+h/2)(x-(x_k+h/2))\nonumber\\ 
+&+\frac{1}{2!}f^{\prime\prime}(x_k+h/2)(x-(x_k+h/2))^2+\mathcal{O}(h^3)
+\end{align}
+!et
+Since $f(x_k+h/2)$ and its derivatives are constants it is straight forward to integrate $f(x)$:
+!bt
+\begin{align}
+I(x_k,x_k+h)&=\int_{x_k}^{x_k+h}\left[f(x_k+h/2)+f^\prime(x_k+h/2)(x-(x_k+h/2))\right.\nonumber\\
+&\left.+\frac{1}{2!}f^{\prime\prime}(x_k+h/2)(x-(x_k+h/2))^2+\mathcal{O}(h^3)\right]dx
+\end{align}
+!et
+The first term is simply the midpoint rule, to evaluate the two other terms we make the substitution: $u=x-x_k$:
+!bt
+\begin{align}
+I(x_k,x_k+h)&=f(x_k+h/2)\cdot h+f^\prime(x_k+h/2)\int_0^h(u-h/2)du\nonumber\\
+&+\frac{1}{2}f^{\prime\prime}(x_k+h/2)\int_0^h(u-h/2)^2du+\mathcal{O}(h^4)\nonumber\\
+&=f(x_k+h/2)\cdot h-\frac{h^3}{24}f^{\prime\prime}(x_k+h/2)+\mathcal{O}(h^4).
+\end{align}
+!et
+Note that all the odd terms cancels out, i.e $\int_0^h(u-h/2)^m=0$ for $m=1,3,5\ldots$. Thus the error for the midpoint rule, $E_{M,k}$, on this particular interval is:
+!bt
+\begin{equation}
+E_{M,k}=I(x_k,x_k+h)-f(x_k+h/2)\cdot h=-\frac{h^3}{24}f^{\prime\prime}(x_k+h/2),
+\end{equation}
+!et
+where we have ignored higher order terms. We can easily sum up the error on all the intervals, but clearly $f^{\prime\prime}(x_k+h/2)$ will 
+not, in general, have the same value on all intervals. However, an upper bound for the error can be found by replacing $f^{\prime\prime}(x_k+h/2)$ 
+with the maximal value on the interval $[a,b]$, $f^{\prime\prime}(\eta)$:
+!bt
+\begin{align}
+E_{M}&=\sum_{k=0}^{N-1}E_{M,k}=-\frac{h^3}{24}\sum_{k=0}^{N-1}f^{\prime\prime}(x_k+h/2)\leq-\frac{Nh^3}{24}f^{\prime\prime}(\eta),\label{eq:numint:em}\\
+E_{M}&\leq-\frac{(b-a)^3}{24N^2}f^{\prime\prime}(\eta),
+\end{align}
+!et
+where we have used $h=(b-a)/N$. We can do the exact same analysis for the trapezoidal rule, but then we expand the function around $x_k-h$ instead of the midpoint. 
+The error term is then:
+!bt
+\begin{equation}
+E_T=\frac{(b-a)^3}{12N^2}f^{\prime\prime}(\overline{\eta}).
+\end{equation}
+!et
+At the first glance it might look like the midpoint rule always is better than the trapezoidal rule, but note that the second derivative is 
+evaluated in different points ($\eta$ and $\overline{\eta}$). Thus it is possible to construct examples where the midpoint rule performs poorer 
+than the trapezoidal rule.
+
+Before we end this section we will rewrite the error terms in a more useful form as it is not so easy to evaluate 
+$f^{\prime\prime}(\eta)$ (since we do not know which value of $\eta$ to use). By taking a closer look at equation (ref{eq:numint:em}), 
+we see that it is closely related to the midpoint rule for $\int_a^bf^{\prime\prime}(x)dx$, hence:
+!bt
+\begin{align}
+E_{M}&=-\frac{h^2}{24}h
+\sum_{k=0}^{N-1}f^{\prime\prime}(x_k+h/2)\simeq-\frac{h^2}{24}\int_a^b
+f^{\prime\prime}(x)dx\\
+E_M&\simeq\frac{h^2}{24}\left[f^\prime(b)-f^\prime(a)\right]=-\frac{(b-a)^2}{24N^2}\left[f^\prime(b)-f^\prime(a)\right]
+\end{align}
+!et
+The corresponding formula for the trapezoid formula is:
+!bt
+\begin{equation}
+E_T\simeq \frac{h^2}{12}\left[f^\prime(b)-f^\prime(a)\right]=\frac{(b-a)^2}{12N^2}\left[f^\prime(b)-f^\prime(a)\right]
+\end{equation}
+!et
+Now, we can make an algorithm that automatically choose the number of steps to reach (at least) a predefined accuracy:
+@@@CODE src-numint/adaptive_midpoint_pc.py
+!bnotice
+In Python it is sometimes convenient to enter default values for the arguments in a function. In the above example, we could also have written the function definition as\\ `def int_adaptive_midpoint(func, lower_limit, upper_limit,` \\ `tol=1e-8):`. If the `tol` parameter is not given the code will assume an accuracy of $10^{-8}$. 
+!enotice
+===== Practical Estimation of Errors on Integrals =====
+label{sec:numint:parct}
+From the example above we were able to estimate the number of steps needed to reach (at least) a certain precision. 
+In many practical cases we do not deal with functions, but with data and it can be difficult to evaluate the derivative. 
+We also saw from the example above that the algorithm gives a higher precision than what we asked for. 
+How can we avoid doing too many iterations? A very simple solution to this question is to double the number of intervals until 
+a desired accuracy is reached. The following analysis holds for both the trapezoid and midpoint method, because in both cases 
+the error scale as $h^2$. 
+
+Assume that we have evaluated the integral with a step size $h_1$, and the computed result is $I_1$. 
+Then we know that the true integral is $I=I_1+c h_1^2$, where $c$ is a constant that is unknown. If we now half the step size: $h_2=h_1/2$, 
+then we get a new (better) estimate of the integral, $I_2$, which is related to the true integral $I$ as: $I=I_2+c h_2^2$. 
+Taking the difference between $I_2$ and $I_1$ give us an estimation of the error:
+!bt
+\begin{equation}
+I_2-I_1=I-c h_2^2-(I-ch_1^2)=3c h_2^2,
+\end{equation}
+!et
+where we have used the fact that $h_1=2h_2$, Thus the error term is:
+!bt
+\begin{equation}
+E(a,b)=c h_2^2=\frac{1}{3}(I_2-I_1).
+\end{equation}
+!et
+This might seem like we need to evaluate the integral twice as many times as needed. This is not the case, by choosing to exactly 
+half the spacing we only need to evaluate for the values that lies halfway between the original points. We will demonstrate how 
+to do this by using the trapezoidal rule, because it operates directly on the $x_k$ values and not the midpoint values. 
+The trapezoidal rule can now be written as:
+!bt
+\begin{align}
+I_2(a,b)&=h_2\left[\frac{1}{2}f(a)+\frac{1}{2}f(b)+\sum_{k=1}^{N_2-1}f(a+k h_2)\right],\\
+&=h_2\left[\frac{1}{2}f(a)+\frac{1}{2}f(b)+\sum_{k=\text{even values}}^{N_2-1}f(a+k h_2)\right.\nonumber\\
+&\left.\qquad+\sum_{k=\text{odd values}}^{N_2-1}f(a+k h_2)\right],
+\end{align}
+!et
+in the last equation we have split the sum into odd an even values. The sum over the even values can be rewritten:
+!bt
+\begin{equation}
+\sum_{k=\text{even values}}^{N_2-1}f(a+k h_2)=\sum_{k=0}^{N_1-1}f(a+2k h_2)=\sum_{k=0}^{N_1-1}f(a+k h_1),
+\end{equation}
+!et
+note that $N_2$ is replaced with $N_1=N_2/2$, we can now rewrite $I_2$ as:
+!bt
+\begin{align}
+I_2(a,b)&=h_2\left[\frac{1}{2}f(a)+\frac{1}{2}f(b)+\sum_{k=0}^{N_1-1}f(a+k h_1)\right.\nonumber\\
+&\left.+\sum_{k=\text{odd values}}^{N_2-1}f(a+k h_2)\right]
+\end{align}
+!et
+Note that the first terms are actually the trapezoidal rule for $I_1$, hence:
+!bt
+\begin{equation}
+I_2(a,b)=\frac{1}{2}I_1(a,b)+h_2\sum_{k=\text{odd values}}^{N_2-1}f(a+k h_2)
+\end{equation}
+!et
+A possible algorithm is then:
+o Choose a low number of steps to evaluate the integral, $I_0$, the first time, e.g. $N_0=10$
+o Double the number of steps, $N_1=2N_0$ 
+o Calculate the missing values by summing over the odd number of steps $\sum_{k=\text{odd values}}^{N_1-1}f(a+k h_1)$
+o Check if $E_1(a,b)=\frac{1}{3}(I_1-I_0)$ is lower than a specific tolerance
+o If yes quit, if not, return to 2, and continue until $E_i(a,b)=\frac{1}{3}(I_{i+1}-I_{i})$ is lower than the tolerance  
+
+Below is a Python implementation:
+@@@CODE src-numint/adaptive_trapez_pc.py
+% if FORMAT == 'ipynb':
+What is a good number to start with, what happens if we choose $N_0$ too large? Compare the adaptive midpoint rule with the adaptive 
+trapezoidal rule, is it possible to get the same accuracy with the same number of iterations? Check the expected number of 
+iterations with the theoretical value $N=\sqrt{\frac{(b-a)^2}{12E_T}\left[f^\prime(b)-f^\prime(a)\right]}$.
+% endif
+
+If you compare the number of terms used in the adaptive trapezoidal rule, which was developed by halving the step size, and the adaptive midpoint rule that was derived on the basis of the theoretical error term, you will find the adaptive midpoint rule is more efficient. So why go through all this trouble? In the next section we will see that the development we did for the adaptive trapezoidal rule is closely related to Romberg integration, which is *much* more effective.
+ 
+======= Romberg Integration =======
+The adaptive algorithm for the trapezoidal rule in the previous section can be easily improved by remembering 
+that the true integral was given by[^romerr] : $I=I_i+ch_i^2+\mathcal{O}(h^4)$. The error term was in the previous example only used to 
+check if the desired tolerance was achieved, but we could also have added it to our estimate of the integral to reach an accuracy to fourth order:
+
+[^romerr]: Note that all odd powers of $h$ is equal to zero, thus the corrections are always in even powers.  
+
+!bt
+\begin{equation}
+I=I_{i+1}+ch^2+\mathcal{O}(h^4)=I_{i+1}+\frac{1}{3}\left[I_{i+1}-I_{i}\right]+\mathcal{O}(h^4).
+\end{equation}
+!et
+As before the error term $\mathcal{O}(h^4)$, can be written as: $ch^4$. Now we can proceed as in the previous section: First we estimate the 
+integral by one step size $I_i=I+ch_i^4$, next we half the step size $I_{i+1}=I+ch_{i+1}^4$ and use these two estimates to calculate the error term:
+!bt
+\begin{align}
+I_{i+1}-I_{i}&=I-c h_{i+1}^4-(I-ch_i^4)=-c h_{i+1}^4+c(2h_{i+1})^4=15c h_{i+1}^4,\nonumber\\
+ch_{i+1}^4&=\frac{1}{15}\left[I_{i+1}-I_{i}\right]+\mathcal{O}(h^6).
+\end{align}
+!et
+but now we are in the exact situation as before, we have not only the error term but the correction up to order $h^4$ for this integral:
+!bt
+\begin{equation}
+I=I_{i+1}+\frac{1}{15}\left[I_{i+1}-I_{i}\right]+\mathcal{O}(h^6).\label{eq:numint:rom}
+\end{equation}
+!et
+Each time we half the step size we also gain a higher order accuracy in our numerical algorithm. Thus, there are two iterations going on at the same time; 
+one is the iteration that half the step size ($i$), and the other one is the increasing number of higher order terms added (which we will denote $m$). 
+We need to improve our notation, and replace the approximation of the integral ($I_i$) with $R_{i,m}$. Equation (ref{eq:numint:rom}), can now 
+be written:
+!bt
+\begin{equation}
+I=R_{i+1,2}+\frac{1}{15}\left[R_{i+1,2}-R_{i,2}\right]+\mathcal{O}(h^6).
+\end{equation}
+!et
+A general formula valid for any $m$ can be found by realizing:
+!bt
+\begin{align}
+I&=R_{i+1,m+1}+c_mh_i^{2m+2}+\mathcal{O}(h_i^{2m+4})\label{eq:numint:rom0}\\
+I&=R_{i,m+1}+c_mh_{i-1}^{2m+2}+\mathcal{O}(h_{i-1}^{2m+4})\nonumber\\
+&=R_{i,m+1}+2^{2m+2}c_mh_{i}^{2m+2}+\mathcal{O}(h_{i-1}^{2m+4}),\label{eq:numint:rom1}
+\end{align}
+!et
+where, as before $h_{i-1}=2h_i$. Subtracting equation (ref{eq:numint:rom0}) and (ref{eq:numint:rom1}), we find an expression for the error term:
+!bt
+\begin{align}
+c_mh_{i}^{2m+2}&=\frac{1}{4^{m+1}-1}(R_{i,m}-R_{i-1,m})\label{eq:numint:rom2}
+\end{align}
+!et
+Then the estimate for the integral in equation (ref{eq:numint:rom1}) is:
+!bt
+\begin{align}
+I&=R_{i,m+1}+\mathcal{O}(h_i^{2m+2})\\
+R_{i,m+1}&=R_{i,m}+\frac{1}{4^{m+1}-1}(R_{i+1,m}-R_{i,m}).
+\end{align}
+!et
+A possible algorithm is then:
+
+o Evaluate $R_{0,0}=\frac{1}{2}\left[f(a)+f(b)\right](b-a)$ as the first estimate
+o Double the number of steps, $N_{i+1}=2N_i$ or half the step size $h_{i+1}=h_i/2$ 
+o Calculate the missing values by summing over the odd number of steps $\sum_{k=\text{odd values}}^{N_1-1}f(a+k h_{i+1})$
+o Correct the estimate by adding *all* the higher order error term $R_{i,m+1}=R_{i,m}+\frac{1}{4^m-1}(R_{i+1,m+1}-R_{i,m+1})$
+o Check if the error term is lower than a specific tolerance $E_{i,m}(a,b)=\frac{1}{4^{m+1}-1}(R_{i,m}-R_{i-1,m})$, if yes quit, if no goto 2, increase $i$ and $m$ by one
+The algorithm is illustrated in figure ref{fig:numint:romberg}.
+FIGURE: [fig-numint/romberg.png, width=400 frac=0.5] Illustration of the Romberg algorithm. Note that for each new evaluation of the integral $R_{i,0}$, all the correction terms $R_{i,m}$ (for $m>0$) must be evaluated again. label{fig:numint:romberg}
+
+Note that the tolerance term is not the correct one as it uses the error estimate for the current step, 
+which we also use correct the integral in the current step to reach a higher accuracy. 
+Thus the error on the integral will always be lower than the user specified tolerance.
+Below is a Python implementation:
+@@@CODE src-numint/romberg_pc.py
+
+Note that the Romberg integration only uses 32 function evaluations to reach a precision of $10^{-8}$, whereas the adaptive midpoint and trapezoidal rule in the previous
+section uses 20480 and 9069 function evaluations, respectively. 
+
+===== Gaussian Quadrature =====
+Many of the methods we have looked into are of the type:
+!bt
+\begin{align}
+	\int_a^b f(x) dx = \sum_{k=0}^{N-1} \omega_k f(x_k),\label{eq:numint:qq1}
+\end{align}
+!et
+where the function is evaluated at fixed interval. For the midpoint rule $\omega_k=h$ for all values of $k$, for the trapezoid rule 
+$\omega_k=h/2$ for the endpoints and $h$ for all the interior points. 
+For the Simpsons rule (see exercise) $\omega_k=h/3, 4h/3,2h/3,4h/3,\ldots,4h/3,h/3$. 
+Note that all the methods we have looked at so far samples the function in equal spaced points, $f(a+k h)$, 
+for $k=0, 1, 2\ldots, N-1$. If we now allow for the function to be evaluated at unevenly spaced points, we can do a lot better. 
+This realization is the basis for Gaussian Quadrature. We will explore this in the following, 
+but to make the development easier and less cumbersome, we transform the integral from the domain $[a,b]$ to $[-1,1]$:
+!bt
+\begin{align}
+\int_a^bf(t)dt&=\frac{b-a}{2}\int_{-1}^{1}f(x)dx\text{ , where:}\\
+x&=\frac{2}{b-a}t-\frac{b+a}{b-a}.
+\end{align}
+!et
+The factor in front comes from the fact that $dt=(b-a)dx/2$, thus we can develop our algorithms on the domain $[-1,1]$, 
+and then do the transformation back using: $t=(b-a)x/2+(b+a)/2$.
+
+!bnotice
+The idea we will explore is as follows:
+If we can approximate the function to be integrated on the domain $[-1,1]$ (or on $[a,b]$) as a 
+polynomial of as *large a degree as possible*, then the numerical integral of this polynomial will be very close to the integral of the 
+function we are seeking.
+!enotice
+This idea is best understood by a couple of examples. Assume that we want to use $N=1$ in equation (ref{eq:numint:qq1}):
+!bt
+\begin{equation}
+\int_{-1}^{1}f(x)\,dx\simeq\omega_0f(x_0).
+\end{equation}
+!et
+We now choose $f(x)$ to be a polynomial of as large a degree as possible, but with the requirement that the integral is exact. If $f(x)=1$, we get:
+!bt
+\begin{equation}
+\int_{-1}^{1}f(x)\,dx=\int_{-1}^{1}1\,dx=2=\omega_0,
+\end{equation}
+!et
+hence $\omega_0=2$. If we choose $f(x)=x$, we get:
+!bt
+\begin{equation}
+\int_{-1}^{1}f(x)\,dx=\int_{-1}^{1}x\,dx=0=\omega_0f(x_0)=2x_0,
+\end{equation}
+!et
+hence $x_0=0$. 
+% if FORMAT != 'sphinx':
+!bnotice The Gaussian integration rule for $N=1$ is:
+% else:
+The Gaussian integration rule for $N=1$ is:
+% endif 
+!bt
+\begin{align}
+&\int_{-1}^{1}f(x)\,dx\simeq 2f(0)\text{, or: }\nonumber\\
+&\int_{a}^{b}f(t)\,dt\simeq\frac{b-a}{2}\,2f(\frac{b+a}{2})=(b-a)f(\frac{b+a}{2}).
+\end{align}
+!et
+% if FORMAT != 'sphinx':
+!enotice
+% endif
+This equation is equal to the midpoint rule, by choosing $b=a+h$ we reproduce equation (ref{eq:numint:mid0}). If we choose $N=2$:
+!bt
+\begin{equation}
+\int_{-1}^{1}f(x)\,dx\simeq\omega_0f(x_0)+\omega_1f(x_1),
+\end{equation}
+!et
+we can show that now $ f(x)=1,\,x,\,x^2\,x^3$ can be integrated exact:
+!bt
+\begin{align}
+\int_{-1}^{1}1\,dx&=2=\omega_0f(x_0)+\omega_1f(x_1)=\omega_0+\omega_1\,,\\
+\int_{-1}^{1}x\,dx&=0=\omega_0f(x_0)+\omega_1f(x_1)=\omega_0x_0+\omega_1x_1\,,\\
+\int_{-1}^{1}x^2\,dx&=\frac{2}{3}=\omega_0f(x_0)+\omega_1f(x_1)=\omega_0x_0^2+\omega_1x_1^2\,,\\
+\int_{-1}^{1}x^3\,dx&=0=\omega_0f(x_0)+\omega_1f(x_1)=\omega_0x_0^3+\omega_1x_1^3\,,
+\end{align}
+!et
+hence there are four unknowns and four equations. The solution is: $\omega_0=\omega_1=1$ and $x_0=-x_1=1/\sqrt{3}$.
+% if FORMAT != 'sphinx':
+!bnotice The Gaussian integration rule for $N=2$ is:
+% else:
+The Gaussian integration rule for $N=2$ is:
+% endif
+!bt
+\begin{align}
+\int_{-1}^{1}f(x)\,dx&\simeq f(-\frac{1}{\sqrt{3}})+f(\frac{1}{\sqrt{3}})\, \text{, or:}\\
+\int_{a}^{b}f(x)\,dx&\simeq \frac{b-a}{2}\left[f(-\frac{b-a}{2}\frac{1}{\sqrt{3}}+\frac{b+a}{2})
++f(\frac{b-a}{2}\frac{1}{\sqrt{3}}+\frac{b+a}{2})\right].
+\end{align}
+!et
+% if FORMAT != 'sphinx':
+!enotice
+% endif
+@@@CODE src-numint/gaussquad2.py fromto: def int_@a=0
+
+=== The case N=3 ===
+For the case $N=3$, we find that $f(x)=1,x,x^2,x^3,x^4,x^5$ can be integrated exactly:
+!bt
+\begin{align}
+\int_{-1}^{1}1\,dx&=2=\omega_0+\omega_1+\omega_2\,,\\
+\int_{-1}^{1}x\,dx&=0=\omega_0x_0+\omega_1x_1+\omega_2x_2\,,\\
+\int_{-1}^{1}x^2\,dx&=\frac{2}{3}=\omega_0x_0^2+\omega_1x_1^2+\omega_2x_2^2\,,\\
+\int_{-1}^{1}x^3\,dx&=0=\omega_0x_0^3+\omega_1x_1^3+\omega_2x_2^3\,,\\
+\int_{-1}^{1}x^4\,dx&=\frac{2}{5}=\omega_0x_0^4+\omega_1x_1^4+\omega_2x_2^4\,,\\
+\int_{-1}^{1}x^5\,dx&=0=\omega_0x_0^5+\omega_1x_1^5+\omega_2x_2^5\,,
+\end{align}
+!et
+the solution to these equations are $\omega_{0,1,2}=5/9, 8/9, 5/9$ and $x_{1,2,3}=-\sqrt{3/5},0,\sqrt{3/5}$. Below is a Python implementation:
+@@@CODE src-numint/gaussquad3.py fromto: def int_@a=0
+
+Note that the Gaussian quadrature converges very fast. From $N=2$ to $N=3$ function evaluation we reduce the error (in this specific case) 
+from 6.5% to 0.1%. Our standard trapezoidal formula needs more than 20 function evaluations to achieve this, the Romberg method uses 4-5 function
+evaluations. How can this be? If we use the standard Taylor formula for the function to be integrated, we know that for $N=2$ the Taylor 
+formula must be integrated up to $x^3$, so the error term is proportional to $h^4f^{(4)}(\xi)$ (where $\xi$ is some x-value in $[a,b]$). 
+$h$ is the step size, and we can replace it with $h\sim (b-a)/N$, thus the error scale as $c_N/N^4$ (where $c_N$ is a constant). 
+Following the same argument, we find for $N=3$ that the error term is $h^6f^{(6)}(\xi)$ or that the error term scale as $c_N/N^6$. 
+Each time we increase $N$ by a factor of one, the error term reduces by $N^2$. Thus if we evaluate the integral for $N=10$, 
+increasing to $N=11$ will reduce the error by a factor of $11^2=121$.
+
+===== Error term on Gaussian Integration =====
+The Gaussian integration rule of order $N$ integrates exactly a polynomial of order $2N-1$. 
+%if book:
+From Taylors error formula, see equation (ref{eq:taylor:error}) in Chapter ref{ch:taylor},
+%else:
+From Taylors error formula, 
+%endif
+we can easily see that the error term must be of order $2N$, and be proportional to $f^{(2N)}(\eta)$, see cite{stoer2013} for more details on the derivation of error terms. The drawback with an analytical error term derived from series expansion is that it involves the derivative of the function. As we have already explained, this is very unpractical and it is much more practical to use the methods described in section ref{sec:numint:parct}. Let us consider this in more detail, assume that we evaluate the integral using first a Gaussian integration rule with $N$ points, and then $N+1$ points. Our estimates of the "exact" integral, $I$,  would then be:
+!bt
+\begin{align}
+ I&=I_N+ch_{N}^{2N},label{eq:numint:gerr1}\\
+ I&=I_{N+1}+ch_{N+1}^{2N+1}.
+label{eq:numint:gerr2}
+\end{align}
+!et
+In principle $h_{N+1}\neq h_{N}$, but in the following we will assume that $h_N\simeq h_{N+1}$, and $h\ll 1$. Subtracting equation (ref{eq:numint:gerr1}) and (ref{eq:numint:gerr2}) we can show that a reasonable estimate for the error term $ch^{2N}$ would be:
+!bt
+\begin{equation}
+ch^N= I_{N+1}-I_N.
+\end{equation}
+!et
+If this estimate is lower than a given tolerance we can be quite confident that the higher order estimate $I_{N+1}$ approximate the true integral within our error estimate. This is the method implemented in SciPy, "`integrate.quadrature`":"https://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.integrate.quadrature.html"
+===== Common Weight functions for Classical Gaussian Quadratures =====
+##https://pomax.github.io/bezierinfo/legendre-gauss.html
+===== Which method to use in a specific case? =====
+There are no general answers to this question, and one need to decide from case to case. If computational speed is not an issue, 
+and the function to be integrated can be evaluated at any points all the methods above can be used. If the function to be integrated 
+is a set of observations at different times, that might be unevenly spaced, I would use the midpoint rule:
+!bt
+\begin{equation}
+I(a,b)=\int_a^bf(x)dx\simeq\sum_{k=0}^{N-1}M(x_k,x_k+h)=\sum_{k=0}^{N-1}h_if(x_k+\frac{h_i}{2})
+\end{equation}
+!et
+This is because we do not know anything about the function between the points, only when it is observed, and the formula uses only 
+the information at the observation points. There is a second more subtle reason, and that is the fact that in many cases the 
+observations a different times are the {\it average} value of the observable quantity and it those cases the midpoint 
+rule would be the exact answer. 
+##===== Exercises =====
+
+===== Exercise: Numerical Integration =====
+!bsubex
+Show that for a linear function, $y=a\cdot x+b$ both the trapezoidal rule and the rectangular rule are exact
+!esubex
+!bsubex
+Consider $I(a,b)=\int_a^bf(x)dx$ for $f(x)=x^2$. The analytical result is $I(a,b)=\frac{b^3-a^3}{3}$. Use the Trapezoidal and 
+  Midpoint rule to evaluate these integrals and show that the error for the Trapezoidal rule is exactly twice as big as the Midpoint rule.
+!esubex
+!bsubex
+Use the fact that the error term on the trapezoidal rule is twice as big as the midpoint rule to derive Simpsons formula: $I(a,b)=\sum_{k=0}^{N-1}I(x_k,x_k+h)=\frac{h}{6}\left[f(a)+ 4f(a+\frac{h}{2})+2f(a+h)+4f(a+3\frac{h}{2})+2f(a+2h)+\cdots+f(b)\right]$ Hint: $I(x_k,x_k+h)=M(x_k,x_k+h)+E_M$ (midpoint rule) and $I(x_k,x_k+h)=T(x_k,x_k+h)+E_T=T(x_k,x_k+h)-2E_M$ (trapezoidal rule).
+!bsol
+Simpsons rule is an improvement over the midpoint and trapezoidal rule. It can be derived in different ways, we will make use of 
+the results in the previous section. If we assume that the second derivative is reasonably well behaved on the interval $x_k$ 
+and $x_k+h$ and fairly constant we can assume that $f^{\prime\prime}(\eta)\simeq f^{\prime\prime}(\overline{\eta})$, hence $E_T=-2E_M$.
+!bt
+\begin{align}
+I(x_k,x_k+h)&=M(x_k,x_k+h)+E_M\text{ (midpoint rule)}\\
+I(x_k,x_k+h)&=T(x_k,x_k+h)+E_T\nonumber\\
+&=T(x_k,x_k+h)-2E_M\text{ (trapezoidal rule)},
+\end{align}
+!et
+we can now cancel out the error term by multiplying the first equation with 2 and adding the equations:
+!bt
+\begin{align}
+3I(x_k,x_k+h)&=2M(x_k,x_k+h)+T(x_k,x_k+h)\\
+&=2f(x_k+\frac{h}{2}) h+\left[f(x_k+h)+f(x_k)\right] \frac{h}{2}\\
+I(x_k,x_k+h)&=\frac{h}{6}\left[f(x_k)+4f(x_k+\frac{h}{2})+f(x_k+h)\right].
+\end{align}
+!et
+Now we can do as we did in the case of the trapezoidal rule, sum over all the elements:
+!bt
+\begin{align}
+I(a,b)&=\sum_{k=0}^{N-1}I(x_k,x_k+h)\nonumber\\
+&=\frac{h}{6}\left[f(a)+ 4f(a+\frac{h}{2})+2f(a+h)+4f(a+3\frac{h}{2})\right.\nonumber\\
+&\left.\qquad+2f(a+2h)+\cdots+f(b)\right]\\
+&=\frac{h^\prime}{3}\left[f(a)+ f(b) + 4\sum_{k= \text{odd}}^{N-2}f(a+k h^\prime)+2\sum_{k= \text{even}}^{N-2}f(a+k h^\prime)\right],
+\end{align}
+!et
+note that in the last equation we have changed the step size $h=2h^\prime$.
+!esol
+!esubex
+!bsubex
+Show that for $N=2$ ($f(x)=1,x,x^3$), the points and Gaussian quadrature rule for $\int_{0}^{1}x^{1/2}f(x)\,dx$
+is $\omega_{0,1}=-\sqrt{70}{150} + 1/3, \sqrt{70}{150} + 1/3$
+##=\simeq 0.27755599823106164, 0.38911066843560504$
+and $x_{0,1}=-2\sqrt{70}{63} + 5/9, 2\sqrt{70}{63} + 5/9$
+##\simeq 0.27755599823106164, 0.38911066843560504$
+o Integrate $\int_0^1x^{1/2}\cos x\,dx$ using the rule derived in the exercise above and compare with the standard Gaussian quadrature rule for ($N=2$, and $N=3$).
+!esubex
+!bsubex
+Make a Python program that uses the Midpoint rule to integrate experimental data that are unevenly spaced and given in the form of two arrays.  
+!esubex
+
+
+
+
+!split
+========= Ordinary differential equations =========
+label{ch:ode}
+%if all:
+###### Content provided under a Creative Commons Attribution license, CC-BY 4.0; code under MIT License. (c)2018 Aksel Hiorth
+
+% if FORMAT == 'ipynb':
+!bc pycod
+from IPython.core.display import HTML
+css_file = 'style.css'
+HTML(open(css_file, "r").read())
+!ec
+% endif
+======= Ordinary Differential Equations =======
+Physical systems evolves in space and time, and very often they are described by a ordinary differential equations (ODE) and/or
+partial differential equations (PDE). The difference between an ODE and a PDE is that an ODE only describes 
+the changes in one spatial dimension *or* time, whereas a PDE describes a system that evolves in the $x-$, $y-$, $z-$ dimension 
+and/or in time. In the following we will spend a significant
+amount of time to explore one of the simplest algorithm, Eulers method.
+Sometimes this is exactly the algorithm you would like to use, but with very 
+little extra effort much more sophisticated algorithms can easily be implemented, such as the Runge-Kutta fourth order method.
+However, all these algorithms, will at some point run into the same
+kind of troubles if used reckless. Thus we will use the Eulers method as a playground,
+investigate when the algorithm run into trouble and
+suggests ways to fix it, these approaches can easily be extended to the higher order methods. Most of the other algorithms boils down to the same idea of extrapolating
+a function using derivatives multiplied with a small step size.  
+
+======= A Simple Model for Fluid Flow =======
+Let us consider a simple example from chemical engineering, a continuous stirred tank reactor (CSTR), see figure ref{fig:ode:cstr}. 
+The flow is incompressible ($q_\text{out}=q_\text{in}$), a fluid is entering
+on the top and exiting at the bottom, the tank has a fixed volume $V$. Assume that the tank is filled with saltwater, and that freshwater is pumped into it, how much time does it 
+take before $90\%$ of the saltwater is replaced with freshwater? The tank is *well mixed*, illustrated with the propeller, this means that at every time the 
+concentration is uniform in the tank, i.e. that $C(t)=C_\text{out}(t)$.  
+
+FIGURE: [fig-ode/cstr, width=800] A continuous stirred tank model, $C(t)=C_\text{out}(t)$, and $q_\text{out}=q_\text{in}$. label{fig:ode:cstr}
+
+The concentration $C$ is measured in gram of salt per liter water, and the flow rate $q$ is liter of water per day. The model for the salt balance in this system can be described in words by:
+!bt
+\begin{align}
+[\text{accumulation of salt}] &= [\text{salt into the system}] - [\text{salt out of the system}]\nonumber\\
+& + [\text{generation of salt}].\label{eq:ode:mbal}
+\end{align}
+!et
+In our case there are no generation of salt within the system so this term is zero. The flow of salt into the system during a time $\Delta t$ is: 
+$q_\text{in}(t)\cdot C_\text{in}(t)\cdot \Delta t=q(t)\cdot C_\text{in}(t)\cdot \Delta t$, 
+the flow of salt out of the system is: $q_\text{out}(t)\cdot C_\text{out}(t)\cdot \Delta t=q(t)\cdot C(t)\cdot \Delta t$, and the accumulation during a time step is:
+$C(t+\Delta t)\cdot V - C(t)\cdot V$, hence:
+!bt
+\begin{equation}
+C(t+\Delta t)\cdot V - C(t)\cdot V = q(t)\cdot C_\text{in}(t)\cdot \Delta t - q(t)\cdot C(t)\cdot \Delta t.\label{eq:ode:cstr1}
+\end{equation}
+!et 
+Note that it is not a priori apparent, which time the concentrations and flow rates on the right hand side should be evaluated at, 
+we could have chosen to evaluate them at $t+\Delta t$, or at any time $t\in [t,t+\Delta t]$. We will return to this point later in this chapter. Dividing by $\Delta t$, and taking the limit
+$\Delta t\to 0$, we can write equation (ref{eq:ode:cstr1}) as:
+!bt
+\begin{equation}
+V\frac{dC(t)}{dt} = q(t)\left[C_\text{in}(t) - C(t)\right].\label{eq:ode:cstr2}
+\end{equation}
+!et 
+Seawater contains about 35 gram salt/liter fluid, if we assume that the fresh water contains no salt, we have the boundary conditions
+$C_\text{in}(t)=0$, $C(0)=$35gram/l. The equation (ref{eq:ode:cstr2}) the reduces to:
+!bt
+\begin{equation}
+V\frac{dC(t)}{dt} = -qC(t),\label{eq:ode:cstr3}
+\end{equation}
+!et
+this equation can easily be solved, by dividing by $C$, multiplying by $dt$ and integrating:
+!bt
+\begin{align}
+V\int_{C_0}^C\frac{dC}{C} &= -q\int_0^tdt,\nonumber\\
+C(t)&=C_0e^{-t/\tau},\text{ where } \tau\equiv \frac{V}{q}.\label{eq:ode:sol}
+\end{align}
+!et
+This equation can be inverted to give $t=-\tau\ln[C(t)/C]$. If we assume that the volume of the tank is 1m$^3$=1000liters, 
+and that the flow rate is 1 liter/min, we find that $\tau$=1000min=0.69days and that it takes about $-0.69\ln0.9\simeq1.6$days to reduce the concentration
+by 90$\%$ to 3.5 gram/liter.     
+
+!bnotice The CSTR
+You might think that the CSTR is a very simple model, and it is, but this type of model is the basic building blocks in chemical engineering.
+By putting CSTR tanks in series and/or connecting them with pipes, the efficiency of manufacturing various type of chemicals
+can be investigated. Although the CSTR is an idealized model for the part of a chemical factory, it is actually a *very good* model 
+for fluid flow in a porous media. By connecting CSTR tanks in series, one can model how chemical tracers propagate in the subsurface. 
+The physical reason for this is that dispersion in porous media will play the role of the propellers and mix the concentration
+uniformly.      
+!enotice
+
+======= Eulers Method =======
+If the system gets slightly more complicated, e.g several tanks in series with a varying flow rate or if salt was generated in the tank, there is a
+good chance that we have to solve the equations numerically to obtain a solution.
+Actually, we have already developed a numerical algorithm to solve equation (ref{eq:ode:cstr2}), 
+before we arrived at equation (ref{eq:ode:cstr2}) in equation (ref{eq:ode:cstr1}). This is a special case of Eulers method, which is basically to 
+replace the derivative in equation (ref{eq:ode:cstr2}), with $(C(t+\Delta t)-C(t))/\Delta t$. By rewriting equation (ref{eq:ode:cstr1}), so that we
+keep everything related to the new time step, $t+\Delta t$, on one side, we get:
+!bt
+\begin{align}
+VC(t+\Delta t) &= VC(t) + qC_\text{in}(t) - qC(t),\label{eq:ode:eu0}\\
+C(t+\Delta t) &= C(t) + \frac{\Delta t}{\tau}\left[C_\text{in}(t) - C(t)\right]\label{eq:ode:eu1},
+\end{align}
+!et
+we introduce the short hand notation: $C(t)=C_n$, and $C(t+\Delta t)=C_{n+1}$, hence the algorithm can be written more compact as:
+!bt
+\begin{equation}
+C_{n+1} = \left(1-\frac{\Delta t}{\tau}\right)C_n + \frac{\Delta t}{\tau}C_{\text{in},n}\label{eq:ode:eu2},
+\end{equation}
+!et
+In the script below, we have implemented equation (ref{eq:ode:eu2}).
+% if FORMAT == 'ipynb':
+Run the script below and look at the results.
+@@@CODE src-ode/euler.py
+% endif
+% if FORMAT != 'ipynb':
+@@@CODE src-ode/euler.py fromto: def analytical@# rest of
+FIGURE: [fig-ode/euler, width=800] The concentration in the tank for different step size $\Delta t$. label{fig:ode:euler}
+
+In figure ref{fig:ode:euler} the result of the implementation is shown for different values of $\Delta t$ 
+% endif
+Clearly we see that the results are dependent on the step size, as the step increases the numerical solution deviates from the analytical solution. At some point the 
+numerical algorithm fails completely, and produces results that have no meaning. 
+
+===== Error Analysis - Eulers Method =====
+There are two obvious questions:
+o When does the algorithm produce unphysical results?  
+o What is an appropriate step size? 
+Let us consider the first question, clearly when the concentrations gets negative the solution is unphysical. From equation (ref{eq:ode:eu2}), 
+we see that when $\Delta t/\tau > 1$, the concentration 
+become negative. For this specific case (the CSTR), there is a clear physical interpretation of this condition. Inserting $\tau=V/q$, we can rewrite
+the condition $\Delta t/\tau <1$ as $q\Delta t < V$. The volume into the tank during one time step is: $q\Delta t$, which means that
+whenever we *flush more than one tank volume through the tank during one time step, the algorithm fails*.
+When this happens the new concentration in the tank cannot be predicted from the old one. This makes sense, because we could have switched to a
+new solution (e.g. seawater) during that time step, then the new solution does not have any relation to the old solution. 
+
+The second question, "what is an appropriate step size?",  is a bit more difficult to answer.
+One strategy could be to simply use the results from chapter [Taylor], where we showed that the truncation error had a minimum value
+with a step size of $10^{-8}$  (when using a first order Taylor approximation).
+How does the value $10^{-8}$ relate to the step sizes in minutes used in our Euler implementation?
+In order to see the connection, we need to rewrite equation (ref{eq:ode:cstr2}) in a dimensionless form,
+by making the following substitution:
+ $t\to t/\tau$:
+!bt
+\begin{equation}
+\frac{dC(\tau)}{d\tau} = \left[C_\text{in}(\tau) - C(\tau)\right].\label{eq:ode:cstr2dim}
+\end{equation}
+!et
+As we found earlier $\tau = 1000$min, thus a step size of e.g. 1 min would correspond to a dimensionless time step of 
+$\Delta t\to$1min/1000min$=10^{-3}$. This number can be directly compared to the value $10^{-8}$, which is the lowest value we can
+choose without getting into trouble with round off errors on the machine. 
+!bnotice Dimensionless variables
+It is a  good idea (necessary) to formulate our equations in terms of dimensionless variables.
+The algorithms we develop can then be used in the same form regardless of changes in the system size and flow rates.
+Thus we do not need to rewrite the algorithm each time the physical system changes. This also means that if you use
+an algorithm developed by someone else (e.g. in Matlab or Python), you should always formulate the ODE system in dimensionless
+form before using the algorithm.
+
+A second reason is that from a pure modeling point of view, dimensionless variables is a way of getting some
+understanding of what kind of combination of the physical parameters that describes the behavior of the system.
+For the case of the CSTR, there is a time scale $\tau=V/q$, which 
+is an intrinsic measure of time in the system. No matter what the flow rate through the tank or the volume of the tank is,
+it will always take  0.1$\tau$ before
+the concentration in the tank is reduced by 90%.
+!enotice
+As already mentioned a step size of $10^{-8}$, is probably the smallest we can choose with respect to round off errors, 
+but it is smaller than necessary and would lead to large simulation times. 
+If it takes 1 second to run the simulation with a step size of $10^{-3}$, it would take $10^5$ seconds or 1 day
+with a step size of $10^{-8}$. 
+To continue the error analyses, we write our ODE for a general system as:
+!bt
+\begin{align}
+\frac{dy}{dt}=f(y,t),\label{eq:ode:ode}
+\end{align}
+!et
+or in discrete form:
+!bt
+\begin{align}
+\frac{y_{n+1}-y_n}{h}-\frac{h}{2}y^{\prime\prime}(\eta_n)&=f(y,t).\nonumber\\
+y_{n+1}&=y_n+hf(y,t)+\frac{h^2}{2}y^{\prime\prime}(\eta_n).
+\end{align}
+!et
+$h$ is now the (dimensionless) step size, equal to $\Delta t$ if the derivative is with respect to $t$ or $\Delta x$ if the derivative is respect to $x$ etc. Note that we
+have also included the error term related to the numerical derivative, $\eta_n\in[t_n,t_n+h]$. At each step we get an error term,
+and the distance between the true solution and our estimate, the *local error*, after $N$ steps is:
+!bt
+\begin{align}
+\epsilon=\sum_{n=0}^{N-1}\frac{h^2}{2}y^{\prime\prime}(\eta_n)&=\frac{h^2}{2}\sum_{n=0}^{N-1}f^\prime(y_n,\eta_n)\simeq\frac{h}{2}\int_{t_0}^{t_f}f^\prime(y,\eta)d\eta\nonumber\\
+&=\frac{h}{2}\left[f(y(t_f),t_f)-f(y(t_0),t_0)\right].\label{eq:ode:eu3}
+\end{align}
+!et
+Note that when we replace the sum with an integral in the equation above, this is only correct if the step size is not too large.
+From equation (ref{eq:ode:eu3})
+we see that even if the error term on the numerical derivative is $h^2$, the local error is proportional to $h$
+(one order lower). This is because we accumulate errors for each step.
+
+In the following we specialize to the CSTR, to see if we can gain some additional insight. First we change variables in 
+equation (ref{eq:ode:cstr3}): $y=C(t)/C_0$, and $x=t/\tau$, hence:
+!bt
+\begin{equation}
+\frac{dy}{dx}=-y.\label{eq:ode:simple}
+\end{equation}
+!et
+The solution to this equation is $y(x)=e^{-x}$, substituting back for the new variables $y$ and $x$, we reproduce the result in equation (ref{eq:ode:sol}). 
+The local error, equation (ref{eq:ode:eu3}), reduces to:
+!bt
+\begin{align}
+\epsilon=\frac{h}{2}\left[-y(x_f)+y(x_0)\right]=\frac{h}{2}\left[1-e^{-x_f}\right],\label{eq:ode:eu4}
+\end{align}
+!et
+we have assumed that $x_0=t_0/\tau=0$. This gives the estimated local error at time $x_f$. For $x_f=0$, the 
+numerical error is zero, this makes sense because at $x=0$ we know the exact solution because of the initial conditions. When we move further away from the initial conditions, the
+numerical error increases, but equation (ref{eq:ode:eu4}) ensures us that as long as the step size is low enough we can get as
+close as possible to the true solution, since the error scales as $h$ (at some point we might run into trouble with round off error in the computer).
+
+Can we prove directly that we get the analytical result? In this 
+case it is fairly simple, if we use Eulers method on equation (ref{eq:ode:simple}), we get:
+!bt
+\begin{align}
+\frac{y_{n+1}-y_n}{h}&=-y_nf.\nonumber\\
+y_{n+1}&=(1-h)y_n,
+\end{align}
+!et
+or alternatively:
+!bt
+\begin{align}
+y_1&=(1-h)y_0,\nonumber\\
+y_2&=(1-h)y_1=(1-h)^2y_0,\nonumber\\
+\vdots\nonumber\\
+y_{N+1}&=(1-h)^{N}y_0=(1-h)^{x_f/h}y_0.
+\end{align}
+!et
+In the last equation, we have used the the fact the number of steps, $N$, is equal to the simulation time divided by the step size, hence: $N=x_f/h$. From calculus,
+the equation above is one of the well known limits for the exponential function: $\lim_{x\to\infty}(1+k/x)^{mx}=e^{mk}$, hence:
+!bt
+\begin{align}
+y_n&=(1-h)^{x_f/h}y_0\to e^{-x_f},
+\end{align}
+!et   
+when $h\to0$. Below is an implementation of the Euler algorithm in this simple case, we also estimate the local error, and global error after $N$ steps. 
+@@@CODE src-ode/euler_simple.py
+By changing the step size $h$, you can easily verify that the local error systematically increases or decreases proportional to $h$.
+Something curious happens with the global error when the 
+step size is changed, it does not change very much. The global error involves a second sum over the local error for each step,
+which can be approximated as a second integration in equation (ref{eq:ode:eu4}):
+!bt
+\begin{align}
+\epsilon_\text{global}=\frac{1}{2}\int_{0}^{x_f}\left[-y(x)+y(0)\right]dx=\frac{1}{2}\left[x_f+e^{-x_f}-1\right].\label{eq:ode:eu5}
+\end{align}
+!et
+Note that the global error does not go to zero when the step size decreases, which can easily be verified by changing the step size. This is strange, but can be understood
+by the following argument: when the step size decreases the local error scales as $\sim h$, but the number of steps scales as $1/h$, so the global error must scale as $h\times 1/h$
+or some constant value. Usually it is much easier to control the local error than the global error, this should be kept in mind if you ever encounter a problem where it is 
+important control the global error. For the higher order methods that we will discuss later in this chapter, the global error will go to zero when $h$ decreases.   
+
+The answer to our original question, ''What is an appropriate step size?'', will depend on what you want to achieve in terms of local or global error.
+In most practical situations you would
+specify a local error that is acceptable for the problem under investigation and then choose a step size where the local error always is lower than this value. In the 
+next subsection we will investigate how to achieve this in practice.
+
+===== Adaptive step size - Eulers Method =====
+We want to be sure that we use a step size that achieves a certain accuracy in our numerical solution, but at
+the same time that we do not waste simulation time using a too low step size. The following approach is similar to the one we derived for the Romberg integration, and
+a special case of what is known as Richardson Extrapolation. The method is easily extended to higher order methods. 
+
+We know that Eulers algorithm is accurate to second order. Our estimate of the new value, $y_1^*$  
+(where we have used a$\,{}^*$ to indicate that we have used a step size of size $h$), should then be related to the true solution $y(t_1)$ in the following way:
+!bt
+\begin{align}
+y^*_1=y(t_1)+ch^2.\label{eq:ode:aeb0}
+\end{align}
+!et
+The constant $c$ is unknown, but it can be found by taking two smaller steps of size $h/2$. If the steps are not too large, our new estimate
+of the value $y_1$ will be related to the true solution as:
+!bt
+\begin{align}
+y_1=y(t_1)+2c\left(\frac{h}{2}\right)^2.\label{eq:ode:aeb1}
+\end{align}
+!et
+The factor 2 in front of $c$ is because we now need to take two steps, and we accumulate a total error of $2c(h/2)^2=ch^2/2$. It might not be completely 
+obvious that the constant $c$ should be the same in equation (ref{eq:ode:aeb0}) and (ref{eq:ode:aeb1}). If you are not convinced, there is an exercise at the end 
+of the chapter.  
+We define:
+!bt
+\begin{align}
+\Delta\equiv y^*_1-y_1=c\frac{h^2}{2}.\label{eq:ode:ae5}
+\end{align}
+!et
+The truncation error in equation (ref{eq:ode:aeb1}) is:
+!bt
+\begin{align}
+\epsilon=y(t_1)-y_1=2c\left(\frac{h}{2}\right)^2=\Delta.\label{eq:ode:ae5b}
+\end{align}
+!et
+Now we have everything we need: We want the local error to be smaller than some predefined
+tolerance, $\epsilon^\prime$, or equivalently 
+that $\epsilon\le\epsilon^\prime$. 
+To achieve this we need to use an optimal step size, $h^\prime$,  that gives us exactly the desired error:
+!bt
+\begin{align}
+\epsilon^\prime=c\frac{{h^\prime}^2}{2}.\label{eq:ode:ae6}
+\end{align}
+!et
+##Note that we use the error term in (ref{eq:ode:ae4}), because we want to use the small step size as our estimate for the next time step. The large
+##step size is only used to estimate the error term. 
+Dividing equation (ref{eq:ode:ae6}) by equation (ref{eq:ode:ae5b}), we can estimate the optimal step size:
+!bt
+\begin{align}
+h^\prime=h\sqrt{\left|\frac{\epsilon^\prime}{\epsilon}\right|},\label{eq:ode:ae7}
+\end{align}
+!et
+where the estimated error, $\epsilon$, is calculated from equation (ref{eq:ode:ae5b}).
+Equation (ref{eq:ode:ae7}) serves two purposes, if the estimated error $\epsilon$ is higher than the tolerance, $\epsilon^\prime$, we have specified it will 
+give us an estimate for the step size we should choose in order to achieve a higher accuracy, if on the other hand $\epsilon^\prime > \epsilon$, then we 
+get an estimate for the next, larger step. Before the implementation we note, as we did for the Romberg integration, that equation (ref{eq:ode:ae5b}) 
+also gives us an estimate for the error term in equation (ref{eq:ode:aeb1}) as an improved estimate of $y_1$. This we get for
+free and will make our Euler algorithm accurate to $h^3$, hence the improved Euler step, $\hat{y_1}$, is to *subtract* the error
+term from our previous estimate:
+!bt
+\begin{align}
+\hat{y_1}=y_1-\epsilon=2y_1-y_1^*.
+\end{align}
+!et
+Below is an implementation of the adaptive Euler algorithm:
+% if FORMAT == 'ipynb':
+@@@CODE src-ode/adaptive_euler.py
+% endif
+% if FORMAT != 'ipynb':
+@@@CODE src-ode/adaptive_euler.py fromto: def one_step@# rest of
+
+FIGURE: [fig-ode/adaptive_euler, width=800] The concentration in the tank using adaptive Euler. Number of Euler steps are: 3006, 117, 48 and 36 for the different step sizes. label{fig:ode:adapt_euler}
+
+In figure ref{fig:ode:adapt_euler} the result of the implementation is shown. 
+% endif
+Note that the number of steps for an accuracy of $10^{-6}$ is only about 3000. Without knowing anything about the accuracy, we would have to assume
+that we needed a step size of the order of $h$ in order to reach a local accuracy of $h$ because of equation (ref{eq:ode:eu3}). In the current case,
+we would have needed $10^7$ steps, which would lead to unnecessary long simulation times.
+!bnotice Local error and bounds
+In the previous example we set an absolute tolerance, and required that our estimate $y_n$ always is within a certain bound
+of the true  solution $y(t_n)$, i.e. $|y(t_n)-y_n|\le\epsilon^\prime$. This is a very strong demand, and sometimes it makes more 
+sense to require that we also accept a relative tolerance proportional to function value. In some areas the solution might have a very large
+value, and then another possibility would be to have an $\epsilon^\prime$ that varied with the function value: $\epsilon^\prime = atol +|y|rtol$, where 'atol' is the absolute tolerance and 'rtol' is the relative tolerance. A sensible choice would be to set 'atol=rtol' (e.g. = $10^{-4}$). 
+
+##!bt
+##\begin{equation}
+##\epsilon^\prime = atol +|y|rtol,
+##\end{equation}
+##!et  
+!enotice
+
+======= Runge-Kutta Methods =======
+FIGURE: [fig-ode/rk_fig, width=800] Illustration of the Euler algorithm, and a motivation for using the slope a distance from the $t_n$.label{fig:ode:rk}
+
+The Euler method only have an accuracy of order $h$, and a global error that do not go to zero as the step size decrease. 
+The Runge-Kutta methods may be motivated by inspecting the Euler method in figure ref{fig:ode:rk}. The Euler method uses information from
+the previous time step to estimate the value at the new time step. The Runge Kutta methods uses the information about the slope between the
+points $t_n$ and $t_n+h$. By inspecting figure ref{fig:ode:rk}, we clearly see that by using the slope at $t_n+h/2$ would give us a
+significant improvement. The 2. order Runge-Kutta method can be derived by Taylor expanding the solution around $t_n+h/2$, we do this by
+setting $t_n+h=t_n+h/2+h/2$:
+!bt
+\begin{align}
+y(t_n+h)=y(t_n+\frac{h}{2})+\frac{h}{2}\left.\frac{dy}{dt}\right|_{t=t_n+h/2}+\frac{h^2}{4}\left.\frac{d^2y}{dt^2}\right|_{t=t_n+h/2}
++\mathcal{O}(h^3).\label{eq:ode:rk1}
+\end{align}
+!et
+Similarly we can expand the solution in $y(t_n)$ about $t_n+h/2$, by setting $t_n=t_n+h/2-h/2$:
+!bt
+\begin{align}
+y(t_n)=y(t_n+\frac{h}{2})-\frac{h}{2}\left.\frac{dy}{dt}\right|_{t=t_n+h/2}+\frac{h^2}{4}\left.\frac{d^2y}{dt^2}\right|_{t=t_n+h/2}
+-\mathcal{O}(h^3).\label{eq:ode:rk2}
+\end{align}
+!et
+Subtracting these two equations the term $y(t_n+\frac{h}{2})$, and all even powers in the derivative cancels out:
+!bt
+\begin{align}
+y(t_n+h)&=y(t_n)+h\left.\frac{dy}{dt}\right|_{t=t_n+h/2}+\mathcal{O}(h^3),\nonumber\\
+y(t_n+h)&=y(t_n)+hf(y_{n+h/2},t_n+h/2)+\mathcal{O}(h^3).\label{eq:ode:rk3}
+\end{align}
+!et
+In the last equation, we have used equation (ref{eq:ode:ode}). Note that we now have an expression that is very similar to Eulers algorithm,
+but it is accurate to order $h^3$. There is one problem, and that is that the function $f$ is to be evaluated at the point $y_{n+1/2}=y(t_n+h/2)$
+which we do not know. This can be fixed by using Eulers algorithm: $y_{n+1/2}=y_n+h/2f(y_n,t_n)$. We can do this even if Eulers algorithm is
+only accurate to order $h^2$, because the $f$ in equation (ref{eq:ode:rk3}) is multiplied by $h$, and thus our algorithm is still accurate
+up to order $h^3$. 
+!bnotice The 2. order Runge-Kutta:
+!bt
+\begin{align}
+k_1&=hf(y_n,t_n)\nonumber\\
+k_2&=hf(y_n+\frac{1}{2}k_1,t_n+h/2)\nonumber\\
+y_{n+1}&=y_n+k_2\label{eq:ode:rk4}
+\end{align}
+!et
+!enotice
+% if FORMAT == 'ipynb':
+Run the script below and inspect the results.
+@@@CODE src-ode/rk2.py  
+% endif
+% if FORMAT != 'ipynb':
+Below is a Python implementation of equation (ref{eq:ode:rk4}):
+@@@CODE src-ode/rk2.py  fromto: def fm@# rest
+FIGURE: [fig-ode/rk2, width=800] The concentration in the tank for different step size $\Delta t$. label{fig:ode:rk2}
+
+In figure ref{fig:ode:rk2} the result of the implementation is shown. 
+% endif
+Note that when comparing Runge-Kutta 2. order with Eulers method,
+% if FORMAT != 'ipynb':
+see figure ref{fig:ode:rk2} and ref{fig:ode:euler},
+% endif
+we of course have 
+the obvious result that a larger step size can be taken, without loosing numerical accuracy. It is also worth noting that we can take steps that
+is larger than the tank volume. Eulers method failed whenever the time step was larger than one tank volume ($h=t/\tau>1$), whereas the Runge-Kutta 
+method finds a physical solution for step sizes lower than twice the tank volume. If the step size is larger, we see that the concentration in the tank
+increases, which is clearly unphysical. 
+ 
+The Runge-Kutta fourth order method is one of he most used methods, it is accurate to order $h^4$, and has an error of order $h^5$. The development of the 
+algorithm itself is similar to the 2. order method, but of course more involved. We just quote the result:
+!bnotice The 4. order Runge-Kutta:
+!bt
+\begin{align}
+k_1&=hf(y_n,t_n)\nonumber\\
+k_2&=hf(y_n+\frac{1}{2}k_1,t_n+h/2)\nonumber\\
+k_3&=hf(y_n+\frac{1}{2}k_2,t_n+h/2)\nonumber\\
+k_4&=hf(y_n+k_3,t_n+h)\nonumber\\
+y_{n+1}&=y_n+\frac{1}{6}(k_1+2k_2+2k_3+k_4)\label{eq:ode:rk5}
+\end{align}
+!et
+!enotice
+  
+% if FORMAT == 'ipynb':
+Run the script below and inspect the results.
+@@@CODE src-ode/rk4.py  
+% endif
+% if FORMAT != 'ipynb':
+Below is a Python implementation of equation (ref{eq:ode:rk5}):
+@@@CODE src-ode/rk4.py  fromto: def fm@# rest
+FIGURE: [fig-ode/rk4, width=800] The concentration in the tank for different step size $\Delta t$. label{fig:ode:rk4}
+
+In figure ref{fig:ode:rk4} the result of the implementation is shown. 
+% endif
+
+===== Adaptive step size - Runge-Kutta Method =====
+Just as we did with Eulers method, we can implement an adaptive method. The derivation is exactly the same, but this time our method is accurate to
+fourth order, hence the error term is of order $h^5$. We start by taking one large step of size $h$, our estimate, $y_1^*$ is related to the true 
+solution, $y(t_1)$, in the following way:
+!bt
+\begin{align}
+y^*_1&=y(t_1)+ch^5,\label{eq:ode:rka0}
+\end{align}
+!et
+Next, we take two steps of half the size, $h/2$, hence:
+!bt
+\begin{align}
+y_1&=y(t)+2c\left(\frac{h}{2}\right)^5.\label{eq:ode:rka1}
+\end{align}
+!et
+Subtracting equation (ref{eq:ode:rka0}) and (ref{eq:ode:rka1}), we find an expression similar to equation (ref{eq:ode:ae5}):
+!bt
+\begin{align}
+\Delta\equiv& y_1^*-y_1=c\frac{15}{16}h^5,\label{eq:ode:rka2}
+\end{align}
+!et
+or $c=16\Delta/(15h^5)$. For the Euler scheme, $\Delta$ also happened to be equal to the truncation error, but in this case it is:
+!bt
+\begin{align}
+\epsilon=2c\left(\frac{h}{2}\right)^5=\frac{\Delta}{15}\label{eq:ode:rka5}
+\end{align}
+!et
+we want the local error, $\epsilon$, to be smaller than some tolerance, $\epsilon^\prime$.  
+The optimal step size, $h^\prime$,  that gives us exactly the desired error is then:
+!bt
+\begin{align}
+\epsilon^\prime=2c\left(\frac{{h^\prime}}{2}\right)^5.\label{eq:ode:rka3}
+\end{align}
+!et
+Dividing equation (ref{eq:ode:rka3}) by equation (ref{eq:ode:rka5}), we can estimate the optimal step size:
+!bt
+\begin{align}
+h^\prime=h\left|\frac{\epsilon}{\epsilon}\right|^{1/5},\label{eq:ode:rka4}
+\end{align}
+!et
+$\epsilon$ can be calculated from equation (ref{eq:ode:rka5}). Below is an implementation
+% if FORMAT == 'ipynb':
+Run the script below and inspect the results.
+@@@CODE src-ode/rk4.py  
+% endif
+% if FORMAT != 'ipynb':
+@@@CODE src-ode/adaptive_rk4.py  fromto: def fm@# rest
+FIGURE: [fig-ode/adaptive_rk4, width=800] The concentration in the tank for different step size $\Delta t$. Number of rk4 steps are: 138, 99, 72 and 66 for the different step sizes and 'rtol=0', for 'rtol=tol' the number of rk4 steps are 81, 72, 63, 63.label{fig:ode:adaptive_rk4}
+
+In figure ref{fig:ode:adaptive_rk4} the result of the implementation is shown. 
+% endif 
+Note that we put a safety limit on the step size 'min(hi*(tol/toli)**(0.2),1)'. 
+
+In general we can use the same procedure any method accurate to order $h^p$, and you can easily verify that:
+!bnotice Error term and step size for a $h^p$ method:
+!bt
+\begin{align}
+\epsilon&=\frac{|\Delta|}{2^p-1}=\frac{|y_1^*-y_1|}{2^p-1},\\
+h^\prime&=\beta h\left|\frac{\epsilon}{\epsilon_0}\right|^{\frac{1}{p+1}},\\
+\hat{y_1}&=y_1-\epsilon=\frac{2^{p-1}y_1-y_1^*}{2^{p-1}-1},
+\end{align}
+!et
+where $\beta$ is a safety factor $\beta\simeq0.8,0.9$, and you should always be careful that the step size do not become too large so that
+the method breaks down. This can happens when $\epsilon$ is very low, which may happen if $y_1^*\simeq y_1$ and/or if $y_1^*\simeq y_1\simeq 0$.  
+!enotice
+ 
+===== Conservation of Mass =====
+A mathematical model of a physical system should always be formulated in such a way that it is
+consistent with the laws of nature. In practical situations this statement is usually equivalent to state that
+the mathematical model should respect conservation laws. The conservation laws can be conservation of mass, energy, momentum, 
+electrical charge, etc. In our
+example with the mixing tank, we were able to derive an expression for the concentration of salt out of
+the tank, equation (ref{eq:ode:sol}), by *demanding* conservation of mass (see equation (ref{eq:ode:cstr1})).
+
+A natural question to ask is then: If our mathematical model respect conservation of mass, are we sure that our 
+solution method respect conservation of mass? We of course expect that
+when the grid spacing approaches zero our numerical solution will get closer and closer to the analytical
+solution. Clearly when $\Delta x\to 0$, the mass is conserved. So what is the problem? The problem is that in many practical problems
+we cannot always have a step size that is small enough to ensure that our solution always is close enough to the analytical 
+solution. The physical system we consider might be very complicated (e.g. a model for the earth climate), and our ODE system could
+be a very small part of a very big system. A very good test of any code is to investigate if the code respect
+the conservation laws. If we know that our implementation respect e.g. mass conservation at the discrete level, we can easily
+test mass conservation by summing up all the mass entering, and subtracting the mass out of and present in our system.
+If the mass is not conserved exactly, there is a good chance that there is a bug in our implementation.
+
+If we now turn to our system, we know that the total amount of salt in the system when we start is $C(0)V$.
+The amount entering is zero, and the amount leaving each time step is $q(t)C(t)\Delta t$. Thus we should
+expect that if we add the amount of salt in the tank to the amount that has left the system
+we should always get an amount that is equal to the original amount. Alternatively, we expect
+$\int_{t_0}^t qC(t)dt + C(t)V -C(0)V=0$. Adding the following code in the `while(ti <= t_final):` loop:
+!bc pycod
+mout += 0.5*(c_old+c_new)*q*dt
+mbal  = (c_new*vol+mout-vol*c_init)/(vol*c_init)
+!ec
+it is possible to calculate the amount of mass lost (note that we have used the
+trapezoidal formula to calculate the integral). In the table below the fraction of mass lost relative to the original
+amount is shown for the various numerical methods.
+
+|-----c-------------c-------------c-------------c-------------c-------|
+| ﻿$\Delta t$ | $h$         | Euler       | RK 2. order | RK 4. order |
+|-----c-------------c-------------c-------------c-------------c-------|
+| 900         | 0.9         | -0.4500     | 0.3682      | 0.0776      |
+| 500         | 0.5         | -0.2500     | 0.0833      | 0.0215      |
+| 100         | 0.1         | -0.0500     | 0.0026      | 0.0008      |
+| 10          | 0.01        | -0.0050     | 2.5E-05     | 8.3E-06     |
+|---------------------------------------------------------------------|
+
+We clearly see from the table that the Runge-Kutta methods performs better than Eulers method, but
+*all of the methods violates mass balance*. 
+
+This might not be a surprise as we know that our numerical solution is always an approximation to the analytical solution. How can 
+we then formulate an algorithm that will respect conservation laws at the discrete level? It turns out that for Eulers method it is not
+so difficult. Eulers algorithm at the discrete level (see equation (ref{eq:ode:eu0})) is actually a two-step process: first we inject the fresh water while we remove the ``old`` fluid *and then we mix*. By thinking about the
+problem this way, it makes more sense to calculate the mass out of the tank as $\sum_kq_kC_k\Delta t_k$. If we in our implementation calculates the mass out of the tank as:
+!bc pycod
+mout += c_old*q*dt
+mbal  = (c_new*vol+mout-vol*c_init)/(vol*c_init)
+!ec
+We easily find that the mass is exactly conserved at every time for Eulers method. The concentration in the tank will of course not be any closer to the 
+analytical solution, but if our mixing tank was part of a much bigger system we could make sure that the mass would always be conserved if we make
+sure that the mass out of the tank and into the next part of the system was equal to $qC(t)\Delta t$. 
+
+======= Solving a set of ODE equations =======
+What happens if we have more than one equation that needs to be solved? If we continue with our current example, we might be interested in what would happen 
+if we had multiple tanks in series. This could be a very simple model to describe the cleaning  of a salty lake by injecting fresh water into it, but at 
+the same time this lake was connected to two nearby fresh water lakes, as illustrated in figure ref{fig:ode:cstr3}. The weakest part of the model is the assumption about 
+complete mixing, in a practical situation we could enforce complete mixing with the salty water in the first tank by injecting fresh water at multiple point in the 
+lake. For the two next lakes, the degree of mixing is not obvious, but salt water is heavier than fresh water and therefore it would sink and mix with the fresh water. Thus
+if the flow rate was slow, one might imaging that a more or less complete mixing could occur. Our model then could answer questions like, how long time would it take before most
+of the salt water is removed from the first lake, and how much time would it take before most of the salt water was cleared from the whole system? The answer to 
+these questions would give practical input on how much and how fast one should inject the fresh water to clean up the system. If we had 
+data from an actual system, we could compare our model predictions with data from the physical system, and investigate if our model description was correct. 
+
+FIGURE: [fig-ode/cstr3, width=800] A simple model for cleaning a salty lake that is connected to two lakes down stream. label{fig:ode:cstr3}
+
+For simplicity we will assume that all the lakes have the same volume, $V$. The governing equations follows
+as before, by assuming mass balance (equation (ref{eq:ode:mbal})):
+!bt
+\begin{align}
+C_0(t+\Delta t)\cdot V - C_0(t)\cdot V &= q(t)\cdot C_\text{in}(t)\cdot \Delta t - q(t)\cdot C_0(t)\cdot \Delta t,\nonumber\\
+C_1(t+\Delta t)\cdot V - C_1(t)\cdot V &= q(t)\cdot C_0(t)\cdot \Delta t - q(t)\cdot C_1(t)\cdot \Delta t,\nonumber\\
+C_2(t+\Delta t)\cdot V - C_2(t)\cdot V &= q(t)\cdot C_1(t)\cdot \Delta t - q(t)\cdot C_2(t)\cdot \Delta t.\label{eq:ode:cstr3a}
+\end{align}
+!et
+Taking the limit $\Delta t\to 0$, we can write equation (ref{eq:ode:cstr3a}) as:
+!bt
+\begin{align}
+V\frac{dC_0(t)}{dt} &= q(t)\left[C_\text{in}(t) - C_0(t)\right],\label{eq:ode:cstr3b}\\
+V\frac{dC_1(t)}{dt} &= q(t)\left[C_0(t) - C_1(t)\right],\label{eq:ode:cstr3c}\\
+V\frac{dC_2(t)}{dt} &= q(t)\left[C_1(t) - C_2(t)\right].\label{eq:ode:cstr3d}
+\end{align}
+!et 
+Let us first derive the analytical solution: Only the first tank is filled with salt water $C_0(0)=C_{0,0}$, $C_1(0)=C_2(0)=0$, and $C_\text{in}=0$. 
+The solution to equation (ref{eq:ode:cstr3b}) is, as before $C_0(t)=C_{0,0}e^{-t/\tau}$, inserting this equation into equation (ref{eq:ode:cstr3c}) we find:
+!bt
+\begin{align}
+V\frac{dC_1(t)}{dt} &= q(t)\left[C_{0,0}e^{-t/\tau} - C_1(t)\right]\label{eq:ode:cstr3e},\\
+\frac{d}{dt}\left[e^{t/\tau}C_1\right]&= \frac{C_{0,0}}{\tau}\label{eq:ode:cstr3f},\\
+C_1(t)&=\frac{C_{0,0}t}{\tau}e^{-t/\tau}\label{eq:ode:cstr3g}.
+\end{align}
+!et
+where we have use the technique of "integrating factors":"https://en.wikipedia.org/wiki/Integrating_factor" when going from equation (ref{eq:ode:cstr3e}) to (ref{eq:ode:cstr3f}). 
+Inserting equation (ref{eq:ode:cstr3g}) into equation (ref{eq:ode:cstr3d}), solving the equation in a similar way as for $C_1$ we find:
+!bt
+\begin{align}
+V\frac{dC_2(t)}{dt} &= q(t)\left[\frac{C_{0,0}t}{\tau}e^{-t/\tau} - C_2(t)\right],\label{eq:ode:cstr3h}\\
+\frac{d}{dt}\left[e^{t/\tau}C_2\right]&= \frac{C_{0,0}t}{\tau},\label{eq:ode:cstr3i}\\
+C_2(t)&=\frac{C_{0,0}t^2}{2\tau^2}e^{-t/\tau}.\label{eq:ode:cstr3j}
+\end{align}
+!et
+The numerical solution follows the exact same pattern as before if we introduce a vector notation. Before doing that, we rescale the time $t\to t/\tau$ and the concentrations,
+ $\hat{C_i}=C_i/C_{0,0}$ for $i=0,1,2$, hence:
+!bt
+\begin{align}
+\frac{d}{dt}
+\begin{bmatrix} 
+ \hat{C_0}(t)\\
+ \hat{C_1}(t)\\
+ \hat{C_2}(t)
+ \end{bmatrix}
+&=  \begin{bmatrix} 
+ \hat{C_\text{in}}(t) - \hat{C_0}(t)\\
+ \hat{C_0}(t) - \hat{C_1}(t)\\
+ \hat{C_1}(t) - \hat{C_2}(t)
+ \end{bmatrix},\nonumber
+ \\
+ \frac{d\mathbf{\hat{C}}(t)}{dt}&=\mathbf{f}(\mathbf{\hat{C}},t).
+\end{align}
+!et
+Below is an implementation using the Runge Kutta 4. order method:
+ % if FORMAT == 'ipynb':
+Run the script below and inspect the results.
+@@@CODE src-ode/rk4_2.py  
+% endif
+% if FORMAT != 'ipynb':
+@@@CODE src-ode/rk4_2.py  fromto: def fm@# rest
+FIGURE: [fig-ode/rk4_2, width=800] The concentration in the tanks. label{fig:ode:rk4_2}
+
+In figure ref{fig:ode:rk4_2} the result of the implementation is shown. 
+% endif 
+
+======= Stiff sets of ODE  and implicit methods =======
+As already mentioned a couple of times, our system could be part of a much larger system. To illustrate this, let us now assume that we have two 
+tanks in series. The first tank is similar to our original tank, but the second tank is a sampling tank, 1000 times smaller.   
+
+FIGURE: [fig-ode/cstr2, width=800] A continuous stirred tank model with a sampling vessel. label{fig:ode:cstr2}
+
+The governing equations can be found by requiring mass balance for each of the tanks (see equation (ref{eq:ode:mbal}):
+!bt
+\begin{align}
+C_0(t+\Delta t)\cdot V_0 - C_0(t)\cdot V_0 &= q(t)\cdot C_\text{in}(t)\cdot \Delta t - q(t)\cdot C_0(t)\cdot \Delta t.\nonumber\\
+C_1(t+\Delta t)\cdot V_1 - C_1(t)\cdot V_1 &= q(t)\cdot C_0(t)\cdot \Delta t - q(t)\cdot C_1(t)\cdot \Delta t.
+\label{eq:ode:cstr2a}
+\end{align}
+!et 
+Taking the limit $\Delta t\to 0$, we can write equation (ref{eq:ode:cstr2a}) as:
+!bt
+\begin{align}
+V_0\frac{dC_0(t)}{dt} &= q(t)\left[C_\text{in}(t) - C_0(t)\right].\label{eq:ode:cstr2bb}\\
+V_1\frac{dC_1(t)}{dt} &= q(t)\left[C_0(t) - C_1(t)\right].\label{eq:ode:cstr2b}
+\end{align}
+!et
+Assume that the first tank is filled with seawater, $C_0(0)=C_{0,0}$, and fresh water is flooded into the tank, i.e. $C_\text{in}=0$. Before we start to consider a numerical
+solution, let us first find the analytical solution: As before the solution for the first tank (equation (ref{eq:ode:cstr2bb})) is:
+!bt
+\begin{equation}
+C_0(t)=C_{0,0}e^{-t/\tau_0},
+\end{equation}
+!et
+where $\tau_0\equiv V_0/q$. Inserting this equation into equation (ref{eq:ode:cstr2b}), we get:
+!bt
+\begin{align}
+\frac{dC_1(t)}{dt} &= \frac{1}{\tau_1}\left[C_{0,0}e^{-t/\tau_0} - C_1(t)\right],\nonumber\\
+\frac{d}{dt}\left[e^{t/\tau_2}C_1\right]&= \frac{C_{0,0}}{\tau_1}e^{-t(1/\tau_0-1/\tau_1)}\label{eq:ode:cstr2c},\\
+C_1(t)&=\frac{C_{0,0}}{1-\frac{\tau_1}{\tau_0}}\left[e^{-t/\tau_0}-e^{-t/\tau_1}\right],\label{eq:ode:cstr2d}
+\end{align}
+!et
+where $\tau_1\equiv V_1/q$.
+
+Next, we will consider the numerical solution. You might think that these equations are more simple to solve numerically than the equations with three tanks
+in series discussed in the previous section. Actually, this system is much harder to solve with the methods we have discussed so far.
+The reason is that there are now *two time scales* in the system, $\tau_1$ and $\tau_2$. The smaller tank sets a strong limitation on the step size
+we can use, because we should never use step sizes larger than a tank volume. Thus if you use the code in the previous section to solve equation
+(ref{eq:ode:cstr2bb}) and (ref{eq:ode:cstr2b}), it will not find the correct solution, unless the step size is lower than $10^{-3}$. Equations of this type
+are known as *stiff*. 
+!bnotice Stiff equations
+There is no precise definition of ''stiff'', but it is used to describe a system of differential equations, where the numerical solution becomes unstable unless
+a very small step size is chosen. Such systems occurs because there are several (length, time) scales in the system, and the numerical solution is constrained
+by the shortest length scale. You should always be careful on how you scale your variables in order to make the system dimensionless, which is of 
+particular importance when you use adaptive methods. 
+!enotice
+
+These types of equations are often encountered in practical applications. If our sampling tank was extremely small, maybe $10^6$ smaller than the chemical
+reactor, then we would need a step size of the order of $10^{-8}$ or lower to solve the system. This step size is so low that we easily run into trouble
+with round off errors in the computer. In addition the simulation time is extremely long.  How do we deal with this problem? The solution is actually
+quite simple. The reason we run into trouble is that we require that the concentration leaving the tank must be a small perturbation of the old one.
+This is not necessary, and it is best illustrated with Eulers method. As explained earlier Eulers method can be viewed as a two step process:
+first we inject a volume (and remove an equal amount: $qC(t)\Delta t$), and then we mix. Clearly when we try to remove more than what is left, we run into
+trouble. What we want to do is to remove or flood much more than one tank volume through the tank during one time step, this can be achieved by
+$q(t)C(t)\Delta t\to q(t+\Delta t)C(t+\Delta t)\Delta t$. The term $q(t+\Delta t)C(t+\Delta t)\Delta t$ now represents
+*the mass out of the system during the time step $\Delta t$*.
+
+The methods we have considered so far are known as *explicit*, whenever we replace the solution in the right hand side of our algorithm with $y(t+\Delta t)$
+or ($y_{n+1}$),
+the method is known as *implicit*. Implicit methods are always stable, meaning that we can take as large a time step that we would like, without
+getting oscillating solution. It does not mean that we will get a more accurate solution, actually explicit methods are usually more accurate.
+
+!bnotice Explicit and Implicit methods
+Explicit methods are often called *forward* methods, as they use only information from the previous step to estimate the next value. The explicit
+methods are easy to implement, but get into trouble if the step size is too large. Implicit methods are often called *backward* methods as the next 
+step cannot be calculated directly from the previous solution, usually a non-linear equation has to be solved. Implicit methods are generally much
+more stable, but the price is often lower accuracy. Many commercial simulators uses implicit methods extensively because they are stable, and stability is often viewed
+as a much more important criterion than numerical accuracy.   
+!enotice
+Let us consider our example further, and for simplicity use the implicit Eulers method:
+!bt
+\begin{align}
+{C_0}_{n+1}V_0 - {C_0}_nV_0 &= q(t+\Delta t){C_\text{in}}_{n+1}\Delta t -
+q(t+\Delta t){C_0}_{n+1}\Delta t.\nonumber\\
+{C_1}_{n+1}V_1 - {C_1}_nV_1 &= q(t+\Delta t){C_0}_{n+1}\Delta t - q(t+\Delta t){C_1}_{n+1}\Delta t.
+\label{eq:ode:cstr2ai}
+\end{align}
+!et 
+This equation is equal to equation (ref{eq:ode:cstr2a}), but the concentrations on the right hand side are now evaluated at the next time step.
+The immediate problem is now that we have to find an expression for $C_{n+1}$ that is given in terms of known variables. In most cases one needs
+to use a root finding method, like Newtons method, in order to solve equation (ref{eq:ode:cstr2ai}). In this case it is straight forward to show:
+!bt
+\begin{align}
+{C_0}_{n+1}&=\frac{{C_0}_n + \frac{\Delta t}{\tau_0}{C_\text{in}}_{n+1}}{1+\frac{\Delta t}{\tau_0}},\nonumber\\
+{C_2}_{n+1}&=\frac{{C_1}_n + \frac{\Delta t}{\tau_1}{C_0}_{n+1}}{1+\frac{\Delta t}{\tau_1}}.\label{eq:ode:cstri1}
+\end{align}
+!et
+Below is an implementation
+% if FORMAT == 'ipynb':
+Run the script below and inspect the results.
+@@@CODE src-ode/euler_imp_2.py  
+% endif
+% if FORMAT != 'ipynb':
+@@@CODE src-ode/euler_imp_2.py  fromto: def fm@# rest
+FIGURE: [fig-ode/euler_imp, width=800] The concentration in the tanks for $h=0.01$.label{fig:ode:euler_imp}
+
+In figure ref{fig:ode:euler_imp} the result of the implementation is shown. 
+% endif 
+
+##======= Bibliography =======
+===== Exercise: Truncation Error in Eulers Method =====
+In the following we will take a closer look at the adaptive Eulers algorithm and show that the 
+constant $c$ is indeed the same in equation (ref{eq:ode:aeb0}) and (ref{eq:ode:aeb1}). 
+The true solution $y(t)$, obeys the following equation:
+!bt
+\begin{align}
+\frac{dy}{dt}&=f(y,t),\label{eq:ode:ay}
+\end{align}
+!et
+and Eulers method to get from $y_0$ to $y_1$ by taking one (large) step, $h$ is:
+!bt
+\begin{align}
+y^*_1&=y_0+hf(y_0,t_0),\label{eq:ode:ae0}
+\end{align}
+!et
+We will also assume (for simplicity) that in our starting point $t=t_0$, the numerical solution, $y_0$, is equal to the true solution, $y(t_0)$, hence $y(t_0)=y_0$.
+!bsubex
+Show that when we take one step of size $h$ from $t_0$ to $t_1=t_0+h$, $c=y^{\prime\prime}(t_0)/2$ in equation (ref{eq:ode:aeb0}).
+!bans 
+The local error, is the difference between the numerical solution and the true solution:
+!bt
+\begin{align}
+\epsilon^*&=y(t_0+h)-y_{1}^*=y(t_0)+y^{\prime}(t_0)h+\frac{1}{2}y^{\prime\prime}(t_0)h^2+\mathcal{O}(h^3)\nonumber\\
+&-\left[y_0+hf(y_0,t_0+h)\right],
+\end{align}
+!et
+where we have used Taylor expansion to expand the true solution around $t_0$, and equation (ref{eq:ode:ae0}).
+Using equation (ref{eq:ode:ay}) to replace $y^\prime(t_0)$ with $f(y_0,t_0)$, we find:
+!bt
+\begin{align}
+\epsilon^*=&y(t_0+h)-y_{1}^*=\frac{1}{2}y^{\prime\prime}(t_0)h^2\equiv ch^2,
+\end{align}
+!et
+hence $c=y^{\prime\prime}(t_0)/2$.
+!eans
+!esubex
+!bsubex
+Show that when we take two steps of size $h/2$ from $t_0$ to $t_1=t_0+h$, Eulers algorithm is:
+!bt
+\begin{align}
+y_{1}&=y_{0}+\frac{h}{2}f(y_0,t_0)+\frac{h}{2}f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2).
+\end{align}
+!et
+!bans
+!bt
+\begin{align}
+y_{1/2}&=y_0+\frac{h}{2}f(y_0,t_0),\label{eq:ode:ae1b}\\
+y_{1}&=y_{1/2}+\frac{h}{2}f(y_{1/2},t_0+h/2),\label{eq:ode:ae2b}\\
+y_{1}&=y_{0}+\frac{h}{2}f(y_0,t_0)+\frac{h}{2}f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2).\label{eq:ode:ae3b}
+\end{align}
+!et
+Note that we have inserted
+equation (ref{eq:ode:ae1b}) into equation (ref{eq:ode:ae2b}) to arrive at equation (ref{eq:ode:ae3b}). 
+!eans
+!esubex
+!bsubex
+Find an expression for the local error when using two steps of size $h/2$, and show that the local error is: $\frac{1}{2}ch^2$
+!bans
+!bt
+\begin{align}
+\epsilon&=y(t_0+h)-y_{1}=y(t_0)+y^{\prime}(t_0)h+\frac{1}{2}y^{\prime\prime}(t_0)h^2+\mathcal{O}(h^3)\nonumber\\
+&-\left[y_{0}+\frac{h}{2}f(y_0,t_0)+\frac{h}{2}f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2)\right].\label{eq:ode:ay5b}
+\end{align}
+!et
+This equation is slightly more complicated, due to the term involving $f$ inside the last parenthesis, we can use Taylor expansion to expand it about $(y_0,t_0)$:
+!bt
+\begin{align}
+&f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2)=f(y_0,t_0)\nonumber\\
+&+\frac{h}{2}\left[f(y_0,t_0)\left.\frac{\partial f}{\partial y}\right|_{y=y_0,t=t_0}
++\frac{h}{2}\left.\frac{\partial f}{\partial t}\right|_{y=y_0,t=t_0}\right]+\mathcal{O}(h^2).\label{eq:ode:ay2b}
+\end{align}
+!et
+It turns out that this equation is related to $y^{\prime\prime}(t_0,y_0)$, which can be seen by differentiating equation (ref{eq:ode:ay}):
+!bt
+\begin{align}
+\frac{d^2y}{dt^2}&=\frac{df(y,t)}{dt}=\frac{\partial f(y,t)}{\partial y}\frac{dy}{dt}+\frac{\partial f(y,t)}{\partial t}
+=\frac{\partial f(y,t)}{\partial y}f(y,t)+\frac{\partial f(y,t)}{\partial t}.\label{eq:ode:ay3b}
+\end{align}
+!et
+Hence, equation (ref{eq:ode:ay2b}) can be written:
+!bt
+\begin{align}
+f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2)=f(y_0,t_0)+\frac{h}{2}y^{\prime\prime}(t_0,y_0),\label{eq:ode:ay4b}
+\end{align}
+!et
+hence the truncation error in equation (ref{eq:ode:ay5b}) can finally be written:
+!bt
+\begin{align}
+\epsilon=&y(t_1)-y_{1}=\frac{h^2}{4} y^{\prime\prime}(y_0,t_0)=\frac{1}{2}ch^2,\label{eq:ode:ae4b}
+\end{align}
+!et
+!eans
+!esubex
+!bsol
+The local error, is the difference between the numerical solution and the true solution:
+!bt
+\begin{align}
+\epsilon^*&=y(t_0+h)-y_{1}^*=y(t_0)+y^{\prime}(t_0)h+\frac{1}{2}y^{\prime\prime}(t_0)h^2+\mathcal{O}(h^3)\nonumber\\
+&-\left[y_0+hf(y_0,t_0+h)\right],
+\end{align}
+!et
+where we have used Taylor expansion to expand the true solution around $t_0$, and equation (ref{eq:ode:ae0}).
+Using equation (ref{eq:ode:ay}) to replace $y^\prime(t_0)$ with $f(y_0,t_0)$, we find:
+!bt
+\begin{align}
+\epsilon^*=&y(t_0+h)-y_{1}^*=\frac{1}{2}y^{\prime\prime}(t_0)h^2\equiv ch^2,
+\end{align}
+!et
+where we have ignored terms of higher order than $h^2$, and defined $c$ as $c=y^{\prime\prime}(t_0)/2$. Next we take two steps of size $h/2$ to
+reach $y_1$:  
+!bt
+\begin{align}
+y_{1/2}&=y_0+\frac{h}{2}f(y_0,t_0),\label{eq:ode:ae1}\\
+y_{1}&=y_{1/2}+\frac{h}{2}f(y_{1/2},t_0+h/2),\label{eq:ode:ae2}\\
+y_{1}&=y_{0}+\frac{h}{2}f(y_0,t_0)+\frac{h}{2}f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2).\label{eq:ode:ae3}
+\end{align}
+!et
+Note that we have inserted
+equation (ref{eq:ode:ae1}) into equation (ref{eq:ode:ae2}) to arrive at equation (ref{eq:ode:ae3}). The truncation error in this case is, as before:
+!bt
+\begin{align}
+\epsilon&=y(t_0+h)-y_{1}=y(t_0)+y^{\prime}(t_0)h+\frac{1}{2}y^{\prime\prime}(t_0)h^2+\mathcal{O}(h^3)\nonumber\\
+&-\left[y_{0}+\frac{h}{2}f(y_0,t_0)+\frac{h}{2}f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2)\right].\label{eq:ode:ay5}
+\end{align}
+!et
+This equation is slightly more complicated, due to the term involving $f$ inside the last parenthesis, we can use Taylor expansion to expand it about $(y_0,t_0)$:
+!bt
+\begin{align}
+&f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2)=f(y_0,t_0)\nonumber\\
+&+\frac{h}{2}\left[f(y_0,t_0)\left.\frac{\partial f}{\partial y}\right|_{y=y_0,t=t_0}
++\left.\frac{\partial f}{\partial t}\right|_{y=y_0,t=t_0}\right]+\mathcal{O}(h^2).\label{eq:ode:ay2}
+\end{align}
+!et
+It turns out that this equation is related to $y^{\prime\prime}(t_0,y_0)$, which can be seen by differentiating equation (ref{eq:ode:ay}):
+!bt
+\begin{align}
+\frac{d^2y}{dt^2}&=\frac{df(y,t)}{dt}=\frac{\partial f(y,t)}{\partial y}\frac{dy}{dt}+\frac{\partial f(y,t)}{\partial t}
+=\frac{\partial f(y,t)}{\partial y}f(y,t)+\frac{\partial f(y,t)}{\partial t}.\label{eq:ode:ay3}
+\end{align}
+!et
+Hence, equation (ref{eq:ode:ay2}) can be written:
+!bt
+\begin{align}
+f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2)=f(y_0,t_0)+\frac{h}{2}y^{\prime\prime}(t_0,y_0),\label{eq:ode:ay4}
+\end{align}
+!et
+hence the truncation error in equation (ref{eq:ode:ay5}) can finally be written:
+!bt
+\begin{align}
+\epsilon=&y(t_1)-y_{1}=\frac{h^2}{4} y^{\prime\prime}(y_0,t_0)=\frac{1}{2}ch^2,\label{eq:ode:ae4}
+\end{align}
+!et
+!esol
+##!bhint
+##"Wolframalpha": "http://wolframalpha.com" can perhaps
+##compute the integral.
+##!ehint
+
+##!bsubex
+##Subexercises are numbered a), b), etc.
+##!esubex
+##!bans 
+##Short answer to subexercise a).
+##!eans
+
+##!bremarks
+##At the very end of the exercise it may be appropriate to summarize
+##and give some perspectives. The text inside the `!bremarks` and `!eremarks`
+##directives is always typeset at the end of the exercise.
+##!eremarks
+
+
+## By default, answers, solutions, and hints are typeset as paragraphs. The command-line arguments --without_answers and 
+## --without_solutions turn off output of answers and solutions, respectively, except for examples.
+## Publish (https://bitbucket.org/logg/publish is used to
+## handle references. The line below specifies the name of
+## the Publish database file (see the doconce manual for details).
+
+##BIBFILE: ../papers.pub
+
+%endif
+!split
+========= Monte Carlo Methods =========
+label{ch:mc}
+%if all:
+###### Content provided under a Creative Commons Attribution license, CC-BY 4.0; code under MIT License. (c)2018 Aksel Hiorth
+
+======= Monte Carlo Methods =======
+Monte Carlo methods are named after the Monte Carlo Casino in Monaco,
+this is because at its core it uses random numbers to solve problems.
+Monte Carlo methods are quite easy to program, and they are
+usually much more intuitive than a theoretical approach. If we would
+like to find the probability to get at least 5 on three dices after 5 throws
+there are methods from statistics that could tell us the probability.
+Using the Monte Carlo method, we would get the computer to pick a
+random integer between 1 and 6, three times, to represent one throw of
+the dices bla bla.
+later in this chapter 
+Usually  Usually we use differential equations to describe physical systems, the solution to these equations are continuous functions. In order for these solutions 
+to be useful, they require that the differential equation describes our physical sufficiently. In many practical cases we have no control over many 
+of the parameters entering the differential equation, or stated differently *our system is not deterministic*. This means that there could be some random
+fluctuations, occurring at different times and points in space, that we have no control over. In a practical situation we might would like to investigate how these fluctuations would
+affect the behavior of our system. A 
+
+o "ray tracing":"https://www.scratchapixel.com/lessons/mathematics-physics-for-computer-graphics/monte-carlo-methods-in-practice/monte-carlo-rendering-practical-example"
+
+======= Monte Carlo Integration  ''Hit and Miss'' =======
+Let us start with a simple illustration of the Monte Carlo Method (MCM), Monte Carlo integration. To the left
+in figure ref{fig:mc:mci} there is a shape of a pond. Imagine that we wanted to estimate the area of the pond, how could
+we do it? Assume further that you did not have your phone or any other electronic devices to help you. 
+
+FIGURE: [fig-mc/mci, width=400 frac=1.0] Two ponds to illustrate the MCM. label{fig:mc:mci}
+
+One possible approach is: First to walk around it, and put up some bands (illustrated by the black dotted line).
+Then estimate the area inside the bands (e.g. 4$\times$3 meters). Then
+we would know that the area was less than e.g. 12m$^2$. Finally,
+and this is the difficult part, throw rocks *randomly* inside the
+bands. The number of rocks hitting the pond divided by the total
+number rocks thrown should be equal to the area of the pond divided by
+the total area inside the bands, i.e. the area of the pond should be
+equal to:
+!bt
+\begin{equation}
+A\simeq\text{Area of rectangle}\times\frac{\text{Number of rocks hitting the pond}}{\text{Number of rocks thrown}}.
+label{eq:mc:mci}
+\end{equation}
+!et
+It is important that we throw the rocks randomly, otherwise  equation (ref{eq:mc:mci}) is not correct. Now, let us
+investigate this in more detail, and use the idea of throwing rocks to estimate $\pi$. To the right in figure ref{fig:mc:mci},
+there is a well known shape, a circle. The area of the circle is $\pi d^2/4$, and the shape is given by $x^2+y^2=d^2/4$. Assume that
+the circle is inscribed in a square with sides of $d$. To throw rocks randomly inside the square, is equivalent pick random numbers
+with coordinates $(x,y)$, where $x\in[0,d]$ and $y\in[0,d]$. We want all the $x-$ and $y-$values to be chosen with equal probability,
+which is equivalent to pick random numbers from a *uniform* distribution. Below is a Python implementation:
+@@@CODE src-mc/pi.py fromto:import@NN
+
+In the table below, we have run the code for $d=1$ and different values of $N$. 
+
+|------c--------------c--------------c--------------c-------|
+| MC estimate  | Error        | $N$          | $1/\sqrt{N}$ |
+|------c--------------c--------------c--------------c-------|
+| 3.04         | -0.10159     | 10$^2$       | 0.100        |
+| 3.176        | $\,$0.03441  | 10$^3$       | 0.032        |
+| 3.1584       | $\,$0.01681  | 10$^4$       | 0.010        |
+| 3.14072      | -0.00087     | 10$^5$       | 0.003        |
+|-----------------------------------------------------------|
+
+We clearly see that a fair amount of rocks or numbers needs to be used in order to get a good estimate. If you run this code several
+times you will see that the results changes from time to time. This
+makes sense as the coordinates $x$ and $y$ are chosen at random.
+===== Random number generators =====
+
+There are much to be said about random number generators. The MCM depends on a good random number generator, otherwise we cannot use the results from
+statistics to develop our algorithms. Below, we briefly summarize some important points that you should be aware of:
+
+o Random number generators are generally of two types: *hardware random number generator* (HRNG) or *pseudo random number generator* (PRNG).
+o HRNG uses a physical process to generate random numbers, this could atmospheric noise, radioactive decay, microscopic fluctuations, which is translated to an electrical signal. The electrical signal is converted to a digital number (1 or 0), by sampling the random signal random numbers can be generated. The HRNG are often named *true random number generators*, and their main use are in *cryptography*.
+o PRNG uses a mathematical algorithm to generate an (apparent) random sequence. The algorithm uses an initial number, or a *seed*,  to start the sequence of random number. The sequence is deterministic, and it will generate the same sequence of numbers if the same seed is used. At some point the algorithm will reproduce itself, i.e. it will have certain period. For some seeds the period may be much shorter.
+o Many of the PRNG are not considered to be cryptographically secure, because if a sufficiently long sequence of random numbers are generated from them, the rest of the sequence can be predicted. 
+o Python uses the "Mersenne Twister":"https://en.wikipedia.org/wiki/Mersenne_Twister" algorithm to generate random numbers, and has a period of $2^{19937}−1\simeq4.3\cdot10^{6001}$. It is not considered to be cryptographically secure.
+
+In Pythons `random.uniform` function, a random seed is chosen each time the code is run, but
+if we set e.g. `random.seed(2)`, the code will generate the same sequence of numbers each time it is called. 
+
+===== Encryption  =====
+This section can be skipped as it is not relevant for development of
+the numerical algorithms, but it is a good place to explain the basic
+idea behind encryption of messages. A very simple, but not a very good
+encryption, is to replace all the letters in the alphabet with a
+number, e.g. A=1, B=2, C=3, etc. This is what is know as a
+*substitution cipher*, it does not need to be a number it could be a
+letter, a sequence of letters, letters and numbers etc. The receiver
+can solve the code by doing the reverse operation.
+
+The
+weakness of this approach is that it can fairly easily be cracked, by
+the following approach: First we analyze the encrypted message and find the frequency of each of the symbols.
+Assume that we know that the message is written in English, then the
+frequency of symbols can be compared with the frequency of
+letters from a known English text (the most common is `E` (12$\%$), then `T`
+(9$\%$), etc.). We would then guess that the most occurring symbol
+probably is an `E` or `T`. When some of the letters are in place, we
+can compare with the frequency of words, and so on. By the help of
+computers this process can easily be automated.
+
+A much better algorithm is *to not replace a letter with the same
+symbol*. To make it more clear, consider our simple example where A=1, B=2,
+C=3, $\ldots$. If we know say that A=1 but we add a *random number*,
+then our code would be much harder to crack. Then the letter A
+could be several places in the message but represented as a complete different
+number. Thus we could not use the frequency of the various symbols to
+crack the message.
+
+How can the receiver decrypt the message? Obviously, it can be done if
+both the sender and receiver have the same sequence of random numbers (or the *key*).
+This can be achieved quite simple with random number generators, if we
+know the seed  used we can generate the same sequence of
+random numbers. If Alice where to send a message to Bob without Eve
+knowing what it is, Alice and Bob could agree to send a message that
+was scrambled using Pythons Mersenne-Twister algorithm with seed=2.
+
+The weakness of this approach is of course that Eve could convince
+Alice or Bob to give her the seed or the key. Another possibility is
+that Eve could write a program that tested
+different random number generators and seeds to decipher the message.
+How to avoid this?
+
+Let us assume that Alice and Bob each had their own
+hardware random generator. This generator generated random numbers that was truly
+random, and the sequence could not be guessed by any outsider. Alice
+do not want to share her key (sequence of random numbers) with Bob,
+and Bob would not share his key with Alice. How can they send a
+message without sharing the key? One possible way of doing it is as
+follows: Alice write a message and encrypt it with her key, she send
+the message to Bob. Bob then encrypt the message with his key, he
+sends it back to Alice. Alice then decrypt the message with her key
+and send it back to Bob. Now, Bob can decrypt it with his own key and
+read the message. The whole process can be visualized by thinking of
+the message as box with the message. Alice but her padlock on the box
+(keeps her key for her self), she sends the message to Bob. Bob locks
+the box with his padlock, now there are two padlocks on the box. He
+sends the box back to Alice, Alice unlocks her padlock with her key,
+and sends it back to Bob. The box now only has Bob's key, he can
+unlock the box and read the message. The important point is that the
+box was never unlocked throughout the transaction, and Alice and Bob
+never had to share the key with anyone. 
+
+===== Errors on Monte Carlo Integration and the Binomial Distribution  =====
+How many rocks do we need to throw in order to reach a certain accuracy? To answer this question we need some results from statistics. Our problem of calculating the integral is closely related to the *binomial distribution*. When we throw a rock one of two things can happen i) the rock falls into the water, or ii) it falls outside the pond. If we denote the probability that the rock falls into the pond as $p$, then the probability that it falls outside the pond, $q$, has to be $q=1-p$.
+This is simply because there are no other possibilities and the sum of the two probabilities has to be one: $p+q=p+(1-p)=1$. The binomial distribution is given by:
+!bt
+\begin{equation}
+p(k)=\frac{n!}{k!(n-k)!}p^k(1-p)^{n-k}.
+label{eq:mc:bin}
+\end{equation}
+!et
+$p(k)$ is the probability that an event happens $k$ times after $n$ trials. The mean, $\mu$, and the variance, $\sigma^2$, of the binomial distribution is:
+!bt
+\begin{align}
+\mu&=\sum_{k=0}^{n-1}kp(k)=np, label{eq:mc:binm}\\
+\sigma^2&=\sum_{k=0}^{n-1}(k-\mu)^2p(k)=np(1-p). label{eq:mc:bins}
+\end{align}
+!et
+!bnotice Mean and variance
+The mean of a distribution is simply the *sum* divided by the *count*,
+the symbol $\mu$ or $\overline{x}$ is usually used. For $N$ observations, $x_i$,
+$\mu=\sum_i x_i/N$. The mean is just an average, it could e.g. be the sum of all the heights of
+students in the class divided by the number of students. The mean
+would then be the average height of all the students in the class.
+
+The variance is calculated by taking the difference between each of
+the data points and the mean, square it, and sum over all data points.
+Usually the symbol $\sigma^2$ is used, $\sigma^2=\sum_i(\mu-x_i)^2/n$.
+The variance measures the spread in the data. Furthermore, it squares the
+distance between the mean and the individual observations, meaning
+that the points lying far a way from $\mu$ contributes more to the
+variance. 
+!enotice
+Before we proceed, we should take a moment and look a little more into
+the meaning of equation (ref{eq:mc:bin}) to appreciate its usefulness.  A classical example of the use of the binomial formula is to toss a coin, if the coin is fair it will have an equal probability of giving us a head or tail, hence $p=1/2$. Equation (ref{eq:mc:bin}), can answer questions like: ''What is the probability to get only heads after 4 tosses?''. Let us calculate this answer using equation (ref{eq:mc:bin}), the number of tosses is 4, the number of success is 4 (only heads each time)
+!bt
+\begin{equation}
+p(k=4)=\frac{4!}{4!(4-4)!}\frac{1}{2}^4(1-\frac{1}{2})^{4-4}=\frac{1}{2^4}=\frac{1}{16}.
+label{eq:mc:coin}
+\end{equation}
+!et
+''What is the probability to get three heads in four tosses?'', using
+the same equation, we find:
+!bt
+\begin{equation}
+p(k=3)=\frac{4!}{3!(4-3)!}\frac{1}{2}^3(1-\frac{1}{2})^{4-3}=\frac{4}{2^4}=\frac{1}{4}.
+label{eq:mc:coin2}
+\end{equation}
+!et
+In figure ref{fig:mc:coin}, all the possibilities are shown. The
+number of possibilities are 16, and there are only one possibility
+that we get only heads, i.e. the probability is 1/16 as calculated in
+equation (ref{eq:mc:coin}). In the figure we also see that there are 4
+possible ways we can get three heads, hence the probability is
+4/16=1/4 as calculated in equation (ref{eq:mc:coin2}).
+
+FIGURE: [fig-mc/coin, width=400 frac=1.0] The famous Norwegian Moose coin, and possible outcomes of four coin flips in a row. label{fig:mc:coin}
+
+Now, let us return to our original question, ''What is the error on our
+estimate of the integral, when using the MCM?''. Before we continue we
+should also clean up our notation, let $I$ be the value of the true
+integral, $A$ is our *estimate* of the integral, and $I_N$ is the area
+of the rectangle. First, let us show
+that the mean or expectation value of the binomial distribution is
+related to our estimate of the area of the pond or the circle, $A$. In our case we draw $n=N$
+random numbers, and $k$ times the coordinate falls inside the circle,
+equation (ref{eq:mc:binm}) tells us that the mean value is $np$. $p$
+is the probability that the coordinate is within the area to be
+integrated, hence as before $p$ is equal to the area to be integrated
+divided by the area of the total domain, thus:
+!bt
+\begin{equation}
+\mu=np=N\frac{A}{I_N},
+\end{equation}
+!et
+or
+!bt
+\begin{equation}
+A=I_N\frac{\mu}{N}.
+\end{equation}
+!et
+Equation (ref{eq:mc:bins}), gives us an estimate of the variance of
+the mean value. Assume for simplicity that we can replace $1-p\simeq
+p$, this is of course only correct if the area of the rectangle is
+twice as big as our pond, but we are only interested in an
+estimate of the error, hence $\sigma^2\simeq np^2$. We can now use the
+standard deviation as an estimate of the error of our integral:
+!bt
+\begin{align}
+I&\simeq I_N\frac{\mu\pm\sigma}{n}=I_N\frac{Np\pm \sqrt{N}p}{N}\nonumber\\
+&\simeq I_N(p\pm \frac{p}{\sqrt{N}})=A\pm \frac{A}{\sqrt{N}}.
+label{eq:mc:mcmf}
+\end{align}
+!et
+In the last equation we have replaced $p$ with $A/I_N$. 
+Hence, the error of our integral is inversely proportional to the
+square root of the number of points. 
+
+===== The mean value method =====
+How does our previous method compare with some of our standard methods,
+like the midpoint rule? The error for the MC method scales as
+$1/\sqrt{N}$, in our previous error estimates we used the step length,
+$h$, as an indicator of the accuracy, and not $N$. The s$N$ is
+related to the number of points as $h=(b-a)/n$, where $b$ and $a$ are
+the integration limit. Thus our MCM scales as $1/\sqrt{n}\sim
+h^{1/2}$, this is actually worse than the midpoint or trapezoidal
+rule, which scaled as $h$.
+
+The MCM can be improved. We will first describe the mean value method.
+In the last section we calculated the area of
+a circle by picking random numbers inside a square and estimated the
+fraction of points inside the circle. This is equivalent to calculate
+the area of a half circle, and multiply with 2:
+!bt
+\begin{equation}
+I=2\int_{-d/2}^{d/2}\sqrt{(d/2)^2-x^2}dx=\frac{\pi d^2}{4}.
+label{eq:mc:Is}
+\end{equation}
+!et
+The half-circle is now centered at the origin. Before we proceed we
+write our integral in a general form as:
+!bt
+\begin{equation}
+I=\int_a^bf(x)dx.
+label{eq:mc:I1}
+\end{equation}
+!et
+Instead of counting the number of points inside the curve given by
+$f(x)$, we could instead use the mean of
+the function, which we will define as $\overline{f}=\sum_k f(x_k)/N$:
+!bt
+\begin{equation}
+I=\int_a^bf(x)dx\simeq\overline{f}\int_a^bdx=(b-a)\overline{f}
+=\frac{(b-a)}{N}\sum_{k=0}^{N-1}f(x_k).
+label{eq:mc:I2}
+\end{equation}
+!et
+Note that this formula is similar to the midpoint rule, but now the
+function is not evaluated at the midpoint, but at several points and
+we use the average value. 
+
+FIGURE: [fig-mc/mcint, width=400 frac=1.0] Illustration of MC integration for $N=4$. label{fig:mc:int}
+
+Below is an implementation:
+@@@CODE src-mc/pi2.py fromto: import@N=
+
+In the table below we have compared the mean value method with the
+''hit and miss'' method. We see
+that the mean value method performs somewhat better, but there are
+some random fluctuations and in some cases it performs poorer. 
+
+|---c---------c---------c---------c---------c-----|
+| MC-mean | Error   | MC      | Error   | $N$     |
+|---c---------c---------c---------c---------c-----|
+| 3.1706  | 0.0290  | 3.1600  | 0.0184  | 10$^2$  |
+| 3.1375  | -0.0041 | 3.1580  | 0.0164  | 10$^3$  |
+| 3.1499  | 0.0083  | 3.1422  | 0.0006  | 10$^4$  |
+| 3.1424  | 0.0008  | 3.1457  | 0.0041  | 10$^5$  |
+| 3.1414  | -0.0002 | 3.1422  | 0.0006  | 10$^6$  |
+|-------------------------------------------------|
+
+We also see that in this case the error scales as $1/\sqrt{N}$.
+!bnotice 
+At first sight it might be a little counter intuitive that if we
+multiply the average value of the function with the size of the
+integration domain we get an estimate for the integral, as illustrated
+in the top figure in figure ref{fig:mc:int}. A different, but
+equivalent way, of viewing the mean value method is the lower figure
+in figure ref{fig:mc:int}. For each random point we choose, we
+multiply with the area $(b-a)/N$, as $N$ increases the area decreases
+and the mean value method approaches the midpoint algorithm. The
+reason the mean value method performs poorer is that we do not sample
+the function at regular intervals. The "law of large
+numbers":"https://en.wikipedia.org/wiki/Law_of_large_numbers", ensures
+that our estimate approach the true value of the integral.
+!enotice
+
+===== Basic Properties of Probability Distributions =====
+The MCM is closely tied to statistics, and it is important to have a
+basic understanding of probability density functions (PDF). In
+the previous section, we used a random number generator to give us
+random numbers in an interval. All the numbers are picked with an
+equal probability. Another way to state this is to say that: we *draw*
+random numbers from an *uniform* distribution. Thus all the numbers
+are drawn with an equal probability $p$. What is the value of $p$?
+That value is given from another property of PDF's, all PDF's must
+be *normalized* to 1. This is equivalent to state that the sum of all
+probabilities must be equal to one. Thus for a general PDF, $p(x)$, we
+must have:
+!bt
+\begin{equation}
+\int_{-\infty}^{\infty}p(x)dx=1.
+label{eq:mc:pdf1}
+\end{equation}
+!et
+A uniform distribution, $p(x)=U(x)$, is given by:
+!bt
+\begin{equation}
+U(x)=\begin{cases} \frac{1}{b-a}, \text{ for }x\in[a,b]\\
+0, \text{ for } x<a \text{ or }x>b,
+\end{cases}
+label{eq:mc:pdfu}
+\end{equation}
+!et
+you can easily verify that $\int_{-\infty}^{\infty}U(x)=1$. In the MCM
+we typically evaluate *expectation values*. The expectation
+value, $E[f]$, for a function is defined:
+!bt
+\begin{equation}
+E[f]\equiv\int_{-\infty}^{\infty}f(x)p(x)dx,
+label{eq:mc:ef}
+\end{equation}
+!et
+specializing to a uniform distribution, $p(x)=U(x)$, we get:
+!bt
+\begin{equation}
+E[f]=\int_{-\infty}^{\infty}f(x)U(x)dx=\frac{1}{b-a}\int_a^bf(x)dx.
+label{eq:mc:efu}
+\end{equation}
+!et
+Rearranging this equation, we see that we can write the above equation
+as:
+!bt
+\begin{equation}
+\int_a^bf(x)dx=(b-a)E[f]\simeq(b-a)\frac{1}{N}\sum_{k=0}^{N-1}f(x_k).
+label{eq:mc:efu2}
+\end{equation}
+!et
+This equation is the same as equation (ref{eq:mc:I2}), but in the
+previous section we never explained why the expectation value of
+$f(x_k)$ was equal to the integral. The derivation above shows that
+$\int_a^bf(x)dx$ is equal to the expectation value of $f(x)$ 
+only under the condition that *we draw numbers from a uniform distribution*.
+
+To make this a bit more clearer, let us specialize to $f(x)=x$. In
+this case the expectation value is equal to the mean:
+!bt
+\begin{equation}
+E[x]=\mu=\int_{-\infty}^\infty xp(x)=\frac{1}{N}\sum_kx_k.
+label{eq:mc:mean}
+\end{equation}
+!et
+The mean of a distribution is a special case 
+
+follows directly from the definition of the variance:
+!bt
+\begin{equation}
+\sigma=\sqrt{\frac{1}{N}\sum_k(f(x_i)-\langle f\rangle)^2}\sim\frac{1}{\sqrt{N}},
+label{eq:mc:varf}
+\end{equation}
+!et
+the reason that the mean value method usually performs better is that
+the leading coefficient is smaller.
+!bnotice Why would we or anyone use MC integration?
+Monte Carlo integration performs much poorer than any of our previous
+methods. So why should we use it, or when should we use it? The
+strength of MC integration is only apparent when there is a large
+number of dimensions. 
+!enotice
+
+
+======= A side step: checking convergence in large dimensions =======
+If you immediate understand or accept that MC integration is the
+preferred method in higher dimension, you can skip the following
+section.
+
+If you read about MC integration in various books and online, you
+will encounter the statement highlighted in the last section: MC is
+superior in higher dimensions, because it always scales as $\sim
+N^{-1/2}$. My experience on this matter is that I do not really
+understand it before I have tried it myself. In this section I will
+try and explain how I am thinking to prove the statement, or at least
+get convinced that it is probably true.
+
+First of all, when people make the statement about dimensionality
+they do not mean spatial dimensions. Usually the dimensionality is
+about all the possible variable in the problem under consideration. If
+we are doing investment analysis, we would like to know the most
+probable outcome (expectation value) of our investment given the
+variation in all the relevant variables. The expectation value would
+then be a multidimensional integral. (Ray tracing example?) However,
+the point in this section is not do to pick a very interesting and
+relevant example, we just want to have a
+simple case where we can systematically change the number of dimension
+and compare with the true answer. What immediately comes to (my) mind
+is the volume of a hyper sphere (or an $n$-ball), the volume of a hyper sphere is known:
+!bt
+\begin{equation}
+V(R)=\frac{\pi^{D/2}}{\Gamma(D/2+1)}R^D,
+label{eq:mc:hyp}
+\end{equation}
+!et
+where $D$ is the number of dimensions $\Gamma(D/2+1)$ is the gamma
+function, if $n$ is an integer then $\Gamma(n)=(n-1)!$ and
+$\Gamma(n+1/2)=(2n)!/(4^nn!)\sqrt{\pi}$. You can easily verify that
+for $D=2,3$, $V(R)=\pi R^2, 4/3\pi R^3$, respectively.
+
+Next, we want to extend one of our 1D integration routines to higher
+dimension, and compare with the MC method. What we want to
+investigate is: if $D$ gets large enough, will the MC method perform
+better than the standard MC method? If yes, how large must $D$ be?
+
+How do we attack this problem? Here is how I would do it:
+
+o Start *simple*. Code a simple example in 2 or 3D, check the result with an analytical formula
+o While coding the example in 2 or 3D, make sure that the code can (easily) be extended to higher dimensions. 
+o Choose the simplest 1D integration technique, once the example is working you can switch to a more advanced method.
+
+Let $x_0,x_1,x_2,\ldots,x_{D-1}$ be the coordinates in a
+$D$-dimensional space, i.e. in 3D: $x\equiv x_0, y\equiv x_1, z\equiv
+x_2$. The formula for a hyper sphere with radius $R$ is:
+!bt
+\begin{equation}
+x_0^2+x_1^2+x_2^2+\cdots+x_{D-1}^2=R^2.
+label{eq:mc:hypf}
+\end{equation}
+!et
+We continue by specializing to $D=3$ (but keep the $x_i$
+notation, because it is then easier to extend to higher dimensions).
+In Cartesian coordinates the volume of the sphere (centered in the
+origin), can be written:
+!bt
+\begin{equation}
+V(R)=\int_{-R}^{R}\int_{-\sqrt{R^2-x_0^2}}^{\sqrt{R^2-x_0^2}}
+\int_{-\sqrt{R^2-x_0^2-x_1^2}}^{\sqrt{R^2-x_0^2-x_1^2}}dx_0dx_1dx_2.
+label{eq:mc:hypV}
+\end{equation}
+!et
+We can always do the last integration, regardless of the number of
+dimensions:
+!bt
+\begin{equation}
+V(R)=2\int_{-R}^{R}\int_{-\sqrt{R^2-x_0^2}}^{\sqrt{R^2-x_0^2}}
+\sqrt{R^2-x_0^2-x_1^2}dx_0dx_1.
+label{eq:mc:hypV2}
+\end{equation}
+!et
+===== Monte Carlo Integration of a Hyper Sphere =====
+
+Let us first do the MC integration, which is extremely simple to
+implement. We simply place the sphere inside a cube, and then count
+the number of points that hits inside the hyper sphere:
+
+@@@CODE src-mc/hypersphere3.py fromto: def mc_nball@def mc_nball_sampling
+
+The code `for _ in range(N)` with the underscore, is used because we
+do not use the counter in the code. We could also written: `for k in
+range(N)`. We can also make an implementation of equation (ref{eq:mc:hypV2}), using the sampling method:
+
+@@@CODE src-mc/hypersphere3.py fromto: def mc_nball_sampling@def nball
+
+The function $f(x)=\sqrt{R^2-x_0^2-x_1^2}$, and defined below. In the next section we will extend the trapezoidal rule to higher dimension, and it is much more cumbersome than the MC integration. The code for the analytical result is:
+
+@@@CODE src-mc/hypersphere3.py fromto: def nball@if __
+
+===== Trapezoidal Integration of a Hyper Sphere =====
+
+How do we extend the methods introduced in the chapter on numerical
+integration to higher order dimensions? The trick is to call a one
+dimensional integration routine several times, to see it more clearly,
+we rewrite equation (ref{eq:mc:hypV2}) as:
+!bt
+\begin{align}
+V(R)&=2\int_{-R}^{R}F(x_0)dx_0,\nonumber\\
+F(x_0)&\equiv\int_{-\sqrt{R^2-x_0^2}}^{\sqrt{R^2-x_0^2}}\sqrt{R^2-x_0^2-x_1^2}dx_1,
+label{eq:mc:hypV3}
+\end{align}
+!et
+when integrating $F(x_0)$, we do it by dividing the x-axis from $-R$
+to $R$ into $N$ equal slices as before. We also need to evaluate
+$F(x_0)$ for each value of $x_0$, which is slightly more tricky, see
+figure ref{fig:mc:2Dint} for an illustration. 
+
+FIGURE: [fig-mc/2Dint, width=400 frac=1.0] Illustration of a 2D integration to evaluate the volume of a sphere.label{fig:mc:2Dint}
+
+The multi dimensional
+integral is done by placing a box around the sphere, and divide this
+box into $N\times N$ equal boxes. If start the integration
+at $x=-R$, $F(-R)=0$, because the integrand is zero. If we move one
+step to the left, we need to integrate from $y=-R$ to $y=R$. We see
+from the figure to the right in figure ref{fig:mc:2Dint} that the
+function is not defined for two first points. Thus we need to make
+sure that if we are outside the integration bounds the function is
+zero, this can be achieved by the following code:
+@@@CODE src-mc/hypersphere3.py fromto: import numpy@def d1
+Next, we need to make our implementation of the trapezoidal rule able
+to handle a function with more than one argument. To make it clearer,
+we show the original implementation below:
+@@@CODE src-mc/trapez.py fromto: def int@N=5
+To achieve what we want we add two extra arguments to our
+implementation, `x`, and `i`, a list with the coordinates and
+which coordinate to integrate over, respectively:
+@@@CODE src-mc/hypersphere3.py fromto: def d1@def d2
+Next, we need to do the outer integral, that is to basically replace
+the function call in the routine above with the trapezoidal rule:
+@@@CODE src-mc/hypersphere3.py fromto: def d3_trapez@def mc_
+Note the similarities between `int_trapez` and `d2_trapez`. If we run
+the code with $N=10^6$ for the MC integration and $N=100$ for the
+trapezoidal rule, we actually get that the methods performs about the
+same - a relative error of $10^{-3}$. The reason we allow for $10^6$
+points in the MC method (instead of $100\times100=10^4$),
+is that we did one of the integrations used in the trapezoidal rule
+analytically.
+
+!bnotice Error Analysis in higher dimensions
+In the chapter about numerical integration, we did an error analysis
+on the trapezoidal rule and found that it scaled as $h^2$. As we see
+from the example above, a higher order integration is simply to do a
+series of 1D integrations in all the dimensions, thus the error term
+should be $h_{x_0}^2+h_{x_1}^2+\cdots+h_{x_{d-1}}^2$. If we use the
+same spatial resolution in all dimensions, then the overall error
+scale as $h^2$. If we let $n$ denote the number of points in each
+directions, $h\sim 1/n$, the total number of points used is $N=n\times
+n\cdots n=n^d$. Thus, the error term scales as $h^2\sim N^{-2/d}$, and
+we see that if $d\geq 4$, the MC integration is expected to perform
+better. 
+!enotice
+
+To continue our discussion, we can easily extend our code to higher dimensions, the case $D=4$ would be:
+@@@CODE src-mc/hypersphere3.py fromto: def d2@def mc
+The code can be run by entering
+!bc
+n=100;D=3
+x = [0. for i in range(D)]
+print("volume of hyperspher in 4D: ", d3_trapez(-1,1,f,x,0,N=n))
+!ec
+
+===== Recursive Calls in Python =====
+As you might guess from reading the above, there must be a simpler way to extend our code to higher dimensions. As a rule of thumb: *whenever you copy and paste code, think functions*. The functions: `d1_trapez`, `d2_trapez`, `d3_trapez` are very similar and the only difference is that for the final integration `d1_trapez` is called and in `d1_trapez` we call the function to be integrated and not an integration routine. There are probably many ways to extend our code to higher dimensions, but we will use this opportunity to introduce recursive functions. A recursive function is simply a function that calls itself. Lets consider a very simple example, the factorial function, e.g. $n!=1\cdot2\cdot3\cdots n$. Below is an implementation that uses a loop:
+@@@CODE src-mc/hypersphere4.py fromto: def fac@def fact_rec
+Below is an equivalent implementation that uses recursive implementation:
+@@@CODE src-mc/hypersphere4.py fromto: def fact_rec@if __
+
+!bwarning Recursive functions
+Recursive implementation is very elegant, and more transparent, but it comes with a price. The reason is that when a function is called additional memory is allocated to store the local variables. If we where to calculate $100!$, 100 copies of the variable $n$ are created, whereas using a loop only one variable is created. Each time a function is called more memory is allocated, and if the recursive calls are too many it might cause memory overflow. If you try to call `fact_rec(1000)`, Python will give an error, because the maximum number of recursions are reached, it can be changed by:
+!bc
+import sys
+sys.setrecursionlimit(1500)
+!ec
+!ewarning
+We can now extend our multi dimensional integration routine of the hyper sphere to any dimension, by using recursive function calls:
+@@@CODE src-mc/hypersphere4.py fromto: def dd_trapez@def mc_n
+======= Importance Sampling =======
+What would be the optimal shape of the function for our MC method?
+Clearly if the function was uniform Assume that we would like to 
+
+===== Exercise: The central limit theorem =====
+label{ex:mc:norm}
+##file=solution.pdf
+The central limit theorem is a corner stone in statistics, and it is
+the reason for why the normal distribution is so widely used. The
+central limit theorem states that if we calculate the average of an
+independent random variable, the *average will be distributed
+according to a normal distribution*. Not that the central limit
+theorem does not state anything about the distribution of the original
+variable. We will not prove the central limit theorem, but illustrate
+it with two examples. 
+
+# !bsol
+# !esol
+
+!bsubex
+First we will investigate a random variable that follows a *uniform
+distribution*. Write a Python function that returns the average of
+$N$ uniformly distributed numbers in $[0,1]$.
+!bsol
+@@@CODE src-mc/clt.py fromto: def@def hist
+!esol
+!esubex
+
+!bsubex
+Calculate the average $M$ times and make a histogram of the values.
+!bsol
+@@@CODE src-mc/clt.py fromto: def hist@average3
+!esol
+!esubex
+
+!bsubex
+Repeat the above exercise for a Poisson distribution.
+!bsol
+@@@CODE src-mc/clt.py fromto: def average3@hist2
+!esol
+!esubex
+
+!bremarks
+It is quite remarkable that the distribution of the average values
+from both a uniform and Poisson distribution follows a normal
+distribution. The general
+"proof":"https://en.wikipedia.org/wiki/Central_limit_theorem"
+is not that complicated, but the ramifications are large. The central
+limit theorem explains why it makes sense to use the standard
+deviation as a measure of confidence for the mean value.
+!eremarks
+===== Exercise: Birthday Paradox =====
+label{ex:mc:BP}
+##file=solution.pdf
+The human mind is not good at logical thinking, and if we use our
+intuition we often get into trouble. A well known example is the
+''Birthday Paradox'', it is simply to answer the following question:
+''How many randomly selected people do we need in order that there is
+a 50\% chance that two of them have birthday on the same date?'' 
+
+# !bsol
+# !esol
+
+!bsubex
+Write a Python function that pick a random date
+# subexercise...
+
+!bsol
+Below are two examples, the first one picks a date, while the second
+one just picks a random day at year.  
+@@@CODE src-mc/rd.py fromto: from@def No
+!esol
+!esubex
+
+!bsubex
+Write a function that takes as argument, number of persons in a group,
+and returns 1 if two of them has birthday on the same date and 0
+otherwise.
+
+!bsol
+. 
+@@@CODE src-mc/rd.py fromto: def No@def BP
+
+!esol
+
+!esubex
+
+!bsubex
+
+Write a function that returns the probability that two people in a
+group of $p$ persons have birthday on the same day, and determine how
+many people we need to have a probability of 50\%.
+
+!bsol
+In order to get some statistics, we need to sample $N$ groups and
+return the fraction of groups that had two persons with the same birthday.
+@@@CODE src-mc/rd.py fromto: def BP@def /N
+By trial an error, we find that 23 persons is needed in order to have
+a probability of 
+
+!esol
+
+!esubex
+##https://nbviewer.jupyter.org/url/norvig.com/ipython/Probability.ipynb
+##https://nbviewer.jupyter.org/url/norvig.com/ipython/ProbabilityParadox.ipynb
+## standard deviation, the variance, the confidence interval, 95% confidence
+## how to compute confidence interval - emperical rule - assume mean
+## estimate is zero, no bias, distribution of errors are normal
+
+%endif
+
+!split
+======= References =======
+
+BIBFILE: ../chapters/papers.pub

@@ -1,0 +1,25 @@
+Introduction to Python programming 
+This chapter is not meant as a full introduction to Python programming. We will assume that you have some knowledge of programming, and focus on the things that will be of most use in this course. One of the great things with Python is that there is a wealth of information and introductory courses freely available on the web. Most of the time you can simply type a question into the web browser, and there is a high chance that someone has asked it before you. The stackoverflow is particularly useful, the answers to questions are voted and the most helpful solution is at the top.
+
+Useful python course python Types in Python 
+
+Functions in Python 
+When to use functions? There is no particular rule, but whenever you start to copy and paste code from one place to another, you should consider to use a function. Functions makes the code easier to read. It is not easy to identify which part of a program is a good candidate for a function, it requires skill and experience. Most likely you will end up changing the function definitions as your program develops. Example: Defining a mathematical function 
+
+
+The following function describes the fluid potential from a vertical well that inject or produce a fluid from a homogeneous reservoir with thickness: where is the injection rate (volume of fluid per time), and is the radial distance from the well.
+
+Write a Python function that returns the fluid potential for any value of and. 
+
+
+
+
+
+
+
+
+
+
+
+Tips for python programming o Use of underscore o get index in loop: for idx,item in enumerate(list): o default argument list o profiling: timeit 
+

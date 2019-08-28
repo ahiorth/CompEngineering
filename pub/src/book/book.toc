@@ -1,0 +1,40 @@
+\contentsline {chapter}{Preface}{vii}{chapter*.1}
+\contentsline {chapter}{\numberline {1}Finite differences}{1}{chapter.1}
+\contentsline {section}{\numberline {1.1}Numerical derivatives}{1}{section.1.1}
+\contentsline {section}{\numberline {1.2}Taylor Polynomial Approximation}{3}{section.1.2}
+\contentsline {subsection}{\numberline {1.2.1}Evaluation of polynomials}{5}{subsection.1.2.1}
+\contentsline {section}{\numberline {1.3}Calculating Derivatives of Functions}{6}{section.1.3}
+\contentsline {subsection}{\numberline {1.3.1}Big $\mathcal {O}$ notation}{8}{subsection.1.3.1}
+\contentsline {subsection}{\numberline {1.3.2}Round off Errors}{8}{subsection.1.3.2}
+\contentsline {section}{\numberline {1.4}Higher Order Derivatives}{9}{section.1.4}
+\contentsline {chapter}{\numberline {2}Linear and nonlinear equations}{13}{chapter.2}
+\contentsline {section}{\numberline {2.1}Solving linear equations}{14}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Gauss-Jordan elimination}{15}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2}Pivoting}{17}{subsection.2.1.2}
+\contentsline {subsection}{\numberline {2.1.3}LU decomposition}{18}{subsection.2.1.3}
+\contentsline {section}{\numberline {2.2}Example: Linear regression}{19}{section.2.2}
+\contentsline {section}{\numberline {2.3}Example: Solving the heat equation regression}{20}{section.2.3}
+\contentsline {section}{\numberline {2.4}Singular Value Decomposition}{20}{section.2.4}
+\contentsline {section}{\numberline {2.5}QR factorization}{20}{section.2.5}
+\contentsline {section}{\numberline {2.6}Solving nonlinear equations}{20}{section.2.6}
+\contentsline {chapter}{\numberline {3}Numerical integration}{21}{chapter.3}
+\contentsline {section}{\numberline {3.1}Numerical Integration}{21}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}The Midpoint Rule}{22}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}The Trapezoidal Rule}{23}{subsection.3.1.2}
+\contentsline {subsection}{\numberline {3.1.3}Numerical Errors on Integrals}{25}{subsection.3.1.3}
+\contentsline {subsection}{\numberline {3.1.4}Practical Estimation of Errors on Integrals}{28}{subsection.3.1.4}
+\contentsline {section}{\numberline {3.2}Romberg Integration}{30}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Gaussian Quadrature}{33}{subsection.3.2.1}
+\contentsline {paragraph}{The case N=3.}{36}{section*.12}
+\contentsline {subsection}{\numberline {3.2.2}Error term on Gaussian Integration}{37}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}Common Weight functions for Classical Gaussian Quadratures}{37}{subsection.3.2.3}
+\contentsline {subsection}{\numberline {3.2.4}Which method to use in a specific case?}{37}{subsection.3.2.4}
+\contentsline {paragraph}{a)}{38}{section*.14}
+\contentsline {paragraph}{b)}{38}{section*.15}
+\contentsline {paragraph}{c)}{38}{section*.16}
+\contentsline {paragraph}{Solution.}{38}{section*.17}
+\contentsline {paragraph}{d)}{39}{section*.18}
+\contentsline {paragraph}{e)}{39}{section*.19}
+\contentsline {chapter}{\numberline {4}Ordinary differential equations}{41}{chapter.4}
+\contentsline {chapter}{\numberline {5}Monte Carlo Methods}{43}{chapter.5}
+\contentsline {chapter}{References}{45}{chapter*.20}

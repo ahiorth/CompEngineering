@@ -1,0 +1,217 @@
+TITLE: Decline Analysis of Oil field production data from the NCS
+AUTHOR: Aksel Hiorth
+DATE: today
+
+__Summary.__
+In this exercise we will look closer at some of the data that is
+available at the Norwegian Petroleum Department
+("NPD":"http://factpages.npd.no/factpages/Default.aspx?culture=no")
+website. We will use simple models to analyze the production data
+from some of the fields. Learning outcomes:
+* read data from files, and visualize them
+* use Python to automatically determine parameters in a mathematical model
+* use a model to interpret observed production data
+* get familiar with the NPD web site and some of the Norwegian oil fields. 
+
+## Include table of contents (latex and html; sphinx always has a toc).
+## (Lines starting with ## are not propagated to the output file,
+## otherwise comments lines starting with # are visible in the
+## output file.)
+
+TOC: on
+
+
+!split
+======= Introduction to Decline Analysis =======
+label{deca}
+
+
+An idealized behavior of an oil field is shown in figure
+ref{fig:hook}. On the web site
+("NPD":"http://factpages.npd.no/factpages/Default.aspx?culture=no"),
+it is possible to select different type of Norwegian oil fields and
+compare the historical production with that of Figure ref{fig:hook}.
+By selecting e.g. Norne or Draugen one can easily see similarities
+with Figure ref{fig:hook}. The main differences might be the size of
+each of the phases, many of the fields does not have a clear plateau,
+and the decline phase might be shorter or longer.
+In this problem we focus on the last phase of the
+oil production; the decline. We define the decline rate $D$ as:
+!bt
+\begin{align}
+\lambda=-\frac{\frac{d q}{d t}}{q}=Cq^\beta\,.
+\label{dec}
+\end{align}
+!et
+$q$ is the field oil rate, $C$ and $\beta$ are constants that needs to be
+found by comparing the model to data.
+
+FIGURE: [fig-decline/hook, width=800] An idealized behavior of an oil field, from cite{hook}. label{fig:hook}
+## !bwarning Observe:
+## In the following exercises, you need to perform all the steps.
+## !ewarning
+
+======= Exercise 1: Import data into a database and access them =======
+
+* Import data from  `field_production_gross_monthly.xls`,
+  in the catalog or from the "NPD web site":"http://factpages.npd.no/factpages/".
+* Extract data from "Draugen", store them in a text file called
+  `draugen.txt` (We can change this, maybe have them access data
+  directly? But for now, I will assume that they have this file in the directory)
+  
+
+======= Exercise 2: Importing and plotting data with Python    =======
+<% counter += 1 %> 
+__Step ${counter}.__
+
+In the below cell, use the `loadtxt` function to load the data file
+`draugen.txt` into an array. The data file should be saved to the same
+folder as this notebook. Refer to the official documentation to
+reference how to use this function if you are unfamiliar:
+"loadtxt":"https://docs.scipy.org/doc/numpy/reference/generated/numpy.loadtxt.html".
+!bc pypro
+# import data from draugen.txt
+!ec 
+
+* Note: you can use *array slicing* to access the individual columns of a 2D array
+ 
+<% counter += 1 %> 
+__Step ${counter}.__
+It is more practical to have the production data to start at $t=0$. In
+the following we will assume that you have organized the oil production
+data from Draugen into Numpy arrays, e.g. `Year` (first column), `Month`
+(second column) , and `OilProd` (third column). 
+
+@@@CODE src-decline/draugen.py fromto: import@ft = plt.savefig
+
+The Python script should generate the output in Figure ref{fig:draugen}.
+<% counter += 1 %> 
+__Step ${counter}.__
+Compare your plot with the one that is reported under Draugen at the "NPD web site":"http://factpages.npd.no/factpages/", why is it different?
+
+FIGURE: [fig-decline/draugen, width=800] Production and cumulative production for the Draugen field. label{fig:draugen}
+
+<% counter += 1 %> 
+__Step ${counter}.__
+ Get data from Norne, Oseberg Øst, and Jotun in the file and make similar plot for them, i.e. production rate and cumulative oil production vs years of production
+
+ <% counter += 1 %> 
+__Step ${counter}.__
+For the same fields plot the production vs the cumulative production
+ 
+======= Exercise 2: Decline analysis, exponential case: $\beta=0$    =======
+<% counter = 0 %> 
+<% counter += 1 %> 
+__Step ${counter}.__
+Use equation (ref{dec}), to show that the oil rate is:
+!bt
+\begin{align}
+q(t)=q_0\exp\{-\lambda_0(t-t_0)\}.
+label{eq:decline:exp}
+\end{align}
+!et
+for $\beta=0$. 
+
+Now we will use this model to analyze the production data from the fields in the previous exercise. First,
+<% counter += 1 %> 
+__Step ${counter}.__
+Define a function that calculates the production rate given in equation (ref{eq:decline:exp}):
+!bc pycod
+def exp_decline(x,q0,lam):
+# enter function here
+  return ...
+!ec
+
+<% counter += 1 %> 
+__Step ${counter}.__
+Next, we want to fit our model to the data. Python have several
+functions to fit a model to data, we will use `curve_fit` from
+"SciPy":"https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.curve_fit.html".
+It is important to only use data from the decline phase (after approximately 8
+years):
+!bc pycod
+from scipy.optimize import curve_fit
+# only choose data from the decline phase (i.e. after approx. 8 years) 
+T0 = 8
+# extract indexes  
+ind = Year > T0;
+# cooresponding X and Y-value 
+NewY = Year[ind]-T0; #important to start at 0
+NewP = OilProd[ind];
+# call the curve_fit function:
+popt, pcov = curve_fit( ... ) # enter correct code
+# evaluate function with the best fit and visual inspect the quality 
+!ec
+A successful fit should produce a similar result as shown in figure ref{fig:draugen_fit}.
+
+FIGURE: [fig-decline/draugen_fit, width=800] Production and exponential decline curve for the Draugen field. label{fig:draugen_fit}
+
+<% counter += 1 %> 
+__Step ${counter}.__
+Use data from Norne, Oseberg Øst, and Jotun, fit the model to the decline phase of the production. Report the values for the decline parameter, compare them. 
+
+======= Exercise 3: Decline analysis, hyperbolic case: $\beta\in <0,1>$  =======
+<% counter = 0 %> 
+<% counter += 1 %> 
+__Step ${counter}.__
+Use equation (ref{dec}), to show that the oil rate is:
+!bt
+\begin{align}
+q(t)=q_0\left[\beta\lambda_0(t-t_0)+1\right]^{-1/\beta}
+\label{bet}
+\end{align}
+!et
+for $\beta>0$. Note that $\lambda_0$ is the decline rate at $t=t_0$: $\lambda_0=Cq_0^\beta$.
+
+<% counter += 1 %> 
+__Step ${counter}.__
+Follow the procedure outlined in the previous exercise, but this time with equation (ref{bet}). 
+You need to make a new Python function, e.g.:
+	
+!bc pycod
+def hyp_decline(x,A,D,b):
+    return # enter function here 
+!ec
+
+<% counter += 1 %> 
+__Step ${counter}.__
+Use data from Norne, Oseberg Øst, and Jotun and fit the hyperbolic  model to the data. Report the values for the decline parameter. 
+How does these values compare with the values you found for the exponential model? Which model is the best and why? 
+
+!bwarning Observe:
+To fit a function to data is not straight forward. The result can be very sensitive to the initial guess of the variables, it also a good idea 
+to constrain the values of the parameters. In our
+case it is also important to choose the right starting point for the decline, for Draugen we used `T0=8`, for the Jotun field `T0=1.8` is a good value. 
+We can force Python to constrain the parameters in `curve_fit`, by the
+use of the `bounds` keyword.
+!ewarning
+
+======= Exercise 4: The Jotun field, hyperbolic case: $\beta\in <0,1>$  =======
+
+In this exercise we will take a closer look at the Jotun field. Use the hyperbolic decline function with the parameters you found in the previous exercise.
+##`T0=1.8`, and `A=0.3709`, `D=0.5384`, and `b=0.3126`. 
+The original drilling program of the Jotun field was finished in 2000. After producing the field for approximately 3 years, it was decided to drill 4 infill wells. 
+By inspecting the Jotun production history, it is easy to spot an increase in the production rate around 2002-2003.  
+<% counter = 0 %> 
+<% counter += 1 %> 
+__Step ${counter}.__
+Why can we use our decline model to estimate the production without the infill wells? 
+
+<% counter += 1 %> 
+__Step ${counter}.__
+Use the decline model to estimate the recovery at the end of 2017 (use e.g. the cumulative production). 
+  Compare this recovery with the ultimate recovery from the field data.   
+
+<% counter += 1 %> 
+__Step ${counter}.__
+Assume an oil price of 50$\$$ per barrel, was it a good decision to drill these infill wells? (Hint: On the "NPD web site":"http://factpages.npd.no/factpages/" you can
+  find information about the  yearly field investments)
+    
+======= Bibliography =======
+
+## Publish (https://bitbucket.org/logg/publish is used to
+## handle references. The line below specifies the name of
+## the Publish database file (see the doconce manual for details).
+
+BIBFILE: papers.pub
+

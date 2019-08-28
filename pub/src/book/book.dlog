@@ -1,0 +1,2346 @@
+running preprocess -DFORMAT=pdflatex -DDEVICE=paper -DCHAPTER="chapter" -DBOOK="book" -DAPPENDIX="appendix" book.do.txt > tmp_preprocess__book.do.txt
+running mako on tmp_preprocess__book.do.txt to make tmp_mako__book.do.txt
+mako variables: {'FORMAT': 'pdflatex', 'DEVICE': 'paper', 'CHAPTER': 'chapter', 'BOOK': 'book', 'APPENDIX': 'appendix'}
+translating doconce text in tmp_mako__book.do.txt to pdflatex
+*** warning: footnotes with verbatim has strange typesetting with svmonodo/t2do/t4do styles
+copy complete file src-taylor/mac_sin_eps.py (format: pypro)
+copy complete file src-numint/midpoint.py (format: pypro)
+copy complete file src-numint/trapez.py (format: pypro)
+copy complete file src-numint/adaptive_midpoint.py (format: pypro)
+copy complete file src-numint/adaptive_trapez.py (format: pypro)
+copy complete file src-numint/romberg.py (format: pypro)
+copy complete file src-numint/gaussquad2.py (format: pypro)
+copy complete file src-numint/gaussquad3.py (format: pypro)
+copying from regex "def analytical" until "# rest of"
+     file: src-ode/euler.py, lines 4-23 (format: pycod)
+copy complete file src-ode/euler_simple.py (format: pypro)
+copying from regex "def one_step" until "# rest of"
+     file: src-ode/adaptive_euler.py, lines 4-34 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk2.py, lines 4-23 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk4.py, lines 4-25 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/adaptive_rk4.py, lines 4-41 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk4_2.py, lines 4-36 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/euler_imp_2.py, lines 4-33 (format: pycod)
+copying from regex "import" until "NN"
+     file: src-mc/pi.py, lines 1-21 (format: pycod)
+copying from regex "import" until "N="
+     file: src-mc/pi2.py, lines 1-22 (format: pycod)
+copying from regex "def mc_nball" until "def mc_nball_sampling"
+     file: src-mc/hypersphere3.py, lines 53-70 (format: pycod)
+copying from regex "def mc_nball_sampling" until "def nball"
+     file: src-mc/hypersphere3.py, lines 70-85 (format: pycod)
+copying from regex "def nball" until "if __"
+     file: src-mc/hypersphere3.py, lines 85-91 (format: pycod)
+copying from regex "import numpy" until "def d1"
+     file: src-mc/hypersphere3.py, lines 3-14 (format: pycod)
+copying from regex "def int" until "N=5"
+     file: src-mc/trapez.py, lines 8-18 (format: pycod)
+copying from regex "def d1" until "def d2"
+     file: src-mc/hypersphere3.py, lines 14-27 (format: pycod)
+copying from regex "def d3_trapez" until "def mc_"
+     file: src-mc/hypersphere3.py, lines 40-70 (format: pycod)
+copying from regex "def d2" until "def mc"
+     file: src-mc/hypersphere3.py, lines 27-70 (format: pycod)
+copying from regex "def fac" until "def fact_rec"
+     file: src-mc/hypersphere4.py, lines 118-127 (format: pycod)
+copying from regex "def fact_rec" until "if __"
+     file: src-mc/hypersphere4.py, lines 127-133 (format: pycod)
+copying from regex "def dd_trapez" until "def mc_n"
+     file: src-mc/hypersphere4.py, lines 62-97 (format: pycod)
+copying from regex "def" until "def hist"
+     file: src-mc/clt.py, lines 5-26 (format: pycod)
+copying from regex "def hist" until "average3"
+     file: src-mc/clt.py, lines 17-27 (format: pycod)
+copying from regex "def average3" until "hist2"
+     file: src-mc/clt.py, lines 22-31 (format: pycod)
+copying from regex "from" until "def No"
+     file: src-mc/rd.py, lines 1-15 (format: pycod)
+copying from regex "def No" until "def BP"
+     file: src-mc/rd.py, lines 15-27 (format: pycod)
+copying from regex "def BP" until "def /N"
+     file: src-mc/rd.py, lines 27-34 (format: pycod)
+
+*** Exercise: Numerical Integration
+    label{None}
+    could be Problem (no refs beyond the exercise itself)
+
+*** Exercise: The central limit theorem
+    label{ex:mc:norm}
+    could be Problem (no refs beyond the exercise itself)
+
+*** Exercise: Birthday Paradox
+    label{ex:mc:BP}
+    could be Problem (no refs beyond the exercise itself)
+found info about 4 exercises
+figure file fig-ode/cstr:
+    can use fig-ode/cstr.png for format pdflatex
+figure file fig-taylor/df:
+    can use fig-taylor/df.png for format pdflatex
+figure file fig-mc/coin:
+    can use fig-mc/coin.png for format pdflatex
+figure file fig-taylor/func_plot:
+    can use fig-taylor/func_plot.png for format pdflatex
+figure file fig-ode/cstr3:
+    can use fig-ode/cstr3.png for format pdflatex
+figure file fig-mc/mci:
+    can use fig-mc/mci.png for format pdflatex
+figure file fig-mc/2Dint:
+    can use fig-mc/2Dint.png for format pdflatex
+figure file fig-ode/rk4_2:
+    can use fig-ode/rk4_2.png for format pdflatex
+figure file fig-taylor/df2:
+    can use fig-taylor/df2.png for format pdflatex
+figure file fig-mc/mcint:
+    can use fig-mc/mcint.png for format pdflatex
+figure file fig-ode/rk_fig:
+    can use fig-ode/rk_fig.png for format pdflatex
+figure file fig-taylor/mac_sin:
+    can use fig-taylor/mac_sin.png for format pdflatex
+figure file fig-ode/adaptive_rk4:
+    can use fig-ode/adaptive_rk4.png for format pdflatex
+figure file fig-ode/euler:
+    can use fig-ode/euler.png for format pdflatex
+figure file fig-ode/rk2:
+    can use fig-ode/rk2.png for format pdflatex
+figure file fig-ode/cstr2:
+    can use fig-ode/cstr2.png for format pdflatex
+figure file fig-ode/rk4:
+    can use fig-ode/rk4.png for format pdflatex
+figure file fig-ode/euler_imp:
+    can use fig-ode/euler_imp.png for format pdflatex
+figure file fig-ode/adaptive_euler:
+    can use fig-ode/adaptive_euler.png for format pdflatex
+
+exporting publish database ../chapters/papers.pub to ../chapters/papers.bib:
+output in book.tex
+running preprocess -DFORMAT=pdflatex -DDEVICE=paper -DCHAPTER="chapter" -DBOOK="book" -DAPPENDIX="appendix" book.do.txt > tmp_preprocess__book.do.txt
+running mako on tmp_preprocess__book.do.txt to make tmp_mako__book.do.txt
+mako variables: {'FORMAT': 'pdflatex', 'DEVICE': 'paper', 'CHAPTER': 'chapter', 'BOOK': 'book', 'APPENDIX': 'appendix'}
+translating doconce text in tmp_mako__book.do.txt to pdflatex
+*** warning: footnotes with verbatim has strange typesetting with svmonodo/t2do/t4do styles
+copy complete file src-taylor/mac_sin_eps.py (format: pypro)
+copy complete file src-numint/midpoint.py (format: pypro)
+copy complete file src-numint/trapez.py (format: pypro)
+copy complete file src-numint/adaptive_midpoint.py (format: pypro)
+copy complete file src-numint/adaptive_trapez.py (format: pypro)
+copy complete file src-numint/romberg.py (format: pypro)
+copy complete file src-numint/gaussquad2.py (format: pypro)
+copy complete file src-numint/gaussquad3.py (format: pypro)
+copying from regex "def analytical" until "# rest of"
+     file: src-ode/euler.py, lines 4-23 (format: pycod)
+copy complete file src-ode/euler_simple.py (format: pypro)
+copying from regex "def one_step" until "# rest of"
+     file: src-ode/adaptive_euler.py, lines 4-34 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk2.py, lines 4-23 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk4.py, lines 4-25 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/adaptive_rk4.py, lines 4-41 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk4_2.py, lines 4-36 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/euler_imp_2.py, lines 4-33 (format: pycod)
+copying from regex "import" until "NN"
+     file: src-mc/pi.py, lines 1-21 (format: pycod)
+copying from regex "import" until "N="
+     file: src-mc/pi2.py, lines 1-22 (format: pycod)
+copying from regex "def mc_nball" until "def mc_nball_sampling"
+     file: src-mc/hypersphere3.py, lines 53-70 (format: pycod)
+copying from regex "def mc_nball_sampling" until "def nball"
+     file: src-mc/hypersphere3.py, lines 70-85 (format: pycod)
+copying from regex "def nball" until "if __"
+     file: src-mc/hypersphere3.py, lines 85-91 (format: pycod)
+copying from regex "import numpy" until "def d1"
+     file: src-mc/hypersphere3.py, lines 3-14 (format: pycod)
+copying from regex "def int" until "N=5"
+     file: src-mc/trapez.py, lines 8-18 (format: pycod)
+copying from regex "def d1" until "def d2"
+     file: src-mc/hypersphere3.py, lines 14-27 (format: pycod)
+copying from regex "def d3_trapez" until "def mc_"
+     file: src-mc/hypersphere3.py, lines 40-70 (format: pycod)
+copying from regex "def d2" until "def mc"
+     file: src-mc/hypersphere3.py, lines 27-70 (format: pycod)
+copying from regex "def fac" until "def fact_rec"
+     file: src-mc/hypersphere4.py, lines 118-127 (format: pycod)
+copying from regex "def fact_rec" until "if __"
+     file: src-mc/hypersphere4.py, lines 127-133 (format: pycod)
+copying from regex "def dd_trapez" until "def mc_n"
+     file: src-mc/hypersphere4.py, lines 62-97 (format: pycod)
+copying from regex "def" until "def hist"
+     file: src-mc/clt.py, lines 5-26 (format: pycod)
+copying from regex "def hist" until "average3"
+     file: src-mc/clt.py, lines 17-27 (format: pycod)
+copying from regex "def average3" until "hist2"
+     file: src-mc/clt.py, lines 22-31 (format: pycod)
+copying from regex "from" until "def No"
+     file: src-mc/rd.py, lines 1-15 (format: pycod)
+copying from regex "def No" until "def BP"
+     file: src-mc/rd.py, lines 15-27 (format: pycod)
+copying from regex "def BP" until "def /N"
+     file: src-mc/rd.py, lines 27-34 (format: pycod)
+
+*** Exercise: Numerical Integration
+    label{None}
+    could be Problem (no refs beyond the exercise itself)
+
+*** Exercise: The central limit theorem
+    label{ex:mc:norm}
+    could be Problem (no refs beyond the exercise itself)
+
+*** Exercise: Birthday Paradox
+    label{ex:mc:BP}
+    could be Problem (no refs beyond the exercise itself)
+found info about 4 exercises
+figure file fig-ode/rk4_2:
+    can use fig-ode/rk4_2.png for format pdflatex
+figure file fig-taylor/df2:
+    can use fig-taylor/df2.png for format pdflatex
+figure file fig-ode/cstr:
+    can use fig-ode/cstr.png for format pdflatex
+figure file fig-mc/mci:
+    can use fig-mc/mci.png for format pdflatex
+figure file fig-ode/adaptive_rk4:
+    can use fig-ode/adaptive_rk4.png for format pdflatex
+figure file fig-ode/rk4:
+    can use fig-ode/rk4.png for format pdflatex
+figure file fig-ode/cstr2:
+    can use fig-ode/cstr2.png for format pdflatex
+figure file fig-ode/euler_imp:
+    can use fig-ode/euler_imp.png for format pdflatex
+figure file fig-taylor/func_plot:
+    can use fig-taylor/func_plot.png for format pdflatex
+figure file fig-taylor/mac_sin:
+    can use fig-taylor/mac_sin.png for format pdflatex
+figure file fig-taylor/df:
+    can use fig-taylor/df.png for format pdflatex
+figure file fig-ode/cstr3:
+    can use fig-ode/cstr3.png for format pdflatex
+figure file fig-ode/rk2:
+    can use fig-ode/rk2.png for format pdflatex
+figure file fig-ode/euler:
+    can use fig-ode/euler.png for format pdflatex
+figure file fig-ode/adaptive_euler:
+    can use fig-ode/adaptive_euler.png for format pdflatex
+figure file fig-ode/rk_fig:
+    can use fig-ode/rk_fig.png for format pdflatex
+figure file fig-mc/2Dint:
+    can use fig-mc/2Dint.png for format pdflatex
+figure file fig-mc/coin:
+    can use fig-mc/coin.png for format pdflatex
+figure file fig-mc/mcint:
+    can use fig-mc/mcint.png for format pdflatex
+
+exporting publish database ../chapters/papers.pub to ../chapters/papers.bib:
+output in book.tex
+running preprocess -DFORMAT=pdflatex -DDEVICE=paper -DCHAPTER="chapter" -DBOOK="book" -DAPPENDIX="appendix" book.do.txt > tmp_preprocess__book.do.txt
+running mako on tmp_preprocess__book.do.txt to make tmp_mako__book.do.txt
+mako variables: {'FORMAT': 'pdflatex', 'DEVICE': 'paper', 'CHAPTER': 'chapter', 'BOOK': 'book', 'APPENDIX': 'appendix'}
+translating doconce text in tmp_mako__book.do.txt to pdflatex
+*** warning: footnotes with verbatim has strange typesetting with svmonodo/t2do/t4do styles
+copy complete file src-taylor/mac_sin_eps.py (format: pypro)
+copy complete file src-numint/midpoint.py (format: pypro)
+copy complete file src-numint/trapez.py (format: pypro)
+copy complete file src-numint/adaptive_midpoint.py (format: pypro)
+copy complete file src-numint/adaptive_trapez.py (format: pypro)
+copy complete file src-numint/romberg.py (format: pypro)
+copy complete file src-numint/gaussquad2.py (format: pypro)
+copy complete file src-numint/gaussquad3.py (format: pypro)
+copying from regex "def analytical" until "# rest of"
+     file: src-ode/euler.py, lines 4-23 (format: pycod)
+copy complete file src-ode/euler_simple.py (format: pypro)
+copying from regex "def one_step" until "# rest of"
+     file: src-ode/adaptive_euler.py, lines 4-34 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk2.py, lines 4-23 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk4.py, lines 4-25 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/adaptive_rk4.py, lines 4-41 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk4_2.py, lines 4-36 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/euler_imp_2.py, lines 4-33 (format: pycod)
+copying from regex "import" until "NN"
+     file: src-mc/pi.py, lines 1-21 (format: pycod)
+copying from regex "import" until "N="
+     file: src-mc/pi2.py, lines 1-22 (format: pycod)
+copying from regex "def mc_nball" until "def mc_nball_sampling"
+     file: src-mc/hypersphere3.py, lines 53-70 (format: pycod)
+copying from regex "def mc_nball_sampling" until "def nball"
+     file: src-mc/hypersphere3.py, lines 70-85 (format: pycod)
+copying from regex "def nball" until "if __"
+     file: src-mc/hypersphere3.py, lines 85-91 (format: pycod)
+copying from regex "import numpy" until "def d1"
+     file: src-mc/hypersphere3.py, lines 3-14 (format: pycod)
+copying from regex "def int" until "N=5"
+     file: src-mc/trapez.py, lines 8-18 (format: pycod)
+copying from regex "def d1" until "def d2"
+     file: src-mc/hypersphere3.py, lines 14-27 (format: pycod)
+copying from regex "def d3_trapez" until "def mc_"
+     file: src-mc/hypersphere3.py, lines 40-70 (format: pycod)
+copying from regex "def d2" until "def mc"
+     file: src-mc/hypersphere3.py, lines 27-70 (format: pycod)
+copying from regex "def fac" until "def fact_rec"
+     file: src-mc/hypersphere4.py, lines 118-127 (format: pycod)
+copying from regex "def fact_rec" until "if __"
+     file: src-mc/hypersphere4.py, lines 127-133 (format: pycod)
+copying from regex "def dd_trapez" until "def mc_n"
+     file: src-mc/hypersphere4.py, lines 62-97 (format: pycod)
+copying from regex "def" until "def hist"
+     file: src-mc/clt.py, lines 5-26 (format: pycod)
+copying from regex "def hist" until "average3"
+     file: src-mc/clt.py, lines 17-27 (format: pycod)
+copying from regex "def average3" until "hist2"
+     file: src-mc/clt.py, lines 22-31 (format: pycod)
+copying from regex "from" until "def No"
+     file: src-mc/rd.py, lines 1-15 (format: pycod)
+copying from regex "def No" until "def BP"
+     file: src-mc/rd.py, lines 15-27 (format: pycod)
+copying from regex "def BP" until "def /N"
+     file: src-mc/rd.py, lines 27-34 (format: pycod)
+
+*** Exercise: Numerical Integration
+    label{None}
+    could be Problem (no refs beyond the exercise itself)
+
+*** Exercise: The central limit theorem
+    label{ex:mc:norm}
+    could be Problem (no refs beyond the exercise itself)
+
+*** Exercise: Birthday Paradox
+    label{ex:mc:BP}
+    could be Problem (no refs beyond the exercise itself)
+found info about 4 exercises
+figure file fig-ode/rk4:
+    can use fig-ode/rk4.png for format pdflatex
+figure file fig-ode/cstr:
+    can use fig-ode/cstr.png for format pdflatex
+figure file fig-mc/mci:
+    can use fig-mc/mci.png for format pdflatex
+figure file fig-taylor/func_plot:
+    can use fig-taylor/func_plot.png for format pdflatex
+figure file fig-taylor/mac_sin:
+    can use fig-taylor/mac_sin.png for format pdflatex
+figure file fig-taylor/df2:
+    can use fig-taylor/df2.png for format pdflatex
+figure file fig-ode/adaptive_rk4:
+    can use fig-ode/adaptive_rk4.png for format pdflatex
+figure file fig-mc/2Dint:
+    can use fig-mc/2Dint.png for format pdflatex
+figure file fig-ode/adaptive_euler:
+    can use fig-ode/adaptive_euler.png for format pdflatex
+figure file fig-ode/rk_fig:
+    can use fig-ode/rk_fig.png for format pdflatex
+figure file fig-ode/rk2:
+    can use fig-ode/rk2.png for format pdflatex
+figure file fig-ode/euler:
+    can use fig-ode/euler.png for format pdflatex
+figure file fig-ode/rk4_2:
+    can use fig-ode/rk4_2.png for format pdflatex
+figure file fig-ode/cstr2:
+    can use fig-ode/cstr2.png for format pdflatex
+figure file fig-ode/cstr3:
+    can use fig-ode/cstr3.png for format pdflatex
+figure file fig-ode/euler_imp:
+    can use fig-ode/euler_imp.png for format pdflatex
+figure file fig-mc/coin:
+    can use fig-mc/coin.png for format pdflatex
+figure file fig-mc/mcint:
+    can use fig-mc/mcint.png for format pdflatex
+figure file fig-taylor/df:
+    can use fig-taylor/df.png for format pdflatex
+
+exporting publish database ../chapters/papers.pub to ../chapters/papers.bib:
+output in book.tex
+running preprocess -DFORMAT=pdflatex -DDEVICE=paper -DCHAPTER="chapter" -DBOOK="book" -DAPPENDIX="appendix" book.do.txt > tmp_preprocess__book.do.txt
+running mako on tmp_preprocess__book.do.txt to make tmp_mako__book.do.txt
+mako variables: {'FORMAT': 'pdflatex', 'DEVICE': 'paper', 'CHAPTER': 'chapter', 'BOOK': 'book', 'APPENDIX': 'appendix'}
+translating doconce text in tmp_mako__book.do.txt to pdflatex
+*** warning: footnotes with verbatim has strange typesetting with svmonodo/t2do/t4do styles
+copy complete file src-taylor/mac_sin_eps.py (format: pypro)
+copy complete file src-numint/midpoint.py (format: pypro)
+copy complete file src-numint/trapez.py (format: pypro)
+copy complete file src-numint/adaptive_midpoint.py (format: pypro)
+copy complete file src-numint/adaptive_trapez.py (format: pypro)
+copy complete file src-numint/romberg.py (format: pypro)
+copy complete file src-numint/gaussquad2.py (format: pypro)
+copy complete file src-numint/gaussquad3.py (format: pypro)
+copying from regex "def analytical" until "# rest of"
+     file: src-ode/euler.py, lines 4-23 (format: pycod)
+copy complete file src-ode/euler_simple.py (format: pypro)
+copying from regex "def one_step" until "# rest of"
+     file: src-ode/adaptive_euler.py, lines 4-34 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk2.py, lines 4-23 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk4.py, lines 4-25 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/adaptive_rk4.py, lines 4-41 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk4_2.py, lines 4-36 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/euler_imp_2.py, lines 4-33 (format: pycod)
+copying from regex "import" until "NN"
+     file: src-mc/pi.py, lines 1-21 (format: pycod)
+copying from regex "import" until "N="
+     file: src-mc/pi2.py, lines 1-22 (format: pycod)
+copying from regex "def mc_nball" until "def mc_nball_sampling"
+     file: src-mc/hypersphere3.py, lines 53-70 (format: pycod)
+copying from regex "def mc_nball_sampling" until "def nball"
+     file: src-mc/hypersphere3.py, lines 70-85 (format: pycod)
+copying from regex "def nball" until "if __"
+     file: src-mc/hypersphere3.py, lines 85-91 (format: pycod)
+copying from regex "import numpy" until "def d1"
+     file: src-mc/hypersphere3.py, lines 3-14 (format: pycod)
+copying from regex "def int" until "N=5"
+     file: src-mc/trapez.py, lines 8-18 (format: pycod)
+copying from regex "def d1" until "def d2"
+     file: src-mc/hypersphere3.py, lines 14-27 (format: pycod)
+copying from regex "def d3_trapez" until "def mc_"
+     file: src-mc/hypersphere3.py, lines 40-70 (format: pycod)
+copying from regex "def d2" until "def mc"
+     file: src-mc/hypersphere3.py, lines 27-70 (format: pycod)
+copying from regex "def fac" until "def fact_rec"
+     file: src-mc/hypersphere4.py, lines 118-127 (format: pycod)
+copying from regex "def fact_rec" until "if __"
+     file: src-mc/hypersphere4.py, lines 127-133 (format: pycod)
+copying from regex "def dd_trapez" until "def mc_n"
+     file: src-mc/hypersphere4.py, lines 62-97 (format: pycod)
+copying from regex "def" until "def hist"
+     file: src-mc/clt.py, lines 5-26 (format: pycod)
+copying from regex "def hist" until "average3"
+     file: src-mc/clt.py, lines 17-27 (format: pycod)
+copying from regex "def average3" until "hist2"
+     file: src-mc/clt.py, lines 22-31 (format: pycod)
+copying from regex "from" until "def No"
+     file: src-mc/rd.py, lines 1-15 (format: pycod)
+copying from regex "def No" until "def BP"
+     file: src-mc/rd.py, lines 15-27 (format: pycod)
+copying from regex "def BP" until "def /N"
+     file: src-mc/rd.py, lines 27-34 (format: pycod)
+
+*** Exercise: Numerical Integration
+    label{None}
+    could be Problem (no refs beyond the exercise itself)
+
+*** Exercise: The central limit theorem
+    label{ex:mc:norm}
+    could be Problem (no refs beyond the exercise itself)
+
+*** Exercise: Birthday Paradox
+    label{ex:mc:BP}
+    could be Problem (no refs beyond the exercise itself)
+found info about 4 exercises
+figure file fig-taylor/func_plot:
+    can use fig-taylor/func_plot.png for format pdflatex
+figure file fig-taylor/mac_sin:
+    can use fig-taylor/mac_sin.png for format pdflatex
+figure file fig-mc/mci:
+    can use fig-mc/mci.png for format pdflatex
+figure file fig-taylor/df:
+    can use fig-taylor/df.png for format pdflatex
+figure file fig-ode/adaptive_rk4:
+    can use fig-ode/adaptive_rk4.png for format pdflatex
+figure file fig-taylor/df2:
+    can use fig-taylor/df2.png for format pdflatex
+figure file fig-mc/2Dint:
+    can use fig-mc/2Dint.png for format pdflatex
+figure file fig-ode/adaptive_euler:
+    can use fig-ode/adaptive_euler.png for format pdflatex
+figure file fig-ode/cstr3:
+    can use fig-ode/cstr3.png for format pdflatex
+figure file fig-ode/rk2:
+    can use fig-ode/rk2.png for format pdflatex
+figure file fig-ode/rk4_2:
+    can use fig-ode/rk4_2.png for format pdflatex
+figure file fig-ode/cstr:
+    can use fig-ode/cstr.png for format pdflatex
+figure file fig-ode/rk4:
+    can use fig-ode/rk4.png for format pdflatex
+figure file fig-ode/cstr2:
+    can use fig-ode/cstr2.png for format pdflatex
+figure file fig-mc/coin:
+    can use fig-mc/coin.png for format pdflatex
+figure file fig-mc/mcint:
+    can use fig-mc/mcint.png for format pdflatex
+figure file fig-ode/euler:
+    can use fig-ode/euler.png for format pdflatex
+figure file fig-ode/rk_fig:
+    can use fig-ode/rk_fig.png for format pdflatex
+figure file fig-ode/euler_imp:
+    can use fig-ode/euler_imp.png for format pdflatex
+
+exporting publish database ../chapters/papers.pub to ../chapters/papers.bib:
+output in book.tex
+running preprocess -DFORMAT=pdflatex -DDEVICE=paper -DCHAPTER="chapter" -DBOOK="book" -DAPPENDIX="appendix" book.do.txt > tmp_preprocess__book.do.txt
+running mako on tmp_preprocess__book.do.txt to make tmp_mako__book.do.txt
+mako variables: {'FORMAT': 'pdflatex', 'DEVICE': 'paper', 'CHAPTER': 'chapter', 'BOOK': 'book', 'APPENDIX': 'appendix'}
+translating doconce text in tmp_mako__book.do.txt to pdflatex
+*** warning: footnotes with verbatim has strange typesetting with svmonodo/t2do/t4do styles
+copy complete file src-taylor/mac_sin_eps.py (format: pypro)
+copy complete file src-numint/midpoint.py (format: pypro)
+copy complete file src-numint/trapez.py (format: pypro)
+copy complete file src-numint/adaptive_midpoint.py (format: pypro)
+copy complete file src-numint/adaptive_trapez.py (format: pypro)
+copy complete file src-numint/romberg.py (format: pypro)
+copy complete file src-numint/gaussquad2.py (format: pypro)
+copy complete file src-numint/gaussquad3.py (format: pypro)
+copying from regex "def analytical" until "# rest of"
+     file: src-ode/euler.py, lines 4-23 (format: pycod)
+copy complete file src-ode/euler_simple.py (format: pypro)
+copying from regex "def one_step" until "# rest of"
+     file: src-ode/adaptive_euler.py, lines 4-34 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk2.py, lines 4-23 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk4.py, lines 4-25 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/adaptive_rk4.py, lines 4-41 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk4_2.py, lines 4-36 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/euler_imp_2.py, lines 4-33 (format: pycod)
+copying from regex "import" until "NN"
+     file: src-mc/pi.py, lines 1-21 (format: pycod)
+copying from regex "import" until "N="
+     file: src-mc/pi2.py, lines 1-22 (format: pycod)
+copying from regex "def mc_nball" until "def mc_nball_sampling"
+     file: src-mc/hypersphere3.py, lines 53-70 (format: pycod)
+copying from regex "def mc_nball_sampling" until "def nball"
+     file: src-mc/hypersphere3.py, lines 70-85 (format: pycod)
+copying from regex "def nball" until "if __"
+     file: src-mc/hypersphere3.py, lines 85-91 (format: pycod)
+copying from regex "import numpy" until "def d1"
+     file: src-mc/hypersphere3.py, lines 3-14 (format: pycod)
+copying from regex "def int" until "N=5"
+     file: src-mc/trapez.py, lines 8-18 (format: pycod)
+copying from regex "def d1" until "def d2"
+     file: src-mc/hypersphere3.py, lines 14-27 (format: pycod)
+copying from regex "def d3_trapez" until "def mc_"
+     file: src-mc/hypersphere3.py, lines 40-70 (format: pycod)
+copying from regex "def d2" until "def mc"
+     file: src-mc/hypersphere3.py, lines 27-70 (format: pycod)
+copying from regex "def fac" until "def fact_rec"
+     file: src-mc/hypersphere4.py, lines 118-127 (format: pycod)
+copying from regex "def fact_rec" until "if __"
+     file: src-mc/hypersphere4.py, lines 127-133 (format: pycod)
+copying from regex "def dd_trapez" until "def mc_n"
+     file: src-mc/hypersphere4.py, lines 62-97 (format: pycod)
+copying from regex "def" until "def hist"
+     file: src-mc/clt.py, lines 5-26 (format: pycod)
+copying from regex "def hist" until "average3"
+     file: src-mc/clt.py, lines 17-27 (format: pycod)
+copying from regex "def average3" until "hist2"
+     file: src-mc/clt.py, lines 22-31 (format: pycod)
+copying from regex "from" until "def No"
+     file: src-mc/rd.py, lines 1-15 (format: pycod)
+copying from regex "def No" until "def BP"
+     file: src-mc/rd.py, lines 15-27 (format: pycod)
+copying from regex "def BP" until "def /N"
+     file: src-mc/rd.py, lines 27-34 (format: pycod)
+
+*** Exercise: Numerical Integration
+    label{None}
+    could be Problem (no refs beyond the exercise itself)
+
+*** Exercise: The central limit theorem
+    label{ex:mc:norm}
+    could be Problem (no refs beyond the exercise itself)
+
+*** Exercise: Birthday Paradox
+    label{ex:mc:BP}
+    could be Problem (no refs beyond the exercise itself)
+found info about 4 exercises
+figure file fig-taylor/mac_sin:
+    can use fig-taylor/mac_sin.png for format pdflatex
+figure file fig-ode/adaptive_rk4:
+    can use fig-ode/adaptive_rk4.png for format pdflatex
+figure file fig-taylor/func_plot:
+    can use fig-taylor/func_plot.png for format pdflatex
+figure file fig-mc/mcint:
+    can use fig-mc/mcint.png for format pdflatex
+figure file fig-taylor/df:
+    can use fig-taylor/df.png for format pdflatex
+figure file fig-ode/euler:
+    can use fig-ode/euler.png for format pdflatex
+figure file fig-ode/cstr2:
+    can use fig-ode/cstr2.png for format pdflatex
+figure file fig-ode/rk_fig:
+    can use fig-ode/rk_fig.png for format pdflatex
+figure file fig-ode/rk4:
+    can use fig-ode/rk4.png for format pdflatex
+figure file fig-mc/coin:
+    can use fig-mc/coin.png for format pdflatex
+figure file fig-ode/adaptive_euler:
+    can use fig-ode/adaptive_euler.png for format pdflatex
+figure file fig-ode/euler_imp:
+    can use fig-ode/euler_imp.png for format pdflatex
+figure file fig-mc/mci:
+    can use fig-mc/mci.png for format pdflatex
+figure file fig-ode/rk4_2:
+    can use fig-ode/rk4_2.png for format pdflatex
+figure file fig-taylor/df2:
+    can use fig-taylor/df2.png for format pdflatex
+figure file fig-ode/cstr3:
+    can use fig-ode/cstr3.png for format pdflatex
+figure file fig-ode/cstr:
+    can use fig-ode/cstr.png for format pdflatex
+figure file fig-mc/2Dint:
+    can use fig-mc/2Dint.png for format pdflatex
+figure file fig-ode/rk2:
+    can use fig-ode/rk2.png for format pdflatex
+
+exporting publish database ../chapters/papers.pub to ../chapters/papers.bib:
+output in book.tex
+running preprocess -DFORMAT=pdflatex -DDEVICE=paper -DCHAPTER="chapter" -DBOOK="book" -DAPPENDIX="appendix" book.do.txt > tmp_preprocess__book.do.txt
+running mako on tmp_preprocess__book.do.txt to make tmp_mako__book.do.txt
+mako variables: {'FORMAT': 'pdflatex', 'DEVICE': 'paper', 'CHAPTER': 'chapter', 'BOOK': 'book', 'APPENDIX': 'appendix'}
+translating doconce text in tmp_mako__book.do.txt to pdflatex
+*** error: reference to equation label "eq:taylor:error" is without parentheses
+    the equation reference should be typeset as (ref{eq:taylor:error})
+... formula ][][equation  ref{eq:taylor:error} in Chapter ref{ch:taylor}]
+cit ...
+running preprocess -DFORMAT=pdflatex -DDEVICE=paper -DCHAPTER="chapter" -DBOOK="book" -DAPPENDIX="appendix" book.do.txt > tmp_preprocess__book.do.txt
+running mako on tmp_preprocess__book.do.txt to make tmp_mako__book.do.txt
+mako variables: {'FORMAT': 'pdflatex', 'DEVICE': 'paper', 'CHAPTER': 'chapter', 'BOOK': 'book', 'APPENDIX': 'appendix'}
+translating doconce text in tmp_mako__book.do.txt to pdflatex
+*** warning: footnotes with verbatim has strange typesetting with svmonodo/t2do/t4do styles
+copy complete file src-taylor/mac_sin_eps.py (format: pypro)
+copy complete file src-numint/midpoint_pc.py (format: pypro)
+copy complete file src-numint/trapez_pc.py (format: pypro)
+copy complete file src-numint/adaptive_midpoint_pc.py (format: pypro)
+copy complete file src-numint/adaptive_trapez_pc.py (format: pypro)
+copy complete file src-numint/romberg.py (format: pypro)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad2.py, lines 6-14 (format: pycod)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad3.py, lines 6-15 (format: pycod)
+copying from regex "def analytical" until "# rest of"
+     file: src-ode/euler.py, lines 4-23 (format: pycod)
+copy complete file src-ode/euler_simple.py (format: pypro)
+copying from regex "def one_step" until "# rest of"
+     file: src-ode/adaptive_euler.py, lines 4-34 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk2.py, lines 4-23 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk4.py, lines 4-25 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/adaptive_rk4.py, lines 4-41 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk4_2.py, lines 4-36 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/euler_imp_2.py, lines 4-33 (format: pycod)
+copying from regex "import" until "NN"
+     file: src-mc/pi.py, lines 1-21 (format: pycod)
+copying from regex "import" until "N="
+     file: src-mc/pi2.py, lines 1-22 (format: pycod)
+copying from regex "def mc_nball" until "def mc_nball_sampling"
+     file: src-mc/hypersphere3.py, lines 53-70 (format: pycod)
+copying from regex "def mc_nball_sampling" until "def nball"
+     file: src-mc/hypersphere3.py, lines 70-85 (format: pycod)
+copying from regex "def nball" until "if __"
+     file: src-mc/hypersphere3.py, lines 85-91 (format: pycod)
+copying from regex "import numpy" until "def d1"
+     file: src-mc/hypersphere3.py, lines 3-14 (format: pycod)
+copying from regex "def int" until "N=5"
+     file: src-mc/trapez.py, lines 8-18 (format: pycod)
+copying from regex "def d1" until "def d2"
+     file: src-mc/hypersphere3.py, lines 14-27 (format: pycod)
+copying from regex "def d3_trapez" until "def mc_"
+     file: src-mc/hypersphere3.py, lines 40-70 (format: pycod)
+copying from regex "def d2" until "def mc"
+     file: src-mc/hypersphere3.py, lines 27-70 (format: pycod)
+copying from regex "def fac" until "def fact_rec"
+     file: src-mc/hypersphere4.py, lines 118-127 (format: pycod)
+copying from regex "def fact_rec" until "if __"
+     file: src-mc/hypersphere4.py, lines 127-133 (format: pycod)
+copying from regex "def dd_trapez" until "def mc_n"
+     file: src-mc/hypersphere4.py, lines 62-97 (format: pycod)
+copying from regex "def" until "def hist"
+     file: src-mc/clt.py, lines 5-26 (format: pycod)
+copying from regex "def hist" until "average3"
+     file: src-mc/clt.py, lines 17-27 (format: pycod)
+copying from regex "def average3" until "hist2"
+     file: src-mc/clt.py, lines 22-31 (format: pycod)
+copying from regex "from" until "def No"
+     file: src-mc/rd.py, lines 1-15 (format: pycod)
+copying from regex "def No" until "def BP"
+     file: src-mc/rd.py, lines 15-27 (format: pycod)
+copying from regex "def BP" until "def /N"
+     file: src-mc/rd.py, lines 27-34 (format: pycod)
+
+*** Exercise: Numerical Integration
+    label{None}
+    could be Problem (no refs beyond the exercise itself)
+
+*** Exercise: The central limit theorem
+    label{ex:mc:norm}
+    could be Problem (no refs beyond the exercise itself)
+
+*** Exercise: Birthday Paradox
+    label{ex:mc:BP}
+    could be Problem (no refs beyond the exercise itself)
+found info about 4 exercises
+figure file fig-ode/adaptive_euler:
+    can use fig-ode/adaptive_euler.png for format pdflatex
+figure file fig-taylor/df:
+    can use fig-taylor/df.png for format pdflatex
+figure file fig-ode/cstr:
+    can use fig-ode/cstr.png for format pdflatex
+figure file fig-mc/mcint:
+    can use fig-mc/mcint.png for format pdflatex
+figure file fig-taylor/df2:
+    can use fig-taylor/df2.png for format pdflatex
+figure file fig-mc/2Dint:
+    can use fig-mc/2Dint.png for format pdflatex
+figure file fig-ode/rk4_2:
+    can use fig-ode/rk4_2.png for format pdflatex
+figure file fig-ode/rk2:
+    can use fig-ode/rk2.png for format pdflatex
+figure file fig-ode/rk4:
+    can use fig-ode/rk4.png for format pdflatex
+figure file fig-ode/cstr3:
+    can use fig-ode/cstr3.png for format pdflatex
+figure file fig-taylor/func_plot:
+    can use fig-taylor/func_plot.png for format pdflatex
+figure file fig-ode/euler_imp:
+    can use fig-ode/euler_imp.png for format pdflatex
+figure file fig-ode/cstr2:
+    can use fig-ode/cstr2.png for format pdflatex
+figure file fig-mc/coin:
+    can use fig-mc/coin.png for format pdflatex
+figure file fig-ode/rk_fig:
+    can use fig-ode/rk_fig.png for format pdflatex
+figure file fig-ode/euler:
+    can use fig-ode/euler.png for format pdflatex
+figure file fig-mc/mci:
+    can use fig-mc/mci.png for format pdflatex
+figure file fig-taylor/mac_sin:
+    can use fig-taylor/mac_sin.png for format pdflatex
+figure file fig-ode/adaptive_rk4:
+    can use fig-ode/adaptive_rk4.png for format pdflatex
+
+exporting publish database ../chapters/papers.pub to ../chapters/papers.bib:
+output in book.tex
+running preprocess -DFORMAT=pdflatex -DDEVICE=paper -DCHAPTER="chapter" -DBOOK="book" -DAPPENDIX="appendix" book.do.txt > tmp_preprocess__book.do.txt
+running mako on tmp_preprocess__book.do.txt to make tmp_mako__book.do.txt
+mako variables: {'FORMAT': 'pdflatex', 'DEVICE': 'paper', 'CHAPTER': 'chapter', 'BOOK': 'book', 'APPENDIX': 'appendix'}
+translating doconce text in tmp_mako__book.do.txt to pdflatex
+*** warning: footnotes with verbatim has strange typesetting with svmonodo/t2do/t4do styles
+copy complete file src-taylor/mac_sin_eps.py (format: pypro)
+copy complete file src-numint/midpoint_pc.py (format: pypro)
+copy complete file src-numint/trapez_pc.py (format: pypro)
+copy complete file src-numint/adaptive_midpoint_pc.py (format: pypro)
+copy complete file src-numint/adaptive_trapez_pc.py (format: pypro)
+copy complete file src-numint/romberg_pc.py (format: pypro)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad2.py, lines 6-14 (format: pycod)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad3.py, lines 6-15 (format: pycod)
+copying from regex "def analytical" until "# rest of"
+     file: src-ode/euler.py, lines 4-23 (format: pycod)
+copy complete file src-ode/euler_simple.py (format: pypro)
+copying from regex "def one_step" until "# rest of"
+     file: src-ode/adaptive_euler.py, lines 4-34 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk2.py, lines 4-23 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk4.py, lines 4-25 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/adaptive_rk4.py, lines 4-41 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk4_2.py, lines 4-36 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/euler_imp_2.py, lines 4-33 (format: pycod)
+copying from regex "import" until "NN"
+     file: src-mc/pi.py, lines 1-21 (format: pycod)
+copying from regex "import" until "N="
+     file: src-mc/pi2.py, lines 1-22 (format: pycod)
+copying from regex "def mc_nball" until "def mc_nball_sampling"
+     file: src-mc/hypersphere3.py, lines 53-70 (format: pycod)
+copying from regex "def mc_nball_sampling" until "def nball"
+     file: src-mc/hypersphere3.py, lines 70-85 (format: pycod)
+copying from regex "def nball" until "if __"
+     file: src-mc/hypersphere3.py, lines 85-91 (format: pycod)
+copying from regex "import numpy" until "def d1"
+     file: src-mc/hypersphere3.py, lines 3-14 (format: pycod)
+copying from regex "def int" until "N=5"
+     file: src-mc/trapez.py, lines 8-18 (format: pycod)
+copying from regex "def d1" until "def d2"
+     file: src-mc/hypersphere3.py, lines 14-27 (format: pycod)
+copying from regex "def d3_trapez" until "def mc_"
+     file: src-mc/hypersphere3.py, lines 40-70 (format: pycod)
+copying from regex "def d2" until "def mc"
+     file: src-mc/hypersphere3.py, lines 27-70 (format: pycod)
+copying from regex "def fac" until "def fact_rec"
+     file: src-mc/hypersphere4.py, lines 118-127 (format: pycod)
+copying from regex "def fact_rec" until "if __"
+     file: src-mc/hypersphere4.py, lines 127-133 (format: pycod)
+copying from regex "def dd_trapez" until "def mc_n"
+     file: src-mc/hypersphere4.py, lines 62-97 (format: pycod)
+copying from regex "def" until "def hist"
+     file: src-mc/clt.py, lines 5-26 (format: pycod)
+copying from regex "def hist" until "average3"
+     file: src-mc/clt.py, lines 17-27 (format: pycod)
+copying from regex "def average3" until "hist2"
+     file: src-mc/clt.py, lines 22-31 (format: pycod)
+copying from regex "from" until "def No"
+     file: src-mc/rd.py, lines 1-15 (format: pycod)
+copying from regex "def No" until "def BP"
+     file: src-mc/rd.py, lines 15-27 (format: pycod)
+copying from regex "def BP" until "def /N"
+     file: src-mc/rd.py, lines 27-34 (format: pycod)
+
+*** Exercise: Numerical Integration
+    label{None}
+    could be Problem (no refs beyond the exercise itself)
+
+*** Exercise: The central limit theorem
+    label{ex:mc:norm}
+    could be Problem (no refs beyond the exercise itself)
+
+*** Exercise: Birthday Paradox
+    label{ex:mc:BP}
+    could be Problem (no refs beyond the exercise itself)
+found info about 4 exercises
+figure file fig-ode/rk4:
+    can use fig-ode/rk4.png for format pdflatex
+figure file fig-taylor/df2:
+    can use fig-taylor/df2.png for format pdflatex
+figure file fig-ode/euler:
+    can use fig-ode/euler.png for format pdflatex
+figure file fig-ode/euler_imp:
+    can use fig-ode/euler_imp.png for format pdflatex
+figure file fig-ode/rk_fig:
+    can use fig-ode/rk_fig.png for format pdflatex
+figure file fig-ode/rk4_2:
+    can use fig-ode/rk4_2.png for format pdflatex
+figure file fig-taylor/mac_sin:
+    can use fig-taylor/mac_sin.png for format pdflatex
+figure file fig-mc/coin:
+    can use fig-mc/coin.png for format pdflatex
+figure file fig-ode/adaptive_rk4:
+    can use fig-ode/adaptive_rk4.png for format pdflatex
+figure file fig-mc/2Dint:
+    can use fig-mc/2Dint.png for format pdflatex
+figure file fig-ode/cstr3:
+    can use fig-ode/cstr3.png for format pdflatex
+figure file fig-taylor/df:
+    can use fig-taylor/df.png for format pdflatex
+figure file fig-mc/mci:
+    can use fig-mc/mci.png for format pdflatex
+figure file fig-mc/mcint:
+    can use fig-mc/mcint.png for format pdflatex
+figure file fig-ode/adaptive_euler:
+    can use fig-ode/adaptive_euler.png for format pdflatex
+figure file fig-ode/cstr:
+    can use fig-ode/cstr.png for format pdflatex
+figure file fig-ode/cstr2:
+    can use fig-ode/cstr2.png for format pdflatex
+figure file fig-ode/rk2:
+    can use fig-ode/rk2.png for format pdflatex
+figure file fig-taylor/func_plot:
+    can use fig-taylor/func_plot.png for format pdflatex
+
+exporting publish database ../chapters/papers.pub to ../chapters/papers.bib:
+output in book.tex
+running preprocess -DFORMAT=pdflatex -DDEVICE=paper -DCHAPTER="chapter" -DBOOK="book" -DAPPENDIX="appendix" book.do.txt > tmp_preprocess__book.do.txt
+running mako on tmp_preprocess__book.do.txt to make tmp_mako__book.do.txt
+mako variables: {'FORMAT': 'pdflatex', 'DEVICE': 'paper', 'CHAPTER': 'chapter', 'BOOK': 'book', 'APPENDIX': 'appendix'}
+translating doconce text in tmp_mako__book.do.txt to pdflatex
+*** warning: footnotes with verbatim has strange typesetting with svmonodo/t2do/t4do styles
+copy complete file src-taylor/mac_sin_eps.py (format: pypro)
+copy complete file src-numint/midpoint_pc.py (format: pypro)
+copy complete file src-numint/trapez_pc.py (format: pypro)
+copy complete file src-numint/adaptive_midpoint_pc.py (format: pypro)
+copy complete file src-numint/adaptive_trapez_pc.py (format: pypro)
+copy complete file src-numint/romberg_pc.py (format: pypro)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad2.py, lines 6-14 (format: pycod)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad3.py, lines 6-15 (format: pycod)
+copying from regex "def analytical" until "# rest of"
+     file: src-ode/euler.py, lines 4-23 (format: pycod)
+copy complete file src-ode/euler_simple.py (format: pypro)
+copying from regex "def one_step" until "# rest of"
+     file: src-ode/adaptive_euler.py, lines 4-34 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk2.py, lines 4-23 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk4.py, lines 4-25 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/adaptive_rk4.py, lines 4-41 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk4_2.py, lines 4-36 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/euler_imp_2.py, lines 4-33 (format: pycod)
+copying from regex "import" until "NN"
+     file: src-mc/pi.py, lines 1-21 (format: pycod)
+copying from regex "import" until "N="
+     file: src-mc/pi2.py, lines 1-22 (format: pycod)
+copying from regex "def mc_nball" until "def mc_nball_sampling"
+     file: src-mc/hypersphere3.py, lines 53-70 (format: pycod)
+copying from regex "def mc_nball_sampling" until "def nball"
+     file: src-mc/hypersphere3.py, lines 70-85 (format: pycod)
+copying from regex "def nball" until "if __"
+     file: src-mc/hypersphere3.py, lines 85-91 (format: pycod)
+copying from regex "import numpy" until "def d1"
+     file: src-mc/hypersphere3.py, lines 3-14 (format: pycod)
+copying from regex "def int" until "N=5"
+     file: src-mc/trapez.py, lines 8-18 (format: pycod)
+copying from regex "def d1" until "def d2"
+     file: src-mc/hypersphere3.py, lines 14-27 (format: pycod)
+copying from regex "def d3_trapez" until "def mc_"
+     file: src-mc/hypersphere3.py, lines 40-70 (format: pycod)
+copying from regex "def d2" until "def mc"
+     file: src-mc/hypersphere3.py, lines 27-70 (format: pycod)
+copying from regex "def fac" until "def fact_rec"
+     file: src-mc/hypersphere4.py, lines 118-127 (format: pycod)
+copying from regex "def fact_rec" until "if __"
+     file: src-mc/hypersphere4.py, lines 127-133 (format: pycod)
+copying from regex "def dd_trapez" until "def mc_n"
+     file: src-mc/hypersphere4.py, lines 62-97 (format: pycod)
+copying from regex "def" until "def hist"
+     file: src-mc/clt.py, lines 5-26 (format: pycod)
+copying from regex "def hist" until "average3"
+     file: src-mc/clt.py, lines 17-27 (format: pycod)
+copying from regex "def average3" until "hist2"
+     file: src-mc/clt.py, lines 22-31 (format: pycod)
+copying from regex "from" until "def No"
+     file: src-mc/rd.py, lines 1-15 (format: pycod)
+copying from regex "def No" until "def BP"
+     file: src-mc/rd.py, lines 15-27 (format: pycod)
+copying from regex "def BP" until "def /N"
+     file: src-mc/rd.py, lines 27-34 (format: pycod)
+
+*** Exercise: Numerical Integration
+    label{None}
+    could be Problem (no refs beyond the exercise itself)
+
+*** Exercise: The central limit theorem
+    label{ex:mc:norm}
+    could be Problem (no refs beyond the exercise itself)
+
+*** Exercise: Birthday Paradox
+    label{ex:mc:BP}
+    could be Problem (no refs beyond the exercise itself)
+found info about 4 exercises
+figure file fig-taylor/mac_sin:
+    can use fig-taylor/mac_sin.png for format pdflatex
+figure file fig-ode/adaptive_euler:
+    can use fig-ode/adaptive_euler.png for format pdflatex
+figure file fig-taylor/df2:
+    can use fig-taylor/df2.png for format pdflatex
+figure file fig-ode/rk_fig:
+    can use fig-ode/rk_fig.png for format pdflatex
+figure file fig-mc/mcint:
+    can use fig-mc/mcint.png for format pdflatex
+figure file fig-ode/euler_imp:
+    can use fig-ode/euler_imp.png for format pdflatex
+figure file fig-mc/mci:
+    can use fig-mc/mci.png for format pdflatex
+figure file fig-ode/euler:
+    can use fig-ode/euler.png for format pdflatex
+figure file fig-taylor/df:
+    can use fig-taylor/df.png for format pdflatex
+figure file fig-ode/adaptive_rk4:
+    can use fig-ode/adaptive_rk4.png for format pdflatex
+figure file fig-ode/rk2:
+    can use fig-ode/rk2.png for format pdflatex
+figure file fig-ode/rk4:
+    can use fig-ode/rk4.png for format pdflatex
+figure file fig-ode/cstr2:
+    can use fig-ode/cstr2.png for format pdflatex
+figure file fig-ode/cstr3:
+    can use fig-ode/cstr3.png for format pdflatex
+figure file fig-taylor/func_plot:
+    can use fig-taylor/func_plot.png for format pdflatex
+figure file fig-ode/cstr:
+    can use fig-ode/cstr.png for format pdflatex
+figure file fig-mc/2Dint:
+    can use fig-mc/2Dint.png for format pdflatex
+figure file fig-ode/rk4_2:
+    can use fig-ode/rk4_2.png for format pdflatex
+figure file fig-mc/coin:
+    can use fig-mc/coin.png for format pdflatex
+
+exporting publish database ../chapters/papers.pub to ../chapters/papers.bib:
+output in book.tex
+running preprocess -DFORMAT=pdflatex -DDEVICE=paper -DCHAPTER="chapter" -DBOOK="book" -DAPPENDIX="appendix" book.do.txt > tmp_preprocess__book.do.txt
+running mako on tmp_preprocess__book.do.txt to make tmp_mako__book.do.txt
+*** mako error: mako.exceptions.CompileException
+   Fragment 'else' is not a partial control statement at line: 931 char: 1
+    Note: the line number refers to the file tmp_mako__book.do.txt
+running preprocess -DFORMAT=pdflatex -DDEVICE=paper -DCHAPTER="chapter" -DBOOK="book" -DAPPENDIX="appendix" book.do.txt > tmp_preprocess__book.do.txt
+running mako on tmp_preprocess__book.do.txt to make tmp_mako__book.do.txt
+mako variables: {'FORMAT': 'pdflatex', 'DEVICE': 'paper', 'CHAPTER': 'chapter', 'BOOK': 'book', 'APPENDIX': 'appendix'}
+translating doconce text in tmp_mako__book.do.txt to pdflatex
+*** warning: footnotes with verbatim has strange typesetting with svmonodo/t2do/t4do styles
+copy complete file src-taylor/mac_sin_eps.py (format: pypro)
+copy complete file src-numint/midpoint_pc.py (format: pypro)
+copy complete file src-numint/trapez_pc.py (format: pypro)
+copy complete file src-numint/adaptive_midpoint_pc.py (format: pypro)
+copy complete file src-numint/adaptive_trapez_pc.py (format: pypro)
+copy complete file src-numint/romberg_pc.py (format: pypro)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad2.py, lines 6-14 (format: pycod)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad3.py, lines 6-15 (format: pycod)
+copying from regex "def analytical" until "# rest of"
+     file: src-ode/euler.py, lines 4-23 (format: pycod)
+copy complete file src-ode/euler_simple.py (format: pypro)
+copying from regex "def one_step" until "# rest of"
+     file: src-ode/adaptive_euler.py, lines 4-34 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk2.py, lines 4-23 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk4.py, lines 4-25 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/adaptive_rk4.py, lines 4-41 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk4_2.py, lines 4-36 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/euler_imp_2.py, lines 4-33 (format: pycod)
+copying from regex "import" until "NN"
+     file: src-mc/pi.py, lines 1-21 (format: pycod)
+copying from regex "import" until "N="
+     file: src-mc/pi2.py, lines 1-22 (format: pycod)
+copying from regex "def mc_nball" until "def mc_nball_sampling"
+     file: src-mc/hypersphere3.py, lines 53-70 (format: pycod)
+copying from regex "def mc_nball_sampling" until "def nball"
+     file: src-mc/hypersphere3.py, lines 70-85 (format: pycod)
+copying from regex "def nball" until "if __"
+     file: src-mc/hypersphere3.py, lines 85-91 (format: pycod)
+copying from regex "import numpy" until "def d1"
+     file: src-mc/hypersphere3.py, lines 3-14 (format: pycod)
+copying from regex "def int" until "N=5"
+     file: src-mc/trapez.py, lines 8-18 (format: pycod)
+copying from regex "def d1" until "def d2"
+     file: src-mc/hypersphere3.py, lines 14-27 (format: pycod)
+copying from regex "def d3_trapez" until "def mc_"
+     file: src-mc/hypersphere3.py, lines 40-70 (format: pycod)
+copying from regex "def d2" until "def mc"
+     file: src-mc/hypersphere3.py, lines 27-70 (format: pycod)
+copying from regex "def fac" until "def fact_rec"
+     file: src-mc/hypersphere4.py, lines 118-127 (format: pycod)
+copying from regex "def fact_rec" until "if __"
+     file: src-mc/hypersphere4.py, lines 127-133 (format: pycod)
+copying from regex "def dd_trapez" until "def mc_n"
+     file: src-mc/hypersphere4.py, lines 62-97 (format: pycod)
+copying from regex "def" until "def hist"
+     file: src-mc/clt.py, lines 5-26 (format: pycod)
+copying from regex "def hist" until "average3"
+     file: src-mc/clt.py, lines 17-27 (format: pycod)
+copying from regex "def average3" until "hist2"
+     file: src-mc/clt.py, lines 22-31 (format: pycod)
+copying from regex "from" until "def No"
+     file: src-mc/rd.py, lines 1-15 (format: pycod)
+copying from regex "def No" until "def BP"
+     file: src-mc/rd.py, lines 15-27 (format: pycod)
+copying from regex "def BP" until "def /N"
+     file: src-mc/rd.py, lines 27-34 (format: pycod)
+
+*** Exercise: Numerical Integration
+    label{None}
+    could be Problem (no refs beyond the exercise itself)
+
+*** Exercise: The central limit theorem
+    label{ex:mc:norm}
+    could be Problem (no refs beyond the exercise itself)
+
+*** Exercise: Birthday Paradox
+    label{ex:mc:BP}
+    could be Problem (no refs beyond the exercise itself)
+found info about 4 exercises
+figure file fig-mc/mcint:
+    can use fig-mc/mcint.png for format pdflatex
+figure file fig-ode/rk4:
+    can use fig-ode/rk4.png for format pdflatex
+figure file fig-ode/adaptive_euler:
+    can use fig-ode/adaptive_euler.png for format pdflatex
+figure file fig-ode/adaptive_rk4:
+    can use fig-ode/adaptive_rk4.png for format pdflatex
+figure file fig-ode/rk_fig:
+    can use fig-ode/rk_fig.png for format pdflatex
+figure file fig-ode/cstr2:
+    can use fig-ode/cstr2.png for format pdflatex
+figure file fig-taylor/df2:
+    can use fig-taylor/df2.png for format pdflatex
+figure file fig-ode/rk4_2:
+    can use fig-ode/rk4_2.png for format pdflatex
+figure file fig-mc/mci:
+    can use fig-mc/mci.png for format pdflatex
+figure file fig-ode/cstr:
+    can use fig-ode/cstr.png for format pdflatex
+figure file fig-taylor/mac_sin:
+    can use fig-taylor/mac_sin.png for format pdflatex
+figure file fig-mc/2Dint:
+    can use fig-mc/2Dint.png for format pdflatex
+figure file fig-mc/coin:
+    can use fig-mc/coin.png for format pdflatex
+figure file fig-ode/euler:
+    can use fig-ode/euler.png for format pdflatex
+figure file fig-ode/euler_imp:
+    can use fig-ode/euler_imp.png for format pdflatex
+figure file fig-taylor/df:
+    can use fig-taylor/df.png for format pdflatex
+figure file fig-ode/cstr3:
+    can use fig-ode/cstr3.png for format pdflatex
+figure file fig-taylor/func_plot:
+    can use fig-taylor/func_plot.png for format pdflatex
+figure file fig-ode/rk2:
+    can use fig-ode/rk2.png for format pdflatex
+
+exporting publish database ../chapters/papers.pub to ../chapters/papers.bib:
+output in book.tex
+running preprocess -DFORMAT=pdflatex -DDEVICE=paper -DCHAPTER="chapter" -DBOOK="book" -DAPPENDIX="appendix" book.do.txt > tmp_preprocess__book.do.txt
+running mako on tmp_preprocess__book.do.txt to make tmp_mako__book.do.txt
+mako variables: {'FORMAT': 'pdflatex', 'DEVICE': 'paper', 'CHAPTER': 'chapter', 'BOOK': 'book', 'APPENDIX': 'appendix'}
+translating doconce text in tmp_mako__book.do.txt to pdflatex
+*** warning: footnotes with verbatim has strange typesetting with svmonodo/t2do/t4do styles
+copy complete file src-taylor/mac_sin_eps.py (format: pypro)
+copy complete file src-numint/midpoint_pc.py (format: pypro)
+copy complete file src-numint/trapez_pc.py (format: pypro)
+copy complete file src-numint/adaptive_midpoint_pc.py (format: pypro)
+copy complete file src-numint/adaptive_trapez_pc.py (format: pypro)
+copy complete file src-numint/romberg_pc.py (format: pypro)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad2.py, lines 6-14 (format: pycod)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad3.py, lines 6-15 (format: pycod)
+copying from regex "def analytical" until "# rest of"
+     file: src-ode/euler.py, lines 4-23 (format: pycod)
+copy complete file src-ode/euler_simple.py (format: pypro)
+copying from regex "def one_step" until "# rest of"
+     file: src-ode/adaptive_euler.py, lines 4-34 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk2.py, lines 4-23 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk4.py, lines 4-25 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/adaptive_rk4.py, lines 4-41 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk4_2.py, lines 4-36 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/euler_imp_2.py, lines 4-33 (format: pycod)
+copying from regex "import" until "NN"
+     file: src-mc/pi.py, lines 1-21 (format: pycod)
+copying from regex "import" until "N="
+     file: src-mc/pi2.py, lines 1-22 (format: pycod)
+copying from regex "def mc_nball" until "def mc_nball_sampling"
+     file: src-mc/hypersphere3.py, lines 53-70 (format: pycod)
+copying from regex "def mc_nball_sampling" until "def nball"
+     file: src-mc/hypersphere3.py, lines 70-85 (format: pycod)
+copying from regex "def nball" until "if __"
+     file: src-mc/hypersphere3.py, lines 85-91 (format: pycod)
+copying from regex "import numpy" until "def d1"
+     file: src-mc/hypersphere3.py, lines 3-14 (format: pycod)
+copying from regex "def int" until "N=5"
+     file: src-mc/trapez.py, lines 8-18 (format: pycod)
+copying from regex "def d1" until "def d2"
+     file: src-mc/hypersphere3.py, lines 14-27 (format: pycod)
+copying from regex "def d3_trapez" until "def mc_"
+     file: src-mc/hypersphere3.py, lines 40-70 (format: pycod)
+copying from regex "def d2" until "def mc"
+     file: src-mc/hypersphere3.py, lines 27-70 (format: pycod)
+copying from regex "def fac" until "def fact_rec"
+     file: src-mc/hypersphere4.py, lines 118-127 (format: pycod)
+copying from regex "def fact_rec" until "if __"
+     file: src-mc/hypersphere4.py, lines 127-133 (format: pycod)
+copying from regex "def dd_trapez" until "def mc_n"
+     file: src-mc/hypersphere4.py, lines 62-97 (format: pycod)
+copying from regex "def" until "def hist"
+     file: src-mc/clt.py, lines 5-26 (format: pycod)
+copying from regex "def hist" until "average3"
+     file: src-mc/clt.py, lines 17-27 (format: pycod)
+copying from regex "def average3" until "hist2"
+     file: src-mc/clt.py, lines 22-31 (format: pycod)
+copying from regex "from" until "def No"
+     file: src-mc/rd.py, lines 1-15 (format: pycod)
+copying from regex "def No" until "def BP"
+     file: src-mc/rd.py, lines 15-27 (format: pycod)
+copying from regex "def BP" until "def /N"
+     file: src-mc/rd.py, lines 27-34 (format: pycod)
+
+*** Exercise: Numerical Integration
+    label{None}
+    could be Problem (no refs beyond the exercise itself)
+
+*** Exercise: The central limit theorem
+    label{ex:mc:norm}
+    could be Problem (no refs beyond the exercise itself)
+
+*** Exercise: Birthday Paradox
+    label{ex:mc:BP}
+    could be Problem (no refs beyond the exercise itself)
+found info about 4 exercises
+figure file fig-mc/mcint:
+    can use fig-mc/mcint.png for format pdflatex
+figure file fig-ode/rk2:
+    can use fig-ode/rk2.png for format pdflatex
+figure file fig-ode/rk_fig:
+    can use fig-ode/rk_fig.png for format pdflatex
+figure file fig-mc/2Dint:
+    can use fig-mc/2Dint.png for format pdflatex
+figure file fig-ode/rk4:
+    can use fig-ode/rk4.png for format pdflatex
+figure file fig-ode/cstr3:
+    can use fig-ode/cstr3.png for format pdflatex
+figure file fig-ode/adaptive_euler:
+    can use fig-ode/adaptive_euler.png for format pdflatex
+figure file fig-taylor/func_plot:
+    can use fig-taylor/func_plot.png for format pdflatex
+figure file fig-mc/coin:
+    can use fig-mc/coin.png for format pdflatex
+figure file fig-ode/cstr:
+    can use fig-ode/cstr.png for format pdflatex
+figure file fig-taylor/df2:
+    can use fig-taylor/df2.png for format pdflatex
+figure file fig-ode/rk4_2:
+    can use fig-ode/rk4_2.png for format pdflatex
+figure file fig-ode/euler_imp:
+    can use fig-ode/euler_imp.png for format pdflatex
+figure file fig-ode/euler:
+    can use fig-ode/euler.png for format pdflatex
+figure file fig-ode/adaptive_rk4:
+    can use fig-ode/adaptive_rk4.png for format pdflatex
+figure file fig-taylor/df:
+    can use fig-taylor/df.png for format pdflatex
+figure file fig-mc/mci:
+    can use fig-mc/mci.png for format pdflatex
+figure file fig-taylor/mac_sin:
+    can use fig-taylor/mac_sin.png for format pdflatex
+figure file fig-ode/cstr2:
+    can use fig-ode/cstr2.png for format pdflatex
+
+exporting publish database ../chapters/papers.pub to ../chapters/papers.bib:
+output in book.tex
+running preprocess -DFORMAT=pdflatex -DDEVICE=paper -DCHAPTER="chapter" -DBOOK="book" -DAPPENDIX="appendix" book.do.txt > tmp_preprocess__book.do.txt
+running mako on tmp_preprocess__book.do.txt to make tmp_mako__book.do.txt
+mako variables: {'FORMAT': 'pdflatex', 'DEVICE': 'paper', 'CHAPTER': 'chapter', 'BOOK': 'book', 'APPENDIX': 'appendix'}
+translating doconce text in tmp_mako__book.do.txt to pdflatex
+*** warning: footnotes with verbatim has strange typesetting with svmonodo/t2do/t4do styles
+copy complete file src-taylor/mac_sin_eps.py (format: pypro)
+copy complete file src-numint/midpoint_pc.py (format: pypro)
+copy complete file src-numint/trapez_pc.py (format: pypro)
+copy complete file src-numint/adaptive_midpoint_pc.py (format: pypro)
+copy complete file src-numint/adaptive_trapez_pc.py (format: pypro)
+copy complete file src-numint/romberg_pc.py (format: pypro)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad2.py, lines 6-14 (format: pycod)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad3.py, lines 6-15 (format: pycod)
+copying from regex "def analytical" until "# rest of"
+     file: src-ode/euler.py, lines 4-23 (format: pycod)
+copy complete file src-ode/euler_simple.py (format: pypro)
+copying from regex "def one_step" until "# rest of"
+     file: src-ode/adaptive_euler.py, lines 4-34 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk2.py, lines 4-23 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk4.py, lines 4-25 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/adaptive_rk4.py, lines 4-41 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk4_2.py, lines 4-36 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/euler_imp_2.py, lines 4-33 (format: pycod)
+copying from regex "import" until "NN"
+     file: src-mc/pi.py, lines 1-21 (format: pycod)
+copying from regex "import" until "N="
+     file: src-mc/pi2.py, lines 1-22 (format: pycod)
+copying from regex "def mc_nball" until "def mc_nball_sampling"
+     file: src-mc/hypersphere3.py, lines 53-70 (format: pycod)
+copying from regex "def mc_nball_sampling" until "def nball"
+     file: src-mc/hypersphere3.py, lines 70-85 (format: pycod)
+copying from regex "def nball" until "if __"
+     file: src-mc/hypersphere3.py, lines 85-91 (format: pycod)
+copying from regex "import numpy" until "def d1"
+     file: src-mc/hypersphere3.py, lines 3-14 (format: pycod)
+copying from regex "def int" until "N=5"
+     file: src-mc/trapez.py, lines 8-18 (format: pycod)
+copying from regex "def d1" until "def d2"
+     file: src-mc/hypersphere3.py, lines 14-27 (format: pycod)
+copying from regex "def d3_trapez" until "def mc_"
+     file: src-mc/hypersphere3.py, lines 40-70 (format: pycod)
+copying from regex "def d2" until "def mc"
+     file: src-mc/hypersphere3.py, lines 27-70 (format: pycod)
+copying from regex "def fac" until "def fact_rec"
+     file: src-mc/hypersphere4.py, lines 118-127 (format: pycod)
+copying from regex "def fact_rec" until "if __"
+     file: src-mc/hypersphere4.py, lines 127-133 (format: pycod)
+copying from regex "def dd_trapez" until "def mc_n"
+     file: src-mc/hypersphere4.py, lines 62-97 (format: pycod)
+copying from regex "def" until "def hist"
+     file: src-mc/clt.py, lines 5-26 (format: pycod)
+copying from regex "def hist" until "average3"
+     file: src-mc/clt.py, lines 17-27 (format: pycod)
+copying from regex "def average3" until "hist2"
+     file: src-mc/clt.py, lines 22-31 (format: pycod)
+copying from regex "from" until "def No"
+     file: src-mc/rd.py, lines 1-15 (format: pycod)
+copying from regex "def No" until "def BP"
+     file: src-mc/rd.py, lines 15-27 (format: pycod)
+copying from regex "def BP" until "def /N"
+     file: src-mc/rd.py, lines 27-34 (format: pycod)
+
+*** Exercise: Numerical Integration
+    label{None}
+    could be Problem (no refs beyond the exercise itself)
+
+*** Exercise: The central limit theorem
+    label{ex:mc:norm}
+    could be Problem (no refs beyond the exercise itself)
+
+*** Exercise: Birthday Paradox
+    label{ex:mc:BP}
+    could be Problem (no refs beyond the exercise itself)
+found info about 4 exercises
+figure file fig-ode/rk2:
+    can use fig-ode/rk2.png for format pdflatex
+figure file fig-ode/adaptive_rk4:
+    can use fig-ode/adaptive_rk4.png for format pdflatex
+figure file fig-ode/rk4:
+    can use fig-ode/rk4.png for format pdflatex
+figure file fig-taylor/func_plot:
+    can use fig-taylor/func_plot.png for format pdflatex
+figure file fig-mc/2Dint:
+    can use fig-mc/2Dint.png for format pdflatex
+figure file fig-ode/rk4_2:
+    can use fig-ode/rk4_2.png for format pdflatex
+figure file fig-ode/cstr3:
+    can use fig-ode/cstr3.png for format pdflatex
+figure file fig-ode/rk_fig:
+    can use fig-ode/rk_fig.png for format pdflatex
+figure file fig-ode/cstr2:
+    can use fig-ode/cstr2.png for format pdflatex
+figure file fig-ode/cstr:
+    can use fig-ode/cstr.png for format pdflatex
+figure file fig-mc/mcint:
+    can use fig-mc/mcint.png for format pdflatex
+figure file fig-ode/euler_imp:
+    can use fig-ode/euler_imp.png for format pdflatex
+figure file fig-taylor/df:
+    can use fig-taylor/df.png for format pdflatex
+figure file fig-ode/euler:
+    can use fig-ode/euler.png for format pdflatex
+figure file fig-ode/adaptive_euler:
+    can use fig-ode/adaptive_euler.png for format pdflatex
+figure file fig-taylor/mac_sin:
+    can use fig-taylor/mac_sin.png for format pdflatex
+figure file fig-taylor/df2:
+    can use fig-taylor/df2.png for format pdflatex
+figure file fig-mc/mci:
+    can use fig-mc/mci.png for format pdflatex
+figure file fig-mc/coin:
+    can use fig-mc/coin.png for format pdflatex
+*** error: citation "bulirsch" is not in the BIBFILE
+running preprocess -DFORMAT=pdflatex -DDEVICE=paper -DCHAPTER="chapter" -DBOOK="book" -DAPPENDIX="appendix" book.do.txt > tmp_preprocess__book.do.txt
+running mako on tmp_preprocess__book.do.txt to make tmp_mako__book.do.txt
+mako variables: {'FORMAT': 'pdflatex', 'DEVICE': 'paper', 'CHAPTER': 'chapter', 'BOOK': 'book', 'APPENDIX': 'appendix'}
+translating doconce text in tmp_mako__book.do.txt to pdflatex
+*** error: found multiple labels:
+    ch:taylor
+running preprocess -DFORMAT=pdflatex -DDEVICE=paper -DCHAPTER="chapter" -DBOOK="book" -DAPPENDIX="appendix" book.do.txt > tmp_preprocess__book.do.txt
+running mako on tmp_preprocess__book.do.txt to make tmp_mako__book.do.txt
+mako variables: {'FORMAT': 'pdflatex', 'DEVICE': 'paper', 'CHAPTER': 'chapter', 'BOOK': 'book', 'APPENDIX': 'appendix'}
+translating doconce text in tmp_mako__book.do.txt to pdflatex
+*** warning: footnotes with verbatim has strange typesetting with svmonodo/t2do/t4do styles
+copy complete file src-taylor/mac_sin_eps.py (format: pypro)
+copying from regex "A = np.array" until "# Back"
+     file: src-nlin/nlin_sym.py, lines 35-51 (format: pycod)
+copying from regex "# Back" until "# Backsubstitution - for loop"
+     file: src-nlin/nlin_sym.py, lines 45-51 (format: pycod)
+copying from regex "# Backsubstitution - for loop" until "print"
+     file: src-nlin/nlin_sym.py, lines 51-70 (format: pycod)
+copying from regex "from numpy.linalg" until "#end"
+     file: src-nlin/nlin_sym.py, lines 72-74 (format: pycod)
+copy complete file src-numint/midpoint_pc.py (format: pypro)
+copy complete file src-numint/trapez_pc.py (format: pypro)
+copy complete file src-numint/adaptive_midpoint_pc.py (format: pypro)
+copy complete file src-numint/adaptive_trapez_pc.py (format: pypro)
+copy complete file src-numint/romberg_pc.py (format: pypro)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad2.py, lines 6-14 (format: pycod)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad3.py, lines 6-15 (format: pycod)
+copying from regex "def analytical" until "# rest of"
+     file: src-ode/euler.py, lines 4-23 (format: pycod)
+copy complete file src-ode/euler_simple.py (format: pypro)
+copying from regex "def one_step" until "# rest of"
+     file: src-ode/adaptive_euler.py, lines 4-34 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk2.py, lines 4-23 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk4.py, lines 4-25 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/adaptive_rk4.py, lines 4-41 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk4_2.py, lines 4-36 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/euler_imp_2.py, lines 4-33 (format: pycod)
+copying from regex "import" until "NN"
+     file: src-mc/pi.py, lines 1-21 (format: pycod)
+copying from regex "import" until "N="
+     file: src-mc/pi2.py, lines 1-22 (format: pycod)
+copying from regex "def mc_nball" until "def mc_nball_sampling"
+     file: src-mc/hypersphere3.py, lines 53-70 (format: pycod)
+copying from regex "def mc_nball_sampling" until "def nball"
+     file: src-mc/hypersphere3.py, lines 70-85 (format: pycod)
+copying from regex "def nball" until "if __"
+     file: src-mc/hypersphere3.py, lines 85-91 (format: pycod)
+copying from regex "import numpy" until "def d1"
+     file: src-mc/hypersphere3.py, lines 3-14 (format: pycod)
+copying from regex "def int" until "N=5"
+     file: src-mc/trapez.py, lines 8-18 (format: pycod)
+copying from regex "def d1" until "def d2"
+     file: src-mc/hypersphere3.py, lines 14-27 (format: pycod)
+copying from regex "def d3_trapez" until "def mc_"
+     file: src-mc/hypersphere3.py, lines 40-70 (format: pycod)
+copying from regex "def d2" until "def mc"
+     file: src-mc/hypersphere3.py, lines 27-70 (format: pycod)
+copying from regex "def fac" until "def fact_rec"
+     file: src-mc/hypersphere4.py, lines 118-127 (format: pycod)
+copying from regex "def fact_rec" until "if __"
+     file: src-mc/hypersphere4.py, lines 127-133 (format: pycod)
+copying from regex "def dd_trapez" until "def mc_n"
+     file: src-mc/hypersphere4.py, lines 62-97 (format: pycod)
+copying from regex "def" until "def hist"
+     file: src-mc/clt.py, lines 5-26 (format: pycod)
+copying from regex "def hist" until "average3"
+     file: src-mc/clt.py, lines 17-27 (format: pycod)
+copying from regex "def average3" until "hist2"
+     file: src-mc/clt.py, lines 22-31 (format: pycod)
+copying from regex "from" until "def No"
+     file: src-mc/rd.py, lines 1-15 (format: pycod)
+copying from regex "def No" until "def BP"
+     file: src-mc/rd.py, lines 15-27 (format: pycod)
+copying from regex "def BP" until "def /N"
+     file: src-mc/rd.py, lines 27-34 (format: pycod)
+
+*** Exercise: Numerical Integration
+    label{None}
+    could be Problem (no refs beyond the exercise itself)
+
+*** Exercise: The central limit theorem
+    label{ex:mc:norm}
+    could be Problem (no refs beyond the exercise itself)
+
+*** Exercise: Birthday Paradox
+    label{ex:mc:BP}
+    could be Problem (no refs beyond the exercise itself)
+found info about 4 exercises
+figure file fig-taylor/df:
+    can use fig-taylor/df.png for format pdflatex
+figure file fig-ode/rk4:
+    can use fig-ode/rk4.png for format pdflatex
+figure file fig-ode/adaptive_rk4:
+    can use fig-ode/adaptive_rk4.png for format pdflatex
+figure file fig-mc/coin:
+    can use fig-mc/coin.png for format pdflatex
+figure file fig-taylor/mac_sin:
+    can use fig-taylor/mac_sin.png for format pdflatex
+figure file fig-mc/2Dint:
+    can use fig-mc/2Dint.png for format pdflatex
+figure file fig-taylor/df2:
+    can use fig-taylor/df2.png for format pdflatex
+figure file fig-ode/adaptive_euler:
+    can use fig-ode/adaptive_euler.png for format pdflatex
+figure file fig-ode/cstr3:
+    can use fig-ode/cstr3.png for format pdflatex
+figure file fig-ode/cstr:
+    can use fig-ode/cstr.png for format pdflatex
+figure file fig-taylor/func_plot:
+    can use fig-taylor/func_plot.png for format pdflatex
+figure file fig-ode/euler:
+    can use fig-ode/euler.png for format pdflatex
+figure file fig-mc/mci:
+    can use fig-mc/mci.png for format pdflatex
+figure file fig-ode/rk4_2:
+    can use fig-ode/rk4_2.png for format pdflatex
+figure file fig-ode/cstr2:
+    can use fig-ode/cstr2.png for format pdflatex
+figure file fig-ode/rk2:
+    can use fig-ode/rk2.png for format pdflatex
+figure file fig-ode/euler_imp:
+    can use fig-ode/euler_imp.png for format pdflatex
+figure file fig-mc/mcint:
+    can use fig-mc/mcint.png for format pdflatex
+figure file fig-ode/rk_fig:
+    can use fig-ode/rk_fig.png for format pdflatex
+
+exporting publish database ../chapters/papers.pub to ../chapters/papers.bib:
+output in book.tex
+running preprocess -DFORMAT=pdflatex -DDEVICE=paper -DCHAPTER="chapter" -DBOOK="book" -DAPPENDIX="appendix" book.do.txt > tmp_preprocess__book.do.txt
+running mako on tmp_preprocess__book.do.txt to make tmp_mako__book.do.txt
+mako variables: {'FORMAT': 'pdflatex', 'DEVICE': 'paper', 'CHAPTER': 'chapter', 'BOOK': 'book', 'APPENDIX': 'appendix'}
+translating doconce text in tmp_mako__book.do.txt to pdflatex
+*** warning: footnotes with verbatim has strange typesetting with svmonodo/t2do/t4do styles
+copy complete file src-taylor/mac_sin_eps.py (format: pypro)
+copying from regex "A = np.array" until "# Back"
+     file: src-nlin/nlin_sym.py, lines 35-51 (format: pycod)
+copying from regex "# Back" until "# Backsubstitution - for loop"
+     file: src-nlin/nlin_sym.py, lines 45-51 (format: pycod)
+copying from regex "# Backsubstitution - for loop" until "print"
+     file: src-nlin/nlin_sym.py, lines 51-70 (format: pycod)
+copying from regex "from numpy.linalg" until "#end"
+     file: src-nlin/nlin_sym.py, lines 72-74 (format: pycod)
+copy complete file src-numint/midpoint_pc.py (format: pypro)
+copy complete file src-numint/trapez_pc.py (format: pypro)
+copy complete file src-numint/adaptive_midpoint_pc.py (format: pypro)
+copy complete file src-numint/adaptive_trapez_pc.py (format: pypro)
+copy complete file src-numint/romberg_pc.py (format: pypro)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad2.py, lines 6-14 (format: pycod)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad3.py, lines 6-15 (format: pycod)
+copying from regex "def analytical" until "# rest of"
+     file: src-ode/euler.py, lines 4-23 (format: pycod)
+copy complete file src-ode/euler_simple.py (format: pypro)
+copying from regex "def one_step" until "# rest of"
+     file: src-ode/adaptive_euler.py, lines 4-34 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk2.py, lines 4-23 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk4.py, lines 4-25 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/adaptive_rk4.py, lines 4-41 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk4_2.py, lines 4-36 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/euler_imp_2.py, lines 4-33 (format: pycod)
+copying from regex "import" until "NN"
+     file: src-mc/pi.py, lines 1-21 (format: pycod)
+copying from regex "import" until "N="
+     file: src-mc/pi2.py, lines 1-22 (format: pycod)
+copying from regex "def mc_nball" until "def mc_nball_sampling"
+     file: src-mc/hypersphere3.py, lines 53-70 (format: pycod)
+copying from regex "def mc_nball_sampling" until "def nball"
+     file: src-mc/hypersphere3.py, lines 70-85 (format: pycod)
+copying from regex "def nball" until "if __"
+     file: src-mc/hypersphere3.py, lines 85-91 (format: pycod)
+copying from regex "import numpy" until "def d1"
+     file: src-mc/hypersphere3.py, lines 3-14 (format: pycod)
+copying from regex "def int" until "N=5"
+     file: src-mc/trapez.py, lines 8-18 (format: pycod)
+copying from regex "def d1" until "def d2"
+     file: src-mc/hypersphere3.py, lines 14-27 (format: pycod)
+copying from regex "def d3_trapez" until "def mc_"
+     file: src-mc/hypersphere3.py, lines 40-70 (format: pycod)
+copying from regex "def d2" until "def mc"
+     file: src-mc/hypersphere3.py, lines 27-70 (format: pycod)
+copying from regex "def fac" until "def fact_rec"
+     file: src-mc/hypersphere4.py, lines 118-127 (format: pycod)
+copying from regex "def fact_rec" until "if __"
+     file: src-mc/hypersphere4.py, lines 127-133 (format: pycod)
+copying from regex "def dd_trapez" until "def mc_n"
+     file: src-mc/hypersphere4.py, lines 62-97 (format: pycod)
+copying from regex "def" until "def hist"
+     file: src-mc/clt.py, lines 5-26 (format: pycod)
+copying from regex "def hist" until "average3"
+     file: src-mc/clt.py, lines 17-27 (format: pycod)
+copying from regex "def average3" until "hist2"
+     file: src-mc/clt.py, lines 22-31 (format: pycod)
+copying from regex "from" until "def No"
+     file: src-mc/rd.py, lines 1-15 (format: pycod)
+copying from regex "def No" until "def BP"
+     file: src-mc/rd.py, lines 15-27 (format: pycod)
+copying from regex "def BP" until "def /N"
+     file: src-mc/rd.py, lines 27-34 (format: pycod)
+
+*** Exercise: Numerical Integration
+    label{None}
+    could be Problem (no refs beyond the exercise itself)
+
+*** Exercise: The central limit theorem
+    label{ex:mc:norm}
+    could be Problem (no refs beyond the exercise itself)
+
+*** Exercise: Birthday Paradox
+    label{ex:mc:BP}
+    could be Problem (no refs beyond the exercise itself)
+found info about 4 exercises
+figure file fig-ode/euler:
+    can use fig-ode/euler.png for format pdflatex
+figure file fig-ode/rk2:
+    can use fig-ode/rk2.png for format pdflatex
+figure file fig-mc/mci:
+    can use fig-mc/mci.png for format pdflatex
+figure file fig-ode/rk4:
+    can use fig-ode/rk4.png for format pdflatex
+figure file fig-ode/rk4_2:
+    can use fig-ode/rk4_2.png for format pdflatex
+figure file fig-mc/2Dint:
+    can use fig-mc/2Dint.png for format pdflatex
+figure file fig-ode/cstr:
+    can use fig-ode/cstr.png for format pdflatex
+figure file fig-mc/coin:
+    can use fig-mc/coin.png for format pdflatex
+figure file fig-mc/mcint:
+    can use fig-mc/mcint.png for format pdflatex
+figure file fig-taylor/func_plot:
+    can use fig-taylor/func_plot.png for format pdflatex
+figure file fig-taylor/df:
+    can use fig-taylor/df.png for format pdflatex
+figure file fig-taylor/mac_sin:
+    can use fig-taylor/mac_sin.png for format pdflatex
+figure file fig-ode/euler_imp:
+    can use fig-ode/euler_imp.png for format pdflatex
+figure file fig-ode/adaptive_euler:
+    can use fig-ode/adaptive_euler.png for format pdflatex
+figure file fig-taylor/df2:
+    can use fig-taylor/df2.png for format pdflatex
+figure file fig-ode/cstr3:
+    can use fig-ode/cstr3.png for format pdflatex
+figure file fig-ode/cstr2:
+    can use fig-ode/cstr2.png for format pdflatex
+figure file fig-ode/adaptive_rk4:
+    can use fig-ode/adaptive_rk4.png for format pdflatex
+figure file fig-ode/rk_fig:
+    can use fig-ode/rk_fig.png for format pdflatex
+
+exporting publish database ../chapters/papers.pub to ../chapters/papers.bib:
+output in book.tex
+running preprocess -DFORMAT=pdflatex -DDEVICE=paper -DCHAPTER="chapter" -DBOOK="book" -DAPPENDIX="appendix" book.do.txt > tmp_preprocess__book.do.txt
+running mako on tmp_preprocess__book.do.txt to make tmp_mako__book.do.txt
+*** mako error: mako.exceptions.SyntaxException
+   No starting keyword 'if' for 'endif' at line: 1365 char: 1
+This could indicate that the mako template code is not compatible with the version of Python currently used by DocOnce and mako, which is Python 3.7.3
+running preprocess -DFORMAT=pdflatex -DDEVICE=paper -DCHAPTER="chapter" -DBOOK="book" -DAPPENDIX="appendix" book.do.txt > tmp_preprocess__book.do.txt
+running mako on tmp_preprocess__book.do.txt to make tmp_mako__book.do.txt
+*** mako error: mako.exceptions.SyntaxException
+   No starting keyword 'if' for 'endif' at line: 1365 char: 1
+This could indicate that the mako template code is not compatible with the version of Python currently used by DocOnce and mako, which is Python 3.7.3
+running preprocess -DFORMAT=pdflatex -DDEVICE=paper -DCHAPTER="chapter" -DBOOK="book" -DAPPENDIX="appendix" book.do.txt > tmp_preprocess__book.do.txt
+running mako on tmp_preprocess__book.do.txt to make tmp_mako__book.do.txt
+*** mako error: mako.exceptions.SyntaxException
+   No starting keyword 'if' for 'endif' at line: 1365 char: 1
+This could indicate that the mako template code is not compatible with the version of Python currently used by DocOnce and mako, which is Python 3.7.3
+running preprocess -DFORMAT=pdflatex -DDEVICE=paper -DCHAPTER="chapter" -DBOOK="book" -DAPPENDIX="appendix" book.do.txt > tmp_preprocess__book.do.txt
+running mako on tmp_preprocess__book.do.txt to make tmp_mako__book.do.txt
+*** mako error: mako.exceptions.SyntaxException
+   No starting keyword 'if' for 'endif' at line: 1365 char: 1
+This could indicate that the mako template code is not compatible with the version of Python currently used by DocOnce and mako, which is Python 3.7.3
+running preprocess -DFORMAT=pdflatex -DDEVICE=paper -DCHAPTER="chapter" -DBOOK="book" -DAPPENDIX="appendix" book.do.txt > tmp_preprocess__book.do.txt
+running mako on tmp_preprocess__book.do.txt to make tmp_mako__book.do.txt
+*** mako error: mako.exceptions.SyntaxException
+   No starting keyword 'if' for 'endif' at line: 1364 char: 1
+This could indicate that the mako template code is not compatible with the version of Python currently used by DocOnce and mako, which is Python 3.7.3
+running preprocess -DFORMAT=pdflatex -DDEVICE=paper -DCHAPTER="chapter" -DBOOK="book" -DAPPENDIX="appendix" book.do.txt > tmp_preprocess__book.do.txt
+running mako on tmp_preprocess__book.do.txt to make tmp_mako__book.do.txt
+*** mako error: mako.exceptions.SyntaxException
+   No starting keyword 'if' for 'endif' at line: 1364 char: 1
+This could indicate that the mako template code is not compatible with the version of Python currently used by DocOnce and mako, which is Python 3.7.3
+running preprocess -DFORMAT=pdflatex -DDEVICE=paper -DCHAPTER="chapter" -DBOOK="book" -DAPPENDIX="appendix" book.do.txt > tmp_preprocess__book.do.txt
+running mako on tmp_preprocess__book.do.txt to make tmp_mako__book.do.txt
+mako variables: {'FORMAT': 'pdflatex', 'DEVICE': 'paper', 'CHAPTER': 'chapter', 'BOOK': 'book', 'APPENDIX': 'appendix'}
+translating doconce text in tmp_mako__book.do.txt to pdflatex
+*** warning: footnotes with verbatim has strange typesetting with svmonodo/t2do/t4do styles
+copy complete file src-taylor/mac_sin_eps.py (format: pypro)
+copy complete file src-numint/midpoint_pc.py (format: pypro)
+copy complete file src-numint/trapez_pc.py (format: pypro)
+copy complete file src-numint/adaptive_midpoint_pc.py (format: pypro)
+copy complete file src-numint/adaptive_trapez_pc.py (format: pypro)
+copy complete file src-numint/romberg_pc.py (format: pypro)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad2.py, lines 6-14 (format: pycod)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad3.py, lines 6-15 (format: pycod)
+copying from regex "def analytical" until "# rest of"
+     file: src-ode/euler.py, lines 4-23 (format: pycod)
+copy complete file src-ode/euler_simple.py (format: pypro)
+copying from regex "def one_step" until "# rest of"
+     file: src-ode/adaptive_euler.py, lines 4-34 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk2.py, lines 4-23 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk4.py, lines 4-25 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/adaptive_rk4.py, lines 4-41 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk4_2.py, lines 4-36 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/euler_imp_2.py, lines 4-33 (format: pycod)
+copying from regex "import" until "NN"
+     file: src-mc/pi.py, lines 1-21 (format: pycod)
+copying from regex "import" until "N="
+     file: src-mc/pi2.py, lines 1-22 (format: pycod)
+copying from regex "def mc_nball" until "def mc_nball_sampling"
+     file: src-mc/hypersphere3.py, lines 53-70 (format: pycod)
+copying from regex "def mc_nball_sampling" until "def nball"
+     file: src-mc/hypersphere3.py, lines 70-85 (format: pycod)
+copying from regex "def nball" until "if __"
+     file: src-mc/hypersphere3.py, lines 85-91 (format: pycod)
+copying from regex "import numpy" until "def d1"
+     file: src-mc/hypersphere3.py, lines 3-14 (format: pycod)
+copying from regex "def int" until "N=5"
+     file: src-mc/trapez.py, lines 8-18 (format: pycod)
+copying from regex "def d1" until "def d2"
+     file: src-mc/hypersphere3.py, lines 14-27 (format: pycod)
+copying from regex "def d3_trapez" until "def mc_"
+     file: src-mc/hypersphere3.py, lines 40-70 (format: pycod)
+copying from regex "def d2" until "def mc"
+     file: src-mc/hypersphere3.py, lines 27-70 (format: pycod)
+copying from regex "def fac" until "def fact_rec"
+     file: src-mc/hypersphere4.py, lines 118-127 (format: pycod)
+copying from regex "def fact_rec" until "if __"
+     file: src-mc/hypersphere4.py, lines 127-133 (format: pycod)
+copying from regex "def dd_trapez" until "def mc_n"
+     file: src-mc/hypersphere4.py, lines 62-97 (format: pycod)
+copying from regex "def" until "def hist"
+     file: src-mc/clt.py, lines 5-26 (format: pycod)
+copying from regex "def hist" until "average3"
+     file: src-mc/clt.py, lines 17-27 (format: pycod)
+copying from regex "def average3" until "hist2"
+     file: src-mc/clt.py, lines 22-31 (format: pycod)
+copying from regex "from" until "def No"
+     file: src-mc/rd.py, lines 1-15 (format: pycod)
+copying from regex "def No" until "def BP"
+     file: src-mc/rd.py, lines 15-27 (format: pycod)
+copying from regex "def BP" until "def /N"
+     file: src-mc/rd.py, lines 27-34 (format: pycod)
+
+*** Exercise: Numerical Integration
+    label{None}
+    could be Problem (no refs beyond the exercise itself)
+
+*** Exercise: The central limit theorem
+    label{ex:mc:norm}
+    could be Problem (no refs beyond the exercise itself)
+
+*** Exercise: Birthday Paradox
+    label{ex:mc:BP}
+    could be Problem (no refs beyond the exercise itself)
+found info about 4 exercises
+figure file fig-ode/euler_imp:
+    can use fig-ode/euler_imp.png for format pdflatex
+figure file fig-taylor/func_plot:
+    can use fig-taylor/func_plot.png for format pdflatex
+figure file fig-ode/cstr3:
+    can use fig-ode/cstr3.png for format pdflatex
+figure file fig-mc/mci:
+    can use fig-mc/mci.png for format pdflatex
+figure file fig-ode/rk2:
+    can use fig-ode/rk2.png for format pdflatex
+figure file fig-taylor/mac_sin:
+    can use fig-taylor/mac_sin.png for format pdflatex
+figure file fig-ode/adaptive_rk4:
+    can use fig-ode/adaptive_rk4.png for format pdflatex
+figure file fig-ode/euler:
+    can use fig-ode/euler.png for format pdflatex
+figure file fig-ode/cstr2:
+    can use fig-ode/cstr2.png for format pdflatex
+figure file fig-ode/rk4_2:
+    can use fig-ode/rk4_2.png for format pdflatex
+figure file fig-taylor/df:
+    can use fig-taylor/df.png for format pdflatex
+figure file fig-mc/2Dint:
+    can use fig-mc/2Dint.png for format pdflatex
+figure file fig-ode/cstr:
+    can use fig-ode/cstr.png for format pdflatex
+figure file fig-mc/mcint:
+    can use fig-mc/mcint.png for format pdflatex
+figure file fig-taylor/df2:
+    can use fig-taylor/df2.png for format pdflatex
+figure file fig-mc/coin:
+    can use fig-mc/coin.png for format pdflatex
+figure file fig-ode/adaptive_euler:
+    can use fig-ode/adaptive_euler.png for format pdflatex
+figure file fig-ode/rk_fig:
+    can use fig-ode/rk_fig.png for format pdflatex
+figure file fig-ode/rk4:
+    can use fig-ode/rk4.png for format pdflatex
+
+exporting publish database ../chapters/papers.pub to ../chapters/papers.bib:
+output in book.tex
+running preprocess -DFORMAT=pdflatex -DDEVICE=paper -DCHAPTER="chapter" -DBOOK="book" -DAPPENDIX="appendix" book.do.txt > tmp_preprocess__book.do.txt
+running mako on tmp_preprocess__book.do.txt to make tmp_mako__book.do.txt
+mako variables: {'FORMAT': 'pdflatex', 'DEVICE': 'paper', 'CHAPTER': 'chapter', 'BOOK': 'book', 'APPENDIX': 'appendix'}
+translating doconce text in tmp_mako__book.do.txt to pdflatex
+*** warning: footnotes with verbatim has strange typesetting with svmonodo/t2do/t4do styles
+copy complete file src-taylor/mac_sin_eps.py (format: pypro)
+copy complete file src-numint/midpoint_pc.py (format: pypro)
+copy complete file src-numint/trapez_pc.py (format: pypro)
+copy complete file src-numint/adaptive_midpoint_pc.py (format: pypro)
+copy complete file src-numint/adaptive_trapez_pc.py (format: pypro)
+copy complete file src-numint/romberg_pc.py (format: pypro)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad2.py, lines 6-14 (format: pycod)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad3.py, lines 6-15 (format: pycod)
+copying from regex "def analytical" until "# rest of"
+     file: src-ode/euler.py, lines 4-23 (format: pycod)
+copy complete file src-ode/euler_simple.py (format: pypro)
+copying from regex "def one_step" until "# rest of"
+     file: src-ode/adaptive_euler.py, lines 4-34 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk2.py, lines 4-23 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk4.py, lines 4-25 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/adaptive_rk4.py, lines 4-41 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk4_2.py, lines 4-36 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/euler_imp_2.py, lines 4-33 (format: pycod)
+copying from regex "import" until "NN"
+     file: src-mc/pi.py, lines 1-21 (format: pycod)
+copying from regex "import" until "N="
+     file: src-mc/pi2.py, lines 1-22 (format: pycod)
+copying from regex "def mc_nball" until "def mc_nball_sampling"
+     file: src-mc/hypersphere3.py, lines 53-70 (format: pycod)
+copying from regex "def mc_nball_sampling" until "def nball"
+     file: src-mc/hypersphere3.py, lines 70-85 (format: pycod)
+copying from regex "def nball" until "if __"
+     file: src-mc/hypersphere3.py, lines 85-91 (format: pycod)
+copying from regex "import numpy" until "def d1"
+     file: src-mc/hypersphere3.py, lines 3-14 (format: pycod)
+copying from regex "def int" until "N=5"
+     file: src-mc/trapez.py, lines 8-18 (format: pycod)
+copying from regex "def d1" until "def d2"
+     file: src-mc/hypersphere3.py, lines 14-27 (format: pycod)
+copying from regex "def d3_trapez" until "def mc_"
+     file: src-mc/hypersphere3.py, lines 40-70 (format: pycod)
+copying from regex "def d2" until "def mc"
+     file: src-mc/hypersphere3.py, lines 27-70 (format: pycod)
+copying from regex "def fac" until "def fact_rec"
+     file: src-mc/hypersphere4.py, lines 118-127 (format: pycod)
+copying from regex "def fact_rec" until "if __"
+     file: src-mc/hypersphere4.py, lines 127-133 (format: pycod)
+copying from regex "def dd_trapez" until "def mc_n"
+     file: src-mc/hypersphere4.py, lines 62-97 (format: pycod)
+copying from regex "def" until "def hist"
+     file: src-mc/clt.py, lines 5-26 (format: pycod)
+copying from regex "def hist" until "average3"
+     file: src-mc/clt.py, lines 17-27 (format: pycod)
+copying from regex "def average3" until "hist2"
+     file: src-mc/clt.py, lines 22-31 (format: pycod)
+copying from regex "from" until "def No"
+     file: src-mc/rd.py, lines 1-15 (format: pycod)
+copying from regex "def No" until "def BP"
+     file: src-mc/rd.py, lines 15-27 (format: pycod)
+copying from regex "def BP" until "def /N"
+     file: src-mc/rd.py, lines 27-34 (format: pycod)
+
+*** Exercise: Numerical Integration
+    label{None}
+    could be Problem (no refs beyond the exercise itself)
+
+*** Exercise: The central limit theorem
+    label{ex:mc:norm}
+    could be Problem (no refs beyond the exercise itself)
+
+*** Exercise: Birthday Paradox
+    label{ex:mc:BP}
+    could be Problem (no refs beyond the exercise itself)
+found info about 4 exercises
+figure file fig-ode/cstr:
+    can use fig-ode/cstr.png for format pdflatex
+figure file fig-mc/2Dint:
+    can use fig-mc/2Dint.png for format pdflatex
+figure file fig-ode/rk_fig:
+    can use fig-ode/rk_fig.png for format pdflatex
+figure file fig-ode/euler:
+    can use fig-ode/euler.png for format pdflatex
+figure file fig-ode/cstr3:
+    can use fig-ode/cstr3.png for format pdflatex
+figure file fig-ode/rk4_2:
+    can use fig-ode/rk4_2.png for format pdflatex
+figure file fig-ode/adaptive_rk4:
+    can use fig-ode/adaptive_rk4.png for format pdflatex
+figure file fig-ode/rk2:
+    can use fig-ode/rk2.png for format pdflatex
+figure file fig-taylor/func_plot:
+    can use fig-taylor/func_plot.png for format pdflatex
+figure file fig-taylor/mac_sin:
+    can use fig-taylor/mac_sin.png for format pdflatex
+figure file fig-ode/euler_imp:
+    can use fig-ode/euler_imp.png for format pdflatex
+figure file fig-ode/adaptive_euler:
+    can use fig-ode/adaptive_euler.png for format pdflatex
+figure file fig-ode/cstr2:
+    can use fig-ode/cstr2.png for format pdflatex
+figure file fig-ode/rk4:
+    can use fig-ode/rk4.png for format pdflatex
+figure file fig-taylor/df:
+    can use fig-taylor/df.png for format pdflatex
+figure file fig-mc/mcint:
+    can use fig-mc/mcint.png for format pdflatex
+figure file fig-mc/mci:
+    can use fig-mc/mci.png for format pdflatex
+figure file fig-mc/coin:
+    can use fig-mc/coin.png for format pdflatex
+figure file fig-taylor/df2:
+    can use fig-taylor/df2.png for format pdflatex
+
+exporting publish database ../chapters/papers.pub to ../chapters/papers.bib:
+output in book.tex
+running preprocess -DFORMAT=pdflatex -DDEVICE=paper -DCHAPTER="chapter" -DBOOK="book" -DAPPENDIX="appendix" book.do.txt > tmp_preprocess__book.do.txt
+running mako on tmp_preprocess__book.do.txt to make tmp_mako__book.do.txt
+mako variables: {'FORMAT': 'pdflatex', 'DEVICE': 'paper', 'CHAPTER': 'chapter', 'BOOK': 'book', 'APPENDIX': 'appendix'}
+translating doconce text in tmp_mako__book.do.txt to pdflatex
+*** warning: footnotes with verbatim has strange typesetting with svmonodo/t2do/t4do styles
+copy complete file src-taylor/mac_sin_eps.py (format: pypro)
+copy complete file src-numint/midpoint_pc.py (format: pypro)
+copy complete file src-numint/trapez_pc.py (format: pypro)
+copy complete file src-numint/adaptive_midpoint_pc.py (format: pypro)
+copy complete file src-numint/adaptive_trapez_pc.py (format: pypro)
+copy complete file src-numint/romberg_pc.py (format: pypro)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad2.py, lines 6-14 (format: pycod)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad3.py, lines 6-15 (format: pycod)
+
+*** Exercise: Numerical Integration
+    label{None}
+    could be Problem (no refs beyond the exercise itself)
+found info about 1 exercises
+figure file fig-taylor/df:
+    can use fig-taylor/df.png for format pdflatex
+figure file fig-taylor/df2:
+    can use fig-taylor/df2.png for format pdflatex
+figure file fig-taylor/mac_sin:
+    can use fig-taylor/mac_sin.png for format pdflatex
+figure file fig-taylor/func_plot:
+    can use fig-taylor/func_plot.png for format pdflatex
+
+exporting publish database ../chapters/papers.pub to ../chapters/papers.bib:
+output in book.tex
+running preprocess -DFORMAT=pdflatex -DDEVICE=paper -DCHAPTER="chapter" -DBOOK="book" -DAPPENDIX="appendix" book.do.txt > tmp_preprocess__book.do.txt
+running mako on tmp_preprocess__book.do.txt to make tmp_mako__book.do.txt
+mako variables: {'FORMAT': 'pdflatex', 'DEVICE': 'paper', 'CHAPTER': 'chapter', 'BOOK': 'book', 'APPENDIX': 'appendix'}
+translating doconce text in tmp_mako__book.do.txt to pdflatex
+*** warning: footnotes with verbatim has strange typesetting with svmonodo/t2do/t4do styles
+copy complete file src-taylor/mac_sin_eps.py (format: pypro)
+copy complete file src-numint/midpoint_pc.py (format: pypro)
+copy complete file src-numint/trapez_pc.py (format: pypro)
+copy complete file src-numint/adaptive_midpoint_pc.py (format: pypro)
+copy complete file src-numint/adaptive_trapez_pc.py (format: pypro)
+copy complete file src-numint/romberg_pc.py (format: pypro)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad2.py, lines 6-14 (format: pycod)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad3.py, lines 6-15 (format: pycod)
+
+*** Exercise: Numerical Integration
+    label{None}
+    could be Problem (no refs beyond the exercise itself)
+found info about 1 exercises
+figure file fig-taylor/func_plot:
+    can use fig-taylor/func_plot.png for format pdflatex
+figure file fig-taylor/df2:
+    can use fig-taylor/df2.png for format pdflatex
+figure file fig-taylor/mac_sin:
+    can use fig-taylor/mac_sin.png for format pdflatex
+figure file fig-taylor/df:
+    can use fig-taylor/df.png for format pdflatex
+
+exporting publish database ../chapters/papers.pub to ../chapters/papers.bib:
+output in book.tex
+running preprocess -DFORMAT=pdflatex -DDEVICE=paper -DCHAPTER="chapter" -DBOOK="book" -DAPPENDIX="appendix" book.do.txt > tmp_preprocess__book.do.txt
+running mako on tmp_preprocess__book.do.txt to make tmp_mako__book.do.txt
+mako variables: {'FORMAT': 'pdflatex', 'DEVICE': 'paper', 'CHAPTER': 'chapter', 'BOOK': 'book', 'APPENDIX': 'appendix'}
+translating doconce text in tmp_mako__book.do.txt to pdflatex
+*** warning: footnotes with verbatim has strange typesetting with svmonodo/t2do/t4do styles
+copy complete file src-taylor/mac_sin_eps.py (format: pypro)
+copy complete file src-numint/midpoint_pc.py (format: pypro)
+copy complete file src-numint/trapez_pc.py (format: pypro)
+copy complete file src-numint/adaptive_midpoint_pc.py (format: pypro)
+copy complete file src-numint/adaptive_trapez_pc.py (format: pypro)
+copy complete file src-numint/romberg_pc.py (format: pypro)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad2.py, lines 6-14 (format: pycod)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad3.py, lines 6-15 (format: pycod)
+
+*** Exercise: Numerical Integration
+    label{None}
+    could be Problem (no refs beyond the exercise itself)
+found info about 1 exercises
+figure file fig-taylor/func_plot:
+    can use fig-taylor/func_plot.png for format pdflatex
+figure file fig-taylor/df:
+    can use fig-taylor/df.png for format pdflatex
+figure file fig-taylor/df2:
+    can use fig-taylor/df2.png for format pdflatex
+figure file fig-taylor/mac_sin:
+    can use fig-taylor/mac_sin.png for format pdflatex
+
+exporting publish database ../chapters/papers.pub to ../chapters/papers.bib:
+output in book.tex
+running preprocess -DFORMAT=pdflatex -DDEVICE=paper -DCHAPTER="chapter" -DBOOK="book" -DAPPENDIX="appendix" book.do.txt > tmp_preprocess__book.do.txt
+running mako on tmp_preprocess__book.do.txt to make tmp_mako__book.do.txt
+mako variables: {'FORMAT': 'pdflatex', 'DEVICE': 'paper', 'CHAPTER': 'chapter', 'BOOK': 'book', 'APPENDIX': 'appendix'}
+translating doconce text in tmp_mako__book.do.txt to pdflatex
+*** warning: footnotes with verbatim has strange typesetting with svmonodo/t2do/t4do styles
+copy complete file src-taylor/mac_sin_eps.py (format: pypro)
+copy complete file src-numint/midpoint_pc.py (format: pypro)
+copy complete file src-numint/trapez_pc.py (format: pypro)
+copy complete file src-numint/adaptive_midpoint_pc.py (format: pypro)
+copy complete file src-numint/adaptive_trapez_pc.py (format: pypro)
+copy complete file src-numint/romberg_pc.py (format: pypro)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad2.py, lines 6-14 (format: pycod)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad3.py, lines 6-15 (format: pycod)
+
+*** Exercise: Numerical Integration
+    label{None}
+    could be Problem (no refs beyond the exercise itself)
+found info about 1 exercises
+figure file fig-taylor/func_plot:
+    can use fig-taylor/func_plot.png for format pdflatex
+figure file fig-taylor/df2:
+    can use fig-taylor/df2.png for format pdflatex
+figure file fig-taylor/mac_sin:
+    can use fig-taylor/mac_sin.png for format pdflatex
+figure file fig-taylor/df:
+    can use fig-taylor/df.png for format pdflatex
+
+exporting publish database ../chapters/papers.pub to ../chapters/papers.bib:
+output in book.tex
+running preprocess -DFORMAT=html -DDEVICE=screen -DCHAPTER="chapter" -DBOOK="book" -DAPPENDIX="appendix" book.do.txt > tmp_preprocess__book.do.txt
+running mako on tmp_preprocess__book.do.txt to make tmp_mako__book.do.txt
+mako variables: {'FORMAT': 'html', 'DEVICE': 'screen', 'CHAPTER': 'chapter', 'BOOK': 'book', 'APPENDIX': 'appendix'}
+translating doconce text in tmp_mako__book.do.txt to html
+copy complete file src-taylor/mac_sin_eps.py (format: pypro)
+copy complete file src-numint/midpoint_pc.py (format: pypro)
+copy complete file src-numint/trapez_pc.py (format: pypro)
+copy complete file src-numint/adaptive_midpoint_pc.py (format: pypro)
+copy complete file src-numint/adaptive_trapez_pc.py (format: pypro)
+copy complete file src-numint/romberg_pc.py (format: pypro)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad2.py, lines 6-14 (format: pycod)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad3.py, lines 6-15 (format: pycod)
+
+*** Exercise: Numerical Integration
+    label{None}
+    could be Problem (no refs beyond the exercise itself)
+found info about 1 exercises
+figure file fig-taylor/mac_sin:
+    can use fig-taylor/mac_sin.png for format html
+figure file fig-taylor/func_plot:
+    can use fig-taylor/func_plot.png for format html
+figure file fig-taylor/df:
+    can use fig-taylor/df.png for format html
+figure file fig-taylor/df2:
+    can use fig-taylor/df2.png for format html
+output in book.html
+running preprocess -DFORMAT=sphinx -DDEVICE=screen -DCHAPTER="chapter" -DBOOK="book" -DAPPENDIX="appendix" book.do.txt > tmp_preprocess__book.do.txt
+running mako on tmp_preprocess__book.do.txt to make tmp_mako__book.do.txt
+mako variables: {'FORMAT': 'sphinx', 'DEVICE': 'screen', 'CHAPTER': 'chapter', 'BOOK': 'book', 'APPENDIX': 'appendix'}
+translating doconce text in tmp_mako__book.do.txt to sphinx
+copy complete file src-taylor/mac_sin_eps.py (format: pypro)
+copy complete file src-numint/midpoint_pc.py (format: pypro)
+copy complete file src-numint/trapez_pc.py (format: pypro)
+copy complete file src-numint/adaptive_midpoint_pc.py (format: pypro)
+copy complete file src-numint/adaptive_trapez_pc.py (format: pypro)
+copy complete file src-numint/romberg_pc.py (format: pypro)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad2.py, lines 6-14 (format: pycod)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad3.py, lines 6-15 (format: pycod)
+
+*** Exercise: Numerical Integration
+    label{None}
+    could be Problem (no refs beyond the exercise itself)
+found info about 1 exercises
+figure file fig-taylor/df2:
+    can use fig-taylor/df2.png for format sphinx
+figure file fig-taylor/func_plot:
+    can use fig-taylor/func_plot.png for format sphinx
+figure file fig-taylor/mac_sin:
+    can use fig-taylor/mac_sin.png for format sphinx
+figure file fig-taylor/df:
+    can use fig-taylor/df.png for format sphinx
+output in book.rst
+running preprocess -DFORMAT=pdflatex -DDEVICE=paper -DCHAPTER="chapter" -DBOOK="book" -DAPPENDIX="appendix" book.do.txt > tmp_preprocess__book.do.txt
+running mako on tmp_preprocess__book.do.txt to make tmp_mako__book.do.txt
+mako variables: {'FORMAT': 'pdflatex', 'DEVICE': 'paper', 'CHAPTER': 'chapter', 'BOOK': 'book', 'APPENDIX': 'appendix'}
+translating doconce text in tmp_mako__book.do.txt to pdflatex
+*** warning: footnotes with verbatim has strange typesetting with svmonodo/t2do/t4do styles
+copy complete file src-taylor/mac_sin_eps.py (format: pypro)
+copy complete file src-numint/midpoint_pc.py (format: pypro)
+copy complete file src-numint/trapez_pc.py (format: pypro)
+copy complete file src-numint/adaptive_midpoint_pc.py (format: pypro)
+copy complete file src-numint/adaptive_trapez_pc.py (format: pypro)
+copy complete file src-numint/romberg_pc.py (format: pypro)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad2.py, lines 6-14 (format: pycod)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad3.py, lines 6-15 (format: pycod)
+
+*** Exercise: Numerical Integration
+    label{None}
+    could be Problem (no refs beyond the exercise itself)
+found info about 1 exercises
+figure file fig-taylor/df:
+    can use fig-taylor/df.png for format pdflatex
+figure file fig-taylor/mac_sin:
+    can use fig-taylor/mac_sin.png for format pdflatex
+figure file fig-taylor/df2:
+    can use fig-taylor/df2.png for format pdflatex
+figure file fig-taylor/func_plot:
+    can use fig-taylor/func_plot.png for format pdflatex
+
+exporting publish database ../chapters/papers.pub to ../chapters/papers.bib:
+output in book.tex
+running preprocess -DFORMAT=html -DDEVICE=screen -DCHAPTER="chapter" -DBOOK="book" -DAPPENDIX="appendix" book.do.txt > tmp_preprocess__book.do.txt
+running mako on tmp_preprocess__book.do.txt to make tmp_mako__book.do.txt
+mako variables: {'FORMAT': 'html', 'DEVICE': 'screen', 'CHAPTER': 'chapter', 'BOOK': 'book', 'APPENDIX': 'appendix'}
+translating doconce text in tmp_mako__book.do.txt to html
+copy complete file src-taylor/mac_sin_eps.py (format: pypro)
+copy complete file src-numint/midpoint_pc.py (format: pypro)
+copy complete file src-numint/trapez_pc.py (format: pypro)
+copy complete file src-numint/adaptive_midpoint_pc.py (format: pypro)
+copy complete file src-numint/adaptive_trapez_pc.py (format: pypro)
+copy complete file src-numint/romberg_pc.py (format: pypro)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad2.py, lines 6-14 (format: pycod)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad3.py, lines 6-15 (format: pycod)
+
+*** Exercise: Numerical Integration
+    label{None}
+    could be Problem (no refs beyond the exercise itself)
+found info about 1 exercises
+figure file fig-taylor/mac_sin:
+    can use fig-taylor/mac_sin.png for format html
+figure file fig-taylor/df2:
+    can use fig-taylor/df2.png for format html
+figure file fig-taylor/df:
+    can use fig-taylor/df.png for format html
+figure file fig-taylor/func_plot:
+    can use fig-taylor/func_plot.png for format html
+output in book.html
+running preprocess -DFORMAT=sphinx -DDEVICE=screen -DCHAPTER="chapter" -DBOOK="book" -DAPPENDIX="appendix" book.do.txt > tmp_preprocess__book.do.txt
+running mako on tmp_preprocess__book.do.txt to make tmp_mako__book.do.txt
+mako variables: {'FORMAT': 'sphinx', 'DEVICE': 'screen', 'CHAPTER': 'chapter', 'BOOK': 'book', 'APPENDIX': 'appendix'}
+translating doconce text in tmp_mako__book.do.txt to sphinx
+copy complete file src-taylor/mac_sin_eps.py (format: pypro)
+copy complete file src-numint/midpoint_pc.py (format: pypro)
+copy complete file src-numint/trapez_pc.py (format: pypro)
+copy complete file src-numint/adaptive_midpoint_pc.py (format: pypro)
+copy complete file src-numint/adaptive_trapez_pc.py (format: pypro)
+copy complete file src-numint/romberg_pc.py (format: pypro)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad2.py, lines 6-14 (format: pycod)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad3.py, lines 6-15 (format: pycod)
+
+*** Exercise: Numerical Integration
+    label{None}
+    could be Problem (no refs beyond the exercise itself)
+found info about 1 exercises
+figure file fig-taylor/df2:
+    can use fig-taylor/df2.png for format sphinx
+figure file fig-taylor/func_plot:
+    can use fig-taylor/func_plot.png for format sphinx
+figure file fig-taylor/df:
+    can use fig-taylor/df.png for format sphinx
+figure file fig-taylor/mac_sin:
+    can use fig-taylor/mac_sin.png for format sphinx
+output in book.rst
+running preprocess -DFORMAT=pdflatex -DDEVICE=paper -DCHAPTER="chapter" -DBOOK="book" -DAPPENDIX="appendix" book.do.txt > tmp_preprocess__book.do.txt
+running mako on tmp_preprocess__book.do.txt to make tmp_mako__book.do.txt
+mako variables: {'FORMAT': 'pdflatex', 'DEVICE': 'paper', 'CHAPTER': 'chapter', 'BOOK': 'book', 'APPENDIX': 'appendix'}
+translating doconce text in tmp_mako__book.do.txt to pdflatex
+*** warning: footnotes with verbatim has strange typesetting with svmonodo/t2do/t4do styles
+copy complete file src-taylor/mac_sin_eps.py (format: pypro)
+copying from regex "A = np.array" until "# Back"
+     file: src-nlin/nlin_sym.py, lines 35-51 (format: pycod)
+copying from regex "# Back" until "# Backsubstitution - for loop"
+     file: src-nlin/nlin_sym.py, lines 45-51 (format: pycod)
+copying from regex "# Backsubstitution - for loop" until "print"
+     file: src-nlin/nlin_sym.py, lines 51-70 (format: pycod)
+copying from regex "from numpy.linalg" until "#end"
+     file: src-nlin/nlin_sym.py, lines 72-74 (format: pycod)
+copy complete file src-numint/midpoint_pc.py (format: pypro)
+copy complete file src-numint/trapez_pc.py (format: pypro)
+copy complete file src-numint/adaptive_midpoint_pc.py (format: pypro)
+copy complete file src-numint/adaptive_trapez_pc.py (format: pypro)
+copy complete file src-numint/romberg_pc.py (format: pypro)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad2.py, lines 6-14 (format: pycod)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad3.py, lines 6-15 (format: pycod)
+
+*** Exercise: Numerical Integration
+    label{None}
+    could be Problem (no refs beyond the exercise itself)
+found info about 1 exercises
+figure file fig-taylor/df2:
+    can use fig-taylor/df2.png for format pdflatex
+figure file fig-taylor/mac_sin:
+    can use fig-taylor/mac_sin.png for format pdflatex
+figure file fig-taylor/func_plot:
+    can use fig-taylor/func_plot.png for format pdflatex
+figure file fig-taylor/df:
+    can use fig-taylor/df.png for format pdflatex
+
+exporting publish database ../chapters/papers.pub to ../chapters/papers.bib:
+output in book.tex
+running preprocess -DFORMAT=pdflatex -DDEVICE=paper -DCHAPTER="chapter" -DBOOK="book" -DAPPENDIX="appendix" book.do.txt > tmp_preprocess__book.do.txt
+running mako on tmp_preprocess__book.do.txt to make tmp_mako__book.do.txt
+mako variables: {'FORMAT': 'pdflatex', 'DEVICE': 'paper', 'CHAPTER': 'chapter', 'BOOK': 'book', 'APPENDIX': 'appendix'}
+translating doconce text in tmp_mako__book.do.txt to pdflatex
+*** warning: footnotes with verbatim has strange typesetting with svmonodo/t2do/t4do styles
+copy complete file src-taylor/mac_sin_eps.py (format: pypro)
+copy complete file src-numint/midpoint_pc.py (format: pypro)
+copy complete file src-numint/trapez_pc.py (format: pypro)
+copy complete file src-numint/adaptive_midpoint_pc.py (format: pypro)
+copy complete file src-numint/adaptive_trapez_pc.py (format: pypro)
+copy complete file src-numint/romberg_pc.py (format: pypro)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad2.py, lines 6-14 (format: pycod)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad3.py, lines 6-15 (format: pycod)
+
+*** Exercise: Numerical Integration
+    label{None}
+    could be Problem (no refs beyond the exercise itself)
+found info about 1 exercises
+figure file fig-taylor/df2:
+    can use fig-taylor/df2.png for format pdflatex
+figure file fig-taylor/df:
+    can use fig-taylor/df.png for format pdflatex
+figure file fig-taylor/mac_sin:
+    can use fig-taylor/mac_sin.png for format pdflatex
+figure file fig-taylor/func_plot:
+    can use fig-taylor/func_plot.png for format pdflatex
+
+exporting publish database ../chapters/papers.pub to ../chapters/papers.bib:
+output in book.tex
+running preprocess -DFORMAT=html -DDEVICE=screen -DCHAPTER="chapter" -DBOOK="book" -DAPPENDIX="appendix" book.do.txt > tmp_preprocess__book.do.txt
+running mako on tmp_preprocess__book.do.txt to make tmp_mako__book.do.txt
+mako variables: {'FORMAT': 'html', 'DEVICE': 'screen', 'CHAPTER': 'chapter', 'BOOK': 'book', 'APPENDIX': 'appendix'}
+translating doconce text in tmp_mako__book.do.txt to html
+copy complete file src-taylor/mac_sin_eps.py (format: pypro)
+copy complete file src-numint/midpoint_pc.py (format: pypro)
+copy complete file src-numint/trapez_pc.py (format: pypro)
+copy complete file src-numint/adaptive_midpoint_pc.py (format: pypro)
+copy complete file src-numint/adaptive_trapez_pc.py (format: pypro)
+copy complete file src-numint/romberg_pc.py (format: pypro)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad2.py, lines 6-14 (format: pycod)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad3.py, lines 6-15 (format: pycod)
+
+*** Exercise: Numerical Integration
+    label{None}
+    could be Problem (no refs beyond the exercise itself)
+found info about 1 exercises
+figure file fig-taylor/df2:
+    can use fig-taylor/df2.png for format html
+figure file fig-taylor/func_plot:
+    can use fig-taylor/func_plot.png for format html
+figure file fig-taylor/df:
+    can use fig-taylor/df.png for format html
+figure file fig-taylor/mac_sin:
+    can use fig-taylor/mac_sin.png for format html
+output in book.html
+running preprocess -DFORMAT=sphinx -DDEVICE=screen -DCHAPTER="chapter" -DBOOK="book" -DAPPENDIX="appendix" book.do.txt > tmp_preprocess__book.do.txt
+running mako on tmp_preprocess__book.do.txt to make tmp_mako__book.do.txt
+mako variables: {'FORMAT': 'sphinx', 'DEVICE': 'screen', 'CHAPTER': 'chapter', 'BOOK': 'book', 'APPENDIX': 'appendix'}
+translating doconce text in tmp_mako__book.do.txt to sphinx
+copy complete file src-taylor/mac_sin_eps.py (format: pypro)
+copy complete file src-numint/midpoint_pc.py (format: pypro)
+copy complete file src-numint/trapez_pc.py (format: pypro)
+copy complete file src-numint/adaptive_midpoint_pc.py (format: pypro)
+copy complete file src-numint/adaptive_trapez_pc.py (format: pypro)
+copy complete file src-numint/romberg_pc.py (format: pypro)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad2.py, lines 6-14 (format: pycod)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad3.py, lines 6-15 (format: pycod)
+
+*** Exercise: Numerical Integration
+    label{None}
+    could be Problem (no refs beyond the exercise itself)
+found info about 1 exercises
+figure file fig-taylor/df:
+    can use fig-taylor/df.png for format sphinx
+figure file fig-taylor/func_plot:
+    can use fig-taylor/func_plot.png for format sphinx
+figure file fig-taylor/mac_sin:
+    can use fig-taylor/mac_sin.png for format sphinx
+figure file fig-taylor/df2:
+    can use fig-taylor/df2.png for format sphinx
+output in book.rst
+running preprocess -DFORMAT=pdflatex -DDEVICE=paper -DCHAPTER="chapter" -DBOOK="book" -DAPPENDIX="appendix" book.do.txt > tmp_preprocess__book.do.txt
+running mako on tmp_preprocess__book.do.txt to make tmp_mako__book.do.txt
+mako variables: {'FORMAT': 'pdflatex', 'DEVICE': 'paper', 'CHAPTER': 'chapter', 'BOOK': 'book', 'APPENDIX': 'appendix'}
+translating doconce text in tmp_mako__book.do.txt to pdflatex
+*** warning: footnotes with verbatim has strange typesetting with svmonodo/t2do/t4do styles
+copy complete file src-taylor/mac_sin_eps.py (format: pypro)
+copy complete file src-numint/midpoint_pc.py (format: pypro)
+copy complete file src-numint/trapez_pc.py (format: pypro)
+copy complete file src-numint/adaptive_midpoint_pc.py (format: pypro)
+copy complete file src-numint/adaptive_trapez_pc.py (format: pypro)
+copy complete file src-numint/romberg_pc.py (format: pypro)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad2.py, lines 6-14 (format: pycod)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad3.py, lines 6-15 (format: pycod)
+
+*** Exercise: Numerical Integration
+    label{None}
+    could be Problem (no refs beyond the exercise itself)
+found info about 1 exercises
+figure file fig-taylor/df:
+    can use fig-taylor/df.png for format pdflatex
+figure file fig-taylor/df2:
+    can use fig-taylor/df2.png for format pdflatex
+figure file fig-taylor/func_plot:
+    can use fig-taylor/func_plot.png for format pdflatex
+figure file fig-taylor/mac_sin:
+    can use fig-taylor/mac_sin.png for format pdflatex
+
+exporting publish database ../chapters/papers.pub to ../chapters/papers.bib:
+output in book.tex
+running preprocess -DFORMAT=pdflatex -DDEVICE=paper -DCHAPTER="chapter" -DBOOK="book" -DAPPENDIX="appendix" book.do.txt > tmp_preprocess__book.do.txt
+running mako on tmp_preprocess__book.do.txt to make tmp_mako__book.do.txt
+mako variables: {'FORMAT': 'pdflatex', 'DEVICE': 'paper', 'CHAPTER': 'chapter', 'BOOK': 'book', 'APPENDIX': 'appendix'}
+translating doconce text in tmp_mako__book.do.txt to pdflatex
+*** warning: footnotes with verbatim has strange typesetting with svmonodo/t2do/t4do styles
+copy complete file src-taylor/mac_sin_eps.py (format: pypro)
+copying from regex "A = np.array" until "# Back"
+     file: src-nlin/nlin_sym.py, lines 35-51 (format: pycod)
+copying from regex "# Back" until "# Backsubstitution - for loop"
+     file: src-nlin/nlin_sym.py, lines 45-51 (format: pycod)
+copying from regex "# Backsubstitution - for loop" until "print"
+     file: src-nlin/nlin_sym.py, lines 51-70 (format: pycod)
+copying from regex "from numpy.linalg" until "#end"
+     file: src-nlin/nlin_sym.py, lines 72-74 (format: pycod)
+copy complete file src-numint/midpoint_pc.py (format: pypro)
+copy complete file src-numint/trapez_pc.py (format: pypro)
+copy complete file src-numint/adaptive_midpoint_pc.py (format: pypro)
+copy complete file src-numint/adaptive_trapez_pc.py (format: pypro)
+copy complete file src-numint/romberg_pc.py (format: pypro)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad2.py, lines 6-14 (format: pycod)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad3.py, lines 6-15 (format: pycod)
+
+*** Exercise: Numerical Integration
+    label{None}
+    could be Problem (no refs beyond the exercise itself)
+found info about 1 exercises
+figure file fig-taylor/mac_sin:
+    can use fig-taylor/mac_sin.png for format pdflatex
+figure file fig-taylor/df2:
+    can use fig-taylor/df2.png for format pdflatex
+figure file fig-taylor/func_plot:
+    can use fig-taylor/func_plot.png for format pdflatex
+figure file fig-taylor/df:
+    can use fig-taylor/df.png for format pdflatex
+
+exporting publish database ../chapters/papers.pub to ../chapters/papers.bib:
+output in book.tex

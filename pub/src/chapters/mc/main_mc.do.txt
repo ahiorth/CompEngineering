@@ -1,0 +1,16 @@
+TITLE:  Monte Carlo Methods
+AUTHOR: Aksel Hiorth, the National IOR Centre & Institute for Energy Resources,
+University of Stavanger
+DATE: today
+
+TOC: on
+
+
+## # Common Mako variables and functions
+## # #include "../mako_code.txt"
+
+# #include "mc.do.txt"
+
+## ======= References =======
+
+##BIBFILE: ../papers.pub

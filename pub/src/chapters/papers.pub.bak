@@ -1,0 +1,118 @@
+* articles
+** {Python} for Scientific Computing
+   key:       NumPy:paper
+   author:    T. E. Oliphant
+   year:      2007
+   journal:   Computing in Science \& Engineering
+   volume:    9
+   status:    published
+   entrytype: article
+** {IPython}: a System for Interactive Scientific Computing
+   key:       IPython:paper
+   author:    F. Perez, B. E. Granger
+   year:      2007
+   journal:   Computing in Science \& Engineering
+   volume:    9
+   status:    published
+   entrytype: article
+** {Matplotlib}: a 2D Graphics Environment
+   key:       Matplotlib:paper
+   author:    J. D. Hunter
+   year:      2007
+   journal:   Computing in Science \& Engineering
+   volume:    9
+   status:    published
+   entrytype: article
+* books
+** A Primer on Scientific Programming With {P}ython
+   key:       Langtangen_2014
+   author:    H. P. Langtangen
+   year:      2014
+   publisher: Springer
+   status:    published
+   edition:   Fourth
+   entrytype: book
+   series:    Texts in Computational Science and Engineering
+** Computational Physics
+   key:       newman2013
+   author:    Mark Newman
+   year:      2013
+   publisher: CreateSpace Independent Publ.
+   status:    published
+   entrytype: book
+** Introduction to Numerical Analysis
+   key:       stoer2013
+   author:    Josef Stoer, Roland Bulirsch
+   year:      2013
+   publisher: Springer Science \& Business Media
+   volume:    12
+   status:    published
+   entrytype: book
+** Linear Algebra and Learning From Data
+   key:       strang2019
+   author:    Gilbert Strang
+   year:      2019
+   publisher: Wellesley-Cambridge Press
+   status:    published
+   entrytype: book
+** Numerical Linear Algebra
+   key:       trefethen1997
+   author:    Lloyd N. Trefethen, David Bau III
+   year:      1997
+   publisher: SIAM
+   volume:    50
+   status:    published
+   entrytype: book
+** Numerical Recipes in C++: the Art of Scientific Computing
+   key:       press2001
+   author:    William H. Press, William T. Vetterling, Saul A. Teukolsky, Brian P. Flannery
+   year:      2002
+   publisher: Cambridge University Press
+   status:    published
+   address:   New York, NY, USA
+   edition:   2nd
+   entrytype: book
+   isbn:      0-521-75033-4
+* misc
+** {Python} Programming Language
+   key:       Python
+   url:       http://python.org
+   status:    published
+   entrytype: misc
+   note:      \url{http://python.org}
+   sortkey:   Python
+** Loops and Lists
+   key:       Langtangen_TCSE6_looplist
+   author:    H. P. Langtangen
+   url:       http://hplgit.github.io/primer.html/doc/pub/looplist
+   status:    published
+   entrytype: misc
+   note:      \emph{http://hplgit.github.io/primer.html/doc/pub/looplist}
+** Some Document
+   key:       Langtangen_dobook_fake
+   author:    H. P. Langtangen
+   url:       http://hplgit.github.io/setup4book-doconce/doc/pub/fake/html
+   status:    published
+   entrytype: misc
+   note:      \emph{http://hplgit.github.io/setup4book-doconce/doc/pub/fake/html}
+** Use of Mako to Aid Book Writing
+   key:       Langtangen_dobook_mako
+   author:    H. P. Langtangen
+   url:       http://hplgit.github.io/setup4book-doconce/doc/pub/mako/html
+   status:    published
+   entrytype: misc
+   note:      \emph{http://hplgit.github.io/setup4book-doconce/doc/pub/mako/html}
+** Directory and File Structure
+   key:       Langtangen_dobook_rules
+   author:    H. P. Langtangen
+   url:       http://hplgit.github.io/setup4book-doconce/doc/pub/rules/html
+   status:    published
+   entrytype: misc
+   note:      \emph{http://hplgit.github.io/setup4book-doconce/doc/pub/rules/html}
+** Debugging in {Python}
+   key:       Langtangen_TCSE6_debug
+   author:    H. P. Langtangen
+   url:       http://hplgit.github.io/primer.html/doc/pub/debug
+   status:    published
+   entrytype: misc
+   note:      \emph{http://hplgit.github.io/primer.html/doc/pub/debug}

@@ -1,0 +1,16 @@
+TITLE:  Solving linear and nonlinear equations
+AUTHOR: Aksel Hiorth, the National IOR Centre & Institute for Energy Resources,
+University of Stavanger
+DATE: today
+
+TOC: on
+
+<% book = False%>
+# Common Mako variables and functions
+# #include "../mako_code.txt"
+
+# #include "nlin.do.txt"
+
+======= References =======
+
+BIBFILE: ../papers.pub

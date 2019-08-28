@@ -1,0 +1,29 @@
+2019.08.22 11:02:32 AM - INFO - copy: fig-mc to sphinx-alabaster/fig-mc
+2019.08.22 11:02:32 AM - INFO - copy: fig-nlin to sphinx-alabaster/fig-nlin
+2019.08.22 11:02:32 AM - INFO - copy: fig-numint to sphinx-alabaster/fig-numint
+2019.08.22 11:02:32 AM - INFO - copy: fig-ode to sphinx-alabaster/fig-ode
+2019.08.22 11:02:32 AM - INFO - copy: fig-taylor to sphinx-alabaster/fig-taylor
+2019.08.22 11:02:32 AM - INFO - copy: fig-taylor/func_plot.png to sphinx-alabaster
+2019.08.22 11:02:32 AM - INFO - edit: figure path to func_plot.png
+2019.08.22 11:02:32 AM - INFO - copy: fig-taylor/mac_sin.png to sphinx-alabaster
+2019.08.22 11:02:32 AM - INFO - edit: figure path to mac_sin.png
+2019.08.22 11:02:32 AM - INFO - copy: fig-taylor/df.png to sphinx-alabaster
+2019.08.22 11:02:32 AM - INFO - edit: figure path to df.png
+2019.08.22 11:02:32 AM - INFO - copy: fig-taylor/df2.png to sphinx-alabaster
+2019.08.22 11:02:32 AM - INFO - edit: figure path to df2.png
+2019.08.22 11:02:32 AM - INFO - copy: fig-numint/func_sq.png to sphinx-alabaster
+2019.08.22 11:02:32 AM - INFO - edit: figure path to func_sq.png
+2019.08.22 11:02:32 AM - INFO - copy: fig-numint/func_tr.png to sphinx-alabaster
+2019.08.22 11:02:32 AM - INFO - edit: figure path to func_tr.png
+2019.08.22 11:02:32 AM - INFO - copy: fig-numint/romberg.png to sphinx-alabaster
+2019.08.22 11:02:32 AM - INFO - edit: figure path to romberg.png
+2019.08.22 11:02:32 AM - INFO - running make clean and make html
+2019.08.22 11:02:36 AM - INFO - edit: genindex.html
+2019.08.22 11:02:36 AM - INFO - edit: index.html
+2019.08.22 11:02:36 AM - INFO - edit: search.html
+2019.08.22 11:02:36 AM - INFO - edit: ._book000.html
+2019.08.22 11:02:36 AM - INFO - edit: ._book001.html
+2019.08.22 11:02:36 AM - INFO - edit: ._book002.html
+2019.08.22 11:02:36 AM - INFO - edit: ._book003.html
+2019.08.22 11:02:36 AM - INFO - edit: ._book004.html
+2019.08.22 11:02:36 AM - INFO - edit: ._book005.html
