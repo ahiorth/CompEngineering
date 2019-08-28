@@ -1,6 +1,0 @@
-running preprocess -DFORMAT=pdflatex -DDEVICE=paper -DSOLUTIONS intro.do.txt > tmp_preprocess__intro.do.txt
-running mako on tmp_preprocess__intro.do.txt to make tmp_mako__intro.do.txt
-mako variables: {'FORMAT': 'pdflatex', 'DEVICE': 'paper', 'SOLUTIONS': True}
-translating doconce text in tmp_mako__intro.do.txt to pdflatex
-*** error: could not open the file src_python/pINTRO_python_introduction.py used in
-@@@CODE-4 src_python/pINTRO_python_introduction.py fromto: Examples of working with functions in Python@-----

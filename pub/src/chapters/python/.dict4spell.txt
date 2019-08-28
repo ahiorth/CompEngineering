@@ -1,8 +1,0 @@
-Aksel
-Centre
-Hiorth
-IOR
-Stavanger
-idx
-stackoverflow
-timeit
