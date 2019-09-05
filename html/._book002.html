@@ -1,0 +1,575 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Modeling and Computational Engineering">
+
+<title>Modeling and Computational Engineering</title>
+
+<!-- Bootstrap style: bootswatch_journal -->
+<link href="https://netdna.bootstrapcdn.com/bootswatch/3.1.1/journal/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:60px;      /* fixed header height for style bootswatch_journal */
+  margin:-60px 0 0; /* negative fixed header height */
+}
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 0,
+ 'sections': [('Table of contents',
+               0,
+               'table_of_contents',
+               'table_of_contents'),
+              ('Preface', 0, 'ch:preface', 'ch:preface'),
+              ('Finite differences', 0, 'ch:taylor', 'ch:taylor'),
+              ('Numerical derivatives', 1, None, '___sec2'),
+              ('Taylor Polynomial Approximation', 1, None, '___sec3'),
+              ('Evaluation of polynomials', 2, None, '___sec4'),
+              ('Calculating Derivatives of Functions',
+               1,
+               'ch:taylor:der',
+               'ch:taylor:der'),
+              ('Big $\\mathcal{O}$ notation', 2, None, '___sec6'),
+              ('Round off Errors', 2, None, '___sec7'),
+              ('Higher Order Derivatives', 1, None, '___sec8'),
+              ('Solving linear systems', 0, 'ch:nlin', 'ch:nlin'),
+              ('Solving linear equations', 1, None, '___sec10'),
+              ('Gauss-Jordan elimination', 2, None, '___sec11'),
+              ('Pivoting', 2, None, '___sec12'),
+              ('LU decomposition', 2, None, '___sec13'),
+              ('Example: Linear regression', 1, None, '___sec14'),
+              ('Solving least square, using algebraic equations',
+               2,
+               None,
+               '___sec15'),
+              ('Least square as a linear algebra problem', 2, None, '___sec16'),
+              ('Sparse matrices and Thomas algorithm', 1, None, '___sec17'),
+              ('Example: Solving the heat equation using linear algebra',
+               1,
+               None,
+               '___sec18'),
+              ('Exercise 2.1: Conservation Equation or the Continuity Equation',
+               2,
+               None,
+               '___sec19'),
+              ('Exercise 2.2: Curing of Concrete and Matrix Formulation',
+               2,
+               None,
+               '___sec20'),
+              ('Numerical integration', 0, 'ch:numint', 'ch:numint'),
+              ('Numerical Integration', 1, None, '___sec22'),
+              ('The Midpoint Rule', 2, None, '___sec23'),
+              ('The Trapezoidal Rule', 2, None, '___sec24'),
+              ('Numerical Errors on Integrals', 2, None, '___sec25'),
+              ('Practical Estimation of Errors on Integrals',
+               2,
+               'sec:numint:parct',
+               'sec:numint:parct'),
+              ('Romberg Integration', 1, None, '___sec27'),
+              ('Gaussian Quadrature', 2, None, '___sec28'),
+              ('The case N=3', 3, None, '___sec29'),
+              ('Error term on Gaussian Integration', 2, None, '___sec30'),
+              ('Common Weight functions for Classical Gaussian Quadratures',
+               2,
+               None,
+               '___sec31'),
+              ('Which method to use in a specific case?', 2, None, '___sec32'),
+              ('Exercise 3.1: Numerical Integration', 2, None, '___sec33'),
+              ('Ordinary differential equations', 0, 'ch:ode', 'ch:ode'),
+              ('Monte Carlo Methods', 0, 'ch:mc', 'ch:mc'),
+              ('References', 1, None, '___sec36')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript" async
+ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\no}{\nonumber}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="book.html">Modeling and Computational Engineering</a>
+  </div>
+
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._book001.html#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
+     <!-- navigation toc: --> <li><a href="._book001.html#ch:preface" style="font-size: 80%;"><b>Preface</b></a></li>
+     <!-- navigation toc: --> <li><a href="#ch:taylor" style="font-size: 80%;"><b>Finite differences</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Numerical derivatives</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Taylor Polynomial Approximation</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Evaluation of polynomials</a></li>
+     <!-- navigation toc: --> <li><a href="#ch:taylor:der" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Calculating Derivatives of Functions</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Big \( \mathcal{O} \) notation</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Round off Errors</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Higher Order Derivatives</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#ch:nlin" style="font-size: 80%;"><b>Solving linear systems</b></a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Solving linear equations</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gauss-Jordan elimination</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pivoting</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LU decomposition</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Linear regression</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solving least square, using algebraic equations</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Least square as a linear algebra problem</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Sparse matrices and Thomas algorithm</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Solving the heat equation using linear algebra</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 2.1: Conservation Equation or the Continuity Equation</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#___sec20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 2.2: Curing of Concrete and Matrix Formulation</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#ch:numint" style="font-size: 80%;"><b>Numerical integration</b></a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#___sec22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Numerical Integration</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#___sec23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Midpoint Rule</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#___sec24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Trapezoidal Rule</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#___sec25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Numerical Errors on Integrals</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#sec:numint:parct" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Practical Estimation of Errors on Integrals</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#___sec27" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Romberg Integration</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#___sec28" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gaussian Quadrature</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#___sec29" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The case N=3</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#___sec30" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Error term on Gaussian Integration</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#___sec31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Common Weight functions for Classical Gaussian Quadratures</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#___sec32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Which method to use in a specific case?</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#___sec33" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 3.1: Numerical Integration</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#ch:ode" style="font-size: 80%;"><b>Ordinary differential equations</b></a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#ch:mc" style="font-size: 80%;"><b>Monte Carlo Methods</b></a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#___sec36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;References</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0002"></a>
+<!-- !split -->
+
+<center><h1 id="ch:taylor" class="anchor">Finite differences</h1></center> <!-- chapter heading -->
+
+<p>
+The mathematics introduced in this chapter is absolutely essential in order to understand the development of numerical algorithms. We strongly advice you to study it carefully, implement python scripts and investigate the results, reproduce the analytical derivations and compare with the numerical solutions.
+
+<h1 id="___sec2" class="anchor">Numerical derivatives </h1>
+The solution to a physical model is usually a function. The function could describe the temperature evolution of the earth, it could be growth of cancer cells, the water pressure in an oil reservoir, the list is endless. If we can solve the model analytically, the answer is given in terms of a continuous function. Most of the models cannot be solved analytically, then we have to rely on computers to help us. The computer does not have any concept of continuous functions, a function is always evaluated at some point in space and/or time. Assume for simplicity that the solution to our problem is \( f(x)=\sin x \), and we would like to visualize the solution. How many points do we need in our plot to approximate the true function? 
+In figure <a href="#fig:taylor:sinx">1</a>, there is a plot of \( \sin x \) on the interval \( [-\pi,\pi] \).
+
+<p>
+<center> <!-- figure label: --> <div id="fig:taylor:sinx"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 1:  A plot of \( \sin x \) for different spacing of the \( x \)-values.  <!-- caption label: fig:taylor:sinx --> </p></center>
+<p><img src="fig-taylor/func_plot.png" align="bottom" width=600></p>
+</center>
+
+<p>
+From the figure we see that in some areas only a couple of points are needed in order to
+represent the function well, and in some areas more points are needed. To state it more clearly; between \( [-1,1] \) a linear function (few points) approximate \( \sin x \) well, 
+whereas in the area where the derivative of the function changes e.g. in \( [-2,-1] \), we need the points to be more closely spaced to capture the behavior of the true function.
+
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b>Discretization.</b>
+To represent a function of space and/or time in a computer, the function needs to be discretized. When a function is discretized it leads to discretization errors.
+</div>
+
+
+<p>
+Why do we care about the number of points? In many cases the function we would like to evaluate can take a very long time to evaluate. Sometimes simulation time is not an issue, then we can use a large number of function
+evaluations. However, in many applications simulation time <em>is an issue</em>, and it would be good to know where the points needs to be closely spaced, and where we can 
+manage with only a few points.
+
+<p>
+What is a <em>good representation</em> representation of the true function? We cannot rely on visual inspection. In the next section we will show how Taylor polynomial representation of a function is a natural starting point to answer this question.
+
+<h1 id="___sec3" class="anchor">Taylor Polynomial Approximation </h1>
+There are many ways of representing a function, but perhaps one of the most widely used is Taylor polynomials. 
+Taylor series are the basis for solving ordinary and differential equations, simply because it makes it possible to evaluate any function with a set
+of limited operations: <em>addition, subtraction, and multiplication</em>. The Taylor polynomial, \( P_n(x) \) of degree \( n \) of a function \( f(x) \) at the point \( c \) is defined as:
+<div class="alert alert-block alert-success alert-text-normal"><b>Taylor polynomial:</b>
+
+$$
+\begin{align}
+ P_n(x) &= f(c)+f^\prime(c)(x-c)+\frac{f^{\prime\prime}(c)}{2!}(x-c)^2+\cdots+\frac{f^{(n)}(c)}{n!}(x-c)^n\nonumber\\ 
+&=\sum_{k=0}^n\frac{f^{(n)}(c)}{k!}(x-c)^k.\tag{1.1}
+\end{align}
+$$
+
+<p>
+</div>
+
+If the series is around the point \( c=0 \), the Taylor polynomial \( P_n(x) \) is often called a Maclaurin polynomial, more examples can be found 
+<a href="https://en.wikipedia.org/wiki/Taylor_series" target="_self">here</a>. If the series converge (i.e. that the higher order terms approach zero), then we can represent the
+function \( f(x) \) with its corresponding Taylor series around the point \( x=c \):
+$$
+\begin{align}
+ f(x) &= f(c)+f^\prime(c)(x-c)+\frac{f^{\prime\prime}(c)}{2!}(x-c)^2+\cdots
+=\sum_{k=0}^\infty\frac{f^{(n)}}{k!}(x-c)^k.\tag{1.2}
+\end{align}
+$$
+
+The Maclaurin series of \( \sin x \) is:
+$$
+\begin{align}
+\sin x = x-\frac{x^3}{3!}+\frac{x^5}{5!}-\frac{x^7}{7!}+\cdots=\sum_{k=0}^{\infty}\frac{(-1)^n}{(2n+1)!}x^{2n+1}.
+\tag{1.3}
+\end{align}
+$$
+
+<p>
+In figure <a href="#fig:mac_sin">2</a>, we show the first nine terms in the Maclaurin series for \( \sin x \) (all even terms are zero).
+
+<p>
+<center> <!-- figure label: --> <div id="fig:mac_sin"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 2:  Up to ninth order in the Maclaurin series of \( \sin x \).  <!-- caption label: fig:mac_sin --> </p></center>
+<p><img src="fig-taylor/mac_sin.png" align="bottom" width=600></p>
+</center>
+
+<p>
+Note that we get a decent representation of \( \sin x \) on the domain, by <em>only knowing the function and its derivative in a single point</em>. 
+The error term in Taylors formula, when we represent a function with a finite number of polynomial elements is given by:
+<div class="alert alert-block alert-danger alert-text-normal"><b>Error term in Taylors formula:</b>
+$$
+\begin{align}
+R_n(x)&=f(x)-P_n(x)=\frac{f^{(n+1)}(\eta)}{(n+1)!}(x-c)^{n+1}\nonumber\\ 
+      &=\frac{1}{n!}\int_c^x(x-\tau)^{n}f^{(n+1)}(\tau)d\tau,\tag{1.4}
+\end{align}
+$$
+
+for some \( \eta \) in the domain \( [x,c] \).
+</div>
+
+If we want to calculate 
+\( \sin x \) to a precision lower than a specified value we can do it as follows:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+
+<span style="color: #408080; font-style: italic"># Sinus implementation using the Maclaurin Serie</span>
+<span style="color: #408080; font-style: italic"># By setting a value for eps this value will be used</span>
+<span style="color: #408080; font-style: italic"># if not provided</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">my_sin</span>(x,eps<span style="color: #666666">=1e-16</span>):
+    f <span style="color: #666666">=</span> power <span style="color: #666666">=</span> x
+    x2 <span style="color: #666666">=</span> x<span style="color: #666666">*</span>x
+    sign <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+    i<span style="color: #666666">=0</span>
+    <span style="color: #008000; font-weight: bold">while</span>(power<span style="color: #666666">&gt;=</span>eps):
+        sign <span style="color: #666666">=</span> <span style="color: #666666">-</span> sign
+        power <span style="color: #666666">*=</span> x2<span style="color: #666666">/</span>(<span style="color: #666666">2*</span>i<span style="color: #666666">+2</span>)<span style="color: #666666">/</span>(<span style="color: #666666">2*</span>i<span style="color: #666666">+3</span>)
+        f <span style="color: #666666">+=</span> sign<span style="color: #666666">*</span>power
+        i <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+    <span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&#39;No function evaluations: &#39;</span>, i)
+    <span style="color: #008000; font-weight: bold">return</span> f
+
+x<span style="color: #666666">=0.8</span>
+eps <span style="color: #666666">=</span> <span style="color: #666666">1e-9</span>
+<span style="color: #008000; font-weight: bold">print</span>(my_sin(x,eps), <span style="color: #BA2121">&#39;error = &#39;</span>, np<span style="color: #666666">.</span>sin(x)<span style="color: #666666">-</span>my_sin(x,eps))
+</pre></div>
+<p>
+This implementation needs some explanation:
+
+<ul>
+<li> The error term is given in equation <a href="#mjx-eqn-1.4">(1.4)</a>, and it is a even power in \( x \). We do not which \( \eta \) to use in equation <a href="#mjx-eqn-1.4">(1.4)</a>, thus we use a trick and simply say that the error term is smaller than the highest order term. Thus, we stop the evaluation if the highest order term in the series is lower than the uncertainty. Thus, in practice we add the error term to the function evaluation, our estimate will always be better than the specified accuracy.</li>
+<li> We evaluate the polynomials in the Taylor series by using the previous values too avoid too many multiplications within the loop, we do this by using the following identity:</li>
+</ul>
+
+$$
+  \begin{align}
+  \sin x&=\sum_{k=0}^{\infty} (-1)^nt_n, \text{ where: } t_n\equiv\frac{x^{2n+1}}{(2n+1)!}, \text{ hence :}\nonumber\\ 
+  t_{n+1}&=\frac{x^{2(n+1)+1}}{(2(n+1)+1)!}=\frac{x^{2n+1}x^2}{(2n+1)! (2n+2)(2n+3)}\nonumber\\ 
+  &=t_n\frac{x^2}{(2n+2)(2n+3)}
+\tag{1.5}
+\end{align}
+$$
+
+<h2 id="___sec4" class="anchor">Evaluation of polynomials </h2>
+How to evaluate a polynomial of the type: \( p_n(x)=a_0+a_1x+a_2x^2+\cdots+a_nx^n \)? We already saw a hint in the previous section that it can be done in different ways. One way is simply to 
+do:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>pol <span style="color: #666666">=</span> a[<span style="color: #666666">0</span>]
+<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>,n<span style="color: #666666">+1</span>):
+	pol <span style="color: #666666">=</span> pol <span style="color: #666666">+</span> a[i]<span style="color: #666666">*</span>x<span style="color: #666666">**</span>i
+</pre></div>
+<p>
+Note that there are \( n \) additions, whereas there are \( 1 + 2 +3+\cdots+n=n(n+1)/2 \) multiplications for all the iterations. Instead of evaluating the powers all over in 
+each loop, we can use the previous calculation to save the number of multiplications:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>pol <span style="color: #666666">=</span> a[<span style="color: #666666">0</span>] <span style="color: #666666">+</span> a[<span style="color: #666666">1</span>]<span style="color: #666666">*</span>x
+power <span style="color: #666666">=</span> x
+<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">2</span>,n<span style="color: #666666">+1</span>):
+	power  <span style="color: #666666">=</span> power<span style="color: #666666">*</span>x
+	pol    <span style="color: #666666">=</span> pol <span style="color: #666666">+</span> a[i]<span style="color: #666666">*</span>power
+</pre></div>
+<p>
+In this case there are still \( n \) additions, but now there are \( 2n-1 \) multiplications. For \( n=15 \), this amounts to 120 for the first, and 29 for the second method. 
+Polynomials can also be evaluated using <em>nested multiplication</em>:
+$$
+\begin{align}
+p_1 & = a_0+a_1x\nonumber\\ 
+p_2 & = a_0+a_1x+a_2x^2=a_0+x(a_1+a_2x)\nonumber\\ 
+p_3 & = a_0+a_1x+a_2x^2+a_3x^3=a_0+x(a_1+x(a_2+a_3x))\nonumber\\ 
+\vdots
+\tag{1.6}
+\end{align}   
+$$
+
+and so on. This can be implemented as:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>pol <span style="color: #666666">=</span> a[n]
+<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(n<span style="color: #666666">-1</span>,<span style="color: #666666">1</span>,<span style="color: #666666">-1</span>):
+	pol  <span style="color: #666666">=</span> a[i] <span style="color: #666666">+</span> pol<span style="color: #666666">*</span>x
+</pre></div>
+<p>
+In this case we only have \( n \) multiplications. So if you know beforehand exactly how many terms is needed to calculate the series, this method would be the preferred method, and is implemented in NumPy as <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.polyval.html#r138ee7027ddf-1" target="_self"><tt>polyval</tt></a>.
+
+<h1 id="ch:taylor:der" class="anchor">Calculating Derivatives of Functions</h1>
+
+<p>
+index{forward difference}
+
+<p>
+The derivative of a function can be calculated using the definition from calculus:
+$$
+\begin{align}
+f^\prime(x)=\lim_{h\to 0}\frac{f(x+h)-f(x)}{h}\simeq \frac{f(x+h)-f(x)}{h}.\tag{1.7}
+\end{align}  
+$$
+
+Not that \( h \) can be both positive and negative, if \( h \) is positive equation <a href="#mjx-eqn-1.7">(1.7)</a> is termed <em>forward difference</em>, because we use the function value on the right (\( f(x+|h|) \)). If on the other hand \( h \) is negative equation <a href="#mjx-eqn-1.7">(1.7)</a> is termed <em>backward difference</em>, because we use the value to the left (\( f(x-|h|) \)). (\( |h| \) is the absolute value of \( h \)).
+In the computer we cannot take the limit, \( h\to 0 \), a natural question is then: What value to use for \( h \)? 
+In figure <a href="#fig:taylor:df">3</a>, we have evaluated the numerical derivative of \( \sin x \), using the formula in equation <a href="#mjx-eqn-1.7">(1.7)</a> for different step sizes \( h \).
+
+<p>
+<center> <!-- figure label: --> <div id="fig:taylor:df"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 3:  Error in the numerical derivative of \( \sin x \) at \( x=0.2 \) for different step size.  <!-- caption label: fig:taylor:df --> </p></center>
+<p><img src="fig-taylor/df.png" align="bottom" width=600></p>
+</center>
+
+<p>
+We clearly see that the error depends on the step size, but there is a minimum; choosing a step size too large give a poor estimate and choosing a too low step size give an 
+even worse estimate. The explanation for this behavior is two competing effects: <em>mathematical approximation</em> and <em>round off errors</em>. Let us consider approximation or truncation error
+first. By using the Taylor expansion in equation <a href="#mjx-eqn-1.2">(1.2)</a> and expand about \( x \) and the error formula <a href="#mjx-eqn-1.4">(1.4)</a>, we get:
+$$
+\begin{align}
+f(x+h)&=f(x)+f^\prime(x)h + \frac{h^2}{2}f^{\prime\prime}(\eta)\text{ , hence:}\nonumber\\ 
+f^\prime(x)&=\frac{f(x+h)-f(x)}{h}-\frac{h}{2}f^{\prime\prime}(\eta),\tag{1.8}
+\end{align}
+$$
+
+for some \( \eta \) in \( [x,x+h] \). Thus the error to our approximation is \( hf^{\prime\prime}(\eta)/2 \), if we reduce the step size by a factor of 10 the error is reduced by a factor of 10. 
+Inspecting the graph, we clearly see that this is correct as the step size decreases from \( 10^{-1} \) to \( 10^{-8} \). When the step size decreases more, there is an increase in the error. This
+is due to round off errors, and can be understood by looking into how numbers are stored in a computer.
+
+<h2 id="___sec6" class="anchor">Big \( \mathcal{O} \) notation </h2>
+<a href="https://rob-bell.net/2009/06/a-beginners-guide-to-big-o-notation/" target="_self">example</a>
+
+<h2 id="___sec7" class="anchor">Round off Errors </h2>
+In a computer a floating point number,$x$, is represented as:
+$$
+\begin{align}
+x=\pm q2^m.
+\tag{1.9}
+\end{align}
+$$
+
+Most computers are 64-bits, then one bit is reserved for the sign, 52 for the fraction (\( q \)) and 11 for
+the exponent (\( m \))  (for a graphic illustration see <a href="https://en.wikipedia.org/wiki/Double-precision_floating-point_format" target="_self">Wikipedia</a>).
+what is the largest <em>floating point</em> number the computer can represent? 
+Since \( m \) contains 11 bits, \( m \) can have the maximal value \( m=2^{11}=1024 \), and then the largest value is close to \( 2^{1024}\simeq 10^{308} \).
+If you enter <code>print(10.1*10**(308))</code> in Python the answer will be <code>Inf</code>. If you enter <code>print(10*10**(308))</code>, Python will give an answer. This is because 
+the number \( 10.1\cdot10^{308} \) is floating point number, whereas \( 10^{309} \) is an <em>integer</em>, and Python does something clever when it comes to representing integers. 
+Python has a third numeric type called long int, which can use the available memory to represent an integer.
+
+<p>
+\( 10^{308} \) is the largest number, but what is the highest precision we can use, or how many decimal places can we use for a floating point number? 
+Since there are 52 bits for the fraction, there are \( 1/2^{52}\simeq10^{-16} \) decimal places. As an example
+the value of \( \pi \) is \( 3.14159265358979323846264338\ldots \), but in Python it can only be represented by 16 digits: \( 3.141592653589793 \). In principle 
+it does not sound so bad to have an answer accurate to 16 digits, and it is much better than most experimental results. 
+So what is the problem? One problem that you should be aware of is that round off errors can be a serious problem when we subtract two numbers that 
+are very close to one another. If we implement the following program in Python:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>h<span style="color: #666666">=1e-16</span>
+x <span style="color: #666666">=</span> <span style="color: #666666">2.1</span> <span style="color: #666666">+</span> h
+y <span style="color: #666666">=</span> <span style="color: #666666">2.1</span> <span style="color: #666666">-</span> h
+<span style="color: #008000; font-weight: bold">print</span>((x<span style="color: #666666">-</span>y)<span style="color: #666666">/</span>h)
+</pre></div>
+<p>
+we expect to get the answer 2, but instead we get zero. By changing \( h \) to a higher value, the answer will get closer to 2.
+
+<p>
+Armed with this knowledge of round off errors, we can continue to analyze
+the result in figure <a href="#fig:taylor:df">3</a>.
+The round off error when we represent a floating point number \( x \) in the 
+machine will be of the order \( x/10^{16} \) (<em>not</em> \( 10^{-16} \)). In general, when we evaluate a function the error will be of the order 
+\( \epsilon|f(x)| \), where \( \epsilon\sim10^{-16} \). Thus equation <a href="#mjx-eqn-1.8">(1.8)</a> is modified in the following way when we take into account the round off errors:
+$$
+\begin{align}
+f^\prime(x)=\frac{f(x+h)-f(x)}{h}\pm\frac{2\epsilon|f(x)|}{h}-\frac{h}{2}f^{\prime\prime}(\eta),\tag{1.10}
+\end{align}
+$$
+
+we do not know the sign of the round off error, so the total error \( R_2 \) is:
+$$
+\begin{align}
+R_2=\frac{2\epsilon|f(x)|}{h}+\frac{h}{2}|f^{\prime\prime}(\eta)|.\tag{1.11}
+\end{align}
+$$
+
+We have put absolute values around the function and its derivative to get the maximal error, it might be the case that the round off error cancel part of the 
+truncation error. However, the round off error is random in nature and will change from machine to machine, and each time we run the program. 
+Note that the round off error increases when \( h \) decreases, and the approximation error decreases when \( h \) decreases. This is exactly what we see in the figure above. We can find the 
+best step size, by differentiating \( R_2 \) and put it equal to zero:
+$$
+\begin{align}
+\frac{dR_2}{dh}&=-\frac{2\epsilon|f(x)|}{h^2}+\frac{1}{2}f^{\prime\prime}(\eta)=0\nonumber\\ 
+h&=2\sqrt{\epsilon\left|\frac{f(x)}{f^{\prime\prime}(\eta)}\right|}\simeq 2\cdot10^{-8},\tag{1.12}
+\end{align}
+$$
+
+In the last equation we have assumed that \( f(x) \) and its derivative is \( ~1 \). This step size corresponds to an error of order \( R_2\sim10^{-8} \). 
+Inspecting 
+the result in figure <a href="#fig:taylor:df">3</a>.
+we see that the minimum is located at \( h\sim10^{-8} \).
+
+<h1 id="___sec8" class="anchor">Higher Order Derivatives </h1>
+There are more ways to calculate the derivative of a function, than the formula given in equation <a href="#mjx-eqn-1.8">(1.8)</a>. Different formulas can be
+derived by using Taylors formula in <a href="#mjx-eqn-1.2">(1.2)</a>, usually one expands about \( x\pm h \):
+$$
+\begin{align}
+f(x+h)&=f(x)+f^\prime(x)h + \frac{h^2}{2}f^{\prime\prime}(x)+ \frac{h^3}{3!}f^{(3)}(x)+ \frac{h^4}{4!}f^{(4)}(x)+\cdots\nonumber\\ 
+f(x-h)&=f(x)-f^\prime(x)h + \frac{h^2}{2}f^{\prime\prime}(x)- \frac{h^3}{3!}f^{(3)}(x)+ \frac{h^4}{4!}f^{(3)}(x)-\cdots.
+\tag{1.13}
+\end{align}
+$$
+
+If we add these two equations, we get an expression for the second derivative, because the first derivative cancels out. But we also observe that if we subtract these two equations we get 
+an expression for the first derivative that is accurate to a higher order than the formula in equation <a href="#mjx-eqn-1.7">(1.7)</a>, hence:
+$$
+\begin{align}
+f^\prime(x)&=\frac{f(x+h)-f(x-h)}{2h} -\frac{h^2}{6}f^{(3)}(\eta),\tag{1.14}\\ 
+f^{\prime\prime}(x) &= \frac{f(x+h)+f(x-h)-2f(x)}{h^2}+ \frac{h^2}{12}f^{(4)}(\eta)\tag{1.15},
+\end{align}
+$$
+
+for some \( \eta \) in \( [x,x+h] \). In figure <a href="#fig:taylor:df2">4</a>, we have plotted equation <a href="#mjx-eqn-1.8">(1.8)</a>, <a href="#mjx-eqn-1.14">(1.14)</a>, and <a href="#mjx-eqn-1.15">(1.15)</a> for 
+different step sizes. The derivative in equation <a href="#mjx-eqn-1.14">(1.14)</a>, gives a higher accuracy than equation <a href="#mjx-eqn-1.8">(1.8)</a> for a larger step size,
+as can bee seen in figure <a href="#fig:taylor:df2">4</a>.
+
+<p>
+<center> <!-- figure label: --> <div id="fig:taylor:df2"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 4:  Error in the numerical derivative and second derivative of \( \sin x \) at \( x=0.2 \) for different step size.  <!-- caption label: fig:taylor:df2 --> </p></center>
+<p><img src="fig-taylor/df2.png" align="bottom" width=600></p>
+</center>
+
+<p>
+We can perform a similar error analysis as we did before, and then we find for equation <a href="#mjx-eqn-1.14">(1.14)</a> and <a href="#mjx-eqn-1.15">(1.15)</a> that the total
+numerical error is:
+$$
+\begin{align}
+R_3&=\frac{\epsilon|f(x)|}{h}+\frac{h^2}{6}f^{(3)}(\eta),\tag{1.16}\\ 
+R_4&=\frac{4\epsilon|f(x)|}{h^2}+\frac{h^2}{12}f^{(4)}(\eta),\tag{1.17}
+\end{align}
+$$
+
+respectively. Differentiating these two equations with respect to \( h \), and set the equations equal to zero, we find an optimal step size of
+\( h\sim10^{-5} \) for equation <a href="#mjx-eqn-1.16">(1.16)</a>, which gives an error of \( R_2\sim 10^{-16}/10^{-5}+(10^{-5})^2/6\simeq10^{-10} \), and \( h\sim10^{-4} \) for equation
+<a href="#mjx-eqn-1.17">(1.17)</a>, which gives an error of \( R_4\sim 4\cdot10^{-16}/(10^{-4})^2+(10^{-4})^2/12\simeq10^{-8} \). Note that we get the surprising result for the first order 
+derivative in equation <a href="#mjx-eqn-1.14">(1.14)</a>, that a higher step size gives a more accurate result.
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+
+  <li class="previous">
+    <a href="._book001.html">&larr; Prev</a>
+  </li>
+
+  <li class="next">
+    <a href="._book003.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

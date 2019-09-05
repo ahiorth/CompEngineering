@@ -1,0 +1,448 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Decline Analysis of Oil field production data from the NCS">
+
+<title>Decline Analysis of Oil field production data from the NCS</title>
+
+<!-- Bootstrap style: bootswatch_readable -->
+<link href="https://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:64px;      /* fixed header height for style bootswatch_readable */
+  margin:-64px 0 0; /* negative fixed header height */
+}
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Table of contents',
+               1,
+               'table_of_contents',
+               'table_of_contents'),
+              ('Introduction to Decline Analysis', 1, 'deca', 'deca'),
+              ('Exercise 1: Import data into a database and access them',
+               1,
+               None,
+               '___sec1'),
+              ('Exercise 2: Importing and plotting data with Python',
+               1,
+               None,
+               '___sec2'),
+              ('Exercise 3: Decline analysis, exponential case: $\\beta=0$',
+               1,
+               None,
+               '___sec3'),
+              ('Exercise 4: Decline analysis, hyperbolic case: $\\beta\\in '
+               '<0,1>$',
+               1,
+               None,
+               '___sec4'),
+              ('Exercise 5: The Jotun field, hyperbolic case: $\\beta\\in '
+               '<0,1>$',
+               1,
+               None,
+               '___sec5'),
+              ('Bibliography', 1, None, '___sec6')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript" async
+ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="decline-readable.html">Decline Analysis of Oil field production data from the NCS</a>
+  </div>
+
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._decline-readable000.html#table_of_contents" style="font-size: 80%;">Table of contents</a></li>
+     <!-- navigation toc: --> <li><a href="#deca" style="font-size: 80%;">Introduction to Decline Analysis</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec1" style="font-size: 80%;">Exercise 1: Import data into a database and access them</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec2" style="font-size: 80%;">Exercise 2: Importing and plotting data with Python</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec3" style="font-size: 80%;">Exercise 3: Decline analysis, exponential case: \( \beta=0 \)</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec4" style="font-size: 80%;">Exercise 4: Decline analysis, hyperbolic case: \( \beta\in <0,1> \)</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec5" style="font-size: 80%;">Exercise 5: The Jotun field, hyperbolic case: \( \beta\in <0,1> \)</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec6" style="font-size: 80%;">Bibliography</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0001"></a>
+<!-- !split -->
+
+<h1 id="deca" class="anchor">Introduction to Decline Analysis</h1>
+
+<p>
+An idealized behavior of an oil field is shown in the figure below, <a href="#hook">[1]</a>.
+On the web site
+(<a href="http://factpages.npd.no/factpages/Default.aspx?culture=no" target="_self">NPD</a>),
+it is possible to select different type of Norwegian oil fields and
+compare the historical production with that of
+the figure below.
+By selecting e.g. Norne or Draugen one can easily see similarities
+with
+the figure below.
+The main differences might be the size of each of the phases, many of the fields does not have a clear plateau,
+and the decline phase might be shorter or longer. In this problem we focus on the last phase of the
+oil production; the decline. We define the decline rate \( D \) as:
+$$
+\begin{align}
+\lambda=-\frac{\frac{d q}{d t}}{q}=Cq^\beta\,.
+\tag{1}
+\end{align}
+$$
+
+\( q \) is the field oil rate, \( C \) and \( \beta \) are constants that needs to be
+found by comparing the model to data.
+<br /><br /><center><p><img src="fig-decline/hook.png" align="bottom" width=800></p></center><br /><br />
+
+<h1 id="___sec1" class="anchor">Exercise 1: Import data into a database and access them </h1>
+
+<ul>
+<li> Import data from  <code>field_production_gross_monthly.xls</code>,
+  in the catalog or from the <a href="http://factpages.npd.no/factpages/" target="_self">NPD web site</a>, into a database</li>
+<li> Extract production data from the Draugen field, and store them in a text file called
+  <code>draugen.txt</code>. The format should be: <code>Year</code> (first column), <code>Month</code>
+  (second column), and <code>OilProd</code> (third column).</li>
+<li> If you do not want to use databases: Simply open the file
+  <code>field_production_gross_monthly.xls</code>, in the catalog or from the
+  <a href="http://factpages.npd.no/factpages/" target="_self">NPD web site</a>. Search in the
+  Excel file after "Draugen", copy the data from all the rows relevant
+  for Draugen (row 1623 to 1921) and paste it into a file (using
+  e.g. notepad or some other text editor). Save the file as 'draugen.txt'.</li> 
+</ul>
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">pandas</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">pd</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">pathlib</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
+<span style="color: #008000; font-weight: bold">print</span>(pathlib<span style="color: #666666">.</span>Path<span style="color: #666666">.</span>cwd())
+folder <span style="color: #666666">=</span> pathlib<span style="color: #666666">.</span>Path<span style="color: #666666">.</span>cwd()<span style="color: #666666">.</span>parent<span style="color: #666666">.</span>joinpath(<span style="color: #BA2121">&#39;data&#39;</span>)
+filename <span style="color: #666666">=</span> folder<span style="color: #666666">.</span>joinpath(<span style="color: #BA2121">&#39;field_production_gross_monthly.xls&#39;</span>)
+df <span style="color: #666666">=</span> pd<span style="color: #666666">.</span>read_excel(filename)
+columns <span style="color: #666666">=</span> df<span style="color: #666666">.</span>columns
+
+
+fields <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;DRAUGEN&#39;</span>]
+
+<span style="color: #008000; font-weight: bold">for</span> field <span style="color: #AA22FF; font-weight: bold">in</span> fields:
+    df2 <span style="color: #666666">=</span> df[df[df<span style="color: #666666">.</span>columns[<span style="color: #666666">0</span>]] <span style="color: #666666">==</span> field]
+    Year <span style="color: #666666">=</span> df2[<span style="color: #BA2121">&#39;Year&#39;</span>]
+    Month <span style="color: #666666">=</span> df2[<span style="color: #BA2121">&#39;Month&#39;</span>]
+    OilProd<span style="color: #666666">=</span>df2[columns[<span style="color: #666666">3</span>]]
+    
+    <span style="color: #408080; font-style: italic">#Assume 30 days in each month and 365 in year</span>
+    Year <span style="color: #666666">=</span> Year <span style="color: #666666">+</span> Month<span style="color: #666666">*30/365</span>
+    ProdStart <span style="color: #666666">=</span> Year<span style="color: #666666">.</span>iloc[<span style="color: #666666">0</span>]
+
+    <span style="color: #408080; font-style: italic">#Year now starts at 0</span>
+    Year <span style="color: #666666">=</span> Year<span style="color: #666666">-</span>ProdStart
+    <span style="color: #408080; font-style: italic">#print(Year)</span>
+    
+    fig <span style="color: #666666">=</span> plt<span style="color: #666666">.</span>figure()
+    plt<span style="color: #666666">.</span>scatter(Year, OilProd)
+</pre></div>
+
+<h1 id="___sec2" class="anchor">Exercise 2: Importing and plotting data with Python    </h1>
+
+<p>
+<b>Step 1.</b>
+In the cell below, use the <code>loadtxt</code> function to load the data file
+<code>draugen.txt</code> into an array. The data file should be saved to the same
+folder as this notebook. Refer to the official documentation to
+reference how to use this function if you are unfamiliar:
+<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.loadtxt.html" target="_self">loadtxt</a>.
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #408080; font-style: italic"># import data from draugen.txt</span>
+</pre></div>
+<ul>
+<li> Note: you can use <em>array slicing</em> to access the individual columns of a 2D array</li>
+</ul>
+
+<b>Step 2.</b>
+It is more practical to have the production data to start at \( t=0 \). In
+the following we will assume that you have organized the oil production
+data from Draugen into Numpy arrays, e.g. <code>Year</code>, <code>Month</code>, and
+<code>OilProd</code>.
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
+
+<span style="color: #408080; font-style: italic">#Assume 30 days in each month and 365 in year</span>
+Year <span style="color: #666666">=</span> Year <span style="color: #666666">+</span> Month<span style="color: #666666">*30/365</span>
+ProdStart <span style="color: #666666">=</span> Year[<span style="color: #666666">0</span>]
+
+<span style="color: #408080; font-style: italic">#Year now starts at 0</span>
+Year <span style="color: #666666">=</span> Year<span style="color: #666666">-</span>ProdStart
+
+<span style="color: #408080; font-style: italic">#Calculate the cumulative oil production</span>
+CumOilProd <span style="color: #666666">=</span> <span style="color: #666666">...</span>
+
+fig, ax1 <span style="color: #666666">=</span> plt<span style="color: #666666">.</span>subplots()
+
+plt<span style="color: #666666">.</span>title(<span style="color: #BA2121">&#39;Draugen production profile&#39;</span>)
+ax1<span style="color: #666666">.</span>set_ylabel(<span style="color: #BA2121">r&#39;MSm$^3$/month&#39;</span>)
+ax1<span style="color: #666666">.</span>set_xlabel(<span style="color: #BA2121">&#39;Years of production&#39;</span>)
+
+ax1<span style="color: #666666">.</span>plot(Year,OilProd, <span style="color: #BA2121">&#39;b--o&#39;</span>)
+ax2 <span style="color: #666666">=</span> ax1<span style="color: #666666">.</span>twinx() <span style="color: #408080; font-style: italic"># second axes that shares the same x-axis</span>
+ax2<span style="color: #666666">.</span>set_ylabel(<span style="color: #BA2121">r&#39;Cumulative production [MSm$^3$]&#39;</span>)
+ax2<span style="color: #666666">.</span>plot(Year,CumOilProd, <span style="color: #BA2121">&#39;r--o&#39;</span>)
+plt<span style="color: #666666">.</span>show()
+</pre></div>
+<p>
+the figure below.
+
+<p>
+<b>Step 3.</b>
+Compare your plot with the one that is reported under Draugen at the <a href="http://factpages.npd.no/factpages/" target="_self">NPD web site</a>, why is it different?
+
+<p>
+<center> <!-- figure label: --> <div id="fig:draugen"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 1:   <!-- caption label: fig:draugen --> </p></center>
+<p><img src="fig-decline/draugen.png" align="bottom" width=800></p>
+</center>
+
+<p>
+<b>Step 4.</b>
+ Get data from Norne, Oseberg &#216;st, and Jotun in the file and make similar plot for them, i.e. production rate and cumulative oil production vs years of production
+
+<p>
+<b>Step 5.</b>
+For the same fields plot the production vs the cumulative production
+
+<h1 id="___sec3" class="anchor">Exercise 3: Decline analysis, exponential case: \( \beta=0 \)    </h1>
+
+<p>
+<b>Step 1.</b>
+Use equation <a href="#mjx-eqn-1">(1)</a>, to show that the oil rate is:
+$$
+\begin{align}
+q(t)=q_0\exp\{-\lambda_0 t\}.
+\tag{2}
+\end{align}
+$$
+
+for \( \beta=0 \).
+
+<p>
+Now we will use this model to analyze the production data from the fields in the previous exercise.
+
+<p>
+<b>Step 2.</b>
+Define a function that calculates the production rate given in equation <a href="#mjx-eqn-2">(2)</a>:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">exp_decline</span>(x,q0,lam):
+<span style="color: #408080; font-style: italic"># enter function here</span>
+  <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">...</span>
+</pre></div>
+<p>
+<b>Step 3.</b>
+Next, we want to fit our model to the data. Python have several
+functions to fit a model to data, we will use <code>curve_fit</code> from
+<a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.curve_fit.html" target="_self">SciPy</a>.
+It is important to only use data from the decline phase (after approximately 8
+years):
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scipy.optimize</span> <span style="color: #008000; font-weight: bold">import</span> curve_fit
+<span style="color: #408080; font-style: italic"># only choose data from the decline phase (i.e. after approx. 8 years) </span>
+T0 <span style="color: #666666">=</span> <span style="color: #666666">8</span>
+<span style="color: #408080; font-style: italic"># extract indexes  </span>
+ind <span style="color: #666666">=</span> Year <span style="color: #666666">&gt;</span> T0;
+<span style="color: #408080; font-style: italic"># cooresponding X and Y-value </span>
+NewY <span style="color: #666666">=</span> Year[ind]<span style="color: #666666">-</span>T0; <span style="color: #408080; font-style: italic">#important to start at 0</span>
+NewP <span style="color: #666666">=</span> OilProd[ind];
+<span style="color: #408080; font-style: italic"># call the curve_fit function:</span>
+popt, pcov <span style="color: #666666">=</span> curve_fit( <span style="color: #666666">...</span> ) <span style="color: #408080; font-style: italic"># enter correct code</span>
+<span style="color: #408080; font-style: italic"># evaluate function with the best fit and visual inspect the quality </span>
+</pre></div>
+<p>
+A successful fit should produce a similar result as shown in the figure below.
+
+<p>
+<center> <!-- figure label: --> <div id="fig:draugen_fit"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 2:   <!-- caption label: fig:draugen_fit --> </p></center>
+<p><img src="fig-decline/draugen_fit.png" align="bottom" width=800></p>
+</center>
+
+<p>
+<b>Step 4.</b>
+Use data from Norne, Oseberg &#216;st, and Jotun, fit the model to the decline phase of the production. Report the values for the decline parameter, compare them.
+
+<h1 id="___sec4" class="anchor">Exercise 4: Decline analysis, hyperbolic case: \( \beta\in < 0,1> \)  </h1>
+
+<p>
+<b>Step 1.</b>
+Use equation <a href="#mjx-eqn-1">(1)</a>, to show that the oil rate is:
+$$
+\begin{align}
+q(t)=q_0\left[\beta\lambda_0t+1\right]^{-1/\beta}
+\tag{3}
+\end{align}
+$$
+
+for \( \beta>0 \). Note that \( \lambda_0 \) is the decline rate at \( t=0 \): \( \lambda_0=Cq_0^\beta \).
+
+<p>
+<b>Step 2.</b>
+Follow the procedure outlined in the previous exercise, but this time with equation <a href="#mjx-eqn-3">(3)</a>. 
+You need to make a new Python function, e.g.:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">hyp_decline</span>(x,A,D,b):
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #408080; font-style: italic"># enter function here </span>
+</pre></div>
+<p>
+<b>Step 3.</b>
+Use data from Norne, Oseberg &#216;st, and Jotun and fit the hyperbolic  model to the data. Report the values for the decline parameter. 
+How does these values compare with the values you found for the exponential model? Which model is the best and why?
+
+<p>
+<div class="alert alert-block alert-danger alert-text-normal"><b>Observe:</b>
+To fit a function to data is not straight forward. The result can be very sensitive to the initial guess of the variables, it also a good idea 
+to constrain the values of the parameters. In our
+case it is also important to choose the right starting point for the decline, for Draugen we used <code>T0=8</code>, for the Jotun field <code>T0=1.8</code> is a good value. 
+We can force Python to constrain the parameters in <code>curve_fit</code>, by the
+use of the <code>bounds</code> keyword.
+</div>
+
+
+<h1 id="___sec5" class="anchor">Exercise 5: The Jotun field, hyperbolic case: \( \beta\in < 0,1> \)  </h1>
+
+<p>
+In this exercise we will take a closer look at the Jotun field. Use the hyperbolic decline function with the parameters you found in the previous exercise.
+The original drilling program of the Jotun field was finished in 2000. After producing the field for approximately 3 years, it was decided to drill 4 infill wells. 
+By inspecting the Jotun production history, it is easy to spot an increase in the production rate around 2002-2003.
+
+<p>
+<b>Step 1.</b>
+Why can we use our decline model to estimate the production without the infill wells?
+
+<p>
+<b>Step 2.</b>
+Use the decline model to estimate the recovery at the end of 2017 (use e.g. the cumulative production). 
+  Compare this recovery with the ultimate recovery from the field data.
+
+<p>
+<b>Step 3.</b>
+Assume an oil price of 50$\$$ per barrel, was it a good decision to drill these infill wells? (Hint: On the <a href="http://factpages.npd.no/factpages/" target="_self">NPD web site</a> you can
+  find information about the  yearly field investments)
+
+<h1 id="___sec6" class="anchor">Bibliography </h1>
+
+<p>
+<!-- begin bibliography -->
+
+<ol>
+ <li> <div id="hook"></div> <b>M. Hook, S. Davidsson, S. Johansson and X. Tang</b>. 
+    Decline and depletion rates of oil production: a comprehensive investigation,
+    <em>Phil. Trans. R. Soc. A</em>,
+    372(20120448),
+    2014.</li>
+</ol>
+
+<!-- end bibliography -->
+
+<p>
+
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+
+  <li class="previous">
+    <a href="._decline-readable000.html">&larr; Prev</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

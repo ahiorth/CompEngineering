@@ -1,7 +1,0 @@
-.. !split
-
-.. _ch:nlin:
-
-Linear and nonlinear equations
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
