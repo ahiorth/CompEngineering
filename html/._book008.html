@@ -149,8 +149,8 @@ $$
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
-     <!-- navigation toc: --> <li><a href="#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
-     <!-- navigation toc: --> <li><a href="#ch:preface" style="font-size: 80%;"><b>Preface</b></a></li>
+     <!-- navigation toc: --> <li><a href="._book001.html#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
+     <!-- navigation toc: --> <li><a href="._book001.html#ch:preface" style="font-size: 80%;"><b>Preface</b></a></li>
      <!-- navigation toc: --> <li><a href="._book002.html#ch:taylor" style="font-size: 80%;"><b>Finite differences</b></a></li>
      <!-- navigation toc: --> <li><a href="._book002.html#___sec2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Numerical derivatives</a></li>
      <!-- navigation toc: --> <li><a href="._book002.html#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Taylor Polynomial Approximation</a></li>
@@ -187,7 +187,7 @@ $$
      <!-- navigation toc: --> <li><a href="._book005.html#ch:nlin" style="font-size: 80%;"><b>Solving nonlinear equations</b></a></li>
      <!-- navigation toc: --> <li><a href="._book006.html#ch:ode" style="font-size: 80%;"><b>Ordinary differential equations</b></a></li>
      <!-- navigation toc: --> <li><a href="._book007.html#ch:mc" style="font-size: 80%;"><b>Monte Carlo Methods</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book008.html#___sec37" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;References</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec37" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;References</a></li>
 
         </ul>
       </li>
@@ -200,117 +200,42 @@ $$
 
 <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
 
-<a name="part0001"></a>
+<a name="part0008"></a>
 <!-- !split -->
 
-
-<center><h1 id="ch:preface" class="anchor">Preface</h1></center> <!-- chapter heading -->
-
-<p>
-What does computers do better than humans? What is it possible to
-compute? These questions have not been fully answered yet, and in the
-coming years we will most likely see that the boundaries for what
-computers can do will expand significantly. Many of the  fundamental laws in
-nature have been known for quite some time, but still it is almost
-impossible to predict the behavior of water (H$_2$O) from quantum
-mechanics. The most sophisticated super computers runs for days and are
-only able to simulate  the behavior of molecules in a couple of
-seconds, almost too short to extract meaningful thermodynamic
-properties. This leads to another interesting question: What does humans do better
-than machines? A large part of
-the answer to this question is <em>modeling</em>. Modeling is the ability to 
-break a complicated, unstructured problem into smaller pieces that can
-be solved by computers or by other means. Modeling requires <em>domain knowledge</em>, one need to
-understand the system well enough to make the correct or the most efficient simplifications. The process usually starts
-with some experimental data that one would like to understand, it could be the increasing temperature in the atmosphere or sea, it could 
-be changes in the chemical composition of a fluid passing through a rock. The modeler then makes a mental image, which includes a set of 
-mechanisms that could be the cause of the observed data. These mechanisms then needs to be formulated mathematically.   
-How can we know if a model of a system is good? First of all, a good model is a model that do not break 
-any of the fundamental laws of nature, such as mass (assuming non relativistic effects) and energy conservation. Even if you are searching 
-for new laws of nature, you have to make sure that your model respect the existing laws, because then a deviation from your model and
-the observations could be a hint of the new physics you are searching for.  
-Secondly, the model must be able to match the observable data, with a limited set of variables. The variables should 
-be determined from data, and then the model should be able to make some predictions that can be tested. Thus, the true
-purpose of the model is not only to match experimental data, but serve as a framework where the underlying
-mechanisms of the process can be understood. This is done by making model predictions, test them, and improve the model.
+<h1 id="___sec37" class="anchor">References </h1>
 
 <p>
-In this course our main focus will be on how to use computers to solve models. We will show you through exercises how a mathematical model of
-a physical system can be made, and you will have the possibility to explore the model. Computers are extremely useful, they can solve problems that
-would be impossible to solve by hand. However, it is extremely important to know about the limitations and strength of various algorithms. One need
-to have a toolbox of various algorithms that can be employed depending on the problem one are studying. Sometimes speed is not an issue, and one can use
-simpler algorithms, but in many cases <em>speed is an issue</em>. Thus it is important to not waste computational time when it is not needed, we will encounter 
-examples of this many times in this course. Why should you spend time learning about algorithms that have been implemented already in a software that 
-most likely can be downloaded for free? There are many answers to this question, some more practical and some that goes deeper. Lets start with the
-practical considerations: Often you encounter a problem that needs to be solved by a computer, it could be as simple as to integrate some production data 
-in a spreadsheet to calculate the total production, or it could be to fit a function with more than one variable to some data. Once you have this problem, and 
-starting to ask Mr. Google for a solution, you will quickly realize that there are numerous ways of achieving what you want. By educating yourself 
-within the most basic numerical methods, presented in this course, you will be able to judge for yourself which method to use in a specific case. 
-Another motivation is that development of most of the different numerical methods are <em>not that difficult</em>, they usually follow a very similar pattern, but
-there are some ''tricks''. It is extremely useful to learn these tricks, they can be adopted to a range of different problems, many are easily implemented
-in a spreadsheet. There are some more deeper arguments, and that is that the numerical methods are developed to solve a <em>general</em> problem. Most of the 
-time we work with <em>specific</em> problems, and we would like to have an algorithm that is optimal for our problem that goes beyond only choosing the right one. 
-Having understood and learned all the cool tricks that was used in the development of the algorithm in the general case, 
-is a starting point for adopting the algorithm to your specific situation. Secondly development of an algorithm is a concrete case of <em>Computational Thinking</em>.
-Computational thinking is not necessarily related to computers and programming, but it is a way of structuring your work 
-into precise statements that are being executed one at a time in a specific order. By learning about algorithmic development, you 
-will train yourself in the art of computational thinking, which is a useful skill in all kind of problem solving.
+<!-- begin bibliography -->
 
-<p>
-*Aksel Hiorth, December 2018
+<ol>
+ <li> <div id="press2007"></div> <b>W. H. Press, S. A. Teukolsky, W. T. Vetterling and B. P. Flannery</b>. 
+    <em>Numerical Recipes 3rd Edition: the Art of Scientific Computing</em>,
+    3 edition,
+    Cambridge University Press,
+    2007.</li>
+ <li> <div id="trefethen1997"></div> <b>L. N. Trefethen and D. B. III</b>. 
+    <em>Numerical Linear Algebra</em>,
+    SIAM,
+    1997.</li>
+ <li> <div id="stoer2013"></div> <b>J. Stoer and R. Bulirsch</b>. 
+    <em>Introduction to Numerical Analysis</em>,
+    Springer Science &amp; Business Media,
+    2013.</li>
+ <li> <div id="strang2019"></div> <b>G. Strang</b>. 
+    <em>Linear Algebra and Learning From Data</em>,
+    Wellesley-Cambridge Press,
+    2019.</li>
+</ol>
 
-<h1 id="table_of_contents">Table of contents</h2>
+<!-- end bibliography -->
 
-<p>
-<a href="#ch:preface"> Preface  </a><br>
-<a href="._book002.html#ch:taylor"> Finite differences </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._book002.html#___sec2"> Numerical derivatives </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._book002.html#___sec3"> Taylor Polynomial Approximation </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._book002.html#___sec4"> Evaluation of polynomials </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._book002.html#ch:taylor:der"> Calculating Derivatives of Functions </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._book002.html#___sec6">  Big \( \mathcal{O} \) notation </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._book002.html#___sec7"> Round off Errors </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._book002.html#___sec8"> Higher Order Derivatives </a><br>
-<a href="._book003.html#ch:lin"> Solving linear systems </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._book003.html#___sec10"> Solving linear equations </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._book003.html#___sec11"> Gauss-Jordan elimination </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._book003.html#___sec12"> Pivoting </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._book003.html#___sec13"> LU decomposition </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._book003.html#___sec14"> Example: Linear regression </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._book003.html#___sec15"> Solving least square, using algebraic equations </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._book003.html#___sec16"> Least square as a linear algebra problem </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._book003.html#___sec17"> Sparse matrices and Thomas algorithm </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._book003.html#___sec18"> Example: Solving the heat equation using linear algebra </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._book003.html#___sec19"> Exercise 2.1: Conservation Equation or the Continuity Equation </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._book003.html#___sec20"> Exercise 2.2: Curing of Concrete and Matrix Formulation </a><br>
-<a href="._book004.html#ch:numint"> Numerical integration </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._book004.html#___sec22"> Numerical Integration </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._book004.html#___sec23"> The Midpoint Rule </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._book004.html#___sec24"> The Trapezoidal Rule </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._book004.html#___sec25"> Numerical Errors on Integrals </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._book004.html#sec:numint:parct"> Practical Estimation of Errors on Integrals (Richardson Extrapolation) </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._book004.html#___sec27"> Romberg Integration </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._book004.html#___sec28"> Gaussian Quadrature </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._book004.html#___sec30"> Error term on Gaussian Integration </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._book004.html#___sec31"> Common Weight functions for Classical Gaussian Quadratures </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._book004.html#___sec32"> Which method to use in a specific case? </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._book004.html#___sec33"> Exercise 3.1: Numerical Integration </a><br>
-<a href="._book005.html#ch:nlin"> Solving nonlinear equations </a><br>
-<a href="._book006.html#ch:ode"> Ordinary differential equations </a><br>
-<a href="._book007.html#ch:mc"> Monte Carlo Methods </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._book008.html#___sec37"> References </a><br>
-</p>
-<p>
 <p>
 <!-- navigation buttons at the bottom of the page -->
 <ul class="pager">
 
   <li class="previous">
-    <a href="._book000.html">&larr; Prev</a>
-  </li>
-
-  <li class="next">
-    <a href="._book002.html">Next &rarr;</a>
+    <a href="._book007.html">&larr; Prev</a>
   </li>
 </ul>
 <!-- ------------------- end of main content --------------- -->

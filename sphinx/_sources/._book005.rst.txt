@@ -1,7 +1,7 @@
 .. !split
 
-.. _ch:ode:
+.. _ch:nlin:
 
-Ordinary differential equations
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Solving nonlinear equations
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

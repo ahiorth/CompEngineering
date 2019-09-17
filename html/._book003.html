@@ -58,7 +58,7 @@ code { color: inherit; background-color: transparent; }
               ('Big $\\mathcal{O}$ notation', 2, None, '___sec6'),
               ('Round off Errors', 2, None, '___sec7'),
               ('Higher Order Derivatives', 1, None, '___sec8'),
-              ('Solving linear systems', 0, 'ch:nlin', 'ch:nlin'),
+              ('Solving linear systems', 0, 'ch:lin', 'ch:lin'),
               ('Solving linear equations', 1, None, '___sec10'),
               ('Gauss-Jordan elimination', 2, None, '___sec11'),
               ('Pivoting', 2, None, '___sec12'),
@@ -87,7 +87,8 @@ code { color: inherit; background-color: transparent; }
               ('The Midpoint Rule', 2, None, '___sec23'),
               ('The Trapezoidal Rule', 2, None, '___sec24'),
               ('Numerical Errors on Integrals', 2, None, '___sec25'),
-              ('Practical Estimation of Errors on Integrals',
+              ('Practical Estimation of Errors on Integrals (Richardson '
+               'Extrapolation)',
                2,
                'sec:numint:parct',
                'sec:numint:parct'),
@@ -101,9 +102,10 @@ code { color: inherit; background-color: transparent; }
                '___sec31'),
               ('Which method to use in a specific case?', 2, None, '___sec32'),
               ('Exercise 3.1: Numerical Integration', 2, None, '___sec33'),
+              ('Solving nonlinear equations', 0, 'ch:nlin', 'ch:nlin'),
               ('Ordinary differential equations', 0, 'ch:ode', 'ch:ode'),
               ('Monte Carlo Methods', 0, 'ch:mc', 'ch:mc'),
-              ('References', 1, None, '___sec36')]}
+              ('References', 1, None, '___sec37')]}
 end of tocinfo -->
 
 <body>
@@ -157,7 +159,7 @@ $$
      <!-- navigation toc: --> <li><a href="._book002.html#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Big \( \mathcal{O} \) notation</a></li>
      <!-- navigation toc: --> <li><a href="._book002.html#___sec7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Round off Errors</a></li>
      <!-- navigation toc: --> <li><a href="._book002.html#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Higher Order Derivatives</a></li>
-     <!-- navigation toc: --> <li><a href="#ch:nlin" style="font-size: 80%;"><b>Solving linear systems</b></a></li>
+     <!-- navigation toc: --> <li><a href="#ch:lin" style="font-size: 80%;"><b>Solving linear systems</b></a></li>
      <!-- navigation toc: --> <li><a href="#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Solving linear equations</a></li>
      <!-- navigation toc: --> <li><a href="#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gauss-Jordan elimination</a></li>
      <!-- navigation toc: --> <li><a href="#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pivoting</a></li>
@@ -174,7 +176,7 @@ $$
      <!-- navigation toc: --> <li><a href="._book004.html#___sec23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Midpoint Rule</a></li>
      <!-- navigation toc: --> <li><a href="._book004.html#___sec24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Trapezoidal Rule</a></li>
      <!-- navigation toc: --> <li><a href="._book004.html#___sec25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Numerical Errors on Integrals</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#sec:numint:parct" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Practical Estimation of Errors on Integrals</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#sec:numint:parct" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Practical Estimation of Errors on Integrals (Richardson Extrapolation)</a></li>
      <!-- navigation toc: --> <li><a href="._book004.html#___sec27" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Romberg Integration</a></li>
      <!-- navigation toc: --> <li><a href="._book004.html#___sec28" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gaussian Quadrature</a></li>
      <!-- navigation toc: --> <li><a href="._book004.html#___sec29" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The case N=3</a></li>
@@ -182,9 +184,10 @@ $$
      <!-- navigation toc: --> <li><a href="._book004.html#___sec31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Common Weight functions for Classical Gaussian Quadratures</a></li>
      <!-- navigation toc: --> <li><a href="._book004.html#___sec32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Which method to use in a specific case?</a></li>
      <!-- navigation toc: --> <li><a href="._book004.html#___sec33" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 3.1: Numerical Integration</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#ch:ode" style="font-size: 80%;"><b>Ordinary differential equations</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#ch:mc" style="font-size: 80%;"><b>Monte Carlo Methods</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book007.html#___sec36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;References</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#ch:nlin" style="font-size: 80%;"><b>Solving nonlinear equations</b></a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#ch:ode" style="font-size: 80%;"><b>Ordinary differential equations</b></a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#ch:mc" style="font-size: 80%;"><b>Monte Carlo Methods</b></a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#___sec37" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;References</a></li>
 
         </ul>
       </li>
@@ -200,7 +203,7 @@ $$
 <a name="part0003"></a>
 <!-- !split -->
 
-<center><h1 id="ch:nlin" class="anchor">Solving linear systems</h1></center> <!-- chapter heading -->
+<center><h1 id="ch:lin" class="anchor">Solving linear systems</h1></center> <!-- chapter heading -->
 Solving systems of equations are one of the most common tasks that we use computers for within modeling. A typical task is that we have a model that contains a set of unknown parameters which we want to determine. To determine these parameters we need to solve a set of equations. In many cases these equations are nonlinear, but often a nonlinear problem is solved
 <em>by linearize</em> the nonlinear equations, and thereby reducing it to a sequence of linear algebra problems. Thus the topic of solving linear systems of equations have been extensively studied, and sophisticated linear equation solving packages have been developed. Python uses functions from the <a href="https://en.wikipedia.org/wiki/LAPACK" target="_self">LAPACK</a> library. In this course we will only cover the theory behind numerical linear algebra superficially, and the main purpose is to shed some light on some of the challenges one might encounter solving linear systems. In particular it is important for you to understand when it is stated in the NumPy documentation that the standard linear solver: <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.solve.html" target="_self"><tt>solve</tt></a> function uses <em>LU-decomposition</em> and <em>partial pivoting</em>.
 
@@ -208,17 +211,17 @@ Solving systems of equations are one of the most common tasks that we use comput
 <!-- After covering some basics of numerical linear algebra, we will shift focus to nonlinear equations. Contrary to linear equations, you will most likely find that the functions available in various Python library will <em>not</em> cover your needs and in many cases fail to give you the correct solution. The reason for this is that the solution of a nonlinear equation is greatly dependent on the starting point, and a combination of various techniques must be used. -->
 
 <h1 id="___sec10" class="anchor">Solving linear equations </h1>
-There are a number of excellent books covering this topic, see e.g. <a href="._book007.html#press2007">[1]</a> <a href="._book007.html#trefethen1997">[2]</a> <a href="._book007.html#stoer2013">[3]</a> <a href="._book007.html#strang2019">[4]</a>.
+There are a number of excellent books covering this topic, see e.g. <a href="._book008.html#press2007">[1]</a> <a href="._book008.html#trefethen1997">[2]</a> <a href="._book008.html#stoer2013">[3]</a> <a href="._book008.html#strang2019">[4]</a>.
 In most of the examples covered in this course we will encounter problems where we have a set of <em>linearly independent</em> equations and one equation for each unknown. For these type of problems there are a number of methods that can be used, and they will find a solution in a finite number of steps. If a solution cannot be found it is usually because the equations are not linearly independent, and our formulation of the physical problem is wrong.
 
 <p>
 Assume that we would like to solve the following set of equations:
 $$
 \begin{align}
-2x_0+x_1+x_2+3x_3&=1,label{eq:nlin:la} \\ 
-x_0+x_1+3x_2+x_3&=-3,label{eq:nlin:lb} \\ 
-x_0+4x_1+x_2+x_3&=2,label{eq:nlin:lc} \\ 
-x_0+x_1+x_2+x_3&=1.label{eq:nlin:ld} 
+2x_0+x_1+x_2+3x_3&=1,label{eq:lin:la} \\ 
+x_0+x_1+3x_2+x_3&=-3,label{eq:lin:lb} \\ 
+x_0+4x_1+x_2+x_3&=2,label{eq:lin:lc} \\ 
+x_0+x_1+x_2+x_3&=1.label{eq:lin:ld} 
 \end{align}
 $$
 
@@ -253,11 +256,16 @@ x_0\\x_1\\x_2\\x_3
 \end{equation}
 $$
 
-You can easily verify that \( x_0=-4, x_1=1, x_2=-1, x_3= 3 \) is the solution to the above equations by direct substitution. If we were to replace one of the above equations with a linear combination of any of the other equations, e.g. replace equation \eqref{eq:nlin:ld} with \( 3x_0+2x_1+4x_2+4x_3=-2 \), there would be no solution. This can be checked by calculating the determinant of the matrix \( \mathbf{A} \), if \( \det \mathbf{A}=0  \),  
-What is the difficulty in solving these equations? Clearly if none of the equations are linearly dependent, and we have \( N \) independent linear equations, it should be straight forward to solve them? Two major numerical problems are i) even if the equations are not exact linear combinations of each other, they could be very close, and as the numerical algorithm progresses they could at some stage become linearly dependent due to roundoff errors. ii) roundoff errors may accumulate if the number of equations are large <a href="._book007.html#press2007">[1]</a>.
+You can easily verify that \( x_0=-4, x_1=1, x_2=-1, x_3= 3 \) is the
+solution to the above equations by direct substitution. If we were to
+replace one of the above equations with a linear combination of any of
+the other equations, e.g. replace equation \eqref{eq:lin:ld} with
+\( 3x_0+2x_1+4x_2+4x_3=-2 \), there would be no unique solution (infinite
+number of solutions). This can be checked by calculating the determinant of the matrix \( \mathbf{A} \), if \( \det \mathbf{A}=0  \),  
+What is the difficulty in solving these equations? Clearly if none of the equations are linearly dependent, and we have \( N \) independent linear equations, it should be straight forward to solve them? Two major numerical problems are i) even if the equations are not exact linear combinations of each other, they could be very close, and as the numerical algorithm progresses they could at some stage become linearly dependent due to roundoff errors. ii) roundoff errors may accumulate if the number of equations are large <a href="._book008.html#press2007">[1]</a>.
 
 <h2 id="___sec11" class="anchor">Gauss-Jordan elimination </h2>
-Let us continue the discussion by consider Gauss-Jordan elimination, which is a <em>direct</em> method. A direct method uses a final set of operations to obtain a solution. According to <a href="._book007.html#press2007">[1]</a> Gauss-Jordan elimination is the method of choice if we want to find the inverse of \( \mathbf{A} \). However, it is slow when it comes to calculate the solution of equation
+Let us continue the discussion by consider Gauss-Jordan elimination, which is a <em>direct</em> method. A direct method uses a final set of operations to obtain a solution. According to <a href="._book008.html#press2007">[1]</a> Gauss-Jordan elimination is the method of choice if we want to find the inverse of \( \mathbf{A} \). However, it is slow when it comes to calculate the solution of equation
 <a href="#mjx-eqn-2.1">(2.1)</a>. Even if speed and memory use is not an issue, it is also not advised to first find the inverse, \( \mathbf{A}^{-1} \), of \( \mathbf{A} \), then multiply it with \( \mathbf{b} \) to obtain the solution, due to roundoff errors (Roundoff errors occur whenever we subtract to numbers that are very close to each other). To simplify our notation, we write equation <a href="#mjx-eqn-2.2">(2.2)</a> as:
 $$
 \begin{equation}
@@ -389,11 +397,11 @@ There are at least two things to notice with our implementation:
 
 <ul>
 <li> Matrix and vector notation makes the code more compact and efficient. In order to understand the implementation it is advised to put \( i=1, 2, 3, 4 \), and then execute the statements in the Gauss-Jordan elimination and compare with equation <a href="#mjx-eqn-2.4">(2.4)</a>.</li>
-<li> The implementation of the Gauss-Jordan elimination is not robust, in particular one could easily imagine cases where one of the leading coefficients turned out as zero, and the routine would fail when we divide by <code>A[i-1,i-1]</code>. By simply changing equation \eqref{eq:nlin:lb} to \( 2x_0+x_1+3x_2+x_3=-3 \), when doing the first Gauss-Jordan elimination, both \( x_0 \) and \( x_1 \) would be canceled. In the next iteration we try to divide next equation by the leading coefficient of \( x_1 \), which is zero, and the whole procedure fails.</li>
+<li> The implementation of the Gauss-Jordan elimination is not robust, in particular one could easily imagine cases where one of the leading coefficients turned out as zero, and the routine would fail when we divide by <code>A[i-1,i-1]</code>. By simply changing equation \eqref{eq:lin:lb} to \( 2x_0+x_1+3x_2+x_3=-3 \), when doing the first Gauss-Jordan elimination, both \( x_0 \) and \( x_1 \) would be canceled. In the next iteration we try to divide next equation by the leading coefficient of \( x_1 \), which is zero, and the whole procedure fails.</li>
 </ul>
 
 <h2 id="___sec12" class="anchor">Pivoting </h2>
-The solution to the last problem is solved by what is called <em>pivoting</em>. The element that we divide on is called the <em>pivot element</em>. It actually turns out that even if we do Gauss-Jordan elimination <em>without</em> encountering a zero pivot element, the Gauss-Jordan procedure is numerically unstable in the presence of roundoff errors <a href="._book007.html#press2007">[1]</a>. There are two versions of pivoting, <em>full pivoting</em> and <em>partial pivoting</em>. In partial pivoting we only interchange rows, while in full pivoting we also interchange rows and columns. Partial pivoting is much easier to implement, and the algorithm is as follows:
+The solution to the last problem is solved by what is called <em>pivoting</em>. The element that we divide on is called the <em>pivot element</em>. It actually turns out that even if we do Gauss-Jordan elimination <em>without</em> encountering a zero pivot element, the Gauss-Jordan procedure is numerically unstable in the presence of roundoff errors <a href="._book008.html#press2007">[1]</a>. There are two versions of pivoting, <em>full pivoting</em> and <em>partial pivoting</em>. In partial pivoting we only interchange rows, while in full pivoting we also interchange rows and columns. Partial pivoting is much easier to implement, and the algorithm is as follows:
 
 <ol>
 <li> Find the row in \( \mathbf{A} \) with largest absolute value in front of \( x_0 \) and change with the first equation, switch corresponding elements in \( \mathbf{b} \)</li>
@@ -406,7 +414,7 @@ For a linear equation we can multiply with a number on each side and the equatio
 As we have already seen, if the matrix \( \mathbf{A} \) is reduced to a triangular form it is trivial to calculate the solution by using backsubstitution. Thus if it was possible to decompose the matrix \( \mathbf{A} \) as follows:
 $$
 \begin{align}
-&\mathbf{A}=\mathbf{L}\cdot\mathbf{U}label{eq:nlin:lu}\\ 
+&\mathbf{A}=\mathbf{L}\cdot\mathbf{U}label{eq:lin:lu}\\ 
 &\begin{pmatrix}
 a_{0,0}&a_{0,1}&a_{0,2}&a_{0,3}\\ 
 a_{1,0}&a_{1,1}&a_{1,2}&a_{1,3}\\ 
@@ -432,7 +440,7 @@ u_{0,0}&u_{0,1}&u_{0,2}&u_{0,3}\\
 The solution procedure would then be to rewrite equation <a href="#mjx-eqn-2.1">(2.1)</a> as:
 $$
 \begin{align}
-\mathbf{A\cdot x}=\mathbf{L}\cdot\mathbf{U}\cdot\mathbf{x}=\mathbf{b},label{eq:nlin:matb}
+\mathbf{A\cdot x}=\mathbf{L}\cdot\mathbf{U}\cdot\mathbf{x}=\mathbf{b},label{eq:lin:matb}
 \end{align}
 $$
 
@@ -447,7 +455,7 @@ $$
 we can first solve for the \( \mathbf{y} \) vector:
 $$
 \begin{align}
-\mathbf{L}\cdot\mathbf{y}=\mathbf{b},label{eq:nlin:for}
+\mathbf{L}\cdot\mathbf{y}=\mathbf{b},label{eq:lin:for}
 \end{align}
 $$
 
@@ -459,7 +467,7 @@ $$
 \end{align}
 $$
 
-Note that the solution to equation \eqref{eq:nlin:for} would be done by <em>forward substitution</em>:
+Note that the solution to equation \eqref{eq:lin:for} would be done by <em>forward substitution</em>:
 $$
 \begin{equation}
 y_i=\frac{1}{l_{ii}}\left[b_i-\sum_{j=0}^{i-1}l_{ij}x_j\right],\quad i=1,2,\ldots N-1.
@@ -467,7 +475,7 @@ y_i=\frac{1}{l_{ii}}\left[b_i-\sum_{j=0}^{i-1}l_{ij}x_j\right],\quad i=1,2,\ldot
 \end{equation}
 $$
 
-Why go to all this trouble? First of all it requires (slightly) less operations to calculate the LU decomposition and doing the forward and backward substitution than the Gauss-Jordan procedure discussed earlier. Secondly, and more importantly, is the fact that in many cases one would like to calculate the solution for different values of the \( \mathbf{b} \) vector in equation \eqref{eq:nlin:matb}. If we do the LU decomposition first we can calculate the solution quite fast using backward and forward substitution for any value of the \( \mathbf{b} \) vector.
+Why go to all this trouble? First of all it requires (slightly) less operations to calculate the LU decomposition and doing the forward and backward substitution than the Gauss-Jordan procedure discussed earlier. Secondly, and more importantly, is the fact that in many cases one would like to calculate the solution for different values of the \( \mathbf{b} \) vector in equation \eqref{eq:lin:matb}. If we do the LU decomposition first we can calculate the solution quite fast using backward and forward substitution for any value of the \( \mathbf{b} \) vector.
 
 <p>
 The NumPy function <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.solve.html" target="_self"><tt>solve</tt></a>, uses LU decomposition and partial pivoting, and we can find the solution to our previous problem simply by the following code:
@@ -479,13 +487,13 @@ x<span style="color: #666666">=</span>solve(A,b)
 </pre></div>
 
 <h1 id="___sec14" class="anchor">Example: Linear regression </h1>
-In the previous section, we considered a system of \( N \) equations and \( N \) unknown (\( x_0, x_1,\ldots, x_N \)). In general we might have more equations than unknowns or more unknowns than equations. An example of the former is linear regression, we might have many data points and we would like to fit a line through the points. How do you fit a single lines to more than two points that does not line on the same line? One way to do it is to minimize the distance from the line to the points, as illustrated in figure <a href="#fig:nlin:reg">5</a>.
+In the previous section, we considered a system of \( N \) equations and \( N \) unknown (\( x_0, x_1,\ldots, x_N \)). In general we might have more equations than unknowns or more unknowns than equations. An example of the former is linear regression, we might have many data points and we would like to fit a line through the points. How do you fit a single lines to more than two points that does not line on the same line? One way to do it is to minimize the distance from the line to the points, as illustrated in figure <a href="#fig:lin:reg">5</a>.
 
 <p>
-<center> <!-- figure label: --> <div id="fig:nlin:reg"></div> <!-- FIGURE -->
+<center> <!-- figure label: --> <div id="fig:lin:reg"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 5:  Linear regression by minimizing the total distance to all the points.  <!-- caption label: fig:nlin:reg --> </p></center>
-<p><img src="fig-nlin/reg.png" align="bottom" width=800></p>
+<center><p class="caption">Figure 5:  Linear regression by minimizing the total distance to all the points.  <!-- caption label: fig:lin:reg --> </p></center>
+<p><img src="fig-lin/reg.png" align="bottom" width=800></p>
 </center>
 
 <p>
@@ -497,7 +505,7 @@ S=\sum_{i=0}^{N-1}(y_i-f(x_i))^2=\sum_{i=0}^{N-1}(y_i-a_0-a_1x_i)^2.
 \end{equation}
 $$
 
-(For the example in figure <a href="#fig:nlin:reg">5</a>, \( N=5 \).) This is the idea behind <em>least square</em>, and linear regression. One thing you should be aware of is that points lying far from the line will contribute more to equation <a href="#mjx-eqn-2.10">(2.10)</a>. The underlying assumption is that each data point provides equally precise information about the process, this is often not the case. When analyzing experimental data, there may be points deviating from the expected behaviour, it is then important to investigate if these points are more affected by measurements errors than the others. If that is the case one should give them less weight in the least square estimate, by extending the formula above:
+(For the example in figure <a href="#fig:lin:reg">5</a>, \( N=5 \).) This is the idea behind <em>least square</em>, and linear regression. One thing you should be aware of is that points lying far from the line will contribute more to equation <a href="#mjx-eqn-2.10">(2.10)</a>. The underlying assumption is that each data point provides equally precise information about the process, this is often not the case. When analyzing experimental data, there may be points deviating from the expected behaviour, it is then important to investigate if these points are more affected by measurements errors than the others. If that is the case one should give them less weight in the least square estimate, by extending the formula above:
 $$
 \begin{equation}
 S=\sum_{i=0}^{N-1}\omega_i(y_i-f(x_i))^2=\sum_{i=0}^3\omega_i(y_i-a_0-a_1x_i)^2,
@@ -531,7 +539,7 @@ $$
 Solving equation <a href="#mjx-eqn-2.14">(2.14)</a> with respect to \( a_0 \), and inserting the expression into equation <a href="#mjx-eqn-2.15">(2.15)</a>, we find:
 $$
 \begin{align}
-a_0&=\overline{y}-a_1\overline{x},label{eq:nlin:ls1c} \\ 
+a_0&=\overline{y}-a_1\overline{x},label{eq:lin:ls1c} \\ 
 a_1&=\frac{\sum_iy_ix_i-N\overline{x}\overline{y}}{\sum_ix_i^2-N\overline{x}^2}
 =\frac{\sum_i(x_i-\overline{x})(y_i-\overline{y})}{\sum_i(x_i-\overline{x})^2}.
 \tag{2.16}
@@ -542,7 +550,7 @@ We leave it as an exercise to show the last expression for \( a_1 \).
 Clearly the equation <a href="#mjx-eqn-2.16">(2.16)</a> above will in most cases have
 a solution. But in addition to a solution, it would be good to have an
 idea of the goodness of the fit. Intuitively it make sense to add all
-the distances (residuals) \( d_i \) in figure <a href="#fig:nlin:reg">5</a>. This is
+the distances (residuals) \( d_i \) in figure <a href="#fig:lin:reg">5</a>. This is
 basically what is done when calculating \( R^2 \) (R-squared). However, we
 would also like to compare the \( R^2 \) between different
 datasets. Therefor we need to normalize the sum of residuals, and
@@ -554,7 +562,7 @@ R^2=1-\frac{\sum_{i=0}^{N-1}(y_i-f(x_i))^2}{\sum_{i=0}^{N-1}(y_i-\overline{y})^2
 \end{equation}
 $$
 
-In python we can implement equation \eqref{eq:nlin:ls1c}, <a href="#mjx-eqn-2.16">(2.16)</a> and <a href="#mjx-eqn-2.17">(2.17)</a> as:
+In python we can implement equation \eqref{eq:lin:ls1c}, <a href="#mjx-eqn-2.16">(2.16)</a> and <a href="#mjx-eqn-2.17">(2.17)</a> as:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
@@ -729,7 +737,7 @@ c_0^\prime =\frac{c_0}{b_0} \qquad &r_0^\prime={r_0}{b_0}
 c_i^\prime
 =\frac{c_i}{b_i-a_ic_{i-1}^\prime}\qquad
 &r_i^\prime=\frac{r_i-a_ir_{i-1}^\prime}{b_i-a_ic_{i-1}^\prime}
-\quad\text{, for }i=1,2,\ldots,N-1label{eq:nlin:thi} 
+\quad\text{, for }i=1,2,\ldots,N-1label{eq:lin:thi} 
 \end{align}
 $$
 
@@ -747,7 +755,7 @@ x_i     & = r_i^\prime-x_{i+1}c_i^\prime\quad\text{, for } i=N-2,N-3,\ldots,0
 \end{align}
 $$
 
-Equation <a href="#mjx-eqn-2.25">(2.25)</a>, \eqref{eq:nlin:thi}, <a href="#mjx-eqn-2.26">(2.26)</a>
+Equation <a href="#mjx-eqn-2.25">(2.25)</a>, \eqref{eq:lin:thi}, <a href="#mjx-eqn-2.26">(2.26)</a>
 and <a href="#mjx-eqn-2.27">(2.27)</a> is known as the Thomas algorithm after
 Llewellyn Thomas. 
 <div class="alert alert-block alert-success alert-text-normal"><b>Notice.</b>
@@ -774,7 +782,7 @@ Thomas algorithm might do the trick.
 <center> <!-- figure label: --> <div id="fig:nlin:heat"></div> <!-- FIGURE -->
 <hr class="figure">
 <center><p class="caption">Figure 6:  Conservation of energy and the continuity equation.  <!-- caption label: fig:nlin:heat --> </p></center>
-<p><img src="fig-nlin/heat.png" align="bottom" width=700></p>
+<p><img src="fig-lin/heat.png" align="bottom" width=700></p>
 </center>
 
 <p>
@@ -853,7 +861,7 @@ where \( \beta=2\dot{\sigma}L^2/k \).
 <center> <!-- figure label: --> <div id="fig:nlin:hgrid"></div> <!-- FIGURE -->
 <hr class="figure">
 <center><p class="caption">Figure 7:  Finite difference grid for \( N=4 \).  <!-- caption label: fig:nlin:hgrid --> </p></center>
-<p><img src="fig-nlin/heat_grid.png" align="bottom" width=200></p>
+<p><img src="fig-lin/heat_grid.png" align="bottom" width=200></p>
 </center>
 
 <p>
@@ -881,7 +889,7 @@ boundary condition on the left hand side is \( dT/dy=0 \), by using the
 central difference for the derivative allows us to write:
 $$
 \begin{equation}
-\left.\frac{dT}{dy}\right|_{y=0}=\frac{T_{-1}-T_1}{2h},
+\left.\frac{dT}{dy}\right|_{y=0}=\frac{T_{-1}-T_1}{2h}=0,
 \tag{2.37}
 \end{equation}
 $$
@@ -930,12 +938,106 @@ T_3\\
 \end{array}
 \right).
 \tag{2.43}
-\end{align}$$
+\end{align}
+\tag{2.44}$$
 
 Note that it is now easy to increase \( N \) as it is only the boundaries
 that requires special attention. The set of equations can be solved
 using <a href="https://docs.scipy.org/doc/scipy/reference/sparse.linalg.html" target="_self"><tt>scipy.sparse.linalg.spsolve</tt></a>.
-The solution to the above equations is \( L=1 \) m, and \( h=14 \), is: \( [T_0,T_1.T_2,T_3]=[38.88888889 38.02083333 35.41666667 31.07638889] \).
+The solution to the above equations is \( L=1 \) m, and \( h=1/4 \), is: \( [T_0,T_1.T_2,T_3]=[38.88888889, 38.02083333, 35.41666667, 31.07638889] \).
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_2_1" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_2_1">
+
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b>Notice.</b>
+The solution below implements equation <a href="#mjx-eqn-2.44">(2.44)</a> using sparse matrices, and the standard Numpy <code>solve</code> function. You can use the <code>%timeit</code> magic command in Ipython and Jupyter notebooks to test the efficiency.
+</div>
+
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #408080; font-style: italic">#%matplotlib inline</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">scipy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">sc</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">scipy.sparse.linalg</span>
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy.linalg</span> <span style="color: #008000; font-weight: bold">import</span> solve
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
+
+<span style="color: #408080; font-style: italic"># Set simulation parameters</span>
+h <span style="color: #666666">=</span> <span style="color: #666666">0.25</span>              <span style="color: #408080; font-style: italic"># element size</span>
+L <span style="color: #666666">=</span> <span style="color: #666666">1.0</span>              <span style="color: #408080; font-style: italic"># length of domain</span>
+n <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">round</span>(L<span style="color: #666666">/</span>h))  <span style="color: #408080; font-style: italic"># number of unknowns </span>
+x<span style="color: #666666">=</span>np<span style="color: #666666">.</span>arange(n<span style="color: #666666">+1</span>)<span style="color: #666666">*</span>h   <span style="color: #408080; font-style: italic"># includes right bc </span>
+T1<span style="color: #666666">=25</span>
+sigma <span style="color: #666666">=</span> <span style="color: #666666">100*</span>L<span style="color: #666666">**2/1.65</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">tri_diag</span>(a, b, c, k1<span style="color: #666666">=-1</span>, k2<span style="color: #666666">=0</span>, k3<span style="color: #666666">=1</span>):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot; a,b,c diagonal terms &quot;&quot;&quot;</span>
+    <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>diag(a, k1) <span style="color: #666666">+</span> np<span style="color: #666666">.</span>diag(b, k2) <span style="color: #666666">+</span> np<span style="color: #666666">.</span>diag(c, k3)
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">analytical</span>(sigma,x):
+    <span style="color: #008000; font-weight: bold">return</span> sigma<span style="color: #666666">*</span>(<span style="color: #666666">1-</span>x<span style="color: #666666">*</span>x)<span style="color: #666666">/2+</span>T1
+
+<span style="color: #408080; font-style: italic">#Create matrix for linalg solver</span>
+a<span style="color: #666666">=</span>np<span style="color: #666666">.</span>ones(n<span style="color: #666666">-1</span>)
+b<span style="color: #666666">=-</span>np<span style="color: #666666">.</span>ones(n)<span style="color: #666666">*2</span>
+c<span style="color: #666666">=</span>np<span style="color: #666666">.</span>ones(n<span style="color: #666666">-1</span>)
+<span style="color: #408080; font-style: italic">#Create matrix for sparse solver</span>
+diagonals<span style="color: #666666">=</span>np<span style="color: #666666">.</span>zeros((<span style="color: #666666">3</span>,n))
+diagonals[<span style="color: #666666">0</span>,:]<span style="color: #666666">=</span> <span style="color: #666666">1</span>
+diagonals[<span style="color: #666666">1</span>,:]<span style="color: #666666">=</span> <span style="color: #666666">-2</span>  
+diagonals[<span style="color: #666666">2</span>,:]<span style="color: #666666">=</span> <span style="color: #666666">1</span>
+
+<span style="color: #408080; font-style: italic"># rhs vector</span>
+d<span style="color: #666666">=</span>np<span style="color: #666666">.</span>repeat(<span style="color: #666666">-</span>h<span style="color: #666666">*</span>h<span style="color: #666666">*</span>sigma,n)
+
+<span style="color: #408080; font-style: italic">#----boundary conditions ------</span>
+<span style="color: #408080; font-style: italic">#lhs - no flux of heat</span>
+diagonals[<span style="color: #666666">2</span>,<span style="color: #666666">1</span>]<span style="color: #666666">=</span> <span style="color: #666666">2</span>
+c[<span style="color: #666666">0</span>]<span style="color: #666666">=2</span>
+<span style="color: #408080; font-style: italic">#rhs - constant temperature</span>
+d[n<span style="color: #666666">-1</span>]<span style="color: #666666">=</span>d[n<span style="color: #666666">-1</span>]<span style="color: #666666">-</span>T1
+<span style="color: #408080; font-style: italic">#------------------------------</span>
+
+A<span style="color: #666666">=</span>tri_diag(a,b,c)
+A_sparse <span style="color: #666666">=</span> sc<span style="color: #666666">.</span>sparse<span style="color: #666666">.</span>spdiags(diagonals, [<span style="color: #666666">-1</span>,<span style="color: #666666">0</span>,<span style="color: #666666">1</span>], n, n,format<span style="color: #666666">=</span><span style="color: #BA2121">&#39;csc&#39;</span>) 
+
+<span style="color: #408080; font-style: italic">#Solve linear problems</span>
+Ta <span style="color: #666666">=</span> solve(A,d,)
+Tb <span style="color: #666666">=</span> sc<span style="color: #666666">.</span>sparse<span style="color: #666666">.</span>linalg<span style="color: #666666">.</span>spsolve(A_sparse,d)
+<span style="color: #408080; font-style: italic">#Add right boundary node</span>
+Ta<span style="color: #666666">=</span>np<span style="color: #666666">.</span>append(Ta,T1)
+Tb<span style="color: #666666">=</span>np<span style="color: #666666">.</span>append(Tb,T1)
+<span style="color: #408080; font-style: italic">#uncomment to test efficiency</span>
+<span style="color: #408080; font-style: italic">#%timeit sc.sparse.linalg.spsolve(A_sparse,d)</span>
+<span style="color: #408080; font-style: italic">#%timeit solve(A,d,)</span>
+
+<span style="color: #408080; font-style: italic"># Plot solutions</span>
+plt<span style="color: #666666">.</span>plot(x,Ta,x,Tb,<span style="color: #BA2121">&#39;-.&#39;</span>,x,analytical(sigma,x),<span style="color: #BA2121">&#39;:&#39;</span>, lw<span style="color: #666666">=3</span>)
+plt<span style="color: #666666">.</span>xlabel(<span style="color: #BA2121">&quot;Dimensionless length&quot;</span>)
+plt<span style="color: #666666">.</span>ylabel(<span style="color: #BA2121">r&quot;Temperature [$^\circ$C]&quot;</span>)
+plt<span style="color: #666666">.</span>xlim(<span style="color: #666666">0</span>,<span style="color: #666666">1</span>)
+plt<span style="color: #666666">.</span>ylim(T1<span style="color: #666666">-1</span>)
+plt<span style="color: #666666">.</span>legend([<span style="color: #BA2121">&#39;sparse&#39;</span>,<span style="color: #BA2121">&#39;linalg&#39;</span>,<span style="color: #BA2121">&#39;analytical&#39;</span>])
+plt<span style="color: #666666">.</span>grid()
+plt<span style="color: #666666">.</span>show()
+</pre></div>
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
 
 <p>
 <!-- --- end exercise --- -->

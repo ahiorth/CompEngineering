@@ -18,3 +18,4 @@ Contents:
    ._book005
    ._book006
    ._book007
+   ._book008

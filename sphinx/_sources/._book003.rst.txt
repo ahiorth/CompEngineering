@@ -1,6 +1,6 @@
 .. !split
 
-.. _ch:nlin:
+.. _ch:lin:
 
 Solving linear systems
 %%%%%%%%%%%%%%%%%%%%%%
@@ -16,7 +16,7 @@ In most of the examples covered in this course we will encounter problems where 
 
 Assume that we would like to solve the following set of equations:
 
-.. _Eq:eq:nlin:la:
+.. _Eq:eq:lin:la:
 
 .. math::
 
@@ -24,7 +24,7 @@ Assume that we would like to solve the following set of equations:
     2x_0+x_1+x_2+3x_3=1, 
         
 
-.. _Eq:eq:nlin:lb:
+.. _Eq:eq:lin:lb:
 
 .. math::
 
@@ -32,7 +32,7 @@ Assume that we would like to solve the following set of equations:
     x_0+x_1+3x_2+x_3=-3, 
         
 
-.. _Eq:eq:nlin:lc:
+.. _Eq:eq:lin:lc:
 
 .. math::
 
@@ -40,7 +40,7 @@ Assume that we would like to solve the following set of equations:
     x_0+4x_1+x_2+x_3=2, 
         
 
-.. _Eq:eq:nlin:ld:
+.. _Eq:eq:lin:ld:
 
 .. math::
 
@@ -50,7 +50,7 @@ Assume that we would like to solve the following set of equations:
 
 These equations can be written in matrix form as:
 
-.. _Eq:eq:nlin:mat:
+.. _Eq:eq:lin:mat:
 
 .. math::
 
@@ -61,7 +61,7 @@ These equations can be written in matrix form as:
 
 where:
 
-.. _Eq:eq:nlin:matA:
+.. _Eq:eq:lin:matA:
 
 .. math::
 
@@ -85,13 +85,18 @@ where:
         
         
 
-You can easily verify that :math:`x_0=-4, x_1=1, x_2=-1, x_3= 3` is the solution to the above equations by direct substitution. If we were to replace one of the above equations with a linear combination of any of the other equations, e.g. replace equation :ref:`(21) <Eq:eq:nlin:ld>` with :math:`3x_0+2x_1+4x_2+4x_3=-2`, there would be no solution. This can be checked by calculating the determinant of the matrix :math:`\mathbf{A}`, if :math:`\det \mathbf{A}=0`,  
+You can easily verify that :math:`x_0=-4, x_1=1, x_2=-1, x_3= 3` is the
+solution to the above equations by direct substitution. If we were to
+replace one of the above equations with a linear combination of any of
+the other equations, e.g. replace equation :ref:`(21) <Eq:eq:lin:ld>` with
+:math:`3x_0+2x_1+4x_2+4x_3=-2`, there would be no unique solution (infinite
+number of solutions). This can be checked by calculating the determinant of the matrix :math:`\mathbf{A}`, if :math:`\det \mathbf{A}=0`,  
 What is the difficulty in solving these equations? Clearly if none of the equations are linearly dependent, and we have :math:`N` independent linear equations, it should be straight forward to solve them? Two major numerical problems are i) even if the equations are not exact linear combinations of each other, they could be very close, and as the numerical algorithm progresses they could at some stage become linearly dependent due to roundoff errors. ii) roundoff errors may accumulate if the number of equations are large [Ref1]_.
 
 Gauss-Jordan elimination
 ------------------------
 Let us continue the discussion by consider Gauss-Jordan elimination, which is a *direct* method. A direct method uses a final set of operations to obtain a solution. According to [Ref1]_ Gauss-Jordan elimination is the method of choice if we want to find the inverse of :math:`\mathbf{A}`. However, it is slow when it comes to calculate the solution of equation
-:ref:`(22) <Eq:eq:nlin:mat>`. Even if speed and memory use is not an issue, it is also not advised to first find the inverse, :math:`\mathbf{A}^{-1}`, of :math:`\mathbf{A}`, then multiply it with :math:`\mathbf{b}` to obtain the solution, due to roundoff errors (Roundoff errors occur whenever we subtract to numbers that are very close to each other). To simplify our notation, we write equation :ref:`(23) <Eq:eq:nlin:matA>` as:
+:ref:`(22) <Eq:eq:lin:mat>`. Even if speed and memory use is not an issue, it is also not advised to first find the inverse, :math:`\mathbf{A}^{-1}`, of :math:`\mathbf{A}`, then multiply it with :math:`\mathbf{b}` to obtain the solution, due to roundoff errors (Roundoff errors occur whenever we subtract to numbers that are very close to each other). To simplify our notation, we write equation :ref:`(23) <Eq:eq:lin:matA>` as:
 
 .. _Eq:_auto5:
 
@@ -111,7 +116,7 @@ Let us continue the discussion by consider Gauss-Jordan elimination, which is a 
 
 The numbers to the left of the vertical dash is the matrix :math:`\mathbf{A}`, and to the right is the vector :math:`\mathbf{b}`. The Gauss-Jordan elimination procedure proceeds by doing the same operation on the right and left side of the dash, and the goal is to get only zeros on the lower triangular part of the matrix. This is achieved by multiplying rows with the same (nonzero) number, swapping rows, adding a multiple of a row to another:
 
-.. _Eq:eq:nlin:gj1:
+.. _Eq:eq:lin:gj1:
 
 .. math::
 
@@ -175,7 +180,7 @@ The operations done are: (:math:`1\to2`) multiply first row with :math:`-1/2` an
 
 Notice that the final matrix has only zeros beyond the diagonal, such a matrix is called *upper triangular*. We still have not found the final solution, but from an upper triangular (or lower triangular) matrix it is trivial to determine the solution. The last row immediately gives us :math:`14/17z=42/17` or :math:`z=3`, now we have the solution for z and the next row gives: :math:`-17y+3z=26` or :math:`y=(26-3\cdot3)/(-17)=-1`, and so on. In a more general form, we can write our solution of the matrix :math:`\mathbf{A}` after making it upper triangular as:
 
-.. _Eq:eq:nlin:back:
+.. _Eq:eq:lin:back:
 
 .. math::
 
@@ -205,7 +210,7 @@ Notice that the final matrix has only zeros beyond the diagonal, such a matrix i
 
 The backsubstitution can then be written formally as:
 
-.. _Eq:eq:nlin:back2:
+.. _Eq:eq:lin:back2:
 
 .. math::
 
@@ -237,9 +242,9 @@ Notice that in the Python implementation, we have used vector operations instead
         sol[i] /= A[i][i]
 
 There are at least two things to notice with our implementation:
-* Matrix and vector notation makes the code more compact and efficient. In order to understand the implementation it is advised to put :math:`i=1, 2, 3, 4`, and then execute the statements in the Gauss-Jordan elimination and compare with equation :ref:`(25) <Eq:eq:nlin:gj1>`.
+* Matrix and vector notation makes the code more compact and efficient. In order to understand the implementation it is advised to put :math:`i=1, 2, 3, 4`, and then execute the statements in the Gauss-Jordan elimination and compare with equation :ref:`(25) <Eq:eq:lin:gj1>`.
 
-* The implementation of the Gauss-Jordan elimination is not robust, in particular one could easily imagine cases where one of the leading coefficients turned out as zero, and the routine would fail when we divide by ``A[i-1,i-1]``. By simply changing equation :ref:`(19) <Eq:eq:nlin:lb>` to :math:`2x_0+x_1+3x_2+x_3=-3`, when doing the first Gauss-Jordan elimination, both :math:`x_0` and :math:`x_1` would be canceled. In the next iteration we try to divide next equation by the leading coefficient of :math:`x_1`, which is zero, and the whole procedure fails.
+* The implementation of the Gauss-Jordan elimination is not robust, in particular one could easily imagine cases where one of the leading coefficients turned out as zero, and the routine would fail when we divide by ``A[i-1,i-1]``. By simply changing equation :ref:`(19) <Eq:eq:lin:lb>` to :math:`2x_0+x_1+3x_2+x_3=-3`, when doing the first Gauss-Jordan elimination, both :math:`x_0` and :math:`x_1` would be canceled. In the next iteration we try to divide next equation by the leading coefficient of :math:`x_1`, which is zero, and the whole procedure fails.
 
 Pivoting
 --------
@@ -253,7 +258,7 @@ LU decomposition
 ----------------
 As we have already seen, if the matrix :math:`\mathbf{A}` is reduced to a triangular form it is trivial to calculate the solution by using backsubstitution. Thus if it was possible to decompose the matrix :math:`\mathbf{A}` as follows:
 
-.. _Eq:eq:nlin:lu:
+.. _Eq:eq:lin:lu:
 
 .. math::
 
@@ -289,9 +294,9 @@ As we have already seen, if the matrix :math:`\mathbf{A}` is reduced to a triang
         
         
 
-The solution procedure would then be to rewrite equation :ref:`(22) <Eq:eq:nlin:mat>` as:
+The solution procedure would then be to rewrite equation :ref:`(22) <Eq:eq:lin:mat>` as:
 
-.. _Eq:eq:nlin:matb:
+.. _Eq:eq:lin:matb:
 
 .. math::
 
@@ -312,7 +317,7 @@ If we define a new vector :math:`\mathbf{y}`:
 
 we can first solve for the :math:`\mathbf{y}` vector:
 
-.. _Eq:eq:nlin:for:
+.. _Eq:eq:lin:for:
 
 .. math::
 
@@ -331,9 +336,9 @@ and then for :math:`\mathbf{x}`:
         
         
 
-Note that the solution to equation :ref:`(33) <Eq:eq:nlin:for>` would be done by *forward substitution*:
+Note that the solution to equation :ref:`(33) <Eq:eq:lin:for>` would be done by *forward substitution*:
 
-.. _Eq:eq:nlin:back3:
+.. _Eq:eq:lin:back3:
 
 .. math::
 
@@ -342,7 +347,7 @@ Note that the solution to equation :ref:`(33) <Eq:eq:nlin:for>` would be done by
         
         
 
-Why go to all this trouble? First of all it requires (slightly) less operations to calculate the LU decomposition and doing the forward and backward substitution than the Gauss-Jordan procedure discussed earlier. Secondly, and more importantly, is the fact that in many cases one would like to calculate the solution for different values of the :math:`\mathbf{b}` vector in equation :ref:`(31) <Eq:eq:nlin:matb>`. If we do the LU decomposition first we can calculate the solution quite fast using backward and forward substitution for any value of the :math:`\mathbf{b}` vector.
+Why go to all this trouble? First of all it requires (slightly) less operations to calculate the LU decomposition and doing the forward and backward substitution than the Gauss-Jordan procedure discussed earlier. Secondly, and more importantly, is the fact that in many cases one would like to calculate the solution for different values of the :math:`\mathbf{b}` vector in equation :ref:`(31) <Eq:eq:lin:matb>`. If we do the LU decomposition first we can calculate the solution quite fast using backward and forward substitution for any value of the :math:`\mathbf{b}` vector.
 
 The NumPy function `solve <https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.solve.html>`__, uses LU decomposition and partial pivoting, and we can find the solution to our previous problem simply by the following code:
 
@@ -353,9 +358,9 @@ The NumPy function `solve <https://docs.scipy.org/doc/numpy/reference/generated/
 
 Example: Linear regression
 ==========================
-In the previous section, we considered a system of :math:`N` equations and :math:`N` unknown (:math:`x_0, x_1,\ldots, x_N`). In general we might have more equations than unknowns or more unknowns than equations. An example of the former is linear regression, we might have many data points and we would like to fit a line through the points. How do you fit a single lines to more than two points that does not line on the same line? One way to do it is to minimize the distance from the line to the points, as illustrated in figure :ref:`fig:nlin:reg`.
+In the previous section, we considered a system of :math:`N` equations and :math:`N` unknown (:math:`x_0, x_1,\ldots, x_N`). In general we might have more equations than unknowns or more unknowns than equations. An example of the former is linear regression, we might have many data points and we would like to fit a line through the points. How do you fit a single lines to more than two points that does not line on the same line? One way to do it is to minimize the distance from the line to the points, as illustrated in figure :ref:`fig:lin:reg`.
 
-.. _fig:nlin:reg:
+.. _fig:lin:reg:
 
 .. figure:: reg.png
    :width: 800
@@ -364,7 +369,7 @@ In the previous section, we considered a system of :math:`N` equations and :math
 
 Mathematically we can express the distance between a data point :math:`(x_i,y_i)` and the line :math:`f(x)` as :math:`y_i-f(x_i)`. Note that this difference can be negative or positive depending if the data point lies below or above the line. We can then take the absolute value of all the distances, and try to minimize them. When we minimize something we take the derivative of the expression and put it equal to zero.  As you might remember from Calculus it is extremely hard to work with the derivative of the absolute value, because it is discontinuous. A much better approach is to square each distance and sum them:
 
-.. _Eq:eq:nlin:lsq:
+.. _Eq:eq:lin:lsq:
 
 .. math::
 
@@ -373,9 +378,9 @@ Mathematically we can express the distance between a data point :math:`(x_i,y_i)
         
         
 
-(For the example in figure :ref:`fig:nlin:reg`, :math:`N=5`.) This is the idea behind *least square*, and linear regression. One thing you should be aware of is that points lying far from the line will contribute more to equation :ref:`(36) <Eq:eq:nlin:lsq>`. The underlying assumption is that each data point provides equally precise information about the process, this is often not the case. When analyzing experimental data, there may be points deviating from the expected behaviour, it is then important to investigate if these points are more affected by measurements errors than the others. If that is the case one should give them less weight in the least square estimate, by extending the formula above:
+(For the example in figure :ref:`fig:lin:reg`, :math:`N=5`.) This is the idea behind *least square*, and linear regression. One thing you should be aware of is that points lying far from the line will contribute more to equation :ref:`(36) <Eq:eq:lin:lsq>`. The underlying assumption is that each data point provides equally precise information about the process, this is often not the case. When analyzing experimental data, there may be points deviating from the expected behaviour, it is then important to investigate if these points are more affected by measurements errors than the others. If that is the case one should give them less weight in the least square estimate, by extending the formula above:
 
-.. _Eq:eq:nlin:lsqm:
+.. _Eq:eq:lin:lsqm:
 
 .. math::
 
@@ -388,9 +393,9 @@ Mathematically we can express the distance between a data point :math:`(x_i,y_i)
 
 Solving least square, using algebraic equations
 -----------------------------------------------
-Let us continue with equation :ref:`(36) <Eq:eq:nlin:lsq>`, the algebraic solution is to simply find the value of :math:`a_0` and :math:`a_1` that minimizes :math:`S`:
+Let us continue with equation :ref:`(36) <Eq:eq:lin:lsq>`, the algebraic solution is to simply find the value of :math:`a_0` and :math:`a_1` that minimizes :math:`S`:
 
-.. _Eq:eq:nlin:ls1:
+.. _Eq:eq:lin:ls1:
 
 .. math::
 
@@ -399,7 +404,7 @@ Let us continue with equation :ref:`(36) <Eq:eq:nlin:lsq>`, the algebraic soluti
          
         
 
-.. _Eq:eq:nlin:ls2:
+.. _Eq:eq:lin:ls2:
 
 .. math::
 
@@ -408,9 +413,9 @@ Let us continue with equation :ref:`(36) <Eq:eq:nlin:lsq>`, the algebraic soluti
         
         
 
-Defining the mean value as :math:`\overline{x}=\sum_ix_i/N` and :math:`\overline{y}=\sum_iy_i/N`, we can write equation :ref:`(38) <Eq:eq:nlin:ls1>` and :ref:`(39) <Eq:eq:nlin:ls2>`  as:
+Defining the mean value as :math:`\overline{x}=\sum_ix_i/N` and :math:`\overline{y}=\sum_iy_i/N`, we can write equation :ref:`(38) <Eq:eq:lin:ls1>` and :ref:`(39) <Eq:eq:lin:ls2>`  as:
 
-.. _Eq:eq:nlin:ls1a:
+.. _Eq:eq:lin:ls1a:
 
 .. math::
 
@@ -419,7 +424,7 @@ Defining the mean value as :math:`\overline{x}=\sum_ix_i/N` and :math:`\overline
          
         
 
-.. _Eq:eq:nlin:ls2b:
+.. _Eq:eq:lin:ls2b:
 
 .. math::
 
@@ -428,9 +433,9 @@ Defining the mean value as :math:`\overline{x}=\sum_ix_i/N` and :math:`\overline
         
         
 
-Solving equation :ref:`(40) <Eq:eq:nlin:ls1a>` with respect to :math:`a_0`, and inserting the expression into equation :ref:`(41) <Eq:eq:nlin:ls2b>`, we find:
+Solving equation :ref:`(40) <Eq:eq:lin:ls1a>` with respect to :math:`a_0`, and inserting the expression into equation :ref:`(41) <Eq:eq:lin:ls2b>`, we find:
 
-.. _Eq:eq:nlin:ls1c:
+.. _Eq:eq:lin:ls1c:
 
 .. math::
 
@@ -438,7 +443,7 @@ Solving equation :ref:`(40) <Eq:eq:nlin:ls1a>` with respect to :math:`a_0`, and 
     a_0=\overline{y}-a_1\overline{x}, 
         
 
-.. _Eq:eq:nlin:ls2d:
+.. _Eq:eq:lin:ls2d:
 
 .. math::
 
@@ -449,16 +454,16 @@ Solving equation :ref:`(40) <Eq:eq:nlin:ls1a>` with respect to :math:`a_0`, and 
         
 
 We leave it as an exercise to show the last expression for :math:`a_1`.  
-Clearly the equation :ref:`(43) <Eq:eq:nlin:ls2d>` above will in most cases have
+Clearly the equation :ref:`(43) <Eq:eq:lin:ls2d>` above will in most cases have
 a solution. But in addition to a solution, it would be good to have an
 idea of the goodness of the fit. Intuitively it make sense to add all
-the distances (residuals) :math:`d_i` in figure :ref:`fig:nlin:reg`. This is
+the distances (residuals) :math:`d_i` in figure :ref:`fig:lin:reg`. This is
 basically what is done when calculating :math:`R^2` (R-squared). However, we
 would also like to compare the :math:`R^2` between different
 datasets. Therefor we need to normalize the sum of residuals, and
 therefore the following form of the :math:`R^2` is used:
 
-.. _Eq:eq:nlin:r2:
+.. _Eq:eq:lin:r2:
 
 .. math::
 
@@ -467,7 +472,7 @@ therefore the following form of the :math:`R^2` is used:
         
         
 
-In python we can implement equation :ref:`(42) <Eq:eq:nlin:ls1c>`, :ref:`(43) <Eq:eq:nlin:ls2d>` and :ref:`(44) <Eq:eq:nlin:r2>` as:
+In python we can implement equation :ref:`(42) <Eq:eq:lin:ls1c>`, :ref:`(43) <Eq:eq:lin:ls2d>` and :ref:`(44) <Eq:eq:lin:r2>` as:
 
 .. code-block:: python
 
@@ -508,7 +513,7 @@ and
 If we define a matrix :math:`\mathbf{X}` containing the observations :math:`x_i`
 as:
 
-.. _Eq:eq:nlin:mreg1:
+.. _Eq:eq:lin:mreg1:
 
 .. math::
 
@@ -525,9 +530,9 @@ as:
 
 We introduce a vector containing all the response :math:`\mathbf{y}`, and the
 regression coefficients :math:`\mathbf{a}=(a_0,a_1)`. Then we can write
-equation :ref:`(37) <Eq:eq:nlin:lsqm>` as a matrix equation:
+equation :ref:`(37) <Eq:eq:lin:lsqm>` as a matrix equation:
 
-.. _Eq:eq:nlin:mregS:
+.. _Eq:eq:lin:mregS:
 
 .. math::
 
@@ -538,10 +543,10 @@ equation :ref:`(37) <Eq:eq:nlin:lsqm>` as a matrix equation:
 
 *Note that this equation can easily be extended to more than one
 observation variable $x_i$*. By simply differentiating equation
-:ref:`(46) <Eq:eq:nlin:mregS>` with respect to :math:`\mathbf{a}`, we can show that
+:ref:`(46) <Eq:eq:lin:mregS>` with respect to :math:`\mathbf{a}`, we can show that
 the derivative has a minimum when:
 
-.. _Eq:eq:nlin:mregS2:
+.. _Eq:eq:lin:mregS2:
 
 .. math::
 
@@ -550,7 +555,7 @@ the derivative has a minimum when:
         
         
 
-Below is a python implementation of equation :ref:`(47) <Eq:eq:nlin:mregS2>`.
+Below is a python implementation of equation :ref:`(47) <Eq:eq:lin:mregS2>`.
 
 .. code-block:: python
 
@@ -662,7 +667,7 @@ tridiagonal matrix to the following form:
 
 where:
 
-.. _Eq:eq:nlin:th0:
+.. _Eq:eq:lin:th0:
 
 .. math::
 
@@ -671,7 +676,7 @@ where:
          
         
 
-.. _Eq:eq:nlin:thi:
+.. _Eq:eq:lin:thi:
 
 .. math::
 
@@ -689,7 +694,7 @@ simplified as there are a lot of zeros in the upper part. Let us
 denote the unknowns :math:`x_i` as we did for the Gauss-Jordan case, now we
 can find the solution as follows:
 
-.. _Eq:eq:nlin:this0:
+.. _Eq:eq:lin:this0:
 
 .. math::
 
@@ -697,7 +702,7 @@ can find the solution as follows:
     x_{N-1}  = r_{N-1}^\prime  
         
 
-.. _Eq:eq:nlin:thisi:
+.. _Eq:eq:lin:thisi:
 
 .. math::
 
@@ -706,8 +711,8 @@ can find the solution as follows:
         
         
 
-Equation :ref:`(52) <Eq:eq:nlin:th0>`, :ref:`(53) <Eq:eq:nlin:thi>`, :ref:`(54) <Eq:eq:nlin:this0>`
-and :ref:`(55) <Eq:eq:nlin:thisi>` is known as the Thomas algorithm after
+Equation :ref:`(52) <Eq:eq:lin:th0>`, :ref:`(53) <Eq:eq:lin:thi>`, :ref:`(54) <Eq:eq:lin:this0>`
+and :ref:`(55) <Eq:eq:lin:thisi>` is known as the Thomas algorithm after
 Llewellyn Thomas. 
 
 .. note::
@@ -881,7 +886,7 @@ central difference for the derivative allows us to write:
 .. math::
 
     \tag{65}
-    \left.\frac{dT}{dy}\right|_{y=0}=\frac{T_{-1}-T_1}{2h},
+    \left.\frac{dT}{dy}\right|_{y=0}=\frac{T_{-1}-T_1}{2h}=0,
         
         
 
@@ -930,7 +935,7 @@ hence :math:`T_{-1}=T_1`. Thus the final set of equations are:
     \tag{70}
     or in matrix form:
 
-.. _Eq:_auto22:
+.. _Eq:eq:lin:heats:
 
 .. math::
 
@@ -966,7 +971,87 @@ hence :math:`T_{-1}=T_1`. Thus the final set of equations are:
 Note that it is now easy to increase :math:`N` as it is only the boundaries
 that requires special attention. The set of equations can be solved
 using `scipy.sparse.linalg.spsolve <https://docs.scipy.org/doc/scipy/reference/sparse.linalg.html>`__.
-The solution to the above equations is :math:`L=1` m, and :math:`h=14`, is: :math:`[T_0,T_1.T_2,T_3]=[38.88888889 38.02083333 35.41666667 31.07638889]`.
+The solution to the above equations is :math:`L=1` m, and :math:`h=1/4`, is: :math:`[T_0,T_1.T_2,T_3]=[38.88888889, 38.02083333, 35.41666667, 31.07638889]`.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+
+.. note::
+   The solution below implements equation :ref:`(71) <Eq:eq:lin:heats>` using sparse matrices, and the standard Numpy ``solve`` function. You can use the ``%timeit`` magic command in Ipython and Jupyter notebooks to test the efficiency.
+
+
+
+
+.. code-block:: python
+
+    #%matplotlib inline
+    import numpy as np
+    import scipy as sc
+    import scipy.sparse.linalg
+    from numpy.linalg import solve
+    import matplotlib.pyplot as plt
+    
+    # Set simulation parameters
+    h = 0.25              # element size
+    L = 1.0              # length of domain
+    n = int(round(L/h))  # number of unknowns 
+    x=np.arange(n+1)*h   # includes right bc 
+    T1=25
+    sigma = 100*L**2/1.65
+    
+    def tri_diag(a, b, c, k1=-1, k2=0, k3=1):
+        """ a,b,c diagonal terms """
+        return np.diag(a, k1) + np.diag(b, k2) + np.diag(c, k3)
+    
+    def analytical(sigma,x):
+        return sigma*(1-x*x)/2+T1
+    
+    #Create matrix for linalg solver
+    a=np.ones(n-1)
+    b=-np.ones(n)*2
+    c=np.ones(n-1)
+    #Create matrix for sparse solver
+    diagonals=np.zeros((3,n))
+    diagonals[0,:]= 1
+    diagonals[1,:]= -2  
+    diagonals[2,:]= 1
+    
+    # rhs vector
+    d=np.repeat(-h*h*sigma,n)
+    
+    #----boundary conditions ------
+    #lhs - no flux of heat
+    diagonals[2,1]= 2
+    c[0]=2
+    #rhs - constant temperature
+    d[n-1]=d[n-1]-T1
+    #------------------------------
+    
+    A=tri_diag(a,b,c)
+    A_sparse = sc.sparse.spdiags(diagonals, [-1,0,1], n, n,format='csc') 
+    
+    #Solve linear problems
+    Ta = solve(A,d,)
+    Tb = sc.sparse.linalg.spsolve(A_sparse,d)
+    #Add right boundary node
+    Ta=np.append(Ta,T1)
+    Tb=np.append(Tb,T1)
+    #uncomment to test efficiency
+    #%timeit sc.sparse.linalg.spsolve(A_sparse,d)
+    #%timeit solve(A,d,)
+    
+    # Plot solutions
+    plt.plot(x,Ta,x,Tb,'-.',x,analytical(sigma,x),':', lw=3)
+    plt.xlabel("Dimensionless length")
+    plt.ylabel(r"Temperature [$^\circ$C]")
+    plt.xlim(0,1)
+    plt.ylim(T1-1)
+    plt.legend(['sparse','linalg','analytical'])
+    plt.grid()
+    plt.show()
+
+.. --- end solution of exercise ---
 
 .. --- end exercise ---
 
