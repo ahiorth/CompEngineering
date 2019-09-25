@@ -1,0 +1,1168 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="MOD510: Mandatory project `#2`">
+
+<title>MOD510: Mandatory project `#2`</title>
+
+<!-- Bootstrap style: bootswatch_readable -->
+<link href="https://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:64px;      /* fixed header height for style bootswatch_readable */
+  margin:-64px 0 0; /* negative fixed header height */
+}
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Table of contents',
+               1,
+               'table_of_contents',
+               'table_of_contents'),
+              ("Darcy's law for incompressible fluid flow",
+               1,
+               'sec:incompressible_flow_darcy',
+               'sec:incompressible_flow_darcy'),
+              ('Steady-state radial flow from a well',
+               1,
+               'sec:ss_radial_well',
+               'sec:ss_radial_well'),
+              ('Finite difference discretization',
+               2,
+               'sec:ss_radial_well_FD',
+               'sec:ss_radial_well_FD'),
+              ('Streamlines',
+               1,
+               'sec:streamline_theory',
+               'sec:streamline_theory'),
+              ('Exercise 1: Radial flow from a single well',
+               1,
+               'laplace_radial_finite_difference',
+               'laplace_radial_finite_difference'),
+              ('Exercise 2: Velocity field for a system of wells',
+               1,
+               'fluid_flow_wells',
+               'fluid_flow_wells'),
+              ('Exercise 3: Tracing streamlines for a well pair',
+               1,
+               'tracing_streamlines',
+               'tracing_streamlines'),
+              ('Exercise 4: Predict tracer production profiles',
+               1,
+               None,
+               '___sec7'),
+              ('Guidelines for project submission', 1, None, '___sec8'),
+              ('Bibliography', 1, None, '___sec9')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript" async
+ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="project2-readable.html">MOD510: Mandatory project `#2`</a>
+  </div>
+
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._project2-readable000.html#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
+     <!-- navigation toc: --> <li><a href="#sec:incompressible_flow_darcy" style="font-size: 80%;"><b>Darcy's law for incompressible fluid flow</b></a></li>
+     <!-- navigation toc: --> <li><a href="#sec:ss_radial_well" style="font-size: 80%;"><b>Steady-state radial flow from a well</b></a></li>
+     <!-- navigation toc: --> <li><a href="#sec:ss_radial_well_FD" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Finite difference discretization</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:streamline_theory" style="font-size: 80%;"><b>Streamlines</b></a></li>
+     <!-- navigation toc: --> <li><a href="#laplace_radial_finite_difference" style="font-size: 80%;"><b>Exercise 1: Radial flow from a single well</b></a></li>
+     <!-- navigation toc: --> <li><a href="#fluid_flow_wells" style="font-size: 80%;"><b>Exercise 2: Velocity field for a system of wells</b></a></li>
+     <!-- navigation toc: --> <li><a href="#tracing_streamlines" style="font-size: 80%;"><b>Exercise 3: Tracing streamlines for a well pair</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec7" style="font-size: 80%;"><b>Exercise 4: Predict tracer production profiles</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec8" style="font-size: 80%;"><b>Guidelines for project submission</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec9" style="font-size: 80%;"><b>Bibliography</b></a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0001"></a>
+<!-- !split -->
+
+<h1 id="sec:incompressible_flow_darcy" class="anchor">Darcy's law for incompressible fluid flow</h1>
+
+<p>
+To make the later derivations as simple as possible, we assume that
+a) only a single fluid phase is flowing, b) that flow
+is <a href="https://en.wikipedia.org/wiki/Incompressible_flow" target="_self">incompressible</a>, and
+c) that <a href="https://en.wikipedia.org/wiki/Inertia" target="_self">inertial forces</a>
+are negligible, so that
+<a href="https://en.wikipedia.org/wiki/Darcy%27s_law" target="_self">Darcy's law</a> holds:
+Under the these assumptions, we may model the macroscopic fluid motion
+via the equations
+$$
+\begin{align}
+\tag{1}
+\nabla\cdot\vec{u} =0 &\text{ (incompressible flow)} \\ 
+\tag{2}
+\vec{u} =-\frac{k}{\mu}\cdot\left(\nabla{P-\rho\vec{g}}\right) &\text{ (Darcy's law)}\,,
+\end{align}
+$$
+
+in which \( \vec{u}[\mathrm{LT^{-1}}] \) represents the flux / discharge of
+fluid (volume per unit area per unit time),
+\( k[\mathrm{L^2}] \) is
+<a href="https://en.wikipedia.org/wiki/Permeability_(earth_sciences)" target="_self">permeability</a>,
+\( \mu[\mathrm{ML^{-1}T^{-1}}] \) is viscosity, \( P[\mathrm{ML^{-1}T^{-2}}] \)
+is fluid pressure, \( \rho[\mathrm{ML^{-3}}] \) is fluid density, and
+\( \vec{g}[\mathrm{MT^{-2}}] \)
+is the vector of gravitational acceleration.
+
+<p>
+The porous medium is idealized so that we may take it as both
+<a href="https://en.wikipedia.org/wiki/Homogeneity_(physics)" target="_self">homogeneous</a> and
+<a href="https://en.wikipedia.org/wiki/Isotropy" target="_self">isotropic</a>, the effect of gravity
+is disregarded, and the fluid phase is assumed to have a constant
+<a href="https://en.wikipedia.org/wiki/Viscosity" target="_self">viscosity</a>.
+By combining <a href="#mjx-eqn-1">(1)</a> and <a href="#mjx-eqn-2">(2)</a> we then
+find
+$$
+\begin{align}
+-\frac{k}{\mu}\nabla^2 P =0 \,,
+\tag{3}
+\end{align}
+$$
+
+or
+$$
+\begin{align}
+\nabla^2 \phi = 0 \,,
+\tag{4}
+\end{align}
+$$
+
+where we have defined a
+<a href="https://en.wikipedia.org/wiki/Potential_flow" target="_self">potential</a>
+field
+$$
+\begin{align}
+\phi\equiv -\frac{k}{\mu}\cdot{P}\,.
+\tag{5}
+\end{align}
+$$
+
+<p>
+This is just the
+<a href="https://en.wikipedia.org/wiki/Laplace%27s_equation" target="_self">Laplace equation</a>.
+
+<h1 id="sec:ss_radial_well" class="anchor">Steady-state radial flow from a well</h1>
+
+<p>
+The goal of the first part of the project will be to model the pressure
+distribution near a well for the following setup: an injection well is
+placed in the middle of a cylindrical porous medium, it is operated by
+pumping in fluid at a constant volumetric flow rate \( Q \), while the
+pressure at the exterior boundary \( r=r_e \) is taken to be a fixed value,
+$$
+\begin{equation}
+\tag{6}
+P\left(r=r_{e}\right)=P_e\,,
+\end{equation}
+$$
+
+for some \( P_e \). The point at which the fluid enters the formation is
+the well radius, \( r=r_w \). We wish to be able to calculate the steady-state
+pressure distribution inside the formation, i.e., between \( r_w \) and \( r_e \).
+
+<p>
+<center> <!-- figure label: --> <div id="fig:radial_well"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 1:  Radial flow from a well.  <!-- caption label: fig:radial_well --> </p></center>
+<p><img src="project2_figs/rwell.png" align="bottom" ></p>
+</center>
+
+<p>
+In cylindrical coordinates, the Laplace equation becomes:
+
+$$
+\begin{equation}
+\tag{7}
+\nabla^{2}\phi=\frac{1}{r}\frac{\partial}{\partial r}
+\left(r\frac{\partial\phi}{\partial r}\right)
++\frac{1}{r^2}\frac{\partial^2 \phi}{\partial\theta^2}
++\frac{\partial^2 \phi}{\partial{z}^2}=0\,,
+\end{equation}
+$$
+
+where \( (r, \theta, z) \) are the coordinates. A considerable simplification
+occurs for the situation we wish to model, in which flow is assumed to be
+perfectly radial. Then, the scalar potential \( \phi \) is a function of the
+\( r \)-coordinate only, i.e., the last two terms in the equation above vanish:
+$$
+\begin{equation}
+\tag{8}
+\nabla^{2}\phi=\frac{1}{r}\frac{\mathrm{d}}{\mathrm{d}r}
+\left(r\frac{\mathrm{d}\phi}{\mathrm{d}r}\right)=0\,.
+\end{equation}
+$$
+
+<p>
+We wish to calculate the steady-state pressure distribution near the
+well numerically with finite differences. That is, we have to solve
+$$
+\begin{equation}
+\tag{9}
+\frac{\mathrm{d}}{\mathrm{d}r}
+\left(r\frac{\mathrm{d}\phi}{\mathrm{d}r}\right)=0\,,
+\end{equation}
+$$
+
+subject to boundary condition <a href="#mjx-eqn-6">(6)</a>, as well as the fixed
+inflow rate condition at the well:
+$$
+\begin{equation}
+\tag{10}
+Q=2\pi{h}r_w \cdot u(r_w) ={2\pi{h} r_w}\cdot
+\left.
+\frac{\mathrm{d}\phi}{\mathrm{d}r}
+\right|_{r=r_w}\,,
+\end{equation}
+$$
+
+where \( u(r_w) \) is the radial flux at the location of the well (the well
+radius), and \( h \) is the (constant) thickness of the porous medium.
+
+<h2 id="sec:ss_radial_well_FD" class="anchor">Finite difference discretization</h2>
+
+<p>
+We divide the total domain into \( N \) cylindrical shells. As illustrated in
+the figure below, we place our grid points in the <em>middle</em> of each cylinder.
+
+<p>
+<center> <!-- figure label: --> <div id="fig:radial_grid"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 2:  Top view of radial grid (\( N=5 \)).  <!-- caption label: fig:radial_grid --> </p></center>
+<p><img src="project2_figs/radial_grid.png" align="bottom" ></p>
+</center>
+
+<p>
+The figure makes use of a fixed grid spacing, but in practice one would often
+choose \( \Delta{r} \) so that each block has the same volume. Hence, for
+generality we will allow the grid spacing to vary in our mathematical
+derivations.
+
+<p>
+The outer radius of grid block \( i \) is:
+$$
+\begin{equation}
+r_{out}^i \equiv r_{i+1/2}=r_i+\frac{\Delta{r}_i}{2} =
+r_w+\displaystyle\sum_{k=0}^{i} \Delta{r}_k\,.
+\tag{11}
+\end{equation}
+$$
+
+Similarly, the inner radius is
+$$
+\begin{equation}
+r_{in}^i \equiv r_{i-1/2}=r_i-\frac{\Delta{r}_i}{2} =
+r_w+\displaystyle\sum_{k=0}^{i-1} \Delta{r}_k = r_{i+1/2} - \Delta{r}_i\,.
+\tag{12}
+\end{equation}
+$$
+
+<p>
+We index our grid blocks starting from zero, \( i=0, 1, \ldots, N-1 \).
+Letting \( f(r)=r\phi^{\prime}(r) \), equation <a href="#mjx-eqn-9">(9)</a>
+for grid point \( i \) can be converted to discrete form as follows:
+$$
+\begin{equation}
+\tag{13}
+0=\left.\frac{\mathrm{d}f(r)}{\mathrm{d}r}\right|_i
+\approx\frac{f(r_{i+1/2})-f(r_{i-1/2})}{\Delta{r}}\,.
+\end{equation}
+$$
+
+<p>
+We also need to find a way to evaluate the function \( f \) at the edges
+of the grid blocks. For the <em>inner</em> grid points we can use centered finite
+differences once more, i.e.,
+$$
+\begin{align}
+f(r_{i+1/2})&=r_{i+1/2}\cdot
+\left.\frac{\mathrm{d}\phi}{\mathrm{d}r}\right|_{r={r_i+1/2}} 
+\tag{14}\\ 
+&\approx r_{i+1/2}\cdot\frac{\phi_{i+1}-\phi_i}{\frac{1}{2}(\Delta{r}_i+\Delta{r}_{i+1})}
+\,,
+\tag{15}
+\end{align}
+$$
+
+and
+$$
+\begin{align}
+f(r_{i-1/2})&=r_{i-1/2}\cdot
+\left.\frac{\mathrm{d}\phi}{\mathrm{d}r}\right|_{r={r_i-1/2}} 
+\tag{16}\\ 
+&\approx r_{i-1/2}\cdot\frac{\phi_{i}-\phi_{i-1}}{\frac{1}{2}(\Delta{r}_{i-1}+\Delta{r}_{i})}
+\,.
+\tag{17}
+\end{align}
+$$
+
+<p>
+With the above approximations, we get the following numerical scheme for
+the inner grid points \( i=1, \ldots, N-2 \):
+$$
+\begin{align}
+\tag{18}
+T_{i+1/2}\left(\phi_{i+1}-\phi_i\right)-
+T_{i-1/2}\left(\phi_{i}-\phi_{i-1}\right)=0\,,
+\end{align}
+$$
+
+where we have defined a set of constant <em>transmissibility factors</em>:
+$$
+\begin{align}
+\tag{19}
+T_{i+1/2}=\frac{2r_{i+1/2}}{\Delta{r}_{i}(\Delta{r}_i+\Delta{r}_{i+1})}
+\,.
+\end{align}
+$$
+
+<p>
+For the first grid point \( i=0 \) we see that we have a problem, because
+formula <a href="#mjx-eqn-18">(18)</a> requires us to compute
+quantities outside of the defined grid (i.e., <em>inside</em> the well):
+$$
+\begin{equation}
+T_{1/2}\left(\phi_{1}-\phi_0\right)-
+{\color{red}T_{-1/2}}\left(\phi_{0}-{\color{red}\phi_{-1}}\right)=0\,,
+\tag{20}
+\end{equation}
+$$
+
+<p>
+However, the second term in the above equation is really a finite
+difference approximation to the flux out of the well:
+$$
+\begin{equation}
+\tag{21}
+T_{-1/2}\left(\phi_{0}-\phi_{-1}\right)\approx
+\frac{\left.
+r\frac{\mathrm{d}\phi}{\mathrm{d}r}
+\right|_{r=r_w}}{\Delta{r}_0}=
+\frac{Q}{2\pi{h}\Delta{r}_0}\,.
+\end{equation}
+$$
+
+<p>
+Thus, we simply replace this expression by a constant term that goes
+on the right-hand side of the equation.
+
+<p>
+Similarly, for the last grid point \( i=N-1 \)
+formula <a href="#mjx-eqn-18">(18)</a> becomes:
+$$
+\begin{align}
+{\color{red}T_{(N-1)+1/2}}\left({\color{red}\phi_{N}}-\phi_{N-1}\right)-
+T_{(N-1)-1/2}\left(\phi_{N-1}-\phi_{N-2}\right)=0\,,
+\tag{22}
+\end{align}
+$$
+
+and this requires us to make evaluations outside of the defined
+external grid boundary. However, since we know the pressure at \( r=r_e \),
+we also know the value \( \phi_e=\phi(r=r_e) \) there. Thus, in the equation
+above we replace \( \phi_N \) by \( \phi_e \), and we use a slightly different
+approximation than before to compute the transmissibility factor,
+
+$$
+\begin{align}
+f(r_{i+1/2})=f(r_{(N-1)+1/2})&=r_{e}\cdot
+\left.\frac{\mathrm{d}\phi}{\mathrm{d}r}\right|_{r=r_e} 
+\tag{23}\\ 
+&\approx r_{e}\cdot\frac{\phi_{e}-\phi_{N-1}}{\frac{\Delta{R}_{N-1}}{2}}
+\,,
+\tag{24}
+\end{align}
+$$
+
+so that we may take
+$$
+\begin{align}
+\tag{25}
+T_{(N-1)+1/2}=\frac{2r_e}{\Delta{r}_{N-1}^2}
+\,.
+\end{align}
+$$
+
+<h1 id="sec:streamline_theory" class="anchor">Streamlines</h1>
+
+<p>
+Given a (velocity) vector field \( \vec{v} \), a streamline is a curve everywhere
+tangential to the direction of \( \vec{v} \).
+If \( \vec{dr}=(dx, dy) \) represents an infinitesimal distance along a streamline,
+by definition \( \vec{dr} \) must be parallel to the velocity field.
+In two dimensions, this means that:
+$$
+\begin{equation}
+\frac{dx}{v_x}=\frac{dy}{v_y}\,,
+\tag{26}
+\end{equation}
+$$
+
+where \( \vec{v}=(v_v, v_y) \) is the velocity field.
+
+<p>
+<center> <!-- figure label: --> <div id="fig:stl_viz"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 3:  A streamline (solid curve) is everywhere tangent to the direction of the vector (e.g, velocity) field (arrows).  <!-- caption label: fig:stl_viz --> </p></center>
+<p><img src="project2_figs/stl_viz.png" align="bottom" ></p>
+</center>
+
+<p>
+We remark that for non-steady flow, streamlines are different from
+<em>pathlines</em>. While the latter are the actual physical trajectories followed
+by particles in the flow field, streamlines provide a 'snapshot' of
+the field at any given moment in time. However, in this project we shall
+assume the velocity field to be frozen in time, so that pathlines and
+streamlines are the same. If a non-reacting fluid particle is placed at
+a point \( (x(0), y(0)) \) at time \( t=0 \), we then have
+$$
+\begin{align}
+\frac{dx(t)}{dt}&=v_x(x(t),y(t))
+\tag{27}\\ 
+\frac{dy(t)}{dt}&=v_y(x(t),y(t))\,,
+\tag{28}
+\end{align}
+$$
+
+where \( (x(t), y(t)) \) is the position of the particle at time \( t \).
+At time \( t>0 \), the position of the particle is therefore
+$$
+\begin{align}
+\tag{29}
+x(t)&=x(0)+\int_{0}^{t} v_x(x(t^{\prime}),y(t^{\prime}))\, dt^{\prime} \\ 
+\tag{30}
+y(t)&=y(0)+\int_{0}^{t} v_y(x(t^{\prime}),y(t^{\prime}))\, dt^{\prime}\,.
+\end{align}
+$$
+
+<!-- \vec{r}(t)= -->
+
+<h1 id="laplace_radial_finite_difference" class="anchor">Exercise 1: Radial flow from a single well</h1>
+
+<p>
+<b>Part 1.</b>
+
+<p>
+By combining equations <a href="#mjx-eqn-18">(18)</a>,
+<a href="#mjx-eqn-19">(19)</a>, <a href="#mjx-eqn-21">(21)</a>,
+and <a href="#mjx-eqn-25">(25)</a>, we obtain a matrix equation
+\( A\vec{\phi}=\vec{b} \), where \( \vec{\phi} \) holds the values of the
+potential function at each of the \( N \) grid points.
+
+<p>
+For the case \( N=5 \), show that the coefficient matrix \( A \) becomes
+$$
+\begin{align*}
+A =
+\left[ {\begin{array}{ccccc}
+-T_{1/2} & T_{1/2} & 0 & 0 & 0 \\ 
+T_{1/2} & -(T_{1/2}+T_{3/2}) & T_{3/2} & 0 & 0 \\ 
+0 & T_{3/2} & -(T_{3/2}+T_{5/2}) & T_{5/2} & 0 \\ 
+0 & 0 & T_{5/2} & -(T_{5/2}+T_{7/2}) & T_{7/2} \\ 
+0 & 0 & 0 & T_{7/2} & -(T_{7/2}+T_{9/2}) \\ 
+\end{array} } \right]\,,
+\end{align*}
+$$
+
+<p>
+What is the right-hand side vector?
+
+<p>
+<b>Part 2.</b>
+The goal is to write a Python program that calculates the estimated
+pressure distribution at the midpoint of each radial grid block.
+
+<p>
+First, we need to set up the grid. Finish writing the following Python
+code:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>n_blocks <span style="color: #666666">=</span> <span style="color: #666666">5</span>  <span style="color: #408080; font-style: italic"># number of grid blocks / points</span>
+r_well <span style="color: #666666">=</span> <span style="color: #666666">0.1</span>  <span style="color: #408080; font-style: italic"># well radius (m)</span>
+r_exterior <span style="color: #666666">=</span> <span style="color: #666666">20.0</span>  <span style="color: #408080; font-style: italic"># outer boundary (m)</span>
+
+<span style="color: #408080; font-style: italic"># Use a constant grid spacing (at least for now):</span>
+radial_grid_edges <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(r_well, r_exterior, n_blocks<span style="color: #666666">+1</span>)
+dr_vec <span style="color: #666666">=</span> radial_grid_edges[<span style="color: #666666">1</span>:]<span style="color: #666666">-</span>radial_grid_edges[<span style="color: #666666">0</span>:<span style="color: #666666">-1</span>]
+
+<span style="color: #408080; font-style: italic"># To do: Calculate grid points r_i, and store them in an array:</span>
+radial_grid_midpoints <span style="color: #666666">=</span> <span style="color: #666666">...</span>
+</pre></div>
+<p>
+<b>Part 3.</b>
+Next, we need to select values for the other input parameters in our model,
+e.g.:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>    <span style="color: #408080; font-style: italic"># Constant formation and fluid properties:</span>
+    viscosity <span style="color: #666666">=</span> <span style="color: #666666">1.0e-3</span>  <span style="color: #408080; font-style: italic"># 1 cP = 0.001 Pa*s</span>
+    permeability <span style="color: #666666">=</span> <span style="color: #666666">1.0e-12</span>  <span style="color: #408080; font-style: italic"># m2</span>
+    h <span style="color: #666666">=</span> <span style="color: #666666">2.0</span>  <span style="color: #408080; font-style: italic"># formation height (m)</span>
+
+    <span style="color: #408080; font-style: italic"># Boundary conditions:</span>
+    Q <span style="color: #666666">=</span> <span style="color: #666666">21.0/3600.0</span>  <span style="color: #408080; font-style: italic"># 21 m3/hr --&gt; m3/sec</span>
+    p_exterior <span style="color: #666666">=</span> <span style="color: #666666">100.0e5</span>  <span style="color: #408080; font-style: italic"># 100 bar ---&gt; Pa</span>
+</pre></div>
+<p>
+Finally, we must set up and solve the matrix equation.
+During the implementing stage, it is recommended to use
+<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.solve.html" target="_self">numpy.linalg.solve</a>
+for the solution part, e.g.:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #408080; font-style: italic"># Grid transmissibility factors for grid edges:</span>
+T <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros(n_blocks<span style="color: #666666">+1</span>)  <span style="color: #408080; font-style: italic"># T_-0.5, T_0.5, T_1.5, ...,</span>
+
+<span style="color: #408080; font-style: italic"># Compute T_(i+1/2) for internal grid points:</span>
+<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(n_blocks<span style="color: #666666">-1</span>):
+    <span style="color: #666666">...</span> <span style="color: #408080; font-style: italic"># implement here</span>
+    T[i<span style="color: #666666">+1</span>] <span style="color: #666666">=</span> <span style="color: #666666">...</span>
+
+<span style="color: #408080; font-style: italic"># Compute transmissibilities at grid boundaries:</span>
+T[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> <span style="color: #666666">...</span>
+T[<span style="color: #666666">-1</span>] <span style="color: #666666">=</span> <span style="color: #666666">...</span>
+
+<span style="color: #408080; font-style: italic"># Setup and solve matrix equation:</span>
+A <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros(shape<span style="color: #666666">=</span>(n_blocks, n_blocks))
+b <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros(n_blocks)
+
+<span style="color: #666666">...</span>  <span style="color: #408080; font-style: italic"># include code here</span>
+
+phi_sol <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linalg<span style="color: #666666">.</span>solve(A, b)
+pressure_sol <span style="color: #666666">=</span> <span style="color: #666666">...</span> <span style="color: #408080; font-style: italic"># convert to pressure</span>
+</pre></div>
+<p>
+Note: It can help to wrap your solution algorithm inside a function, so that
+you can easily test it later for different values of \( N \).
+
+<p>
+<b>Part 4.</b>
+Going back to equation <a href="#mjx-eqn-9">(9)</a>, show that
+the analytical solution to the steady-state pressure at radial distance
+\( r \) from the well is:
+$$
+\begin{equation}
+P(r) = P_e - \frac{Q\mu}{2\pi{k}h}\cdot\ln\left(\frac{r}{r_e}\right)\,.
+\tag{31}
+\end{equation}
+$$
+
+<p>
+Verify that your numerical solution seems to converge to the exact one as
+\( \Delta{r}\rightarrow{0} \).
+
+<p>
+<b>Part 5.</b>
+
+<p>
+Once everything seems to be working, investigate how much you are able to
+speed up your program if you use a sparse matrix solver, compared to
+if you use the standard
+<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.solve.html" target="_self">dense matrix solver</a>.
+
+<p>
+<b>(Optional) Part 6.</b>
+Adapt your code so that it also handles the case with a constant pressure
+at the well. For this case the analytical solution is most conveniently
+displayed as:
+$$
+\begin{equation}
+P(r) = P_w + \frac{P_e-P_w}{\ln\left(\frac{r_e}{r_w}\right)}\cdot
+\ln\left(\frac{r}{r_w}\right)\,.
+\tag{32}
+\end{equation}
+$$
+
+<h1 id="fluid_flow_wells" class="anchor">Exercise 2: Velocity field for a system of wells</h1>
+
+<p>
+If the surrounding medium is very large, we may neglect the finite radius
+of the well, and model it as a point source/sink term in the governing
+fluid flow equations.
+Assuming flow to/from a well to be perfectly radial in nature
+and governed by Darcy's law, we have for the case of a single well that
+$$
+\begin{equation}
+u(r)=\frac{\mathrm{d}\phi}{\mathrm{d}{r}}=\frac{{Q}}{2\pi{h}{r}}\,,
+\tag{33}
+\end{equation}
+$$
+
+in radial coordinates, where \( u=u(r) \) is the radial Darcy flux at
+position \( r \), and \( \phi=\phi(r)=-(k/\mu)p(r) \) is the potential scalar
+field there.
+Hence, it follows from a simple integration that
+$$
+\begin{equation}
+\tag{34}
+\phi=\frac{{Q}}{2\pi{h}}\cdot\ln(r)+C=
+\frac{{Q}}{4\pi{h}}\cdot\ln\left\{(x-x_{w})^2+(y-y_{w})^2\right\}+C
+\end{equation}
+$$
+
+in Cartesian coordinates, where \( r=\sqrt{(x-x_w)^2+(y-y_w)^2} \) is the
+distance to a given point from the location of the well, \( (x_w,y_w) \).
+We do not really care about the numerical value of the constant term \( C \);
+when we take the derivative of \( \phi \) to obtain velocity, it disappears.
+
+<p>
+Suppose instead that we have \( N_w \) wells. Let \( (x_i,y_i) \) denote the
+location of well \( i \), and let \( Q_i \) be the volumetric flow rate of well
+\( i \), with \( Q_i>0 \) for injectors and \( Q_i < 0 \) for producers.
+By the
+<a href="https://en.wikipedia.org/wiki/Superposition_principle" target="_self">superposition principle</a>,
+it can be shown that the total fluid potential is simply the sum of the
+potentials for each well.
+
+<p>
+<b>Part 1.</b>
+The Darcy flux \( \vec{u} \) measures the rate of fluid flow through cross-sections
+of the porous medium. However, as the injected fluid has to move around the
+solid particles (grains), the average macroscopic velocity of fluid particles
+traveling through the medium has to account for porosity, \( n \):
+$$
+\begin{equation}
+\vec{v}=\frac{\vec{u}}{n}\,.
+\tag{35}
+\end{equation}
+$$
+
+<p>
+Show that for the general case of \( N_w \) wells with arbitrary placements,
+the resulting velocity field \( \vec{v}=(v_x,v_y) \) is given by
+
+$$
+\begin{equation}
+\tag{36}
+v_x=\frac{1}{n}\frac{\mathrm{d}\phi}{\mathrm{d}x}=\frac{1}{2\pi{h}n}\cdot\displaystyle\sum_{i=0}^{N_w-1}
+\frac{Q_{i}(x-x_i)}{(x-x_i)^2+(y-y_i)^2}\,,
+\end{equation}
+$$
+
+<p>
+and
+
+$$
+\begin{equation}
+\tag{37}
+v_y=\frac{1}{n}\frac{\mathrm{d}\phi}{\mathrm{d}y}=\frac{1}{2\pi{h}n}\cdot\displaystyle\sum_{i=0}^{N_w-1}
+\frac{Q_{i}(y-y_i)}{(x-x_i)^2+(y-y_i)^2}\,.
+\end{equation}
+$$
+
+<p>
+<b>Part 2.</b>
+Consider the special case of a <em>well doublet</em>: we have two wells,
+an injector located at \( (d,0) \), and a producer at \( (-d,0) \). Let the constant
+injection rate be \( Q>0 \). Show that in this situation, the components of
+the velocity vector field are:
+
+$$
+\begin{equation}
+\tag{38}
+v_x=\frac{Q}{2\pi{h}n}\cdot
+\left\{
+\frac{x-d}{(x-d)^2+y^2}-\frac{x+d}{(x+d)^2+y^2}
+\right\}
+\,,
+\end{equation}
+$$
+
+<p>
+and
+
+$$
+\begin{equation}
+\tag{39}
+v_y=\frac{Q}{2\pi{h}n}\cdot
+\left\{
+\frac{y}{(x-d)^2+y^2}-\frac{y}{(x+d)^2+y^2}
+\right\}
+\,.
+\end{equation}
+$$
+
+<p>
+<b>Part 3.</b>
+Later we are going to use numerical calculations to estimate the total travel
+time, or time-of-flight, for a non-reacting fluid particle to traverse
+different streamlines. It is always smart to compare our numerical results
+with known analytical solutions, should they be available.
+For our scenario, the time it takes to travel along the shortest,
+straight-line path from injector to producer is:
+
+$$
+\begin{equation}
+\tau_{0}=\int_{d}^{-d} \frac{dx}{v_x}\,.
+\tag{40}
+\end{equation}
+$$
+
+<p>
+Show by exact integration that:
+
+$$
+\begin{equation}
+\tag{41}
+\tau_{0}=\frac{4\pi{h}{n}{d}^2}{3Q}\,.
+\end{equation}
+$$
+
+<p>
+For a given formation, how will the time until water breakthrough at the
+producer be affected if we double the distance between the wells, but
+keep the flow rate the same?
+
+<p>
+<b>Part 4.</b>
+Finish implementing the following Python routine:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">calc_velocity_well_doublet</span>(x, y, d, Q, h, poro):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    Calculate velocity field for a well doublet: an injector</span>
+<span style="color: #BA2121; font-style: italic">    located at (d,0), and a producer at (-d, 0).</span>
+
+<span style="color: #BA2121; font-style: italic">    :param x: x value(s) at which to compute the velocity (m).</span>
+<span style="color: #BA2121; font-style: italic">    :param y: y value(s) at which to compute the velocity (m).</span>
+<span style="color: #BA2121; font-style: italic">    :param d: Half-distance between injector and producer (m).</span>
+<span style="color: #BA2121; font-style: italic">    :param Q: Volumetric injection rate in m3/s.</span>
+<span style="color: #BA2121; font-style: italic">    :param h: Formation height (m).</span>
+<span style="color: #BA2121; font-style: italic">    :param poro: Constant formation porosity.</span>
+<span style="color: #BA2121; font-style: italic">    :return: Components of velocity vector field: (vx, vy)</span>
+<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+</pre></div>
+<p>
+The function should work equally well whether a single pair of numbers is
+given as input, in which case a single pair of numbers is also returned, or
+if \( x \) and \( y \) are numpy arrays.
+
+<p>
+<b>Part 5.</b>
+
+<p>
+Suppose that \( d=200 \) metres, \( h=110 \) metres, \( n=0.3 \), and \( Q=130 \) cubic metres
+per hour.
+These values are representative of water injection at the Ekofisk field.
+
+<p>
+According to the streamline model, how many days does it take before the
+first injected fluid reaches the producer?
+
+<h1 id="tracing_streamlines" class="anchor">Exercise 3: Tracing streamlines for a well pair</h1>
+
+<p>
+To trace out a streamline curve, we first 'place' an imaginary fluid particle
+at a point very close to the injector. Using equations <a href="#mjx-eqn-29">(29)</a>
+and <a href="#mjx-eqn-30">(30)</a>, we then integrate in a step-by-step
+manner, taking successive time steps until we reach the production well.
+Alternatively, we can start at the producer, and trace backwards until we
+reach an injector. In that case, we need to change the sign of the velocity
+field when doing the integration.
+
+<p>
+<b>Part 1.</b>
+
+<p>
+Unless otherwise is specified, we shall in this exercise assume that
+\( d=8 \) metres, \( h=2 \) metres, \( n=0.25 \), and \( Q=21 \) cubic metres per hour.
+
+<p>
+How many hours does it take before the first injected fluid reaches the
+producer?
+
+<p>
+<b>Part 2.</b>
+
+<p>
+The simplest integration method, though rarely used in practice, is the
+(explicit) Forward <a href="https://en.wikipedia.org/wiki/Euler_method" target="_self">Euler</a>
+method:
+$$
+\begin{align}
+x_{n+1}&=x_n+v_x(x_n, y_n)\cdot\Delta{t} 
+\tag{42}\\ 
+y_{n+1}&=y_n+v_y(x_n, y_n)\cdot\Delta{t} \,.
+\tag{43}
+\end{align}
+$$
+
+Here, \( x_n \) is the approximate value for the true \( x \)-coordinate
+\( x(t_n) \) at the \( n \)-th time step (and similarly for \( y \)).
+
+<p>
+Consider the following Python code:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #408080; font-style: italic"># Define model parameters:</span>
+Q <span style="color: #666666">=</span> <span style="color: #666666">21.0/3600.0</span>  <span style="color: #408080; font-style: italic"># 21 m3/hr</span>
+d <span style="color: #666666">=</span> <span style="color: #666666">8.0</span>  <span style="color: #408080; font-style: italic"># m</span>
+h <span style="color: #666666">=</span> <span style="color: #666666">2.0</span>  <span style="color: #408080; font-style: italic"># m</span>
+poro <span style="color: #666666">=</span> <span style="color: #666666">0.25</span>
+</pre></div>
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #408080; font-style: italic"># Trace out a single streamline:</span>
+dr <span style="color: #666666">=</span> <span style="color: #666666">0.1</span>
+dr2 <span style="color: #666666">=</span> dr<span style="color: #666666">*</span>dr
+dt <span style="color: #666666">=</span> <span style="color: #666666">0.01*3600.</span>  <span style="color: #408080; font-style: italic"># constant time step</span>
+
+stl_x <span style="color: #666666">=</span> []
+stl_y <span style="color: #666666">=</span> []
+stl_dt <span style="color: #666666">=</span> []
+
+x_n <span style="color: #666666">=</span> d<span style="color: #666666">-</span>dr
+y_n <span style="color: #666666">=</span> <span style="color: #666666">0.0</span>
+
+<span style="color: #008000; font-weight: bold">while</span> <span style="color: #008000">True</span>:
+    v_x, v_y <span style="color: #666666">=</span> calc_velocity_well_doublet(x_n, y_n, d, Q, h, poro)
+    x_n <span style="color: #666666">+=</span> v_x<span style="color: #666666">*</span>dt
+    y_n <span style="color: #666666">+=</span> v_y<span style="color: #666666">*</span>dt
+    dist2 <span style="color: #666666">=</span> (x_n<span style="color: #666666">+</span>d)<span style="color: #666666">**2+</span>y_n<span style="color: #666666">**2</span>
+    <span style="color: #008000; font-weight: bold">if</span> dist2 <span style="color: #666666">&gt;</span> dr2:
+        stl_x<span style="color: #666666">.</span>append(x_n)
+        stl_y<span style="color: #666666">.</span>append(y_n)
+        stl_dt<span style="color: #666666">.</span>append(dt)
+    <span style="color: #008000; font-weight: bold">else</span>:
+        <span style="color: #008000; font-weight: bold">break</span>
+<span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&#39;Number of steps taken: {:d}.&#39;</span><span style="color: #666666">.</span>format(<span style="color: #008000">len</span>(stl_x)))
+<span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&#39;Last point: ({}, {}).&#39;</span><span style="color: #666666">.</span>format(stl_x[<span style="color: #666666">-1</span>], stl_y[<span style="color: #666666">-1</span>]))
+<span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&#39;Total time: {} hours.&#39;</span><span style="color: #666666">.</span>format(np<span style="color: #666666">.</span>cumsum(stl_dt)[<span style="color: #666666">-1</span>]<span style="color: #666666">/3600.</span>))
+
+fig_streamline <span style="color: #666666">=</span> plt<span style="color: #666666">.</span>figure()
+plt<span style="color: #666666">.</span>plot(stl_x, stl_y)
+</pre></div>
+<ul>
+<li> What does the algorithm do? Compare the output with what you calculated in Part 1.</li>
+<li> What happens as we lower the value of \( \Delta{r} \)? Why?</li>
+<li> What happens if we set \( x_n=x_n+\Delta{r} \) initially (i.e., plus instead of minus)?</li>
+</ul>
+
+<b>Part 3.</b>
+Next, let \( \vec{x}_0=(x(0), y(0)) \) denote a general point lying a
+distance \( \Delta{r} \) away from the injection well:
+$$
+\begin{align}
+x(0) &= d + \Delta{r}\cos{\beta_o} 
+\tag{44}\\ 
+y(0) &= \Delta{r}\sin{\beta_o} \,.
+\tag{45}
+\end{align}
+$$
+
+Make a plot showing the points we get as we vary \( \beta_o \) from
+$$
+\begin{align}
+\beta_o=\beta_{o}(i)=(i+1)\cdot\frac{\pi}{N}\,,
+\tag{46}
+\end{align}
+$$
+
+for \( i=0, 1, \ldots, N-1 \)? What is the physical meaning of the parameter
+\( \beta_o \)?
+
+<p>
+<b>Part 4.</b>
+
+<p>
+We now want to launch \( N=5 \) different streamlines from the injector:
+<!-- As starting points for the integration, we choose the points \( \vec{x_0} \) -->
+<!-- from the previous exercise, with \( \Delta{r}=0.1 \) m: -->
+<!-- As before, we start out with a constant time step \( \Delta{t}=0.01 \) hour. -->
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #408080; font-style: italic"># Trace N streamlines from injector to producer:</span>
+Q <span style="color: #666666">=</span> <span style="color: #666666">21.0/3600.0</span>  <span style="color: #408080; font-style: italic"># 21 m3/hr</span>
+d <span style="color: #666666">=</span> <span style="color: #666666">8.0</span>  <span style="color: #408080; font-style: italic"># m</span>
+h <span style="color: #666666">=</span> <span style="color: #666666">2.0</span>  <span style="color: #408080; font-style: italic"># m</span>
+poro <span style="color: #666666">=</span> <span style="color: #666666">0.25</span>
+
+dr <span style="color: #666666">=</span> <span style="color: #666666">0.1</span>  <span style="color: #408080; font-style: italic"># m</span>
+dt <span style="color: #666666">=</span> <span style="color: #666666">0.01*3600.0</span>  <span style="color: #408080; font-style: italic"># 0.01 hrs in seconds</span>
+N <span style="color: #666666">=</span> <span style="color: #666666">5</span>  <span style="color: #408080; font-style: italic"># number of streamlines</span>
+
+<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(N):
+    <span style="color: #408080; font-style: italic"># To do: trace out the streamline:</span>
+    angle <span style="color: #666666">=</span> <span style="color: #666666">...</span>
+    x0 <span style="color: #666666">=</span> <span style="color: #666666">...</span>
+    y0 <span style="color: #666666">=</span> <span style="color: #666666">...</span>
+</pre></div>
+<p>
+Finish implementing the above algorithm by tracing out each streamline until
+it hits (close to) the production well.  Moreover, for each of the streamlines
+estimate the time (time-of-flight) \( \tau \) it takes for a non-reacting
+fluid particle to travel along the path from injector to producer.
+
+<p>
+Next, visualize the streamlines. For each streamline, include in the figure
+the computed \( \tau \)-value as a text label above that streamline.
+Mark out the locations of the two wells in the plot; use a different
+colour for each well.
+
+<p>
+<b>Part 5.</b>
+It is not only for the straight-line path from injector to producer that
+we can compute \( \tau \) analytically. Compare your numerical results
+from the previous exercise with exact values recorded in the following
+table (obtained with a very complicated formula from
+<a href="#zhan1999analytical">[1]</a>):
+
+<p>
+
+<div class="row">
+  <div class="col-xs-8">
+    <table class="table table-striped table-hover table-condensed">
+<thead>
+<tr><td align="center"><b>Streamline index</b></td> <td align="center">Angle, \( \beta_o \)</td> <td align="center">Time-of-flight, \( \tau \) (hours)</td> </tr>
+</thead>
+<tbody>
+<tr><td align="center">   0                   </td> <td align="center">   \( \pi/5 \)             </td> <td align="center">   251.44                                </td> </tr>
+<tr><td align="center">   1                   </td> <td align="center">   \( 2\pi/5 \)            </td> <td align="center">   34.57                                 </td> </tr>
+<tr><td align="center">   2                   </td> <td align="center">   \( 3\pi/5 \)            </td> <td align="center">   12.61                                 </td> </tr>
+<tr><td align="center">   3                   </td> <td align="center">   \( 4\pi/5 \)            </td> <td align="center">   7.51                                  </td> </tr>
+<tr><td align="center">   4                   </td> <td align="center">   \( \pi \)               </td> <td align="center">   6.38                                  </td> </tr>
+</tbody>
+    </table>
+  </div> <!-- col-xs-8 -->
+</div> <!-- cell row -->
+<p>
+Is the agreement between numerical and analytical time-of-flight good for
+all computed streamlines? If not, what steps could you take to remedy this?
+
+<p>
+<b>Part 6.</b>
+Extend the code from Part 4 to handle the general case of
+\( N \) streamlines launched from the injector. However, do not trace out all
+of the streamlines fully, only those that reach the producer within a given
+period of time.
+
+<p>
+It is recommended to encapsulate your algorithm within a Python function
+and/or class, for later reusability.
+
+<h1 id="___sec7" class="anchor">Exercise 4: Predict tracer production profiles </h1>
+
+<p>
+Suppose a non-reacting chemical (i.e., a tracer) is injected into the
+formation. We can use our streamline model to predict the chemical
+concentration at the production well as a function of time:
+$$
+\begin{equation}
+C_{e}(t)\approx\displaystyle\sum_{i=0}^{N-1} C_{i,e}(t)\Delta{f}\,,
+\tag{47}
+\end{equation}
+$$
+
+where \( C_{i,e} \) denotes the concentration of the tracer at the final point
+of streamline \( i \), and \( \Delta{f}=\Delta{Q}_i/Q \) is the fraction of the total
+production rate associated with that streamline. Since we launch streamlines
+at equally spaced angles, they are all assumed to carry the same amount
+of fluid, which means that \( \Delta{f}=\frac{1}{N} \). Finally, if \( \tau_i \)
+is the total time it takes to traverse streamline \( i \), \( C_{i,e}(t) \) must equal
+the initial chemical concentration if \( t < \tau_i \), and the injected
+concentration otherwise.
+
+<p>
+<b>Part 1.</b>
+Suppose we start injecting water into the formation at time \( t=0 \).
+Use the input parameters from Exercise 3 to
+plot the percentage of injected water that has reached the production
+well at times \( t>0 \).
+
+<p>
+To see the effect of streamline resolution, include in the plot the
+production curve for different values of \( N \). The two largest values
+should give more or less identical results.
+
+<p>
+<b>Part 2.</b>
+Roughly the same scenario has been simulated with a finite difference simulator.
+Results from that program can be found in the text file <code>FD_water_btc.dat</code>, and
+are plotted below.
+
+<p>
+<center> <!-- figure label: --> <div id="fig:fd_simres"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 4:  Results from a finite difference simulator.  <!-- caption label: fig:fd_simres --> </p></center>
+<p><img src="project2_figs/fd_simres.png" align="bottom" ></p>
+</center>
+
+<p>
+<center> <!-- figure label: --> <div id="fig:fd_simres_swdist"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 5:  Distribution of injected water at two different times (finite difference simulation).  <!-- caption label: fig:fd_simres_swdist --> </p></center>
+<p><img src="project2_figs/wells_fd.png" align="bottom" ></p>
+</center>
+
+<p>
+Make your plot from the previous exercise dimensionless by dividing the
+time axis by the shortest time-of-flight, \( \tau_0 \).
+Use a logarithmic spacing on the time axis, and also include output from
+the finite difference simulator in the figure.
+
+<p>
+How long does it take for 50 <code>%</code> of the injected water to reach the producer?
+Provide your answer both in dimensional and dimensionless units.
+
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b>Note.</b>
+You will not be able to perfectly match the two simulations, due
+to different assumptions made regarding boundary conditions in the two
+cases, and because of inherent numerical errors associated with the finite
+difference implementation.
+</div>
+
+
+<p>
+<b>(Optional) Part 3.</b>
+Make a Python program capable of tracing streamlines for <em>arbitrary</em>
+well placements. You may assume a single production well, but any number
+of injectors. (hint: here it is smart to start the streamline integration
+at the producer, and go backwards)
+
+<p>
+Apply your program by plotting streamlines for a
+<a href="https://www.glossary.oilfield.slb.com/en/Terms/f/five_spot.aspx" target="_self">five-spot</a>
+well pattern.
+
+<h1 id="___sec8" class="anchor">Guidelines for project submission </h1>
+The assignment is provided both as a PDF, and as a Jupyter notebook.
+However, the work done to answer the exercises only has to be handed in as a
+notebook, though you can submit an additional PDF if you want.
+You should bear the following points in mind when working on the project:
+
+<ul>
+<li> Start your notebook by providing a short introduction in which you outline the nature of the problem(s) to be investigated.</li>
+<li> End your notebook with a brief summary of what you feel you learnt from the project (if anything). Also, if you have any general comments or suggestions for what could be improved in future assignments, this is the place to do it.</li>
+<li> All code that you make use of should be present in the notebook, and it should ideally execute without any errors (especially run-time errors). If you are not able to fix everything before the deadline, you should give your best understanding of what is not working, and how you might go about fixing it.</li>
+<li> If you use an algorithm that is not fully described in the assignment text, you should try to explain it in your own words. This also applies if the method is described elsewhere in the course material.</li>
+<li> In some cases it may suffice to explain your work via comments in the code itself, but other times you might want to include a more elaborate explanation in terms of, e.g., mathematics and/or pseudocode.</li>
+<li> In general, it is a good habit to comment your code (though it can be overdone).</li>
+<li> When working with approximate solutions to equations, it is always useful to check your results against known exact (analytical) solutions, should they be available.</li>
+<li> It is also a good test of a model implementation to study what happens at known 'edge cases'.</li>
+<li> Any figures you include should be easily understandable. You should label axes appropriately, and depending on the problem, include other legends etc. Also, you should discuss your figures in the main text.</li>
+<li> It is always good if you can reflect a little bit around <em>why</em> you see what you see.</li>
+</ul>
+
+<h1 id="___sec9" class="anchor">Bibliography </h1>
+
+<p>
+<!-- begin bibliography -->
+
+<ol>
+ <li> <div id="zhan1999analytical"></div> <b>H. Zhan</b>. 
+    Analytical and Numerical Modeling of a Double Well Capture Zone,
+    <em>Mathematical Geology</em>,
+    31(2),
+    pp. 175-193,
+    1999.</li>
+</ol>
+
+<!-- end bibliography -->
+
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+
+  <li class="previous">
+    <a href="._project2-readable000.html">&larr; Prev</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+
