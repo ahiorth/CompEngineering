@@ -1,0 +1,809 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="1.0">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Solving linear systems &#8212; Modeling and Computational Engineering 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Numerical integration" href="._book004.html" />
+    <link rel="prev" title="Finite differences" href="._book002.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  
+       <style type="text/css">
+         div.admonition {
+           background-color: whiteSmoke;
+           border: 1px solid #bababa;
+         }
+       </style>
+      </head>
+    <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="solving-linear-systems">
+<span id="ch-lin"></span><h1>Solving linear systems<a class="headerlink" href="#solving-linear-systems" title="Permalink to this headline">¶</a></h1>
+<p>Solving systems of equations are one of the most common tasks that we use computers for within modeling. A typical task is that we have a model that contains a set of unknown parameters which we want to determine. To determine these parameters we need to solve a set of equations. In many cases these equations are nonlinear, but often a nonlinear problem is solved
+<em>by linearize</em> the nonlinear equations, and thereby reducing it to a sequence of linear algebra problems. Thus the topic of solving linear systems of equations have been extensively studied, and sophisticated linear equation solving packages have been developed. Python uses functions from the <a class="reference external" href="https://en.wikipedia.org/wiki/LAPACK">LAPACK</a> library. In this course we will only cover the theory behind numerical linear algebra superficially, and the main purpose is to shed some light on some of the challenges one might encounter solving linear systems. In particular it is important for you to understand when it is stated in the NumPy documentation that the standard linear solver: <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.solve.html">solve</a> function uses <em>LU-decomposition</em> and <em>partial pivoting</em>.</p>
+<div class="section" id="solving-linear-equations">
+<h2>Solving linear equations<a class="headerlink" href="#solving-linear-equations" title="Permalink to this headline">¶</a></h2>
+<p>There are a number of excellent books covering this topic, see e.g. [Ref1] [Ref2] [Ref3] [Ref4].
+In most of the examples covered in this course we will encounter problems where we have a set of <em>linearly independent</em> equations and one equation for each unknown. For these type of problems there are a number of methods that can be used, and they will find a solution in a finite number of steps. If a solution cannot be found it is usually because the equations are not linearly independent, and our formulation of the physical problem is wrong.</p>
+<p>Assume that we would like to solve the following set of equations:</p>
+<div class="math notranslate nohighlight" id="eq-eq-lin-la">
+\[\tag{18}
+2x_0+x_1+x_2+3x_3=1,\]</div>
+<div class="math notranslate nohighlight" id="eq-eq-lin-lb">
+\[\tag{19}
+x_0+x_1+3x_2+x_3=-3,\]</div>
+<div class="math notranslate nohighlight" id="eq-eq-lin-lc">
+\[\tag{20}
+x_0+4x_1+x_2+x_3=2,\]</div>
+<div class="math notranslate nohighlight" id="eq-eq-lin-ld">
+\[\tag{21}
+x_0+x_1+x_2+x_3=1.\]</div>
+<p>These equations can be written in matrix form as:</p>
+<div class="math notranslate nohighlight" id="eq-eq-lin-mat">
+\[\tag{22}
+\mathbf{A\cdot x}=\mathbf{b},\]</div>
+<p>where:</p>
+<div class="math notranslate nohighlight" id="eq-eq-lin-mata">
+\[\begin{split}\tag{23}
+\mathbf{A}\equiv\begin{pmatrix}
+    2&amp;1&amp;1&amp;3\\
+    1&amp;1&amp;3&amp;1\\
+    1&amp;4&amp;1&amp;1\\
+    1&amp;1&amp;2&amp;2
+    \end{pmatrix}
+    \qquad
+    \mathbf{b}\equiv
+    \begin{pmatrix}
+    1\\-3\\2\\1
+    \end{pmatrix}
+    \qquad
+    \mathbf{x}\equiv
+    \begin{pmatrix}
+    x_0\\x_1\\x_2\\x_3
+    \end{pmatrix}.\end{split}\]</div>
+<p>You can easily verify that <span class="math notranslate nohighlight">\(x_0=-4, x_1=1, x_2=-1, x_3= 3\)</span> is the
+solution to the above equations by direct substitution. If we were to
+replace one of the above equations with a linear combination of any of
+the other equations, e.g. replace equation <a class="reference internal" href="#eq-eq-lin-ld"><span class="std std-ref">(21)</span></a> with
+<span class="math notranslate nohighlight">\(3x_0+2x_1+4x_2+4x_3=-2\)</span>, there would be no unique solution (infinite
+number of solutions). This can be checked by calculating the determinant of the matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>, if <span class="math notranslate nohighlight">\(\det \mathbf{A}=0\)</span>,
+What is the difficulty in solving these equations? Clearly if none of the equations are linearly dependent, and we have <span class="math notranslate nohighlight">\(N\)</span> independent linear equations, it should be straight forward to solve them? Two major numerical problems are i) even if the equations are not exact linear combinations of each other, they could be very close, and as the numerical algorithm progresses they could at some stage become linearly dependent due to roundoff errors. ii) roundoff errors may accumulate if the number of equations are large [Ref1].</p>
+<div class="section" id="gauss-jordan-elimination">
+<h3>Gauss-Jordan elimination<a class="headerlink" href="#gauss-jordan-elimination" title="Permalink to this headline">¶</a></h3>
+<p>Let us continue the discussion by consider Gauss-Jordan elimination, which is a <em>direct</em> method. A direct method uses a final set of operations to obtain a solution. According to [Ref1] Gauss-Jordan elimination is the method of choice if we want to find the inverse of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>. However, it is slow when it comes to calculate the solution of equation
+<a class="reference internal" href="#eq-eq-lin-mat"><span class="std std-ref">(22)</span></a>. Even if speed and memory use is not an issue, it is also not advised to first find the inverse, <span class="math notranslate nohighlight">\(\mathbf{A}^{-1}\)</span>, of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>, then multiply it with <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> to obtain the solution, due to roundoff errors (Roundoff errors occur whenever we subtract to numbers that are very close to each other). To simplify our notation, we write equation <a class="reference internal" href="#eq-eq-lin-mata"><span class="std std-ref">(23)</span></a> as:</p>
+<div class="math notranslate nohighlight" id="eq-auto5">
+\[\begin{split}\tag{24}
+\left(
+    \begin{array}{cccc|c}
+    2&amp;1&amp;1&amp;3&amp;1\\
+    1&amp;1&amp;3&amp;1&amp;-3\\
+    1&amp;4&amp;1&amp;1&amp;2\\
+    1&amp;1&amp;2&amp;2&amp;1
+    \end{array}
+    \right).\end{split}\]</div>
+<p>The numbers to the left of the vertical dash is the matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>, and to the right is the vector <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>. The Gauss-Jordan elimination procedure proceeds by doing the same operation on the right and left side of the dash, and the goal is to get only zeros on the lower triangular part of the matrix. This is achieved by multiplying rows with the same (nonzero) number, swapping rows, adding a multiple of a row to another:</p>
+<div class="math notranslate nohighlight" id="eq-eq-lin-gj1">
+\[\begin{split}\tag{25}
+\left(
+    \begin{array}{cccc|c}
+    2&amp;1&amp;1&amp;3&amp;1\\
+    1&amp;1&amp;3&amp;1&amp;-3\\
+    1&amp;4&amp;1&amp;1&amp;2\\
+    1&amp;1&amp;2&amp;2&amp;1
+    \end{array}
+    \right)\to
+    \left(
+    \begin{array}{cccc|c}
+    2&amp;1&amp;1&amp;3&amp;1\\
+    0&amp;1/2&amp;5/2&amp;-1/2&amp;-7/2\\
+    0&amp;7/2&amp;1/2&amp;-1/2&amp;3/2\\
+    0&amp;1/2&amp;3/2&amp;1/2&amp;1/2
+    \end{array}
+    \right)\to\\end{split}\]</div>
+<div class="math notranslate nohighlight" id="eq-auto6">
+\[\begin{split}\tag{26}
+\left(
+    \begin{array}{cccc|c}
+    2&amp;1&amp;1&amp;3&amp;1\\
+    0&amp;1/2&amp;5/2&amp;-1/2&amp;-7/2\\
+    0&amp;0&amp;-17&amp;3&amp;26\\
+    0&amp;0&amp;1&amp;-1&amp;4
+    \end{array}
+    \right)
+    \to
+    \left(
+    \begin{array}{cccc|c}
+    2&amp;1&amp;1&amp;3&amp;1\\
+    0&amp;1/2&amp;5/2&amp;-1/2&amp;-7/2\\
+    0&amp;0&amp;-17&amp;3&amp;26\\
+    0&amp;0&amp;0&amp;14/17&amp;42/17
+    \end{array}
+    \right){\nonumber}\end{split}\]</div>
+<p>The operations done are: (<span class="math notranslate nohighlight">\(1\to2\)</span>) multiply first row with <span class="math notranslate nohighlight">\(-1/2\)</span> and add to second, third and the fourth row, (<span class="math notranslate nohighlight">\(2\to 3\)</span>) multiply second row with <span class="math notranslate nohighlight">\(-7\)</span>, and add to third row, multiply second row with <span class="math notranslate nohighlight">\(-1\)</span> and add to fourth row, (<span class="math notranslate nohighlight">\(3\to4\)</span>) multiply third row with <span class="math notranslate nohighlight">\(-1/17\)</span> and add to fourth row. These operations can easily be coded into Python:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,],[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">],[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span> <span class="p">]],</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">N</span><span class="o">=</span><span class="mi">4</span>
+<span class="c1"># Gauss-Jordan Elimination</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>
+    <span class="n">fact</span>    <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">:,</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">:,]</span> <span class="o">-=</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">fact</span><span class="p">,</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,])</span>
+    <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">:]</span>  <span class="o">-=</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">fact</span>
+</pre></div>
+</div>
+<p>Notice that the final matrix has only zeros beyond the diagonal, such a matrix is called <em>upper triangular</em>. We still have not found the final solution, but from an upper triangular (or lower triangular) matrix it is trivial to determine the solution. The last row immediately gives us <span class="math notranslate nohighlight">\(14/17z=42/17\)</span> or <span class="math notranslate nohighlight">\(z=3\)</span>, now we have the solution for z and the next row gives: <span class="math notranslate nohighlight">\(-17y+3z=26\)</span> or <span class="math notranslate nohighlight">\(y=(26-3\cdot3)/(-17)=-1\)</span>, and so on. In a more general form, we can write our solution of the matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> after making it upper triangular as:</p>
+<div class="math notranslate nohighlight" id="eq-eq-lin-back">
+\[\begin{split}\tag{27}
+\begin{pmatrix}
+    a^\prime_{0,0}&amp;a^\prime_{0,1}&amp;a^\prime_{0,2}&amp;a^\prime_{0,3}\\
+    0&amp;a^\prime_{1,1}&amp;a^\prime_{1,2}&amp;a^\prime_{1,3}\\
+    0&amp;0&amp;a^\prime_{2,2}&amp;a^\prime_{2,3}\\
+    0&amp;0&amp;0&amp;a^\prime_{3,3}
+    \end{pmatrix}
+    \cdot
+    \begin{pmatrix}
+    x_0\\
+    x_1\\
+    x_2\\
+    x_3
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+    b^\prime_{0}\\
+    b^\prime_{1}\\
+    b^\prime_{2}\\
+    b^\prime_{3}
+    \end{pmatrix}\end{split}\]</div>
+<p>The backsubstitution can then be written formally as:</p>
+<div class="math notranslate nohighlight" id="eq-eq-lin-back2">
+\[\tag{28}
+x_i=\frac{1}{a^\prime_{ii}}\left[b_i^\prime-\sum_{j=i+1}^{N-1}a^\prime_{ij}x_j\right],\quad i=N-1,N-2,\ldots,0\]</div>
+<p>The backsubstitution can now easily be implemented in Python as:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Backsubstitution</span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">sol</span><span class="p">[</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">b</span><span class="p">[</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="n">A</span><span class="p">[</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">sol</span><span class="p">[</span><span class="n">N</span><span class="o">-</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="n">N</span><span class="o">-</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">[(</span><span class="n">N</span><span class="o">-</span><span class="n">i</span><span class="p">),],</span><span class="n">sol</span><span class="p">))</span><span class="o">/</span><span class="n">A</span><span class="p">[</span><span class="n">N</span><span class="o">-</span><span class="n">i</span><span class="p">,</span><span class="n">N</span><span class="o">-</span><span class="n">i</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Notice that in the Python implementation, we have used vector operations instead of for loops. This makes the code more efficient, but it could also be implemented with for loops:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Backsubstitution - for loop</span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="nb">float</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">sol</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>
+        <span class="n">sol</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">sol</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+    <span class="n">sol</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>There are at least two things to notice with our implementation:
+* Matrix and vector notation makes the code more compact and efficient. In order to understand the implementation it is advised to put <span class="math notranslate nohighlight">\(i=1, 2, 3, 4\)</span>, and then execute the statements in the Gauss-Jordan elimination and compare with equation <a class="reference internal" href="#eq-eq-lin-gj1"><span class="std std-ref">(25)</span></a>.</p>
+<ul class="simple">
+<li>The implementation of the Gauss-Jordan elimination is not robust, in particular one could easily imagine cases where one of the leading coefficients turned out as zero, and the routine would fail when we divide by <code class="docutils literal notranslate"><span class="pre">A[i-1,i-1]</span></code>. By simply changing equation <a class="reference internal" href="#eq-eq-lin-lb"><span class="std std-ref">(19)</span></a> to <span class="math notranslate nohighlight">\(2x_0+x_1+3x_2+x_3=-3\)</span>, when doing the first Gauss-Jordan elimination, both <span class="math notranslate nohighlight">\(x_0\)</span> and <span class="math notranslate nohighlight">\(x_1\)</span> would be canceled. In the next iteration we try to divide next equation by the leading coefficient of <span class="math notranslate nohighlight">\(x_1\)</span>, which is zero, and the whole procedure fails.</li>
+</ul>
+</div>
+<div class="section" id="pivoting">
+<h3>Pivoting<a class="headerlink" href="#pivoting" title="Permalink to this headline">¶</a></h3>
+<p>The solution to the last problem is solved by what is called <em>pivoting</em>. The element that we divide on is called the <em>pivot element</em>. It actually turns out that even if we do Gauss-Jordan elimination <em>without</em> encountering a zero pivot element, the Gauss-Jordan procedure is numerically unstable in the presence of roundoff errors [Ref1]. There are two versions of pivoting, <em>full pivoting</em> and <em>partial pivoting</em>. In partial pivoting we only interchange rows, while in full pivoting we also interchange rows and columns. Partial pivoting is much easier to implement, and the algorithm is as follows:
+1. Find the row in <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> with largest absolute value in front of <span class="math notranslate nohighlight">\(x_0\)</span> and change with the first equation, switch corresponding elements in <span class="math notranslate nohighlight">\(\mathbf{b}\)</span></p>
+<ol class="arabic simple" start="2">
+<li>Do one Gauss-Jordan elimination, find the row in <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> with the largest absolute value in front of <span class="math notranslate nohighlight">\(x_1\)</span> and switch with the second (same for <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>), and so on.</li>
+</ol>
+<p>For a linear equation we can multiply with a number on each side and the equation would be unchanged, so if we where to multiply one of the equations with a large value, we are almost sure that this equation would be placed first by our algorithm. This seems a bit strange as our mathematical problem is the same. Sometimes the linear algebra routines tries to normalize the equations to find the pivot element that would have been the largest element if all equations were normalized according to some rule, this is called <em>implicit pivoting</em>.
+LU decomposition
+----------------
+As we have already seen, if the matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is reduced to a triangular form it is trivial to calculate the solution by using backsubstitution. Thus if it was possible to decompose the matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> as follows:</p>
+<div class="math notranslate nohighlight" id="eq-eq-lin-lu">
+\[\tag{29}
+\mathbf{A}=\mathbf{L}\cdot\mathbf{U}\]</div>
+<div class="math notranslate nohighlight" id="eq-auto7">
+\[\begin{split}\tag{30}
+&amp;\begin{pmatrix}
+    a_{0,0}&amp;a_{0,1}&amp;a_{0,2}&amp;a_{0,3}\\
+    a_{1,0}&amp;a_{1,1}&amp;a_{1,2}&amp;a_{1,3}\\
+    a_{2,0}&amp;a_{2,1}&amp;a_{2,2}&amp;a_{2,3}\\
+    a_{3,0}&amp;a_{3,1}&amp;a_{3,2}&amp;a_{3,3}
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+    l_{0,0}&amp;0&amp;0&amp;0\\
+    l_{1,0}&amp;l_{1,1}&amp;0&amp;0\\
+    l_{2,0}&amp;l_{2,1}&amp;l_{2,2}&amp;0\\
+    l_{3,0}&amp;l_{3,1}&amp;l_{3,2}&amp;l_{3,3}
+    \end{pmatrix}
+    \cdot
+    \begin{pmatrix}
+    u_{0,0}&amp;u_{0,1}&amp;u_{0,2}&amp;u_{0,3}\\
+    0&amp;u_{1,1}&amp;u_{1,2}&amp;u_{1,3}\\
+    0&amp;0&amp;u_{2,2}&amp;u_{2,3}\\
+    0&amp;0&amp;0&amp;u_{3,3}
+    \end{pmatrix}.{\nonumber}\end{split}\]</div>
+<p>The solution procedure would then be to rewrite equation <a class="reference internal" href="#eq-eq-lin-mat"><span class="std std-ref">(22)</span></a> as:</p>
+<div class="math notranslate nohighlight" id="eq-eq-lin-matb">
+\[\tag{31}
+\mathbf{A\cdot x}=\mathbf{L}\cdot\mathbf{U}\cdot\mathbf{x}=\mathbf{b},\]</div>
+<p>If we define a new vector <span class="math notranslate nohighlight">\(\mathbf{y}\)</span>:</p>
+<div class="math notranslate nohighlight" id="eq-auto8">
+\[\tag{32}
+\mathbf{y}\equiv\mathbf{U}\cdot\mathbf{x},\]</div>
+<p>we can first solve for the <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> vector:</p>
+<div class="math notranslate nohighlight" id="eq-eq-lin-for">
+\[\tag{33}
+\mathbf{L}\cdot\mathbf{y}=\mathbf{b},\]</div>
+<p>and then for <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>:</p>
+<div class="math notranslate nohighlight" id="eq-auto9">
+\[\tag{34}
+\mathbf{U}\cdot\mathbf{x}=\mathbf{y}.\]</div>
+<p>Note that the solution to equation <a class="reference internal" href="#eq-eq-lin-for"><span class="std std-ref">(33)</span></a> would be done by <em>forward substitution</em>:</p>
+<div class="math notranslate nohighlight" id="eq-eq-lin-back3">
+\[\tag{35}
+y_i=\frac{1}{l_{ii}}\left[b_i-\sum_{j=0}^{i-1}l_{ij}x_j\right],\quad i=1,2,\ldots N-1.\]</div>
+<p>Why go to all this trouble? First of all it requires (slightly) less operations to calculate the LU decomposition and doing the forward and backward substitution than the Gauss-Jordan procedure discussed earlier. Secondly, and more importantly, is the fact that in many cases one would like to calculate the solution for different values of the <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> vector in equation <a class="reference internal" href="#eq-eq-lin-matb"><span class="std std-ref">(31)</span></a>. If we do the LU decomposition first we can calculate the solution quite fast using backward and forward substitution for any value of the <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> vector.</p>
+<p>The NumPy function <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.solve.html">solve</a>, uses LU decomposition and partial pivoting, and we can find the solution to our previous problem simply by the following code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="kn">import</span> <span class="n">solve</span>
+<span class="n">x</span><span class="o">=</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="example-linear-regression">
+<h2>Example: Linear regression<a class="headerlink" href="#example-linear-regression" title="Permalink to this headline">¶</a></h2>
+<p>In the previous section, we considered a system of <span class="math notranslate nohighlight">\(N\)</span> equations and <span class="math notranslate nohighlight">\(N\)</span> unknown (<span class="math notranslate nohighlight">\(x_0, x_1,\ldots, x_N\)</span>). In general we might have more equations than unknowns or more unknowns than equations. An example of the former is linear regression, we might have many data points and we would like to fit a line through the points. How do you fit a single lines to more than two points that does not line on the same line? One way to do it is to minimize the distance from the line to the points, as illustrated in figure <a class="reference internal" href="#fig-lin-reg"><span class="std std-ref">Linear regression by minimizing the total distance to all the points</span></a>.</p>
+<div class="figure" id="id8">
+<span id="fig-lin-reg"></span><a class="reference internal image-reference" href="_images/reg.png"><img alt="_images/reg.png" src="_images/reg.png" style="width: 800px;" /></a>
+<p class="caption"><span class="caption-text"><em>Linear regression by minimizing the total distance to all the points</em></span></p>
+</div>
+<p>Mathematically we can express the distance between a data point <span class="math notranslate nohighlight">\((x_i,y_i)\)</span> and the line <span class="math notranslate nohighlight">\(f(x)\)</span> as <span class="math notranslate nohighlight">\(y_i-f(x_i)\)</span>. Note that this difference can be negative or positive depending if the data point lies below or above the line. We can then take the absolute value of all the distances, and try to minimize them. When we minimize something we take the derivative of the expression and put it equal to zero.  As you might remember from Calculus it is extremely hard to work with the derivative of the absolute value, because it is discontinuous. A much better approach is to square each distance and sum them:</p>
+<div class="math notranslate nohighlight" id="eq-eq-lin-lsq">
+\[\tag{36}
+S=\sum_{i=0}^{N-1}(y_i-f(x_i))^2=\sum_{i=0}^{N-1}(y_i-a_0-a_1x_i)^2.\]</div>
+<p>(For the example in figure <a class="reference internal" href="#fig-lin-reg"><span class="std std-ref">Linear regression by minimizing the total distance to all the points</span></a>, <span class="math notranslate nohighlight">\(N=5\)</span>.) This is the idea behind <em>least square</em>, and linear regression. One thing you should be aware of is that points lying far from the line will contribute more to equation <a class="reference internal" href="#eq-eq-lin-lsq"><span class="std std-ref">(36)</span></a>. The underlying assumption is that each data point provides equally precise information about the process, this is often not the case. When analyzing experimental data, there may be points deviating from the expected behaviour, it is then important to investigate if these points are more affected by measurements errors than the others. If that is the case one should give them less weight in the least square estimate, by extending the formula above:</p>
+<div class="math notranslate nohighlight" id="eq-eq-lin-lsqm">
+\[\tag{37}
+S=\sum_{i=0}^{N-1}\omega_i(y_i-f(x_i))^2=\sum_{i=0}^3\omega_i(y_i-a_0-a_1x_i)^2,\]</div>
+<p><span class="math notranslate nohighlight">\(\omega_i\)</span> is a weight factor.</p>
+<div class="section" id="solving-least-square-using-algebraic-equations">
+<h3>Solving least square, using algebraic equations<a class="headerlink" href="#solving-least-square-using-algebraic-equations" title="Permalink to this headline">¶</a></h3>
+<p>Let us continue with equation <a class="reference internal" href="#eq-eq-lin-lsq"><span class="std std-ref">(36)</span></a>, the algebraic solution is to simply find the value of <span class="math notranslate nohighlight">\(a_0\)</span> and <span class="math notranslate nohighlight">\(a_1\)</span> that minimizes <span class="math notranslate nohighlight">\(S\)</span>:</p>
+<div class="math notranslate nohighlight" id="eq-eq-lin-ls1">
+\[\tag{38}
+\frac{\partial S}{\partial a_0} =-2\sum_{i=0}^{N-1}(y_i-a_0-a_1x_i)=0,\]</div>
+<div class="math notranslate nohighlight" id="eq-eq-lin-ls2">
+\[\tag{39}
+\frac{\partial S}{\partial a_1} =-2\sum_{i=0}^{N-1}(y_i-a_0-a_1x_i)x_i=0.\]</div>
+<p>Defining the mean value as <span class="math notranslate nohighlight">\(\overline{x}=\sum_ix_i/N\)</span> and <span class="math notranslate nohighlight">\(\overline{y}=\sum_iy_i/N\)</span>, we can write equation <a class="reference internal" href="#eq-eq-lin-ls1"><span class="std std-ref">(38)</span></a> and <a class="reference internal" href="#eq-eq-lin-ls2"><span class="std std-ref">(39)</span></a>  as:</p>
+<div class="math notranslate nohighlight" id="eq-eq-lin-ls1a">
+\[\tag{40}
+\sum_{i=0}^{N-1}(y_i-a_0-a_1x_i)=N\overline{y}-a_0N-a_1N\overline{x}=0,\]</div>
+<div class="math notranslate nohighlight" id="eq-eq-lin-ls2b">
+\[\tag{41}
+\sum_{i=0}^{N-1}(y_i-a_0-a_1x_i)x_i=\sum_iy_ix_i-a_0N\overline{x}-a_1\sum_ix_ix_i=0.\]</div>
+<p>Solving equation <a class="reference internal" href="#eq-eq-lin-ls1a"><span class="std std-ref">(40)</span></a> with respect to <span class="math notranslate nohighlight">\(a_0\)</span>, and inserting the expression into equation <a class="reference internal" href="#eq-eq-lin-ls2b"><span class="std std-ref">(41)</span></a>, we find:</p>
+<div class="math notranslate nohighlight" id="eq-eq-lin-ls1c">
+\[\tag{42}
+a_0=\overline{y}-a_1\overline{x},\]</div>
+<div class="math notranslate nohighlight" id="eq-eq-lin-ls2d">
+\[\tag{43}
+a_1=\frac{\sum_iy_ix_i-N\overline{x}\overline{y}}{\sum_ix_i^2-N\overline{x}^2}
+    =\frac{\sum_i(x_i-\overline{x})(y_i-\overline{y})}{\sum_i(x_i-\overline{x})^2}.\]</div>
+<p>We leave it as an exercise to show the last expression for <span class="math notranslate nohighlight">\(a_1\)</span>.
+Clearly the equation <a class="reference internal" href="#eq-eq-lin-ls2d"><span class="std std-ref">(43)</span></a> above will in most cases have
+a solution. But in addition to a solution, it would be good to have an
+idea of the goodness of the fit. Intuitively it make sense to add all
+the distances (residuals) <span class="math notranslate nohighlight">\(d_i\)</span> in figure <a class="reference internal" href="#fig-lin-reg"><span class="std std-ref">Linear regression by minimizing the total distance to all the points</span></a>. This is
+basically what is done when calculating <span class="math notranslate nohighlight">\(R^2\)</span> (R-squared). However, we
+would also like to compare the <span class="math notranslate nohighlight">\(R^2\)</span> between different
+datasets. Therefor we need to normalize the sum of residuals, and
+therefore the following form of the <span class="math notranslate nohighlight">\(R^2\)</span> is used:</p>
+<div class="math notranslate nohighlight" id="eq-eq-lin-r2">
+\[\tag{44}
+R^2=1-\frac{\sum_{i=0}^{N-1}(y_i-f(x_i))^2}{\sum_{i=0}^{N-1}(y_i-\overline{y})^2}.\]</div>
+<p>In python we can implement equation <a class="reference internal" href="#eq-eq-lin-ls1c"><span class="std std-ref">(42)</span></a>, <a class="reference internal" href="#eq-eq-lin-ls2d"><span class="std std-ref">(43)</span></a> and <a class="reference internal" href="#eq-eq-lin-r2"><span class="std std-ref">(44)</span></a> as:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">OLS</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="c1"># returns regression coefficients</span>
+    <span class="c1"># in ordinary least square</span>
+    <span class="c1"># x: observations</span>
+    <span class="c1"># y: response</span>
+    <span class="c1"># R^2: R-squared</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># number of data points</span>
+
+    <span class="c1"># mean of x and y vector</span>
+    <span class="n">m_x</span><span class="p">,</span> <span class="n">m_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+    <span class="c1"># calculating cross-deviation and deviation about x</span>
+    <span class="n">SS_xy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">n</span><span class="o">*</span><span class="n">m_y</span><span class="o">*</span><span class="n">m_x</span>
+    <span class="n">SS_xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">n</span><span class="o">*</span><span class="n">m_x</span><span class="o">*</span><span class="n">m_x</span>
+
+    <span class="c1"># calculating regression coefficients</span>
+    <span class="n">b_1</span> <span class="o">=</span> <span class="n">SS_xy</span> <span class="o">/</span> <span class="n">SS_xx</span>
+    <span class="n">b_0</span> <span class="o">=</span> <span class="n">m_y</span> <span class="o">-</span> <span class="n">b_1</span><span class="o">*</span><span class="n">m_x</span>
+
+    <span class="c1">#R^2</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">b_0</span> <span class="o">+</span> <span class="n">b_1</span><span class="o">*</span><span class="n">x</span>
+    <span class="n">S_yy</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">y</span><span class="p">)</span> <span class="o">-</span> <span class="n">n</span><span class="o">*</span><span class="n">m_y</span><span class="o">*</span><span class="n">m_y</span>
+    <span class="n">y_res</span>  <span class="o">=</span> <span class="n">y</span><span class="o">-</span><span class="n">y_pred</span>
+    <span class="n">S_res</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y_res</span><span class="o">*</span><span class="n">y_res</span><span class="p">)</span>
+
+    <span class="k">return</span><span class="p">(</span><span class="n">b_0</span><span class="p">,</span> <span class="n">b_1</span><span class="p">,</span><span class="mi">1</span><span class="o">-</span><span class="n">S_res</span><span class="o">/</span><span class="n">S_yy</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="least-square-as-a-linear-algebra-problem">
+<h3>Least square as a linear algebra problem<a class="headerlink" href="#least-square-as-a-linear-algebra-problem" title="Permalink to this headline">¶</a></h3>
+<p>It turns out that the least square problem can be formulated as a
+matrix problem. (Two great explanations see <a class="reference external" href="https://medium.com/&#64;andrew.chamberlain/the-linear-algebra-view-of-least-squares-regression-f67044b7f39b">linear regression by
+matrices</a>,
+and
+<a class="reference external" href="https://medium.com/&#64;andrew.chamberlain/a-more-elegant-view-of-r-squared-a0a14c177dc3">$R^2$-squared</a>.)
+If we define a matrix <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> containing the observations <span class="math notranslate nohighlight">\(x_i\)</span>
+as:</p>
+<div class="math notranslate nohighlight" id="eq-eq-lin-mreg1">
+\[\begin{split}\tag{45}
+\mathbf{X} =
+    \begin{pmatrix}
+    1&amp;x_0\\
+    1&amp;x_1\\
+    \vdots&amp;\vdots\\
+    1&amp;x_{N-1}
+    \end{pmatrix}.\end{split}\]</div>
+<p>We introduce a vector containing all the response <span class="math notranslate nohighlight">\(\mathbf{y}\)</span>, and the
+regression coefficients <span class="math notranslate nohighlight">\(\mathbf{a}=(a_0,a_1)\)</span>. Then we can write
+equation <a class="reference internal" href="#eq-eq-lin-lsqm"><span class="std std-ref">(37)</span></a> as a matrix equation:</p>
+<div class="math notranslate nohighlight" id="eq-eq-lin-mregs">
+\[\tag{46}
+S=(\mathbf{y}-\mathbf{X\cdot a})^T(\mathbf{y}-\mathbf{X\cdot a}).\]</div>
+<p><em>Note that this equation can easily be extended to more than one
+observation variable $x_i$</em>. By simply differentiating equation
+<a class="reference internal" href="#eq-eq-lin-mregs"><span class="std std-ref">(46)</span></a> with respect to <span class="math notranslate nohighlight">\(\mathbf{a}\)</span>, we can show that
+the derivative has a minimum when:</p>
+<div class="math notranslate nohighlight" id="eq-eq-lin-mregs2">
+\[\tag{47}
+\mathbf{X}^T\mathbf{X a}=\mathbf{X}^T\mathbf{y}\]</div>
+<p>Below is a python implementation of equation <a class="reference internal" href="#eq-eq-lin-mregs2"><span class="std std-ref">(47)</span></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">OLSM</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="c1"># returns regression coefficients</span>
+    <span class="c1"># in ordinary least square using solve function</span>
+    <span class="c1"># x: observations</span>
+    <span class="c1"># y: response</span>
+
+    <span class="n">XT</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span><span class="n">x</span><span class="p">],</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">X</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">XT</span><span class="p">)</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">XT</span><span class="p">,</span><span class="n">X</span><span class="p">)</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">XT</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">solve</span><span class="p">(</span><span class="n">B</span><span class="p">,</span><span class="n">C</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="sparse-matrices-and-thomas-algorithm">
+<h2>Sparse matrices and Thomas algorithm<a class="headerlink" href="#sparse-matrices-and-thomas-algorithm" title="Permalink to this headline">¶</a></h2>
+<p>In many practical examples, such as solving partial differential
+equations the matrices could be quite large and also contain a lot of
+zeros. A very important class of such matrices are <em>banded matrices</em>
+this is a type of <em>sparse matrices</em> containing a lot of zero elements,
+and the non-zero elements are confined to diagonal bands. In the
+following we will focus on one important type of sparse matrix the
+tridiagonal. In the next section we will show how it enters naturally
+in solving the heat equation. It turns out that solving banded
+matrices is quite simple, and can be coded quite efficiently. As with
+the Gauss-Jordan example, lets consider a concrete example:</p>
+<div class="math notranslate nohighlight" id="eq-auto10">
+\[\begin{split}\tag{48}
+\left(
+    \begin{array}{ccccc|c}
+    b_0&amp;c_0&amp;0&amp;0&amp;0&amp;r_0\\
+    a_1&amp;b_1&amp;c_1&amp;0&amp;0&amp;r_1\\
+    0&amp;a_2&amp;b_2&amp;c_2&amp;0&amp;r_2\\
+    0&amp; 0&amp;a_3&amp;b_3&amp;c_3&amp;r_3\\
+    0&amp; 0&amp; 0&amp;a_4&amp;b_4&amp;r_4
+    \end{array}
+    \right)\end{split}\]</div>
+<p>The right hand side is represented with <span class="math notranslate nohighlight">\(r_i\)</span>. The first Gauss-Jordan
+step is simply to divide by <span class="math notranslate nohighlight">\(b_0\)</span>, then we multiply with <span class="math notranslate nohighlight">\(-a_1\)</span> and
+add to second row:</p>
+<div class="math notranslate nohighlight" id="eq-auto11">
+\[\begin{split}\tag{49}
+\to \left(
+    \begin{array}{ccccc|c}
+    1&amp;c_0^\prime&amp;0&amp;0&amp;0&amp;r_0^\prime\\
+    0&amp;b_1-a_1c_0^\prime&amp;c_1&amp;0&amp;0&amp;r_1-a_0r_0^\prime\\
+    0&amp;a_2&amp;b_2&amp;c_2&amp;0&amp;r_2\\
+    0&amp; 0&amp;a_3&amp;b_3&amp;c_3&amp;r_3\\
+    0&amp; 0&amp; 0&amp;a_4&amp;b_4&amp;r_4
+    \end{array}
+    \right),\end{split}\]</div>
+<p>Note that we have introduced some new symbols to simplify the
+notation: <span class="math notranslate nohighlight">\(c_0^\prime=c_0/b_0\)</span> and <span class="math notranslate nohighlight">\(r_0^\prime=r_0/b_0\)</span>. Then we
+divide by <span class="math notranslate nohighlight">\(b_1-a_1c_0^\prime\)</span>:</p>
+<div class="math notranslate nohighlight" id="eq-auto12">
+\[\begin{split}\tag{50}
+\left(
+    \begin{array}{ccccc|c}
+    1&amp;c_0^\prime&amp;0&amp;0&amp;0&amp;r_0^\prime\\
+    0&amp;1&amp;c_1^\prime&amp;0&amp;0&amp;r_1^\prime\\
+    0&amp;a_2&amp;b_2&amp;c_2&amp;0&amp;r_2\\
+    0&amp; 0&amp;a_3&amp;b_3&amp;c_3&amp;r_3\\
+    0&amp; 0&amp; 0&amp;a_4&amp;b_4&amp;r_4
+    \end{array}
+    \right),\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(c_1^\prime=c_1/(b_1-a_1c_0^\prime)\)</span> and
+<span class="math notranslate nohighlight">\(r_1^\prime=(r_1-a_0r_0^\prime)/(b_1-a_1c_0^\prime)\)</span>. If you continue
+in this manner, you can easily convince yourself that to transform a
+tridiagonal matrix to the following form:</p>
+<div class="math notranslate nohighlight" id="eq-auto13">
+\[\begin{split}\tag{51}
+\to \left(
+    \begin{array}{ccccc|c}
+    1&amp;c_0^\prime&amp;0&amp;0&amp;0&amp;r_0^\prime\\
+    0&amp;1&amp;c_1^\prime&amp;0&amp;0&amp;r_1^\prime\\
+    0&amp;0&amp;1&amp;c_2^\prime&amp;0&amp;r_2^\prime\\
+    0&amp; 0&amp;0&amp;1&amp;c_3^\prime&amp;r_3^\prime\\
+    0&amp; 0&amp; 0&amp;0&amp;1&amp;r_4^\prime
+    \end{array}
+    \right),\end{split}\]</div>
+<p>where:</p>
+<div class="math notranslate nohighlight" id="eq-eq-lin-th0">
+\[\tag{52}
+c_0^\prime =\frac{c_0}{b_0} \qquad r_0^\prime={r_0}{b_0}\]</div>
+<div class="math notranslate nohighlight" id="eq-eq-lin-thi">
+\[\tag{53}
+c_i^\prime
+    =\frac{c_i}{b_i-a_ic_{i-1}^\prime}\qquad
+    r_i^\prime=\frac{r_i-a_ir_{i-1}^\prime}{b_i-a_ic_{i-1}^\prime}
+    \quad\text{, for }i=1,2,\ldots,N-1\]</div>
+<p>Note that we where able to reduce the tridiagonal matrix to an <em>upper
+triangular</em> matrix in only <em>one</em> Gauss-Jordan step. This equation can
+readily be solved using back-substitution, which can also be
+simplified as there are a lot of zeros in the upper part. Let us
+denote the unknowns <span class="math notranslate nohighlight">\(x_i\)</span> as we did for the Gauss-Jordan case, now we
+can find the solution as follows:</p>
+<div class="math notranslate nohighlight" id="eq-eq-lin-this0">
+\[\tag{54}
+x_{N-1}  = r_{N-1}^\prime\]</div>
+<div class="math notranslate nohighlight" id="eq-eq-lin-thisi">
+\[\tag{55}
+x_i      = r_i^\prime-x_{i+1}c_i^\prime\quad\text{, for } i=N-2,N-3,\ldots,0\]</div>
+<p>Equation <a class="reference internal" href="#eq-eq-lin-th0"><span class="std std-ref">(52)</span></a>, <a class="reference internal" href="#eq-eq-lin-thi"><span class="std std-ref">(53)</span></a>, <a class="reference internal" href="#eq-eq-lin-this0"><span class="std std-ref">(54)</span></a>
+and <a class="reference internal" href="#eq-eq-lin-thisi"><span class="std std-ref">(55)</span></a> is known as the Thomas algorithm after
+Llewellyn Thomas.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Clearly tridiagonal matrices can be solved much more efficiently with
+the Thomas algorithm than
+using a standard library, such as LU-decomposition. This is
+because the solution method takes advantages of the <em>symmetry</em> of the
+problem. We will not show it here, but it can be shown that the Thomas
+algorithm is stable whenever <span class="math notranslate nohighlight">\(|b_i|\ge |a_i|+|c_i|\)</span>. If the algorithm
+fails, an advice is first to use the standard <code class="docutils literal notranslate"><span class="pre">solve</span></code> function in
+python. If this gives a solution, then <em>pivoting</em> combined with the
+Thomas algorithm might do the trick.</p>
+</div>
+</div>
+<div class="section" id="example-solving-the-heat-equation-using-linear-algebra">
+<h2>Example: Solving the heat equation using linear algebra<a class="headerlink" href="#example-solving-the-heat-equation-using-linear-algebra" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="exercise-2-1-conservation-equation-or-the-continuity-equation">
+<h3>Exercise 2.1: Conservation Equation or the Continuity Equation<a class="headerlink" href="#exercise-2-1-conservation-equation-or-the-continuity-equation" title="Permalink to this headline">¶</a></h3>
+<div class="figure" id="id9">
+<span id="fig-nlin-heat"></span><a class="reference internal image-reference" href="_images/heat.png"><img alt="_images/heat.png" src="_images/heat.png" style="width: 700px;" /></a>
+<p class="caption"><span class="caption-text"><em>Conservation of energy and the continuity equation</em></span></p>
+</div>
+<p>In figure <a class="reference internal" href="#fig-nlin-heat"><span class="std std-ref">Conservation of energy and the continuity equation</span></a>, the continuity equation is derived for
+heat flow.
+In the case of heat exchange for a solid, we can show
+that it can be written:</p>
+<div class="math notranslate nohighlight" id="eq-eq-nlin-heateq">
+\[\tag{56}
+\frac{d^2T}{dx^2}+\frac{\dot{\sigma}}{k}=\frac{\rho c_p}{k}\frac{dT}{dt},\]</div>
+<p>where <span class="math notranslate nohighlight">\(\dot{\sigma}\)</span> is the rate of heat generation in the solid. This
+equation can be used as a starting point for many inter-sting
+models. In this exercise we will investigate the <em>steady state</em>
+solution, <em>steady state</em> is just a fancy way of expressing that we
+want the solution that <em>does not change with time</em>. This is achieved
+by ignoring the derivative with respect to time in equation
+<a class="reference internal" href="#eq-eq-nlin-heateq"><span class="std std-ref">(56)</span></a>. We want to study a system with size <span class="math notranslate nohighlight">\(L\)</span>, and is
+it good practice to introduce a dimensionless variable: <span class="math notranslate nohighlight">\(y=x/L\)</span>.
+Equation <a class="reference internal" href="#eq-eq-nlin-heateq"><span class="std std-ref">(56)</span></a> can now be written:</p>
+<div class="math notranslate nohighlight" id="eq-eq-nlin-heat2">
+\[\tag{57}
+\frac{d^2T }{dx^2}+\frac{\dot{\sigma}L^2}{k}=0\]</div>
+</div>
+<div class="section" id="exercise-2-2-curing-of-concrete-and-matrix-formulation">
+<h3>Exercise 2.2: Curing of Concrete and Matrix Formulation<a class="headerlink" href="#exercise-2-2-curing-of-concrete-and-matrix-formulation" title="Permalink to this headline">¶</a></h3>
+<p>Curing of concrete is one particular example that we can investigate
+with equation <a class="reference internal" href="#eq-eq-nlin-heat2"><span class="std std-ref">(57)</span></a>. When concrete is curing, there are
+a lot of chemical reactions happening, these reactions generate
+heat. This is a known issue, and if the temperature rises too much
+compared to the surroundings, the concrete may fracture.  In the
+following we will, for simplicity, assume that the rate of heat
+generated during curing is constant, $dot{sigma}=$100 W/m$^3$. The
+left end (at <span class="math notranslate nohighlight">\(x=0\)</span>) is insulated, meaning that there is no flow of
+heat over that boundary, hence <span class="math notranslate nohighlight">\(dT/dx=0\)</span> at <span class="math notranslate nohighlight">\(x=0\)</span>. On the right hand
+side the temperature is kept constant, <span class="math notranslate nohighlight">\(x(L)=y(1)=T_1\)</span>, assumed to be
+equal to the ambient temperature of $T_1=25^circ$C.  The concrete
+thermal conductivity is assumed to be <span class="math notranslate nohighlight">\(k=1.65\)</span> W/m$^circ$C.</p>
+<p>We leave it as an exercise to show that the analytical solution to equation <a class="reference internal" href="#eq-eq-nlin-heat2"><span class="std std-ref">(57)</span></a> in this case is:</p>
+<div class="math notranslate nohighlight" id="eq-eq-nlin-heatsol">
+\[\tag{58}
+T(y)=\frac{\dot{\sigma}L^2}{2k}(1-y^2)+T_1.\]</div>
+<p>In order to solve equation <a class="reference internal" href="#eq-eq-nlin-heat2"><span class="std std-ref">(57)</span></a> numerically, we need to discretize
+it.
+We replace the second derivative with
+<span class="math notranslate nohighlight">\(dT/dy^2=(T(y+dy)+T(y-dy)-2T(y))/dy\)</span>. Equation <a class="reference internal" href="#eq-eq-nlin-heateq"><span class="std std-ref">(56)</span></a> can now be written:</p>
+<div class="math notranslate nohighlight" id="eq-eq-nlin-heat3">
+\[\tag{59}
+T_{i+1}+T_{i-1}-2T_i=-h^2\beta,\]</div>
+<p>where <span class="math notranslate nohighlight">\(\beta=2\dot{\sigma}L^2/k\)</span>.</p>
+<div class="figure" id="id10">
+<span id="fig-nlin-hgrid"></span><a class="reference internal image-reference" href="_images/heat_grid.png"><img alt="_images/heat_grid.png" src="_images/heat_grid.png" style="width: 200px;" /></a>
+<p class="caption"><span class="caption-text">Finite difference grid for <span class="math notranslate nohighlight">\(N=4\)</span></span></p>
+</div>
+<p>In figure <a class="reference internal" href="#fig-nlin-hgrid"><span class="std std-ref">Finite difference grid for N=4</span></a>, the finite difference grid is shown for
+<span class="math notranslate nohighlight">\(N=4\)</span>. Let us write down equation <a class="reference internal" href="#eq-eq-nlin-heat3"><span class="std std-ref">(59)</span></a> for each grid
+node to see how the implementation is done in practice:</p>
+<div class="math notranslate nohighlight" id="eq-auto14">
+\[\tag{60}
+T_{-1}+T_1-2T_0 =-h^2\beta,{\nonumber}\]</div>
+<div class="math notranslate nohighlight" id="eq-auto15">
+\[\tag{61}
+T_{0}+T_2-2T_1 =-h^2\beta,{\nonumber}\]</div>
+<div class="math notranslate nohighlight" id="eq-auto16">
+\[\tag{62}
+T_{1}+T_3-2T_2 =-h^2\beta,{\nonumber}\]</div>
+<div class="math notranslate nohighlight" id="eq-auto17">
+\[\tag{63}
+T_{2}+T_4-2T_3 =-h^2\beta.{\nonumber}\]</div>
+<div class="math notranslate nohighlight" id="eq-eq-nlin-heat4">
+\[\tag{64}
+The tricky part is now to introduce the boundary conditions. The right\]</div>
+<p>hand side is easy, because here the temperature is <span class="math notranslate nohighlight">\(T_4=25\)</span>. However,
+we see that <span class="math notranslate nohighlight">\(T_{-1}\)</span> enters and we have no value for this node. The
+boundary condition on the left hand side is <span class="math notranslate nohighlight">\(dT/dy=0\)</span>, by using the
+central difference for the derivative allows us to write:</p>
+<div class="math notranslate nohighlight" id="eq-eq-nlin-bound1">
+\[\tag{65}
+\left.\frac{dT}{dy}\right|_{y=0}=\frac{T_{-1}-T_1}{2h}=0,\]</div>
+<p>hence <span class="math notranslate nohighlight">\(T_{-1}=T_1\)</span>. Thus the final set of equations are:</p>
+<div class="math notranslate nohighlight" id="eq-auto18">
+\[\tag{66}
+2T_1-2T_0 =-h^2\beta,{\nonumber}\]</div>
+<div class="math notranslate nohighlight" id="eq-auto19">
+\[\tag{67}
+T_{0}+T_2-2T_1 =-h^2\beta,{\nonumber}\]</div>
+<div class="math notranslate nohighlight" id="eq-auto20">
+\[\tag{68}
+T_{1}+T_3-2T_2 =-h^2\beta,{\nonumber}\]</div>
+<div class="math notranslate nohighlight" id="eq-auto21">
+\[\tag{69}
+T_{2}+25-2T_3 =-h^2\beta,{\nonumber}\]</div>
+<div class="math notranslate nohighlight" id="eq-eq-nlin-heat5">
+\[\tag{70}
+or in matrix form:\]</div>
+<div class="math notranslate nohighlight" id="eq-eq-lin-heats">
+\[\begin{split}\tag{71}
+\left(
+    \begin{array}{cccc}
+    -2&amp;2&amp;0&amp;0\\
+    1&amp;-2&amp;1&amp;0\\
+    0&amp;1&amp;-2&amp;1\\
+    0&amp;0&amp;1&amp;-2\\
+    \end{array}
+    \right)
+    \left(
+    \begin{array}{c}
+    T_0\\
+    T_1\\
+    T_2\\
+    T_3\\
+    \end{array}
+    \right)
+    =
+    \left(
+    \begin{array}{c}
+    -h^2\beta\\
+    -h^2\beta\\
+    -h^2\beta\\
+    -h^2\beta+25\\
+    \end{array}
+    \right).\end{split}\]</div>
+<p>Note that it is now easy to increase <span class="math notranslate nohighlight">\(N\)</span> as it is only the boundaries
+that requires special attention. The set of equations can be solved
+using <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/sparse.linalg.html">scipy.sparse.linalg.spsolve</a>.
+The solution to the above equations is <span class="math notranslate nohighlight">\(L=1\)</span> m, and <span class="math notranslate nohighlight">\(h=1/4\)</span>, is: <span class="math notranslate nohighlight">\([T_0,T_1.T_2,T_3]=[38.88888889, 38.02083333, 35.41666667, 31.07638889]\)</span>.</p>
+<p><strong>Solution.</strong></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The solution below implements equation <a class="reference internal" href="#eq-eq-lin-heats"><span class="std std-ref">(71)</span></a> using sparse matrices, and the standard Numpy <code class="docutils literal notranslate"><span class="pre">solve</span></code> function. You can use the <code class="docutils literal notranslate"><span class="pre">%timeit</span></code> magic command in Ipython and Jupyter notebooks to test the efficiency.</p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#%matplotlib inline</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy</span> <span class="kn">as</span> <span class="nn">sc</span>
+<span class="kn">import</span> <span class="nn">scipy.sparse.linalg</span>
+<span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="kn">import</span> <span class="n">solve</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Set simulation parameters</span>
+<span class="n">h</span> <span class="o">=</span> <span class="mf">0.25</span>              <span class="c1"># element size</span>
+<span class="n">L</span> <span class="o">=</span> <span class="mf">1.0</span>              <span class="c1"># length of domain</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">L</span><span class="o">/</span><span class="n">h</span><span class="p">))</span>  <span class="c1"># number of unknowns</span>
+<span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">h</span>   <span class="c1"># includes right bc</span>
+<span class="n">T1</span><span class="o">=</span><span class="mi">25</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mi">100</span><span class="o">*</span><span class="n">L</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mf">1.65</span>
+
+<span class="k">def</span> <span class="nf">tri_diag</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">k1</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">k2</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">k3</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; a,b,c diagonal terms &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">k1</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">k2</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">k3</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">analytical</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">sigma</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="n">T1</span>
+
+<span class="c1">#Create matrix for linalg solver</span>
+<span class="n">a</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">b</span><span class="o">=-</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span>
+<span class="n">c</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1">#Create matrix for sparse solver</span>
+<span class="n">diagonals</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="n">n</span><span class="p">))</span>
+<span class="n">diagonals</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span><span class="o">=</span> <span class="mi">1</span>
+<span class="n">diagonals</span><span class="p">[</span><span class="mi">1</span><span class="p">,:]</span><span class="o">=</span> <span class="o">-</span><span class="mi">2</span>
+<span class="n">diagonals</span><span class="p">[</span><span class="mi">2</span><span class="p">,:]</span><span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># rhs vector</span>
+<span class="n">d</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="o">-</span><span class="n">h</span><span class="o">*</span><span class="n">h</span><span class="o">*</span><span class="n">sigma</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+
+<span class="c1">#----boundary conditions ------</span>
+<span class="c1">#lhs - no flux of heat</span>
+<span class="n">diagonals</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span> <span class="mi">2</span>
+<span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="mi">2</span>
+<span class="c1">#rhs - constant temperature</span>
+<span class="n">d</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">d</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">T1</span>
+<span class="c1">#------------------------------</span>
+
+<span class="n">A</span><span class="o">=</span><span class="n">tri_diag</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
+<span class="n">A_sparse</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">spdiags</span><span class="p">(</span><span class="n">diagonals</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span><span class="n">format</span><span class="o">=</span><span class="s1">&#39;csc&#39;</span><span class="p">)</span>
+
+<span class="c1">#Solve linear problems</span>
+<span class="n">Ta</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">d</span><span class="p">,)</span>
+<span class="n">Tb</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">spsolve</span><span class="p">(</span><span class="n">A_sparse</span><span class="p">,</span><span class="n">d</span><span class="p">)</span>
+<span class="c1">#Add right boundary node</span>
+<span class="n">Ta</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Ta</span><span class="p">,</span><span class="n">T1</span><span class="p">)</span>
+<span class="n">Tb</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Tb</span><span class="p">,</span><span class="n">T1</span><span class="p">)</span>
+<span class="c1">#uncomment to test efficiency</span>
+<span class="c1">#%timeit sc.sparse.linalg.spsolve(A_sparse,d)</span>
+<span class="c1">#%timeit solve(A,d,)</span>
+
+<span class="c1"># Plot solutions</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">Ta</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">Tb</span><span class="p">,</span><span class="s1">&#39;-.&#39;</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">analytical</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span><span class="n">x</span><span class="p">),</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Dimensionless length&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Temperature [$^\circ$C]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">T1</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;sparse&#39;</span><span class="p">,</span><span class="s1">&#39;linalg&#39;</span><span class="p">,</span><span class="s1">&#39;analytical&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Modeling and Computational Engineering</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="._book000.html">Modeling and Computational Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._book001.html">Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._book002.html">Finite differences</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Solving linear systems</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#solving-linear-equations">Solving linear equations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gauss-jordan-elimination">Gauss-Jordan elimination</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pivoting">Pivoting</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#example-linear-regression">Example: Linear regression</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#solving-least-square-using-algebraic-equations">Solving least square, using algebraic equations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#least-square-as-a-linear-algebra-problem">Least square as a linear algebra problem</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#sparse-matrices-and-thomas-algorithm">Sparse matrices and Thomas algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-solving-the-heat-equation-using-linear-algebra">Example: Solving the heat equation using linear algebra</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#exercise-2-1-conservation-equation-or-the-continuity-equation">Exercise 2.1: Conservation Equation or the Continuity Equation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#exercise-2-2-curing-of-concrete-and-matrix-formulation">Exercise 2.2: Curing of Concrete and Matrix Formulation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="._book004.html">Numerical integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._book005.html">Solving nonlinear equations</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="._book002.html" title="previous chapter">Finite differences</a></li>
+      <li>Next: <a href="._book004.html" title="next chapter">Numerical integration</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Aksel Hiorth, the National IOR Centre & Institute for Energy Resources,.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/._book003.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
