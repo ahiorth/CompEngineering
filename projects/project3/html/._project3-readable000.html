@@ -1,0 +1,226 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Modeling the Worst: A Zombie outbreak">
+
+<title>Modeling the Worst: A Zombie outbreak</title>
+
+<!-- Bootstrap style: bootswatch_readable -->
+<link href="https://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:64px;      /* fixed header height for style bootswatch_readable */
+  margin:-64px 0 0; /* negative fixed header height */
+}
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Table of contents',
+               1,
+               'table_of_contents',
+               'table_of_contents'),
+              ('Introduction',
+               1,
+               'intro_compartment_models',
+               'intro_compartment_models'),
+              ('Modeling a zombie outbreak - $SZ$ model', 1, None, '___sec1'),
+              ('Exercise 1: Analytical solution (OPTIONAL)',
+               1,
+               'zombie_human_model',
+               'zombie_human_model'),
+              ('Exercise 2: No hope?', 1, 'no_hope', 'no_hope'),
+              ('Exercise 3: Numerical solver implementation',
+               1,
+               None,
+               '___sec4'),
+              ('Exercise 4: Predicting the fate of Sokndal and Dirdal',
+               1,
+               'fate_of_dirdal_and_sokndal',
+               'fate_of_dirdal_and_sokndal'),
+              ('Exercise 5: Adaptive Method and Richardson extrapolation (CAN '
+               'BE SKIPPED)',
+               1,
+               None,
+               '___sec6'),
+              ('Exercise 6: Counter attacks - Kill them all?',
+               1,
+               'SIR_model',
+               'SIR_model'),
+              ('Exercise 7: Ebola epidemic in West Africa',
+               1,
+               'ebola',
+               'ebola'),
+              ('Guidelines for project submission', 1, None, '___sec9'),
+              ('Bibliography', 1, None, '___sec10')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript" async
+ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="project3-readable.html">Modeling the Worst: A Zombie outbreak</a>
+  </div>
+
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="#table_of_contents" style="font-size: 80%;">Table of contents</a></li>
+     <!-- navigation toc: --> <li><a href="._project3-readable001.html#intro_compartment_models" style="font-size: 80%;">Introduction</a></li>
+     <!-- navigation toc: --> <li><a href="._project3-readable001.html#___sec1" style="font-size: 80%;">Modeling a zombie outbreak - \( SZ \) model</a></li>
+     <!-- navigation toc: --> <li><a href="._project3-readable001.html#zombie_human_model" style="font-size: 80%;">Exercise 1: Analytical solution (OPTIONAL)</a></li>
+     <!-- navigation toc: --> <li><a href="._project3-readable001.html#no_hope" style="font-size: 80%;">Exercise 2: No hope?</a></li>
+     <!-- navigation toc: --> <li><a href="._project3-readable001.html#___sec4" style="font-size: 80%;">Exercise 3: Numerical solver implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._project3-readable001.html#fate_of_dirdal_and_sokndal" style="font-size: 80%;">Exercise 4: Predicting the fate of Sokndal and Dirdal</a></li>
+     <!-- navigation toc: --> <li><a href="._project3-readable001.html#___sec6" style="font-size: 80%;">Exercise 5: Adaptive Method and Richardson extrapolation (CAN BE SKIPPED)</a></li>
+     <!-- navigation toc: --> <li><a href="._project3-readable001.html#SIR_model" style="font-size: 80%;">Exercise 6: Counter attacks - Kill them all?</a></li>
+     <!-- navigation toc: --> <li><a href="._project3-readable001.html#ebola" style="font-size: 80%;">Exercise 7: Ebola epidemic in West Africa</a></li>
+     <!-- navigation toc: --> <li><a href="._project3-readable001.html#___sec9" style="font-size: 80%;">Guidelines for project submission</a></li>
+     <!-- navigation toc: --> <li><a href="._project3-readable001.html#___sec10" style="font-size: 80%;">Bibliography</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0000"></a>
+<!-- ------------------- main content ---------------------- -->
+
+
+
+<div class="jumbotron">
+<center><h1>Modeling the Worst: A Zombie outbreak</h1></center>  <!-- document title -->
+
+<p>
+<!-- author(s): MOD510: Mandatory project \#3, and Deadline: 10. November 2019 -->
+
+<center>
+<b>MOD510: Mandatory project \#3</b> 
+</center>
+
+<center>
+<b>Deadline: 10. November 2019</b> 
+</center>
+
+<p>
+<!-- institution(s) -->
+
+<br>
+<p>
+<center><h4>Oct 25, 2019</h4></center> <!-- date -->
+<br>
+<p>
+<b>Learning objectives.</b>
+By completing this project, the student will:
+
+<ul>
+<li> Learn how to escape from a zombie threat using wisdom from simple <em>compartment models</em>.</li>
+<li> Learn how one can model the spreading of diseases mathematically.</li>
+<li> Apply the model to study the outbreak of the Ebola virus in West-Africa in the period 2014-2015.</li>
+<li> Implement a selection of such models in Python, using standard methods.</li>
+<li> Gain intuition about which parameters are important by performing model sensitivity runs.</li>
+</ul>
+
+
+</div> <!-- end jumbotron -->
+
+<h1 id="table_of_contents">Table of contents</h2>
+
+<p>
+<a href="._project3-readable001.html#intro_compartment_models"> Introduction </a><br>
+<a href="._project3-readable001.html#___sec1"> Modeling a zombie outbreak - \( SZ \) model </a><br>
+<a href="._project3-readable001.html#zombie_human_model"> Exercise 1: Analytical solution (OPTIONAL) </a><br>
+<a href="._project3-readable001.html#no_hope"> Exercise 2: No hope? </a><br>
+<a href="._project3-readable001.html#___sec4"> Exercise 3: Numerical solver implementation </a><br>
+<a href="._project3-readable001.html#fate_of_dirdal_and_sokndal"> Exercise 4: Predicting the fate of Sokndal and Dirdal </a><br>
+<a href="._project3-readable001.html#___sec6"> Exercise 5: Adaptive Method and Richardson extrapolation (CAN BE SKIPPED) </a><br>
+<a href="._project3-readable001.html#SIR_model"> Exercise 6: Counter attacks - Kill them all? </a><br>
+<a href="._project3-readable001.html#ebola"> Exercise 7: Ebola epidemic in West Africa </a><br>
+<a href="._project3-readable001.html#___sec9"> Guidelines for project submission </a><br>
+<a href="._project3-readable001.html#___sec10"> Bibliography </a><br>
+</p>
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+
+  <li class="next">
+    <a href="._project3-readable001.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+
