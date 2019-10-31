@@ -6,6 +6,7 @@ Automatically generated HTML file from DocOnce source
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="Modeling and Computational Engineering">
 
 <title>Modeling and Computational Engineering</title>
@@ -102,10 +103,67 @@ code { color: inherit; background-color: transparent; }
                '___sec31'),
               ('Which method to use in a specific case?', 2, None, '___sec32'),
               ('Exercise 3.1: Numerical Integration', 2, None, '___sec33'),
-              ('Solving nonlinear equations', 0, 'ch:nlin', 'ch:nlin'),
               ('Ordinary differential equations', 0, 'ch:ode', 'ch:ode'),
+              ('Ordinary Differential Equations', 1, None, '___sec35'),
+              ('A Simple Model for Fluid Flow', 1, None, '___sec36'),
+              ('Eulers Method', 1, None, '___sec37'),
+              ('Error Analysis - Eulers Method', 2, None, '___sec38'),
+              ('Adaptive step size - Eulers Method', 2, None, '___sec39'),
+              ('Runge-Kutta Methods', 1, None, '___sec40'),
+              ('Adaptive step size - Runge-Kutta Method', 2, None, '___sec41'),
+              ('Conservation of Mass', 2, None, '___sec42'),
+              ('Solving a set of ODE equations', 1, None, '___sec43'),
+              ('Stiff sets of ODE  and implicit methods', 1, None, '___sec44'),
+              ('Exercise 4.1: Truncation Error in Eulers Method',
+               2,
+               None,
+               '___sec45'),
+              ('Solving nonlinear equations', 0, 'ch:nlin', 'ch:nlin'),
+              ('Nonlinear equations', 1, None, '___sec47'),
+              ('Example: van der Waals equation of state', 1, None, '___sec48'),
+              ('Exercise 5.1: van der Waal EOS and CO$_2$',
+               2,
+               None,
+               '___sec49'),
+              ('Fixed-point iteration', 1, None, '___sec50'),
+              ('Exercise 5.2: Implement the fixed point iteration',
+               2,
+               None,
+               '___sec51'),
+              ('Exercise 5.3: Finding the molar volume from the van der Waal '
+               'EOS by fixed point iteration',
+               2,
+               None,
+               '___sec52'),
+              ('When do the fixed point method fail?',
+               2,
+               'sec:nlin:fp',
+               'sec:nlin:fp'),
+              ('What to do when the fixed point method fail',
+               2,
+               None,
+               '___sec54'),
+              ('Exercise 5.4: Solve $x=e^{1-x^2}$ using fixed point iteration',
+               2,
+               None,
+               '___sec55'),
+              ('Rate of convergence', 1, None, '___sec56'),
+              ('The bisection method', 1, None, '___sec57'),
+              ('Newtons method', 1, None, '___sec58'),
+              ('Exercise 5.5: Compare Newtons, Bisection and the Fixed Point '
+               'method',
+               2,
+               None,
+               '___sec59'),
+              ('Newton Rapson method', 1, None, '___sec60'),
+              ('Gradient Descent', 1, None, '___sec61'),
+              ('Exercise 5.6: Gradient descent solution of linear regression',
+               2,
+               None,
+               '___sec62'),
+              ('Other Useful Methods', 1, None, '___sec63'),
               ('Monte Carlo Methods', 0, 'ch:mc', 'ch:mc'),
-              ('References', 1, None, '___sec37')]}
+              ('References', 1, None, '___sec65')]}
 end of tocinfo -->
 
 <body>
@@ -184,10 +242,38 @@ $$
      <!-- navigation toc: --> <li><a href="._book004.html#___sec31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Common Weight functions for Classical Gaussian Quadratures</a></li>
      <!-- navigation toc: --> <li><a href="._book004.html#___sec32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Which method to use in a specific case?</a></li>
      <!-- navigation toc: --> <li><a href="._book004.html#___sec33" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 3.1: Numerical Integration</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#ch:nlin" style="font-size: 80%;"><b>Solving nonlinear equations</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#ch:ode" style="font-size: 80%;"><b>Ordinary differential equations</b></a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#ch:ode" style="font-size: 80%;"><b>Ordinary differential equations</b></a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#___sec35" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ordinary Differential Equations</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#___sec36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;A Simple Model for Fluid Flow</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#___sec37" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Eulers Method</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#___sec38" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Error Analysis - Eulers Method</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#___sec39" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adaptive step size - Eulers Method</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#___sec40" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Runge-Kutta Methods</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#___sec41" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adaptive step size - Runge-Kutta Method</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#___sec42" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Conservation of Mass</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#___sec43" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Solving a set of ODE equations</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#___sec44" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Stiff sets of ODE  and implicit methods</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#___sec45" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.1: Truncation Error in Eulers Method</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#ch:nlin" style="font-size: 80%;"><b>Solving nonlinear equations</b></a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#___sec47" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Nonlinear equations</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#___sec48" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: van der Waals equation of state</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#___sec49" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.1: van der Waal EOS and CO$_2$</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#___sec50" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Fixed-point iteration</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#___sec51" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.2: Implement the fixed point iteration</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#___sec52" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.3: Finding the molar volume from the van der Waal EOS by fixed point iteration</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#sec:nlin:fp" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When do the fixed point method fail?</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#___sec54" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;What to do when the fixed point method fail</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#___sec55" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.4: Solve \( x=e^{1-x^2} \) using fixed point iteration</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#___sec56" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#___sec57" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The bisection method</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#___sec58" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Newtons method</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#___sec59" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.5: Compare Newtons, Bisection and the Fixed Point method</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#___sec60" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Newton Rapson method</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#___sec61" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Gradient Descent</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#___sec62" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.6: Gradient descent solution of linear regression</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#___sec63" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Other Useful Methods</a></li>
      <!-- navigation toc: --> <li><a href="._book007.html#ch:mc" style="font-size: 80%;"><b>Monte Carlo Methods</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book008.html#___sec37" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;References</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#___sec65" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;References</a></li>
 
         </ul>
       </li>

@@ -9,11 +9,13 @@
     <title>Modeling and Computational Engineering &#8212; Modeling and Computational Engineering 1.0 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Preface" href="._book001.html" />
@@ -53,7 +55,7 @@
 </tbody>
 </table>
 <p>University of Stavanger
-:Date: Sep 17, 2019</p>
+:Date: Oct 31, 2019</p>
 <p><em>Summary.</em> (Work in Progress) The purpose of this document is to explain how computers solve mathematical models.
 Many of the most common numerical methods is presented, we show how to implement them in Python, and discuss the limitations.
 The mathemathical formalism is kept to a minimum. All the material is available at
@@ -67,7 +69,27 @@ We strongly recommend to install Python from <a class="reference external" href=
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper"><div class="relations">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Modeling and Computational Engineering</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Modeling and Computational Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._book001.html">Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._book002.html">Finite differences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._book003.html">Solving linear systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._book004.html">Numerical integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._book005.html">Ordinary differential equations</a></li>
+</ul>
+
+<div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
@@ -76,13 +98,6 @@ We strongly recommend to install Python from <a class="reference external" href=
   </ul></li>
 </ul>
 </div>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/._book000.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <div class="searchformwrapper">
@@ -95,6 +110,14 @@ We strongly recommend to install Python from <a class="reference external" href=
     </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>
@@ -103,7 +126,7 @@ We strongly recommend to install Python from <a class="reference external" href=
       &copy;2019, Aksel Hiorth, the National IOR Centre & Institute for Energy Resources,.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

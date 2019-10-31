@@ -1,7 +1,0 @@
-.. !split
-
-.. _ch:nlin:
-
-Solving nonlinear equations
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-

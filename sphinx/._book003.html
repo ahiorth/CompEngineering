@@ -9,11 +9,13 @@
     <title>Solving linear systems &#8212; Modeling and Computational Engineering 1.0 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Numerical integration" href="._book004.html" />
@@ -563,7 +565,7 @@ T_{i+1}+T_{i-1}-2T_i=-h^2\beta,\]</div>
 <span id="fig-nlin-hgrid"></span><a class="reference internal image-reference" href="_images/heat_grid.png"><img alt="_images/heat_grid.png" src="_images/heat_grid.png" style="width: 200px;" /></a>
 <p class="caption"><span class="caption-text">Finite difference grid for <span class="math notranslate nohighlight">\(N=4\)</span></span></p>
 </div>
-<p>In figure <a class="reference internal" href="#fig-nlin-hgrid"><span class="std std-ref">Finite difference grid for </span></a>, the finite difference grid is shown for
+<p>In figure <a class="reference internal" href="#fig-nlin-hgrid"><span class="std std-ref">Finite difference grid for N=4</span></a>, the finite difference grid is shown for
 <span class="math notranslate nohighlight">\(N=4\)</span>. Let us write down equation <a class="reference internal" href="#eq-eq-nlin-heat3"><span class="std std-ref">(59)</span></a> for each grid
 node to see how the implementation is done in practice:</p>
 <div class="math notranslate nohighlight" id="eq-auto14">
@@ -718,28 +720,43 @@ The solution to the above equations is <span class="math notranslate nohighlight
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Solving linear systems</a><ul>
-<li><a class="reference internal" href="#solving-linear-equations">Solving linear equations</a><ul>
-<li><a class="reference internal" href="#gauss-jordan-elimination">Gauss-Jordan elimination</a></li>
-<li><a class="reference internal" href="#pivoting">Pivoting</a></li>
+<h1 class="logo"><a href="index.html">Modeling and Computational Engineering</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="._book000.html">Modeling and Computational Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._book001.html">Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._book002.html">Finite differences</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Solving linear systems</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#solving-linear-equations">Solving linear equations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gauss-jordan-elimination">Gauss-Jordan elimination</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pivoting">Pivoting</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#example-linear-regression">Example: Linear regression</a><ul>
-<li><a class="reference internal" href="#solving-least-square-using-algebraic-equations">Solving least square, using algebraic equations</a></li>
-<li><a class="reference internal" href="#least-square-as-a-linear-algebra-problem">Least square as a linear algebra problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-linear-regression">Example: Linear regression</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#solving-least-square-using-algebraic-equations">Solving least square, using algebraic equations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#least-square-as-a-linear-algebra-problem">Least square as a linear algebra problem</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#sparse-matrices-and-thomas-algorithm">Sparse matrices and Thomas algorithm</a></li>
-<li><a class="reference internal" href="#example-solving-the-heat-equation-using-linear-algebra">Example: Solving the heat equation using linear algebra</a><ul>
-<li><a class="reference internal" href="#exercise-2-1-conservation-equation-or-the-continuity-equation">Exercise 2.1: Conservation Equation or the Continuity Equation</a></li>
-<li><a class="reference internal" href="#exercise-2-2-curing-of-concrete-and-matrix-formulation">Exercise 2.2: Curing of Concrete and Matrix Formulation</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#sparse-matrices-and-thomas-algorithm">Sparse matrices and Thomas algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-solving-the-heat-equation-using-linear-algebra">Example: Solving the heat equation using linear algebra</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#exercise-2-1-conservation-equation-or-the-continuity-equation">Exercise 2.1: Conservation Equation or the Continuity Equation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#exercise-2-2-curing-of-concrete-and-matrix-formulation">Exercise 2.2: Curing of Concrete and Matrix Formulation</a></li>
 </ul>
 </li>
 </ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="._book004.html">Numerical integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._book005.html">Ordinary differential equations</a></li>
+</ul>
+
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
@@ -749,13 +766,6 @@ The solution to the above equations is <span class="math notranslate nohighlight
   </ul></li>
 </ul>
 </div>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/._book003.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <div class="searchformwrapper">
@@ -768,6 +778,14 @@ The solution to the above equations is <span class="math notranslate nohighlight
     </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>
@@ -776,7 +794,7 @@ The solution to the above equations is <span class="math notranslate nohighlight
       &copy;2019, Aksel Hiorth, the National IOR Centre & Institute for Energy Resources,.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

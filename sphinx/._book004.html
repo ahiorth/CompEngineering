@@ -9,14 +9,16 @@
     <title>Numerical integration &#8212; Modeling and Computational Engineering 1.0 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Solving nonlinear equations" href="._book005.html" />
+    <link rel="next" title="Ordinary differential equations" href="._book005.html" />
     <link rel="prev" title="Solving linear systems" href="._book003.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -476,7 +478,7 @@ R_{i,m+1}=R_{i,m}+\frac{1}{4^{m+1}-1}(R_{i+1,m}-R_{i,m}).\]</div>
 <li>Correct the estimate by adding <em>all</em> the higher order error term <span class="math notranslate nohighlight">\(R_{i,m+1}=R_{i,m}+\frac{1}{4^m-1}(R_{i+1,m+1}-R_{i,m+1})\)</span></li>
 <li>Check if the error term is lower than a specific tolerance <span class="math notranslate nohighlight">\(E_{i,m}(a,b)=\frac{1}{4^{m+1}-1}(R_{i,m}-R_{i-1,m})\)</span>, if yes quit, if no goto 2, increase <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(m\)</span> by one</li>
 </ol>
-<p>The algorithm is illustrated in figure <a class="reference internal" href="#fig-numint-romberg"><span class="std std-ref">Illustration of the Romberg algorithm. Note that for each new evaluation of the integral , all the correction terms  (for ) must be evaluated again</span></a>.</p>
+<p>The algorithm is illustrated in figure <a class="reference internal" href="#fig-numint-romberg"><span class="std std-ref">Illustration of the Romberg algorithm. Note that for each new evaluation of the integral R_{i,0}, all the correction terms R_{i,m} (for m&gt;0) must be evaluated again</span></a>.</p>
 <div class="figure" id="id6">
 <span id="fig-numint-romberg"></span><a class="reference internal image-reference" href="_images/romberg.png"><img alt="_images/romberg.png" src="_images/romberg.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-text">Illustration of the Romberg algorithm. Note that for each new evaluation of the integral <span class="math notranslate nohighlight">\(R_{i,0}\)</span>, all the correction terms <span class="math notranslate nohighlight">\(R_{i,m}\)</span> (for <span class="math notranslate nohighlight">\(m&gt;0\)</span>) must be evaluated again</span></p>
@@ -786,44 +788,49 @@ Make a Python program that uses the Midpoint rule to integrate experimental data
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Numerical integration</a><ul>
-<li><a class="reference internal" href="#id1">Numerical Integration</a><ul>
-<li><a class="reference internal" href="#the-midpoint-rule">The Midpoint Rule</a></li>
-<li><a class="reference internal" href="#the-trapezoidal-rule">The Trapezoidal Rule</a></li>
-<li><a class="reference internal" href="#numerical-errors-on-integrals">Numerical Errors on Integrals</a></li>
-<li><a class="reference internal" href="#practical-estimation-of-errors-on-integrals-richardson-extrapolation">Practical Estimation of Errors on Integrals (Richardson Extrapolation)</a></li>
+<h1 class="logo"><a href="index.html">Modeling and Computational Engineering</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="._book000.html">Modeling and Computational Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._book001.html">Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._book002.html">Finite differences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._book003.html">Solving linear systems</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Numerical integration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">Numerical Integration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#the-midpoint-rule">The Midpoint Rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-trapezoidal-rule">The Trapezoidal Rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#numerical-errors-on-integrals">Numerical Errors on Integrals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#practical-estimation-of-errors-on-integrals-richardson-extrapolation">Practical Estimation of Errors on Integrals (Richardson Extrapolation)</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#romberg-integration">Romberg Integration</a><ul>
-<li><a class="reference internal" href="#gaussian-quadrature">Gaussian Quadrature</a><ul>
-<li><a class="reference internal" href="#the-case-n-3">The case N=3</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#error-term-on-gaussian-integration">Error term on Gaussian Integration</a></li>
-<li><a class="reference internal" href="#exercise-3-1-numerical-integration">Exercise 3.1: Numerical Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#romberg-integration">Romberg Integration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gaussian-quadrature">Gaussian Quadrature</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#error-term-on-gaussian-integration">Error term on Gaussian Integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#exercise-3-1-numerical-integration">Exercise 3.1: Numerical Integration</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="._book005.html">Ordinary differential equations</a></li>
 </ul>
+
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
       <li>Previous: <a href="._book003.html" title="previous chapter">Solving linear systems</a></li>
-      <li>Next: <a href="._book005.html" title="next chapter">Solving nonlinear equations</a></li>
+      <li>Next: <a href="._book005.html" title="next chapter">Ordinary differential equations</a></li>
   </ul></li>
 </ul>
 </div>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/._book004.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <div class="searchformwrapper">
@@ -836,6 +843,14 @@ Make a Python program that uses the Midpoint rule to integrate experimental data
     </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>
@@ -844,7 +859,7 @@ Make a Python program that uses the Midpoint rule to integrate experimental data
       &copy;2019, Aksel Hiorth, the National IOR Centre & Institute for Energy Resources,.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

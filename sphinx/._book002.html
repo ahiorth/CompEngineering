@@ -9,11 +9,13 @@
     <title>Finite differences &#8212; Modeling and Computational Engineering 1.0 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Solving linear systems" href="._book003.html" />
@@ -90,7 +92,7 @@ f(x) = f(c)+f^\prime(c)(x-c)+\frac{f^{\prime\prime}(c)}{2!}(x-c)^2+\cdots
 \[\tag{3}
 \sin x = x-\frac{x^3}{3!}+\frac{x^5}{5!}-\frac{x^7}{7!}+\cdots=\sum_{k=0}^{\infty}\frac{(-1)^n}{(2n+1)!}x^{2n+1}.
     \]</div>
-<p>In figure <a class="reference internal" href="#fig-mac-sin"><span class="std std-ref">Up to ninth order in the Maclaurin series of </span></a>, we show the first nine terms in the Maclaurin series for <span class="math notranslate nohighlight">\(\sin x\)</span> (all even terms are zero).</p>
+<p>In figure <a class="reference internal" href="#fig-mac-sin"><span class="std std-ref">Up to ninth order in the Maclaurin series of \sin x</span></a>, we show the first nine terms in the Maclaurin series for <span class="math notranslate nohighlight">\(\sin x\)</span> (all even terms are zero).</p>
 <div class="figure" id="id2">
 <span id="fig-mac-sin"></span><a class="reference internal image-reference" href="_images/mac_sin.png"><img alt="_images/mac_sin.png" src="_images/mac_sin.png" style="width: 600px;" /></a>
 <p class="caption"><span class="caption-text">Up to ninth order in the Maclaurin series of <span class="math notranslate nohighlight">\(\sin x\)</span></span></p>
@@ -203,8 +205,8 @@ f^\prime(x)=\frac{f(x+h)-f(x)}{h}-\frac{h}{2}f^{\prime\prime}(\eta),\]</div>
 <p>for some <span class="math notranslate nohighlight">\(\eta\)</span> in <span class="math notranslate nohighlight">\([x,x+h]\)</span>. Thus the error to our approximation is <span class="math notranslate nohighlight">\(hf^{\prime\prime}(\eta)/2\)</span>, if we reduce the step size by a factor of 10 the error is reduced by a factor of 10.
 Inspecting the graph, we clearly see that this is correct as the step size decreases from <span class="math notranslate nohighlight">\(10^{-1}\)</span> to <span class="math notranslate nohighlight">\(10^{-8}\)</span>. When the step size decreases more, there is an increase in the error. This
 is due to round off errors, and can be understood by looking into how numbers are stored in a computer.</p>
-<div class="section" id="big-notation">
-<h3>Big <span class="math notranslate nohighlight">\(\mathcal{O}\)</span> notation<a class="headerlink" href="#big-notation" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="big-mathcal-o-notation">
+<h3>Big <span class="math notranslate nohighlight">\(\mathcal{O}\)</span> notation<a class="headerlink" href="#big-mathcal-o-notation" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference external" href="https://rob-bell.net/2009/06/a-beginners-guide-to-big-o-notation/">example</a></p>
 </div>
 <div class="section" id="round-off-errors">
@@ -306,23 +308,38 @@ derivative in equation <a class="reference internal" href="#eq-eq-taylor-der2"><
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Finite differences</a><ul>
-<li><a class="reference internal" href="#numerical-derivatives">Numerical derivatives</a></li>
-<li><a class="reference internal" href="#taylor-polynomial-approximation">Taylor Polynomial Approximation</a><ul>
-<li><a class="reference internal" href="#evaluation-of-polynomials">Evaluation of polynomials</a></li>
+<h1 class="logo"><a href="index.html">Modeling and Computational Engineering</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="._book000.html">Modeling and Computational Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._book001.html">Preface</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Finite differences</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#numerical-derivatives">Numerical derivatives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#taylor-polynomial-approximation">Taylor Polynomial Approximation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#evaluation-of-polynomials">Evaluation of polynomials</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#calculating-derivatives-of-functions">Calculating Derivatives of Functions</a><ul>
-<li><a class="reference internal" href="#big-notation">Big <span class="math notranslate nohighlight">\(\mathcal{O}\)</span> notation</a></li>
-<li><a class="reference internal" href="#round-off-errors">Round off Errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#calculating-derivatives-of-functions">Calculating Derivatives of Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#big-mathcal-o-notation">Big <span class="math notranslate nohighlight">\(\mathcal{O}\)</span> notation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#round-off-errors">Round off Errors</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#higher-order-derivatives">Higher Order Derivatives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#higher-order-derivatives">Higher Order Derivatives</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="._book003.html">Solving linear systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._book004.html">Numerical integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._book005.html">Ordinary differential equations</a></li>
 </ul>
+
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
@@ -332,13 +349,6 @@ derivative in equation <a class="reference internal" href="#eq-eq-taylor-der2"><
   </ul></li>
 </ul>
 </div>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/._book002.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <div class="searchformwrapper">
@@ -351,6 +361,14 @@ derivative in equation <a class="reference internal" href="#eq-eq-taylor-der2"><
     </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>
@@ -359,7 +377,7 @@ derivative in equation <a class="reference internal" href="#eq-eq-taylor-der2"><
       &copy;2019, Aksel Hiorth, the National IOR Centre & Institute for Energy Resources,.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
