@@ -101,40 +101,47 @@ code { color: inherit; background-color: transparent; }
                2,
                None,
                '___sec31'),
-              ('Which method to use in a specific case?', 2, None, '___sec32'),
-              ('Exercise 3.1: Numerical Integration', 2, None, '___sec33'),
+              ('Integrating functions over an infinite range',
+               1,
+               None,
+               '___sec32'),
+              ('Which method to use in a specific case? (NOT COMPLETED)',
+               2,
+               None,
+               '___sec33'),
+              ('Exercise 3.1: Numerical Integration', 2, None, '___sec34'),
               ('Ordinary differential equations', 0, 'ch:ode', 'ch:ode'),
-              ('Ordinary Differential Equations', 1, None, '___sec35'),
-              ('A Simple Model for Fluid Flow', 1, None, '___sec36'),
-              ('Eulers Method', 1, None, '___sec37'),
-              ('Error Analysis - Eulers Method', 2, None, '___sec38'),
-              ('Adaptive step size - Eulers Method', 2, None, '___sec39'),
-              ('Runge-Kutta Methods', 1, None, '___sec40'),
-              ('Adaptive step size - Runge-Kutta Method', 2, None, '___sec41'),
-              ('Conservation of Mass', 2, None, '___sec42'),
-              ('Solving a set of ODE equations', 1, None, '___sec43'),
-              ('Stiff sets of ODE  and implicit methods', 1, None, '___sec44'),
+              ('Ordinary Differential Equations', 1, None, '___sec36'),
+              ('A Simple Model for Fluid Flow', 1, None, '___sec37'),
+              ('Eulers Method', 1, None, '___sec38'),
+              ('Error Analysis - Eulers Method', 2, None, '___sec39'),
+              ('Adaptive step size - Eulers Method', 2, None, '___sec40'),
+              ('Runge-Kutta Methods', 1, None, '___sec41'),
+              ('Adaptive step size - Runge-Kutta Method', 2, None, '___sec42'),
+              ('Conservation of Mass', 2, None, '___sec43'),
+              ('Solving a set of ODE equations', 1, None, '___sec44'),
+              ('Stiff sets of ODE  and implicit methods', 1, None, '___sec45'),
               ('Exercise 4.1: Truncation Error in Eulers Method',
                2,
                None,
-               '___sec45'),
+               '___sec46'),
               ('Solving nonlinear equations', 0, 'ch:nlin', 'ch:nlin'),
-              ('Nonlinear equations', 1, None, '___sec47'),
-              ('Example: van der Waals equation of state', 1, None, '___sec48'),
+              ('Nonlinear equations', 1, None, '___sec48'),
+              ('Example: van der Waals equation of state', 1, None, '___sec49'),
               ('Exercise 5.1: van der Waal EOS and CO$_2$',
                2,
                None,
-               '___sec49'),
-              ('Fixed-point iteration', 1, None, '___sec50'),
+               '___sec50'),
+              ('Fixed-point iteration', 1, None, '___sec51'),
               ('Exercise 5.2: Implement the fixed point iteration',
                2,
                None,
-               '___sec51'),
+               '___sec52'),
               ('Exercise 5.3: Finding the molar volume from the van der Waal '
                'EOS by fixed point iteration',
                2,
                None,
-               '___sec52'),
+               '___sec53'),
               ('When do the fixed point method fail?',
                2,
                'sec:nlin:fp',
@@ -142,28 +149,59 @@ code { color: inherit; background-color: transparent; }
               ('What to do when the fixed point method fail',
                2,
                None,
-               '___sec54'),
+               '___sec55'),
               ('Exercise 5.4: Solve $x=e^{1-x^2}$ using fixed point iteration',
                2,
                None,
-               '___sec55'),
-              ('Rate of convergence', 1, None, '___sec56'),
-              ('The bisection method', 1, None, '___sec57'),
-              ('Newtons method', 1, None, '___sec58'),
+               '___sec56'),
+              ('Rate of convergence', 1, None, '___sec57'),
+              ('The bisection method', 1, None, '___sec58'),
+              ('Newtons method', 1, None, '___sec59'),
               ('Exercise 5.5: Compare Newtons, Bisection and the Fixed Point '
                'method',
                2,
                None,
-               '___sec59'),
-              ('Newton Rapson method', 1, None, '___sec60'),
-              ('Gradient Descent', 1, None, '___sec61'),
+               '___sec60'),
+              ('Newton Rapson method', 1, None, '___sec61'),
+              ('Gradient Descent', 1, None, '___sec62'),
               ('Exercise 5.6: Gradient descent solution of linear regression',
                2,
                None,
-               '___sec62'),
-              ('Other Useful Methods', 1, None, '___sec63'),
+               '___sec63'),
+              ('Other Useful Methods', 1, None, '___sec64'),
               ('Monte Carlo Methods', 0, 'ch:mc', 'ch:mc'),
-              ('References', 1, None, '___sec65')]}
+              ('Monte Carlo Methods', 1, None, '___sec66'),
+              ("Monte Carlo Integration  ''Hit and Miss''",
+               1,
+               None,
+               '___sec67'),
+              ('Random number generators', 2, None, '___sec68'),
+              ('Encryption', 2, None, '___sec69'),
+              ('Errors on Monte Carlo Integration and the Binomial '
+               'Distribution',
+               2,
+               None,
+               '___sec70'),
+              ('The mean value method', 2, None, '___sec71'),
+              ('Basic Properties of Probability Distributions',
+               2,
+               None,
+               '___sec72'),
+              ('Example: Monte Carlo Integration of a Hyper Sphere',
+               2,
+               None,
+               '___sec73'),
+              ('Importance Sampling (To be completed)', 1, None, '___sec74'),
+              ('Accept Reject (To be completed)', 1, None, '___sec75'),
+              ('Example: Random Walk (To be completed)', 1, None, '___sec76'),
+              ('Simulated Annealing (To be completed)', 1, None, '___sec77'),
+              ('Exercise 6.1: The central limit theorem',
+               2,
+               'ex:mc:norm',
+               'ex:mc:norm'),
+              ('Remarks', 3, None, '___sec79'),
+              ('Exercise 6.2: Birthday Paradox', 2, 'ex:mc:BP', 'ex:mc:BP'),
+              ('References', 1, None, '___sec81')]}
 end of tocinfo -->
 
 <body>
@@ -240,40 +278,56 @@ $$
      <!-- navigation toc: --> <li><a href="._book004.html#___sec29" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The case N=3</a></li>
      <!-- navigation toc: --> <li><a href="._book004.html#___sec30" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Error term on Gaussian Integration</a></li>
      <!-- navigation toc: --> <li><a href="._book004.html#___sec31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Common Weight functions for Classical Gaussian Quadratures</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Which method to use in a specific case?</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec33" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 3.1: Numerical Integration</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#___sec32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Integrating functions over an infinite range</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#___sec33" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Which method to use in a specific case? (NOT COMPLETED)</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#___sec34" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 3.1: Numerical Integration</a></li>
      <!-- navigation toc: --> <li><a href="#ch:ode" style="font-size: 80%;"><b>Ordinary differential equations</b></a></li>
-     <!-- navigation toc: --> <li><a href="#___sec35" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ordinary Differential Equations</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;A Simple Model for Fluid Flow</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec37" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Eulers Method</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec38" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Error Analysis - Eulers Method</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec39" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adaptive step size - Eulers Method</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec40" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Runge-Kutta Methods</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec41" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adaptive step size - Runge-Kutta Method</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec42" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Conservation of Mass</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec43" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Solving a set of ODE equations</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec44" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Stiff sets of ODE  and implicit methods</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec45" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.1: Truncation Error in Eulers Method</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ordinary Differential Equations</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec37" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;A Simple Model for Fluid Flow</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec38" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Eulers Method</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec39" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Error Analysis - Eulers Method</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec40" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adaptive step size - Eulers Method</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec41" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Runge-Kutta Methods</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec42" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adaptive step size - Runge-Kutta Method</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec43" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Conservation of Mass</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec44" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Solving a set of ODE equations</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec45" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Stiff sets of ODE  and implicit methods</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec46" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.1: Truncation Error in Eulers Method</a></li>
      <!-- navigation toc: --> <li><a href="._book006.html#ch:nlin" style="font-size: 80%;"><b>Solving nonlinear equations</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec47" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Nonlinear equations</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec48" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: van der Waals equation of state</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec49" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.1: van der Waal EOS and CO$_2$</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec50" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Fixed-point iteration</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec51" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.2: Implement the fixed point iteration</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec52" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.3: Finding the molar volume from the van der Waal EOS by fixed point iteration</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#___sec48" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Nonlinear equations</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#___sec49" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: van der Waals equation of state</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#___sec50" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.1: van der Waal EOS and CO$_2$</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#___sec51" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Fixed-point iteration</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#___sec52" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.2: Implement the fixed point iteration</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#___sec53" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.3: Finding the molar volume from the van der Waal EOS by fixed point iteration</a></li>
      <!-- navigation toc: --> <li><a href="._book006.html#sec:nlin:fp" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When do the fixed point method fail?</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec54" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;What to do when the fixed point method fail</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec55" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.4: Solve \( x=e^{1-x^2} \) using fixed point iteration</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec56" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec57" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The bisection method</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec58" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Newtons method</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec59" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.5: Compare Newtons, Bisection and the Fixed Point method</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec60" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Newton Rapson method</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec61" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Gradient Descent</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec62" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.6: Gradient descent solution of linear regression</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec63" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Other Useful Methods</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#___sec55" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;What to do when the fixed point method fail</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#___sec56" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.4: Solve \( x=e^{1-x^2} \) using fixed point iteration</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#___sec57" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#___sec58" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The bisection method</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#___sec59" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Newtons method</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#___sec60" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.5: Compare Newtons, Bisection and the Fixed Point method</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#___sec61" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Newton Rapson method</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#___sec62" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Gradient Descent</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#___sec63" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.6: Gradient descent solution of linear regression</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#___sec64" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Other Useful Methods</a></li>
      <!-- navigation toc: --> <li><a href="._book007.html#ch:mc" style="font-size: 80%;"><b>Monte Carlo Methods</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book008.html#___sec65" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;References</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#___sec66" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Monte Carlo Methods</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#___sec67" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Monte Carlo Integration  ''Hit and Miss''</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#___sec68" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Random number generators</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#___sec69" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Encryption</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#___sec70" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Errors on Monte Carlo Integration and the Binomial Distribution</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#___sec71" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The mean value method</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#___sec72" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Basic Properties of Probability Distributions</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#___sec73" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example: Monte Carlo Integration of a Hyper Sphere</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#___sec74" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Importance Sampling (To be completed)</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#___sec75" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Accept Reject (To be completed)</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#___sec76" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Random Walk (To be completed)</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#___sec77" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Simulated Annealing (To be completed)</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#ex:mc:norm" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 6.1: The central limit theorem</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#___sec79" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#ex:mc:BP" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 6.2: Birthday Paradox</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#___sec81" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;References</a></li>
 
         </ul>
       </li>
@@ -291,7 +345,7 @@ $$
 
 <center><h1 id="ch:ode" class="anchor">Ordinary differential equations</h1></center> <!-- chapter heading -->
 
-<h1 id="___sec35" class="anchor">Ordinary Differential Equations </h1>
+<h1 id="___sec36" class="anchor">Ordinary Differential Equations </h1>
 Physical systems evolves in space and time, and very often they are described by a ordinary differential equations (ODE) and/or
 partial differential equations (PDE). The difference between an ODE and a PDE is that an ODE only describes 
 the changes in one spatial dimension <em>or</em> time, whereas a PDE describes a system that evolves in the \( x- \), \( y- \), \( z- \) dimension 
@@ -305,7 +359,7 @@ investigate when the algorithm run into trouble and
 suggests ways to fix it, these approaches can easily be extended to the higher order methods. Most of the other algorithms boils down to the same idea of extrapolating
 a function using derivatives multiplied with a small step size.
 
-<h1 id="___sec36" class="anchor">A Simple Model for Fluid Flow </h1>
+<h1 id="___sec37" class="anchor">A Simple Model for Fluid Flow </h1>
 Let us consider a simple example from chemical engineering, a continuous stirred tank reactor (CSTR), see figure <a href="#fig:ode:cstr">11</a>. 
 The flow is incompressible (\( q_\text{out}=q_\text{in} \)), a fluid is entering
 on the top and exiting at the bottom, the tank has a fixed volume \( V \). Assume that the tank is filled with saltwater, and that freshwater is pumped into it, how much time does it 
@@ -378,7 +432,7 @@ uniformly.
 </div>
 
 
-<h1 id="___sec37" class="anchor">Eulers Method </h1>
+<h1 id="___sec38" class="anchor">Eulers Method </h1>
 If the system gets slightly more complicated, e.g several tanks in series with a varying flow rate or if salt was generated in the tank, there is a
 good chance that we have to solve the equations numerically to obtain a solution.
 Actually, we have already developed a numerical algorithm to solve equation <a href="#mjx-eqn-4.3">(4.3)</a>, 
@@ -435,7 +489,7 @@ In figure <a href="#fig:ode:euler">12</a> the result of the implementation is sh
 Clearly we see that the results are dependent on the step size, as the step increases the numerical solution deviates from the analytical solution. At some point the 
 numerical algorithm fails completely, and produces results that have no meaning.
 
-<h2 id="___sec38" class="anchor">Error Analysis - Eulers Method </h2>
+<h2 id="___sec39" class="anchor">Error Analysis - Eulers Method </h2>
 There are two obvious questions:
 
 <ol>
@@ -616,7 +670,7 @@ In most practical situations you would
 specify a local error that is acceptable for the problem under investigation and then choose a step size where the local error always is lower than this value. In the 
 next subsection we will investigate how to achieve this in practice.
 
-<h2 id="___sec39" class="anchor">Adaptive step size - Eulers Method </h2>
+<h2 id="___sec40" class="anchor">Adaptive step size - Eulers Method </h2>
 We want to be sure that we use a step size that achieves a certain accuracy in our numerical solution, but at
 the same time that we do not waste simulation time using a too low step size. The following approach is similar to the one we derived for the Romberg integration, and
 a special case of what is known as Richardson Extrapolation. The method is easily extended to higher order methods.
@@ -743,7 +797,7 @@ value, and then another possibility would be to have an \( \epsilon^\prime \) th
 </div>
 
 
-<h1 id="___sec40" class="anchor">Runge-Kutta Methods </h1>
+<h1 id="___sec41" class="anchor">Runge-Kutta Methods </h1>
 
 <p>
 <center> <!-- figure label: --> <div id="fig:ode:rk"></div> <!-- FIGURE -->
@@ -865,7 +919,7 @@ In figure <a href="#fig:ode:rk4">16</a> the result of the Runge-Kutta fourth ord
 <p>
 <!-- % endif -->
 
-<h2 id="___sec41" class="anchor">Adaptive step size - Runge-Kutta Method </h2>
+<h2 id="___sec42" class="anchor">Adaptive step size - Runge-Kutta Method </h2>
 Just as we did with Eulers method, we can implement an adaptive method. The derivation is exactly the same, but this time our method is accurate to
 fourth order, hence the error term is of order \( h^5 \). We start by taking one large step of size \( h \), our estimate, \( y_1^* \) is related to the true 
 solution, \( y(t_1) \), in the following way:
@@ -946,7 +1000,7 @@ the method breaks down. This can happens when \( \epsilon \) is very low, which 
 </div>
 
 
-<h2 id="___sec42" class="anchor">Conservation of Mass </h2>
+<h2 id="___sec43" class="anchor">Conservation of Mass </h2>
 A mathematical model of a physical system should always be formulated in such a way that it is
 consistent with the laws of nature. In practical situations this statement is usually equivalent to state that
 the mathematical model should respect conservation laws. The conservation laws can be conservation of mass, energy, momentum, 
@@ -1020,7 +1074,7 @@ We easily find that the mass is exactly conserved at every time for Eulers metho
 analytical solution, but if our mixing tank was part of a much bigger system we could make sure that the mass would always be conserved if we make
 sure that the mass out of the tank and into the next part of the system was equal to \( qC(t)\Delta t \).
 
-<h1 id="___sec43" class="anchor">Solving a set of ODE equations </h1>
+<h1 id="___sec44" class="anchor">Solving a set of ODE equations </h1>
 What happens if we have more than one equation that needs to be solved? If we continue with our current example, we might be interested in what would happen 
 if we had multiple tanks in series. This could be a very simple model to describe the cleaning  of a salty lake by injecting fresh water into it, but at 
 the same time this lake was connected to two nearby fresh water lakes, as illustrated in figure <a href="#fig:ode:cstr3">18</a>. The weakest part of the model is the assumption about 
@@ -1123,7 +1177,7 @@ In figure <a href="#fig:ode:rk4_2">19</a> results of an implementation using Run
 <p>
 <!-- % endif -->
 
-<h1 id="___sec44" class="anchor">Stiff sets of ODE  and implicit methods </h1>
+<h1 id="___sec45" class="anchor">Stiff sets of ODE  and implicit methods </h1>
 As already mentioned a couple of times, our system could be part of a much larger system. To illustrate this, let us now assume that we have two 
 tanks in series. The first tank is similar to our original tank, but the second tank is a sampling tank, 1000 times smaller.
 
@@ -1255,7 +1309,7 @@ In figure <a href="#fig:ode:euler_imp">21</a> the result of the implementation i
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="___sec45" class="anchor">Exercise 4.1: Truncation Error in Eulers Method </h2>
+<h2 id="___sec46" class="anchor">Exercise 4.1: Truncation Error in Eulers Method </h2>
 
 <p>
 In the following we will take a closer look at the adaptive Eulers algorithm and show that the 
