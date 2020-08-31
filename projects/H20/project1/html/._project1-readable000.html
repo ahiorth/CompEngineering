@@ -175,7 +175,24 @@ a conclusion. In particular, comment on how possible numerical errors in the
 Antarctica data set might impact your analysis.
 </div>
 
+Import the following stuff in your Jupyter notebook:
+<p>
 
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span> <span style="color: #408080; font-style: italic"># Import from standard library:</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">pathlib</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">random</span>
+
+ <span style="color: #408080; font-style: italic"># Import other stuff:</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">pandas</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">pd</span>
+
+ <span style="color: #408080; font-style: italic"># Packages needed for the last part? (uncomment to use):</span>
+ <span style="color: #408080; font-style: italic">#import cmocean</span>
+ <span style="color: #408080; font-style: italic">#import rockhound as rh</span>
+ <span style="color: #408080; font-style: italic">#import xarray as xr</span>
+</pre></div>
 <p>
 </div> <!-- end jumbotron -->
 
@@ -257,7 +274,7 @@ M <span style="color: #666666">=</span> <span style="color: #666666">3</span>
 list_of_numbers <span style="color: #666666">=</span> [i<span style="color: #666666">+1</span> <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(M)]
 
 <span style="color: #666666">%</span>timeit draw_random_values_using_for_loop(list_of_numbers, N)
-<span style="color: #666666">%</span>timeit draw_random_values_using_list_comprehension(list_of_values, N)
+<span style="color: #666666">%</span>timeit draw_random_values_using_list_comprehension(list_of_numbers, N)
 <span style="color: #666666">%</span>timeit random<span style="color: #666666">.</span>choices(list_of_numbers, k<span style="color: #666666">=</span>N)
 <span style="color: #666666">%</span>timeit np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>choice(list_of_numbers, size<span style="color: #666666">=</span>N)
 </pre></div>
@@ -307,7 +324,7 @@ is_equal_to_eight <span style="color: #666666">=</span> (example_array <span sty
 <span style="color: #008000">print</span>(example_array[is_equal_to_eight])
 new_example_array <span style="color: #666666">=</span> np<span style="color: #666666">.</span>where(example_array <span style="color: #666666">==</span> <span style="color: #666666">1</span>, example_array, <span style="color: #666666">0</span>)
 random_mdim <span style="color: #666666">=</span> np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>randint(<span style="color: #666666">100</span>, size<span style="color: #666666">=</span>(<span style="color: #666666">5</span>,<span style="color: #666666">5</span>))
-nnz <span style="color: #666666">=</span> np<span style="color: #666666">.</span>count_nonzero(random_ndim)
+nnz <span style="color: #666666">=</span> np<span style="color: #666666">.</span>count_nonzero(random_mdim)
 </pre></div>
 <ul>
 <li> Explain what each line of code does.</li>
