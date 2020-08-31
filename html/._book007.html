@@ -49,99 +49,67 @@ code { color: inherit; background-color: transparent; }
                'table_of_contents'),
               ('Preface', 0, 'ch:preface', 'ch:preface'),
               ('Finite differences', 0, 'ch:taylor', 'ch:taylor'),
-              ('Numerical derivatives', 1, None, '___sec2'),
+              ('Truncation Errors', 1, None, '___sec2'),
               ('Taylor Polynomial Approximation', 1, None, '___sec3'),
               ('Evaluation of polynomials', 2, None, '___sec4'),
-              ('Calculating Derivatives of Functions',
+              ('Calculating Numerical Derivatives of Functions',
                1,
                'ch:taylor:der',
                'ch:taylor:der'),
               ('Big $\\mathcal{O}$ notation', 2, None, '___sec6'),
               ('Round off Errors', 2, None, '___sec7'),
-              ('Higher Order Derivatives', 1, None, '___sec8'),
+              ('Binary numbers', 3, None, '___sec8'),
+              ('Floating point numbers and the IEEE 754-1985 standard',
+               3,
+               None,
+               '___sec9'),
+              ('Round off error and truncation error in numerical derivatives',
+               3,
+               None,
+               '___sec10'),
+              ('Higher Order Derivatives', 1, None, '___sec11'),
               ('Solving linear systems', 0, 'ch:lin', 'ch:lin'),
-              ('Solving linear equations', 1, None, '___sec10'),
-              ('Gauss-Jordan elimination', 2, None, '___sec11'),
-              ('Pivoting', 2, None, '___sec12'),
-              ('LU decomposition', 2, None, '___sec13'),
-              ('Example: Linear regression', 1, None, '___sec14'),
+              ('Solving linear equations', 1, None, '___sec13'),
+              ('Gauss-Jordan elimination', 2, None, '___sec14'),
+              ('Pivoting', 2, None, '___sec15'),
+              ('LU decomposition', 2, None, '___sec16'),
+              ('Example: Linear regression', 1, None, '___sec17'),
               ('Solving least square, using algebraic equations',
                2,
                None,
-               '___sec15'),
-              ('Least square as a linear algebra problem', 2, None, '___sec16'),
-              ('Sparse matrices and Thomas algorithm', 1, None, '___sec17'),
+               '___sec18'),
+              ('Least square as a linear algebra problem', 2, None, '___sec19'),
+              ('Working with matrices on component form', 2, None, '___sec20'),
+              ('Sparse matrices and Thomas algorithm', 1, None, '___sec21'),
               ('Example: Solving the heat equation using linear algebra',
                1,
                None,
-               '___sec18'),
+               '___sec22'),
               ('Exercise 2.1: Conservation Equation or the Continuity Equation',
                2,
                None,
-               '___sec19'),
+               '___sec23'),
               ('Exercise 2.2: Curing of Concrete and Matrix Formulation',
                2,
                None,
-               '___sec20'),
-              ('Numerical integration', 0, 'ch:numint', 'ch:numint'),
-              ('Numerical Integration', 1, None, '___sec22'),
-              ('The Midpoint Rule', 2, None, '___sec23'),
-              ('The Trapezoidal Rule', 2, None, '___sec24'),
-              ('Numerical Errors on Integrals', 2, None, '___sec25'),
-              ('Practical Estimation of Errors on Integrals (Richardson '
-               'Extrapolation)',
-               2,
-               'sec:numint:parct',
-               'sec:numint:parct'),
-              ('Romberg Integration', 1, None, '___sec27'),
-              ('Gaussian Quadrature', 2, None, '___sec28'),
-              ('The case N=3', 3, None, '___sec29'),
-              ('Error term on Gaussian Integration', 2, None, '___sec30'),
-              ('Common Weight functions for Classical Gaussian Quadratures',
-               2,
-               None,
-               '___sec31'),
-              ('Integrating functions over an infinite range',
-               1,
-               None,
-               '___sec32'),
-              ('Which method to use in a specific case? (NOT COMPLETED)',
-               2,
-               None,
-               '___sec33'),
-              ('Exercise 3.1: Numerical Integration', 2, None, '___sec34'),
-              ('Ordinary differential equations', 0, 'ch:ode', 'ch:ode'),
-              ('Ordinary Differential Equations', 1, None, '___sec36'),
-              ('A Simple Model for Fluid Flow', 1, None, '___sec37'),
-              ('Eulers Method', 1, None, '___sec38'),
-              ('Error Analysis - Eulers Method', 2, None, '___sec39'),
-              ('Adaptive step size - Eulers Method', 2, None, '___sec40'),
-              ('Runge-Kutta Methods', 1, None, '___sec41'),
-              ('Adaptive step size - Runge-Kutta Method', 2, None, '___sec42'),
-              ('Conservation of Mass', 2, None, '___sec43'),
-              ('Solving a set of ODE equations', 1, None, '___sec44'),
-              ('Stiff sets of ODE  and implicit methods', 1, None, '___sec45'),
-              ('Exercise 4.1: Truncation Error in Eulers Method',
-               2,
-               None,
-               '___sec46'),
+               '___sec24'),
               ('Solving nonlinear equations', 0, 'ch:nlin', 'ch:nlin'),
-              ('Nonlinear equations', 1, None, '___sec48'),
-              ('Example: van der Waals equation of state', 1, None, '___sec49'),
-              ('Exercise 5.1: van der Waal EOS and CO$_2$',
+              ('Nonlinear equations', 1, None, '___sec26'),
+              ('Example: van der Waals equation of state', 1, None, '___sec27'),
+              ('Exercise 3.1: van der Waal EOS and CO$_2$',
                2,
                None,
-               '___sec50'),
-              ('Fixed-point iteration', 1, None, '___sec51'),
-              ('Exercise 5.2: Implement the fixed point iteration',
+               '___sec28'),
+              ('Fixed-point iteration', 1, None, '___sec29'),
+              ('Exercise 3.2: Implement the fixed point iteration',
                2,
                None,
-               '___sec52'),
-              ('Exercise 5.3: Finding the molar volume from the van der Waal '
+               '___sec30'),
+              ('Exercise 3.3: Finding the molar volume from the van der Waal '
                'EOS by fixed point iteration',
                2,
                None,
-               '___sec53'),
+               '___sec31'),
               ('When do the fixed point method fail?',
                2,
                'sec:nlin:fp',
@@ -149,59 +117,101 @@ code { color: inherit; background-color: transparent; }
               ('What to do when the fixed point method fail',
                2,
                None,
-               '___sec55'),
-              ('Exercise 5.4: Solve $x=e^{1-x^2}$ using fixed point iteration',
+               '___sec33'),
+              ('Exercise 3.4: Solve $x=e^{1-x^2}$ using fixed point iteration',
                2,
                None,
-               '___sec56'),
-              ('Rate of convergence', 1, None, '___sec57'),
-              ('The bisection method', 1, None, '___sec58'),
-              ('Newtons method', 1, None, '___sec59'),
-              ('Exercise 5.5: Compare Newtons, Bisection and the Fixed Point '
+               '___sec34'),
+              ('Rate of convergence', 1, None, '___sec35'),
+              ('The bisection method', 1, None, '___sec36'),
+              ('Newtons method', 1, None, '___sec37'),
+              ('Exercise 3.5: Compare Newtons, Bisection and the Fixed Point '
                'method',
                2,
                None,
-               '___sec60'),
-              ('Newton Rapson method', 1, None, '___sec61'),
-              ('Gradient Descent', 1, None, '___sec62'),
-              ('Exercise 5.6: Gradient descent solution of linear regression',
+               '___sec38'),
+              ('Newton Rapson method', 1, None, '___sec39'),
+              ('Gradient Descent', 1, None, '___sec40'),
+              ('Exercise 3.6: Gradient descent solution of linear regression',
                2,
                None,
-               '___sec63'),
-              ('Other Useful Methods', 1, None, '___sec64'),
+               '___sec41'),
+              ('Other Useful Methods', 1, None, '___sec42'),
+              ('Numerical integration', 0, 'ch:numint', 'ch:numint'),
+              ('Numerical Integration', 1, None, '___sec44'),
+              ('The Midpoint Rule', 2, None, '___sec45'),
+              ('The Trapezoidal Rule', 2, None, '___sec46'),
+              ('Numerical Errors on Integrals', 2, None, '___sec47'),
+              ('Practical Estimation of Errors on Integrals (Richardson '
+               'Extrapolation)',
+               2,
+               'sec:numint:parct',
+               'sec:numint:parct'),
+              ('Romberg Integration', 1, None, '___sec49'),
+              ('Gaussian Quadrature', 2, None, '___sec50'),
+              ('The case N=3', 3, None, '___sec51'),
+              ('Error term on Gaussian Integration', 2, None, '___sec52'),
+              ('Common Weight functions for Classical Gaussian Quadratures',
+               2,
+               None,
+               '___sec53'),
+              ('Integrating functions over an infinite range',
+               1,
+               None,
+               '___sec54'),
+              ('Which method to use in a specific case? (NOT COMPLETED)',
+               2,
+               None,
+               '___sec55'),
+              ('Exercise 4.1: Numerical Integration', 2, None, '___sec56'),
+              ('Ordinary differential equations', 0, 'ch:ode', 'ch:ode'),
+              ('Ordinary Differential Equations', 1, None, '___sec58'),
+              ('A Simple Model for Fluid Flow', 1, None, '___sec59'),
+              ('Eulers Method', 1, None, '___sec60'),
+              ('Error Analysis - Eulers Method', 2, None, '___sec61'),
+              ('Adaptive step size - Eulers Method', 2, None, '___sec62'),
+              ('Runge-Kutta Methods', 1, None, '___sec63'),
+              ('Adaptive step size - Runge-Kutta Method', 2, None, '___sec64'),
+              ('Conservation of Mass', 2, None, '___sec65'),
+              ('Solving a set of ODE equations', 1, None, '___sec66'),
+              ('Stiff sets of ODE  and implicit methods', 1, None, '___sec67'),
+              ('Exercise 5.1: Truncation Error in Eulers Method',
+               2,
+               None,
+               '___sec68'),
               ('Monte Carlo Methods', 0, 'ch:mc', 'ch:mc'),
-              ('Monte Carlo Methods', 1, None, '___sec66'),
+              ('Monte Carlo Methods', 1, None, '___sec70'),
               ("Monte Carlo Integration  ''Hit and Miss''",
                1,
                None,
-               '___sec67'),
-              ('Random number generators', 2, None, '___sec68'),
-              ('Encryption', 2, None, '___sec69'),
+               '___sec71'),
+              ('Random number generators', 2, None, '___sec72'),
+              ('Encryption', 2, None, '___sec73'),
               ('Errors on Monte Carlo Integration and the Binomial '
                'Distribution',
                2,
                None,
-               '___sec70'),
-              ('The mean value method', 2, None, '___sec71'),
+               '___sec74'),
+              ('The mean value method', 2, None, '___sec75'),
               ('Basic Properties of Probability Distributions',
                2,
                None,
-               '___sec72'),
+               '___sec76'),
               ('Example: Monte Carlo Integration of a Hyper Sphere',
                2,
                None,
-               '___sec73'),
-              ('Importance Sampling (To be completed)', 1, None, '___sec74'),
-              ('Accept Reject (To be completed)', 1, None, '___sec75'),
-              ('Example: Random Walk (To be completed)', 1, None, '___sec76'),
-              ('Simulated Annealing (To be completed)', 1, None, '___sec77'),
+               '___sec77'),
+              ('Importance Sampling (To be completed)', 1, None, '___sec78'),
+              ('Accept Reject (To be completed)', 1, None, '___sec79'),
+              ('Example: Random Walk (To be completed)', 1, None, '___sec80'),
+              ('Simulated Annealing (To be completed)', 1, None, '___sec81'),
               ('Exercise 6.1: The central limit theorem',
                2,
                'ex:mc:norm',
                'ex:mc:norm'),
-              ('Remarks', 3, None, '___sec79'),
+              ('Remarks', 3, None, '___sec83'),
               ('Exercise 6.2: Birthday Paradox', 2, 'ex:mc:BP', 'ex:mc:BP'),
-              ('References', 1, None, '___sec81')]}
+              ('References', 1, None, '___sec85')]}
 end of tocinfo -->
 
 <body>
@@ -248,86 +258,90 @@ $$
      <!-- navigation toc: --> <li><a href="._book001.html#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
      <!-- navigation toc: --> <li><a href="._book001.html#ch:preface" style="font-size: 80%;"><b>Preface</b></a></li>
      <!-- navigation toc: --> <li><a href="._book002.html#ch:taylor" style="font-size: 80%;"><b>Finite differences</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Numerical derivatives</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#___sec2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Truncation Errors</a></li>
      <!-- navigation toc: --> <li><a href="._book002.html#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Taylor Polynomial Approximation</a></li>
      <!-- navigation toc: --> <li><a href="._book002.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Evaluation of polynomials</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#ch:taylor:der" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Calculating Derivatives of Functions</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#ch:taylor:der" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Calculating Numerical Derivatives of Functions</a></li>
      <!-- navigation toc: --> <li><a href="._book002.html#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Big \( \mathcal{O} \) notation</a></li>
      <!-- navigation toc: --> <li><a href="._book002.html#___sec7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Round off Errors</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Higher Order Derivatives</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Binary numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Floating point numbers and the IEEE 754-1985 standard</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Round off error and truncation error in numerical derivatives</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Higher Order Derivatives</a></li>
      <!-- navigation toc: --> <li><a href="._book003.html#ch:lin" style="font-size: 80%;"><b>Solving linear systems</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Solving linear equations</a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gauss-Jordan elimination</a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pivoting</a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LU decomposition</a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Linear regression</a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solving least square, using algebraic equations</a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Least square as a linear algebra problem</a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Sparse matrices and Thomas algorithm</a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Solving the heat equation using linear algebra</a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 2.1: Conservation Equation or the Continuity Equation</a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 2.2: Curing of Concrete and Matrix Formulation</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#ch:numint" style="font-size: 80%;"><b>Numerical integration</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Numerical Integration</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Midpoint Rule</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Trapezoidal Rule</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Numerical Errors on Integrals</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#sec:numint:parct" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Practical Estimation of Errors on Integrals (Richardson Extrapolation)</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec27" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Romberg Integration</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec28" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gaussian Quadrature</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec29" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The case N=3</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec30" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Error term on Gaussian Integration</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Common Weight functions for Classical Gaussian Quadratures</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Integrating functions over an infinite range</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec33" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Which method to use in a specific case? (NOT COMPLETED)</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec34" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 3.1: Numerical Integration</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#ch:ode" style="font-size: 80%;"><b>Ordinary differential equations</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ordinary Differential Equations</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec37" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;A Simple Model for Fluid Flow</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec38" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Eulers Method</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec39" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Error Analysis - Eulers Method</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec40" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adaptive step size - Eulers Method</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec41" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Runge-Kutta Methods</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec42" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adaptive step size - Runge-Kutta Method</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec43" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Conservation of Mass</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec44" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Solving a set of ODE equations</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec45" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Stiff sets of ODE  and implicit methods</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec46" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.1: Truncation Error in Eulers Method</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#ch:nlin" style="font-size: 80%;"><b>Solving nonlinear equations</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec48" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Nonlinear equations</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec49" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: van der Waals equation of state</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec50" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.1: van der Waal EOS and CO$_2$</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec51" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Fixed-point iteration</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec52" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.2: Implement the fixed point iteration</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec53" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.3: Finding the molar volume from the van der Waal EOS by fixed point iteration</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#sec:nlin:fp" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When do the fixed point method fail?</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec55" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;What to do when the fixed point method fail</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec56" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.4: Solve \( x=e^{1-x^2} \) using fixed point iteration</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec57" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec58" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The bisection method</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec59" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Newtons method</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec60" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.5: Compare Newtons, Bisection and the Fixed Point method</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec61" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Newton Rapson method</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec62" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Gradient Descent</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec63" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.6: Gradient descent solution of linear regression</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec64" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Other Useful Methods</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Solving linear equations</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gauss-Jordan elimination</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pivoting</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LU decomposition</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Linear regression</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solving least square, using algebraic equations</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Least square as a linear algebra problem</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#___sec20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Working with matrices on component form</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#___sec21" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Sparse matrices and Thomas algorithm</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#___sec22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Solving the heat equation using linear algebra</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#___sec23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 2.1: Conservation Equation or the Continuity Equation</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#___sec24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 2.2: Curing of Concrete and Matrix Formulation</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#ch:nlin" style="font-size: 80%;"><b>Solving nonlinear equations</b></a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#___sec26" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Nonlinear equations</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#___sec27" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: van der Waals equation of state</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#___sec28" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 3.1: van der Waal EOS and CO$_2$</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#___sec29" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Fixed-point iteration</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#___sec30" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 3.2: Implement the fixed point iteration</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#___sec31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 3.3: Finding the molar volume from the van der Waal EOS by fixed point iteration</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#sec:nlin:fp" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When do the fixed point method fail?</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#___sec33" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;What to do when the fixed point method fail</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#___sec34" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 3.4: Solve \( x=e^{1-x^2} \) using fixed point iteration</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#___sec35" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#___sec36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The bisection method</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#___sec37" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Newtons method</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#___sec38" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 3.5: Compare Newtons, Bisection and the Fixed Point method</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#___sec39" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Newton Rapson method</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#___sec40" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Gradient Descent</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#___sec41" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 3.6: Gradient descent solution of linear regression</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#___sec42" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Other Useful Methods</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#ch:numint" style="font-size: 80%;"><b>Numerical integration</b></a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#___sec44" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Numerical Integration</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#___sec45" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Midpoint Rule</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#___sec46" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Trapezoidal Rule</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#___sec47" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Numerical Errors on Integrals</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#sec:numint:parct" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Practical Estimation of Errors on Integrals (Richardson Extrapolation)</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#___sec49" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Romberg Integration</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#___sec50" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gaussian Quadrature</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#___sec51" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The case N=3</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#___sec52" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Error term on Gaussian Integration</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#___sec53" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Common Weight functions for Classical Gaussian Quadratures</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#___sec54" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Integrating functions over an infinite range</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#___sec55" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Which method to use in a specific case? (NOT COMPLETED)</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#___sec56" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.1: Numerical Integration</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#ch:ode" style="font-size: 80%;"><b>Ordinary differential equations</b></a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#___sec58" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ordinary Differential Equations</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#___sec59" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;A Simple Model for Fluid Flow</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#___sec60" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Eulers Method</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#___sec61" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Error Analysis - Eulers Method</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#___sec62" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adaptive step size - Eulers Method</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#___sec63" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Runge-Kutta Methods</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#___sec64" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adaptive step size - Runge-Kutta Method</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#___sec65" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Conservation of Mass</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#___sec66" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Solving a set of ODE equations</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#___sec67" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Stiff sets of ODE  and implicit methods</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#___sec68" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.1: Truncation Error in Eulers Method</a></li>
      <!-- navigation toc: --> <li><a href="#ch:mc" style="font-size: 80%;"><b>Monte Carlo Methods</b></a></li>
-     <!-- navigation toc: --> <li><a href="#___sec66" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Monte Carlo Methods</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec67" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Monte Carlo Integration  ''Hit and Miss''</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec68" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Random number generators</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec69" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Encryption</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec70" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Errors on Monte Carlo Integration and the Binomial Distribution</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec71" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The mean value method</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec72" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Basic Properties of Probability Distributions</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec73" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example: Monte Carlo Integration of a Hyper Sphere</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec74" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Importance Sampling (To be completed)</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec75" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Accept Reject (To be completed)</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec76" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Random Walk (To be completed)</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec77" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Simulated Annealing (To be completed)</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec70" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Monte Carlo Methods</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec71" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Monte Carlo Integration  ''Hit and Miss''</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec72" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Random number generators</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec73" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Encryption</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec74" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Errors on Monte Carlo Integration and the Binomial Distribution</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec75" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The mean value method</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec76" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Basic Properties of Probability Distributions</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec77" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example: Monte Carlo Integration of a Hyper Sphere</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec78" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Importance Sampling (To be completed)</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec79" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Accept Reject (To be completed)</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec80" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Random Walk (To be completed)</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec81" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Simulated Annealing (To be completed)</a></li>
      <!-- navigation toc: --> <li><a href="#ex:mc:norm" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 6.1: The central limit theorem</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec79" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec83" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
      <!-- navigation toc: --> <li><a href="#ex:mc:BP" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 6.2: Birthday Paradox</a></li>
-     <!-- navigation toc: --> <li><a href="._book008.html#___sec81" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;References</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#___sec85" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;References</a></li>
 
         </ul>
       </li>
@@ -345,7 +359,7 @@ $$
 
 <center><h1 id="ch:mc" class="anchor">Monte Carlo Methods</h1></center> <!-- chapter heading -->
 
-<h1 id="___sec66" class="anchor">Monte Carlo Methods </h1>
+<h1 id="___sec70" class="anchor">Monte Carlo Methods </h1>
 Monte Carlo methods are named after the Monte Carlo Casino in Monaco,
 this is because at its core it uses random numbers to solve problems.
 Monte Carlo methods are quite easy to program, and they are
@@ -368,15 +382,15 @@ usually much more intuitive than a theoretical approach.
 <p>
 <!-- o <a href="https://www.scratchapixel.com/lessons/mathematics-physics-for-computer-graphics/monte-carlo-methods-in-practice/monte-carlo-rendering-practical-example" target="_self">ray  tracing</a> -->
 
-<h1 id="___sec67" class="anchor">Monte Carlo Integration  ''Hit and Miss'' </h1>
+<h1 id="___sec71" class="anchor">Monte Carlo Integration  ''Hit and Miss'' </h1>
 Let us start with a simple illustration of the Monte Carlo Method (MCM), Monte Carlo integration. To the left
-in figure <a href="#fig:mc:mci">31</a> there is a shape of a pond. Imagine that we wanted to estimate the area of the pond, how could
+in figure <a href="#fig:mc:mci">32</a> there is a shape of a pond. Imagine that we wanted to estimate the area of the pond, how could
 we do it? Assume further that you did not have your phone or any other electronic devices to help you.
 
 <p>
 <center> <!-- figure label: --> <div id="fig:mc:mci"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 31:  Two ponds to illustrate the MCM.  <!-- caption label: fig:mc:mci --> </p></center>
+<center><p class="caption">Figure 32:  Two ponds to illustrate the MCM.  <!-- caption label: fig:mc:mci --> </p></center>
 <p><img src="fig-mc/mci.png" align="bottom" width=400></p>
 </center>
 
@@ -397,7 +411,7 @@ A\simeq\text{Area of rectangle}\times\frac{\text{Number of rocks hitting the pon
 $$
 
 It is important that we throw the rocks randomly, otherwise  equation <a href="#mjx-eqn-6.1">(6.1)</a> is not correct. Now, let us
-investigate this in more detail, and use the idea of throwing rocks to estimate \( \pi \). To the right in figure <a href="#fig:mc:mci">31</a>,
+investigate this in more detail, and use the idea of throwing rocks to estimate \( \pi \). To the right in figure <a href="#fig:mc:mci">32</a>,
 there is a well known shape, a circle. The area of the circle is \( \pi d^2/4 \), and the shape is given by \( x^2+y^2=d^2/4 \). Assume that
 the circle is inscribed in a square with sides of \( d \). To throw rocks randomly inside the square, is equivalent pick random numbers
 with coordinates \( (x,y) \), where \( x\in[0,d] \) and \( y\in[0,d] \). We want all the \( x- \) and $y-$values to be chosen with equal probability,
@@ -421,7 +435,7 @@ which is equivalent to pick random numbers from a <em>uniform</em> distribution.
 
 N<span style="color: #666666">=1000</span>;d<span style="color: #666666">=2</span>
 pi_est<span style="color: #666666">=</span>estimate_pi(N,d)
-<span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&#39;Estimate for pi= &#39;</span>, pi_est,<span style="color: #BA2121">&#39; Error=&#39;</span>, np<span style="color: #666666">.</span>pi<span style="color: #666666">-</span>pi_est)
+<span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Estimate for pi= &#39;</span>, pi_est,<span style="color: #BA2121">&#39; Error=&#39;</span>, np<span style="color: #666666">.</span>pi<span style="color: #666666">-</span>pi_est)
 </pre></div>
 <p>
 In the table below, we have run the code for \( d=1 \) and different values of \( N \).
@@ -448,7 +462,7 @@ We clearly see that a fair amount of rocks or numbers needs to be used in order 
 times you will see that the results changes from time to time. This
 makes sense as the coordinates \( x \) and \( y \) are chosen at random.
 
-<h2 id="___sec68" class="anchor">Random number generators </h2>
+<h2 id="___sec72" class="anchor">Random number generators </h2>
 
 <p>
 There are much to be said about random number generators. The MCM depends on a good random number generator, otherwise we cannot use the results from
@@ -465,7 +479,7 @@ statistics to develop our algorithms. Below, we briefly summarize some important
 In Pythons <code>random.uniform</code> function, a random seed is chosen each time the code is run, but
 if we set e.g. <code>random.seed(2)</code>, the code will generate the same sequence of numbers each time it is called.
 
-<h2 id="___sec69" class="anchor">Encryption  </h2>
+<h2 id="___sec73" class="anchor">Encryption  </h2>
 This section can be skipped as it is not relevant for development of
 the numerical algorithms, but it is a good place to explain the basic
 idea behind encryption of messages. A very simple, but not a very good
@@ -533,7 +547,7 @@ unlock the box and read the message. The important point is that the
 box was never unlocked throughout the transaction, and Alice and Bob
 never had to share the key with anyone.
 
-<h2 id="___sec70" class="anchor">Errors on Monte Carlo Integration and the Binomial Distribution  </h2>
+<h2 id="___sec74" class="anchor">Errors on Monte Carlo Integration and the Binomial Distribution  </h2>
 How many rocks do we need to throw in order to reach a certain accuracy? To answer this question we need some results from statistics. Our problem of calculating the integral is closely related to the <em>binomial distribution</em>. When we throw a rock one of two things can happen i) the rock falls into the water, or ii) it falls outside the pond. If we denote the probability that the rock falls into the pond as \( p \), then the probability that it falls outside the pond, \( q \), has to be \( q=1-p \).
 This is simply because there are no other possibilities and the sum of the two probabilities has to be one: \( p+q=p+(1-p)=1 \). The binomial distribution is given by:
 $$
@@ -586,7 +600,7 @@ p(k=3)=\frac{4!}{3!(4-3)!}\frac{1}{2}^3(1-\frac{1}{2})^{4-3}=\frac{4}{2^4}=\frac
 \end{equation}
 $$
 
-In figure <a href="#fig:mc:coin">32</a>, all the possibilities are shown. The
+In figure <a href="#fig:mc:coin">33</a>, all the possibilities are shown. The
 number of possibilities are 16, and there are only one possibility
 that we get only heads, i.e. the probability is 1/16 as calculated in
 equation <a href="#mjx-eqn-6.5">(6.5)</a>. In the figure we also see that there are 4
@@ -596,7 +610,7 @@ possible ways we can get three heads, hence the probability is
 <p>
 <center> <!-- figure label: --> <div id="fig:mc:coin"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 32:  The famous Norwegian Moose coin, and possible outcomes of four coin flips in a row.  <!-- caption label: fig:mc:coin --> </p></center>
+<center><p class="caption">Figure 33:  The famous Norwegian Moose coin, and possible outcomes of four coin flips in a row.  <!-- caption label: fig:mc:coin --> </p></center>
 <p><img src="fig-mc/coin.png" align="bottom" width=400></p>
 </center>
 
@@ -646,7 +660,7 @@ In the last equation we have replaced \( p \) with \( A/I_N \).
 Hence, the error of our integral is inversely proportional to the
 square root of the number of points.
 
-<h2 id="___sec71" class="anchor">The mean value method </h2>
+<h2 id="___sec75" class="anchor">The mean value method </h2>
 How does our previous method compare with some of our standard methods,
 like the midpoint rule? The error for the MC method scales as
 \( 1/\sqrt{N} \), in our previous error estimates we used the step length,
@@ -696,7 +710,7 @@ we use the average value.
 <p>
 <center> <!-- figure label: --> <div id="fig:mc:int"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 33:  Illustration of MC integration for \( N=4 \).  <!-- caption label: fig:mc:int --> </p></center>
+<center><p class="caption">Figure 34:  Illustration of MC integration for \( N=4 \).  <!-- caption label: fig:mc:int --> </p></center>
 <p><img src="fig-mc/mcint.png" align="bottom" width=400></p>
 </center>
 
@@ -750,9 +764,9 @@ We also see that in this case the error scales as \( 1/\sqrt{N} \).
 At first sight it might be a little counter intuitive that if we
 multiply the average value of the function with the size of the
 integration domain we get an estimate for the integral, as illustrated
-in the top figure in figure <a href="#fig:mc:int">33</a>. A different, but
+in the top figure in figure <a href="#fig:mc:int">34</a>. A different, but
 equivalent way, of viewing the mean value method is the lower figure
-in figure <a href="#fig:mc:int">33</a>. For each random point we choose, we
+in figure <a href="#fig:mc:int">34</a>. For each random point we choose, we
 multiply with the area \( (b-a)/N \), as \( N \) increases the area decreases
 and the mean value method approaches the midpoint algorithm. The
 reason the mean value method performs poorer is that we do not sample
@@ -762,7 +776,7 @@ that our estimate approach the true value of the integral.
 </div>
 
 
-<h2 id="___sec72" class="anchor">Basic Properties of Probability Distributions </h2>
+<h2 id="___sec76" class="anchor">Basic Properties of Probability Distributions </h2>
 The MCM is closely tied to statistics, and it is important to have a
 basic understanding of probability density functions (PDF). In
 the previous section, we used a random number generator to give us
@@ -855,7 +869,7 @@ number of dimensions.
 </div>
 
 
-<h2 id="___sec73" class="anchor">Example: Monte Carlo Integration of a Hyper Sphere </h2>
+<h2 id="___sec77" class="anchor">Example: Monte Carlo Integration of a Hyper Sphere </h2>
 The volume of a hyper sphere is known:
 $$
 \begin{equation}
@@ -890,7 +904,7 @@ the number of points that hits inside the hyper sphere:
             xi<span style="color: #666666">=</span>np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>uniform(<span style="color: #666666">-</span>R,R)
             r<span style="color: #666666">+=</span>xi<span style="color: #666666">*</span>xi
         <span style="color: #008000; font-weight: bold">if</span> np<span style="color: #666666">.</span>sqrt(r) <span style="color: #666666">&lt;=</span> R: vol <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
-    <span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&quot;Number of points inside n-ball: &quot;</span>, vol)
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;Number of points inside n-ball: &quot;</span>, vol)
     <span style="color: #008000; font-weight: bold">return</span> vol<span style="color: #666666">/</span>N<span style="color: #666666">*</span>(<span style="color: #666666">2*</span>R)<span style="color: #666666">**</span>D
 </pre></div>
 <p>
@@ -911,7 +925,7 @@ As you might have found out by now, vectorizing the code might to wonders in ter
         r<span style="color: #666666">+=</span>xi<span style="color: #666666">*</span>xi
     r<span style="color: #666666">=</span>np<span style="color: #666666">.</span>sqrt(r)
     vol <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sum(r<span style="color: #666666">&lt;=</span>R)
-    <span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&quot;Number of points inside n-ball: &quot;</span>, vol)
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;Number of points inside n-ball: &quot;</span>, vol)
     <span style="color: #008000; font-weight: bold">return</span> vol<span style="color: #666666">/</span>N<span style="color: #666666">*</span>(<span style="color: #666666">2*</span>R)<span style="color: #666666">**</span>D
 </pre></div>
 <p>
@@ -930,14 +944,14 @@ better.
 </div>
 
 
-<h1 id="___sec74" class="anchor">Importance Sampling (To be completed) </h1>
+<h1 id="___sec78" class="anchor">Importance Sampling (To be completed) </h1>
 What would be the optimal shape of the function for our MC method?
 
-<h1 id="___sec75" class="anchor">Accept Reject (To be completed) </h1>
+<h1 id="___sec79" class="anchor">Accept Reject (To be completed) </h1>
 
-<h1 id="___sec76" class="anchor">Example: Random Walk (To be completed) </h1>
+<h1 id="___sec80" class="anchor">Example: Random Walk (To be completed) </h1>
 
-<h1 id="___sec77" class="anchor">Simulated Annealing (To be completed) </h1>
+<h1 id="___sec81" class="anchor">Simulated Annealing (To be completed) </h1>
 
 <p>
 <!-- --- begin exercise --- -->
@@ -1076,7 +1090,7 @@ Repeat the above exercise for a Poisson distribution.
 <p>
 <!-- Closing remarks for this Exercise -->
 
-<h3 id="___sec79" class="anchor">Remarks </h3>
+<h3 id="___sec83" class="anchor">Remarks </h3>
 
 <p>
 It is quite remarkable that the distribution of the average values
@@ -1225,7 +1239,7 @@ return the fraction of groups that had two persons with the same birthday.
         prob <span style="color: #666666">+=</span> NoPeople(p)
     <span style="color: #008000; font-weight: bold">return</span> prob<span style="color: #666666">/</span>N
 
-<span style="color: #008000; font-weight: bold">print</span>(BP(<span style="color: #666666">23</span>,<span style="color: #666666">1000</span>))
+<span style="color: #008000">print</span>(BP(<span style="color: #666666">23</span>,<span style="color: #666666">1000</span>))
 </pre></div>
 <p>
 By trial an error, we find that 23 persons is needed in order to have
