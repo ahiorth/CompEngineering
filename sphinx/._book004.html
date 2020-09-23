@@ -45,52 +45,60 @@
   <div class="section" id="solving-nonlinear-equations">
 <span id="ch-nlin"></span><h1>Solving nonlinear equations<a class="headerlink" href="#solving-nonlinear-equations" title="Permalink to this headline">¶</a></h1>
 <p>In this chapter we will cover some theory related to the solution of nonlinear equations, and introduce the most used methods. A nonlinear problem is represented as a single equation or a system of equations, where the response is not changing proportionally to the input.  Almost all physical systems are nonlinear, and one frequent use of the methods presented in this chapter is to determine model parameters by matching a nonlinear model to data.</p>
+<p>Numerical methods that is guaranteed to find a solution (if it exists) are called <em>closed methods</em>, and <em>open</em> other vise. In many cases the closed methods requires more iterations for well behaved functions than the open methods. For one dimensional problems we will cover: fixed point iteration, bisection, Newton's method, and the secant method.
+For  multidimensional problems we will cover Newton-Rapson method, which is a direct extension of Newton's method in one
+dimension, and the steepest decent. The main challenge is that there are (usually) more than one solution, the solution that
+<em>you</em> want for a specific problem is usually dictated by the underlying physics. If computational speed is not an issue, the</p>
+<blockquote>
+<div><p>method of choice is usually the bisection method. It is guaranteed to give an answer, but it might be slow. If speed is an issue, usually Newton's or the secant method will be the fastest (but it depends on the starting point). The secant method is sometimes preferred if the derivative of the function is costly to evaluate. Brents method is a method that combine the secant and bisection method (not covered), and is guaranteed to find a solution if the root is bracketed.</p>
+</div></blockquote>
+<p>In many practical, engineering, applications one usually implements some of the methods described below directly inside functions. This is because it is usually faster than calling a separate all purpose nonlinear solver, and that one usually has a very good idea of what a good starting point for the nonlinear solver is.</p>
 <div class="section" id="nonlinear-equations">
 <h2>Nonlinear equations<a class="headerlink" href="#nonlinear-equations" title="Permalink to this headline">¶</a></h2>
 <p>A nonlinear equation is simply an equation that is not linear. That means that when the variables changes the response is not changing proportional to the values of the variables. Solving a nonlinear equation always proceeds by <em>iterations</em>, we start with one or several initial guesses and then search for the solution. In many cases we do not know beforehand if the equation actually has a solution, or multiple solutions. An example of a nonlinear problem is:</p>
 <div class="math notranslate nohighlight" id="eq-eq-nlin-exp">
-\[\tag{84}
+\[\tag{96}
 e^{-x}=x^2.\]</div>
 <p>Traditionally one collect all the terms on one side, to solve an equation of the form</p>
 <div class="math notranslate nohighlight" id="eq-eq-nlin-fx">
-\[\tag{85}
+\[\tag{97}
 f(x)=x^2-e^{-x}=0.\]</div>
 <p>In figure <a class="reference internal" href="#fig-nlin-fx"><span class="std std-ref">Notice that the root is located at the same place ( \( x=0.703467417 \) )</span></a>, the solution is shown graphically. Note that in one case the solution is when the graph of <span class="math notranslate nohighlight">\(e^{-x}\)</span>, and <span class="math notranslate nohighlight">\(x^2\)</span> intersect, whereas in the other case the root is located when <span class="math notranslate nohighlight">\(x^2-e^{-x}\)</span> intersect the $x-$axis.</p>
 <div class="figure align-default" id="id7">
 <span id="fig-nlin-fx"></span><a class="reference internal image-reference" href="_images/fx.png"><img alt="_images/fx.png" src="_images/fx.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-text"><em>Notice that the root is located at the same place ( \( x=0.703467417 \) )</em></span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
 </div>
-<p>In the case of more than one unknown, or a set of equations that must be satisfied simultaneously, equation <a class="reference internal" href="#eq-eq-nlin-fx"><span class="std std-ref">(85)</span></a> is replaced with a vector equation</p>
+<p>In the case of more than one unknown, or a set of equations that must be satisfied simultaneously, equation <a class="reference internal" href="#eq-eq-nlin-fx"><span class="std std-ref">(97)</span></a> is replaced with a vector equation</p>
 <div class="math notranslate nohighlight" id="eq-eq-nlin-fvec">
-\[\tag{86}
+\[\tag{98}
 \mathbf{f}(\mathbf{x})=\mathbf{0}.\]</div>
-<p>Although this equation looks quite similar to equation <a class="reference internal" href="#eq-eq-nlin-fx"><span class="std std-ref">(85)</span></a>, this equation is <em>much</em> harder to solve. The only methods we will cover is the Newton Rapson method, which is a very good method if a good starting point is given. If you have a multidimensional problem, the advice is to try Newton-Raphson, if this method fails you need to try more advanced method, see e.g. <span id="id1">[Ref5]</span>.</p>
+<p>Although this equation looks quite similar to equation <a class="reference internal" href="#eq-eq-nlin-fx"><span class="std std-ref">(97)</span></a>, this equation is <em>much</em> harder to solve. The only methods we will cover is the Newton Rapson method, which is a very good method if a good starting point is given. If you have a multidimensional problem, the advice is to try Newton-Raphson, if this method fails you need to try more advanced method, see e.g. <span id="id1">[Ref5]</span>.</p>
 </div>
 <div class="section" id="example-van-der-waals-equation-of-state">
 <h2>Example: van der Waals equation of state<a class="headerlink" href="#example-van-der-waals-equation-of-state" title="Permalink to this headline">¶</a></h2>
 <p>Before we begin with the numerical algorithms, let us consider an example: the van der Waals equation of state. The purpose is to illustrate some of the typical challenges. You are probably familiar with the ideal gas law:</p>
 <div class="math notranslate nohighlight" id="eq-eq-nlin-pvt">
-\[\tag{87}
+\[\tag{99}
 P\nu=R_gT,\]</div>
-<p>where <span class="math notranslate nohighlight">\(\nu=V/n\)</span> is the molar volume of the gas, <span class="math notranslate nohighlight">\(P\)</span> is the pressure, <span class="math notranslate nohighlight">\(V\)</span> is the volume, <span class="math notranslate nohighlight">\(T\)</span> is the temperature, <span class="math notranslate nohighlight">\(n\)</span> is the number of moles of the gas, and <span class="math notranslate nohighlight">\(R_g\)</span> is the ideal gas constant.  This equation is an example of an <em>equation of state</em> (EOS), it relates <span class="math notranslate nohighlight">\(P\)</span>, <span class="math notranslate nohighlight">\(T\)</span>, and <span class="math notranslate nohighlight">\(\nu\)</span>. Thus if we know the pressure and temperature of the gas, we can calculate <span class="math notranslate nohighlight">\(\nu\)</span>. Equation <a class="reference internal" href="#eq-eq-nlin-pvt"><span class="std std-ref">(87)</span></a> assumes that there are no interactions between the molecules in the gas. Clearly, this is too simplistic, and because of this one normally uses an EOS that better reflect the physical properties of the substance. A very famous EOS is the van der Waal EOS, which is a slight modification of equation <a class="reference internal" href="#eq-eq-nlin-pvt"><span class="std std-ref">(87)</span></a>:</p>
+<p>where <span class="math notranslate nohighlight">\(\nu=V/n\)</span> is the molar volume of the gas, <span class="math notranslate nohighlight">\(P\)</span> is the pressure, <span class="math notranslate nohighlight">\(V\)</span> is the volume, <span class="math notranslate nohighlight">\(T\)</span> is the temperature, <span class="math notranslate nohighlight">\(n\)</span> is the number of moles of the gas, and <span class="math notranslate nohighlight">\(R_g\)</span> is the ideal gas constant.  This equation is an example of an <em>equation of state</em> (EOS), it relates <span class="math notranslate nohighlight">\(P\)</span>, <span class="math notranslate nohighlight">\(T\)</span>, and <span class="math notranslate nohighlight">\(\nu\)</span>. Thus if we know the pressure and temperature of the gas, we can calculate <span class="math notranslate nohighlight">\(\nu\)</span>. Equation <a class="reference internal" href="#eq-eq-nlin-pvt"><span class="std std-ref">(99)</span></a> assumes that there are no interactions between the molecules in the gas. Clearly, this is too simplistic, and because of this one normally uses an EOS that better reflect the physical properties of the substance. A very famous EOS is the van der Waal EOS, which is a slight modification of equation <a class="reference internal" href="#eq-eq-nlin-pvt"><span class="std std-ref">(99)</span></a>:</p>
 <div class="math notranslate nohighlight" id="eq-eq-nlin-vdw">
-\[\tag{88}
+\[\tag{100}
 \left(P+\frac{a}{\nu^2}\right)\left(\nu-b\right)=R_gT.\]</div>
-<p><span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> are material constants that needs to be determined experimentally. This equation is <em>not</em> used in industrial design, but most equations used in practice are based on equation <a class="reference internal" href="#eq-eq-nlin-vdw"><span class="std std-ref">(88)</span></a>. Multiplying equation <a class="reference internal" href="#eq-eq-nlin-vdw"><span class="std std-ref">(88)</span></a> with <span class="math notranslate nohighlight">\(\nu^2\)</span>, we get a non linear equation that is cubic in the molar volume. It turns out that cubic EOS are a class of equations that are quite successful in modeling the behavior of real systems <span id="id2">[Ref6]</span>. However equation <a class="reference internal" href="#eq-eq-nlin-vdw"><span class="std std-ref">(88)</span></a> is a good starting point for more complex and realistic equations.</p>
+<p><span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> are material constants that needs to be determined experimentally. This equation is <em>not</em> used in industrial design, but most equations used in practice are based on equation <a class="reference internal" href="#eq-eq-nlin-vdw"><span class="std std-ref">(100)</span></a>. Multiplying equation <a class="reference internal" href="#eq-eq-nlin-vdw"><span class="std std-ref">(100)</span></a> with <span class="math notranslate nohighlight">\(\nu^2\)</span>, we get a non linear equation that is cubic in the molar volume. It turns out that cubic EOS are a class of equations that are quite successful in modeling the behavior of real systems <span id="id2">[Ref6]</span>. However equation <a class="reference internal" href="#eq-eq-nlin-vdw"><span class="std std-ref">(100)</span></a> is a good starting point for more complex and realistic equations.</p>
 <p>It is common practice to rescale EOS with respect to the critical point. At the critical point we have [ref]:</p>
 <div class="math notranslate nohighlight" id="eq-eq-nlin-crit1">
-\[\tag{89}
+\[\tag{101}
 \left.\frac{\partial P}{\partial \nu}\right|_{T_c,P_c} =0\]</div>
 <div class="math notranslate nohighlight" id="eq-eq-nlin-crit2">
-\[\tag{90}
+\[\tag{102}
 \left.\frac{\partial^2 P}{\partial \nu^2}\right|_{T_c,P_c} =0\]</div>
-<p>From equation <a class="reference internal" href="#eq-eq-nlin-crit1"><span class="std std-ref">(89)</span></a>,  <a class="reference internal" href="#eq-eq-nlin-crit2"><span class="std std-ref">(90)</span></a>, and <a class="reference internal" href="#eq-eq-nlin-vdw"><span class="std std-ref">(88)</span></a>, it follows:</p>
+<p>From equation <a class="reference internal" href="#eq-eq-nlin-crit1"><span class="std std-ref">(101)</span></a>,  <a class="reference internal" href="#eq-eq-nlin-crit2"><span class="std std-ref">(102)</span></a>, and <a class="reference internal" href="#eq-eq-nlin-vdw"><span class="std std-ref">(100)</span></a>, it follows:</p>
 <div class="math notranslate nohighlight" id="eq-eq-nlin-crit3">
-\[\tag{91}
+\[\tag{103}
 \nu_c=3b\quad,P_c=\frac{a}{27b^2}\quad,R_gT_c=\frac{8a}{27b^2}.\]</div>
-<p>Inserting these equations into equation <a class="reference internal" href="#eq-eq-nlin-vdw"><span class="std std-ref">(88)</span></a>, and defining the <em>reduced</em> quantities <span class="math notranslate nohighlight">\(\hat{P}=P/P_c\)</span>, <span class="math notranslate nohighlight">\(\hat{T}=T/T_c\)</span>, <span class="math notranslate nohighlight">\(\hat{\nu}=\nu/\nu_c\)</span>, we get</p>
+<p>Inserting these equations into equation <a class="reference internal" href="#eq-eq-nlin-vdw"><span class="std std-ref">(100)</span></a>, and defining the <em>reduced</em> quantities <span class="math notranslate nohighlight">\(\hat{P}=P/P_c\)</span>, <span class="math notranslate nohighlight">\(\hat{T}=T/T_c\)</span>, <span class="math notranslate nohighlight">\(\hat{\nu}=\nu/\nu_c\)</span>, we get</p>
 <div class="math notranslate nohighlight" id="eq-eq-nlin-vdwr">
-\[\tag{92}
+\[\tag{104}
 \left(\hat{P}+\frac{3}{\hat{\nu}^2}\right)\left(3\hat{\nu}-1\right)=8\hat{T}.\]</div>
 <div class="figure align-default" id="id8">
 <span id="fig-nlin-vdw"></span><a class="reference internal image-reference" href="_images/vdw.png"><img alt="_images/vdw.png" src="_images/vdw.png" style="width: 400px;" /></a>
@@ -103,7 +111,7 @@ P\nu=R_gT,\]</div>
 </div>
 <div class="section" id="exercise-3-1-van-der-waal-eos-and-co-2">
 <h3>Exercise 3.1: van der Waal EOS and CO$_2$<a class="headerlink" href="#exercise-3-1-van-der-waal-eos-and-co-2" title="Permalink to this headline">¶</a></h3>
-<p>Use equation <a class="reference internal" href="#eq-eq-nlin-vdw"><span class="std std-ref">(88)</span></a>, and the parameters for CO$_2$: a=3.640 L$^2$bar/mol, and b=0.04267 L/mol, to test the van der Waal EOS in equation <a class="reference internal" href="#eq-eq-nlin-vdw"><span class="std std-ref">(88)</span></a>. Use that at 2 MPa and 100 $^circ$C, CO$_2$ has a specific volume of 0.033586 m$^3$/kg.</p>
+<p>Use equation <a class="reference internal" href="#eq-eq-nlin-vdw"><span class="std std-ref">(100)</span></a>, and the parameters for CO$_2$: a=3.640 L$^2$bar/mol, and b=0.04267 L/mol, to test the van der Waal EOS in equation <a class="reference internal" href="#eq-eq-nlin-vdw"><span class="std std-ref">(100)</span></a>. Use that at 2 MPa and 100 $^circ$C, CO$_2$ has a specific volume of 0.033586 m$^3$/kg.</p>
 <p><strong>Solution.</strong>
 The calculation is straight forward, but it is easy to get an error due to units. We will use SI units: a=0.3640 m$^6$Pa/mol, b=4.267$cdot10^{-5}$ m$^3$/mol, $R$=8.314J/mol K.  The molar volume is obtained by multiplying by the molar weight of CO$_2$: <span class="math notranslate nohighlight">\(M_w\)</span> = 44 g/mol, hence $nu=1.478cdot10^{-3}$m$^3$/mol. Using <span class="math notranslate nohighlight">\(P=RT/(\nu-b)-a/\nu^2=1.993\)</span> MPa, or an error of <span class="math notranslate nohighlight">\(0.3\%\)</span>.</p>
 </div>
@@ -112,16 +120,16 @@ The calculation is straight forward, but it is easy to get an error due to units
 <h2>Fixed-point iteration<a class="headerlink" href="#fixed-point-iteration" title="Permalink to this headline">¶</a></h2>
 <p>A simple (but not always possible) way of solving a nonlinear equation is to reformulate the problem <span class="math notranslate nohighlight">\(f(x)=0\)</span> to a problem of the form</p>
 <div class="math notranslate nohighlight" id="eq-eq-nlin-g">
-\[\tag{93}
+\[\tag{105}
 x=g(x).\]</div>
 <p>The algorithm for solving this equation is to guess at a starting point, <span class="math notranslate nohighlight">\(x_0\)</span>, evaluate <span class="math notranslate nohighlight">\(x_1=g(x_0)\)</span>, <span class="math notranslate nohighlight">\(x_2=g(x_1)\)</span>, and so on. In some circumstances we might end up at a stable point, where <span class="math notranslate nohighlight">\(x\)</span> does not change. This point is termed a <em>fixed point</em>.</p>
-<p>Note that the form of <span class="math notranslate nohighlight">\(g(x)\)</span> is not uniquely determined. For our function defined in equation <a class="reference internal" href="#eq-eq-nlin-exp"><span class="std std-ref">(84)</span></a>, we can solve for <span class="math notranslate nohighlight">\(x\)</span> directly</p>
+<p>Note that the form of <span class="math notranslate nohighlight">\(g(x)\)</span> is not uniquely determined. For our function defined in equation <a class="reference internal" href="#eq-eq-nlin-exp"><span class="std std-ref">(96)</span></a>, we can solve for <span class="math notranslate nohighlight">\(x\)</span> directly</p>
 <div class="math notranslate nohighlight" id="eq-eq-nlin-g2">
-\[\tag{94}
+\[\tag{106}
 x=e^{-x/2},\]</div>
 <p>or we could write:</p>
 <div class="math notranslate nohighlight" id="eq-eq-nlin-g3">
-\[\tag{95}
+\[\tag{107}
 x=x-x^2+e^{-x}.\]</div>
 <p>These functions are illustrated in figure <a class="reference internal" href="#fig-nlin-fg"><span class="std std-ref">Two examples of iterative functions, that will give the same solution</span></a>, by visual inspection they look very similar, but as we will show in the next exercise the convergence is quite different.</p>
 <div class="figure align-default" id="id9">
@@ -161,11 +169,11 @@ Below is a straight forward (vanilla) implementation:</p>
 </div>
 <div class="section" id="exercise-3-3-finding-the-molar-volume-from-the-van-der-waal-eos-by-fixed-point-iteration">
 <h3>Exercise 3.3: Finding the molar volume from the van der Waal EOS by fixed point iteration<a class="headerlink" href="#exercise-3-3-finding-the-molar-volume-from-the-van-der-waal-eos-by-fixed-point-iteration" title="Permalink to this headline">¶</a></h3>
-<p>Extend the code above to take as argument the van der Waal EOS. For simplicity we will use the rescaled EOS in equation <a class="reference internal" href="#eq-eq-nlin-vdwr"><span class="std std-ref">(92)</span></a>. Show that for the reduced temperature, $hat{T}$=1.2, and pressure, $hat{P}$=1.5, the reduced molar volume <span class="math notranslate nohighlight">\(\hat{nu}\)</span> is 1.3522091.</p>
+<p>Extend the code above to take as argument the van der Waal EOS. For simplicity we will use the rescaled EOS in equation <a class="reference internal" href="#eq-eq-nlin-vdwr"><span class="std std-ref">(104)</span></a>. Show that for the reduced temperature, $hat{T}$=1.2, and pressure, $hat{P}$=1.5, the reduced molar volume <span class="math notranslate nohighlight">\(\hat{nu}\)</span> is 1.3522091.</p>
 <p><strong>Solution.</strong>
-First we rewrite equation <a class="reference internal" href="#eq-eq-nlin-vdwr"><span class="std std-ref">(92)</span></a> in a more useful form</p>
+First we rewrite equation <a class="reference internal" href="#eq-eq-nlin-vdwr"><span class="std std-ref">(104)</span></a> in a more useful form</p>
 <div class="math notranslate nohighlight" id="eq-eq-nlin-sp">
-\[\tag{96}
+\[\tag{108}
 \hat{\nu}=\frac{1}{3}(1+\frac{8\hat{T}}{\hat{P}+3/\hat{\nu}^2})\]</div>
 <p>The right hand side will play the same role as <span class="math notranslate nohighlight">\(g(x)\)</span> above, where <span class="math notranslate nohighlight">\(x\)</span> now is the reduced molar volume, and can be implemented in Python as:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">dvdwEOS</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">p</span><span class="p">):</span>
@@ -194,44 +202,44 @@ First we rewrite equation <a class="reference internal" href="#eq-eq-nlin-vdwr">
 </div>
 <div class="section" id="when-do-the-fixed-point-method-fail">
 <span id="sec-nlin-fp"></span><h3>When do the fixed point method fail?<a class="headerlink" href="#when-do-the-fixed-point-method-fail" title="Permalink to this headline">¶</a></h3>
-<p>If we replace <span class="math notranslate nohighlight">\(e^{-x}\)</span> with <span class="math notranslate nohighlight">\(e^{1-x^2}\)</span> in equation <a class="reference internal" href="#eq-eq-nlin-g3"><span class="std std-ref">(95)</span></a>, our method will not give a solution. You can easily verify that the <span class="math notranslate nohighlight">\(x=1\)</span> is a solution, so why does our method fail? To investigate this in a bit more detail, we turn to Taylors formula (once again). Assume that the root is located at <span class="math notranslate nohighlight">\(x^*\)</span>, and our guess is <span class="math notranslate nohighlight">\(x_k\)</span>, then the next <span class="math notranslate nohighlight">\(x\)</span>-value will be</p>
+<p>If we replace <span class="math notranslate nohighlight">\(e^{-x}\)</span> with <span class="math notranslate nohighlight">\(e^{1-x^2}\)</span> in equation <a class="reference internal" href="#eq-eq-nlin-g3"><span class="std std-ref">(107)</span></a>, our method will not give a solution. You can easily verify that the <span class="math notranslate nohighlight">\(x=1\)</span> is a solution, so why does our method fail? To investigate this in a bit more detail, we turn to Taylors formula (once again). Assume that the root is located at <span class="math notranslate nohighlight">\(x^*\)</span>, and our guess is <span class="math notranslate nohighlight">\(x_k\)</span>, then the next <span class="math notranslate nohighlight">\(x\)</span>-value will be</p>
 <div class="math notranslate nohighlight" id="eq-eq-nlin-t1">
-\[\tag{97}
+\[\tag{109}
 x_{k+1}=g(x_0)=g(x^*)+g^\prime(x^*)(x_k-x^*)+\cdots\]</div>
 <p>The true solution is <span class="math notranslate nohighlight">\(x^*\)</span>, hence <span class="math notranslate nohighlight">\(x^*=f(x^*)\)</span>, and we can write</p>
 <div class="math notranslate nohighlight" id="eq-eq-nlin-t2">
-\[\tag{98}
+\[\tag{110}
 x_{k+1}-x^*=g^\prime(x^*)(x_k-x^*),\]</div>
 <p>where we have neglected higher order terms. The point is: at each iteration we want the distance <span class="math notranslate nohighlight">\(x_1-x^*\)</span> to decrease, i.e. to be smaller than <span class="math notranslate nohighlight">\(x_0-x^*\)</span>. This can only be achieved if</p>
 <div class="math notranslate nohighlight" id="eq-eq-nlin-fpi">
-\[\tag{99}
+\[\tag{111}
 |g^\prime(x^*)|&lt;1.\]</div>
 <p>In our example above we saw that if <span class="math notranslate nohighlight">\(g(x)=x-x^2+e^{-x}\)</span>, we used 172 iterations and only 19 iterations if we replaced <span class="math notranslate nohighlight">\(g(x)\)</span> with <span class="math notranslate nohighlight">\(h(x)=e^{-x/2}\)</span> to converge to the <em>same</em> root $x$=0.70346742. We can now understand this, because <span class="math notranslate nohighlight">\(g^\prime(x)=1-2x-e^{-x}\)</span> and <span class="math notranslate nohighlight">\(g(x^*)\simeq-0.90\)</span>, whereas <span class="math notranslate nohighlight">\(h^\prime(x)=-e^{-x/2}/2\)</span>, and <span class="math notranslate nohighlight">\(h^\prime(x^*)\simeq0.35\)</span>. We expect the number of iterations, <span class="math notranslate nohighlight">\(n\)</span>, needed to reach a certain precision, <span class="math notranslate nohighlight">\(\varepsilon\)</span>, to scale as</p>
 <div class="math notranslate nohighlight" id="eq-eq-nlin-scale">
-\[\tag{100}
+\[\tag{112}
 |g^\prime(x^*)|^n=\varepsilon.\]</div>
 <p>We expect to use <span class="math notranslate nohighlight">\(\log|h^\prime(x^*)|/\log|g^\prime(x^*)|\simeq10\)</span> more iterations using <span class="math notranslate nohighlight">\(g(x)\)</span> compared to <span class="math notranslate nohighlight">\(h(x)\)</span>, which is close to the observed value of 172/19$simeq 9$.
 What to do when the fixed point method fail
 -------------------------------------------
 As discussed in <span id="id3">[Ref7]</span>, there might be an elegant solution whenever <span class="math notranslate nohighlight">\(|g^\prime(x^*)|&gt;1\)</span>. If it is possible to invert the <span class="math notranslate nohighlight">\(g(x)\)</span>, we can show that the derivative of the inverse function
 $ { g^prime }^{-1} (x^*)  = 1/g^prime (x^*) $. Why is this useful? Because if <span class="math notranslate nohighlight">\(x^*=g(x^*)\)</span> is the solution we are searching for, then this is equivalent to <span class="math notranslate nohighlight">\(x^*={g}^{-1}(x^*)\)</span> <em>if and only if</em> we can invert <span class="math notranslate nohighlight">\(g(x)\)</span>. Note that in many cases it is not possible to invert <span class="math notranslate nohighlight">\(g(x)\)</span>. Let us first show that $ { g^prime }^{-1} (x^*)  = 1/g^prime (x^*) $. For simplicity write</p>
-<div class="math notranslate nohighlight" id="eq-auto29">
-\[\tag{101}
+<div class="math notranslate nohighlight" id="eq-auto30">
+\[\tag{113}
 y = g(x)\Leftarrow x=g^{-1}(y),\]</div>
 <p>taking the derivative with respect to x gives</p>
 <div class="math notranslate nohighlight" id="eq-eq-nlin-fpi1">
-\[\tag{102}
+\[\tag{114}
 \frac{d}{dx}g^{-1}(y)=\frac{dx}{dx}=1,\]</div>
 <div class="math notranslate nohighlight" id="eq-eq-nlin-fpi2">
-\[\tag{103}
+\[\tag{115}
 \frac{dg^{-1}(y)}{dy}\frac{dy}{dx}=\frac{dx}{dx}=1,\]</div>
 <div class="math notranslate nohighlight" id="eq-eq-nlin-fpi3">
-\[\tag{104}
+\[\tag{116}
 \frac{dg^{-1}(y)}{dy}=\frac{1}{\frac{dy}{dx}}=\frac{1}{g^{\prime}(x)}
     =\frac{1}{g^{\prime}(g^{-1}(y))}.\]</div>
-<p>Going from equation <a class="reference internal" href="#eq-eq-nlin-fpi1"><span class="std std-ref">(102)</span></a> to <a class="reference internal" href="#eq-eq-nlin-fpi2"><span class="std std-ref">(103)</span></a>, we have used the chain rule. Equation <a class="reference internal" href="#eq-eq-nlin-fpi3"><span class="std std-ref">(104)</span></a> is general, let us now specify to our fixed point iteration. Then we can use <span class="math notranslate nohighlight">\(x^*=g(x^*)=y^*\)</span>, and <span class="math notranslate nohighlight">\(x^*=g^{-1}(y^*)=g^{-1}(x^*)\)</span> hence we can write the last equation as</p>
+<p>Going from equation <a class="reference internal" href="#eq-eq-nlin-fpi1"><span class="std std-ref">(114)</span></a> to <a class="reference internal" href="#eq-eq-nlin-fpi2"><span class="std std-ref">(115)</span></a>, we have used the chain rule. Equation <a class="reference internal" href="#eq-eq-nlin-fpi3"><span class="std std-ref">(116)</span></a> is general, let us now specify to our fixed point iteration. Then we can use <span class="math notranslate nohighlight">\(x^*=g(x^*)=y^*\)</span>, and <span class="math notranslate nohighlight">\(x^*=g^{-1}(y^*)=g^{-1}(x^*)\)</span> hence we can write the last equation as</p>
 <div class="math notranslate nohighlight" id="eq-eq-nlin-fpif">
-\[\tag{105}
+\[\tag{117}
 \frac{d}{dx}g^{-1}(x^*)=\frac{1}{g^{\prime}(x^*)}.\]</div>
 </div>
 <div class="section" id="exercise-3-4-solve-x-e-1-x-2-using-fixed-point-iteration">
@@ -244,28 +252,28 @@ y = g(x)\Leftarrow x=g^{-1}(y),\]</div>
 <p><strong>Solution.</strong>
 First, we calculate the derivative of <span class="math notranslate nohighlight">\(g(x)\)</span>, <span class="math notranslate nohighlight">\(g^\prime(x)=-2xe^{1-x^2}\)</span>, hence <span class="math notranslate nohighlight">\(g^\prime(x^*)=-2\)</span> and <span class="math notranslate nohighlight">\(|g^\prime(x^*)|&gt;1\)</span>. This is an unstable fixed point, and if we start a little bit off from this point we will spiral away from it.</p>
 <p>Inverting <span class="math notranslate nohighlight">\(y=g(x)\)</span> gives us $ g^{-1} (y)=sqrt{1-ln y}$. Note that <span class="math notranslate nohighlight">\(y^*=x^*=1\)</span> is a solution to this equation as it should be. The derivative is</p>
-<div class="math notranslate nohighlight" id="eq-auto30">
-\[\tag{106}
+<div class="math notranslate nohighlight" id="eq-auto31">
+\[\tag{118}
 {g^{-1}}^\prime(y)=-\frac{1}{2\sqrt{1-\ln y}},\]</div>
 <p>and $ {g^{-1}}^prime(y^*)=-1/2 $.
 It takes about 30 iterations to reach the correct solution <span class="math notranslate nohighlight">\(y^*=1\)</span>, when the starting point is <span class="math notranslate nohighlight">\(y=0\)</span>.</p>
 </div>
 </div>
-<div class="section" id="rate-of-convergence">
-<h2>Rate of convergence<a class="headerlink" href="#rate-of-convergence" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="rate-of-convergence-1">
+<h2>Rate of convergence<a class="headerlink" href="#rate-of-convergence-1" title="Permalink to this headline">¶</a></h2>
 <p>The rate of convergence is the speed at which a <em>convergent</em> sequence approach the limit. Assume that our sequence <span class="math notranslate nohighlight">\(x_{k}\)</span> converges to the number <span class="math notranslate nohighlight">\(x^*\)</span>, the sequence is said to <em>converge linearly</em> to <span class="math notranslate nohighlight">\(x^*\)</span> if there exists a number <span class="math notranslate nohighlight">\(\mu\in&lt;0,1&gt;\)</span>, such that</p>
 <div class="math notranslate nohighlight" id="eq-eq-nlin-linconv">
-\[\tag{107}
-\lim{k\to\infty}=\frac{|x_{k+1}-x^*|}{|x_k-x^*|}=\mu\]</div>
-<p>Inserting equation <a class="reference internal" href="#eq-eq-nlin-t2"><span class="std std-ref">(98)</span></a> in equation <a class="reference internal" href="#eq-eq-nlin-linconv"><span class="std std-ref">(107)</span></a>, we get:</p>
+\[\tag{119}
+\lim_{k\to\infty}=\frac{|x_{k+1}-x^*|}{|x_k-x^*|}=\mu\]</div>
+<p>Inserting equation <a class="reference internal" href="#eq-eq-nlin-t2"><span class="std std-ref">(110)</span></a> in equation <a class="reference internal" href="#eq-eq-nlin-linconv"><span class="std std-ref">(119)</span></a>, we get:</p>
 <div class="math notranslate nohighlight" id="eq-eq-nlin-ling">
-\[\tag{108}
-\lim{k\to\infty}=\frac{|x_{k+1}-x_k|}{x_k-x^*}
+\[\tag{120}
+\lim_{k\to\infty}=\frac{|x_{k+1}-x_k|}{x_k-x^*}
     =\frac{|g^\prime(x^*)(x_k-x^*)|}{|x_k-x^*|}=|g^\prime(x^*)|.\]</div>
-<p>Hence the fixed point iteration is expected to converge <em>linearly</em> to the correct solution. The definition in equation <a class="reference internal" href="#eq-eq-nlin-linconv"><span class="std std-ref">(107)</span></a>, can be extended to include the definition of quadratic, cubic, etc. convergence:</p>
+<p>Hence the fixed point iteration is expected to converge <em>linearly</em> to the correct solution. The definition in equation <a class="reference internal" href="#eq-eq-nlin-linconv"><span class="std std-ref">(119)</span></a>, can be extended to include the definition of quadratic, cubic, etc. convergence:</p>
 <div class="math notranslate nohighlight" id="eq-eq-nlin-qconv">
-\[\tag{109}
-\lim{k\to\infty}=\frac{|x_{k+1}-x^*|}{|x_k-x^*|^q}=\mu.\]</div>
+\[\tag{121}
+\lim_{k\to\infty}=\frac{|x_{k+1}-x^*|}{|x_k-x^*|^q}=\mu.\]</div>
 <p>If <span class="math notranslate nohighlight">\(q=2\)</span> the convergence is said to be quadratic and so on.</p>
 </div>
 <div class="section" id="the-bisection-method">
@@ -281,15 +289,8 @@ It takes about 30 iterations to reach the correct solution <span class="math not
 <li><p>Calculate the midpoint <span class="math notranslate nohighlight">\(c=(a+b)/2\)</span>. If <span class="math notranslate nohighlight">\(f(a)\cdot f(c)&lt;0\)</span> the root is in the interval <span class="math notranslate nohighlight">\([a,c]\)</span>, else the root is in the interval <span class="math notranslate nohighlight">\([c,b]\)</span></p></li>
 <li><p>Half the interval, and test in which interval the root lies, and continue until a convergence criterion.</p></li>
 </ul>
-<p>In figure <a class="reference internal" href="#fig-nlin-bisection"><span class="std std-ref">Illustration of the bisection method for the van der Waal EOS</span></a>, a graphical illustration of the method is shown. If <span class="math notranslate nohighlight">\(c_n\)</span> is the midpoint after <span class="math notranslate nohighlight">\(n\)</span> steps, the difference between the solution <span class="math notranslate nohighlight">\(x^*\)</span> and <span class="math notranslate nohighlight">\(c_n\)</span> is</p>
-<div class="math notranslate nohighlight" id="eq-eq-nlin-bisec">
-\[\tag{110}
-|c_n-x^*| \le \frac{|b-a|}{2^n}\]</div>
-<p>Using our previous definition in equation <a class="reference internal" href="#eq-eq-nlin-qconv"><span class="std std-ref">(109)</span></a>, we find that</p>
-<div class="math notranslate nohighlight" id="eq-eq-nlin-bsc1">
-\[\tag{111}
-\lim{k\to\infty}=\frac{|c_{k+1}-x^*|}{|c_k-x^*|}\le\frac{|b-a|/2^{n+1}}{|b-a|/2^n}=\frac{1}{2},\]</div>
-<p>hence the bisection method converges linearly. Below is an implementation of the bisection method.</p>
+<p>In figure <a class="reference internal" href="#fig-nlin-bisection"><span class="std std-ref">Illustration of the bisection method for the van der Waal EOS</span></a>, there is a graphical illustration.
+Below is an implementation of the bisection method.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">bisection</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">prec</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span><span class="n">MAXIT</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Approximate solution of f(x)=0 on interval [a,b] by bisection.</span>
 
@@ -298,17 +299,18 @@ It takes about 30 iterations to reach the correct solution <span class="math not
 <span class="sd">    eps : desired precision</span>
 
 <span class="sd">    Returns the midpoint when it is closer than eps to the root,</span>
-<span class="sd">    unless MAX_ITERATIONS are not exceeded</span>
+<span class="sd">    unless MAXIT are not exceeded</span>
 <span class="sd">    &#39;&#39;&#39;</span>
-    <span class="n">MAX_ITERATIONS</span><span class="o">=</span><span class="n">MAXIT</span>
     <span class="k">if</span> <span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;You need to bracket the root, f(a)*f(b) &gt;= 0&#39;</span><span class="p">)</span>
         <span class="k">return</span> <span class="kc">None</span>
     <span class="n">an</span> <span class="o">=</span> <span class="n">a</span>
     <span class="n">bn</span> <span class="o">=</span> <span class="n">b</span>
-    <span class="n">c_old</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">an</span> <span class="o">+</span> <span class="n">bn</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">MAX_ITERATIONS</span><span class="p">):</span>
-        <span class="n">cn</span> <span class="o">=</span> <span class="n">c_old</span>
+    <span class="n">cn</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">an</span> <span class="o">+</span> <span class="n">bn</span><span class="p">)</span>
+    <span class="n">c_old</span> <span class="o">=</span> <span class="n">cn</span> <span class="o">-</span> <span class="mi">10</span><span class="o">*</span><span class="n">prec</span>
+    <span class="n">n</span><span class="o">=</span><span class="mi">0</span>
+    <span class="k">while</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">cn</span><span class="o">-</span><span class="n">c_old</span><span class="p">)</span><span class="o">&gt;=</span><span class="n">prec</span> <span class="ow">and</span> <span class="n">n</span><span class="o">&lt;</span><span class="n">MAXIT</span><span class="p">:</span>
+        <span class="n">c_old</span> <span class="o">=</span> <span class="n">cn</span>
         <span class="n">f_cn</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">cn</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">f</span><span class="p">(</span><span class="n">an</span><span class="p">)</span><span class="o">*</span><span class="n">f_cn</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">bn</span> <span class="o">=</span> <span class="n">cn</span>
@@ -322,59 +324,49 @@ It takes about 30 iterations to reach the correct solution <span class="math not
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Bisection method fails.&#39;</span><span class="p">)</span>
             <span class="k">return</span> <span class="kc">None</span>
         <span class="n">cn</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">an</span><span class="o">+</span><span class="n">bn</span><span class="p">)</span>
-        <span class="k">if</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">cn</span><span class="o">-</span><span class="n">c_old</span><span class="p">)</span><span class="o">&lt;</span><span class="n">prec</span><span class="p">):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Found solution &#39;</span><span class="p">,</span> <span class="n">cn</span><span class="p">,</span>
-                  <span class="s1">&#39; after &#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="s1">&#39;iterations&#39;</span> <span class="p">)</span>
-            <span class="k">return</span> <span class="n">cn</span>
-        <span class="n">c_old</span><span class="o">=</span><span class="n">cn</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Max number of iterations: &#39;</span><span class="p">,</span> <span class="n">MAXIT</span><span class="p">,</span> <span class="s1">&#39; reached.&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Try to increase MAXIT or decrease prec&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Returning best guess, value of function is: &#39;</span><span class="p">,</span> <span class="n">f_cn</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">cn</span>
+        <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">n</span><span class="o">&lt;</span><span class="n">MAXIT</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Found solution &#39;</span><span class="p">,</span> <span class="n">cn</span><span class="p">,</span><span class="s1">&#39; after &#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="s1">&#39;iterations&#39;</span> <span class="p">)</span>
+        <span class="k">return</span> <span class="n">cn</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Max number of iterations: &#39;</span><span class="p">,</span> <span class="n">MAXIT</span><span class="p">,</span> <span class="s1">&#39; reached.&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Try to increase MAXIT or decrease prec&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Returning best guess, value of function is: &#39;</span><span class="p">,</span> <span class="n">f_cn</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">None</span>
 </pre></div>
 </div>
 <div class="admonition-warnings admonition">
 <p class="admonition-title">Warnings</p>
 <p>Note that the implementation of the bisection algorithm is only a few lines of code, and most of the code is to give warnings to the user. In this case it is important to do additional checking, and give the user warnings. If $f(c)$=0, then we must stop and return the exact solution. If we only test if <span class="math notranslate nohighlight">\(f(a)\cdot f(c)\)</span> is greater or lower than zero the algorithm would fail.</p>
 </div>
-</div>
-<div class="section" id="newtons-method">
-<h2>Newtons method<a class="headerlink" href="#newtons-method" title="Permalink to this headline">¶</a></h2>
-<p>Newtons method is one of the most used methods. If it converges, it converges quadratically to the correct solution. The drawback is that contrary to the bisection method it may fail if a bad starting point is given. Newtons method for finding the root of a function <span class="math notranslate nohighlight">\(f(x)=0\)</span> is illustrated in figure <a class="reference internal" href="#fig-nlin-newton"><span class="std std-ref">Illustration of Newtons method for the van der Waals EOS</span></a>. The main idea is to use more information about the function in the search of the root. In this case we want to find the point where the tangent of the function in <span class="math notranslate nohighlight">\(x_k\)</span> intersect the $x-$axis, and take that as our next point, <span class="math notranslate nohighlight">\(x_{k+1}\)</span>.</p>
+<div class="section" id="rate-of-convergence-2">
+<h3>Rate of convergence<a class="headerlink" href="#rate-of-convergence-2" title="Permalink to this headline">¶</a></h3>
+<p>If <span class="math notranslate nohighlight">\(c_n\)</span> is the midpoint after <span class="math notranslate nohighlight">\(n\)</span> steps, the difference between the solution <span class="math notranslate nohighlight">\(x^*\)</span> and <span class="math notranslate nohighlight">\(c_n\)</span> is</p>
+<div class="math notranslate nohighlight" id="eq-eq-nlin-bisec">
+\[\tag{122}
+|c_n-x^*| \le \frac{|b-a|}{2^n}\]</div>
+<p>Using our previous definition in equation <a class="reference internal" href="#eq-eq-nlin-qconv"><span class="std std-ref">(121)</span></a>, we find that</p>
+<div class="math notranslate nohighlight" id="eq-eq-nlin-bsc1">
+\[\tag{123}
+\lim_{k\to\infty}=\frac{|c_{k+1}-x^*|}{|c_k-x^*|}\le\frac{|b-a|/2^{n+1}}{|b-a|/2^n}=\frac{1}{2},\]</div>
+<p>hence the bisection method converges linearly.
+Newtons method
+==============
+Newtons method is one of the most used methods. If it converges, it converges quadratically to the correct solution. The drawback is that contrary to the bisection method it may fail if a bad starting point is given. Newtons method for finding the root of a function <span class="math notranslate nohighlight">\(f(x)=0\)</span> is illustrated in figure <a class="reference internal" href="#fig-nlin-newton"><span class="std std-ref">Illustration of Newtons method for the van der Waals EOS</span></a>. The main idea is to use more information about the function in the search of the root. In this case we want to find the point where the tangent of the function in <span class="math notranslate nohighlight">\(x_k\)</span> intersect the $x-$axis, and take that as our next point, <span class="math notranslate nohighlight">\(x_{k+1}\)</span>.</p>
 <div class="figure align-default" id="id11">
 <span id="fig-nlin-newton"></span><a class="reference internal image-reference" href="_images/newton_comb.png"><img alt="_images/newton_comb.png" src="_images/newton_comb.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-text"><em>Illustration of Newtons method for the van der Waals EOS</em></span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
 </div>
 <p>We can easily derive the algorithm by finding the formula for the tangent line. Using <span class="math notranslate nohighlight">\(y=ax+b\)</span> for the tangent line, we immediately know that <span class="math notranslate nohighlight">\(a=f^\prime(x_k)\)</span>. <span class="math notranslate nohighlight">\(b\)</span> can be found as we know that the line intersects <span class="math notranslate nohighlight">\((x_k,f(x_k))\)</span>: <span class="math notranslate nohighlight">\(f(x_k)=f^\prime(x_k)x_k+b\)</span>, hence the equation for the tangent line is <span class="math notranslate nohighlight">\(y=f^\prime(x_k)x+f(x_k)-f^\prime(x_k)x_k\)</span>. The next point is located where <span class="math notranslate nohighlight">\(y\)</span> crosses the <span class="math notranslate nohighlight">\(x\)</span>-axis, hence <span class="math notranslate nohighlight">\(0=f^\prime(x_k)x_{k+1}+f(x_k)-f^\prime(x_k)x_k\)</span>. Rearranging this equation, we can write Newtons method in the standard form</p>
 <div class="math notranslate nohighlight" id="eq-eq-nlin-newton">
-\[\tag{112}
+\[\tag{124}
 x_{k+1}=x_k-\frac{f(x_k)}{f^\prime(x_k)}.\]</div>
-<p>Note that the derivative of <span class="math notranslate nohighlight">\(f(x)\)</span> enters in equation <a class="reference internal" href="#eq-eq-nlin-newton"><span class="std std-ref">(112)</span></a>, which means that if our function has a extremal value in our search domain, Newtons method most likely will fail. In particular <span class="math notranslate nohighlight">\(x_1\)</span>, and <span class="math notranslate nohighlight">\(x_4\)</span> in the figure to the right in figure <a class="reference internal" href="#fig-nlin-newton2"><span class="std std-ref">Illustration of some of the possible challenges with Newtons method. Note that if the derivative is zero somewhere in the search interval, Newtons method will fail</span></a> are bad starting point for Newtons method. Newtons method</p>
+<p>Note that the derivative of <span class="math notranslate nohighlight">\(f(x)\)</span> enters in equation <a class="reference internal" href="#eq-eq-nlin-newton"><span class="std std-ref">(124)</span></a>, which means that if our function has a extremal value in our search domain, Newtons method most likely will fail. In particular <span class="math notranslate nohighlight">\(x_1\)</span>, and <span class="math notranslate nohighlight">\(x_4\)</span> in the figure to the right in figure <a class="reference internal" href="#fig-nlin-newton2"><span class="std std-ref">Illustration of some of the possible challenges with Newtons method. Note that if the derivative is zero somewhere in the search interval, Newtons method will fail</span></a> are bad starting point for Newtons method.</p>
 <div class="figure align-default" id="id12">
 <span id="fig-nlin-newton2"></span><a class="reference internal image-reference" href="_images/newton2.png"><img alt="_images/newton2.png" src="_images/newton2.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-text"><em>Illustration of some of the possible challenges with Newtons method. Note that if the derivative is zero somewhere in the search interval, Newtons method will fail</em></span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
 </div>
-<p>Before we show how to implement Newtons method, let us first investigate the convergence and rate of convergence. Comparing figure <a class="reference internal" href="#fig-nlin-bisection"><span class="std std-ref">Illustration of the bisection method for the van der Waal EOS</span></a> and <a class="reference internal" href="#fig-nlin-newton"><span class="std std-ref">Illustration of Newtons method for the van der Waals EOS</span></a>, you immediately get the sense that Newtons method converges faster. Newtons method is similar to the fixed point method, but where we do not use <span class="math notranslate nohighlight">\(g(x)=x-f(x)\)</span>, but <span class="math notranslate nohighlight">\(g(x)=x-\frac{f(x)}{f^\prime(x)}\)</span>. We will now analyze Newtons method, using the same approach as in the section <a class="reference internal" href="#sec-nlin-fp"><span class="std std-ref">When do the fixed point method fail?</span></a>. First we expand <span class="math notranslate nohighlight">\(g(x)\)</span> around the root <span class="math notranslate nohighlight">\(x^*\)</span></p>
-<div class="math notranslate nohighlight" id="eq-eq-nlin-nsec">
-\[\tag{113}
-x_{k+1}=g(x_k)=g(x^*)+g^\prime(x^*)(x_k-x^*)+\frac{1}{2}g^{\prime\prime}(x^*)(x_k-x^*)^2,\]</div>
-<p>where we have skipped all higher order terms. You can easily verify that</p>
-<div class="math notranslate nohighlight" id="eq-eq-nlin-gn2">
-\[\tag{114}
-g^\prime(x) =\frac{f^{\prime\prime}(x)f(x)}{f^\prime(x)^2}\]</div>
-<div class="math notranslate nohighlight" id="eq-eq-nlin-gn3">
-\[\tag{115}
-g^{\prime\prime}(x) =\frac{(f^{\prime\prime\prime}(x)f^\prime(x)-2f^{\prime\prime}(x)^2f^\prime(x))f(x)
-    +f^{\prime\prime}(x)f^\prime(x)^2}{f^\prime(x)^4}.\]</div>
-<p><span class="math notranslate nohighlight">\(x^*\)</span> is a solution, hence <span class="math notranslate nohighlight">\(f(x^*)=0\)</span>, we then find from equation <a class="reference internal" href="#eq-eq-nlin-gn2"><span class="std std-ref">(114)</span></a> and <a class="reference internal" href="#eq-eq-nlin-gn3"><span class="std std-ref">(115)</span></a> that <span class="math notranslate nohighlight">\(g^\prime(x^*)=0\)</span>, and <span class="math notranslate nohighlight">\(g^{\prime\prime}(x^*)=f^{\prime\prime}(x^*)/f^{\prime}(x^*)^2\)</span>. Thus from equation <a class="reference internal" href="#eq-eq-nlin-nsec"><span class="std std-ref">(113)</span></a> we get</p>
-<div class="math notranslate nohighlight" id="eq-eq-nlin-nsecn">
-\[\tag{116}
-x_{k+1}=x^*+\frac{1}{2}\frac{f^{\prime\prime}(x^*)}{f^{\prime}(x^*)^2}(x_k-x^*)^2,\]</div>
-<p>or equivalently:</p>
-<div class="math notranslate nohighlight" id="eq-eq-nlin-nsecn2">
-\[\tag{117}
-\frac{x_{k+1}-x^*}{(x-x^*)^2}=\frac{1}{2}\frac{f^{\prime\prime}(x^*)}{f^{\prime}(x^*)^2}.\]</div>
-<p>The denominator has a power of two, and hence Newtons method is <em>quadratic</em> convergent (assuming that the sequence <span class="math notranslate nohighlight">\(x_{k+1}\)</span> is a convergent sequence). Note that it also follows from the analyses above that Newtons method will fail if the derivative at the root, <span class="math notranslate nohighlight">\(f^\prime(x^*)\)</span>, is zero. An implementation is shown below.</p>
+<p>An implementation is shown below.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">newton</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">x</span><span class="p">,</span> <span class="n">prec</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span><span class="n">MAXIT</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Approximate solution of f(x)=0 by Newtons method.</span>
 <span class="sd">    The derivative of the function is calculated numerically</span>
@@ -401,6 +393,34 @@ x_{k+1}=x^*+\frac{1}{2}\frac{f^{\prime\prime}(x^*)}{f^{\prime}(x^*)^2}(x_k-x^*)^
     <span class="k">return</span> <span class="n">x_new</span>
 </pre></div>
 </div>
+<p>Comparing figure <a class="reference internal" href="#fig-nlin-bisection"><span class="std std-ref">Illustration of the bisection method for the van der Waal EOS</span></a> and <a class="reference internal" href="#fig-nlin-newton"><span class="std std-ref">Illustration of Newtons method for the van der Waals EOS</span></a>, you immediately get the sense that Newtons method converges faster, and indeed it does.</p>
+</div>
+<div class="section" id="rate-of-convergence-3">
+<h3>Rate of convergence<a class="headerlink" href="#rate-of-convergence-3" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>Newtons method is similar to the fixed point method, but where we do not use <span class="math notranslate nohighlight">\(g(x)=x-f(x)\)</span>, but <span class="math notranslate nohighlight">\(g(x)=x-\frac{f(x)}{f^\prime(x)}\)</span>. We will now analyze Newtons method, using the same approach as in the section <a class="reference internal" href="#sec-nlin-fp"><span class="std std-ref">When do the fixed point method fail?</span></a>. First we expand <span class="math notranslate nohighlight">\(g(x)\)</span> around the root <span class="math notranslate nohighlight">\(x^*\)</span></p>
+</div></blockquote>
+<div class="math notranslate nohighlight" id="eq-eq-nlin-nsec">
+\[\tag{125}
+x_{k+1}=g(x_k)=g(x^*)+g^\prime(x^*)(x_k-x^*)+\frac{1}{2}g^{\prime\prime}(x^*)(x_k-x^*)^2,\]</div>
+<p>where we have skipped all higher order terms. You can easily verify that</p>
+<div class="math notranslate nohighlight" id="eq-eq-nlin-gn2">
+\[\tag{126}
+g^\prime(x) =\frac{f^{\prime\prime}(x)f(x)}{f^\prime(x)^2}\]</div>
+<div class="math notranslate nohighlight" id="eq-eq-nlin-gn3">
+\[\tag{127}
+g^{\prime\prime}(x) =\frac{(f^{\prime\prime\prime}(x)f^\prime(x)-2f^{\prime\prime}(x)^2f^\prime(x))f(x)
+    +f^{\prime\prime}(x)f^\prime(x)^2}{f^\prime(x)^4}.\]</div>
+<p><span class="math notranslate nohighlight">\(x^*\)</span> is a solution, hence <span class="math notranslate nohighlight">\(f(x^*)=0\)</span>, we then find from equation <a class="reference internal" href="#eq-eq-nlin-gn2"><span class="std std-ref">(126)</span></a> and <a class="reference internal" href="#eq-eq-nlin-gn3"><span class="std std-ref">(127)</span></a> that <span class="math notranslate nohighlight">\(g^\prime(x^*)=0\)</span>, and <span class="math notranslate nohighlight">\(g^{\prime\prime}(x^*)=f^{\prime\prime}(x^*)/f^{\prime}(x^*)^2\)</span>. Thus from equation <a class="reference internal" href="#eq-eq-nlin-nsec"><span class="std std-ref">(125)</span></a> we get</p>
+<div class="math notranslate nohighlight" id="eq-eq-nlin-nsecn">
+\[\tag{128}
+x_{k+1}=x^*+\frac{1}{2}\frac{f^{\prime\prime}(x^*)}{f^{\prime}(x^*)^2}(x_k-x^*)^2,\]</div>
+<p>or equivalently:</p>
+<div class="math notranslate nohighlight" id="eq-eq-nlin-nsecn2">
+\[\tag{129}
+\frac{x_{k+1}-x^*}{(x-x^*)^2}=\frac{1}{2}\frac{f^{\prime\prime}(x^*)}{f^{\prime}(x^*)^2}.\]</div>
+<p>The denominator has a power of two, and hence Newtons method is <em>quadratic</em> convergent (assuming that the sequence <span class="math notranslate nohighlight">\(x_{k+1}\)</span> is a convergent sequence). Note that it also follows from the analyses above that Newtons method will fail if the derivative at the root, <span class="math notranslate nohighlight">\(f^\prime(x^*)\)</span>, is zero.</p>
+</div>
 <div class="section" id="exercise-3-5-compare-newtons-bisection-and-the-fixed-point-method">
 <h3>Exercise 3.5: Compare Newtons, Bisection and the Fixed Point method<a class="headerlink" href="#exercise-3-5-compare-newtons-bisection-and-the-fixed-point-method" title="Permalink to this headline">¶</a></h3>
 <p>Find the root of <span class="math notranslate nohighlight">\(f(x)=x^2-e^{-x}\)</span> using bisection, fixed point,  and Newtons method, start at <span class="math notranslate nohighlight">\(x=0\)</span>. How many iterations do you need to use reach a precision of <span class="math notranslate nohighlight">\(10^{-8}\)</span>? What happens if you widen the search domain or start further away from the root?</p>
@@ -421,25 +441,89 @@ The root is located at <span class="math notranslate nohighlight">\(x^*=0.703467
 </div>
 </div>
 </div>
+<div class="section" id="secant-method">
+<h2>Secant method<a class="headerlink" href="#secant-method" title="Permalink to this headline">¶</a></h2>
+<p>The Newtons method is very good if you can choose a good starting point, and you can give in an analytical formula for the derivative. In some cases it is not possible to calculate the derivative analytically, then a very good method of choice is the secant method. It can be derived by simply replacing the derivative in Newtons method by the finite difference approximation</p>
+<div class="math notranslate nohighlight" id="eq-eq-nlin-sec1">
+\[\tag{130}
+f^\prime(x_k)\to \frac{f(x_k)-f(x_{k-1})}{x_k-x_{k-1}}.\]</div>
+<p>Inserting this equation into equation <a class="reference internal" href="#eq-eq-nlin-newton"><span class="std std-ref">(124)</span></a>, we get</p>
+<div class="math notranslate nohighlight" id="eq-auto32">
+\[\tag{131}
+x_{k+1}=x_k-f(x_k)\frac{x_k-x_{k-1}}{f(x_k)-f(x_{k-1})}{\nonumber}\]</div>
+<div class="math notranslate nohighlight" id="eq-eq-nlin-sec2">
+\[\tag{132}
+=\frac{x_{k-1}f(x_k)-x_kf(x_{k-1})}{f(x_k)-f(x_{k-1})}.\]</div>
+<p>For a graphical illustration see figure <a class="reference internal" href="#fig-nlin-secant"><span class="std std-ref">A graphical illustration of the secant method. Note that the starting points x_0 and x_1 do not need to be close. The next point is where the (secant) line crosses the x-axis</span></a></p>
+<div class="figure align-default" id="id14">
+<span id="fig-nlin-secant"></span><a class="reference internal image-reference" href="_images/secant.png"><img alt="_images/secant.png" src="_images/secant.png" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-text">A graphical illustration of the secant method. Note that the starting points <span class="math notranslate nohighlight">\(x_0\)</span> and <span class="math notranslate nohighlight">\(x_1\)</span> do not need to be close. The next point is where the (secant) line crosses the <span class="math notranslate nohighlight">\(x\)</span>-axis</span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></p>
+</div>
+<div class="section" id="rate-of-convergence-4">
+<h3>Rate of convergence<a class="headerlink" href="#rate-of-convergence-4" title="Permalink to this headline">¶</a></h3>
+<p>The derivation of the rate of convergence for the secant method is a bit more involved. To simplify the notation we introduce the notation <span class="math notranslate nohighlight">\(\varepsilon_k\equiv x_k-x^*\)</span>, where <span class="math notranslate nohighlight">\(x^*\)</span> is the exact solution. Subtracting <span class="math notranslate nohighlight">\(x^*\)</span> from each side of equation <a class="reference internal" href="#eq-eq-nlin-sec2"><span class="std std-ref">(132)</span></a> we get</p>
+<div class="math notranslate nohighlight" id="eq-auto33">
+\[\tag{133}
+\varepsilon_{k+1}=x_{k+1}-x^*=\frac{x_{k-1}f(x_k)-x_kf(x_{k-1})}{f(x_k)-f(x_{k-1})}-x^*, {\nonumber}\]</div>
+<div class="math notranslate nohighlight" id="eq-eq-nlin-sec3">
+\[\tag{134}
+\varepsilon_{k+1}=\frac{\varepsilon_{k-1}f(x_k)-\varepsilon_k f(x_{k-1})}{f(x_k)-f(x_{k-1})},\]</div>
+<p>we now make a Taylor expansion of <span class="math notranslate nohighlight">\(f(x_k)\)</span> and <span class="math notranslate nohighlight">\(f(x_{k-1})\)</span> about the root <span class="math notranslate nohighlight">\(x^*\)</span></p>
+<div class="math notranslate nohighlight" id="eq-auto34">
+\[\tag{135}
+f(x_k) =f(x^*)+f^\prime(x^*)(x_k-x^*)+\frac{1}{2}f^{\prime\prime}(x^*)(x_k-x^*)^2+\cdots ,{\nonumber}\]</div>
+<div class="math notranslate nohighlight" id="eq-auto35">
+\[\tag{136}
+=f^\prime(x^*)\varepsilon_k+\frac{1}{2}f^{\prime\prime}(x^*)\varepsilon_k^2+\cdots .\]</div>
+<div class="math notranslate nohighlight" id="eq-auto36">
+\[\tag{137}
+f(x_{k-1}) =f(x^*)+f^\prime(x^*)(x_{k-1}-x^*)+\frac{1}{2}f^{\prime\prime}(x^*)(x_{k-1}-x^*)^2+\cdots,{\nonumber}\]</div>
+<div class="math notranslate nohighlight" id="eq-auto37">
+\[\tag{138}
+=f^\prime(x^*)\varepsilon_{k-1}+\frac{1}{2}f^{\prime\prime}(x^*)\varepsilon_{k-1}^2+\cdots ,\]</div>
+<p>where we have used the fact that <span class="math notranslate nohighlight">\(f(x^*)=0\)</span>. Inserting these equations into equation <a class="reference internal" href="#eq-eq-nlin-sec3"><span class="std std-ref">(134)</span></a> and neglecting terms of order <span class="math notranslate nohighlight">\(\varepsilon_k^3\)</span> we get</p>
+<div class="math notranslate nohighlight" id="eq-auto38">
+\[\tag{139}
+\varepsilon_{k+1}=\frac{\varepsilon_{k-1}\left[f^\prime(x^*)\varepsilon_k+\frac{1}{2}f^{\prime\prime}(x^*)\varepsilon_k^2\right] -\varepsilon_k\left[ f^\prime(x^*)\varepsilon_{k-1}+\frac{1}{2}f^{\prime\prime}(x^*)\varepsilon_{k-1}^2\right]}{f^\prime(x^*)\varepsilon_k+\frac{1}{2}f^{\prime\prime}(x^*)\varepsilon_k^2-\left[ f^\prime(x^*)\varepsilon_{k-1}+\frac{1}{2}f^{\prime\prime}(x^*)\varepsilon_{k-1}^2\right]},{\nonumber}\]</div>
+<div class="math notranslate nohighlight" id="eq-auto39">
+\[\tag{140}
+=\frac{\varepsilon_k\varepsilon_{k-1}\left[\varepsilon_k-\varepsilon_{k-1}\right]}{\left[f^\prime(x^*)+\frac{1}{2}f^{\prime\prime}(x^*)(\varepsilon_k+\varepsilon_{k-1})\right](\varepsilon_k-\varepsilon_{k-1})},{\nonumber}\]</div>
+<div class="math notranslate nohighlight" id="eq-eq-nlin-sec4">
+\[\tag{141}
+=\frac{f^{\prime\prime}(x^*)}{2f^\prime(x^*)}\varepsilon_k\varepsilon_{k-1},\]</div>
+<p>where we have neglected higher powers of <span class="math notranslate nohighlight">\(\varepsilon\)</span>. We are searching for a solution of the form <span class="math notranslate nohighlight">\(\varepsilon_{k+1}=K\varepsilon_k^q\)</span>, <span class="math notranslate nohighlight">\(q\)</span> is the rate of convergence. We can invert this equation to get <span class="math notranslate nohighlight">\(\varepsilon_k=K^{-1/q}\varepsilon_{k+1}^{1/q}\)</span>, or alternatively <span class="math notranslate nohighlight">\(\varepsilon_{k-1}=K^{-1/q}\varepsilon_{k}^{1/q}\)</span> (just set <span class="math notranslate nohighlight">\(k\to k-1\)</span>). Inserting these equations into equation <a class="reference internal" href="#eq-eq-nlin-sec4"><span class="std std-ref">(141)</span></a></p>
+<div class="math notranslate nohighlight" id="eq-eq-nlin-sec5">
+\[\tag{142}
+\varepsilon_k^q=\frac{f^{\prime\prime}(x^*)}{2f^\prime(x^*)}\varepsilon_kK^{-1/q}\varepsilon_{k}^{1/q}.\]</div>
+<p>Clearly, if this equation is to have a solution we must have</p>
+<div class="math notranslate nohighlight" id="eq-auto40">
+\[\tag{143}
+\frac{f^{\prime\prime}(x^*)}{2f^\prime(x^*)}K^{-1/q} =1{\nonumber}\]</div>
+<div class="math notranslate nohighlight" id="eq-auto41">
+\[\tag{144}
+\varepsilon_k^q=\varepsilon_k\varepsilon_{k}^{1/q}=\varepsilon_{k}^{1+1/q},\]</div>
+<p>or <span class="math notranslate nohighlight">\(q=1+1/q\)</span>. Solving this equation we get <span class="math notranslate nohighlight">\(q=(1\pm\sqrt{5})/2\)</span>, neglecting the negative solution, we find the rate of convergence for the secant method <span class="math notranslate nohighlight">\(q=(1+\sqrt{5})/2\simeq 1.618\)</span>.</p>
+</div>
+</div>
 <div class="section" id="newton-rapson-method">
 <h2>Newton Rapson method<a class="headerlink" href="#newton-rapson-method" title="Permalink to this headline">¶</a></h2>
-<p>The derivation of Newtons method, equation <a class="reference internal" href="#eq-eq-nlin-newton"><span class="std std-ref">(112)</span></a>, done in the previous section was based on figure <a class="reference internal" href="#fig-nlin-newton"><span class="std std-ref">Illustration of Newtons method for the van der Waals EOS</span></a>. We will now derive it using a slightly different approach, but which lends itself easier to extend Newtons method to higher dimensions. The starting point is to expand the function around <span class="math notranslate nohighlight">\(x_k\)</span>, using Taylors formula</p>
+<p>The derivation of Newtons method, equation <a class="reference internal" href="#eq-eq-nlin-newton"><span class="std std-ref">(124)</span></a>, done in the previous section was based on figure <a class="reference internal" href="#fig-nlin-newton"><span class="std std-ref">Illustration of Newtons method for the van der Waals EOS</span></a>. We will now derive it using a slightly different approach, but which lends itself easier to extend Newtons method to higher dimensions. The starting point is to expand the function around <span class="math notranslate nohighlight">\(x_k\)</span>, using Taylors formula</p>
 <div class="math notranslate nohighlight" id="eq-eq-nlin-nt">
-\[\tag{118}
+\[\tag{145}
 f(x)=f(x_k)+f^\prime(x_k)(x-x_k) + \cdots\,.\]</div>
-<p>Equation <a class="reference internal" href="#eq-eq-nlin-newton"><span class="std std-ref">(112)</span></a> can be derived from equation <a class="reference internal" href="#eq-eq-nlin-nt"><span class="std std-ref">(118)</span></a> by simply demanding that we keep the linear terms, and that the next point <span class="math notranslate nohighlight">\(x_{k+1}\)</span> is located where the linear approximation intersects the <span class="math notranslate nohighlight">\(x\)</span>-axis, i.e. simply set <span class="math notranslate nohighlight">\(f(x)=0\)</span>, and <span class="math notranslate nohighlight">\(x=x_{k+1}\)</span> in equation <a class="reference internal" href="#eq-eq-nlin-nt"><span class="std std-ref">(118)</span></a>.</p>
-<p>In higher order dimensions, we solve equation <a class="reference internal" href="#eq-eq-nlin-fvec"><span class="std std-ref">(86)</span></a>, and equation <a class="reference internal" href="#eq-eq-nlin-nt"><span class="std std-ref">(118)</span></a> is</p>
+<p>Equation <a class="reference internal" href="#eq-eq-nlin-newton"><span class="std std-ref">(124)</span></a> can be derived from equation <a class="reference internal" href="#eq-eq-nlin-nt"><span class="std std-ref">(145)</span></a> by simply demanding that we keep the linear terms, and that the next point <span class="math notranslate nohighlight">\(x_{k+1}\)</span> is located where the linear approximation intersects the <span class="math notranslate nohighlight">\(x\)</span>-axis, i.e. simply set <span class="math notranslate nohighlight">\(f(x)=0\)</span>, and <span class="math notranslate nohighlight">\(x=x_{k+1}\)</span> in equation <a class="reference internal" href="#eq-eq-nlin-nt"><span class="std std-ref">(145)</span></a>.</p>
+<p>In higher order dimensions, we solve equation <a class="reference internal" href="#eq-eq-nlin-fvec"><span class="std std-ref">(98)</span></a>, and equation <a class="reference internal" href="#eq-eq-nlin-nt"><span class="std std-ref">(145)</span></a> is</p>
 <div class="math notranslate nohighlight" id="eq-eq-nlin-ntd">
-\[\tag{119}
+\[\tag{146}
 \mathbf{f}(\mathbf{x})=\mathbf{f}(\mathbf{x}_k)+ \mathbf{J}(\mathbf{x}_k)(\mathbf{x}-\mathbf{x}_k) + \cdots\,.\]</div>
 <p><span class="math notranslate nohighlight">\(\mathbf{J}(\mathbf{x}_k)\)</span> is the Jacobian. As before, we simply set  <span class="math notranslate nohighlight">\(\mathbf{f}(\mathbf{x})=\mathbf{0}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{x}=\mathbf{x}_{k+1}\)</span>, and keep the linear terms, hence</p>
 <div class="math notranslate nohighlight" id="eq-eq-nlin-ntd2">
-\[\tag{120}
+\[\tag{147}
 \mathbf{x}_{k+1}=\mathbf{x}_k-\mathbf{J}^{-1}(\mathbf{x}_k)\mathbf{f}(\mathbf{x}_k).\]</div>
 <p>To make the mathematics a bit more clear, let us specify to <span class="math notranslate nohighlight">\(2D\)</span>. Assume that
 <span class="math notranslate nohighlight">\(\mathbf{f}(\mathbf{x})=[f_x(x,y),f_y(x,y)]\)</span>, then the Jacobian is</p>
 <div class="math notranslate nohighlight" id="eq-eq-nlin-jac">
-\[\begin{split}\tag{121}
+\[\begin{split}\tag{148}
 \mathbf{J}(\mathbf{x}_k)=
     \left(
     \begin{array}{cc}
@@ -451,35 +535,35 @@ f(x)=f(x_k)+f^\prime(x_k)(x-x_k) + \cdots\,.\]</div>
 <div class="section" id="gradient-descent">
 <h2>Gradient Descent<a class="headerlink" href="#gradient-descent" title="Permalink to this headline">¶</a></h2>
 <p>This method used is to minimize functions (does not work for root finding). In many nonlinear problems, we would like to minimize (or maximize) a function. An ideal 2D example is shown in figure <a class="reference internal" href="#fig-nlin-grad"><span class="std std-ref">A very simple example of the gradient descent method</span></a>. The algorithm moves in the direction of steepest descent. Note that the step size might change towards the search.</p>
-<div class="figure align-default" id="id14">
+<div class="figure align-default" id="id15">
 <span id="fig-nlin-grad"></span><a class="reference internal image-reference" href="_images/steepest_descent.png"><img alt="_images/steepest_descent.png" src="_images/steepest_descent.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-text"><em>A very simple example of the gradient descent method</em></span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text"><em>A very simple example of the gradient descent method</em></span><a class="headerlink" href="#id15" title="Permalink to this image">¶</a></p>
 </div>
 <p>Assume that we have a function <span class="math notranslate nohighlight">\(\mathbf{f}(\mathbf{x})\)</span>, that we would like to minimize. The gradient descent algorithm is simply to update parameters according to the derivative (gradient) of <span class="math notranslate nohighlight">\(\mathbf{f}\)</span></p>
 <div class="math notranslate nohighlight" id="eq-eq-nlin-stpdc">
-\[\tag{122}
+\[\tag{149}
 \mathbf{x}_{k+1}=\mathbf{x}_{k}-\gamma\nabla\mathbf{f}.\]</div>
 <p><span class="math notranslate nohighlight">\(\gamma\)</span> is the learning rate, and a good choice of <span class="math notranslate nohighlight">\(\gamma\)</span> is important. <span class="math notranslate nohighlight">\(\gamma\)</span> might also change from one iteration to the other, and does not have to be constant.</p>
 <div class="section" id="exercise-3-6-gradient-descent-solution-of-linear-regression">
 <h3>Exercise 3.6: Gradient descent solution of linear regression<a class="headerlink" href="#exercise-3-6-gradient-descent-solution-of-linear-regression" title="Permalink to this headline">¶</a></h3>
 <p>A very typical example is if we have a model and we would like to fit some parameters of the model to a data set (e.g. linear regression). Assume that we have observations <span class="math notranslate nohighlight">\((x_i,y_i)\)</span> and model predictions <span class="math notranslate nohighlight">\(f(x_i,\mathbf{\beta})\)</span>, the model parameters are contained in the vector <span class="math notranslate nohighlight">\(\mathbf{\beta}\)</span>. The <em>least square</em>, <span class="math notranslate nohighlight">\(S\)</span>, is the square of the sum of all the <em>residuals</em>, i.e. the difference between the observations and model predictions</p>
 <div class="math notranslate nohighlight" id="eq-eq-nlin-lsq">
-\[\tag{123}
+\[\tag{150}
 S=\sum_i(y_i-f(x_i,\mathbf{\beta}))^2.\]</div>
 <p>Specializing to linear regression, we choose the model to be linear</p>
 <div class="math notranslate nohighlight" id="eq-eq-nlin-lin">
-\[\tag{124}
+\[\tag{151}
 f(x_i,\mathbf{\beta})=b_0+b_1x_i.\]</div>
-<p>Equation <a class="reference internal" href="#eq-eq-nlin-lsq"><span class="std std-ref">(123)</span></a> now takes the form</p>
+<p>Equation <a class="reference internal" href="#eq-eq-nlin-lsq"><span class="std std-ref">(150)</span></a> now takes the form</p>
 <div class="math notranslate nohighlight" id="eq-eq-nlin-lsq2">
-\[\tag{125}
+\[\tag{152}
 S=\sum_i(y_i-b_0+b_1x_i)^2.\]</div>
 <p>The gradients are:</p>
-<div class="math notranslate nohighlight" id="eq-auto31">
-\[\tag{126}
+<div class="math notranslate nohighlight" id="eq-auto42">
+\[\tag{153}
 \frac{\partial S}{\partial b_0}=-2\sum_i(y_i-b_0+b_1x_i),{\nonumber}\]</div>
 <div class="math notranslate nohighlight" id="eq-eq-nlin-dlsq">
-\[\tag{127}
+\[\tag{154}
 \frac{\partial S}{\partial b_1}=-2\sum_i(y_i-b_0+b_1x_i)x_i,.\]</div>
 <ul class="simple">
 <li><p>Implement the gradient descent method using a constant learning rate of <span class="math notranslate nohighlight">\(10^{-3}\)</span>, to minimize the least square function</p></li>
@@ -496,11 +580,10 @@ Below is an implementation of the gradient descent method with a constant learni
 <span class="sd">    prec: desired precision</span>
 
 <span class="sd">    Returns x when it is closer than eps to the root,</span>
-<span class="sd">    unless MAX_ITERATIONS are not exceeded</span>
+<span class="sd">    unless MAXIT are not exceeded</span>
 <span class="sd">    &#39;&#39;&#39;</span>
-    <span class="n">MAX_ITERATIONS</span><span class="o">=</span><span class="n">MAXIT</span>
     <span class="n">x_old</span> <span class="o">=</span> <span class="n">x</span>
-    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">MAX_ITERATIONS</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">MAXIT</span><span class="p">):</span>
         <span class="n">x_new</span> <span class="o">=</span> <span class="n">x_old</span> <span class="o">-</span> <span class="n">g</span><span class="o">*</span><span class="n">df</span><span class="p">(</span><span class="n">x_old</span><span class="p">)</span>
         <span class="k">if</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x_new</span><span class="o">-</span><span class="n">x_old</span><span class="p">))</span><span class="o">&lt;</span><span class="n">prec</span><span class="p">):</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Found solution:&#39;</span><span class="p">,</span> <span class="n">x_new</span><span class="p">,</span>
@@ -516,6 +599,60 @@ Below is an implementation of the gradient descent method with a constant learni
 <p>The linear regression is implemented as below</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x_obs_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">])</span>
 <span class="n">y_obs_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">plot_regression_line</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="n">x_obs_</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y_obs_</span><span class="p">):</span>
+    <span class="k">global</span> <span class="n">N_</span>
+    <span class="c1"># plotting the actual points as scatter plot</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;m&quot;</span><span class="p">,</span>
+               <span class="n">marker</span> <span class="o">=</span> <span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;data&quot;</span><span class="p">)</span>
+
+    <span class="c1"># predicted response vector</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span>
+
+    <span class="c1"># plotting the regression line</span>
+    <span class="k">if</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">):</span>
+<span class="c1">#        plt.plot(x, y_pred, color = &quot;g&quot;, label = &quot;R-squared = {0:.3f}&quot;.format(b[2]))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;iteration:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">N_</span><span class="p">)</span> <span class="o">+</span><span class="s2">&quot;, (b[0],b[1])= (</span><span class="si">{0:.3f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;, </span><span class="si">{0:.3f}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;g&quot;</span><span class="p">)</span>
+
+    <span class="c1"># putting labels</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="c1">#    plt.savefig(&#39;../fig-nlin/stdec&#39;+str(N_)+&#39;.png&#39;, bbox_inches=&#39;tight&#39;,transparent=True)</span>
+    <span class="n">N_</span><span class="o">=</span><span class="n">N_</span><span class="o">+</span><span class="mi">1</span>
+    <span class="c1"># function to show plot</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+
+<span class="k">def</span> <span class="nf">gradient_descent</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">df</span><span class="p">,</span> <span class="n">g</span><span class="o">=.</span><span class="mi">001</span><span class="p">,</span> <span class="n">prec</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span><span class="n">MAXIT</span><span class="o">=</span><span class="mi">10000</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Minimize f(x) by gradient descent.</span>
+<span class="sd">    f   : min(f(x))</span>
+<span class="sd">    x   : starting point</span>
+<span class="sd">    df  : derivative of f(x)</span>
+<span class="sd">    g   : learning rate</span>
+<span class="sd">    prec: desired precision</span>
+
+<span class="sd">    Returns x when it is closer than eps to the root,</span>
+<span class="sd">    unless MAXIT are not exceeded</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">x_old</span> <span class="o">=</span> <span class="n">x</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">MAXIT</span><span class="p">):</span>
+        <span class="n">x_new</span> <span class="o">=</span> <span class="n">x_old</span> <span class="o">-</span> <span class="n">g</span><span class="o">*</span><span class="n">df</span><span class="p">(</span><span class="n">x_old</span><span class="p">)</span>
+        <span class="k">if</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x_new</span><span class="o">-</span><span class="n">x_old</span><span class="p">))</span><span class="o">&lt;</span><span class="n">prec</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Found solution:&#39;</span><span class="p">,</span> <span class="n">x_new</span><span class="p">,</span>
+                  <span class="s1">&#39;, after:&#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="s1">&#39;iterations.&#39;</span> <span class="p">)</span>
+            <span class="k">return</span> <span class="n">x_new</span>
+        <span class="n">x_old</span><span class="o">=</span><span class="n">x_new</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Max number of iterations: &#39;</span><span class="p">,</span> <span class="n">MAXIT</span><span class="p">,</span> <span class="s1">&#39; reached.&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Try to increase MAXIT or decrease prec&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Returning best guess, value of function is: &#39;</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">x_new</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">x_new</span>
+<span class="c1">#end</span>
+
 <span class="k">def</span> <span class="nf">S</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="n">x_obs_</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">y_obs_</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">y</span><span class="o">-</span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 
@@ -527,9 +664,9 @@ Below is an implementation of the gradient descent method with a constant learni
 </pre></div>
 </div>
 <p>The first four iterations are shown in figure <a class="reference internal" href="#fig-nlin-grsc"><span class="std std-ref">First four iterations of the gradient descent solution of linear regression</span></a>. If we choose a learning rate that is too high, we will move past the minimum, and the solution will oscillate. This can be avoided by lowering the learning rate as we iterate, by e.g. replacing <code class="docutils literal notranslate"><span class="pre">g</span></code> with <code class="docutils literal notranslate"><span class="pre">g/(n+1)</span></code> in the implementation above.</p>
-<div class="figure align-default" id="id15">
+<div class="figure align-default" id="id16">
 <span id="fig-nlin-grsc"></span><a class="reference internal image-reference" href="_images/stdec_comb.png"><img alt="_images/stdec_comb.png" src="_images/stdec_comb.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-text"><em>First four iterations of the gradient descent solution of linear regression</em></span><a class="headerlink" href="#id15" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text"><em>First four iterations of the gradient descent solution of linear regression</em></span><a class="headerlink" href="#id16" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 </div>
@@ -537,9 +674,6 @@ Below is an implementation of the gradient descent method with a constant learni
 <h2>Other Useful Methods<a class="headerlink" href="#other-useful-methods" title="Permalink to this headline">¶</a></h2>
 <p>In this chapter we have covered the <em>basic</em>, but you should now be well equipped to dive into other methods. We highly recommend <span id="id6">[Ref5]</span> as a starting point, although the code examples are written in C++, the theory is presented in a very accurate, but informal way.
 * Brents method:  uses root bracketing, bisection, and inverse quadratic interpolation. The 1D method of choice if the function and not its derivative is known</p>
-<ul class="simple">
-<li><p>Secant method: uses linear interpolation to find the root (only function values, not derivatives)</p></li>
-</ul>
 </div>
 </div>
 
@@ -578,10 +712,15 @@ Below is an implementation of the gradient descent method with a constant learni
 <li class="toctree-l3"><a class="reference internal" href="#exercise-3-4-solve-x-e-1-x-2-using-fixed-point-iteration">Exercise 3.4: Solve <span class="math notranslate nohighlight">\(x=e^{1-x^2}\)</span> using fixed point iteration</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#rate-of-convergence">Rate of convergence</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#the-bisection-method">The bisection method</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#newtons-method">Newtons method</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#rate-of-convergence-1">Rate of convergence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-bisection-method">The bisection method</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rate-of-convergence-2">Rate of convergence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rate-of-convergence-3">Rate of convergence</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#exercise-3-5-compare-newtons-bisection-and-the-fixed-point-method">Exercise 3.5: Compare Newtons, Bisection and the Fixed Point method</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#secant-method">Secant method</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rate-of-convergence-4">Rate of convergence</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#newton-rapson-method">Newton Rapson method</a></li>

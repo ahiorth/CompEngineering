@@ -336,7 +336,7 @@ an expression for the first derivative that is accurate to a higher order than t
 f^\prime(x)=\frac{f(x+h)-f(x-h)}{2h} -\frac{h^2}{6}f^{(3)}(\eta),\]</div>
 <div class="math notranslate nohighlight" id="eq-eq-taylor-2der">
 \[\tag{20}
-f^{\prime\prime}(x) = \frac{f(x+h)+f(x-h)-2f(x)}{h^2}+ \frac{h^2}{12}f^{(4)}(\eta)\,\]</div>
+f^{\prime\prime}(x) = \frac{f(x+h)+f(x-h)-2f(x)}{h^2}- \frac{h^2}{12}f^{(4)}(\eta)\,\]</div>
 <p>for some <span class="math notranslate nohighlight">\(\eta\)</span> in <span class="math notranslate nohighlight">\([x,x+h]\)</span>. In figure <a class="reference internal" href="#fig-taylor-df2"><span class="std std-ref">Error in the numerical derivative and second derivative of  \( sin x \)  at  \( x=0.2 \)  for different step size</span></a>, we have plotted equation <a class="reference internal" href="#eq-eq-taylor-derr"><span class="std std-ref">(8)</span></a>, <a class="reference internal" href="#eq-eq-taylor-der2"><span class="std std-ref">(19)</span></a>, and <a class="reference internal" href="#eq-eq-taylor-2der"><span class="std std-ref">(20)</span></a> for
 different step sizes. The derivative in equation <a class="reference internal" href="#eq-eq-taylor-der2"><span class="std std-ref">(19)</span></a>, gives a higher accuracy than equation <a class="reference internal" href="#eq-eq-taylor-derr"><span class="std std-ref">(8)</span></a> for a larger step size,
 as can bee seen in figure <a class="reference internal" href="#fig-taylor-df2"><span class="std std-ref">Error in the numerical derivative and second derivative of  \( sin x \)  at  \( x=0.2 \)  for different step size</span></a>.</p>

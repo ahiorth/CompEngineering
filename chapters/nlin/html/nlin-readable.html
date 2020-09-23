@@ -74,20 +74,24 @@ code { color: inherit; background-color: transparent; }
                '___sec8'),
               ('Rate of convergence', 1, None, '___sec9'),
               ('The bisection method', 1, None, '___sec10'),
-              ('Newtons method', 1, None, '___sec11'),
+              ('Rate of convergence', 2, None, '___sec11'),
+              ('Newtons method', 1, None, '___sec12'),
+              ('Rate of convergence', 2, None, '___sec13'),
               ('Exercise 5: Compare Newtons, Bisection and the Fixed Point '
                'method',
                2,
                None,
-               '___sec12'),
-              ('Newton Rapson method', 1, None, '___sec13'),
-              ('Gradient Descent', 1, None, '___sec14'),
+               '___sec14'),
+              ('Secant method', 1, None, '___sec15'),
+              ('Rate of convergence', 2, None, '___sec16'),
+              ('Newton Rapson method', 1, None, '___sec17'),
+              ('Gradient Descent', 1, None, '___sec18'),
               ('Exercise 6: Gradient descent solution of linear regression',
                2,
                None,
-               '___sec15'),
-              ('Other Useful Methods', 1, None, '___sec16'),
-              ('References', 1, None, '___sec17')]}
+               '___sec19'),
+              ('Other Useful Methods', 1, None, '___sec20'),
+              ('References', 1, None, '___sec21')]}
 end of tocinfo -->
 
 <body>
@@ -143,13 +147,17 @@ $$
      <!-- navigation toc: --> <li><a href="#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 4: Solve \( x=e^{1-x^2} \) using fixed point iteration</a></li>
      <!-- navigation toc: --> <li><a href="#___sec9" style="font-size: 80%;"><b>Rate of convergence</b></a></li>
      <!-- navigation toc: --> <li><a href="#___sec10" style="font-size: 80%;"><b>The bisection method</b></a></li>
-     <!-- navigation toc: --> <li><a href="#___sec11" style="font-size: 80%;"><b>Newtons method</b></a></li>
-     <!-- navigation toc: --> <li><a href="#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 5: Compare Newtons, Bisection and the Fixed Point method</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec13" style="font-size: 80%;"><b>Newton Rapson method</b></a></li>
-     <!-- navigation toc: --> <li><a href="#___sec14" style="font-size: 80%;"><b>Gradient Descent</b></a></li>
-     <!-- navigation toc: --> <li><a href="#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 6: Gradient descent solution of linear regression</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec16" style="font-size: 80%;"><b>Other Useful Methods</b></a></li>
-     <!-- navigation toc: --> <li><a href="#___sec17" style="font-size: 80%;"><b>References</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec12" style="font-size: 80%;"><b>Newtons method</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 5: Compare Newtons, Bisection and the Fixed Point method</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec15" style="font-size: 80%;"><b>Secant method</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec17" style="font-size: 80%;"><b>Newton Rapson method</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec18" style="font-size: 80%;"><b>Gradient Descent</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 6: Gradient descent solution of linear regression</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec20" style="font-size: 80%;"><b>Other Useful Methods</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec21" style="font-size: 80%;"><b>References</b></a></li>
 
         </ul>
       </li>
@@ -183,7 +191,7 @@ $$
 <br>
 University of Stavanger
 <p>
-<center><h4>Aug 31, 2020</h4></center> <!-- date -->
+<center><h4>Sep 23, 2020</h4></center> <!-- date -->
 <br>
 <p>
 </div> <!-- end jumbotron -->
@@ -202,13 +210,17 @@ University of Stavanger
 &nbsp; &nbsp; &nbsp; <a href="#___sec8"> Exercise 4: Solve \( x=e^{1-x^2} \) using fixed point iteration </a><br>
 <a href="#___sec9"> Rate of convergence </a><br>
 <a href="#___sec10"> The bisection method </a><br>
-<a href="#___sec11"> Newtons method </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec12"> Exercise 5: Compare Newtons, Bisection and the Fixed Point method </a><br>
-<a href="#___sec13"> Newton Rapson method </a><br>
-<a href="#___sec14"> Gradient Descent </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec15"> Exercise 6: Gradient descent solution of linear regression </a><br>
-<a href="#___sec16"> Other Useful Methods </a><br>
-<a href="#___sec17"> References </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec11"> Rate of convergence </a><br>
+<a href="#___sec12"> Newtons method </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec13"> Rate of convergence </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec14"> Exercise 5: Compare Newtons, Bisection and the Fixed Point method </a><br>
+<a href="#___sec15"> Secant method </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec16"> Rate of convergence </a><br>
+<a href="#___sec17"> Newton Rapson method </a><br>
+<a href="#___sec18"> Gradient Descent </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec19"> Exercise 6: Gradient descent solution of linear regression </a><br>
+<a href="#___sec20"> Other Useful Methods </a><br>
+<a href="#___sec21"> References </a><br>
 </p>
 <p>
 <!-- Common Mako variables and functions -->
@@ -223,11 +235,14 @@ University of Stavanger
 In this chapter we will cover some theory related to the solution of nonlinear equations, and introduce the most used methods. A nonlinear problem is represented as a single equation or a system of equations, where the response is not changing proportionally to the input.  Almost all physical systems are nonlinear, and one frequent use of the methods presented in this chapter is to determine model parameters by matching a nonlinear model to data.
 
 <p>
-<!-- For one dimensional problems we will cover: fixed point iteration, bisection, Newton's method, and the secant method. -->
-<!-- For  multidimensional problems we will cover Newton-Rapson method, which is a direct extension of Newton's method in one -->
-<!-- dimension, and the steepest decent. The main challenge is that there are (usually) more than one solution, the solution that -->
-<!-- <em>you</em> want for a specific problem is usually dictated by the underlying physics. If computational speed is not an issue, the -->
-<!-- method of choice is usually the bisection method. It is guaranteed to give an answer, but it might be slow. If speed is an issue, usually Newton's or the secant method will be the fastest (but it depends on the starting point). The secant method is sometimes preferred if the derivative of the function is costly to evaluate. -->
+Numerical methods that is guaranteed to find a solution (if it exists) are called <em>closed methods</em>, and <em>open</em> other vise. In many cases the closed methods requires more iterations for well behaved functions than the open methods. For one dimensional problems we will cover: fixed point iteration, bisection, Newton's method, and the secant method.
+For  multidimensional problems we will cover Newton-Rapson method, which is a direct extension of Newton's method in one
+dimension, and the steepest decent. The main challenge is that there are (usually) more than one solution, the solution that
+<em>you</em> want for a specific problem is usually dictated by the underlying physics. If computational speed is not an issue, the
+ method of choice is usually the bisection method. It is guaranteed to give an answer, but it might be slow. If speed is an issue, usually Newton's or the secant method will be the fastest (but it depends on the starting point). The secant method is sometimes preferred if the derivative of the function is costly to evaluate. Brents method is a method that combine the secant and bisection method (not covered), and is guaranteed to find a solution if the root is bracketed.
+
+<p>
+In many practical, engineering, applications one usually implements some of the methods described below directly inside functions. This is because it is usually faster than calling a separate all purpose nonlinear solver, and that one usually has a very good idea of what a good starting point for the nonlinear solver is.
 
 <h1 id="___sec0" class="anchor">Nonlinear equations  </h1>
 A nonlinear equation is simply an equation that is not linear. That means that when the variables changes the response is not changing proportional to the values of the variables. Solving a nonlinear equation always proceeds by <em>iterations</em>, we start with one or several initial guesses and then search for the solution. In many cases we do not know beforehand if the equation actually has a solution, or multiple solutions. An example of a nonlinear problem is:
@@ -652,7 +667,7 @@ It takes about 30 iterations to reach the correct solution \( y^*=1 \), when the
 The rate of convergence is the speed at which a <em>convergent</em> sequence approach the limit. Assume that our sequence \( x_{k} \) converges to the number \( x^* \), the sequence is said to <em>converge linearly</em> to \( x^* \) if there exists a number \( \mu\in < 0,1> \), such that
 $$
 \begin{equation}
-\lim{k\to\infty}=\frac{|x_{k+1}-x^*|}{|x_k-x^*|}=\mu
+\lim_{k\to\infty}=\frac{|x_{k+1}-x^*|}{|x_k-x^*|}=\mu
 \tag{21}
 \end{equation}
 $$
@@ -660,7 +675,7 @@ $$
 Inserting equation <a href="#mjx-eqn-15">(15)</a> in equation <a href="#mjx-eqn-21">(21)</a>, we get:
 $$
 \begin{equation}
-\lim{k\to\infty}=\frac{|x_{k+1}-x_k|}{x_k-x^*}
+\lim_{k\to\infty}=\frac{|x_{k+1}-x_k|}{x_k-x^*}
 =\frac{|g^\prime(x^*)(x_k-x^*)|}{|x_k-x^*|}=|g^\prime(x^*)|.
 \tag{22}
 \end{equation}
@@ -669,7 +684,7 @@ $$
 Hence the fixed point iteration is expected to converge <em>linearly</em> to the correct solution. The definition in equation <a href="#mjx-eqn-21">(21)</a>, can be extended to include the definition of quadratic, cubic, etc. convergence:
 $$
 \begin{equation}
-\lim{k\to\infty}=\frac{|x_{k+1}-x^*|}{|x_k-x^*|^q}=\mu.
+\lim_{k\to\infty}=\frac{|x_{k+1}-x^*|}{|x_k-x^*|^q}=\mu.
 \tag{23}
 \end{equation}
 $$
@@ -695,23 +710,8 @@ The algorithm is as follows:
 <li> Half the interval, and test in which interval the root lies, and continue until a convergence criterion.</li>
 </ul>
 
-In figure <a href="#fig:nlin:bisection">4</a>, a graphical illustration of the method is shown. If \( c_n \) is the midpoint after \( n \) steps, the difference between the solution \( x^* \) and \( c_n \) is
-$$
-\begin{equation}
-|c_n-x^*| \le \frac{|b-a|}{2^n}
-\tag{24}
-\end{equation}
-$$
-
-Using our previous definition in equation <a href="#mjx-eqn-23">(23)</a>, we find that
-$$
-\begin{equation}
-\lim{k\to\infty}=\frac{|c_{k+1}-x^*|}{|c_k-x^*|}\le\frac{|b-a|/2^{n+1}}{|b-a|/2^n}=\frac{1}{2},
-\tag{25}
-\end{equation}
-$$
-
-hence the bisection method converges linearly. Below is an implementation of the bisection method.
+In figure <a href="#fig:nlin:bisection">4</a>, there is a graphical illustration.
+Below is an implementation of the bisection method.
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
@@ -723,17 +723,18 @@ hence the bisection method converges linearly. Below is an implementation of the
 <span style="color: #BA2121; font-style: italic">    eps : desired precision</span>
 <span style="color: #BA2121; font-style: italic">    </span>
 <span style="color: #BA2121; font-style: italic">    Returns the midpoint when it is closer than eps to the root, </span>
-<span style="color: #BA2121; font-style: italic">    unless MAX_ITERATIONS are not exceeded</span>
+<span style="color: #BA2121; font-style: italic">    unless MAXIT are not exceeded</span>
 <span style="color: #BA2121; font-style: italic">    &#39;&#39;&#39;</span>
-    MAX_ITERATIONS<span style="color: #666666">=</span>MAXIT
     <span style="color: #008000; font-weight: bold">if</span> f(a)<span style="color: #666666">*</span>f(b) <span style="color: #666666">&gt;=</span> <span style="color: #666666">0</span>:
         <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;You need to bracket the root, f(a)*f(b) &gt;= 0&#39;</span>)
         <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">None</span>
     an <span style="color: #666666">=</span> a
     bn <span style="color: #666666">=</span> b
-    c_old <span style="color: #666666">=</span> <span style="color: #666666">0.5*</span>(an <span style="color: #666666">+</span> bn)
-    <span style="color: #008000; font-weight: bold">for</span> n <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(MAX_ITERATIONS):
-        cn <span style="color: #666666">=</span> c_old 
+    cn <span style="color: #666666">=</span> <span style="color: #666666">0.5*</span>(an <span style="color: #666666">+</span> bn)
+    c_old <span style="color: #666666">=</span> cn <span style="color: #666666">-</span> <span style="color: #666666">10*</span>prec
+    n<span style="color: #666666">=0</span>
+    <span style="color: #008000; font-weight: bold">while</span> np<span style="color: #666666">.</span>abs(cn<span style="color: #666666">-</span>c_old)<span style="color: #666666">&gt;=</span>prec <span style="color: #AA22FF; font-weight: bold">and</span> n<span style="color: #666666">&lt;</span>MAXIT:
+        c_old <span style="color: #666666">=</span> cn 
         f_cn <span style="color: #666666">=</span> f(cn)
         <span style="color: #008000; font-weight: bold">if</span> f(an)<span style="color: #666666">*</span>f_cn <span style="color: #666666">&lt;</span> <span style="color: #666666">0</span>:
             bn <span style="color: #666666">=</span> cn
@@ -747,15 +748,15 @@ hence the bisection method converges linearly. Below is an implementation of the
             <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Bisection method fails.&#39;</span>)
             <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">None</span>
         cn <span style="color: #666666">=</span> <span style="color: #666666">0.5*</span>(an<span style="color: #666666">+</span>bn)
-        <span style="color: #008000; font-weight: bold">if</span>(<span style="color: #008000">abs</span>(cn<span style="color: #666666">-</span>c_old)<span style="color: #666666">&lt;</span>prec):
-            <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Found solution &#39;</span>, cn, 
-                  <span style="color: #BA2121">&#39; after &#39;</span>, n, <span style="color: #BA2121">&#39;iterations&#39;</span> )
-            <span style="color: #008000; font-weight: bold">return</span> cn
-        c_old<span style="color: #666666">=</span>cn
-    <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Max number of iterations: &#39;</span>, MAXIT, <span style="color: #BA2121">&#39; reached.&#39;</span>) 
-    <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Try to increase MAXIT or decrease prec&#39;</span>)
-    <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Returning best guess, value of function is: &#39;</span>, f_cn)
-    <span style="color: #008000; font-weight: bold">return</span> cn
+        n <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+    <span style="color: #008000; font-weight: bold">if</span> n<span style="color: #666666">&lt;</span>MAXIT<span style="color: #666666">-1</span>:
+        <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Found solution &#39;</span>, cn,<span style="color: #BA2121">&#39; after &#39;</span>, n, <span style="color: #BA2121">&#39;iterations&#39;</span> )
+        <span style="color: #008000; font-weight: bold">return</span> cn
+    <span style="color: #008000; font-weight: bold">else</span>:
+        <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Max number of iterations: &#39;</span>, MAXIT, <span style="color: #BA2121">&#39; reached.&#39;</span>) 
+        <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Try to increase MAXIT or decrease prec&#39;</span>)
+        <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Returning best guess, value of function is: &#39;</span>, f_cn)
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">None</span>
 </pre></div>
 <p>
 <div class="alert alert-block alert-success alert-text-normal"><b>Warnings.</b>
@@ -763,7 +764,26 @@ Note that the implementation of the bisection algorithm is only a few lines of c
 </div>
 
 
-<h1 id="___sec11" class="anchor">Newtons method </h1>
+<h2 id="___sec11" class="anchor">Rate of convergence </h2>
+If \( c_n \) is the midpoint after \( n \) steps, the difference between the solution \( x^* \) and \( c_n \) is
+$$
+\begin{equation}
+|c_n-x^*| \le \frac{|b-a|}{2^n}
+\tag{24}
+\end{equation}
+$$
+
+Using our previous definition in equation <a href="#mjx-eqn-23">(23)</a>, we find that
+$$
+\begin{equation}
+\lim_{k\to\infty}=\frac{|c_{k+1}-x^*|}{|c_k-x^*|}\le\frac{|b-a|/2^{n+1}}{|b-a|/2^n}=\frac{1}{2},
+\tag{25}
+\end{equation}
+$$
+
+hence the bisection method converges linearly.
+
+<h1 id="___sec12" class="anchor">Newtons method </h1>
 Newtons method is one of the most used methods. If it converges, it converges quadratically to the correct solution. The drawback is that contrary to the bisection method it may fail if a bad starting point is given. Newtons method for finding the root of a function \( f(x)=0 \) is illustrated in figure <a href="#fig:nlin:newton">5</a>. The main idea is to use more information about the function in the search of the root. In this case we want to find the point where the tangent of the function in \( x_k \) intersect the $x-$axis, and take that as our next point, \( x_{k+1} \).
 
 <p>
@@ -782,7 +802,7 @@ x_{k+1}=x_k-\frac{f(x_k)}{f^\prime(x_k)}.
 \end{equation}
 $$
 
-Note that the derivative of \( f(x) \) enters in equation <a href="#mjx-eqn-26">(26)</a>, which means that if our function has a extremal value in our search domain, Newtons method most likely will fail. In particular \( x_1 \), and \( x_4 \) in the figure to the right in figure <a href="#fig:nlin:newton2">6</a> are bad starting point for Newtons method. Newtons method
+Note that the derivative of \( f(x) \) enters in equation <a href="#mjx-eqn-26">(26)</a>, which means that if our function has a extremal value in our search domain, Newtons method most likely will fail. In particular \( x_1 \), and \( x_4 \) in the figure to the right in figure <a href="#fig:nlin:newton2">6</a> are bad starting point for Newtons method.
 
 <p>
 <center> <!-- figure label: --> <div id="fig:nlin:newton2"></div> <!-- FIGURE -->
@@ -792,7 +812,40 @@ Note that the derivative of \( f(x) \) enters in equation <a href="#mjx-eqn-26">
 </center>
 
 <p>
-Before we show how to implement Newtons method, let us first investigate the convergence and rate of convergence. Comparing figure <a href="#fig:nlin:bisection">4</a> and <a href="#fig:nlin:newton">5</a>, you immediately get the sense that Newtons method converges faster. Newtons method is similar to the fixed point method, but where we do not use \( g(x)=x-f(x) \), but \( g(x)=x-\frac{f(x)}{f^\prime(x)} \). We will now analyze Newtons method, using the same approach as in the section <a href="#sec:nlin:fp">When do the fixed point method fail?</a>. First we expand \( g(x) \) around the root \( x^* \)
+An implementation is shown below.
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">newton</span>(f,x, prec<span style="color: #666666">=1e-8</span>,MAXIT<span style="color: #666666">=500</span>):
+    <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;Approximate solution of f(x)=0 by Newtons method.</span>
+<span style="color: #BA2121; font-style: italic">    The derivative of the function is calculated numerically</span>
+<span style="color: #BA2121; font-style: italic">    f   : f(x)=0.</span>
+<span style="color: #BA2121; font-style: italic">    x   : starting point  </span>
+<span style="color: #BA2121; font-style: italic">    eps : desired precision</span>
+<span style="color: #BA2121; font-style: italic">    </span>
+<span style="color: #BA2121; font-style: italic">    Returns x when it is closer than eps to the root, </span>
+<span style="color: #BA2121; font-style: italic">    unless MAX_ITERATIONS are not exceeded</span>
+<span style="color: #BA2121; font-style: italic">    &#39;&#39;&#39;</span>
+    MAX_ITERATIONS<span style="color: #666666">=</span>MAXIT
+    x_old <span style="color: #666666">=</span> x
+    h     <span style="color: #666666">=</span> <span style="color: #666666">1e-4</span>
+    <span style="color: #008000; font-weight: bold">for</span> n <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(MAX_ITERATIONS):
+        x_new <span style="color: #666666">=</span> x_old <span style="color: #666666">-</span> <span style="color: #666666">2*</span>h<span style="color: #666666">*</span>f(x_old)<span style="color: #666666">/</span>(f(x_old<span style="color: #666666">+</span>h)<span style="color: #666666">-</span>f(x_old<span style="color: #666666">-</span>h))
+        <span style="color: #008000; font-weight: bold">if</span>(<span style="color: #008000">abs</span>(x_new<span style="color: #666666">-</span>x_old)<span style="color: #666666">&lt;</span>prec):
+            <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Found solution:&#39;</span>, x_new, 
+                  <span style="color: #BA2121">&#39;, after:&#39;</span>, n, <span style="color: #BA2121">&#39;iterations.&#39;</span> )
+            <span style="color: #008000; font-weight: bold">return</span> x_new
+        x_old<span style="color: #666666">=</span>x_new
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Max number of iterations: &#39;</span>, MAXIT, <span style="color: #BA2121">&#39; reached.&#39;</span>) 
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Try to increase MAXIT or decrease prec&#39;</span>)
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Returning best guess, value of function is: &#39;</span>, f(x_new))
+    <span style="color: #008000; font-weight: bold">return</span> x_new
+</pre></div>
+<p>
+Comparing figure <a href="#fig:nlin:bisection">4</a> and <a href="#fig:nlin:newton">5</a>, you immediately get the sense that Newtons method converges faster, and indeed it does.
+
+<h2 id="___sec13" class="anchor">Rate of convergence </h2>
+ Newtons method is similar to the fixed point method, but where we do not use \( g(x)=x-f(x) \), but \( g(x)=x-\frac{f(x)}{f^\prime(x)} \). We will now analyze Newtons method, using the same approach as in the section <a href="#sec:nlin:fp">When do the fixed point method fail?</a>. First we expand \( g(x) \) around the root \( x^* \)
 $$
 \begin{equation}
 x_{k+1}=g(x_k)=g(x^*)+g^\prime(x^*)(x_k-x^*)+\frac{1}{2}g^{\prime\prime}(x^*)(x_k-x^*)^2,
@@ -827,39 +880,12 @@ $$
 \end{equation}
 $$
 
-The denominator has a power of two, and hence Newtons method is <em>quadratic</em> convergent (assuming that the sequence \( x_{k+1} \) is a convergent sequence). Note that it also follows from the analyses above that Newtons method will fail if the derivative at the root, \( f^\prime(x^*) \), is zero. An implementation is shown below.
-<p>
+The denominator has a power of two, and hence Newtons method is <em>quadratic</em> convergent (assuming that the sequence \( x_{k+1} \) is a convergent sequence). Note that it also follows from the analyses above that Newtons method will fail if the derivative at the root, \( f^\prime(x^*) \), is zero.
 
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">newton</span>(f,x, prec<span style="color: #666666">=1e-8</span>,MAXIT<span style="color: #666666">=500</span>):
-    <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;Approximate solution of f(x)=0 by Newtons method.</span>
-<span style="color: #BA2121; font-style: italic">    The derivative of the function is calculated numerically</span>
-<span style="color: #BA2121; font-style: italic">    f   : f(x)=0.</span>
-<span style="color: #BA2121; font-style: italic">    x   : starting point  </span>
-<span style="color: #BA2121; font-style: italic">    eps : desired precision</span>
-<span style="color: #BA2121; font-style: italic">    </span>
-<span style="color: #BA2121; font-style: italic">    Returns x when it is closer than eps to the root, </span>
-<span style="color: #BA2121; font-style: italic">    unless MAX_ITERATIONS are not exceeded</span>
-<span style="color: #BA2121; font-style: italic">    &#39;&#39;&#39;</span>
-    MAX_ITERATIONS<span style="color: #666666">=</span>MAXIT
-    x_old <span style="color: #666666">=</span> x
-    h     <span style="color: #666666">=</span> <span style="color: #666666">1e-4</span>
-    <span style="color: #008000; font-weight: bold">for</span> n <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(MAX_ITERATIONS):
-        x_new <span style="color: #666666">=</span> x_old <span style="color: #666666">-</span> <span style="color: #666666">2*</span>h<span style="color: #666666">*</span>f(x_old)<span style="color: #666666">/</span>(f(x_old<span style="color: #666666">+</span>h)<span style="color: #666666">-</span>f(x_old<span style="color: #666666">-</span>h))
-        <span style="color: #008000; font-weight: bold">if</span>(<span style="color: #008000">abs</span>(x_new<span style="color: #666666">-</span>x_old)<span style="color: #666666">&lt;</span>prec):
-            <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Found solution:&#39;</span>, x_new, 
-                  <span style="color: #BA2121">&#39;, after:&#39;</span>, n, <span style="color: #BA2121">&#39;iterations.&#39;</span> )
-            <span style="color: #008000; font-weight: bold">return</span> x_new
-        x_old<span style="color: #666666">=</span>x_new
-    <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Max number of iterations: &#39;</span>, MAXIT, <span style="color: #BA2121">&#39; reached.&#39;</span>) 
-    <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Try to increase MAXIT or decrease prec&#39;</span>)
-    <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Returning best guess, value of function is: &#39;</span>, f(x_new))
-    <span style="color: #008000; font-weight: bold">return</span> x_new
-</pre></div>
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="___sec12" class="anchor">Exercise 5: Compare Newtons, Bisection and the Fixed Point method </h2>
+<h2 id="___sec14" class="anchor">Exercise 5: Compare Newtons, Bisection and the Fixed Point method </h2>
 
 <p>
 Find the root of \( f(x)=x^2-e^{-x} \) using bisection, fixed point,  and Newtons method, start at \( x=0 \). How many iterations do you need to use reach a precision of \( 10^{-8} \)? What happens if you widen the search domain or start further away from the root?
@@ -908,23 +934,106 @@ Note that it is not given which method is best, but if we are ''close'' to the r
 <p>
 <!-- --- end exercise --- -->
 
-<h1 id="___sec13" class="anchor">Newton Rapson method </h1>
-The derivation of Newtons method, equation <a href="#mjx-eqn-26">(26)</a>, done in the previous section was based on figure <a href="#fig:nlin:newton">5</a>. We will now derive it using a slightly different approach, but which lends itself easier to extend Newtons method to higher dimensions. The starting point is to expand the function around \( x_k \), using Taylors formula
+<h1 id="___sec15" class="anchor">Secant method </h1>
+The Newtons method is very good if you can choose a good starting point, and you can give in an analytical formula for the derivative. In some cases it is not possible to calculate the derivative analytically, then a very good method of choice is the secant method. It can be derived by simply replacing the derivative in Newtons method by the finite difference approximation
 $$
 \begin{equation}
-f(x)=f(x_k)+f^\prime(x_k)(x-x_k) + \cdots\,.
+f^\prime(x_k)\to \frac{f(x_k)-f(x_{k-1})}{x_k-x_{k-1}}.
 \tag{32}
 \end{equation}
 $$
 
-Equation <a href="#mjx-eqn-26">(26)</a> can be derived from equation <a href="#mjx-eqn-32">(32)</a> by simply demanding that we keep the linear terms, and that the next point \( x_{k+1} \) is located where the linear approximation intersects the \( x \)-axis, i.e. simply set \( f(x)=0 \), and \( x=x_{k+1} \) in equation <a href="#mjx-eqn-32">(32)</a>.
+Inserting this equation into equation <a href="#mjx-eqn-26">(26)</a>, we get
+$$
+\begin{align}
+x_{k+1}&=x_k-f(x_k)\frac{x_k-x_{k-1}}{f(x_k)-f(x_{k-1})}\no
+\tag{33}\\ 
+       &=\frac{x_{k-1}f(x_k)-x_kf(x_{k-1})}{f(x_k)-f(x_{k-1})}. \tag{34}
+\end{align}
+$$
+
+For a graphical illustration see figure <a href="#fig:nlin:secant">8</a>
 
 <p>
-In higher order dimensions, we solve equation <a href="#mjx-eqn-3">(3)</a>, and equation <a href="#mjx-eqn-32">(32)</a> is
+<center> <!-- figure label: --> <div id="fig:nlin:secant"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 8:  A graphical illustration of the secant method. Note that the starting points \( x_0 \) and \( x_1 \) do not need to be close. The next point is where the (secant) line crosses the \( x \)-axis.  <!-- caption label: fig:nlin:secant --> </p></center>
+<p><img src="fig-nlin/secant.png" align="bottom" width=400></p>
+</center>
+
+<h2 id="___sec16" class="anchor">Rate of convergence </h2>
+The derivation of the rate of convergence for the secant method is a bit more involved. To simplify the notation we introduce the notation \( \varepsilon_k\equiv x_k-x^* \), where \( x^* \) is the exact solution. Subtracting \( x^* \) from each side of equation <a href="#mjx-eqn-34">(34)</a> we get
+$$
+\begin{align}
+\varepsilon_{k+1}&=x_{k+1}-x^*=\frac{x_{k-1}f(x_k)-x_kf(x_{k-1})}{f(x_k)-f(x_{k-1})}-x^*, \no
+\tag{35}\\ 
+\varepsilon_{k+1}&=\frac{\varepsilon_{k-1}f(x_k)-\varepsilon_k f(x_{k-1})}{f(x_k)-f(x_{k-1})},
+\tag{36}
+\end{align}
+$$
+
+we now make a Taylor expansion of \( f(x_k) \) and \( f(x_{k-1}) \) about the root \( x^* \)
+$$
+\begin{align}
+f(x_k) &=f(x^*)+f^\prime(x^*)(x_k-x^*)+\frac{1}{2}f^{\prime\prime}(x^*)(x_k-x^*)^2+\cdots ,\no
+\tag{37}\\ 
+       &=f^\prime(x^*)\varepsilon_k+\frac{1}{2}f^{\prime\prime}(x^*)\varepsilon_k^2+\cdots .
+\tag{38}\\ 
+f(x_{k-1}) &=f(x^*)+f^\prime(x^*)(x_{k-1}-x^*)+\frac{1}{2}f^{\prime\prime}(x^*)(x_{k-1}-x^*)^2+\cdots,\no
+\tag{39}\\ 
+       &=f^\prime(x^*)\varepsilon_{k-1}+\frac{1}{2}f^{\prime\prime}(x^*)\varepsilon_{k-1}^2+\cdots ,
+\tag{40}
+\end{align}
+$$
+
+where we have used the fact that \( f(x^*)=0 \). Inserting these equations into equation <a href="#mjx-eqn-36">(36)</a> and neglecting terms of order \( \varepsilon_k^3 \) we get
+$$
+\begin{align}
+\varepsilon_{k+1}&=\frac{\varepsilon_{k-1}\left[f^\prime(x^*)\varepsilon_k+\frac{1}{2}f^{\prime\prime}(x^*)\varepsilon_k^2\right] -\varepsilon_k\left[ f^\prime(x^*)\varepsilon_{k-1}+\frac{1}{2}f^{\prime\prime}(x^*)\varepsilon_{k-1}^2\right]}{f^\prime(x^*)\varepsilon_k+\frac{1}{2}f^{\prime\prime}(x^*)\varepsilon_k^2-\left[ f^\prime(x^*)\varepsilon_{k-1}+\frac{1}{2}f^{\prime\prime}(x^*)\varepsilon_{k-1}^2\right]},\no
+\tag{41}\\ 
+&=\frac{\varepsilon_k\varepsilon_{k-1}\left[\varepsilon_k-\varepsilon_{k-1}\right]}{\left[f^\prime(x^*)+\frac{1}{2}f^{\prime\prime}(x^*)(\varepsilon_k+\varepsilon_{k-1})\right](\varepsilon_k-\varepsilon_{k-1})},\no
+\tag{42}\\ 
+&=\frac{f^{\prime\prime}(x^*)}{2f^\prime(x^*)}\varepsilon_k\varepsilon_{k-1},label{eq:nlin:sec4}
+\end{align}
+$$
+
+where we have neglected higher powers of \( \varepsilon \). We are searching for a solution of the form \( \varepsilon_{k+1}=K\varepsilon_k^q \), \( q \) is the rate of convergence. We can invert this equation to get \( \varepsilon_k=K^{-1/q}\varepsilon_{k+1}^{1/q} \), or alternatively \( \varepsilon_{k-1}=K^{-1/q}\varepsilon_{k}^{1/q} \) (just set \( k\to k-1 \)). Inserting these equations into equation \eqref{eq:nlin:sec4}
+$$
+\begin{equation}
+\varepsilon_k^q=\frac{f^{\prime\prime}(x^*)}{2f^\prime(x^*)}\varepsilon_kK^{-1/q}\varepsilon_{k}^{1/q}.
+\tag{43}
+\end{equation}
+$$
+
+Clearly, if this equation is to have a solution we must have
+$$
+\begin{align}
+\frac{f^{\prime\prime}(x^*)}{2f^\prime(x^*)}K^{-1/q} &=1\no
+\tag{44}\\ 
+\varepsilon_k^q=\varepsilon_k\varepsilon_{k}^{1/q}=\varepsilon_{k}^{1+1/q},
+\tag{45}
+\end{align}
+$$
+
+or \( q=1+1/q \). Solving this equation we get \( q=(1\pm\sqrt{5})/2 \), neglecting the negative solution, we find the rate of convergence for the secant method \( q=(1+\sqrt{5})/2\simeq 1.618 \).
+
+<h1 id="___sec17" class="anchor">Newton Rapson method </h1>
+The derivation of Newtons method, equation <a href="#mjx-eqn-26">(26)</a>, done in the previous section was based on figure <a href="#fig:nlin:newton">5</a>. We will now derive it using a slightly different approach, but which lends itself easier to extend Newtons method to higher dimensions. The starting point is to expand the function around \( x_k \), using Taylors formula
+$$
+\begin{equation}
+f(x)=f(x_k)+f^\prime(x_k)(x-x_k) + \cdots\,.
+\tag{46}
+\end{equation}
+$$
+
+Equation <a href="#mjx-eqn-26">(26)</a> can be derived from equation <a href="#mjx-eqn-46">(46)</a> by simply demanding that we keep the linear terms, and that the next point \( x_{k+1} \) is located where the linear approximation intersects the \( x \)-axis, i.e. simply set \( f(x)=0 \), and \( x=x_{k+1} \) in equation <a href="#mjx-eqn-46">(46)</a>.
+
+<p>
+In higher order dimensions, we solve equation <a href="#mjx-eqn-3">(3)</a>, and equation <a href="#mjx-eqn-46">(46)</a> is
 $$
 \begin{equation}
 \mathbf{f}(\mathbf{x})=\mathbf{f}(\mathbf{x}_k)+ \mathbf{J}(\mathbf{x}_k)(\mathbf{x}-\mathbf{x}_k) + \cdots\,.
-\tag{33}
+\tag{47}
 \end{equation}
 $$
 
@@ -932,7 +1041,7 @@ $$
 $$
 \begin{equation}
 \mathbf{x}_{k+1}=\mathbf{x}_k-\mathbf{J}^{-1}(\mathbf{x}_k)\mathbf{f}(\mathbf{x}_k). 
-\tag{34}
+\tag{48}
 \end{equation}
 $$
 
@@ -947,19 +1056,19 @@ $$
 \frac{\partial f_y}{\partial x}&\frac{\partial f_y}{\partial y}
 \end{array}
 \right).
-\tag{35}
+\tag{49}
 \end{equation}
 $$
 
-<h1 id="___sec14" class="anchor">Gradient Descent </h1>
+<h1 id="___sec18" class="anchor">Gradient Descent </h1>
 
 <p>
-This method used is to minimize functions (does not work for root finding). In many nonlinear problems, we would like to minimize (or maximize) a function. An ideal 2D example is shown in figure <a href="#fig:nlin:grad">8</a>. The algorithm moves in the direction of steepest descent. Note that the step size might change towards the search.
+This method used is to minimize functions (does not work for root finding). In many nonlinear problems, we would like to minimize (or maximize) a function. An ideal 2D example is shown in figure <a href="#fig:nlin:grad">9</a>. The algorithm moves in the direction of steepest descent. Note that the step size might change towards the search.
 
 <p>
 <center> <!-- figure label: --> <div id="fig:nlin:grad"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 8:  A very simple example of the gradient descent method.  <!-- caption label: fig:nlin:grad --> </p></center>
+<center><p class="caption">Figure 9:  A very simple example of the gradient descent method.  <!-- caption label: fig:nlin:grad --> </p></center>
 <p><img src="fig-nlin/steepest_descent.png" align="bottom" width=400></p>
 </center>
 
@@ -968,7 +1077,7 @@ Assume that we have a function \( \mathbf{f}(\mathbf{x}) \), that we would like 
 $$
 \begin{equation}
 \mathbf{x}_{k+1}=\mathbf{x}_{k}-\gamma\nabla\mathbf{f}.
-\tag{36}
+\tag{50}
 \end{equation}
 $$
 
@@ -977,14 +1086,14 @@ $$
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="___sec15" class="anchor">Exercise 6: Gradient descent solution of linear regression </h2>
+<h2 id="___sec19" class="anchor">Exercise 6: Gradient descent solution of linear regression </h2>
 
 <p>
 A very typical example is if we have a model and we would like to fit some parameters of the model to a data set (e.g. linear regression). Assume that we have observations \( (x_i,y_i) \) and model predictions \( f(x_i,\mathbf{\beta}) \), the model parameters are contained in the vector \( \mathbf{\beta} \). The <em>least square</em>, \( S \), is the square of the sum of all the <em>residuals</em>, i.e. the difference between the observations and model predictions 
 $$
 \begin{equation}
 S=\sum_i(y_i-f(x_i,\mathbf{\beta}))^2.
-\tag{37}
+\tag{51}
 \end{equation}
 $$
 
@@ -993,15 +1102,15 @@ Specializing to linear regression, we choose the model to be linear
 $$
 \begin{equation}
 f(x_i,\mathbf{\beta})=b_0+b_1x_i.
-\tag{38}
+\tag{52}
 \end{equation}
 $$
 
-Equation <a href="#mjx-eqn-37">(37)</a> now takes the form
+Equation <a href="#mjx-eqn-51">(51)</a> now takes the form
 $$
 \begin{equation}
 S=\sum_i(y_i-b_0+b_1x_i)^2.
-\tag{39}
+\tag{53}
 \end{equation}
 $$
 
@@ -1009,9 +1118,9 @@ The gradients are:
 $$
 \begin{align}
 \frac{\partial S}{\partial b_0}&=-2\sum_i(y_i-b_0+b_1x_i),\no
-\tag{40}\\ 
+\tag{54}\\ 
 \frac{\partial S}{\partial b_1}&=-2\sum_i(y_i-b_0+b_1x_i)x_i,.
-\tag{41}
+\tag{55}
 \end{align}
 $$
 
@@ -1046,11 +1155,10 @@ Below is an implementation of the gradient descent method with a constant learni
 <span style="color: #BA2121; font-style: italic">    prec: desired precision</span>
 <span style="color: #BA2121; font-style: italic">    </span>
 <span style="color: #BA2121; font-style: italic">    Returns x when it is closer than eps to the root, </span>
-<span style="color: #BA2121; font-style: italic">    unless MAX_ITERATIONS are not exceeded</span>
+<span style="color: #BA2121; font-style: italic">    unless MAXIT are not exceeded</span>
 <span style="color: #BA2121; font-style: italic">    &#39;&#39;&#39;</span>
-    MAX_ITERATIONS<span style="color: #666666">=</span>MAXIT
     x_old <span style="color: #666666">=</span> x
-    <span style="color: #008000; font-weight: bold">for</span> n <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(MAX_ITERATIONS):
+    <span style="color: #008000; font-weight: bold">for</span> n <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(MAXIT):
         x_new <span style="color: #666666">=</span> x_old <span style="color: #666666">-</span> g<span style="color: #666666">*</span>df(x_old)       
         <span style="color: #008000; font-weight: bold">if</span>(<span style="color: #008000">abs</span>(np<span style="color: #666666">.</span>max(x_new<span style="color: #666666">-</span>x_old))<span style="color: #666666">&lt;</span>prec):
             <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Found solution:&#39;</span>, x_new, 
@@ -1069,6 +1177,60 @@ The linear regression is implemented as below
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>x_obs_ <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([<span style="color: #666666">0</span>, <span style="color: #666666">1</span>, <span style="color: #666666">2</span>, <span style="color: #666666">3</span>, <span style="color: #666666">4</span>, <span style="color: #666666">5</span>, <span style="color: #666666">6</span>, <span style="color: #666666">7</span>, <span style="color: #666666">8</span>, <span style="color: #666666">9</span>]) 
 y_obs_ <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([<span style="color: #666666">1</span>, <span style="color: #666666">3</span>, <span style="color: #666666">2</span>, <span style="color: #666666">5</span>, <span style="color: #666666">7</span>, <span style="color: #666666">8</span>, <span style="color: #666666">8</span>, <span style="color: #666666">9</span>, <span style="color: #666666">10</span>, <span style="color: #666666">12</span>]) 
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">plot_regression_line</span>(b,x<span style="color: #666666">=</span>x_obs_, y<span style="color: #666666">=</span>y_obs_): 
+    <span style="color: #008000; font-weight: bold">global</span> N_
+    <span style="color: #408080; font-style: italic"># plotting the actual points as scatter plot </span>
+    plt<span style="color: #666666">.</span>scatter(x, y, color <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;m&quot;</span>, 
+               marker <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;o&quot;</span>, s <span style="color: #666666">=</span> <span style="color: #666666">30</span>,label<span style="color: #666666">=</span><span style="color: #BA2121">&quot;data&quot;</span>) 
+  
+    <span style="color: #408080; font-style: italic"># predicted response vector </span>
+    y_pred <span style="color: #666666">=</span> b[<span style="color: #666666">0</span>] <span style="color: #666666">+</span> b[<span style="color: #666666">1</span>]<span style="color: #666666">*</span>x
+  
+    <span style="color: #408080; font-style: italic"># plotting the regression line</span>
+    <span style="color: #008000; font-weight: bold">if</span>(<span style="color: #008000">len</span>(b)<span style="color: #666666">&gt;1</span>):
+<span style="color: #408080; font-style: italic">#        plt.plot(x, y_pred, color = &quot;g&quot;, label = &quot;R-squared = {0:.3f}&quot;.format(b[2]))</span>
+        plt<span style="color: #666666">.</span>plot(x, y_pred, color <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;g&quot;</span>, label <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;iteration:&quot;</span> <span style="color: #666666">+</span> <span style="color: #008000">str</span>(N_) <span style="color: #666666">+</span><span style="color: #BA2121">&quot;, (b[0],b[1])= (</span><span style="color: #BB6688; font-weight: bold">{0:.3f}</span><span style="color: #BA2121">&quot;</span><span style="color: #666666">.</span>format(b[<span style="color: #666666">0</span>]) <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;, </span><span style="color: #BB6688; font-weight: bold">{0:.3f}</span><span style="color: #BA2121">)&quot;</span><span style="color: #666666">.</span>format(b[<span style="color: #666666">1</span>]))
+        plt<span style="color: #666666">.</span>legend()
+    <span style="color: #008000; font-weight: bold">else</span>:
+        plt<span style="color: #666666">.</span>plot(x, y_pred, color <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;g&quot;</span>)
+  
+    <span style="color: #408080; font-style: italic"># putting labels </span>
+    plt<span style="color: #666666">.</span>xlabel(<span style="color: #BA2121">&#39;x&#39;</span>) 
+    plt<span style="color: #666666">.</span>ylabel(<span style="color: #BA2121">&#39;y&#39;</span>) 
+    plt<span style="color: #666666">.</span>grid()
+    plt<span style="color: #666666">.</span>legend()
+<span style="color: #408080; font-style: italic">#    plt.savefig(&#39;../fig-nlin/stdec&#39;+str(N_)+&#39;.png&#39;, bbox_inches=&#39;tight&#39;,transparent=True)</span>
+    N_<span style="color: #666666">=</span>N_<span style="color: #666666">+1</span>  
+    <span style="color: #408080; font-style: italic"># function to show plot </span>
+    plt<span style="color: #666666">.</span>show() 
+
+
+    
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">gradient_descent</span>(f,x,df, g<span style="color: #666666">=.001</span>, prec<span style="color: #666666">=1e-8</span>,MAXIT<span style="color: #666666">=10000</span>):
+    <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;Minimize f(x) by gradient descent.</span>
+<span style="color: #BA2121; font-style: italic">    f   : min(f(x))</span>
+<span style="color: #BA2121; font-style: italic">    x   : starting point </span>
+<span style="color: #BA2121; font-style: italic">    df  : derivative of f(x)</span>
+<span style="color: #BA2121; font-style: italic">    g   : learning rate</span>
+<span style="color: #BA2121; font-style: italic">    prec: desired precision</span>
+<span style="color: #BA2121; font-style: italic">    </span>
+<span style="color: #BA2121; font-style: italic">    Returns x when it is closer than eps to the root, </span>
+<span style="color: #BA2121; font-style: italic">    unless MAXIT are not exceeded</span>
+<span style="color: #BA2121; font-style: italic">    &#39;&#39;&#39;</span>
+    x_old <span style="color: #666666">=</span> x
+    <span style="color: #008000; font-weight: bold">for</span> n <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(MAXIT):
+        x_new <span style="color: #666666">=</span> x_old <span style="color: #666666">-</span> g<span style="color: #666666">*</span>df(x_old)       
+        <span style="color: #008000; font-weight: bold">if</span>(<span style="color: #008000">abs</span>(np<span style="color: #666666">.</span>max(x_new<span style="color: #666666">-</span>x_old))<span style="color: #666666">&lt;</span>prec):
+            <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Found solution:&#39;</span>, x_new, 
+                  <span style="color: #BA2121">&#39;, after:&#39;</span>, n, <span style="color: #BA2121">&#39;iterations.&#39;</span> )
+            <span style="color: #008000; font-weight: bold">return</span> x_new
+        x_old<span style="color: #666666">=</span>x_new
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Max number of iterations: &#39;</span>, MAXIT, <span style="color: #BA2121">&#39; reached.&#39;</span>) 
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Try to increase MAXIT or decrease prec&#39;</span>)
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Returning best guess, value of function is: &#39;</span>, f(x_new))
+    <span style="color: #008000; font-weight: bold">return</span> x_new
+<span style="color: #408080; font-style: italic">#end</span>
+
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">S</span>(b,x<span style="color: #666666">=</span>x_obs_,y<span style="color: #666666">=</span>y_obs_):
     <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>sum((y<span style="color: #666666">-</span>b[<span style="color: #666666">0</span>]<span style="color: #666666">-</span>b[<span style="color: #666666">1</span>]<span style="color: #666666">*</span>x)<span style="color: #666666">**2</span>)
 
@@ -1079,12 +1241,12 @@ y_obs_ <span style="color: #666666">=</span> np<span style="color: #666666">.</s
 b<span style="color: #666666">=</span>np<span style="color: #666666">.</span>array([<span style="color: #666666">0</span>,<span style="color: #666666">0</span>])
 </pre></div>
 <p>
-The first four iterations are shown in figure <a href="#fig:nlin:grsc">9</a>. If we choose a learning rate that is too high, we will move past the minimum, and the solution will oscillate. This can be avoided by lowering the learning rate as we iterate, by e.g. replacing <code>g</code> with <code>g/(n+1)</code> in the implementation above.
+The first four iterations are shown in figure <a href="#fig:nlin:grsc">10</a>. If we choose a learning rate that is too high, we will move past the minimum, and the solution will oscillate. This can be avoided by lowering the learning rate as we iterate, by e.g. replacing <code>g</code> with <code>g/(n+1)</code> in the implementation above.
 
 <p>
 <center> <!-- figure label: --> <div id="fig:nlin:grsc"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 9:  First four iterations of the gradient descent solution of linear regression.  <!-- caption label: fig:nlin:grsc --> </p></center>
+<center><p class="caption">Figure 10:  First four iterations of the gradient descent solution of linear regression.  <!-- caption label: fig:nlin:grsc --> </p></center>
 <p><img src="fig-nlin/stdec_comb.png" align="bottom" width=400></p>
 </center>
 
@@ -1099,17 +1261,16 @@ The first four iterations are shown in figure <a href="#fig:nlin:grsc">9</a>. If
 <p>
 <!-- --- end exercise --- -->
 
-<h1 id="___sec16" class="anchor">Other Useful Methods </h1>
+<h1 id="___sec20" class="anchor">Other Useful Methods </h1>
 
 <p>
 In this chapter we have covered the <em>basic</em>, but you should now be well equipped to dive into other methods. We highly recommend <a href="#press2001">[1]</a> as a starting point, although the code examples are written in C++, the theory is presented in a very accurate, but informal way.
 
 <ul>
 <li> Brents method:  uses root bracketing, bisection, and inverse quadratic interpolation. The 1D method of choice if the function and not its derivative is known</li>
-<li> Secant method: uses linear interpolation to find the root (only function values, not derivatives)</li>
 </ul>
 
-<h1 id="___sec17" class="anchor">References </h1>
+<h1 id="___sec21" class="anchor">References </h1>
 
 <p>
 <!-- begin bibliography -->

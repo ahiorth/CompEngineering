@@ -508,7 +508,7 @@ an expression for the first derivative that is accurate to a higher order than t
 .. math::
 
     \tag{20}
-    f^{\prime\prime}(x) = \frac{f(x+h)+f(x-h)-2f(x)}{h^2}+ \frac{h^2}{12}f^{(4)}(\eta)\,
+    f^{\prime\prime}(x) = \frac{f(x+h)+f(x-h)-2f(x)}{h^2}- \frac{h^2}{12}f^{(4)}(\eta)\,
         
 
 for some :math:`\eta` in :math:`[x,x+h]`. In figure :ref:`fig:taylor:df2`, we have plotted equation :ref:`(8) <Eq:eq:taylor:derr>`, :ref:`(19) <Eq:eq:taylor:der2>`, and :ref:`(20) <Eq:eq:taylor:2der>` for 

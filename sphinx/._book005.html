@@ -63,13 +63,13 @@ case if there is a special need  that the integration is fast.</p>
 Let us first consider the most simple case, a function <span class="math notranslate nohighlight">\(f(x)\)</span>, which is a function of one variable, <span class="math notranslate nohighlight">\(x\)</span>. The most straight forward way of calculating the area <span class="math notranslate nohighlight">\(\int_a^bf(x)dx\)</span> is
 simply to divide the area under the function into <span class="math notranslate nohighlight">\(N\)</span> equal rectangular slices with size <span class="math notranslate nohighlight">\(h=(b-a)/N\)</span>, as illustrated in figure <a class="reference internal" href="#fig-numint-mid"><span class="std std-ref">Integrating a function with the midpoint rule</span></a>. The area of one box is:</p>
 <div class="math notranslate nohighlight" id="eq-eq-numint-mid0">
-\[\tag{128}
+\[\tag{155}
 M(x_k,x_k+h)=f(x_k+\frac{h}{2}) h,\]</div>
 <p>and the area of all the boxes is:</p>
 <div class="math notranslate nohighlight">
 \[I(a,b)=\int_a^bf(x)dx\simeq\sum_{k=0}^{N-1}M(x_k,x_k+h)\nonumber\]</div>
 <div class="math notranslate nohighlight" id="eq-eq-numint-mid1">
-\[\tag{129}
+\[\tag{156}
 =h\sum_{k=0}^{N-1}f(x_k+\frac{h}{2})=h\sum_{k=0}^{N-1}f(a+(k+\frac{1}{2})h).
     \]</div>
 <p>Note that the sum goes from <span class="math notranslate nohighlight">\(k=0,1,\ldots,N-1\)</span>, a total of <span class="math notranslate nohighlight">\(N\)</span> elements. We could have chosen to let the sum go from <span class="math notranslate nohighlight">\(k=1,2,\ldots,N\)</span>.
@@ -131,8 +131,8 @@ see figure <a class="reference internal" href="#fig-numint-trap"><span class="st
 </div>
 <p>Earlier we approximated the area using the midpoint value: <span class="math notranslate nohighlight">\(f(x_k+h/2)\cdot h\)</span>. Now we use <span class="math notranslate nohighlight">\(A=A_1+A_2\)</span>, where <span class="math notranslate nohighlight">\(A_1=f(x_k)\cdot h\)</span>
 and <span class="math notranslate nohighlight">\(A_2=(f(x_k+h)-f(x_k))\cdot h/2\)</span>, hence the area of one trapezoid is:</p>
-<div class="math notranslate nohighlight" id="eq-auto32">
-\[\tag{130}
+<div class="math notranslate nohighlight" id="eq-auto43">
+\[\tag{157}
 A\equiv T(x_k,x_k+h)=(f(x_k+h)+f(x_k))h/2.\]</div>
 <p>This is the trapezoidal rule, and for the whole interval we get:</p>
 <div class="math notranslate nohighlight">
@@ -141,8 +141,8 @@ A\equiv T(x_k,x_k+h)=(f(x_k+h)+f(x_k))h/2.\]</div>
 \[=h\left[\frac{1}{2}f(a)+f(a+h) + f(a+2h) +\nonumber\right.\]</div>
 <div class="math notranslate nohighlight">
 \[\left.\qquad\cdots + f(a+(N-2)h)+\frac{1}{2}f(b)\right]\nonumber\]</div>
-<div class="math notranslate nohighlight" id="eq-auto33">
-\[\tag{131}
+<div class="math notranslate nohighlight" id="eq-auto44">
+\[\tag{158}
 =h\left[\frac{1}{2}f(a)+\frac{1}{2}f(b)+\sum_{k=1}^{N-1}f(a+k h)\right].\]</div>
 <p>Note that this formula was bit more involved to derive, but it requires only one more function evaluations compared to the midpoint rule.
 Below is a python implementation:</p>
@@ -229,58 +229,58 @@ run until a desired accuracy is reached.</p>
 series at the midpoint between <span class="math notranslate nohighlight">\(x_k\)</span> and <span class="math notranslate nohighlight">\(x_k+h\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[f(x)=f(x_k+h/2)+f^\prime(x_k+h/2)(x-(x_k+h/2))\nonumber\]</div>
-<div class="math notranslate nohighlight" id="eq-auto34">
-\[\tag{132}
+<div class="math notranslate nohighlight" id="eq-auto45">
+\[\tag{159}
 +\frac{1}{2!}f^{\prime\prime}(x_k+h/2)(x-(x_k+h/2))^2+\mathcal{O}(h^3)\]</div>
 <p>Since <span class="math notranslate nohighlight">\(f(x_k+h/2)\)</span> and its derivatives are constants it is straight forward to integrate <span class="math notranslate nohighlight">\(f(x)\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[I(x_k,x_k+h)=\int_{x_k}^{x_k+h}\left[f(x_k+h/2)+f^\prime(x_k+h/2)(x-(x_k+h/2))\right.\nonumber\]</div>
-<div class="math notranslate nohighlight" id="eq-auto35">
-\[\tag{133}
+<div class="math notranslate nohighlight" id="eq-auto46">
+\[\tag{160}
 \left.+\frac{1}{2!}f^{\prime\prime}(x_k+h/2)(x-(x_k+h/2))^2+\mathcal{O}(h^3)\right]dx\]</div>
 <p>The first term is simply the midpoint rule, to evaluate the two other terms we make the substitution: <span class="math notranslate nohighlight">\(u=x-x_k\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[I(x_k,x_k+h)=f(x_k+h/2)\cdot h+f^\prime(x_k+h/2)\int_0^h(u-h/2)du\nonumber\]</div>
 <div class="math notranslate nohighlight">
 \[+\frac{1}{2}f^{\prime\prime}(x_k+h/2)\int_0^h(u-h/2)^2du+\mathcal{O}(h^4)\nonumber\]</div>
-<div class="math notranslate nohighlight" id="eq-auto36">
-\[\tag{134}
+<div class="math notranslate nohighlight" id="eq-auto47">
+\[\tag{161}
 =f(x_k+h/2)\cdot h-\frac{h^3}{24}f^{\prime\prime}(x_k+h/2)+\mathcal{O}(h^4).\]</div>
 <p>Note that all the odd terms cancels out, i.e <span class="math notranslate nohighlight">\(\int_0^h(u-h/2)^m=0\)</span> for <span class="math notranslate nohighlight">\(m=1,3,5\ldots\)</span>. Thus the error for the midpoint rule, <span class="math notranslate nohighlight">\(E_{M,k}\)</span>, on this particular interval is:</p>
-<div class="math notranslate nohighlight" id="eq-auto37">
-\[\tag{135}
+<div class="math notranslate nohighlight" id="eq-auto48">
+\[\tag{162}
 E_{M,k}=I(x_k,x_k+h)-f(x_k+h/2)\cdot h=-\frac{h^3}{24}f^{\prime\prime}(x_k+h/2),\]</div>
 <p>where we have ignored higher order terms. We can easily sum up the error on all the intervals, but clearly <span class="math notranslate nohighlight">\(f^{\prime\prime}(x_k+h/2)\)</span> will
 not, in general, have the same value on all intervals. However, an upper bound for the error can be found by replacing <span class="math notranslate nohighlight">\(f^{\prime\prime}(x_k+h/2)\)</span>
 with the maximal value on the interval <span class="math notranslate nohighlight">\([a,b]\)</span>, <span class="math notranslate nohighlight">\(f^{\prime\prime}(\eta)\)</span>:</p>
 <div class="math notranslate nohighlight" id="eq-eq-numint-em">
-\[\tag{136}
+\[\tag{163}
 E_{M}=\sum_{k=0}^{N-1}E_{M,k}=-\frac{h^3}{24}\sum_{k=0}^{N-1}f^{\prime\prime}(x_k+h/2)\leq-\frac{Nh^3}{24}f^{\prime\prime}(\eta),\]</div>
-<div class="math notranslate nohighlight" id="eq-auto38">
-\[\tag{137}
+<div class="math notranslate nohighlight" id="eq-auto49">
+\[\tag{164}
 E_{M}\leq-\frac{(b-a)^3}{24N^2}f^{\prime\prime}(\eta),\]</div>
 <p>where we have used <span class="math notranslate nohighlight">\(h=(b-a)/N\)</span>. We can do the exact same analysis for the trapezoidal rule, but then we expand the function around <span class="math notranslate nohighlight">\(x_k-h\)</span> instead of the midpoint.
 The error term is then:</p>
-<div class="math notranslate nohighlight" id="eq-auto39">
-\[\tag{138}
+<div class="math notranslate nohighlight" id="eq-auto50">
+\[\tag{165}
 E_T=\frac{(b-a)^3}{12N^2}f^{\prime\prime}(\overline{\eta}).\]</div>
 <p>At the first glance it might look like the midpoint rule always is better than the trapezoidal rule, but note that the second derivative is
 evaluated in different points (<span class="math notranslate nohighlight">\(\eta\)</span> and <span class="math notranslate nohighlight">\(\overline{\eta}\)</span>). Thus it is possible to construct examples where the midpoint rule performs poorer
 than the trapezoidal rule.</p>
 <p>Before we end this section we will rewrite the error terms in a more useful form as it is not so easy to evaluate
-<span class="math notranslate nohighlight">\(f^{\prime\prime}(\eta)\)</span> (since we do not know which value of <span class="math notranslate nohighlight">\(\eta\)</span> to use). By taking a closer look at equation <a class="reference internal" href="#eq-eq-numint-em"><span class="std std-ref">(136)</span></a>,
+<span class="math notranslate nohighlight">\(f^{\prime\prime}(\eta)\)</span> (since we do not know which value of <span class="math notranslate nohighlight">\(\eta\)</span> to use). By taking a closer look at equation <a class="reference internal" href="#eq-eq-numint-em"><span class="std std-ref">(163)</span></a>,
 we see that it is closely related to the midpoint rule for <span class="math notranslate nohighlight">\(\int_a^bf^{\prime\prime}(x)dx\)</span>, hence:</p>
-<div class="math notranslate nohighlight" id="eq-auto40">
-\[\tag{139}
+<div class="math notranslate nohighlight" id="eq-auto51">
+\[\tag{166}
 E_{M}=-\frac{h^2}{24}h
     \sum_{k=0}^{N-1}f^{\prime\prime}(x_k+h/2)\simeq-\frac{h^2}{24}\int_a^b
     f^{\prime\prime}(x)dx\]</div>
-<div class="math notranslate nohighlight" id="eq-auto41">
-\[\tag{140}
+<div class="math notranslate nohighlight" id="eq-auto52">
+\[\tag{167}
 E_M\simeq\frac{h^2}{24}\left[f^\prime(b)-f^\prime(a)\right]=-\frac{(b-a)^2}{24N^2}\left[f^\prime(b)-f^\prime(a)\right]\]</div>
 <p>The corresponding formula for the trapezoid formula is:</p>
-<div class="math notranslate nohighlight" id="eq-auto42">
-\[\tag{141}
+<div class="math notranslate nohighlight" id="eq-auto53">
+\[\tag{168}
 E_T\simeq \frac{h^2}{12}\left[f^\prime(b)-f^\prime(a)\right]=\frac{(b-a)^2}{12N^2}\left[f^\prime(b)-f^\prime(a)\right]\]</div>
 <p>Now, we can make an algorithm that automatically choose the number of steps to reach (at least) a predefined accuracy:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -332,38 +332,38 @@ the error scale as <span class="math notranslate nohighlight">\(h^2\)</span>.</p
 Then we know that the true integral is <span class="math notranslate nohighlight">\(I=I_1+c h_1^2\)</span>, where <span class="math notranslate nohighlight">\(c\)</span> is a constant that is unknown. If we now half the step size: <span class="math notranslate nohighlight">\(h_2=h_1/2\)</span>,
 then we get a new (better) estimate of the integral, <span class="math notranslate nohighlight">\(I_2\)</span>, which is related to the true integral <span class="math notranslate nohighlight">\(I\)</span> as: <span class="math notranslate nohighlight">\(I=I_2+c h_2^2\)</span>.
 Taking the difference between <span class="math notranslate nohighlight">\(I_2\)</span> and <span class="math notranslate nohighlight">\(I_1\)</span> give us an estimation of the error:</p>
-<div class="math notranslate nohighlight" id="eq-auto43">
-\[\tag{142}
+<div class="math notranslate nohighlight" id="eq-auto54">
+\[\tag{169}
 I_2-I_1=I-c h_2^2-(I-ch_1^2)=3c h_2^2,\]</div>
 <p>where we have used the fact that <span class="math notranslate nohighlight">\(h_1=2h_2\)</span>, Thus the error term is:</p>
-<div class="math notranslate nohighlight" id="eq-auto44">
-\[\tag{143}
+<div class="math notranslate nohighlight" id="eq-auto55">
+\[\tag{170}
 E(a,b)=c h_2^2=\frac{1}{3}(I_2-I_1).\]</div>
 <p>This might seem like we need to evaluate the integral twice as many times as needed. This is not the case, by choosing to exactly
 half the spacing we only need to evaluate for the values that lies halfway between the original points. We will demonstrate how
 to do this by using the trapezoidal rule, because it operates directly on the <span class="math notranslate nohighlight">\(x_k\)</span> values and not the midpoint values.
 The trapezoidal rule can now be written as:</p>
-<div class="math notranslate nohighlight" id="eq-auto45">
-\[\tag{144}
+<div class="math notranslate nohighlight" id="eq-auto56">
+\[\tag{171}
 I_2(a,b)=h_2\left[\frac{1}{2}f(a)+\frac{1}{2}f(b)+\sum_{k=1}^{N_2-1}f(a+k h_2)\right],\]</div>
 <div class="math notranslate nohighlight">
 \[=h_2\left[\frac{1}{2}f(a)+\frac{1}{2}f(b)+\sum_{k=\text{even values}}^{N_2-1}f(a+k h_2)\right.\nonumber\]</div>
-<div class="math notranslate nohighlight" id="eq-auto46">
-\[\tag{145}
+<div class="math notranslate nohighlight" id="eq-auto57">
+\[\tag{172}
 \left.\qquad+\sum_{k=\text{odd values}}^{N_2-1}f(a+k h_2)\right],\]</div>
 <p>in the last equation we have split the sum into odd an even values. The sum over the even values can be rewritten:</p>
-<div class="math notranslate nohighlight" id="eq-auto47">
-\[\tag{146}
+<div class="math notranslate nohighlight" id="eq-auto58">
+\[\tag{173}
 \sum_{k=\text{even values}}^{N_2-1}f(a+k h_2)=\sum_{k=0}^{N_1-1}f(a+2k h_2)=\sum_{k=0}^{N_1-1}f(a+k h_1),\]</div>
 <p>note that <span class="math notranslate nohighlight">\(N_2\)</span> is replaced with <span class="math notranslate nohighlight">\(N_1=N_2/2\)</span>, we can now rewrite <span class="math notranslate nohighlight">\(I_2\)</span> as:</p>
 <div class="math notranslate nohighlight">
 \[I_2(a,b)=h_2\left[\frac{1}{2}f(a)+\frac{1}{2}f(b)+\sum_{k=0}^{N_1-1}f(a+k h_1)\right.\nonumber\]</div>
-<div class="math notranslate nohighlight" id="eq-auto48">
-\[\tag{147}
+<div class="math notranslate nohighlight" id="eq-auto59">
+\[\tag{174}
 \left.+\sum_{k=\text{odd values}}^{N_2-1}f(a+k h_2)\right]\]</div>
 <p>Note that the first terms are actually the trapezoidal rule for <span class="math notranslate nohighlight">\(I_1\)</span>, hence:</p>
-<div class="math notranslate nohighlight" id="eq-auto49">
-\[\tag{148}
+<div class="math notranslate nohighlight" id="eq-auto60">
+\[\tag{175}
 I_2(a,b)=\frac{1}{2}I_1(a,b)+h_2\sum_{k=\text{odd values}}^{N_2-1}f(a+k h_2).\]</div>
 <p>The factor <span class="math notranslate nohighlight">\(1/2\)</span> in front of <span class="math notranslate nohighlight">\(I_1(a,b)\)</span>, appears because <span class="math notranslate nohighlight">\(h_2=h_1/2\)</span>.
 A possible algorithm is then:
@@ -426,46 +426,46 @@ check if the desired tolerance was achieved, but we could also have added it to 
 <dd><p>Note that all odd powers of <span class="math notranslate nohighlight">\(h\)</span> is equal to zero, thus the corrections are always in even powers.</p>
 </dd>
 </dl>
-<div class="math notranslate nohighlight" id="eq-auto50">
-\[\tag{149}
+<div class="math notranslate nohighlight" id="eq-auto61">
+\[\tag{176}
 I=I_{i+1}+ch^2+\mathcal{O}(h^4)=I_{i+1}+\frac{1}{3}\left[I_{i+1}-I_{i}\right]+\mathcal{O}(h^4).\]</div>
 <p>As before the error term <span class="math notranslate nohighlight">\(\mathcal{O}(h^4)\)</span>, can be written as: <span class="math notranslate nohighlight">\(ch^4\)</span>. Now we can proceed as in the previous section: First we estimate the
 integral by one step size <span class="math notranslate nohighlight">\(I_i=I+ch_i^4\)</span>, next we half the step size <span class="math notranslate nohighlight">\(I_{i+1}=I+ch_{i+1}^4\)</span> and use these two estimates to calculate the error term:</p>
 <div class="math notranslate nohighlight">
 \[I_{i+1}-I_{i}=I-c h_{i+1}^4-(I-ch_i^4)=-c h_{i+1}^4+c(2h_{i+1})^4=15c h_{i+1}^4,\nonumber\]</div>
-<div class="math notranslate nohighlight" id="eq-auto51">
-\[\tag{150}
+<div class="math notranslate nohighlight" id="eq-auto62">
+\[\tag{177}
 ch_{i+1}^4=\frac{1}{15}\left[I_{i+1}-I_{i}\right]+\mathcal{O}(h^6).\]</div>
 <p>but now we are in the exact situation as before, we have not only the error term but the correction up to order <span class="math notranslate nohighlight">\(h^4\)</span> for this integral:</p>
 <div class="math notranslate nohighlight" id="eq-eq-numint-rom">
-\[\tag{151}
+\[\tag{178}
 I=I_{i+1}+\frac{1}{15}\left[I_{i+1}-I_{i}\right]+\mathcal{O}(h^6).\]</div>
 <p>Each time we half the step size we also gain a higher order accuracy in our numerical algorithm. Thus, there are two iterations going on at the same time;
 one is the iteration that half the step size (<span class="math notranslate nohighlight">\(i\)</span>), and the other one is the increasing number of higher order terms added (which we will denote <span class="math notranslate nohighlight">\(m\)</span>).
-We need to improve our notation, and replace the approximation of the integral (<span class="math notranslate nohighlight">\(I_i\)</span>) with <span class="math notranslate nohighlight">\(R_{i,m}\)</span>. Equation <a class="reference internal" href="#eq-eq-numint-rom"><span class="std std-ref">(151)</span></a>, can now
+We need to improve our notation, and replace the approximation of the integral (<span class="math notranslate nohighlight">\(I_i\)</span>) with <span class="math notranslate nohighlight">\(R_{i,m}\)</span>. Equation <a class="reference internal" href="#eq-eq-numint-rom"><span class="std std-ref">(178)</span></a>, can now
 be written:</p>
-<div class="math notranslate nohighlight" id="eq-auto52">
-\[\tag{152}
+<div class="math notranslate nohighlight" id="eq-auto63">
+\[\tag{179}
 I=R_{i+1,2}+\frac{1}{15}\left[R_{i+1,2}-R_{i,2}\right]+\mathcal{O}(h^6).\]</div>
 <p>A general formula valid for any <span class="math notranslate nohighlight">\(m\)</span> can be found by realizing:</p>
 <div class="math notranslate nohighlight" id="eq-eq-numint-rom0">
-\[\tag{153}
+\[\tag{180}
 I=R_{i+1,m+1}+c_mh_i^{2m+2}+\mathcal{O}(h_i^{2m+4})\]</div>
 <div class="math notranslate nohighlight">
 \[I=R_{i,m+1}+c_mh_{i-1}^{2m+2}+\mathcal{O}(h_{i-1}^{2m+4})\nonumber\]</div>
 <div class="math notranslate nohighlight" id="eq-eq-numint-rom1">
-\[\tag{154}
+\[\tag{181}
 =R_{i,m+1}+2^{2m+2}c_mh_{i}^{2m+2}+\mathcal{O}(h_{i-1}^{2m+4}),\]</div>
-<p>where, as before <span class="math notranslate nohighlight">\(h_{i-1}=2h_i\)</span>. Subtracting equation <a class="reference internal" href="#eq-eq-numint-rom0"><span class="std std-ref">(153)</span></a> and <a class="reference internal" href="#eq-eq-numint-rom1"><span class="std std-ref">(154)</span></a>, we find an expression for the error term:</p>
+<p>where, as before <span class="math notranslate nohighlight">\(h_{i-1}=2h_i\)</span>. Subtracting equation <a class="reference internal" href="#eq-eq-numint-rom0"><span class="std std-ref">(180)</span></a> and <a class="reference internal" href="#eq-eq-numint-rom1"><span class="std std-ref">(181)</span></a>, we find an expression for the error term:</p>
 <div class="math notranslate nohighlight" id="eq-eq-numint-rom2">
-\[\tag{155}
+\[\tag{182}
 c_mh_{i}^{2m+2}=\frac{1}{4^{m+1}-1}(R_{i,m}-R_{i-1,m})\]</div>
-<p>Then the estimate for the integral in equation <a class="reference internal" href="#eq-eq-numint-rom1"><span class="std std-ref">(154)</span></a> is:</p>
-<div class="math notranslate nohighlight" id="eq-auto53">
-\[\tag{156}
+<p>Then the estimate for the integral in equation <a class="reference internal" href="#eq-eq-numint-rom1"><span class="std std-ref">(181)</span></a> is:</p>
+<div class="math notranslate nohighlight" id="eq-auto64">
+\[\tag{183}
 I=R_{i,m+1}+\mathcal{O}(h_i^{2m+2})\]</div>
-<div class="math notranslate nohighlight" id="eq-auto54">
-\[\tag{157}
+<div class="math notranslate nohighlight" id="eq-auto65">
+\[\tag{184}
 R_{i,m+1}=R_{i,m}+\frac{1}{4^{m+1}-1}(R_{i+1,m}-R_{i,m}).\]</div>
 <p>A possible algorithm is then:</p>
 <ol class="arabic simple">
@@ -533,7 +533,7 @@ section uses 20480 and 9069 function evaluations, respectively.</p>
 <h3>Gaussian Quadrature<a class="headerlink" href="#gaussian-quadrature" title="Permalink to this headline">¶</a></h3>
 <p>Many of the methods we have looked into are of the type:</p>
 <div class="math notranslate nohighlight" id="eq-eq-numint-qq1">
-\[\tag{158}
+\[\tag{185}
 \int_a^b f(x) dx = \sum_{k=0}^{N-1} \omega_k f(x_k),\]</div>
 <p>where the function is evaluated at fixed interval. For the midpoint rule <span class="math notranslate nohighlight">\(\omega_k=h\)</span> for all values of <span class="math notranslate nohighlight">\(k\)</span>, for the trapezoid rule
 <span class="math notranslate nohighlight">\(\omega_k=h/2\)</span> for the endpoints and <span class="math notranslate nohighlight">\(h\)</span> for all the interior points.
@@ -542,11 +542,11 @@ Note that all the methods we have looked at so far samples the function in equal
 for <span class="math notranslate nohighlight">\(k=0, 1, 2\ldots, N-1\)</span>. If we now allow for the function to be evaluated at unevenly spaced points, we can do a lot better.
 This realization is the basis for Gaussian Quadrature. We will explore this in the following,
 but to make the development easier and less cumbersome, we transform the integral from the domain <span class="math notranslate nohighlight">\([a,b]\)</span> to <span class="math notranslate nohighlight">\([-1,1]\)</span>:</p>
-<div class="math notranslate nohighlight" id="eq-auto55">
-\[\tag{159}
+<div class="math notranslate nohighlight" id="eq-auto66">
+\[\tag{186}
 \int_a^bf(t)dt=\frac{b-a}{2}\int_{-1}^{1}f(x)dx\text{ , where:}\]</div>
-<div class="math notranslate nohighlight" id="eq-auto56">
-\[\tag{160}
+<div class="math notranslate nohighlight" id="eq-auto67">
+\[\tag{187}
 x=\frac{2}{b-a}t-\frac{b+a}{b-a}.\]</div>
 <p>The factor in front comes from the fact that <span class="math notranslate nohighlight">\(dt=(b-a)dx/2\)</span>, thus we can develop our algorithms on the domain <span class="math notranslate nohighlight">\([-1,1]\)</span>,
 and then do the transformation back using: <span class="math notranslate nohighlight">\(t=(b-a)x/2+(b+a)/2\)</span>.</p>
@@ -557,49 +557,49 @@ If we can approximate the function to be integrated on the domain <span class="m
 polynomial of as <em>large a degree as possible</em>, then the numerical integral of this polynomial will be very close to the integral of the
 function we are seeking.</p>
 </div>
-<p>This idea is best understood by a couple of examples. Assume that we want to use <span class="math notranslate nohighlight">\(N=1\)</span> in equation <a class="reference internal" href="#eq-eq-numint-qq1"><span class="std std-ref">(158)</span></a>:</p>
-<div class="math notranslate nohighlight" id="eq-auto57">
-\[\tag{161}
+<p>This idea is best understood by a couple of examples. Assume that we want to use <span class="math notranslate nohighlight">\(N=1\)</span> in equation <a class="reference internal" href="#eq-eq-numint-qq1"><span class="std std-ref">(185)</span></a>:</p>
+<div class="math notranslate nohighlight" id="eq-auto68">
+\[\tag{188}
 \int_{-1}^{1}f(x)\,dx\simeq\omega_0f(x_0).\]</div>
 <p>We now choose <span class="math notranslate nohighlight">\(f(x)\)</span> to be a polynomial of as large a degree as possible, but with the requirement that the integral is exact. If <span class="math notranslate nohighlight">\(f(x)=1\)</span>, we get:</p>
-<div class="math notranslate nohighlight" id="eq-auto58">
-\[\tag{162}
+<div class="math notranslate nohighlight" id="eq-auto69">
+\[\tag{189}
 \int_{-1}^{1}f(x)\,dx=\int_{-1}^{1}1\,dx=2=\omega_0,\]</div>
 <p>hence <span class="math notranslate nohighlight">\(\omega_0=2\)</span>. If we choose <span class="math notranslate nohighlight">\(f(x)=x\)</span>, we get:</p>
-<div class="math notranslate nohighlight" id="eq-auto59">
-\[\tag{163}
+<div class="math notranslate nohighlight" id="eq-auto70">
+\[\tag{190}
 \int_{-1}^{1}f(x)\,dx=\int_{-1}^{1}x\,dx=0=\omega_0f(x_0)=2x_0,\]</div>
 <p>hence <span class="math notranslate nohighlight">\(x_0=0\)</span>.
 The Gaussian integration rule for <span class="math notranslate nohighlight">\(N=1\)</span> is:</p>
 <div class="math notranslate nohighlight">
 \[\int_{-1}^{1}f(x)\,dx\simeq 2f(0)\text{, or: }\nonumber\]</div>
-<div class="math notranslate nohighlight" id="eq-auto60">
-\[\tag{164}
+<div class="math notranslate nohighlight" id="eq-auto71">
+\[\tag{191}
 \int_{a}^{b}f(t)\,dt\simeq\frac{b-a}{2}\,2f(\frac{b+a}{2})=(b-a)f(\frac{b+a}{2}).\]</div>
-<p>This equation is equal to the midpoint rule, by choosing <span class="math notranslate nohighlight">\(b=a+h\)</span> we reproduce equation <a class="reference internal" href="#eq-eq-numint-mid0"><span class="std std-ref">(128)</span></a>. If we choose <span class="math notranslate nohighlight">\(N=2\)</span>:</p>
-<div class="math notranslate nohighlight" id="eq-auto61">
-\[\tag{165}
+<p>This equation is equal to the midpoint rule, by choosing <span class="math notranslate nohighlight">\(b=a+h\)</span> we reproduce equation <a class="reference internal" href="#eq-eq-numint-mid0"><span class="std std-ref">(155)</span></a>. If we choose <span class="math notranslate nohighlight">\(N=2\)</span>:</p>
+<div class="math notranslate nohighlight" id="eq-auto72">
+\[\tag{192}
 \int_{-1}^{1}f(x)\,dx\simeq\omega_0f(x_0)+\omega_1f(x_1),\]</div>
 <p>we can show that now $ f(x)=1,,x,,x^2,x^3$ can be integrated exact:</p>
-<div class="math notranslate nohighlight" id="eq-auto62">
-\[\tag{166}
+<div class="math notranslate nohighlight" id="eq-auto73">
+\[\tag{193}
 \int_{-1}^{1}1\,dx=2=\omega_0f(x_0)+\omega_1f(x_1)=\omega_0+\omega_1\,,\]</div>
-<div class="math notranslate nohighlight" id="eq-auto63">
-\[\tag{167}
+<div class="math notranslate nohighlight" id="eq-auto74">
+\[\tag{194}
 \int_{-1}^{1}x\,dx=0=\omega_0f(x_0)+\omega_1f(x_1)=\omega_0x_0+\omega_1x_1\,,\]</div>
-<div class="math notranslate nohighlight" id="eq-auto64">
-\[\tag{168}
+<div class="math notranslate nohighlight" id="eq-auto75">
+\[\tag{195}
 \int_{-1}^{1}x^2\,dx=\frac{2}{3}=\omega_0f(x_0)+\omega_1f(x_1)=\omega_0x_0^2+\omega_1x_1^2\,,\]</div>
-<div class="math notranslate nohighlight" id="eq-auto65">
-\[\tag{169}
+<div class="math notranslate nohighlight" id="eq-auto76">
+\[\tag{196}
 \int_{-1}^{1}x^3\,dx=0=\omega_0f(x_0)+\omega_1f(x_1)=\omega_0x_0^3+\omega_1x_1^3\,,\]</div>
 <p>hence there are four unknowns and four equations. The solution is: <span class="math notranslate nohighlight">\(\omega_0=\omega_1=1\)</span> and <span class="math notranslate nohighlight">\(x_0=-x_1=1/\sqrt{3}\)</span>.
 The Gaussian integration rule for <span class="math notranslate nohighlight">\(N=2\)</span> is:</p>
-<div class="math notranslate nohighlight" id="eq-auto66">
-\[\tag{170}
+<div class="math notranslate nohighlight" id="eq-auto77">
+\[\tag{197}
 \int_{-1}^{1}f(x)\,dx\simeq f(-\frac{1}{\sqrt{3}})+f(\frac{1}{\sqrt{3}})\, \text{, or:}\]</div>
-<div class="math notranslate nohighlight" id="eq-auto67">
-\[\tag{171}
+<div class="math notranslate nohighlight" id="eq-auto78">
+\[\tag{198}
 \int_{a}^{b}f(x)\,dx\simeq \frac{b-a}{2}\left[f(-\frac{b-a}{2}\frac{1}{\sqrt{3}}+\frac{b+a}{2})
     +f(\frac{b-a}{2}\frac{1}{\sqrt{3}}+\frac{b+a}{2})\right].\]</div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">int_gaussquad2</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">lower_limit</span><span class="p">,</span> <span class="n">upper_limit</span><span class="p">):</span>
@@ -614,23 +614,23 @@ The Gaussian integration rule for <span class="math notranslate nohighlight">\(N
 <div class="section" id="the-case-n-3">
 <h4>The case N=3<a class="headerlink" href="#the-case-n-3" title="Permalink to this headline">¶</a></h4>
 <p>For the case <span class="math notranslate nohighlight">\(N=3\)</span>, we find that <span class="math notranslate nohighlight">\(f(x)=1,x,x^2,x^3,x^4,x^5\)</span> can be integrated exactly:</p>
-<div class="math notranslate nohighlight" id="eq-auto68">
-\[\tag{172}
+<div class="math notranslate nohighlight" id="eq-auto79">
+\[\tag{199}
 \int_{-1}^{1}1\,dx=2=\omega_0+\omega_1+\omega_2\,,\]</div>
-<div class="math notranslate nohighlight" id="eq-auto69">
-\[\tag{173}
+<div class="math notranslate nohighlight" id="eq-auto80">
+\[\tag{200}
 \int_{-1}^{1}x\,dx=0=\omega_0x_0+\omega_1x_1+\omega_2x_2\,,\]</div>
-<div class="math notranslate nohighlight" id="eq-auto70">
-\[\tag{174}
+<div class="math notranslate nohighlight" id="eq-auto81">
+\[\tag{201}
 \int_{-1}^{1}x^2\,dx=\frac{2}{3}=\omega_0x_0^2+\omega_1x_1^2+\omega_2x_2^2\,,\]</div>
-<div class="math notranslate nohighlight" id="eq-auto71">
-\[\tag{175}
+<div class="math notranslate nohighlight" id="eq-auto82">
+\[\tag{202}
 \int_{-1}^{1}x^3\,dx=0=\omega_0x_0^3+\omega_1x_1^3+\omega_2x_2^3\,,\]</div>
-<div class="math notranslate nohighlight" id="eq-auto72">
-\[\tag{176}
+<div class="math notranslate nohighlight" id="eq-auto83">
+\[\tag{203}
 \int_{-1}^{1}x^4\,dx=\frac{2}{5}=\omega_0x_0^4+\omega_1x_1^4+\omega_2x_2^4\,,\]</div>
-<div class="math notranslate nohighlight" id="eq-auto73">
-\[\tag{177}
+<div class="math notranslate nohighlight" id="eq-auto84">
+\[\tag{204}
 \int_{-1}^{1}x^5\,dx=0=\omega_0x_0^5+\omega_1x_1^5+\omega_2x_2^5\,,\]</div>
 <p>the solution to these equations are <span class="math notranslate nohighlight">\(\omega_{0,1,2}=5/9, 8/9, 5/9\)</span> and <span class="math notranslate nohighlight">\(x_{1,2,3}=-\sqrt{3/5},0,\sqrt{3/5}\)</span>. Below is a Python implementation:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">int_gaussquad3</span><span class="p">(</span><span class="n">lower_limit</span><span class="p">,</span> <span class="n">upper_limit</span><span class="p">,</span><span class="n">func</span><span class="p">):</span>
@@ -658,14 +658,14 @@ increasing to <span class="math notranslate nohighlight">\(N=11\)</span> will re
 From Taylors error formula, see equation <a class="reference internal" href="._book002.html#eq-eq-taylor-error"><span class="std std-ref">(4)</span></a> in the chapter <a class="reference internal" href="._book002.html#ch-taylor"><span class="std std-ref">Finite differences</span></a>,
 we can easily see that the error term must be of order <span class="math notranslate nohighlight">\(2N\)</span>, and be proportional to <span class="math notranslate nohighlight">\(f^{(2N)}(\eta)\)</span>, see <span id="id3">[Ref3]</span> for more details on the derivation of error terms. The drawback with an analytical error term derived from series expansion is that it involves the derivative of the function. As we have already explained, this is very unpractical and it is much more practical to use the methods described in the section <a class="reference internal" href="#sec-numint-parct"><span class="std std-ref">Practical Estimation of Errors on Integrals (Richardson Extrapolation)</span></a>. Let us consider this in more detail, assume that we evaluate the integral using first a Gaussian integration rule with <span class="math notranslate nohighlight">\(N\)</span> points, and then <span class="math notranslate nohighlight">\(N+1\)</span> points. Our estimates of the &quot;exact&quot; integral, <span class="math notranslate nohighlight">\(I\)</span>,  would then be:</p>
 <div class="math notranslate nohighlight" id="eq-eq-numint-gerr1">
-\[\tag{178}
+\[\tag{205}
 I=I_N+ch_{N}^{2N},\]</div>
 <div class="math notranslate nohighlight" id="eq-eq-numint-gerr2">
-\[\tag{179}
+\[\tag{206}
 I=I_{N+1}+ch_{N+1}^{2N+1}.\]</div>
-<p>In principle <span class="math notranslate nohighlight">\(h_{N+1}\neq h_{N}\)</span>, but in the following we will assume that <span class="math notranslate nohighlight">\(h_N\simeq h_{N+1}\)</span>, and <span class="math notranslate nohighlight">\(h\ll 1\)</span>. Subtracting equation <a class="reference internal" href="#eq-eq-numint-gerr1"><span class="std std-ref">(178)</span></a> and <a class="reference internal" href="#eq-eq-numint-gerr2"><span class="std std-ref">(179)</span></a> we can show that a reasonable estimate for the error term <span class="math notranslate nohighlight">\(ch^{2N}\)</span> would be:</p>
-<div class="math notranslate nohighlight" id="eq-auto74">
-\[\tag{180}
+<p>In principle <span class="math notranslate nohighlight">\(h_{N+1}\neq h_{N}\)</span>, but in the following we will assume that <span class="math notranslate nohighlight">\(h_N\simeq h_{N+1}\)</span>, and <span class="math notranslate nohighlight">\(h\ll 1\)</span>. Subtracting equation <a class="reference internal" href="#eq-eq-numint-gerr1"><span class="std std-ref">(205)</span></a> and <a class="reference internal" href="#eq-eq-numint-gerr2"><span class="std std-ref">(206)</span></a> we can show that a reasonable estimate for the error term <span class="math notranslate nohighlight">\(ch^{2N}\)</span> would be:</p>
+<div class="math notranslate nohighlight" id="eq-auto85">
+\[\tag{207}
 ch^N= I_{N+1}-I_N.\]</div>
 <p>If this estimate is lower than a given tolerance we can be quite confident that the higher order estimate <span class="math notranslate nohighlight">\(I_{N+1}\)</span> approximate the true integral within our error estimate. This is the method implemented in SciPy, <a class="reference external" href="https://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.integrate.quadrature.html">integrate.quadrature</a></p>
 </div>
@@ -677,7 +677,7 @@ ch^N= I_{N+1}-I_N.\]</div>
 <h2>Integrating functions over an infinite range<a class="headerlink" href="#integrating-functions-over-an-infinite-range" title="Permalink to this headline">¶</a></h2>
 <p>Integrating a function over an infinite range can be done by the following trick. Assume that we would like to evaluate</p>
 <div class="math notranslate nohighlight" id="eq-eq-numint-inf">
-\[\tag{181}
+\[\tag{208}
 \int_a^\infty f(x) dx.\]</div>
 <p>If we introduce the following substitution</p>
 <div class="math notranslate nohighlight">
@@ -685,15 +685,15 @@ ch^N= I_{N+1}-I_N.\]</div>
 or equivalently\\x=a+\frac{z}{1-z},\end{aligned}\end{align} \]</div>
 <p>then if <span class="math notranslate nohighlight">\(x=a\)</span>, <span class="math notranslate nohighlight">\(z=0\)</span>, and if <span class="math notranslate nohighlight">\(x\to\infty\)</span> then <span class="math notranslate nohighlight">\(z\to1\)</span>, hence:</p>
 <div class="math notranslate nohighlight" id="eq-eq-numint-infs3">
-\[\tag{182}
+\[\tag{209}
 \int_a^\infty f(x) dx = \int_0^1 f(a+\frac{z}{1-z}) \frac{dz}{(1-z)^2}.\]</div>
 <div class="section" id="which-method-to-use-in-a-specific-case-not-completed">
 <h3>Which method to use in a specific case? (NOT COMPLETED)<a class="headerlink" href="#which-method-to-use-in-a-specific-case-not-completed" title="Permalink to this headline">¶</a></h3>
 <p>There are no general answers to this question, and one need to decide from case to case. If computational speed is not an issue,
 and the function to be integrated can be evaluated at any points all the methods above can be used. If the function to be integrated
 is a set of observations at different times, that might be unevenly spaced, I would use the midpoint rule:</p>
-<div class="math notranslate nohighlight" id="eq-auto75">
-\[\tag{183}
+<div class="math notranslate nohighlight" id="eq-auto86">
+\[\tag{210}
 I(a,b)=\int_a^bf(x)dx\simeq\sum_{k=0}^{N-1}M(x_k,x_k+h)=\sum_{k=0}^{N-1}h_if(x_k+\frac{h_i}{2})\]</div>
 <p>This is because we do not know anything about the function between the points, only when it is observed, and the formula uses only
 the information at the observation points. There is a second more subtle reason, and that is the fact that in many cases the
@@ -715,34 +715,34 @@ Use the fact that the error term on the trapezoidal rule is twice as big as the 
 Simpsons rule is an improvement over the midpoint and trapezoidal rule. It can be derived in different ways, we will make use of
 the results in the previous section. If we assume that the second derivative is reasonably well behaved on the interval <span class="math notranslate nohighlight">\(x_k\)</span>
 and <span class="math notranslate nohighlight">\(x_k+h\)</span> and fairly constant we can assume that <span class="math notranslate nohighlight">\(f^{\prime\prime}(\eta)\simeq f^{\prime\prime}(\overline{\eta})\)</span>, hence <span class="math notranslate nohighlight">\(E_T=-2E_M\)</span>.</p>
-<div class="math notranslate nohighlight" id="eq-auto76">
-\[\tag{184}
+<div class="math notranslate nohighlight" id="eq-auto87">
+\[\tag{211}
 I(x_k,x_k+h)=M(x_k,x_k+h)+E_M\text{ (midpoint rule)}\]</div>
 <div class="math notranslate nohighlight">
 \[I(x_k,x_k+h)=T(x_k,x_k+h)+E_T\nonumber\]</div>
-<div class="math notranslate nohighlight" id="eq-auto77">
-\[\tag{185}
+<div class="math notranslate nohighlight" id="eq-auto88">
+\[\tag{212}
 =T(x_k,x_k+h)-2E_M\text{ (trapezoidal rule)},\]</div>
 <p>we can now cancel out the error term by multiplying the first equation with 2 and adding the equations:</p>
-<div class="math notranslate nohighlight" id="eq-auto78">
-\[\tag{186}
+<div class="math notranslate nohighlight" id="eq-auto89">
+\[\tag{213}
 3I(x_k,x_k+h)=2M(x_k,x_k+h)+T(x_k,x_k+h)\]</div>
-<div class="math notranslate nohighlight" id="eq-auto79">
-\[\tag{187}
+<div class="math notranslate nohighlight" id="eq-auto90">
+\[\tag{214}
 =2f(x_k+\frac{h}{2}) h+\left[f(x_k+h)+f(x_k)\right] \frac{h}{2}\]</div>
-<div class="math notranslate nohighlight" id="eq-auto80">
-\[\tag{188}
+<div class="math notranslate nohighlight" id="eq-auto91">
+\[\tag{215}
 I(x_k,x_k+h)=\frac{h}{6}\left[f(x_k)+4f(x_k+\frac{h}{2})+f(x_k+h)\right].\]</div>
 <p>Now we can do as we did in the case of the trapezoidal rule, sum over all the elements:</p>
 <div class="math notranslate nohighlight">
 \[I(a,b)=\sum_{k=0}^{N-1}I(x_k,x_k+h)\nonumber\]</div>
 <div class="math notranslate nohighlight">
 \[=\frac{h}{6}\left[f(a)+ 4f(a+\frac{h}{2})+2f(a+h)+4f(a+3\frac{h}{2})\right.\nonumber\]</div>
-<div class="math notranslate nohighlight" id="eq-auto81">
-\[\tag{189}
+<div class="math notranslate nohighlight" id="eq-auto92">
+\[\tag{216}
 \left.\qquad+2f(a+2h)+\cdots+f(b)\right]\]</div>
-<div class="math notranslate nohighlight" id="eq-auto82">
-\[\tag{190}
+<div class="math notranslate nohighlight" id="eq-auto93">
+\[\tag{217}
 =\frac{h^\prime}{3}\left[f(a)+ f(b) + 4\sum_{k= \text{odd}}^{N-2}f(a+k h^\prime)+2\sum_{k= \text{even}}^{N-2}f(a+k h^\prime)\right],\]</div>
 <p>note that in the last equation we have changed the step size <span class="math notranslate nohighlight">\(h=2h^\prime\)</span>.</p>
 <p><strong>d)</strong>
