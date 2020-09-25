@@ -1,0 +1,1084 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Transport in Porous Media -  From Laboratory Scale to Field Scale">
+
+<title>Transport in Porous Media -  From Laboratory Scale to Field Scale</title>
+
+<!-- Bootstrap style: bootswatch_readable -->
+<link href="https://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:64px;      /* fixed header height for style bootswatch_readable */
+  margin:-64px 0 0; /* negative fixed header height */
+}
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Introduction', 1, None, '___sec0'),
+              ('Exercise 1',
+               1,
+               'ex:core_scale_experiment',
+               'ex:core_scale_experiment'),
+              ('Theoretical background for the rest of the project',
+               1,
+               'theoretical_background',
+               'theoretical_background'),
+              ('Diffusivity equation in radial flow', 2, None, '___sec3'),
+              ('Analytical solutions to the radial diffusivity equation?',
+               2,
+               None,
+               '___sec4'),
+              ('A Crash Course on Classes', 1, None, '___sec5'),
+              ('Exercise 2', 1, None, '___sec6'),
+              ('Exercise 3 Implement the full numerical solution',
+               1,
+               None,
+               '___sec7'),
+              ('Exercise 4 Compare with well data', 1, None, '___sec8'),
+              ('Guidelines for project submission', 1, None, '___sec9'),
+              ('Bibliography', 1, None, '___sec10')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript" async
+ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\DDT}[1]{\frac{\partial}{\partial t}{#1}}
+\newcommand{\DDR}[1]{\frac{\partial}{\partial r}{#1}}
+\newcommand{\DFDT}[1]{\frac{\partial{#1}}{\partial t}}
+\newcommand{\DFDP}[1]{\frac{\partial{#1}}{\partial p}}
+\newcommand{\DFDR}[1]{\frac{\partial{#1}}{\partial r}}
+\newcommand{\TENSOR}[1]{\mathbf{#1}}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="project2-readable.html">Transport in Porous Media -  From Laboratory Scale to Field Scale</a>
+  </div>
+
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="#___sec0" style="font-size: 80%;"><b>Introduction</b></a></li>
+     <!-- navigation toc: --> <li><a href="#ex:core_scale_experiment" style="font-size: 80%;"><b>Exercise 1</b></a></li>
+     <!-- navigation toc: --> <li><a href="#theoretical_background" style="font-size: 80%;"><b>Theoretical background for the rest of the project</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Diffusivity equation in radial flow</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Analytical solutions to the radial diffusivity equation?</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec5" style="font-size: 80%;"><b>A Crash Course on Classes</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec6" style="font-size: 80%;"><b>Exercise 2</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec7" style="font-size: 80%;"><b>Exercise 3 Implement the full numerical solution</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec8" style="font-size: 80%;"><b>Exercise 4 Compare with well data</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec9" style="font-size: 80%;"><b>Guidelines for project submission</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec10" style="font-size: 80%;"><b>Bibliography</b></a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0000"></a>
+<!-- ------------------- main content ---------------------- -->
+
+
+
+<div class="jumbotron">
+<center><h1>Transport in Porous Media -  From Laboratory Scale to Field Scale</h1></center>  <!-- document title -->
+
+<p>
+<!-- author(s): MOD510: Mandatory project \#2, and Deadline: 11 October 2020 (23:59) -->
+
+<center>
+<b>MOD510: Mandatory project \#2</b> 
+</center>
+
+<center>
+<b>Deadline: 11 October 2020 (23:59)</b> 
+</center>
+
+<p>
+<!-- institution(s) -->
+
+<br>
+<p>
+<center><h4>Sep 25, 2020</h4></center> <!-- date -->
+<br>
+<p>
+<b>Learning objectives.</b>
+By completing this project, the student will:
+
+<ul>
+<li> Learn to use matrix equation to do linear regression, and estimate model parameters from experimental data</li>
+<li> Solve the diffusivity equation using an implicit solution method</li> 
+<li> Compare sparse matrix solvers with standard dense solvers</li>
+<li> Estimate reservoir properties, such as reservoir permeability, and reservoir volume using a model for the well pressure and data from a well test</li>
+</ul>
+<b>Abstract.</b> In this project we want to show you how we extract information from both
+lab and field data. As many of you do not
+have a proper background in the study of transport in porous media, we have included thorough introduction and derivation of the necessary equations. If you want to get started quickly with the coding,
+without having to read and understand all the theory first, we suggest that
+you jump straight to equations <a href="#mjx-eqn-19">(19)</a>, <a href="#mjx-eqn-20">(20)</a>,
+and <a href="#mjx-eqn-21">(21)</a>. Show how you can derive these equations from the earlier
+equations involving the \( r \)-coordinate, equations <a href="#mjx-eqn-11">(11)</a>, <a href="#mjx-eqn-12">(12)</a>, and <a href="#mjx-eqn-13">(13)</a>.
+Next, implement a solver that solves the system <em>iteratively</em>. Start
+from a known initial pressure \( p_i \), and then compute the pressure distribution
+at a sequence of times \( \Delta t \), \( 2\Delta t \), \( 3\Delta t \) etc.
+After you have finished implementing the solver, you can go back and
+do exercise 1, and then 3 and 4 (or 3, 4 and then 1).
+
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b>A final tip.</b>
+If you want to copy and paste some of the provided example code, it is best
+to use the html version of the project. If you copy from the pdf, some of
+the symbols might not be pasted correctly.
+</div>
+
+
+<p>
+</div> <!-- end jumbotron -->
+
+<h1 id="___sec0" class="anchor">Introduction </h1>
+
+<p>
+Reservoirs are large pieces of porous rocks (usually sediments) that
+are buried underground. The size of a reservoir may vary a lot: typically
+by as much as 100-1000 m horizontally, and 10-100 m vertically.
+A sedimentary rock consists of many small grains, like sand on a beach.
+During geological time the sand grains have become cemented together,
+but still there is plenty of room for oil, water and gas to occupy the pores
+between the grains. Usually 20-30 \( \% \) of a rock is void space.
+The absolute <em>permeability</em> is a measure of how easily fluids flow through
+the rock. It plays the same role as does the inverse of resistance
+in electromagnetism. For example, a high permeability means that fluids flow
+easily through the rock, just as a low resistance conductor transmits
+electric current easily.
+What actually drives the fluid flow are <em>pressure differences</em>, and if we
+continue the analogy with electricity, these pressure differences play the
+same role as voltage gradients inside a conductor.
+
+<p>
+When a reservoir is opened for production, the pores close to the producer
+might clog due to the mobilization of particles, and because of
+chemical reactions taking place etc. <a href="#krueger1988overview">[1]</a>.
+If this happens, the permeability will be reduced. To monitor changes in
+reservoir permeability, a key tool is
+<em>well pressure testing</em> <a href="#lee2003pressure">[2]</a>, which is the topic of this
+project.
+It turns out that by studying the time-dependence of well pressures during
+production, one can actually learn a lot about the properties of a reservoir.
+This information is clearly extremely relevant for an oil company,
+but it of equal importance in geothermal applications, as well as during
+groundwater monitoring. Reservoirs are huge (\( \sim \) km size), and the well
+is only about half a foot, but still the information coming from a single
+producing well can provide valuable information about, e.g.,
+the size of the reservoir, or about formation damage close to well.
+If one finds that the reservoir has become clogged, one has
+to implement some kind of intervention, after which one can measure the
+effect of the intervention by repeating the well test.
+
+<p>
+Another factor that may be important to consider is reservoir compaction.
+As fluids are produced, the pressure in the formation drops, and this could
+lead to large increases in the effective stress in the reservoir,
+and to seabed subsidence.
+An example of this is Ekofisk, Norway's largest oil field, where platforms
+were observed to sink by several meters <a href="#sulak1988reservoir">[3]</a>;
+even if the reservoir itself is located more than 3 km below the seabed!
+A similar process has been taking place in Venice, which is currently sinking.
+Part of the recorded subsidence of the city has been attributed to
+groundwater pumping operations <a href="#tosi2013natural">[4]</a>.
+
+<h1 id="ex:core_scale_experiment" class="anchor">Exercise 1</h1>
+
+<p>
+Darcy's law <a href="#hubbert1956darcy">[5]</a> is frequently used to calculate the
+relationship between flow rate and pressure when a fluid phase is moving
+inside a permeable medium.
+If we neglect gravity and if we use a consistent set of units (e.g., SI-units),
+Darcy's law can be expressed in coordinate-free form as
+$$
+\begin{equation}
+\vec{u} = - \frac{\TENSOR{k}}{\mu}\nabla p \,,
+\tag{1}
+\end{equation}
+$$
+
+where \( \vec{u} \)[$\mathrm{L/T}$] is the Darcy velocity,
+\( \TENSOR{k} \)[$\mathrm{L^2}$] is the absolute permeability tensor,
+\( \mu \)[$\mathrm{ML/T}$] is the fluid viscosity, and
+\( p \)[$\mathrm{M/LT^2}$] is fluid pressure.
+
+<p>
+<b>Part 1.</b>
+
+<p>
+Consider a homogeneous cylindrical core sample of length \( L=7 \) cm,
+diameter \( d=3.8 \) cm.
+Imagine that we have first saturated the sample with water, and that
+we subsequently perform a sequence of injection tests in which water is pumped
+through the core at a constant volumetric flow rate, \( Q \). For each flow rate,
+we record the (steady-state) pressure difference across the core, \( \Delta{p} \).
+Darcy's law then implies that:
+$$
+\begin{equation}
+Q = \frac{kA}{\mu}\cdot\frac{\Delta{P}}{L}\,,
+\tag{2}
+\end{equation}
+$$
+
+where \( A=\pi{r}^2 \) is the cross-sectional area of the core.
+
+<ul>
+<li> Read the data stored in the file <code>core_flood.dat</code>. Make a scatter plot of \( \Delta{P} \) versus \( Q \).</li>
+</ul>
+
+<b>Part 2.</b>
+
+<p>
+At room temperature, the viscosity of water is approximately 1 cP (or
+\( 10^{-3} \) $\mathrm{Pa\cdot s}$ in SI-units).
+
+<ul>
+<li> Use linear regression to estimate the slope of the data, and estimate the permeability from equation <a href="#mjx-eqn-2">(2)</a>. If you use the given units (atm, ml/s, cm, cP) the permeability, \( k \), will have unit of Darcy (1 D \( \simeq 10^{-12} \) m$^2$).  When doing the linear regression formulate the problem as a linear problem (see example in the lecture notes), and use a matrix solver do find the regression coefficients.</li>
+</ul>
+
+<h1 id="theoretical_background" class="anchor">Theoretical background for the rest of the project</h1>
+
+<p>
+<!-- How are measured lab data relevant at the field scale? -->
+
+<p>
+The time-dependent pressure development in a reservoir can be studied by
+setting up a <em>fluid mass balance</em>:
+$$
+\begin{equation}
+\tag{3}
+\DDT{(\phi \rho)} = -\nabla\cdot (\rho \vec{u})\,,
+\end{equation}
+$$
+
+where \( \rho \)[$\mathrm{M/L^3}$] is the fluid density, and \( \phi \) is the
+porosity; the void fraction of the reservoir that permits fluid flow.
+We are going to assume that
+
+<ul>
+<li> Darcy's law accurately describes fluid motion,</li>
+<li> gravity and capillary forces can be neglected,</li>
+<li> viscosity is independent of pressure,</li>
+<li> the permeability tensor is isotropic and homogeneous, so that it can be represented by a single constant value, and</li>
+<li> fluid compressibility is low (i.e., we do not consider gases)</li>
+</ul>
+
+Inserting Darcy's law, equation <a href="#mjx-eqn-1">(1)</a>, and then expanding both
+sides of <a href="#mjx-eqn-3">(3)</a>, yields:
+$$
+\begin{equation}
+\tag{4}
+\phi\DFDT{\rho} + \rho\DFDT{\phi} = \frac{k}{\mu}
+\left(
+\nabla\rho\cdot\nabla{p} + \rho\nabla^{2}p
+\right)\,.
+\end{equation}
+$$
+
+The left side contains the <em>fluid density</em>, \( \rho \). We want to replace
+the density with pressure. This can be done by using the fluid compressibility:
+$$
+\begin{align}
+\tag{5}
+c_{f} &= -\frac{1}{V}\cdot\DFDP{V} = \frac{1}{\rho}\cdot\DFDP{\rho}\,.
+\end{align}
+$$
+
+Similarly, we want to replace the derivative of porosity by using the
+rock compressibility:
+$$
+\begin{align}
+\tag{6}
+c_{r} = \frac{1}{\phi}\cdot\DFDP{\phi}\,.
+\end{align}
+$$
+
+Both \( c_f \) and \( c_r \) are measured in units of inverse
+pressure (\( \mathrm{LT^2/M} \)).
+Equation <a href="#mjx-eqn-4">(4)</a> can therefore be written as
+$$
+\begin{align}
+\tag{7}
+\rho\phi c_t \cdot \DFDT{p} = \rho\frac{k}{\mu}
+\left(
+c_{f}\nabla{p}\cdot\nabla{p}
++\nabla{p}^2
+\right)
+\,.
+\end{align}
+$$
+
+where \( c_t=c_{f}+c_{r} \) is the total compressibility.
+Since we have assumed our fluid to be relatively incompressible (this is the
+case for water), it is often a very good approximation to drop the term
+proportional to \( c_{f} \) on the right-hand side:
+$$
+\begin{equation}
+\rho\frac{k}{\mu} c_{f}\nabla{p}\cdot\nabla{p}\approx 0 \,.
+\tag{8}
+\end{equation}
+$$
+
+If we use this approximation, and if we further define
+$$
+\begin{equation}
+\eta=\frac{k}{\mu\phi c_t}\,,
+\tag{9}
+\end{equation}
+$$
+
+<p>
+we end up with the <em>diffusivity equation</em>.
+<div class="alert alert-block alert-success alert-text-normal"><b>The diffusivity equation.</b>
+The diffusivity equation describes how pressure waves travel in a porous rock.
+$$
+\begin{equation}
+\DFDT{p} = \eta\nabla^{2} p\,.
+\tag{10}
+\end{equation}
+$$
+
+The factor \( \eta \) can be consider a diffusion constant, in analogy with
+molecular diffusion. Whenever you have a diffusion equation, you can
+use the relation
+$$
+\text{diffusion constant} \approx \frac{{\mathrm{length}}^2}
+{4\cdot\mathrm{time}}\,.
+$$
+
+to give an order of magnitude estimate the speed of the "diffusion".
+For example, if \( \eta= \) 2.5 m$^2$/s and the reservoir radius is 1 km,
+it will take approximately
+$$
+\frac{(1000 \text{ m})^2}{4\cdot 2.5 \text{ } \mathrm{m^2/s}}
+\simeq 1.2 \text{ days}
+$$
+
+for the pressure wave to reach the outer boundaries of the reservoir.
+</div>
+
+
+<h2 id="___sec3" class="anchor">Diffusivity equation in radial flow </h2>
+
+<p>
+If we use cylindrical coordinates, and if we assume perfectly radially
+symmetric flow, the diffusivity equation reduces to
+$$
+\begin{equation}
+\tag{11}
+\DFDT{p} = \eta \frac{1}{r}
+\DDR{\left(r\DFDR{p}\right)}\,.
+\end{equation}
+$$
+
+To solve this equation we need some boundary conditions.
+Later when doing numerical calculations, we shall assume that there is a
+vertical well placed in the middle of the reservoir, with well radius \( r=r_w \).
+The well is set to produce fluids at a <em>constant flow rate</em>, \( Q>0 \), in other
+words:
+$$
+\begin{align}
+\tag{12}
+\frac{2\pi h kr}{\mu}\frac{\partial p}{\partial r}|_{r=r_w} = Q \,.
+\end{align}
+$$
+
+<p>
+Far away from the well, at a distance \( r=r_e \), we shall assume that there
+is <em>no</em> flow of fluids:
+$$
+\begin{align}
+\tag{13}
+\frac{\partial p}{\partial r}|_{r=r_e} =0 \,.
+\end{align}
+$$
+
+<p>
+Note that equation <a href="#mjx-eqn-12">(12)</a> is a special case of
+Darcy's law, equation <a href="#mjx-eqn-1">(1)</a>; this can be seen by inserting
+\( \nabla=\partial/\partial r \), and \( Q=-u A=-u\cdot 2\pi r h \)
+\footnote{We use the sign convention that \( Q>0 \) for production from the well.}.
+
+<h2 id="___sec4" class="anchor">Analytical solutions to the radial diffusivity equation? </h2>
+
+<p>
+The diffusivity equation is extremely hard to solve exactly, and explicit
+formulas can be found only in idealized cases. One such solution is called
+the <em>line source solution</em>. It employs slightly different boundary conditions
+than formulated above:
+
+<ul>
+<li> It considers the well to be infinitely small (i.e. a line), thus neglecting the influence of a finite well radius, and</li>
+<li> The reservoir is assumed to be infinite. Moreover, rather than assuming no flow far away from the well, the line source solution assumes a constant pressure \( p_i \), the initial reservoir pressure, at infinity.</li>
+</ul>
+
+In mathematical terms, the boundary conditions for the line source solution
+are:
+$$
+\begin{align}
+\tag{14}
+\lim_{r\rightarrow 0}
+\left(\frac{2\pi h k}{\mu} r\DFDR{p}\right) = Q\,,
+\end{align}
+$$
+
+$$
+and
+\begin{align}
+\tag{15}
+\lim_{r\rightarrow \infty} p(r, t) = p_i \,.
+\end{align}
+$$
+
+The exact solution to equations <a href="#mjx-eqn-11">(11)</a>,
+<a href="#mjx-eqn-14">(14)</a>, and <a href="#mjx-eqn-15">(15)</a>
+is\footnote{You do not have to show this.}
+$$
+\begin{align}
+\tag{16}
+p(r, t) = p_i + \frac{Q\mu}{4\pi k h}\cdot
+\mathcal{W}\left(-\frac{r^2}{4\eta t}\right)\,,
+\end{align}
+$$
+
+where \( \mathcal{W} \) is the <em>exponential function</em>, defined in terms of an
+integral:
+$$
+\begin{align}
+\mathcal{W}(x) = \int^{x}_{-\infty} \frac{e^{u}}{u}\, du\,.
+\tag{17}
+\end{align}
+$$
+
+In Python this function can easily be computed by using the <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.expi.html" target="_self"><tt>sp.special.expi</tt></a>
+function.
+<!-- -sp.special.expi(-u) -->
+
+<h1 id="___sec5" class="anchor">A Crash Course on Classes </h1>
+
+<p>
+You are free to code the project as you see fit, but regardless of how you
+do it you should strive to a) write clear, concise code and b) reduce
+unnecessary code repetition. One way to achieve that is to use classes,
+because classes provide a mechanism for wrapping parts of your code into
+objects, which you can afterwards reuse in several places.
+
+<p>
+If you want to use classes for this project, there are really only a couple
+of things you need to know. First, all of your classes should include a special
+function called <code>__init__</code>, in which you declare the variables (attributes)
+you wish an instance / object of the class to keep track of.
+Second, all of these attributes should start with the keyword <code>self</code>,
+followed by a dot and then the actual attribute name.
+Third, functions inside a class should have <code>self</code> as the first function
+argument (when defining the function).
+All of this is best understood via an example:
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Person</span>:
+<span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">A class representing custom objects of the type Person.</span>
+<span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, name, age):
+
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>name <span style="color: #666666">=</span> name
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>age <span style="color: #666666">=</span> age
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>species <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;Human&#39;</span>
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">greeting</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Hello, my name is </span><span style="color: #BB6688; font-weight: bold">{}</span><span style="color: #BA2121">.&#39;</span><span style="color: #666666">.</span>format(<span style="color: #008000">self</span><span style="color: #666666">.</span>name))
+</pre></div>
+<p>
+This first few lines tells Python that in order to create a new <em>object</em> of
+the type <code>Person</code>, you have to provide the name and age of the person as
+input arguments, for example:
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>p1 <span style="color: #666666">=</span> Person(<span style="color: #BA2121">&#39;John&#39;</span>, <span style="color: #666666">36</span>)
+</pre></div>
+<p>
+When executing the above code, Python automatically invokes the <code>__init__</code>
+method, and sets the object attributes <code>self.name</code> and <code>self.age</code> based on
+the user input. In addition, we see that the object <code>p1</code> has a third attribute,
+<code>species</code>, which is hard-coded inside <code>__init__</code>, and is therefore not
+needed as input (this is a good way to set constants that you expect to
+re-use across parts of your program).
+
+<p>
+Once we have created a particular Person object, we can call the other
+function we have defined, namely <code>greeting</code>:
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>p1<span style="color: #666666">.</span>greeting()
+</pre></div>
+<p>
+Note that we do not include <code>self</code> as an input argument when <em>calling</em> the
+function; only when we define it \footnote{This is to let Python know that
+the function should be called on a particular object.}
+If you want to access variables belonging to an instance of the class,
+you can also access it via "dot-notation", e.g.:
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000">print</span>(p1<span style="color: #666666">.</span>name)
+<span style="color: #008000">print</span>(p1<span style="color: #666666">.</span>age)
+</pre></div>
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b>Why we suggest using classes.</b>
+The main advantage of using classes in this project is that you can define
+all the numerical model parameters once and for all within <code>__init__</code>, and
+then simply re-use them inside all your other functions.
+
+<p>
+However, you are not required to use classes to complete this project.
+If it seems too advanced at the moment, just code using ordinary functions.
+You should still try to make your functions re-usable, though!
+</div>
+
+
+<h1 id="___sec6" class="anchor">Exercise 2 </h1>
+
+<p>
+You are going to implement a numerical solver for the radial diffusivity
+equation. To avoid unnecessary complications with units, you may use the
+following class definition as a starting point:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">RadialDiffusivityEquationSolver</span>:
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    A finite difference solver for the radial diffusivity equation.</span>
+<span style="color: #BA2121; font-style: italic">    We use the coordinate transformation y = ln(r/rw) to set up and</span>
+<span style="color: #BA2121; font-style: italic">    solve the pressure equation.</span>
+
+<span style="color: #BA2121; font-style: italic">    The solver uses SI units internally, while &quot;practical field units&quot;</span>
+<span style="color: #BA2121; font-style: italic">    are required as input.</span>
+
+<span style="color: #BA2121; font-style: italic">    Except for the number of grid blocks / points to use, all class</span>
+<span style="color: #BA2121; font-style: italic">    instance attributes are provided with reasonable default values.</span>
+
+<span style="color: #BA2121; font-style: italic">    Input arguments:</span>
+
+<span style="color: #BA2121; font-style: italic">        name                                symbol      unit</span>
+<span style="color: #BA2121; font-style: italic">        --------------------------------------------------------------</span>
+<span style="color: #BA2121; font-style: italic">        Number of grid points                N          dimensionless</span>
+<span style="color: #BA2121; font-style: italic">        well radius                          rw         ft</span>
+<span style="color: #BA2121; font-style: italic">        extent of reservoir                  re         ft</span>
+<span style="color: #BA2121; font-style: italic">        height of reservoir                  h          ft</span>
+<span style="color: #BA2121; font-style: italic">        permeability                         k          mD</span>
+<span style="color: #BA2121; font-style: italic">        porosity                             phi        dimensionless</span>
+<span style="color: #BA2121; font-style: italic">        fluid viscosity                      mu         mPas (cP)</span>
+<span style="color: #BA2121; font-style: italic">        total compressibility                ct         1 / psi</span>
+<span style="color: #BA2121; font-style: italic">        constant flow rate at well           Q          bbl / day</span>
+<span style="color: #BA2121; font-style: italic">        initial reservoir pressure           pi         psi</span>
+<span style="color: #BA2121; font-style: italic">        constant time step                   dt         days</span>
+<span style="color: #BA2121; font-style: italic">        maximal simulation time          max_time       days</span>
+<span style="color: #BA2121; font-style: italic">        -------------------------------------------------------------</span>
+<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, N, rw<span style="color: #666666">=0.328</span>, re <span style="color: #666666">=</span> <span style="color: #666666">100000.</span>, h<span style="color: #666666">=8.0</span>,
+                 k<span style="color: #666666">=500</span>, phi<span style="color: #666666">=0.1</span>, mu<span style="color: #666666">=1.0</span>, ct<span style="color: #666666">=17.7e-6</span>,
+                 Q<span style="color: #666666">=1000</span>, pi<span style="color: #666666">=2000</span>, dt<span style="color: #666666">=0.1</span>, max_time<span style="color: #666666">=10</span>):
+
+        <span style="color: #408080; font-style: italic"># Unit conversion factors (input units --&gt; SI)</span>
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>ft_to_m_ <span style="color: #666666">=</span> <span style="color: #666666">0.3048</span>
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>psi_to_pa_ <span style="color: #666666">=</span> <span style="color: #666666">6894.75729</span>
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>day_to_sec_ <span style="color: #666666">=</span> <span style="color: #666666">24*60*60</span>
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>bbl_to_m3_ <span style="color: #666666">=</span> <span style="color: #666666">0.1589873</span>
+
+        <span style="color: #408080; font-style: italic"># Grid</span>
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>N_ <span style="color: #666666">=</span> N
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>rw_ <span style="color: #666666">=</span> rw<span style="color: #666666">*</span><span style="color: #008000">self</span><span style="color: #666666">.</span>ft_to_m_
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>re_ <span style="color: #666666">=</span> re<span style="color: #666666">*</span><span style="color: #008000">self</span><span style="color: #666666">.</span>ft_to_m_
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>h_ <span style="color: #666666">=</span> h<span style="color: #666666">*</span><span style="color: #008000">self</span><span style="color: #666666">.</span>ft_to_m_
+
+        <span style="color: #408080; font-style: italic"># Rock and fluid properties</span>
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>k_ <span style="color: #666666">=</span> k<span style="color: #666666">*1e-15</span> <span style="color: #666666">/</span> <span style="color: #666666">1.01325</span>
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>phi_ <span style="color: #666666">=</span> phi
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>mu_ <span style="color: #666666">=</span> mu<span style="color: #666666">*1e-3</span>
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>ct_ <span style="color: #666666">=</span> ct <span style="color: #666666">/</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>psi_to_pa_
+
+        <span style="color: #408080; font-style: italic"># Initial and boundary conditions</span>
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>Q_ <span style="color: #666666">=</span> Q<span style="color: #666666">*</span><span style="color: #008000">self</span><span style="color: #666666">.</span>bbl_to_m3_ <span style="color: #666666">/</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>day_to_sec_
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>pi_ <span style="color: #666666">=</span> pi<span style="color: #666666">*</span><span style="color: #008000">self</span><span style="color: #666666">.</span>psi_to_pa_
+
+        <span style="color: #408080; font-style: italic"># Time control for simulation</span>
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>dt_ <span style="color: #666666">=</span> dt<span style="color: #666666">*</span><span style="color: #008000">self</span><span style="color: #666666">.</span>day_to_sec_
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>max_time_ <span style="color: #666666">=</span> max_time<span style="color: #666666">*</span><span style="color: #008000">self</span><span style="color: #666666">.</span>day_to_sec_
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>current_time_ <span style="color: #666666">=</span> <span style="color: #666666">0.</span>
+</pre></div>
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b>READ THIS FIRST:  A note on default model parameters.</b>
+Whether you code with classes or not, we shall assume that the default model
+input parameters are those shown in the above class definition. For example,
+the default value for viscosity is \( 1 \) cP, the default well radius is
+0.328 ft, and so on.
+</div>
+
+
+<p>
+<b>Part 1.</b>
+
+<ul>
+<li> Implement a Python function called <code>line_source_solution</code> that returns the analytical line source solution, equation <a href="#mjx-eqn-16">(16)</a>, as a function of \( r \) and \( t \). The function should work both in the case when \( r \) and \( t \) are floating-point numbers, and when one of them is a float and the other is a NumPy array.</li>
+<li> Implement another function called <code>plot_line_source_solution</code> that makes a plot of the reservoir pressure versus radial distance at a specific point in time. This second function should take the time in question as an input argument, and it should call <code>line_source_solution</code> in order to compute the pressures.</li>
+</ul>
+
+For those of you who choose to code using classes, the functions should
+be member functions of the solver class; otherwise, use standalone
+functions with appropriate input arguments and default values.
+
+<p>
+The following code snippet shows how the above functions might
+work in practice (if following the class approach):
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #408080; font-style: italic"># Create a solver object. Use only default arguments:</span>
+solver <span style="color: #666666">=</span> RadialDiffusivityEquationSolver(N<span style="color: #666666">=100</span>)
+
+<span style="color: #408080; font-style: italic"># We can calculate the analytical solution at a specific point</span>
+<span style="color: #408080; font-style: italic"># in space and time:</span>
+analytical_sol <span style="color: #666666">=</span> solver<span style="color: #666666">.</span>line_source_solution(<span style="color: #666666">10.0</span>, <span style="color: #666666">42.0</span>)
+
+<span style="color: #408080; font-style: italic"># ...or at a specific position, but at several times:</span>
+time_array <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0.0</span>, <span style="color: #666666">50</span>, <span style="color: #666666">51</span>)
+analytical_sol <span style="color: #666666">=</span> solver<span style="color: #666666">.</span>line_source_solution(<span style="color: #666666">10.0</span>, time_array)
+
+<span style="color: #408080; font-style: italic"># ...or at a specific time, but at multiple locations:</span>
+position_array <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0.1</span>, <span style="color: #666666">10</span>, <span style="color: #666666">11</span>)
+analytical_sol <span style="color: #666666">=</span> solver<span style="color: #666666">.</span>line_source_solution(position_array, <span style="color: #666666">42.0</span>)
+</pre></div>
+<p>
+<b>Part 2.</b>
+
+<ul>
+<li> Plot the line source solution as a function of \( r \) assuming default model input parameters (i.e., at \( t=10 \) days).</li>
+<li> What do you see? Does the curve approach the expected limits?</li>
+</ul>
+
+<b>Part 3.</b>
+Next, we are going to use a clever coordinate transformation. Define
+$$
+\begin{equation}
+y(r) = \ln\frac{r}{r_w},
+\tag{18}
+\end{equation}
+$$
+
+where, as before, \( r_w \) is the radius of the well.
+
+<ul>
+<li> Show that in the new \( y \)-coordinate, equations <a href="#mjx-eqn-11">(11)</a>, <a href="#mjx-eqn-12">(12)</a>, and <a href="#mjx-eqn-13">(13)</a> can be rewritten as:</li>
+</ul>
+
+$$
+\begin{align}
+\tag{19}
+\frac{\partial p}{\partial t}
+&= \eta\frac{e^{-2y}}{r_w^2}\frac{\partial^2 p}{\partial y^2} \,, \\ 
+\tag{20}
+\frac{\partial p}{\partial y}|_{y=y_w} &= \frac{Q\mu}{2\pi h k} \,, \\ 
+\tag{21}
+\frac{\partial p}{\partial y}|_{y=y_e} &= 0 \,.
+\end{align}
+$$
+
+<!-- \frac{2\pi h k}{\mu}\frac{\partial p}{\partial y}|_{y=y_w} &= Q \,, \\ -->
+
+<p>
+<b>Part 4.</b>
+
+<p>
+We are now going to discretize equation <a href="#mjx-eqn-19">(19)</a>. We start by dividing
+the total flow domain into \( N \) equally sized grid blocks in the \( y \)-coordinates,
+see figure <a href="#fig:rad_coord">1</a> for an illustration.
+The numerical pressure solution will be calculated at the <em>midpoints</em> (centers)
+of the \( y \)-blocks; note that this does <em>not</em> correspond to the center of the
+\( r \)-blocks!
+
+<p>
+<center> <!-- figure label: --> <div id="fig:rad_coord"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 1:  Sketch of the coordinate transformation \( r\rightarrow{y} \). Note that the pressure is always evaluated at the center of the \( y \)-blocks.  <!-- caption label: fig:rad_coord --> </p></center>
+<p><img src="fig-project2/radial_coords.png" align="bottom" width=300></p>
+</center>
+
+<ul>
+<li> Make a NumPy array of size \( N \) where the elements are the midpoint coordinates of each \( y \)-interval. You should give the array a meaningful name, for example: <code>y_centres_</code> or <code>y_midpoints_</code>.</li>
+<li> Create another array holding the \( r \)-coordinates of the grid points. Again, this will be a NumPy array of size \( N \) (hint: invert equation <a href="#mjx-eqn-18">(18)</a>.)</li>
+<li> Plot the line solution using your new \( r \)-coordinates.  Use a logarithmic scale on the x-axis. Comment on the plot. Are the \( r \)-points spaced out as they should?</li>
+</ul>
+
+If you code your solver as a class, the arrays should be attributes
+that are initialized within the <code>__init__</code> function.
+However, the plotting should <em>not</em> be included inside <code>__init__</code>.
+<!--  -->
+<!-- In general when doing numerical simulations, it is almost always a good idea -->
+<!-- to separate plotting from calculations. -->
+
+<p>
+<b>Part 5.</b>
+Let \( i \) denote an arbitrary grid point inside our simulation domain.
+To discretize the left-hand side of <a href="#mjx-eqn-19">(19)</a> for point \( i \), we use
+the following approximation:
+$$
+\begin{equation}
+\frac{\partial p}{\partial t} =
+\frac{p(y_i, t+\Delta t)-p(y_i, t)}{\Delta t} + \mathcal{O}(\Delta t)
+\equiv \frac{p_{i}^{n+1}-p_{i}^n}{\Delta t} + \mathcal{O}(\Delta t).
+\tag{22}
+\end{equation}
+$$
+
+We have introduced the following short-hand notation:
+\( p_{i}^{n+1}\equiv p(y_i, t+\Delta t) \), and \( p_{i}^n\equiv p(y_i, t) \).
+Next, we are going do discretize the spatial (right-hand side)
+term of Eq. <a href="#mjx-eqn-19">(19)</a>. However, before we can approximate partial
+derivatives with respect to \( y \), we have to decide what value to use for
+the time; after all, the pressure is a function of both space and time,
+\( p=p(r, t) \).
+
+<p>
+If we select the time \( t \), corresponding to the pressure solutions \( p_{i}^n \),
+we say that we use an <em>explicit scheme</em>.
+On the other hand, if we use \( t+\Delta{t} \), we say that we have an
+<em>implicit</em> scheme. It turns out that the implicit scheme is much more
+numerically stable, hence we choose that option here:
+$$
+\begin{equation}
+\frac{\partial^2 p}{\partial y^2}
+=\frac{p^{n+1}_{i+1}+p^{n+1}_{i-1}-2p^{n+1}_i}{\Delta y^2}
++ \mathcal{O}(\Delta{y}^2)
+\tag{23}
+\end{equation}
+$$
+
+<div class="alert alert-block alert-success alert-text-normal"><b>Numerical scheme for interior grid points.</b>
+By neglecting higher order terms, the finite difference discretization of
+equation <a href="#mjx-eqn-19">(19)</a> becomes
+$$
+\begin{equation}
+\frac{p_{i}^{n+1}-p_{i}^n}{\Delta t}=\eta\cdot\frac{e^{-2y_i}}{r_w^2}\cdot
+\frac{p^{n+1}_{i+1}+p^{n+1}_{i-1}-2p^{n+1}_i}{\Delta y^2}
+\tag{24}
+\end{equation}
+$$
+</div>
+
+
+<ul>
+<li> Suppose that we use \( N=4 \) grid points. Write down equation <a href="#mjx-eqn-24">(24)</a> for all four points, \( i=0, 1, 2, 3 \).</li>
+</ul>
+
+Note that some of the equations contains \( p_{-1} \) and \( p_{4} \), both of which are outside of the physical simulation domain!
+
+<p>
+<b>Part 6.</b>
+
+<ul>
+<li> Again, let \( N=4 \). Replace the derivatives in the boundary conditions equation <a href="#mjx-eqn-20">(20)</a> and <a href="#mjx-eqn-21">(21)</a> by the (second order) central finite difference approximation to eliminate  \( p_{-1} \) and \( p_4 \). Show that we now can formulate the equations as the following matrix equation</li>
+</ul>
+
+$$
+\begin{equation}
+\underbrace{\begin{pmatrix}
+1+\xi_0&-\xi_0&0&0\\ 
+-\xi_1&2+\xi_1&-\xi_1&0\\ 
+0&-\xi_2&2+\xi_2&-\xi_2\\ 
+0&0&-\xi_3&1+\xi_3\\ 
+\end{pmatrix}}_{\mathbf{A}}
+\underbrace{\begin{pmatrix}
+p_0^{n+1}\\ 
+p_1^{n+1}\\ 
+p_2^{n+1}\\ 
+p_3^{n+1}\\ 
+\end{pmatrix}}_{\mathbf{p}^{n+1}}
+=
+\underbrace{\begin{pmatrix}
+p_0^{n}-\xi_0\beta\\ 
+p_1^{n}\\ 
+p_2^{n}\\ 
+p_3^{n}\\ 
+\end{pmatrix}}_{\mathbf{p}^{n}-\mathbf{d}}
+\tag{25},
+\end{equation}
+$$
+
+where we have defined
+$$
+\xi_i \equiv \frac{\eta e^{-2 y_i} \Delta{t}}{r_w^2 \Delta{y}^2}\,,
+$$
+
+and
+$$
+\beta \equiv \frac{Q\mu\Delta y}{2\pi k h}\,.
+$$
+
+If we know the initial pressure, \( \mathbf{p}^0 \), in the reservoir at \( t=0 \),
+the pressure distribution at \( t=\Delta t \) , \( \mathbf{p}^1 \), is found by solving
+equation <a href="#mjx-eqn-25">(25)</a>. Schematically:
+$$
+\begin{align*}
+\mathbf{p}^1 & =\mathbf{A}^{-1}\left(\mathbf{p}^0-\mathbf{d}\right)  \,, \\ 
+\mathbf{p}^2 & =\mathbf{A}^{-1}\left(\mathbf{p}^1-\mathbf{d}\right) \,,  \\ 
+\mathbf{p}^3 & =\mathbf{A}^{-1}\left(\mathbf{p}^2-\mathbf{d}\right) \,, \\ 
+&\text{ etc.}
+\end{align*}
+$$
+
+<h1 id="___sec7" class="anchor">Exercise 3 Implement the full numerical solution </h1>
+
+<p>
+Once you have understood what goes on in special case \( N=4 \), it is time to
+tackle the general situation (<em>any</em> choice of \( N \)).
+We assume the pressure is the same everywhere at time zero:
+$$
+p_{0}^0=p_{1}^0=p_{2}^0\ldots=p_i \,.
+$$
+
+<p>
+After setting the initial condition, we need to implement a time loop and
+solve the discretized equations <a href="#mjx-eqn-25">(25)</a> repeatedly for each
+time step: \( \Delta{t} \), \( 2\Delta{t} \), \( 3\Delta{t} \), etc.
+As before, we need to take special care when coding the equations for
+the first and last grid points, \( i=0 \) and \( i=N-1 \).
+
+<p>
+<b>Part 1.</b>
+Start by making three different Python functions:
+
+<ol>
+<li> A function <code>setup_matrix</code>, in which you store the coefficient matrix as a regular NumPy matrix\footnote{An \( N\times N \) NumPy array.}.</li>
+<li> Another function <code>setup_sparse_matrix</code>, where only the non-zero elements of the matrix are stored. For ideas on how to do this, see the official SciPy documentation, e.g.: <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.diags.html" target="_self"><tt>scipy.sparse.diags</tt></a>.</li>
+<li> A function <code>rhs</code>, which calculates the right-hand side of the linear equation system.</li>
+</ol>
+
+<b>Part 2.</b>
+
+<p>
+Note that as long as we use a constant \( \Delta{t} \), we only need to set
+up the matrices once; when initializing the model.
+On the other hand, the right-hand side vector must be updated each time step.
+
+<p>
+Finish implementing the numerical solver for the radial diffusivity equation:
+
+<ul>
+<li> Write a "top-level" function that executes all the necessary steps. The simulator should be able to select at run-time whether the dense and sparse matrix solver is going to be used.</li>
+<li> Solve the diffusivity equation numerically assuming default model input parameters and \( N=100 \).</li>
+<li> Compare your numerical solutions with the analytical line source solution. Check that you get the same result regardless of whether you use a dense or sparse matrix solver.</li>
+</ul>
+
+<b>Part 3.</b>
+
+<ul>
+<li> Increase the number of grid points to \( N=1000 \). Compare the efficiency of the two linear solvers.</li>
+</ul>
+
+<h1 id="___sec8" class="anchor">Exercise 4 Compare with well data </h1>
+
+<p>
+Although we have measured properties of a rock sample in the lab, the reality
+in the reservoir might be very different. In this exercise we are going to
+study data from a well test.
+During a well test, the production engineer starts to produce from the
+reservoir, while at the same time monitoring how the well pressure changes
+as a function of time.
+
+<p>
+<b>Part 1.</b>
+
+<ul>
+<li> Read the data from <code>well_test.dat</code> into a Pandas DataFrame.</li>
+<li> Plot the experimental well pressures versus time. Describe what you see.</li>
+</ul>
+
+<b>Part 2.</b>
+
+<p>
+So far we have only calculated the pressure distribution
+<em>inside the reservoir</em>; the actual observable well pressure is missing!
+However, we can estimate the well pressure by discretizing equation <a href="#mjx-eqn-21">(21)</a>:
+
+<ul>
+<li> Use a first-order finite difference approximation to determine the well pressure</li>
+</ul>
+
+(Hint: Use Taylor's formula with step-size \( \Delta{y}/2 \).)
+
+<p>
+<b>Part 3.</b>
+
+<ul>
+<li> Further extend your program by calculating, and storing, the estimated well pressure at each time step in your simulation.</li>
+</ul>
+
+<b>Part 4.</b>
+
+<ul>
+<li> Try to manually match your numerical model to the well test data (Hint: use \( \log \) scale on the \( x \)-axis)</li> 
+<li> To be able to do so, you might have to modify one or both of the following input parameters: \( k \), \( p_i \).</li>
+<li> Make a plot in which you show 1) the experimental well test data, 2) your numerical well pressure solution, and 3) the corresponding line source solution (i.e., at \( r=r_w \))</li>
+</ul>
+
+<b>Part 5.</b>
+
+<p>
+Notice that towards the end of the well test, the pressure starts to rapidly
+decline. This is actually a sign that the pressure wave has reached the end of
+the reservoir.
+
+<ul>
+<li> Use the permeability, \( k \), and initial pressure, \( p_i \), you found in the previous task, but change \( r_e \) to to match the start of the late decline period.</li>
+<li> Use the value you found for \( r_e \) to calculate the volume of fluids in the reservoir.</li>
+</ul>
+
+<b>Part 6.</b>
+(OPTIONAL) Use a non linear solver in Python to estimate \( p_i \), \( k \), \( r_e \) as a best fit to the data from the well pressure test.
+
+<h1 id="___sec9" class="anchor">Guidelines for project submission </h1>
+The project has to be handed in as a notebook, though you can submit an additional PDF if you want.
+You should bear the following points in mind when working on the project:
+
+<ul>
+<li> Start your notebook by providing a short introduction in which you outline the nature of the problem(s) to be investigated.</li>
+<li> End your notebook with a brief summary of what you feel you learned from the project (if anything). Also, if you have any general comments or suggestions for what could be improved in future assignments, this is the place to do it.</li>
+<li> All code that you make use of should be present in the notebook, and it should ideally execute without any errors (especially run-time errors). If you are not able to fix everything before the deadline, you should give your best understanding of what is not working, and how you might go about fixing it.</li>
+<li> Functions that you code <em>should be reusable, never copy and paste code</em>. Copy and paste is a strong indication that you instead should define function.</li>
+<li> If you use an algorithm that is not fully described in the assignment text, you should try to explain it in your own words. This also applies if the method is described elsewhere in the course material.</li>
+<li> In some cases it may suffice to explain your work via comments in the code itself, but other times you might want to include a more elaborate explanation in terms of, e.g., mathematics and/or pseudocode.</li>
+<li> In general, it is a good habit to comment your code (though it can be overdone).</li>
+<li> When working with approximate solutions to equations, it is always useful to check your results against known exact (analytical) solutions, should they be available.</li>
+<li> It is also a good test of a model implementation to study what happens at known 'edge cases'.</li>
+<li> Any figures you include should be easily understandable. You should label axes appropriately, and depending on the problem, include other legends etc. Also, you should discuss your figures in the main text.</li>
+<li> It is always good if you can reflect a little bit around <em>why</em> you see what you see.</li>
+</ul>
+
+<h1 id="___sec10" class="anchor">Bibliography </h1>
+
+<p>
+<!-- begin bibliography -->
+
+<ol>
+ <li> <div id="krueger1988overview"></div> <b>R. F. Krueger</b>. 
+    An Overview of Formation Damage and Well Productivity in Oilfield Operations: an Update,
+    <em>SPE California Regional Meeting</em>,
+    1988.</li>
+ <li> <div id="lee2003pressure"></div> <b>J. Lee, J. B. Rollins and J. P. Spivey</b>. 
+    <em>Pressure Transient Testing</em>,
+    Richardson, Tex.: Henry L. Doherty Memorial Fund of AIME, Society of Petroleum Engineers,
+    2003.</li>
+ <li> <div id="sulak1988reservoir"></div> <b>A. Sulak and J. Danielsen</b>. 
+    Reservoir Aspects of Ekofisk Subsidence,
+    <em>Offshore Technology Conference</em>,
+    1988.</li>
+ <li> <div id="tosi2013natural"></div> <b>L. Tosi, P. Teatini and T. Strozzi</b>. 
+    Natural Versus Anthropogenic Subsidence of Venice,
+    <em>Scientific reports</em>,
+    3(1),
+    pp. 1-9,
+    2013.</li>
+ <li> <div id="hubbert1956darcy"></div> <b>M. K. Hubbert</b>. 
+    Darcy's Law and the Field Equations of the Flow of Underground Fluids,
+    <em>Transactions of the AIME</em>,
+    207(01),
+    pp. 222-239,
+    1956.</li>
+</ol>
+
+<!-- end bibliography -->
+
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+
