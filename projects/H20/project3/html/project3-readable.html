@@ -1,0 +1,1209 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Zombies and Covid-19 - Trust the models, or your gut?">
+
+<title>Zombies and Covid-19 - Trust the models, or your gut?</title>
+
+<!-- Bootstrap style: bootswatch_readable -->
+<link href="https://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:64px;      /* fixed header height for style bootswatch_readable */
+  margin:-64px 0 0; /* negative fixed header height */
+}
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Exercise 1: General ODE solver',
+               1,
+               'exercise:ODE_solver',
+               'exercise:ODE_solver'),
+              ('Exercise 1.1 (OPTIONAL): Adaptive step size',
+               1,
+               None,
+               '___sec1'),
+              ('Modeling the apocalypse: The SZ-model', 1, None, '___sec2'),
+              ('Exercise 2: No hope?',
+               1,
+               'exercise:no_hope',
+               'exercise:no_hope'),
+              ('The SEZR-model', 1, None, '___sec4'),
+              ('Exercise 3: Counter-strike', 1, 'eq:SZ_kill', 'eq:SZ_kill'),
+              ('Exercise 4: Compartment model for Covid-19',
+               1,
+               'exercise:corona_virus',
+               'exercise:corona_virus'),
+              ('In your analysis, discuss (at least) the following points',
+               1,
+               None,
+               '___sec7'),
+              ('Appendix A: Implementing ODE solvers using standalone '
+               'functions',
+               1,
+               None,
+               '___sec8'),
+              ('Appendix B: Be aware of variable scope!', 1, None, '___sec9'),
+              ('Appendix C: Passing function arguments using `*args` and '
+               '`*kwargs`',
+               1,
+               None,
+               '___sec10'),
+              ('Appendix D: Implementing ODE solvers using object-oriented '
+               'programming',
+               1,
+               None,
+               '___sec11'),
+              ('Bibliography', 1, None, '___sec12')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript" async
+ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\renewcommand{\vec}[1]{\mathbf{#1}}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="project3-readable.html">Zombies and Covid-19 - Trust the models, or your gut?</a>
+  </div>
+
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="#exercise:ODE_solver" style="font-size: 80%;">Exercise 1: General ODE solver</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec1" style="font-size: 80%;">Exercise 1.1 (OPTIONAL): Adaptive step size</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec2" style="font-size: 80%;">Modeling the apocalypse: The SZ-model</a></li>
+     <!-- navigation toc: --> <li><a href="#exercise:no_hope" style="font-size: 80%;">Exercise 2: No hope?</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec4" style="font-size: 80%;">The SEZR-model</a></li>
+     <!-- navigation toc: --> <li><a href="#eq:SZ_kill" style="font-size: 80%;">Exercise 3: Counter-strike</a></li>
+     <!-- navigation toc: --> <li><a href="#exercise:corona_virus" style="font-size: 80%;">Exercise 4: Compartment model for Covid-19</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec7" style="font-size: 80%;">In your analysis, discuss (at least) the following points</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec8" style="font-size: 80%;">Appendix A: Implementing ODE solvers using standalone functions</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec9" style="font-size: 80%;">Appendix B: Be aware of variable scope!</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec10" style="font-size: 80%;">Appendix C: Passing function arguments using <code>*args</code> and <code>*kwargs</code></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec11" style="font-size: 80%;">Appendix D: Implementing ODE solvers using object-oriented programming</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec12" style="font-size: 80%;">Bibliography</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0000"></a>
+<!-- ------------------- main content ---------------------- -->
+
+
+
+<div class="jumbotron">
+<center><h1>Zombies and Covid-19 - Trust the models, or your gut?</h1></center>  <!-- document title -->
+
+<p>
+<!-- author(s): MOD510: Mandatory project \#3, and Deadline: 15 November 2020 (23:59) -->
+
+<center>
+<b>MOD510: Mandatory project \#3</b> 
+</center>
+
+<center>
+<b>Deadline: 15 November 2020 (23:59)</b> 
+</center>
+
+<p>
+<!-- institution(s) -->
+
+<br>
+<p>
+<center><h4>Oct 27, 2020</h4></center> <!-- date -->
+<br>
+<p>
+<b>Learning objectives.</b>
+By completing this project, the student will:
+<!-- * Learn how one can model the spreading of diseases mathematically. -->
+
+<ul>
+<li> Implement a solver for systems of first-order ordinary differential equations (ODEs) in Python.</li>
+<li> Learn how to escape a zombie invasion using wisdom from simple <em>compartment models</em>.</li>
+<li> Describe the spread of the Corona virus with a compartment model.</li>
+<li> Constrain model input parameters by comparing with data.</li>
+</ul>
+
+<b>Project overview.</b>
+In this project we are modeling the worst, but hoping (solving) for the
+best.
+If zombies invade a little village in Norway, how much time do the inhabitants
+have to prevent the apocalypse? Is it even possible? To answer these questions,
+we set up and solve deterministic compartment models. After simulating the zombie epidemic, we apply the same kind of model
+to real data for outbreaks of the Corona (SARS-CoV-2) virus.
+
+<p>
+<!-- ======= Introduction ======= -->
+
+<p>
+<center> <!-- figure label: --> <div id="fig:p3:wkd0"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 1:  Prepare for the worst (From the AMC show ''The Walking Dead'')  <!-- caption label: fig:p3:wkd0 --> </p></center>
+<p><img src="fig-project3/wkd.png" align="bottom" width=400></p>
+</center>
+
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b><font color="white">Before we start:</font>.</b>
+<font color="white">In this project, more than any other, you have to have
+control over numerical uncertainty and instabilities - your very future
+may depend on it!</font>
+</div>
+
+
+<p>
+</div> <!-- end jumbotron -->
+
+<h1 id="exercise:ODE_solver" class="anchor">Exercise 1: General ODE solver</h1>
+
+<p>
+The goal of this exercise is to implement a solver that can handle <em>any</em>
+system of ordinary differential equations (ODEs) of the form
+$$
+\begin{align}
+\tag{1}
+\frac{d\vec{y}}{dt} &= \vec{f}(\vec{y}, t) \,, \\ 
+\vec{y}(0) &= \vec{y_0} \,,
+\tag{2}
+\end{align}
+$$
+
+where \( t\geq{0} \) is a real number, \( \vec{y(t)} \) is the unknown solution
+vector with initial condition \( \vec{y_0} \),
+and \( \vec{f} \) is a vector-valued function that can depend upon
+both \( y \) and \( t \).
+
+<p>
+It is important that the solver is general, because later you are going
+to apply it to a series of different compartment models.
+
+<p>
+<b>Part 1.</b>
+
+<ul>
+<li> Implement a general ODE solver class or function.</li>
+<li> The solver should be able to switch between different numerical schemes, depending on user input:</li>
+
+<ul>
+    <li> Implement as one option the Forward (explicit) Euler scheme.</li>
+    <li> Implement as another option the (explicit) Runge-Kutta fourth order scheme (see <a href="#hiorth2019">[1]</a>, and the lecture notes)</li>
+</ul>
+
+<li> The solver should work regardless of the size of the system.</li>
+</ul>
+
+To be able to write a reusable solver, your code must be agnostic about the
+particular choice of right-hand side function.
+If you are unsure about how to do this, the Appendix contains suggestions
+with example code to get you started!
+
+<p>
+<b>Part 2.</b>
+To test that the solver works, we shall consider the second-order differential
+equation
+$$
+\begin{align}
+\tag{3}
+x^{\prime\prime}(t) + \omega^{2} x(t)=0\,,
+\end{align}
+$$
+
+where \( x_0=x(0) \) and \( v_0=x^{\prime}(0) \). The analytical solution is:
+$$
+\begin{align}
+x(t) = x_0 \cdot\cos(\omega t) + \frac{v_0}{\omega}\cdot\sin(\omega t)\,.
+\tag{4}
+\end{align}
+$$
+
+
+<ul>
+<li> First, make a plot in which you show the analytical solution for several combinations of \( \omega \), \( x_0 \), and \( v_0 \).</li>
+</ul>
+
+<b>Part 3.</b>
+
+<p>
+Equation <a href="#mjx-eqn-3">(3)</a> is a second order ODE, and it is
+therefore not in the form required by your numerical solver.
+However, there is a standard trick we can use to convert it into
+a <em>system of first order equations</em>: first, we introduce a new variable
+\( v=v(t)=x^{\prime}(t) \), and then we let
+$$
+\vec{y}=
+\begin{pmatrix}
+x \\ 
+v \\ 
+\end{pmatrix}\,.
+$$
+
+We end up with,
+$$
+\begin{align}
+\tag{5}
+\frac{d\vec{y}}{dt} &=
+\begin{pmatrix}
+v \\ 
+-\omega^2 x \\ 
+\end{pmatrix} \,,
+\end{align}$$
+
+which is of the form <a href="#mjx-eqn-1">(1)</a>:
+<!-- Thus, you are in a position to solve the system with the code you made in -->
+<!-- the first part: -->
+
+<ul>
+<li> Let \( v_0=0 \), \( x_0=1 \), and \( \omega=1 \). Solve the system <a href="#mjx-eqn-5">(5)</a> with both the Forward Euler and the Runge-Kutta4 method.</li>
+<li> Simulate for at least \( t=3P \), where \( P=2\pi/\omega \), and start by letting \( dt=0.1 \) (you may want to test different step sizes)</li>
+<li> Compare with the analytical solution.</li>
+</ul>
+
+<h1 id="___sec1" class="anchor">Exercise 1.1 (OPTIONAL): Adaptive step size  </h1>
+
+<ul>
+<li> As a third solver option, implement an adaptive version of the Runge-Kutta fourth order scheme, using Richardson extrapolation.</li>
+<li> Compare the performance of the adaptive scheme to the non-adaptive schemes.</li>
+</ul>
+
+To be able to do so, you may have to modify your previous code.
+
+<h1 id="___sec2" class="anchor">Modeling the apocalypse: The SZ-model </h1>
+
+<p>
+Compartment models <a href="#kermack1927contribution">[2]</a> are widely used to study
+how an epidemic disease might spread in a population.
+In these models, the population is partitioned into compartments based on
+a set of possible "disease states", and differential equations are set up
+to describe how individuals "flow" from one compartment to another.
+The equations can be either deterministic or stochastic.
+While the latter type of model is more realistic, we will only study
+deterministic models in this project.
+
+<p>
+We first consider the SZ-model, which consists of only two compartments:
+
+<ol>
+<li> \( S \) - Susceptible: humans that risk being turned into zombies; by being bitten or scratched by a zombie.</li>
+<li> \( Z \) - Zombies.</li>
+</ol>
+
+<center> <!-- figure label: --> <div id="fig:human_zombies"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 2:  The SZ-model. Note that only transport from the class of exposed humans to zombies are allowed. Zombies are <em>never</em> cured; if you are bitten you are dead, dead, dead, ...  <!-- caption label: fig:human_zombies --> </p></center>
+<p><img src="fig-project3/ZI.png" align="bottom" width=400></p>
+</center>
+
+<p>
+Let \( N \) be the total population size. For each time \( t \), let \( S(t) \) denote
+the number of humans, and \( Z(t) \) the number of zombies.
+To develop a model, we need to calculate the rate of flow between the
+two compartments in figure <a href="#fig:human_zombies">2</a>.
+We start by making some observations:
+
+<ul>
+<li> During each time interval \( \Delta{t} \), a certain number of individuals will come into contact with each other.</li>
+<li> We only care about human-zombie encounters. Interactions between two humans, or between two zombies, are not relevant for the process of "zombification".</li>
+<li> Whenever a human meets a zombie, there is a certain probability that the human becomes infected.</li>
+</ul>
+
+We shall take our imagined population of humans and zombies to be <em>well mixed</em>,
+meaning that pairs of individuals interact with equal probability.
+Let \( \mathcal{C}(N) \) denote the rate at which <em>any</em> individual in the
+population contacts <em>any</em> another individual, i.e., the average number of
+contacts made per unit time. Then, we can estimate the change in the human
+population from time \( t \) to \( t+\Delta{t} \) as:
+$$
+\begin{align}
+S(t+\Delta t)-S(t) = -\mathcal{C}(N)\cdot{\Delta t}
+\cdot{p}\cdot{q}\cdot{S(t)}\,.
+\tag{6}
+\end{align}
+$$
+
+where \( p \) denotes the conditional probability that a given contact is between a
+human and a zombie, and \( q \) is the probability that such an encounter leads to
+infection. Because of the well mixed assumption, a good assumption is that
+\( p=Z(t)/N \); thus, the challenge consists in estimating \( \mathcal{C}(N) \) and \( q \).
+In principle, both of these parameters may vary in time, but for now we shall
+regard them as constant. By merging them into a single factor, \( \beta \), we
+get
+$$
+\begin{align}
+S(t+\Delta t)-S(t) = -\beta\cdot{\Delta t}\cdot\frac{S(t)Z(t)}{N}\,,
+\tag{7}
+\end{align}
+$$
+
+Finally, by dividing by \( \Delta t \) and letting \( \Delta t \rightarrow 0 \),
+we obtain the following ODE:
+$$
+\begin{align}
+\tag{8}
+\frac{\mathrm{d}S(t)}{\mathrm{d}t} =-\beta\cdot\frac{S(t)Z(t)}{N} \,.
+\end{align}
+$$
+
+Similarly, the evolution of the zombie population is given by:
+$$
+\begin{align}
+\tag{9}
+\frac{\mathrm{d}Z(t)}{\mathrm{d}t} =+\beta\cdot\frac{S(t)Z(t)}{N} \,.
+\end{align}
+$$
+
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b><font color="white">How to interpret \( \beta \)?</font>.</b>
+
+<p>
+<font color="white">By saying that \( \beta \) is constant, we have made two very strong assumptions:</font>
+
+<ul>
+<li> <font color="white">People make the same number of contacts regardless of the population size, and independent of time.</font></li>
+<li> <font color="white">The probability of becoming a zombie, given that you meet one, always stays the same.</font></li>
+</ul>
+
+<font color="white">In reality, \( \beta \) is time-dependent,
+as it implicitly accounts for a lot of biomedical, physical, and sociological
+factors.
+For example, in the beginning of a zombie outbreak, \( \beta \) is likely to be
+large, because humanity might not yet understand the severity of the situation,
+or they may be in denial. As people start to realize the danger
+and fight back against the zombies, we expect that \( \beta \) will decrease!</font>
+</div>
+
+
+<h1 id="exercise:no_hope" class="anchor">Exercise 2: No hope?</h1>
+
+<p>
+Clearly, if there are no infected individuals at time zero,
+the above equations predict that nothing will happen later either.
+We shall therefore assume that the initial number of zombies is close
+to one; typically \( Z_0=Z(0)=1 \).
+
+<p>
+<b>Part 1.</b>
+
+<ul>
+<li> Show that the analytical solution to the SZ-model, equations <a href="#mjx-eqn-8">(8)</a> and <a href="#mjx-eqn-9">(9)</a>, is</li>
+</ul>
+
+$$
+\begin{align}
+\tag{10}
+S(t) &=\frac{(S_0+Z_0)\frac{S_0}{Z_0}\exp(-\beta{t})}{1+\frac{S_0}{Z_0}\exp(-\beta{t})} \,, \\ 
+\tag{11}
+Z(t) &=\frac{S_0+Z_0}{1+\frac{S_0}{Z_0}\exp(-\beta{t})}\,,
+\end{align}
+$$
+
+where \( S_0=S(0) \), and thus \( S_0+Z_0=N \).
+
+<p>
+<b>Part 2.</b>
+
+<p>
+The SZ-model predicts that the entire human population will be turned into
+zombies as \( t\rightarrow{\infty} \):
+
+<ul>
+<li> Prove this mathematically.</li>
+</ul>
+
+<b>Part 3.</b>
+
+<p>
+Sokndal and Dirdal are two small villages in Rogaland. Two scientists from
+these places went to an international conference on numerical methods
+in Haiti. During the conference, an excursion was arranged to a rural area,
+and a strange tomato salad consisting of, among other things, pufferfish
+venom, was served <a href="#davis2010serpent">[3]</a>.
+After arriving back in Norway, both scientists got a fever, stopped eating,
+and subsequently started to behave suspiciously.
+
+<p>
+<center>  <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 3:  A view from Sokndal (left) and Dirdal (right). </p></center>
+<p><img src="fig-project3/sd.png" align="bottom" width=400></p>
+</center>
+
+<p>
+Dirdal has about 683 inhabitants, and Sokndal 3305 <a href="#snl">[4]</a>.
+We want to use the SZ-model to investigate a potential zombie invasion
+in these two places:
+
+<ul>
+<li> Assume that \( \beta=0.06 \) 1/hour. Use the analytical solution, equation <a href="#mjx-eqn-11">(11)</a>, to calculate how the number of zombies changes as a function of time in Dirdal and Sokndal.</li>
+<li> Make a figure where you compare the results.</li>
+</ul>
+
+<b>Part 4.</b>
+Use your ODESolver to compute numerical solutions to the case you studied in the previous part:
+
+<ul>
+<li> Make one plot in which you compare the ForwardEuler results to the analytical solution.</li>
+<li> Make another plot where you apply the RungeKutta4 method.</li>
+<li> Roughly which time steps do you need to take in order to get accurate solutions?</li>
+</ul>
+
+<b>Part 5.</b>
+
+<p>
+Later on in a zombie outbreak, people become more aware and not so easily
+fooled by the hordes of undead; after all, zombies are not known to be
+particularly bright. To capture this behavior, the zombie-infection rate
+will now be assumed to decline exponentially:
+$$
+\begin{equation}
+\beta(t)=\beta_0 e^{-\lambda t}.
+\tag{12}
+\end{equation}
+$$
+
+Suppose moreover that, after a specific time \( T \), the probability of infection
+has been reduced to 60$\%$ of its initial value. We can then estimate \( \lambda \)
+from:
+$$
+\begin{equation}
+e^{-\lambda T}=0.6,
+\tag{13}
+\end{equation}
+$$
+
+from which it follows that
+$$
+\begin{equation}
+\lambda=-\frac{1}{T}\ln 0.6.
+\tag{14}
+\end{equation}
+$$
+
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b><font color="white">Sokndal versus Dirdal?</font>.</b>
+<font color="white">In Sokndal, it takes 48 hours for the probability of being
+infected by a zombie to drop by 40 \%. In Dirdal, it takes 72 hours.
+One explanation for this is that the inhabitants of Dirdal are more tolerant
+of unorthodox behavior, with the consequence that it takes more time for them
+to discover the zombies. However, anecdotal evidence suggests that people in
+Sokndal behave in quite strange ways also, as might be inferred from the
+lyrics of their local singer-songwriter T&#248;nes.</font>
+</div>
+
+
+<p>
+Based on the information you have been given above:
+
+<ul>
+<li> Calculate the numerical value of \( \lambda \) for both the Dirdal and the Sokndal zombie outbreak.</li>
+<li> Solve the extended SZ-model numerically.</li>
+<li> Roughly how many people survive the zombie outbreak in the two locations?</li>
+</ul>
+
+Again, you should compare the different numerical schemes with each other.
+<!-- * (<b>OPTIONAL</b>): Find the analytical solution to the extended \( SZ \)-model, and  use it to quantify numerical errors. -->
+
+<h1 id="___sec4" class="anchor">The SEZR-model </h1>
+
+<p>
+In the \( SZ \)-model with time-dependent \( \beta \), some of the humans might survive,
+but that is only because the probability of infection eventually drops to zero;
+the zombies are still roaming around. However, we know from data on
+real outbreaks (e.g., <a href="#kirkman2004walking">[5]</a>) that the humans will eventually
+fight back and start killing zombies.
+The \( SZ \)-model furthermore supposes that bitten humans turn into zombies
+instantaneously. While this conservative assumption are supported by certain
+movies and TV shows, other sources <a href="#brooks2003zombie">[6]</a> indicate that a
+latency period of about \( 1/\sigma=24 \) hours may be more realistic.
+Both of the above facts should be acknowledged in our models.
+We therefore refine our model by adding two new compartments:
+
+<ul>
+<li> \( E \): <em>exposed</em> humans, people that have been bitten or scratched by a zombie, but who still remain non-contagious to others.</li>
+<li> \( R \): <em>removed</em> (killed) zombies.</li>
+</ul>
+
+The system of equations <a href="#mjx-eqn-15">(15)</a>-<a href="#mjx-eqn-18">(18)</a>
+will hereafter be referred to as the \( SEZR \)-model, see figure <a href="#fig:SEZR">4</a>.
+
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b><font color="white">The \( SEZR \)-model</font>.</b>
+<font color="white">
+$$
+\begin{align}
+\tag{15}
+\frac{\mathrm{d}S(t)}{\mathrm{d}t} &= -\beta(t)\cdot\frac{S(t)Z(t)}{N} \,, \\ 
+\tag{16}
+\frac{\mathrm{d}E(t)}{\mathrm{d}t} &= \beta(t)\cdot\frac{S(t)Z(t)}{N}-\sigma\cdot{E(t)} \,, \\ 
+\tag{17}
+\frac{\mathrm{d}Z(t)}{\mathrm{d}t} &= \sigma\cdot{E(t)}-\left(\alpha+\omega(t)\right)\frac{S(t)Z(t)}{N} \,, \\ 
+\tag{18}
+\frac{\mathrm{d}R(t)}{\mathrm{d}t} &= \left(\alpha+\omega(t)\right)\frac{S(t)Z(t)}{N} \,.
+\end{align}
+$$
+
+</font>
+</div>
+
+
+<p>
+<center> <!-- figure label: --> <div id="fig:SEZR"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 4:  SEZR model.  <!-- caption label: fig:SEZR --> </p></center>
+<p><img src="fig-project3/seir.png" align="bottom" width=400></p>
+</center>
+
+<p>
+In the above equations, the parameter \( \alpha \) can be thought of as the
+average rate of zombie killing, while the function \( \omega(t) \) represents
+a series of violent attacks launched by humans at specific points in time.
+Following Langtangen et al.  <a href="#langtangen2013escaping">[7]</a>, we define:
+$$
+\begin{equation}
+\tag{19}
+\omega(t) = a\displaystyle\sum_{i=1}^m
+\exp\left(\frac{1}{2}(\frac{t-T_i}{T_\sigma})^2\right)\,,
+\end{equation}
+$$
+
+where \( a \) and \( T_\sigma \) are constant parameters, and where
+\( T_1, T_2, \ldots, T_m \) are the times at which the humans launch
+violent attacks.
+
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b><font color="white">The reproduction number</font>.</b>
+<font color="white">
+The <em>basic reproduction number</em>,  is a number that determines
+whether a disease is able to spread in population. It represents the average number
+of new infected cases produced, in an entirely susceptible population, by a typical
+infected individual <a href="#diekmann1990definition">[8]</a>.
+In the SEZR-model, it is a good approximation to define it as</font>
+<font color="white">
+$$
+\begin{equation}
+\tag{20}
+\mathcal{R}_0\simeq\frac{\beta(t)}{\alpha + \omega(t)}.
+\end{equation}
+$$
+
+</font>
+</div>
+
+
+<h1 id="eq:SZ_kill" class="anchor">Exercise 3: Counter-strike</h1>
+
+<p>
+<b>Part 1.</b>
+
+<ul>
+<li> Implement the violent attack function, Eq. <a href="#mjx-eqn-19">(19)</a>, as a Python function.</li>
+<li> Plot the function for the following choice of values \( a=40\cdot\beta_0 \) and \( T_\sigma=1 \)</li>
+<li> What is the physical interpretation of the parameters \( a \) and \( T_\sigma \)?</li>
+</ul>
+
+<b>Part 2.</b>
+For simplicity we shall again suppose that \( \beta(t)=\beta_0 \) is constant.
+Choose either Sokndal or Dirdal. Run a few simulations:
+
+<ul>
+<li> Start by letting \( \alpha>0 \), but set \( \omega(t)=0 \). Is it possible to survive the zombie apocalypse if \( \beta/\alpha > 1 \)?</li>
+<li> Turn on violent attacks. Does it now seem possible to survive if \( \beta/\alpha>1 \)?
+<!-- * What if you both \( \beta \) be a time-varying function? -->
+<!-- !bnotice <font color="white">if \( Z(t)<1 \) and \( E(t) < 1 \)</font> -->
+<!-- <font color="white"> --></li>
+</ul>
+
+If the number of zombies drops below one,
+you might want to set \( \beta \) $\to 0$. Similarly, if \( E(t) < 1 \)
+you could set \( \sigma \) $\to0$. After all, there is no
+such thing as a fractional zombie or human. (Or is there ...?)
+<!-- </font> -->
+<!-- !enotice -->
+
+<p>
+<!-- ======= The SEIRD-model ======= -->
+
+<h1 id="exercise:corona_virus" class="anchor">Exercise 4: Compartment model for Covid-19</h1>
+
+<p>
+In the final part of the project we wish to study the transmission of
+Covid-19 (Corona virus disease) by means of a compartment model with
+five compartments:
+<div class="alert alert-block alert-success alert-text-normal"><b><font color="white">The \( SEIRD \)-model</font>.</b>
+<font color="white">
+$$
+\begin{align}
+\tag{21}
+\frac{\mathrm{d}S(t)}{\mathrm{d}t} &= -\beta(t)\cdot\frac{S(t)I(t)}{N} \,, \\ 
+\tag{22}
+\frac{\mathrm{d}E(t)}{\mathrm{d}t} &= \beta(t)\cdot\frac{S(t)I(t)}{N}-\sigma\cdot{E(t)} \,, \\ 
+\tag{23}
+\frac{\mathrm{d}I(t)}{\mathrm{d}t} &= \sigma\cdot{E(t)}-\gamma\cdot I(t) \,, \\ 
+\tag{24}
+\frac{\mathrm{d}R(t)}{\mathrm{d}t} &= (1-f)\cdot\gamma\cdot I(t) \,, \\ 
+\tag{25}
+\frac{\mathrm{d}D(t)}{\mathrm{d}t} &= f\cdot\gamma\cdot I(t)\,.
+\end{align}
+$$
+
+</font>
+In this model the <em>basic reproduction number</em> is
+given by \( \mathcal{R}_0 = \beta(t)/\gamma \).
+
+<p>
+</div>
+
+
+<p>
+Notice that we have changed the notation for the infectious compartment from
+\( Z(t) \) to \( I(t) \). The exposed compartment is the same as before, but
+we have split people who no longer have the disease into two categories:
+
+<ol>
+<li> \( R(t) \) is the number of people who have become immune ("Recovered").</li>
+<li> \( D(t) \) denotes the number of dead individuals.</li>
+</ol>
+
+Data for the Corona virus are readily available. We will use data found at
+the Github repository <a href="https://github.com/CSSEGISandData/COVID-19" target="_self">'Center for Systems Science and Engineering (CSSE) at
+Johns Hopkins University'</a>.
+We have already extracted country-level data for you, and stored it in a
+processed format in the text file <code>corona_data.dat</code>. Data for the Hubei
+province in China, where it is believed that the virus first arose, is also
+included in the text file.
+
+<p>
+The reason for doing so is that while the original data were organized by date
+since January 22 2020, we would like to plot the data versus the time of
+the first confirmed case.
+This makes it easier to apply the same model to different locations.
+
+<p>
+<b>Part 1.</b>
+
+<ul>
+<li> Plot the total number of a) confirmed cases and b) deaths of Covid-19 for Norway, Sweden, the Hubei province in China, and a couple of other locations of your own choice.
+<!-- * Comment on the results! --></li>
+</ul>
+
+Consider to make more than one Python function to achieve this, for example
+one that reads the data file into a Pandas Data Frame and returns it, and
+another function to plot confirmed cases and/or deaths.
+
+<p>
+You might also want to normalize the data rather than showing absolute numbers,
+e.g., to plot the number of confirmed cases / deaths per 100 000 inhabitants
+(find relevant source(s) for population data)
+<!--  -->
+<!-- For population size use number of inhabitants as reported in <a href="https://www.worldometers.info/world-population/" target="_self">worldometer</a> -->
+
+<p>
+<b>Part 2.</b>
+
+<p>
+Next, we want to fit our model to the data. To this end, you can for example
+use
+<a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.curve_fit.html" target="_self"><tt>scipy.optimize.curve_fit</tt></a> function.
+
+<p>
+As before, calculate \( \beta(t) \) from equation <a href="#mjx-eqn-12">(12)</a>.
+If we assume the mean infectious period to be
+approximately 20 days <a href="#NIPH">[9]</a>, $1/\gamma$=20,
+and that the mean incubation period, \( 1/\sigma \), is 5.1 days <a href="#lauer2020incubation">[10]</a>,
+the only unknowns are \( \beta_0 \), \( \lambda \), and the death rate, \( f \).
+
+<ul>
+<li> Fit the \( SEIRD \) model (i.e. determine \( \beta_0 \), and \( \lambda \)) to the confirmed number of cases for Hubei, assuming a death rate of 5 \%.</li>
+<li> Plot 1) the number of confirmed cases,  2) the number of deaths, and 3) the results of the fitted model <em>in the same plot</em>. Include a secondary y-axis where you plot the basic reproduction number versus time.</li>
+</ul>
+
+<b>Part 3.</b>
+
+<ul>
+<li> Use the same model you fitted to the Hubei data to predict disease transmission in the other places you considered before (Norway, Sweden, etc.)</li>
+</ul>
+
+<b>Part 4.</b>
+
+<ul>
+<li> Tune the model individually to the different places, so that you get a better match than in the previous part (you might want to change the death rate)</li>
+</ul>
+
+<h1 id="___sec7" class="anchor">In your analysis, discuss (at least) the following points </h1>
+
+<ul>
+<li> [Zombie] How the Euler and  Runge Kutta4 methods perform in terms of both accuracy and speed.</li>
+<li> [Zombie] How the SEZR-model could be further improved.</li>
+<li> [Covid-19] Strengths and weaknesses of the presented SEIRD-model for Covid-19.</li>
+<li> [Covid-19] In particular, comment on the model we have chosen for \( \beta(t) \). Do you have any better suggestions?</li>
+</ul>
+
+<h1 id="___sec8" class="anchor">Appendix A: Implementing ODE solvers using standalone functions </h1>
+
+<p>
+To implement a general ODE solver, you should make use of the fact that in
+Python, functions are <em>first-class objects</em>.
+That is, functions are objects just like any other (e.g., numbers and strings),
+which means that functions can passed in as input arguments to other
+functions, they can be return values of other functions, etc.
+As an example to whet your appetite, consider the following code:
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">forward_euler_step</span>(f, yn, tn, dt):
+    <span style="color: #008000; font-weight: bold">return</span> yn <span style="color: #666666">+</span> dt <span style="color: #666666">*</span> f(yn, tn)
+</pre></div>
+<p>
+The function <code>forward_euler_step</code> has four input arguments:
+1) The right-hand side function of the ODE, 2) the current solution,
+3) the current time, and  4) the time step to use when advancing the
+solution forward in time to the next time step.
+The code is completely general; all we require is that <code>f</code> is a function
+that takes two input arguments, \( Y \) and \( t \), e.g.:
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(y, t):
+    <span style="color: #008000; font-weight: bold">return</span> y
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">g</span>(y, t):
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">-</span>y
+
+<span style="color: #408080; font-style: italic"># Set initial condition &amp; time step:</span>
+t0 <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+y0 <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+dt <span style="color: #666666">=</span> <span style="color: #666666">0.1</span>
+
+<span style="color: #408080; font-style: italic"># Compute solution at t=dt for two different choices of the</span>
+<span style="color: #408080; font-style: italic"># right-hand side function:</span>
+y1_f <span style="color: #666666">=</span> forward_euler_step(f, y0, t0, <span style="color: #666666">0.1</span>)
+y1_g <span style="color: #666666">=</span> forward_euler_step(g, y0, t0, <span style="color: #666666">0.1</span>)
+</pre></div>
+<p>
+The above code will even work for functions of several variables, provided that
+<code>f</code> is a vectorized function and that <code>yn</code> is an array of the correct size.
+As an example of this, consider the SZ-model introduced in the main text.
+While we could reduce this system of two equations to a single equation by
+using that \( S(t)+Z(t)=N \), we ignore this and write it in the general
+form <a href="#mjx-eqn-1">(1)</a> by setting
+$$
+\begin{align}
+\vec{y}(t) &=
+\begin{pmatrix}
+S(t) \\ 
+Z(t) \\ 
+\end{pmatrix}\,.
+\tag{26}
+\\ 
+\vec{f}(\vec{y}(t), t) &=
+\begin{pmatrix}
+-\frac{\beta S(t)Z(t)}{N} \\ 
++\frac{\beta S(t)Z(t)}{N} \\ 
+\end{pmatrix}\,.
+\tag{27}
+\\ 
+\,.
+\tag{28}
+\end{align}$$
+
+We can implement the vector-valued right-hand side function like this:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #408080; font-style: italic"># We start by defining the model parameters outside of the function</span>
+N <span style="color: #666666">=</span> <span style="color: #666666">683</span>
+beta <span style="color: #666666">=</span> <span style="color: #666666">0.06</span>
+
+<span style="color: #408080; font-style: italic"># Next, we use the current parameters to create a function with</span>
+<span style="color: #408080; font-style: italic"># only Y and t as input arguments:</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">rhs_SZ</span>(Y, t):
+    S, Z <span style="color: #666666">=</span> Y
+    <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>array([<span style="color: #666666">-</span>beta<span style="color: #666666">*</span>S<span style="color: #666666">*</span>Z<span style="color: #666666">/</span>N, beta<span style="color: #666666">*</span>S<span style="color: #666666">*</span>Z<span style="color: #666666">/</span>N])
+</pre></div>
+<p>
+Notice the clever use of
+<a href="https://realpython.com/python-lists-tuples/#tuple-assignment-packing-and-unpacking" target="_self">tuple unpacking</a>
+here; the first line of the function definition is a short-hand equivalent to
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>S <span style="color: #666666">=</span> Y[<span style="color: #666666">0</span>]
+Z <span style="color: #666666">=</span> Y[<span style="color: #666666">1</span>]
+</pre></div>
+<p>
+With this approach, we can take a Forward-Euler step as follows:
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>t0 <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+y0 <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([<span style="color: #666666">682</span>, <span style="color: #666666">1</span>])  <span style="color: #408080; font-style: italic"># notice that y0 is now an array of size 2</span>
+dt <span style="color: #666666">=</span> <span style="color: #666666">0.1</span>
+
+<span style="color: #408080; font-style: italic"># Compute solution at t=dt:</span>
+y1 <span style="color: #666666">=</span> forward_euler_step(rhs_SZ, y0, t0, <span style="color: #666666">0.1</span>)
+</pre></div>
+<p>
+So far, we have only implemented a single time step.
+To implement a solver that computes the solution at a sequence of time
+steps \( 0, \Delta{t}, 2\Delta{t}, 3\Delta{t}, \ldots \), we can call the
+function <code>forward_euler_step</code> inside yet another function, e.g.:
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">ode_solver_forward_euler</span>(f, y0, dt, max_time):
+
+    no_time_steps <span style="color: #666666">=</span> <span style="color: #008000">int</span>(max_time<span style="color: #666666">/</span>dt)
+
+    times <span style="color: #666666">=</span> [<span style="color: #666666">0</span>]
+    solutions <span style="color: #666666">=</span> [y0]
+    <span style="color: #008000; font-weight: bold">for</span> _ <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(no_time_steps):
+        <span style="color: #408080; font-style: italic"># insert missing code here</span>
+    <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>array(times), np<span style="color: #666666">.</span>array(solutions)
+</pre></div>
+<p>
+Once finished, the function can be executed as follows:
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>t_num, y_num <span style="color: #666666">=</span> ode_solver_forward_euler(rhs_SZ, y0, <span style="color: #666666">0.01</span>, <span style="color: #666666">100</span>)
+</pre></div>
+<p>
+Of course, we would have to make additional modifications to accommodate
+different choices of numerical schemes.
+
+<h1 id="___sec9" class="anchor">Appendix B: Be aware of variable scope! </h1>
+
+<p>
+In the above code examples, the model parameters \( \beta \) and \( N \) were
+defined outside of the function <code>f</code>, but the function still had access to
+the values. In general when running Python code, this is only possible if
+the following conditions are met:
+
+<ul>
+<li> The function definition is placed within the same scope as the variables it uses (i.e., \( \beta \) and \( N \)), and</li>
+<li> The function definition comes after the variables have been declared.</li>
+</ul>
+
+It should be mentioned that Jupyter notebooks work differently.
+This is because you can run cells in any order, which means that even if you
+delete the declaration of \( \beta \) and \( N \), their previous values will be stored
+in memory until you reset the Python kernel. This also implies that if at any time
+you execute a cell which changes \( \beta \) or N, all subsequent calls to the
+ODE solver will use the latest values!
+
+<p>
+For a very simple example illustrating this behavior, consider the following
+function, defined in a scope where no variable <code>x</code> has previously been assigned:
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_function</span>():
+    <span style="color: #008000">print</span>(x)
+</pre></div>
+<p>
+Trying to execute the function will lead to a <em>NameError</em>:
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>test_function()
+</pre></div>
+<p>
+On the other hand, we can get the code to work by first typing, e.g.
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>x <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+</pre></div>
+<p>
+and then re-running the cell executing the function. However, if we
+restart the Python kernel, the call to <code>test_function</code> will not work anymore!
+This is because we are once more in a situation where the test function is
+called <em>before</em> <code>x</code> has been assigned.
+
+<p>
+To summarize, you should be very careful when using variables defined
+outside of a function inside the function. Sometimes it may be necessary, but
+remember that the order in which you execute your code could then be very
+important!
+
+<p>
+See <a href="https://python-textbok.readthedocs.io/en/1.0/Variables_and_Scope.html" target="_self">this link</a>
+for a detailed explanation of variable scope in Python.
+
+<h1 id="___sec10" class="anchor">Appendix C: Passing function arguments using <code>*args</code> and <code>*kwargs</code> </h1>
+
+<p>
+Another way you can implement your ODE solver is to make use of a special Python
+syntax that lets you pass in an arbitrary number of parameters to a function.
+For example, you can extend the above solver functions by adding <code>*args</code> to the
+end of their input argument lists:
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">forward_euler_step</span>(f, yn, tn, dt, <span style="color: #666666">*</span>args):
+    <span style="color: #008000; font-weight: bold">return</span> yn <span style="color: #666666">+</span> dt <span style="color: #666666">*</span> f(yn, tn, <span style="color: #666666">*</span>args)
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">ode_solver_forward_euler</span>(f, y0, dt, max_time, <span style="color: #666666">*</span>args):
+
+    no_time_steps <span style="color: #666666">=</span> <span style="color: #008000">int</span>(max_time<span style="color: #666666">/</span>dt)
+
+    times <span style="color: #666666">=</span> [<span style="color: #666666">0</span>]
+    solutions <span style="color: #666666">=</span> [y0]
+    <span style="color: #008000; font-weight: bold">for</span> _ <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(no_time_steps):
+        <span style="color: #408080; font-style: italic"># insert missing code here</span>
+    <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>array(times), np<span style="color: #666666">.</span>array(solutions)
+</pre></div>
+<p>
+Next, we re-define the right-hand side function to explicitly include
+\( \beta \) and \( N \) as input parameters:
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f_SZ</span>(Y, t, beta, N):
+    S, Z <span style="color: #666666">=</span> Y
+    <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>array([<span style="color: #666666">-</span>beta<span style="color: #666666">*</span>S<span style="color: #666666">*</span>Z<span style="color: #666666">/</span>N, beta<span style="color: #666666">*</span>S<span style="color: #666666">*</span>Z<span style="color: #666666">/</span>N])
+</pre></div>
+<p>
+Finally, you can run the solver by typing:
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>t_num, y_num <span style="color: #666666">=</span> ode_solver_forward_euler(f_SZ, y0, <span style="color: #666666">0.01</span>, <span style="color: #666666">100</span>, beta, N)
+</pre></div>
+<p>
+See this <a href="https://realpython.com/python-kwargs-and-args/" target="_self">tutorial</a> on
+RealPython for a good introduction to how you can use this technique.
+The tutorial also explains how you may do the same with
+keyword arguments (<code>**kwargs</code>).
+
+<h1 id="___sec11" class="anchor">Appendix D: Implementing ODE solvers using object-oriented programming </h1>
+
+<p>
+A more advanced method for implementing your ODE solvers is to use classes.
+You can of course code everything inside a single class, as you probably did
+in Project 2. However, here it might be an even better idea to code in
+an <a href="https://en.wikipedia.org/wiki/Object-oriented_programming" target="_self">object-oriented</a>
+way by making several classes:
+
+<ul>
+<li> A base class called, e.g., <code>ODESolver</code>.</li>
+<li> Several subclasses, one for each numerical scheme, e.g.. <code>ForwardEuler</code>, <code>RungeKutta4</code>, etc.</li>
+</ul>
+
+If you want to try this strategy, the code below illustrates how you could start:
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">ODESolver</span>:
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    Base class for ODE solvers.</span>
+<span style="color: #BA2121; font-style: italic">    Subclasses of this class will implement a particular numerical</span>
+<span style="color: #BA2121; font-style: italic">    scheme for solving a system of first-order ODEs of the form</span>
+
+<span style="color: #BA2121; font-style: italic">        dY/dt = f(Y, t), Y(0)=Y0,</span>
+
+<span style="color: #BA2121; font-style: italic">    where Y=Y(t) can be either a function of a single real-valued</span>
+<span style="color: #BA2121; font-style: italic">    variable, or a vector of such functions.</span>
+
+<span style="color: #BA2121; font-style: italic">    Note that the current implementation presumes a constant step</span>
+<span style="color: #BA2121; font-style: italic">    size for the integration. This assumption will of course have</span>
+<span style="color: #BA2121; font-style: italic">    to be relaxed if adaptive step size control is to be used.</span>
+<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, f, y0, dt):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">        :param f: The right-hand side function of the ODE (system).</span>
+<span style="color: #BA2121; font-style: italic">        :param y0: The initial condition.</span>
+<span style="color: #BA2121; font-style: italic">        :param dt: Constant step size.</span>
+<span style="color: #BA2121; font-style: italic">        &quot;&quot;&quot;</span>
+        <span style="color: #408080; font-style: italic"># Trick: Ensure that f will return an array even if the</span>
+        <span style="color: #408080; font-style: italic"># user returns a list</span>
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>f_ <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">lambda</span> y, t: np<span style="color: #666666">.</span>array(f(y, t), dtype<span style="color: #666666">=</span><span style="color: #BA2121">&#39;float&#39;</span>)
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>y0_ <span style="color: #666666">=</span> y0
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>dt_ <span style="color: #666666">=</span> dt
+
+        <span style="color: #408080; font-style: italic"># Set simulation history to &quot;None&quot; before initializing</span>
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>t_ <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">None</span>
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>y_ <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">None</span>
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">reset_model</span>(<span style="color: #008000">self</span>):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">        Resets the model before starting up a new simulation.</span>
+<span style="color: #BA2121; font-style: italic">        &quot;&quot;&quot;</span>
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>t_ <span style="color: #666666">=</span> [<span style="color: #666666">0</span>]
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>y_ <span style="color: #666666">=</span> [<span style="color: #008000">self</span><span style="color: #666666">.</span>y0_]
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">solve</span>(<span style="color: #008000">self</span>, max_t, verbose<span style="color: #666666">=0</span>):
+
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>reset_model()
+
+        no_steps <span style="color: #666666">=</span> <span style="color: #008000">int</span>(max_t <span style="color: #666666">/</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>dt_)
+
+        current_t <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+        dt <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>dt_
+        <span style="color: #008000; font-weight: bold">for</span> _ <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(no_steps):
+            <span style="color: #008000">self</span><span style="color: #666666">.</span>advance(dt)
+            current_t <span style="color: #666666">+=</span> dt
+            <span style="color: #008000; font-weight: bold">if</span> verbose:
+                msg <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;Done computing solution at&#39;</span>
+                msg <span style="color: #666666">+=</span> <span style="color: #BA2121">&#39; t=</span><span style="color: #BB6688; font-weight: bold">{}</span><span style="color: #BA2121">.&#39;</span><span style="color: #666666">.</span>format(current_t)
+                <span style="color: #008000">print</span>(msg)
+        <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>array(<span style="color: #008000">self</span><span style="color: #666666">.</span>t_), np<span style="color: #666666">.</span>array(<span style="color: #008000">self</span><span style="color: #666666">.</span>y_)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">advance</span>(<span style="color: #008000">self</span>, dt):
+        err <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;advance() cannot be called on base class ODESolver.&quot;</span>
+        err <span style="color: #666666">+=</span> <span style="color: #BA2121">&quot; Must call on an instance of an ODESolver subclass!&quot;</span>
+        <span style="color: #008000; font-weight: bold">raise</span> <span style="color: #D2413A; font-weight: bold">NotImplementedError</span>(err)
+
+<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">ForwardEuler</span>(ODESolver):
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, f, y0, dt):
+        <span style="color: #008000">super</span>()<span style="color: #666666">.</span><span style="color: #0000FF">__init__</span>(f, y0, dt)  <span style="color: #408080; font-style: italic"># call superclass __init__ method</span>
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">advance</span>(<span style="color: #008000">self</span>, dt):
+        tn, yn <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>t_[<span style="color: #666666">-1</span>], <span style="color: #008000">self</span><span style="color: #666666">.</span>y_[<span style="color: #666666">-1</span>]
+        f <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>f_
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>t_<span style="color: #666666">.</span>append(tn<span style="color: #666666">+</span>dt)
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>y_<span style="color: #666666">.</span>append(yn <span style="color: #666666">+</span> dt <span style="color: #666666">*</span> f(yn, tn))
+</pre></div>
+
+<h1 id="___sec12" class="anchor">Bibliography </h1>
+
+<p>
+<!-- begin bibliography -->
+
+<ol>
+ <li> <div id="hiorth2019"></div> <b>A. Hiorth</b>. 
+    <em>Computational Engineering and Modeling</em>,
+    https://github.com/ahiorth/CompEngineering,
+    2019.</li>
+ <li> <div id="kermack1927contribution"></div> <b>W. O. Kermack and A. G. McKendrick</b>. 
+    A Contribution to the Mathematical Theory of Epidemics—I,
+    <em>Proceedings of the Royal Society of London. Series A, Containing papers of a mathematical and physical character</em>,
+    115(772),
+    pp. 700-721,
+    1927.</li>
+ <li> <div id="davis2010serpent"></div> <b>W. Davis</b>. 
+    <em>The Serpent and the Rainbow</em>,
+    Simon and Schuster,
+    2010.</li>
+ <li> <div id="snl"></div> Store Norske Leksikon. 
+    Accessed: 2020-10-23,
+    <a href="https://snl.no" target="_self"><tt>https://snl.no</tt></a>.</li>
+ <li> <div id="kirkman2004walking"></div> <b>R. Kirkman</b>. 
+    <em>The Walking Dead Vol. 1: Days Gone Bye</em>,
+    Image Comics,
+    2004.</li>
+ <li> <div id="brooks2003zombie"></div> <b>M. Brooks</b>. 
+    <em>The Zombie Survival Guide: Complete Protection From the Living Dead</em>,
+    Broadway Books,
+    2003.</li>
+ <li> <div id="langtangen2013escaping"></div> <b>H. P. Langtangen, K.-A. Mardal and P. Røtnes</b>. 
+    Escaping the Zombie Threat by Mathematics,
+    <em>Zombies in the Academy-Living Death in Higher Education</em>,
+    2013.</li>
+ <li> <div id="diekmann1990definition"></div> <b>O. Diekmann, J. A. P. Heesterbeek and J. A. Metz</b>. 
+    On the Definition and the Computation of the Basic Reproduction Ratio R 0 in Models for Infectious Diseases in Heterogeneous Populations,
+    <em>Journal of mathematical biology</em>,
+    28(4),
+    pp. 365-382,
+    1990.</li>
+ <li> <div id="NIPH"></div> Coronavirus Modelling at the NIPH. 
+    Accessed: 2019-10-26,
+    <a href="https://www.fhi.no/en/id/infectious-diseases/coronavirus/coronavirus-modelling-at-the-niph-fhi/" target="_self"><tt>https://www.fhi.no/en/id/infectious-diseases/coronavirus/coronavirus-modelling-at-the-niph-fhi/</tt></a>.</li>
+<li> <div id="lauer2020incubation"></div> <b>S. A. Lauer, K. H. Grantz, Q. Bi, F. K. Jones, Q. Zheng, H. R. Meredith, A. S. Azman, N. G. Reich and J. Lessler</b>. 
+    The Incubation Period of Coronavirus Disease 2019 (COVID-19) From Publicly Reported Confirmed Cases: Estimation and Application,
+    <em>Annals of internal medicine</em>,
+    172(9),
+    pp. 577-582,
+    2020.</li>
+</ol>
+
+<!-- end bibliography -->
+
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+
