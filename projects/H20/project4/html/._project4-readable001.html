@@ -1,0 +1,812 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Gone (randomly?) viral">
+
+<title>Gone (randomly?) viral</title>
+
+<!-- Bootstrap style: bootswatch_readable -->
+<link href="https://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:64px;      /* fixed header height for style bootswatch_readable */
+  margin:-64px 0 0; /* negative fixed header height */
+}
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Table of contents',
+               1,
+               'table_of_contents',
+               'table_of_contents'),
+              ('Introduction', 1, 'introduction', 'introduction'),
+              ('Exercise 1: Implement a random walk disease model',
+               1,
+               None,
+               '___sec1'),
+              ('Exercise 2: Comparison with deterministic SI-model',
+               1,
+               None,
+               '___sec2'),
+              ('Exercise 3: Estimating parameters, and incorporating age '
+               'classes',
+               1,
+               None,
+               '___sec3'),
+              ('Exercise 4: Implement your own scenario', 1, None, '___sec4'),
+              ('Appendix A: Suggested Python class implementation',
+               1,
+               None,
+               '___sec5'),
+              ('Position of Walkers', 3, None, '___sec6'),
+              ('Plot the current state (show walkers)', 3, None, '___sec7'),
+              ('Move walkers', 3, None, '___sec8'),
+              ('Revert illegal moves (Bounce-back condition)',
+               3,
+               None,
+               '___sec9'),
+              ('State of Walkers', 3, None, '___sec10'),
+              ('Appendix B: Tips on how to speed up your code',
+               1,
+               None,
+               '___sec11'),
+              ('Bibliography', 1, None, '___sec12')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript" async
+ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="project4-readable.html">Gone (randomly?) viral</a>
+  </div>
+
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._project4-readable000.html#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
+     <!-- navigation toc: --> <li><a href="#introduction" style="font-size: 80%;"><b>Introduction</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec1" style="font-size: 80%;"><b>Exercise 1: Implement a random walk disease model</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec2" style="font-size: 80%;"><b>Exercise 2: Comparison with deterministic SI-model</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec3" style="font-size: 80%;"><b>Exercise 3: Estimating parameters, and incorporating age classes</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec4" style="font-size: 80%;"><b>Exercise 4: Implement your own scenario</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec5" style="font-size: 80%;"><b>Appendix A: Suggested Python class implementation</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec11" style="font-size: 80%;"><b>Appendix B: Tips on how to speed up your code</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec12" style="font-size: 80%;"><b>Bibliography</b></a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0001"></a>
+<!-- !split -->
+
+<h1 id="introduction" class="anchor">Introduction</h1>
+
+<p>
+In this project you are going to gain further insight into how diseases spread.
+Previously, you used continuous <em>compartment models</em>, which were based on
+the assumption that every individual in a population interacts with everyone
+else in the same way, and where the simulated outcomes were completely
+determined by model input.
+While these models capture key aspects of real data, it is obvious
+that they are not very realistic.
+As an alternative to the deterministic approach, you are in this project
+going to apply Monte Carlo (MC) techniques.
+This allows you to easily incorporate <em>mechanisms</em> for <em>how</em> diseases spread,
+and to account for chance events that may be important, especially near the
+beginning of a disease outbreak.
+
+<p>
+Key parameters in the compartment model approach were the effective
+rate of infection, \( \beta \), and the infection recovery rate, \( \gamma \)
+(or kill rate, \( \alpha \), for the zombie scenario).
+Together these two parameters yielded the basic reproduction number
+\( \mathcal{R}_0 \), which is a measure of whether the disease is able to
+spread in the population.
+In project 3, it was simply assumed that \( \beta \) should decline exponentially
+as a function of time, eventually putting an end to the epidemic.
+However, it is certainly not clear why this should happen, if at all.
+For the particular case of the 2014 Ebola virus outbreak in Liberia,
+researchers actually estimated that \( \mathcal{R}_0 \) were constant for
+several months following the initial outbreak <a href="#althaus2014">[1]</a>.
+Similarly, the Corona virus has not stopped infecting new hosts almost
+a year after it first became known; in fact, there have been several
+waves of disease transmission. Understanding the mechanisms responsible
+for changes in \( \beta \) and \( \gamma \) are therefore very important when faced
+with a potential epidemic.
+
+<p>
+In this project, you are going to model how a disease spreads in a
+population by explicitly tracking each individual.
+Interactions between sick and healthy people will be described by a
+<em>random walk</em> <a href="#pearson1905problem">[2]</a> <a href="#codling2008random">[3]</a>.
+In this way you can easily test the impact of various model assumptions,
+and predict how they affect the effective values for \( \beta \) and \( \gamma \)
+in the compartment model approach.
+
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b>Read this first: Code design matters.</b>
+The goal of this project is to implement a flexible random walk algorithm
+that allows the walkers to have different properties and/or abilities.
+These properties might vary among different individuals, and at different
+times.
+Ideally it should be possible to add new properties easily without
+having to restructure large parts of the program.
+Finally, for a given model setup you should be able to simulate forward in
+time many times in order to compute statistics; this is the Monte Carlo
+component.
+
+<p>
+For the above reasons, you should think very carefully about how you design
+your code in this project! It is also important that you include sufficient
+<a href="https://realpython.com/documenting-python-code/" target="_self">documentation</a>
+in the form of class and function docstrings, as well as clarifying
+comments for more difficult parts of your code.
+
+<p>
+Coding tips are presented in the Appendix, to help you get you started. 
+It is strongly recommended that you read the Appendix before starting 
+to work on the project, even if you in the end choose to adopt your 
+own strategy.
+</div>
+
+
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b>Random walk and nuclear magnetic resonance (NMR).</b>
+The model you are going to develop is not that different from models 
+describing NMR and magnetic resonance imaging (MRI). 
+In MRI, all the magnetic spins are excited to a higher energy level. 
+Next, they move randomly. Whenever they bump into each other, 
+there is a certain probability that they fall into a lower energy 
+level (they ''die''). The MRI machine measures the time it takes before 
+all the spins have returned to their original states. 
+If the spins are confined, for example inside cells in the body, 
+they will return to the lower, original energy state faster.
+Water contains more spins and will give a higher intensity signal. 
+<!-- more spins than ? -->
+</div>
+
+
+<h1 id="___sec1" class="anchor">Exercise 1: Implement a random walk disease model </h1>
+
+<p>
+Consider a population of individuals that are confined to a finite,
+rectangular lattice with \( n_x\times{n_y} \) equally spaced nodes.
+This could for example represent an isolated island, or a city surrounded
+by walls. Each node represents a specific location, and during a simulation
+people move <a href="https://en.wikipedia.org/wiki/Random_walk" target="_self">randomly</a>
+from place to place .
+At any given time, each person is assigned a certain disease status:
+"Susceptible" (healthy), "Exposed", "Infectious", "Immune", "Dead", etc.
+As time goes by, people will change status depending on whom they meet,
+but also partly due to chance.
+
+<p>
+This part will be the basis for the rest of the project. To start out simple,
+we assume that there are only two possible disease states (compartments):
+
+<ol>
+<li> Susceptible (S): Healthy persons who stand the chance of becoming sick.</li>
+<li> Infectious (I): People that have the disease, and are contagious to others.</li>
+</ol>
+
+Implement the following random walk disease model in Python:
+
+<ul>
+<li> The walkers are assumed to move randomly (i.e., with a 25 percent chance) in one of the following four directions: North, South, East, or West. That is, walker goes <em>either</em> in the x-direction <em>or</em> in the y-direction, but not both at the same time.</li>
+<li> At the end of a time step, after having moved each walker, check for new infections.</li>
+<li> Every infectious individual will have the same probability, \( q \), of infecting each susceptible person present at the same location. Go through each S-I pair in turn, and update the status of each newly infected person from \( S \) to \( I \).</li>
+</ul>
+
+<center> <!-- figure label: --> <div id="fig:rw"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 1:  Example illustration of walkers moving on a lattice. In the plot, \( q \) is the probability that a walker is infected.  <!-- caption label: fig:rw --> </p></center>
+<p><img src="fig-project4/rw.png" align="bottom" width=800></p>
+</center>
+
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b>The bare minimum your program must do.</b>
+
+<p>
+The code you develop in this part will continue being used, and extended,
+in later exercises. Your final program should be able to perform at least
+the following steps:
+
+<ol>
+<li> <code>reset_model</code>: set correct values for all model parameters at \( t=0 \). This includes assigning a starting location for each walker.</li>
+<li> <code>move_walkers</code>: Move all walkers a single step.</li>
+<li> <code>revert_illegal_moves</code>: For each move that was actually illegal, go back. To be able to do so, you must have temporarily stored the old positions.</li>
+<li> <code>collide</code>: check for new infections, whether previously infected individuals become contagious (if including a latent period), if an infected person becomes immune or dies etc. Update the current state accordingly.</li>
+<li> <code>plot_current_state</code>: visualize walker positions, and/or selected summary statistics (total number of infectious, recovered, dead, etc.). This is very useful for debugging. However, you should not automatically plot every time step, only selected ones specified by the user.</li>
+<li> <code>save_current_state</code>: Save (selected) information about the current state for later retrieval (also useful for debugging, and needed for doing statistics). At the very least, you need to record how many people there are in each "disease compartment" at each time step.</li>
+<li> <code>simulate</code>: Top-level function that organizes a full simulation from start to finish (using the other steps).</li>
+</ol>
+
+It is recommended that you code all of these steps as separate Python
+functions, and moreover that you place them all within a single class.
+You can of course use different function names if you want, but they should
+be meaningful.
+Appendix A contains example code for the beginning of a class implementation.
+</div>
+
+
+<p>
+<b>Part 1.</b>
+Let \( n_x=n_y=50 \) and \( q=0.9 \). Let the total population size be \( N=683 \), and suppose 
+that there is a single infectious individual initially.
+
+<ul>
+<li> Run the walk model forward in time, about 300 steps. At each time make a time series that holds the total number of healthy (S) and sick (I) people in the population.</li>
+<li> Plot the number of healthy and sick people in the population over time, and comment on the results</li>
+</ul>
+
+<h1 id="___sec2" class="anchor">Exercise 2: Comparison with deterministic SI-model </h1>
+
+<p>
+<b>Part 1.</b>
+Again, let \( n_x=n_y=50 \) and \( q=0.9 \), and \( N=682 \), suppose that there is a single 
+infectious individual initially.
+
+<ul>
+<li> Run the 2-compartment random walk model forward in time repeatedly (at least) 100 times, each time taking 300 steps. (If your code is fast you can run more times and longer if necessary)</li>
+<li> For each time step, calculate 1) the sample mean and 2) the sample standard deviation of the number of healthy (S) and sick (I) people in the population.</li>
+<li> Create a figure showing the expected time development of the two populations. Make sure to include the computed uncertainty in the plot.</li>
+</ul>
+
+For illustrating the spread in model predictions, you might want to check out 
+the 
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.fill_between.html" target="_self"><tt>fill_between</tt></a>.
+function in <code>matplotlib</code>.
+
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b>Be smart: In this project efficiency matters!</b>
+As the random walk simulations might take quite some computing time,
+you should only re-run simulations if you absolutely have to (see Appendix B
+for tips on how to make an efficient implementation).
+Therefore, it is wise to store the intermediate results you need for later
+analysis. To this end, you can for example store data in NumPy arrays,
+and/or Pandas Data Frames. You might also want to record data into text files.
+As always, it pays off to use smart naming conventions
+(e.g., <code>x</code> or <code>results2</code> is almost always a bad name).
+</div>
+
+
+<p>
+<b>Part 2.</b>
+
+<ul>
+<li> Repeat the exercise when there are 10 infectious people initially.</li>
+<li> What is different now?</li>
+</ul>
+
+<b>Part 3.</b>
+
+<ul>
+<li> Try to compare the results from the previous two exercises with the \( SZ \)-model used in Project 3 (use the analytical solution).</li>
+<li> Specifically, can you find a \( \beta(t) \) function that approximately describes the mean number of infectious people as a function of time?</li>
+</ul>
+
+For reference, the analytical solution to the \( SI \)-model was:
+
+$$
+\begin{align}
+I(t)&=\frac{N}{1+\frac{S_0}{I_0}\exp(-\beta{t})}\,,
+\tag{1}
+\end{align}
+$$
+
+where \( N \) is the total population size, \( S_0=S(0) \) is the number of healthy
+people at \( t=0 \), \( I_0=I(0) \) is the number of infectious individuals at \( t=0 \),
+and \( \beta(t) \) is a function that describes the effective rate of infection
+per unit time.
+
+<h1 id="___sec3" class="anchor">Exercise 3: Estimating parameters, and incorporating age classes </h1>
+
+<p>
+<b>Part 1.</b>
+Our original \( SI \)-model was
+$$
+\begin{align}
+\tag{2}
+\frac{\mathrm{d}S(t)}{\mathrm{d}t}&=-\beta(t)\cdot\frac{S(t)I(t)}{N} \,, \\ 
+\tag{3}
+\frac{\mathrm{d}I(t)}{\mathrm{d}t}&=\beta(t)\cdot\frac{S(t)I(t)}{N} \,.
+\end{align}
+$$
+
+In this model, \( \beta(t) \) was input to the model. In the random walk model we
+can <em>estimate</em> values for \( \beta \) based on observed changes in the random
+walker population. To do this, we combine equation <a href="#mjx-eqn-2">(2)</a>
+with a first order approximation of the derivative to yield:
+$$
+\begin{equation}
+\beta\cdot\Delta t \approx -\frac{(S(t)-S(t-\Delta t))N}{S(t)I(t)},
+\tag{4}
+\end{equation}
+$$
+
+Use the formula above to estimate \( \beta\cdot\Delta t \) from your estimated numbers of healthy (\( S \)), and infected (\( I \)) at each time step.
+
+<ul>
+<li> Estimate the mean and median of \( \beta \), how well do these values compare with your value for \( \beta \) in the previous exercise?</li>
+</ul>
+
+<b>Part 2.</b>
+In this part you are going to record another property about each individual,
+namely their age class.
+
+<p>
+One implementation is to create an array <code>age_class</code> and let <code>age_class[i]</code> denote the age of person number \( i \).
+
+<p>
+For simplicity, you may assume that there are only two age classes, young and old people:
+
+<ul>
+<li> Modify the <code>move_walkers</code> part of the algorithm so that old people only have a 20 percent chance of moving in each of the four directions. They also have a 20 percent chance of staying put.</li>
+<li> Suppose the population is halfway split between young and old people. Is the disease likely to spread faster in one of the age groups?</li>
+<li> How does \( \beta \) change compared to when all walkers behaved in the same way?</li>
+</ul>
+
+<div class="alert alert-block alert-success alert-text-normal"><b>Remember to check your assumptions.</b>
+As you gradually add more features to your simulator, make sure that you do
+not break existing functionality. For example, after having implemented
+the "old-young model" in this exercise, you should probably check that the
+code you ran in Exercise 1 still works the same.
+</div>
+
+
+<h1 id="___sec4" class="anchor">Exercise 4: Implement your own scenario </h1>
+
+<p>
+For the final part of the project, you are going to suggest your own scenario.
+You are free to do almost whatever you like, but keep in mind that since
+there are infinitely many choices you could make, it is very important
+that you explain your assumptions carefully, both in the main text and in the
+code documentation (docstrings).
+
+<p>
+Below we have listed some suggestions for new features to include in the model:
+
+<ul>
+<li> Add a latency period: a certain time interval between when an individual first becomes infected, and when that person actually becomes sick (i.e., contagious to others).</li>
+<li> Let people recover from the disease and become immune after a certain time (e.g., determined by introducing a mean infectious period, \( 1/\gamma \)).</li>
+<li> Allow some people to die from the disease.</li>
+<li> Introduce additional walls and/or inaccessible locations at certain times to simulate effects of quarantine, then remove the barriers again after a while. The <a href="https://tomaspueyo.medium.com/coronavirus-the-hammer-and-the-dance-be9337092b56" target="_self">Hammer and Dance strategy</a>, might be an inspiration.</li>
+<li> Distinguish between symptomatic and asymptomatic sick people. Use different infection probabilities for these two classes of individuals.</li>
+<li> If including asymptomatics, you might also want to add an incubation period: the time it takes from becoming infected to start showing symptoms (the person is still infectious from the get go)</li>
+<li> Establish a <em>safe zone</em> in one part of the lattice, i.e., an area in which only disease-free people are allowed to enter. This could represent, e.g., a hospital or a safe zone. However, if you also include asymptomatic people, these might not be detected in time....</li>
+<li> Include vaccination, possibly starting at some late time \( t>0 \).</li>
+<li> Add the option that a healthy person will have a higher probability of moving away from a location that already contains many sick people.</li>
+<li> "Party people" (or "stalkers?"): people who do not care about, or are oblivious to, the disease. They tend to go to where there are a lot of people already.</li>
+<li> (Probably quite difficult) Allow disease transmission to take place on a more general network, instead of on a regular 2D grid. Include movements, temporary and/or permanent, between both near and distant locations (e.g., to represent airline travel).</li>
+</ul>
+
+Illustrate your new model by considering a specific scenario:
+
+<ul>
+<li> Run simulations and plot results in one or more figures.</li>
+<li> Discuss your findings (remember to account for uncertainty)</li>
+<li> In particular, can you relate your findings to actual data for the Corona virus? (choose one or more countries, regions, cities etc.)</li>
+</ul>
+
+<h1 id="___sec5" class="anchor">Appendix A: Suggested Python class implementation </h1>
+
+<p>
+As in project 2, we strongly recommend creating a single "simulator class"
+that is responsible for running your model(s) from start to finish.
+This allows different class functions to re-use the same variables,
+instead of having to pass them around all the time. At the same time,
+you avoid using global variables defined outside of the class, 
+which can be a source of hard-to-find bugs, and can make your program 
+hard to understand.
+
+<p>
+Furthermore, when using the class approach it becomes very easy to start up
+separate simulation runs, using either identical or variable model input
+parameters, which will be needed for this project.
+
+<p>
+Below is a suggestion for how you may start writing the <code>__init__</code> method of 
+such a class:
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">RandomWalkEpidemicSimulator</span>:
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    Class used to model the spreading of a contagious disease in a</span>
+<span style="color: #BA2121; font-style: italic">    population of individuals with a 2D random walk.</span>
+
+<span style="color: #BA2121; font-style: italic">    Each walker has a disease status which is represented by an </span>
+<span style="color: #BA2121; font-style: italic">    integer Enum. Also, a set of integer (x, y)-coordinates are </span>
+<span style="color: #BA2121; font-style: italic">    stored for each walker. The possible coordinates are:</span>
+
+<span style="color: #BA2121; font-style: italic">        {0, 1, ..., Lx-1} in the x-direction</span>
+<span style="color: #BA2121; font-style: italic">        {0, 1, ..., Ly-1} in the y-direction</span>
+
+<span style="color: #BA2121; font-style: italic">    It is only possible to move North, South, East, or West. If a </span>
+<span style="color: #BA2121; font-style: italic">    walker attempts to move outside of the physical domain, nothing </span>
+<span style="color: #BA2121; font-style: italic">    happens (i.e., a &quot;bounce-back boundary condition&quot; is enforced).</span>
+<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>,
+                 population_size,
+                 no_init_infected<span style="color: #666666">=1</span>,
+                 nx<span style="color: #666666">=50</span>,
+                 ny<span style="color: #666666">=50</span>,
+                 q<span style="color: #666666">=0.9</span>):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">        :param population_size: The total number of people (N).</span>
+<span style="color: #BA2121; font-style: italic">        :param no_init_infected: The number of infected people at t=0.</span>
+<span style="color: #BA2121; font-style: italic">        :param nx: The number of lattice nodes in the x-direction </span>
+<span style="color: #BA2121; font-style: italic">        :param ny: The number of lattice nodes in the y-direction.</span>
+<span style="color: #BA2121; font-style: italic">        :param q: The probability of infection (0 &lt;= q &lt;= 1).</span>
+<span style="color: #BA2121; font-style: italic">        &quot;&quot;&quot;</span>
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>N_ <span style="color: #666666">=</span> population_size
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>I0_<span style="color: #666666">=</span> no_initially_infected
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>nx_<span style="color: #666666">=</span> nx
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>ny_<span style="color: #666666">=</span> ny
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>infection_probability_ <span style="color: #666666">=</span> q
+</pre></div>
+<p>
+As you work through the project, you will gradually add more content to the class;
+inside the <code>__init__</code> function as well as in other functions.
+
+<p>
+Next, we will give you some concrete suggestions on how to implement your simulator.
+
+<h3 id="___sec6" class="anchor">Position of Walkers </h3>
+
+<p>
+We need to know where the walkers are located at all times. For this we suggest 
+using a <em>single</em> 2D array to store the \( (x,y) \)-coordinates of all walkers.
+To generate random starting positions, we simply draw one
+\( x \)-coordinate and one \( y \)-coordinate for each walker:
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000">self</span><span style="color: #666666">.</span>Walkers_ <span style="color: #666666">=</span> np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>randint(<span style="color: #666666">0</span>, 
+                                  [<span style="color: #008000">self</span><span style="color: #666666">.</span>nx_, <span style="color: #008000">self</span><span style="color: #666666">.</span>ny_], 
+                                  size<span style="color: #666666">=</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>N_, <span style="color: #666666">2</span>))
+</pre></div>
+<p>
+To understand what the code does, choose some small values for \( n_x \), \( n_y \), and \( N \),
+and inspect the result.
+
+<h3 id="___sec7" class="anchor">Plot the current state (show walkers) </h3>
+
+<p>
+Implement a function that makes a scatter plot of where the walkers are on 
+the map. 
+Use different colors for the different 
+disease states (susceptible, infectious, recovered, dead, etc.).
+Make a black line where there are walls.
+
+<p>
+This extremely useful for debugging. For instance, by doing so you will easily 
+see whether walkers have moved outside of the domain (should not happen!)
+Also, it is important to see if your code manages to locate all infectious 
+people.
+
+<h3 id="___sec8" class="anchor">Move walkers </h3>
+
+<p>
+It is important that the walkers move at <em>random</em>, and only <em>one step</em> in 
+<em>either</em> the \( x \)- <em>or</em> the \( y \)-direction. There are many ways to achieve this. 
+One method is to draw a random integer \( u \) between 1 and 4, and to say, e.g.:
+
+<ul>
+<li> If <code>u==1</code>, move East: add \( [1, 0] \) to \( (x, y) \)-coordinates,</li>
+<li> If <code>u==2</code>, move North: add \( [0, 1] \),</li>
+<li> If <code>u==3</code>, move West: add \( [-1, 0] \),</li>
+<li> If <code>u==4</code>, move South: add \( [0, -1] \).</li>
+</ul>
+
+Assume for simplicity that we only have five walkers, and that for 
+each of them we have randomly chosen the following new steps:
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>next_steps <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([[<span style="color: #666666">0</span>,<span style="color: #666666">1</span>], [<span style="color: #666666">1</span>,<span style="color: #666666">0</span>], [<span style="color: #666666">1</span>,<span style="color: #666666">0</span>], [<span style="color: #666666">0</span>,<span style="color: #666666">1</span>], [<span style="color: #666666">-1</span>,<span style="color: #666666">0</span>]])
+</pre></div>
+<p>
+We can then update the position of all walkers simultaneously as follows:
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000">self</span><span style="color: #666666">.</span>Walkers_ <span style="color: #666666">+=</span> next_steps
+</pre></div>
+
+<h3 id="___sec9" class="anchor">Revert illegal moves (Bounce-back condition)  </h3>
+
+<p>
+We need to make sure that none of the walkers move outside the grid,
+or go into any other illegal location. One way of achieving this is to 
+always keep track of the old (legal) positions:
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000">self</span><span style="color: #666666">.</span>Walkers_Old_ <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>Walkers_<span style="color: #666666">.</span>copy()
+</pre></div>
+<p>
+Note the use of <code>copy()</code> here. If we write
+<code>self.Walkers_Old_ = self.Walkers_</code>, it would not work, because arrays are
+<a href="https://towardsdatascience.com/https-towardsdatascience-com-python-basics-mutable-vs-immutable-objects-829a0cb1530a" target="_self">mutable</a>
+objects in Python. 
+This means that if <code>Walkers_</code> had been assigned directly to <code>Walkers_Old</code>,
+both variable names would point to the same underlying object in memory.
+Since the arrays contain objects of an immutable type (<code>int</code>), one way to avoid
+this problem is to create a shallow copy with <code>copy()</code>. In yet other applications, 
+a <a href="https://realpython.com/copying-python-objects/" target="_self"><tt>deepcopy()</tt></a> operation might 
+be needed.
+
+<p>
+To correct for walkers that have moved outside of the simulation domain, 
+the most obvious thing to do is to loop over the position of each walker 
+and check, in turn, whether that walker is at a legal position. 
+If not, go back to the old coordinates; this is often called a 
+bounce-back boundary condition. E.g., we could write code like this:
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #408080; font-style: italic"># Note: </span>
+<span style="color: #408080; font-style: italic">#   Assuming we have made a function &quot;is_at_illegal_position&quot; that </span>
+<span style="color: #408080; font-style: italic"># checks whether the coordinates of a given walker is valid.</span>
+<span style="color: #008000; font-weight: bold">for</span> idx <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>N_):
+    <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>is_at_illegal_position(idx):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>Walkers_[idx] <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>Walkers_Old_[idx]
+
+<span style="color: #408080; font-style: italic"># Remember to save the new positions for the next time step</span>
+<span style="color: #008000">self</span><span style="color: #666666">.</span>Walkers_Old_ <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>Walkers_<span style="color: #666666">.</span>copy()
+</pre></div>
+<p>
+Note that this method is likely to be very slow, so instead you might want to use
+<a href="https://jakevdp.github.io/PythonDataScienceHandbook/02.06-boolean-arrays-and-masks.html" target="_self">boolean masking</a>
+to check the position of each walker in one go (that is, without using for loops).
+See Appendix B for more details.
+
+<p>
+<center> <!-- figure label: --> <div id="fig:bb"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 2:  An illustration of the bounce-back  boundary condition, the wall is located to the east, and a move in the east direction is illegal.  <!-- caption label: fig:bb --> </p></center>
+<p><img src="fig-project4/bb.png" align="bottom" width=200></p>
+</center>
+
+<h3 id="___sec10" class="anchor">State of Walkers </h3>
+
+<p>
+We still have no information about what type (susceptible, infected, recovered, dead, etc.)
+the individual walkers are. To represent the possible states, we suggest
+defining a set on <em>named integer constants</em>. These could for example be 
+members of the simulator class 
+(either class attributes or instance attributes), e.g.:
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000">self</span><span style="color: #666666">.</span>SUSCEPTIBLE_ <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+<span style="color: #008000">self</span><span style="color: #666666">.</span>INFECTIOUS_ <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+<span style="color: #008000">self</span><span style="color: #666666">.</span>RECOVERED_ <span style="color: #666666">=</span> <span style="color: #666666">2</span>
+<span style="color: #008000">self</span><span style="color: #666666">.</span>DEAD_ <span style="color: #666666">=</span> <span style="color: #666666">3</span>
+</pre></div>
+<p>
+Alternatively, they could be stored in a separate 
+<a href="https://docs.python.org/3/library/enum.html" target="_self">enumeration class</a>:
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">enum</span> <span style="color: #008000; font-weight: bold">import</span> Enum
+<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">DiseaseStatus</span>(Enum):
+    SUSCEPTIBLE <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    INFECTIOUS <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+    RECOVERED <span style="color: #666666">=</span> <span style="color: #666666">2</span>
+    DEAD <span style="color: #666666">=</span> <span style="color: #666666">3</span>
+</pre></div>
+<p>
+The following example shows how you can use this kind of approach in your code:
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #408080; font-style: italic"># First, let all walkers be in the susceptible compartment:</span>
+<span style="color: #008000">self</span><span style="color: #666666">.</span>State_ <span style="color: #666666">=</span> np<span style="color: #666666">.</span>full(<span style="color: #008000">self</span><span style="color: #666666">.</span>N_, <span style="color: #008000">self</span><span style="color: #666666">.</span>SUSCEPTIBLE_)
+<span style="color: #408080; font-style: italic"># Next, change walker number 0, 1, 2, ..., I0-1 to be infectious:</span>
+<span style="color: #008000">self</span><span style="color: #666666">.</span>State_[<span style="color: #666666">0</span>:<span style="color: #008000">self</span><span style="color: #666666">.</span>I0_] <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>INFECTED_
+</pre></div>
+<p>
+As the simulation is progressing, the <code>State_</code> array will be continually updated.
+At any given time, we can count the total number of infected, recovered, dead etc. 
+by
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>no_susceptible <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sum(<span style="color: #008000">self</span><span style="color: #666666">.</span>State_ <span style="color: #666666">==</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>SUSCEPTIBLE_)
+no_infectious <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sum(<span style="color: #008000">self</span><span style="color: #666666">.</span>State_ <span style="color: #666666">==</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>INFECTIOUS_)
+no_dead <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sum(<span style="color: #008000">self</span><span style="color: #666666">.</span>State_ <span style="color: #666666">==</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>DEAD_)
+</pre></div>
+<p>
+Note that the code becomes so much easier to read than if you had used 
+hard-coded integers everywhere in your code. Then, you would have to always 
+remember that <code>0=SUSCEPTIBLE</code> and <code>1=INFECTIOUS</code> etc., 
+which is obviously not very readable, as well as error prone. 
+Furthermore, this approach lends itself very easily to adding more compartments,
+or changing the numbering scheme later on. For instance, suppose you want to 
+use to the following numbering instead:
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000">self</span><span style="color: #666666">.</span>SUSCEPTIBLE_ <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+<span style="color: #008000">self</span><span style="color: #666666">.</span>EXPOSED_ <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+<span style="color: #008000">self</span><span style="color: #666666">.</span>INFECTIOUS_ <span style="color: #666666">=</span> <span style="color: #666666">2</span>
+<span style="color: #008000">self</span><span style="color: #666666">.</span>RECOVERED_ <span style="color: #666666">=</span> <span style="color: #666666">3</span>
+<span style="color: #008000">self</span><span style="color: #666666">.</span>DEAD_ <span style="color: #666666">=</span> <span style="color: #666666">4</span>
+</pre></div>
+<p>
+Here, the <code>EXPOSED</code> compartment represents individuals that have been
+infected, but are not yet contagious to others. Note that if you wrote your
+code referring directly to numbers, you would have to change each
+occurrence of <code>1</code> to <code>2</code>. This could quickly lead to bugs in your code.
+
+<h1 id="___sec11" class="anchor">Appendix B: Tips on how to speed up your code </h1>
+
+<p>
+A good rule is to <em>never optimize code too early</em>. First get the code to work, 
+then you can spend time replacing part of the code that is too slow.
+
+<ul>
+<li> It is important to avoid loops whenever possible. For instance, drawing random numbers one at a time inside a loop tends to be <a href="https://eli.thegreenplace.net/2018/slow-and-fast-methods-for-generating-random-integers-in-python/" target="_self">very slow</a>:</li>
+</ul>
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>, N):
+        x <span style="color: #666666">=</span> np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>uniform(<span style="color: #666666">0</span>, d)
+        y <span style="color: #666666">=</span> np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>uniform(<span style="color: #666666">0</span>, d)
+</pre></div>
+<p>
+Instead, take advantage of built-in functionality in Numpy to draw all the numbers at once:
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>x <span style="color: #666666">=</span> np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>uniform(<span style="color: #666666">0</span>, d, size<span style="color: #666666">=</span>N)
+y <span style="color: #666666">=</span> np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>uniform(<span style="color: #666666">0</span>, d, size<span style="color: #666666">=</span>N)
+</pre></div>
+<ul>
+<li> When locating walkers at illegal positions, or finding positions where infectious and susceptible individuals meet (this step is crucial for speed!), consider using <a href="https://numpy.org/doc/stable/reference/generated/numpy.where.html" target="_self"><tt>numpy.where</tt></a>.</li> 
+<li> You can also use <a href="https://jakevdp.github.io/PythonDataScienceHandbook/02.06-boolean-arrays-and-masks.html" target="_self">boolean masking</a>, for example:</li>
+</ul>
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #408080; font-style: italic"># too_large_x[i] == True iff walker i has moved too far to the right</span>
+too_large_x <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>Walkers_[:, <span style="color: #666666">0</span>] <span style="color: #666666">&gt;</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>nx_
+<span style="color: #408080; font-style: italic"># too_small_x[i] == True iff walker i has moved too far to the left</span>
+too_small_x <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>Walkers_[:, <span style="color: #666666">0</span>] <span style="color: #666666">&lt;</span> <span style="color: #666666">0</span>
+wrong_x <span style="color: #666666">=</span> too_large_x <span style="color: #666666">|</span> too_small_x  <span style="color: #408080; font-style: italic"># boolean &quot;OR&quot; applied elementwise</span>
+</pre></div>
+<ul>
+<li> Another example: Suppose we have marked the illegal positions in a array called <code>at_illegal_pos</code>. Then, we can simply correct illegal moves by typing</li>
+</ul>
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #408080; font-style: italic"># at_illegal_pos[i]==True iff walker no. i is at an illegal position</span>
+<span style="color: #008000">self</span><span style="color: #666666">.</span>Walkers_[at_illegal_pos] <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>Walkers_Old_[at_illegal_pos]
+</pre></div>
+<ul>
+<li> <a href="https://numba.pydata.org/" target="_self">Numba</a> translates python functions to optimized machine code, and might be something to look into.</li>
+<li> A final tip (that might prove wrong): While using classes can be good, avoid creating too many of them. It might be tempting to represent individual walkers with a class, but our guess is that this will slow down the code considerably unless one is very careful. Accessing a class and its members adds extra overhead.</li>
+</ul>
+
+<h1 id="___sec12" class="anchor">Bibliography </h1>
+
+<p>
+<!-- begin bibliography -->
+
+<ol>
+ <li> <div id="althaus2014"></div> <b>C. L. Althaus</b>. 
+    Estimating the Reproduction Number of Ebola Virus (EBOV) During the 2014 Outbreak in West Africa,
+    <em>PLoS currents</em>,
+    6,
+    2014.</li>
+ <li> <div id="pearson1905problem"></div> <b>K. Pearson</b>. 
+    The Problem of the Random Walk,
+    <em>Nature</em>,
+    72(1867),
+    pp. 342,
+    1905.</li>
+ <li> <div id="codling2008random"></div> <b>E. A. Codling, M. J. Plank and S. Benhamou</b>. 
+    Random Walk Models in Biology,
+    <em>Journal of the Royal society interface</em>,
+    5(25),
+    pp. 813-834,
+    2008.</li>
+</ol>
+
+<!-- end bibliography -->
+
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+
+  <li class="previous">
+    <a href="._project4-readable000.html">&larr; Prev</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+
