@@ -1,19 +1,20 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="1.0">
+<html lang="1.0">
   <head>
     <meta charset="utf-8" />
-    <title>Solving linear systems &#8212; _ Aksel Hiorth, the National IOR Centre &amp; Institute for Energy Resources, documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Solving linear systems &#8212; _ Aksel Hiorth, the National IOR Centre &amp; Institute for Energy Resources, University of Stavanger documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Solving nonlinear equations" href="._book004.html" />
@@ -180,12 +181,12 @@ What is the difficulty in solving these equations? Clearly if none of the equati
     b^\prime_{2}\\
     b^\prime_{3}
     \end{pmatrix}\end{split}\]</div>
-<p>The backsubstitution can then be written formally as:</p>
+<p>The back substitution can then be written formally as:</p>
 <div class="math notranslate nohighlight" id="eq-eq-lin-back2">
 \[\tag{33}
 x_i=\frac{1}{a^\prime_{ii}}\left[b_i^\prime-\sum_{j=i+1}^{N-1}a^\prime_{ij}x_j\right],\quad i=N-1,N-2,\ldots,0\]</div>
-<p>The backsubstitution can now easily be implemented in Python as:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Backsubstitution</span>
+<p>The back substitution can now easily be implemented in Python as:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Back substitution</span>
 <span class="n">sol</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="nb">float</span><span class="p">)</span>
 <span class="n">sol</span><span class="p">[</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">b</span><span class="p">[</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="n">A</span><span class="p">[</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
@@ -193,7 +194,7 @@ x_i=\frac{1}{a^\prime_{ii}}\left[b_i^\prime-\sum_{j=i+1}^{N-1}a^\prime_{ij}x_j\r
 </pre></div>
 </div>
 <p>Notice that in the Python implementation, we have used vector operations instead of for loops. This makes the code more efficient, but it could also be implemented with for loops:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Backsubstitution - for loop</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Back substitution - for loop</span>
 <span class="n">sol</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="nb">float</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
     <span class="n">sol</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
@@ -218,7 +219,7 @@ x_i=\frac{1}{a^\prime_{ii}}\left[b_i^\prime-\sum_{j=i+1}^{N-1}a^\prime_{ij}x_j\r
 <p>For a linear equation we can multiply with a number on each side and the equation would be unchanged, so if we where to multiply one of the equations with a large value, we are almost sure that this equation would be placed first by our algorithm. This seems a bit strange as our mathematical problem is the same. Sometimes the linear algebra routines tries to normalize the equations to find the pivot element that would have been the largest element if all equations were normalized according to some rule, this is called <em>implicit pivoting</em>.
 LU decomposition
 ----------------
-As we have already seen, if the matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is reduced to a triangular form it is trivial to calculate the solution by using backsubstitution. Thus if it was possible to decompose the matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> as follows:</p>
+As we have already seen, if the matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is reduced to a triangular form it is trivial to calculate the solution by using back substitution. Thus if it was possible to decompose the matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> as follows:</p>
 <div class="math notranslate nohighlight" id="eq-eq-lin-lu">
 \[\tag{34}
 \mathbf{A}=\mathbf{L}\cdot\mathbf{U}\]</div>
@@ -875,6 +876,97 @@ that requires special attention.</p>
 </div>
 </div>
 </div>
+<div class="section" id="co-2-diffusion-into-aquifers">
+<h2>CO$_2$ diffusion into aquifers<a class="headerlink" href="#co-2-diffusion-into-aquifers" title="Permalink to this headline">¶</a></h2>
+<p>The transport of CO$_2$ into aquifers can be described according to the diffusion equation</p>
+<div class="math notranslate nohighlight" id="eq-eq-lin-co2-diff">
+\[\tag{96}
+\frac{\partial C(z,t)}{\partial t}=\frac{\partial }{\partial z}\left(K(z)\frac{\partial C(z,t)}{\partial z}\right),\]</div>
+<p>where <span class="math notranslate nohighlight">\(C(z,t)\)</span> is the concentration of {CO$_2$}as a function of depth (<span class="math notranslate nohighlight">\(z\)</span>) and time <span class="math notranslate nohighlight">\(t\)</span>, and <span class="math notranslate nohighlight">\(K(z)\)</span> is the diffusion constant of {CO$_2$}as a function of depth. This equation can be discretized using standard techniques, to help in that respect consider figure <a class="reference internal" href="#fig-lin-co2-diff"><span class="std std-ref">Discretization for diffusion of {CO$_2$}into an aquifer, including boundary conditions</span></a>.</p>
+<div class="figure align-default" id="id12">
+<span id="fig-lin-co2-diff"></span><a class="reference internal image-reference" href="_images/co2_diff.png"><img alt="_images/co2_diff.png" src="_images/co2_diff.png" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-text">Discretization for diffusion of {CO$_2$}into an aquifer, including boundary conditions</span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
+</div>
+<p>In the following we will assume that there are only four nodes (<span class="math notranslate nohighlight">\(i=0\ldots 3\)</span>) in the physical domain, and two ghost nodes <span class="math notranslate nohighlight">\(i=-1\)</span>, and <span class="math notranslate nohighlight">\(i=4\)</span>. There are many ways to attack this problem, but in the following we will borrow ideas from Finite Volume. Finite volume methods is a way of discretizing equations such that we <em>conserve mass</em>. The diffusion equation as it is derived in figure <a class="reference internal" href="#fig-nlin-heat"><span class="std std-ref">Conservation of energy and the continuity equation</span></a>, express that the flux of something (heat, particles, etc) leaving the box surface minus the flux entering the surface of the box is equal to the rate of change of something inside the box. We can formulate this mathematically as:</p>
+<div class="math notranslate nohighlight" id="eq-eq-lin-co2fv">
+\[\tag{97}
+\frac{\partial C(z,t)}{\partial t}\simeq\frac{1}{h}\left[\left.K(z)\frac{\partial C(z,t)}{\partial z}\right|_{i+1/2}
+    -\left.K(z)\frac{\partial C(z,t)}{\partial z}\right|_{i-1/2}\right]\]</div>
+<p>The notation <span class="math notranslate nohighlight">\(i\pm1/2\)</span>, means that the flux is to be evaluated <em>at the surface</em> of the box (i.e. halfway between the red dots in figure <a class="reference internal" href="#fig-lin-co2-diff"><span class="std std-ref">Discretization for diffusion of {CO$_2$}into an aquifer, including boundary conditions</span></a>). <span class="math notranslate nohighlight">\(K(z)\)</span> is the diffusion constant, and it is known everywhere, so this is simple to evaluate at the surface. The concentrations are only known at the center of each box, the red dots in figure <a class="reference internal" href="#fig-lin-co2-diff"><span class="std std-ref">Discretization for diffusion of {CO$_2$}into an aquifer, including boundary conditions</span></a>. The derivative of the concentration can be evaluated using the central difference formula (remember that the distance between the red dot and edge of the box is <span class="math notranslate nohighlight">\(h/2\)</span>), hence</p>
+<div class="math notranslate nohighlight" id="eq-eq-lin-co2fv2">
+\[\tag{98}
+\frac{C_i^{n+1}-C_i^n}{\Delta t}=\frac{1}{h}\left[K_{i+1/2}\frac{ C_{i+1}-C_{i}}{h}-K_{i-1/2}\frac{ C_{i}-C_{i-1}}{h}\right],\]</div>
+<p>notice that we have discretized the time derivative, and that we have introduced <span class="math notranslate nohighlight">\(n\)</span> to indicate the time step. On the right hand side there are is no time indicated, it turns out that we have a choice to put time step <span class="math notranslate nohighlight">\(n\)</span> or <span class="math notranslate nohighlight">\(n+1\)</span> on the concentrations on the right hand side. If we put <span class="math notranslate nohighlight">\(n\)</span> the scheme is said to be explicit, if we put <span class="math notranslate nohighlight">\(n+1\)</span>, the scheme is implicit. Implicit schemes are stable compared to explicit schemes, whereas explicit schemes has slightly higher numerical accuracy [<strong>TO DO 1</strong>: show this!]. In general we can write</p>
+<div class="math notranslate nohighlight" id="eq-auto30">
+\[\tag{99}
+\frac{C_i^{n+1}-C_i^n}{\Delta t}=\frac{\theta}{h}\left[K_{i+1/2}
+    \frac{C^n_{i+1}-C^n_{i}}{h}-K_{i-1/2}\frac{C^n_{i}-C^n_{i-1}}{h}\right]\]</div>
+<div class="math notranslate nohighlight" id="eq-eq-lin-co2fv23">
+\[\tag{100}
++\frac{1-\theta}{h}\left[K_{i+1/2}
+    \frac{C_{i+1}^{n+1}-C_{i}^{n+1}}{h}-K_{i-1/2}\frac{ C_{i}^{n+1}-C_{i-1}^{n+1}}{h}\right],\]</div>
+<p>hence if <span class="math notranslate nohighlight">\(\theta=1\)</span> the scheme is explicit, if <span class="math notranslate nohighlight">\(\theta=0\)</span> the scheme is implicit, and if <span class="math notranslate nohighlight">\(\theta=1/2\)</span>, the scheme is called the Crank-Nicolson method. The first and last boundary are special, let us first consider the <span class="math notranslate nohighlight">\(i=0\)</span>, this is where the sea is in contact with the {CO$_2$}in the atmosphere, and the flux is <span class="math notranslate nohighlight">\(k_w(C_0-C_{eq})\)</span>, hence</p>
+<div class="math notranslate nohighlight" id="eq-auto31">
+\[\tag{101}
+\frac{C_0^{n+1}-C_0^n}{\Delta t}=\frac{\theta}{h}\left[K_{i+1/2}
+    \frac{C^n_{1}-C^n_{0}}{h}-k_w(C_0^n-C_{eq}^n)\right]\]</div>
+<div class="math notranslate nohighlight" id="eq-eq-lin-co2fv23b">
+\[\tag{102}
++\frac{1-\theta}{h}\left[K_{i+1/2}
+    \frac{C_{1}^{n+1}-C_{0}^{n+1}}{h}-k_w(C_0^{n+1}-C_{eq}^{n+1})\right].\]</div>
+<p>For the last block the flux is zero towards the seafloor, and equation <a class="reference internal" href="#eq-eq-lin-co2fv23"><span class="std std-ref">(100)</span></a> can be written</p>
+<div class="math notranslate nohighlight" id="eq-auto32">
+\[\tag{103}
+\frac{C_3^{n+1}-C_3^n}{\Delta t}  =\frac{\theta}{h}\left[-K_{5/2}\frac{C^n_{3}-C^n_{2}}{h}\right]\]</div>
+<div class="math notranslate nohighlight" id="eq-eq-lin-co2fv23c">
+\[\tag{104}
++\frac{1-\theta}{h}\left[-K_{5/2}\frac{ C_{3}^{n+1}-C_{2}^{n+1}}{h}\right].\]</div>
+<p>For the blocks <span class="math notranslate nohighlight">\(i=1\ldots2\)</span>, we can collect all terms with <span class="math notranslate nohighlight">\(n+1\)</span> on one side and terms with <span class="math notranslate nohighlight">\(n\)</span> on the other side and rewrite equation <a class="reference internal" href="#eq-eq-lin-co2fv23"><span class="std std-ref">(100)</span></a></p>
+<div class="math notranslate nohighlight" id="eq-auto33">
+\[\tag{105}
+\left[1+(1-\theta)\right. \left.\alpha(K_{i+1/2}+K_{i-1/2})\right]C_i^{n+1}{\nonumber}\]</div>
+<div class="math notranslate nohighlight" id="eq-auto34">
+\[\tag{106}
+-(1-\theta)\alpha K_{i+1/2}C_{i+1}^{n+1}
+    -(1-\theta)\alpha K_{i-1/2}C_{i-1}^{n+1} {\nonumber}\]</div>
+<div class="math notranslate nohighlight" id="eq-auto35">
+\[\tag{107}
+=\left[1-\theta\right. \left.\alpha(K_{i+1/2}+K_{i-1/2})\right]C_i^{n}{\nonumber}\]</div>
+<div class="math notranslate nohighlight" id="eq-eq-lin-co2fv4">
+\[\tag{108}
++\theta\alpha K_{i+1/2}C_{i+1}^{n}
+    +\theta\alpha K_{i-1/2}C_{i-1}^{n},\]</div>
+<p>where <span class="math notranslate nohighlight">\(\alpha\equiv\Delta t/h^2\)</span>.
+Next, we want to write down the corresponding matrix equations for four grid nodes as indicated in figure <a class="reference internal" href="#fig-lin-co2-diff"><span class="std std-ref">Discretization for diffusion of {CO$_2$}into an aquifer, including boundary conditions</span></a>. Notice that we need to use the equations in figure <a class="reference internal" href="#fig-lin-co2-diff"><span class="std std-ref">Discretization for diffusion of {CO$_2$}into an aquifer, including boundary conditions</span></a>, for <span class="math notranslate nohighlight">\(C_{-1}\)</span>, and <span class="math notranslate nohighlight">\(C_4\)</span>. The left and right hand coefficient matrix <span class="math notranslate nohighlight">\(\mathbf{L}\)</span>, and <span class="math notranslate nohighlight">\(\mathbf{R}\)</span> are given as</p>
+<div class="math notranslate nohighlight" id="eq-auto36">
+\[ \begin{align}\begin{aligned}\tag{109}
+{\tiny\\\begin{split}    \begin{pmatrix}
+    1+(1-\theta)\alpha(K_{1/2}+hk_w)&amp;-(1-\theta)\alpha K_{1/2}&amp;0&amp;0\\
+    -(1-\theta)\alpha K_{1/2}&amp;1+(1-\theta)\alpha(K_{3/2}+K_{1/2})&amp;-(1-\theta)\alpha K_{3/2} &amp;0\\
+    0&amp;-(1-\theta)\alpha K_{3/2}&amp;1+(1-\theta)\alpha(K_{5/2}+K_{3/2})&amp;-(1-\theta)\alpha K_{5/2} \\
+    0&amp;0&amp;-(1-\theta)\alpha K_{5/2}&amp;1+(1-\theta)\alpha K_{5/2}{\nonumber}
+    \end{pmatrix},\end{split}\\
+    }\end{aligned}\end{align} \]</div>
+<div class="math notranslate nohighlight" id="eq-auto37">
+\[ \begin{align}\begin{aligned}\tag{110}
+{\tiny\\\begin{split}    \begin{pmatrix}
+    1-\theta\alpha(K_{1/2}+hk_w)&amp;+\theta\alpha K_{1/2}&amp;0&amp;0\\
+    \theta\alpha K_{1/2}&amp;1-\theta\alpha(K_{3/2}+K_{1/2})&amp;\theta\alpha K_{3/2} &amp;0\\
+    0&amp;\theta\alpha K_{3/2}&amp;1-\theta\alpha(K_{5/2}+K_{3/2})&amp;\theta\alpha K_{5/2} \\
+    0&amp;0&amp;\theta\alpha K_{5/2}&amp;1-\theta\alpha K_{5/2}{\nonumber}
+    \end{pmatrix},\end{split}\\
+    }\end{aligned}\end{align} \]</div>
+<p>respectively. Introducing <span class="math notranslate nohighlight">\(\mathbf{S}=\left[k_wC_{eq}\Delta t/h,0,0,0\right]^T\)</span>, we can finally write the diffusion equation <a class="reference internal" href="#eq-eq-lin-co2-diff"><span class="std std-ref">(96)</span></a> as</p>
+<div class="math notranslate nohighlight" id="eq-eq-lin-discdif">
+\[\tag{111}
+\mathbf{L}\mathbf{C}^{n+1}=\mathbf{R}\mathbf{C}^n+\theta\mathbf{S}^n+(1-\theta)\mathbf{S}^{n+1}\]</div>
+<p>More stuff to do:
+1. Assume zero flux over the air water interface ($k_w$=0), show from the equations above that if we start with a uniform concentration in the sea ($mathbf{C}^n$=constant) that <span class="math notranslate nohighlight">\(\mathbf{C}^{n+1}\)</span> does not change (as it should).</p>
+<ol class="arabic simple" start="2">
+<li><p>Assume that if the concentration at a specific time <span class="math notranslate nohighlight">\(n\)</span> in the sea is equal to <span class="math notranslate nohighlight">\(\mathbf{C}_{eq}\)</span> then the concentration stays constant at all later times</p></li>
+<li><p>Add chemical reactions</p></li>
+</ol>
+</div>
 </div>
 
 
@@ -921,6 +1013,7 @@ that requires special attention.</p>
 <li class="toctree-l3"><a class="reference internal" href="#exercise-2-2-curing-of-concrete-and-matrix-formulation">Exercise 2.2: Curing of Concrete and Matrix Formulation</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#co-2-diffusion-into-aquifers">CO$_2$ diffusion into aquifers</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="._book004.html">Solving nonlinear equations</a></li>
@@ -945,7 +1038,7 @@ that requires special attention.</p>
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
 
 
 
@@ -959,10 +1052,10 @@ that requires special attention.</p>
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2020, Modeling and Computational Engineering.
+      &copy;2021, Modeling and Computational Engineering.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.3.1</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.1</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
