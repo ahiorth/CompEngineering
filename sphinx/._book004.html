@@ -119,7 +119,7 @@ The calculation is straight forward, but it is easy to get an error due to units
 </div>
 <div class="section" id="fixed-point-iteration">
 <h2>Fixed-point iteration<a class="headerlink" href="#fixed-point-iteration" title="Permalink to this headline">¶</a></h2>
-<p>A simple (but not always possible) way of solving a nonlinear equation is to reformulate the problem <span class="math notranslate nohighlight">\(f(x)=0\)</span> to a problem of the form</p>
+<p id="index-0">A simple (but not always possible) way of solving a nonlinear equation is to reformulate the problem <span class="math notranslate nohighlight">\(f(x)=0\)</span> to a problem of the form</p>
 <div class="math notranslate nohighlight" id="eq-eq-nlin-g">
 \[\tag{121}
 x=g(x).\]</div>
@@ -262,7 +262,7 @@ It takes about 30 iterations to reach the correct solution <span class="math not
 </div>
 <div class="section" id="rate-of-convergence-1">
 <h2>Rate of convergence<a class="headerlink" href="#rate-of-convergence-1" title="Permalink to this headline">¶</a></h2>
-<p>The rate of convergence is the speed at which a <em>convergent</em> sequence approach the limit. Assume that our sequence <span class="math notranslate nohighlight">\(x_{k}\)</span> converges to the number <span class="math notranslate nohighlight">\(x^*\)</span>, the sequence is said to <em>converge linearly</em> to <span class="math notranslate nohighlight">\(x^*\)</span> if there exists a number <span class="math notranslate nohighlight">\(\mu\in&lt;0,1&gt;\)</span>, such that</p>
+<p id="index-1">The rate of convergence is the speed at which a <em>convergent</em> sequence approach the limit. Assume that our sequence <span class="math notranslate nohighlight">\(x_{k}\)</span> converges to the number <span class="math notranslate nohighlight">\(x^*\)</span>, the sequence is said to <em>converge linearly</em> to <span class="math notranslate nohighlight">\(x^*\)</span> if there exists a number <span class="math notranslate nohighlight">\(\mu\in&lt;0,1&gt;\)</span>, such that</p>
 <div class="math notranslate nohighlight" id="eq-eq-nlin-linconv">
 \[\tag{135}
 \lim_{k\to\infty}=\frac{|x_{k+1}-x^*|}{|x_k-x^*|}=\mu\]</div>
@@ -279,7 +279,7 @@ It takes about 30 iterations to reach the correct solution <span class="math not
 </div>
 <div class="section" id="the-bisection-method">
 <h2>The bisection method<a class="headerlink" href="#the-bisection-method" title="Permalink to this headline">¶</a></h2>
-<p>The idea behind bisection is that the root is bracketed, i.e. that there exists two points <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>, such that <span class="math notranslate nohighlight">\(f(a)\cdot f(b)&lt;0\)</span>. In practice it might be a challenge to find these two points. However, if you know that the function has a only root between two values, and that speed is not a big issue this method guarantees that the root will be found within a finite number of steps. The basic idea behind the method is to divide the interval into two (i.e. bisecting the interval). The method only works if the function is continuous on the interval.</p>
+<p id="index-2">The idea behind bisection is that the root is bracketed, i.e. that there exists two points <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>, such that <span class="math notranslate nohighlight">\(f(a)\cdot f(b)&lt;0\)</span>. In practice it might be a challenge to find these two points. However, if you know that the function has a only root between two values, and that speed is not a big issue this method guarantees that the root will be found within a finite number of steps. The basic idea behind the method is to divide the interval into two (i.e. bisecting the interval). The method only works if the function is continuous on the interval.</p>
 <div class="figure align-default" id="id10">
 <span id="fig-nlin-bisection"></span><a class="reference internal image-reference" href="_images/bisection.png"><img alt="_images/bisection.png" src="_images/bisection.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-text"><em>Illustration of the bisection method for the van der Waal EOS</em></span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
@@ -342,7 +342,7 @@ Below is an implementation of the bisection method.</p>
 </div>
 <div class="section" id="rate-of-convergence-2">
 <h3>Rate of convergence<a class="headerlink" href="#rate-of-convergence-2" title="Permalink to this headline">¶</a></h3>
-<p>If <span class="math notranslate nohighlight">\(c_n\)</span> is the midpoint after <span class="math notranslate nohighlight">\(n\)</span> steps, the difference between the solution <span class="math notranslate nohighlight">\(x^*\)</span> and <span class="math notranslate nohighlight">\(c_n\)</span> is</p>
+<p id="index-3">If <span class="math notranslate nohighlight">\(c_n\)</span> is the midpoint after <span class="math notranslate nohighlight">\(n\)</span> steps, the difference between the solution <span class="math notranslate nohighlight">\(x^*\)</span> and <span class="math notranslate nohighlight">\(c_n\)</span> is</p>
 <div class="math notranslate nohighlight" id="eq-eq-nlin-bisec">
 \[\tag{138}
 |c_n-x^*| \le \frac{|b-a|}{2^n}\]</div>
@@ -352,8 +352,8 @@ Below is an implementation of the bisection method.</p>
 \lim_{k\to\infty}=\frac{|c_{k+1}-x^*|}{|c_k-x^*|}\le\frac{|b-a|/2^{n+1}}{|b-a|/2^n}=\frac{1}{2},\]</div>
 <p>hence the bisection method converges linearly.
 Newtons method
-==============
-Newtons method is one of the most used methods. If it converges, it converges quadratically to the correct solution. The drawback is that contrary to the bisection method it may fail if a bad starting point is given. Newtons method for finding the root of a function <span class="math notranslate nohighlight">\(f(x)=0\)</span> is illustrated in figure <a class="reference internal" href="#fig-nlin-newton"><span class="std std-ref">Illustration of Newtons method for the van der Waals EOS</span></a>. The main idea is to use more information about the function in the search of the root. In this case we want to find the point where the tangent of the function in <span class="math notranslate nohighlight">\(x_k\)</span> intersect the $x-$axis, and take that as our next point, <span class="math notranslate nohighlight">\(x_{k+1}\)</span>.</p>
+==============</p>
+<p id="index-4">Newtons method is one of the most used methods. If it converges, it converges quadratically to the correct solution. The drawback is that contrary to the bisection method it may fail if a bad starting point is given. Newtons method for finding the root of a function <span class="math notranslate nohighlight">\(f(x)=0\)</span> is illustrated in figure <a class="reference internal" href="#fig-nlin-newton"><span class="std std-ref">Illustration of Newtons method for the van der Waals EOS</span></a>. The main idea is to use more information about the function in the search of the root. In this case we want to find the point where the tangent of the function in <span class="math notranslate nohighlight">\(x_k\)</span> intersect the $x-$axis, and take that as our next point, <span class="math notranslate nohighlight">\(x_{k+1}\)</span>.</p>
 <div class="figure align-default" id="id11">
 <span id="fig-nlin-newton"></span><a class="reference internal image-reference" href="_images/newton_comb.png"><img alt="_images/newton_comb.png" src="_images/newton_comb.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-text"><em>Illustration of Newtons method for the van der Waals EOS</em></span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
@@ -398,9 +398,6 @@ x_{k+1}=x_k-\frac{f(x_k)}{f^\prime(x_k)}.\]</div>
 </div>
 <div class="section" id="rate-of-convergence-3">
 <h3>Rate of convergence<a class="headerlink" href="#rate-of-convergence-3" title="Permalink to this headline">¶</a></h3>
-<blockquote>
-<div><p>Newtons method is similar to the fixed point method, but where we do not use <span class="math notranslate nohighlight">\(g(x)=x-f(x)\)</span>, but <span class="math notranslate nohighlight">\(g(x)=x-\frac{f(x)}{f^\prime(x)}\)</span>. We will now analyze Newtons method, using the same approach as in the section <a class="reference internal" href="#sec-nlin-fp"><span class="std std-ref">When do the fixed point method fail?</span></a>. First we expand <span class="math notranslate nohighlight">\(g(x)\)</span> around the root <span class="math notranslate nohighlight">\(x^*\)</span></p>
-</div></blockquote>
 <div class="math notranslate nohighlight" id="eq-eq-nlin-nsec">
 \[\tag{141}
 x_{k+1}=g(x_k)=g(x^*)+g^\prime(x^*)(x_k-x^*)+\frac{1}{2}g^{\prime\prime}(x^*)(x_k-x^*)^2,\]</div>
@@ -444,7 +441,7 @@ The root is located at <span class="math notranslate nohighlight">\(x^*=0.703467
 </div>
 <div class="section" id="secant-method">
 <h2>Secant method<a class="headerlink" href="#secant-method" title="Permalink to this headline">¶</a></h2>
-<p>The Newtons method is very good if you can choose a good starting point, and you can give in an analytical formula for the derivative. In some cases it is not possible to calculate the derivative analytically, then a very good method of choice is the secant method. It can be derived by simply replacing the derivative in Newtons method by the finite difference approximation</p>
+<p id="index-5">The Newtons method is very good if you can choose a good starting point, and you can give in an analytical formula for the derivative. In some cases it is not possible to calculate the derivative analytically, then a very good method of choice is the secant method. It can be derived by simply replacing the derivative in Newtons method by the finite difference approximation</p>
 <div class="math notranslate nohighlight" id="eq-eq-nlin-sec1">
 \[\tag{146}
 f^\prime(x_k)\to \frac{f(x_k)-f(x_{k-1})}{x_k-x_{k-1}}.\]</div>
@@ -462,7 +459,7 @@ x_{k+1}=x_k-f(x_k)\frac{x_k-x_{k-1}}{f(x_k)-f(x_{k-1})}{\nonumber}\]</div>
 </div>
 <div class="section" id="rate-of-convergence-4">
 <h3>Rate of convergence<a class="headerlink" href="#rate-of-convergence-4" title="Permalink to this headline">¶</a></h3>
-<p>The derivation of the rate of convergence for the secant method is a bit more involved. To simplify the notation we introduce the notation <span class="math notranslate nohighlight">\(\varepsilon_k\equiv x_k-x^*\)</span>, where <span class="math notranslate nohighlight">\(x^*\)</span> is the exact solution. Subtracting <span class="math notranslate nohighlight">\(x^*\)</span> from each side of equation <a class="reference internal" href="#eq-eq-nlin-sec2"><span class="std std-ref">(148)</span></a> we get</p>
+<p id="index-6">The derivation of the rate of convergence for the secant method is a bit more involved. To simplify the notation we introduce the notation <span class="math notranslate nohighlight">\(\varepsilon_k\equiv x_k-x^*\)</span>, where <span class="math notranslate nohighlight">\(x^*\)</span> is the exact solution. Subtracting <span class="math notranslate nohighlight">\(x^*\)</span> from each side of equation <a class="reference internal" href="#eq-eq-nlin-sec2"><span class="std std-ref">(148)</span></a> we get</p>
 <div class="math notranslate nohighlight" id="eq-auto41">
 \[\tag{149}
 \varepsilon_{k+1}=x_{k+1}-x^*=\frac{x_{k-1}f(x_k)-x_kf(x_{k-1})}{f(x_k)-f(x_{k-1})}-x^*, {\nonumber}\]</div>
@@ -508,7 +505,7 @@ f(x_{k-1}) =f(x^*)+f^\prime(x^*)(x_{k-1}-x^*)+\frac{1}{2}f^{\prime\prime}(x^*)(x
 </div>
 <div class="section" id="newton-rapson-method">
 <h2>Newton Rapson method<a class="headerlink" href="#newton-rapson-method" title="Permalink to this headline">¶</a></h2>
-<p>The derivation of Newtons method, equation <a class="reference internal" href="#eq-eq-nlin-newton"><span class="std std-ref">(140)</span></a>, done in the previous section was based on figure <a class="reference internal" href="#fig-nlin-newton"><span class="std std-ref">Illustration of Newtons method for the van der Waals EOS</span></a>. We will now derive it using a slightly different approach, but which lends itself easier to extend Newtons method to higher dimensions. The starting point is to expand the function around <span class="math notranslate nohighlight">\(x_k\)</span>, using Taylors formula</p>
+<p id="index-7">The derivation of Newtons method, equation <a class="reference internal" href="#eq-eq-nlin-newton"><span class="std std-ref">(140)</span></a>, done in the previous section was based on figure <a class="reference internal" href="#fig-nlin-newton"><span class="std std-ref">Illustration of Newtons method for the van der Waals EOS</span></a>. We will now derive it using a slightly different approach, but which lends itself easier to extend Newtons method to higher dimensions. The starting point is to expand the function around <span class="math notranslate nohighlight">\(x_k\)</span>, using Taylors formula</p>
 <div class="math notranslate nohighlight" id="eq-eq-nlin-nt">
 \[\tag{161}
 f(x)=f(x_k)+f^\prime(x_k)(x-x_k) + \cdots\,.\]</div>
@@ -535,7 +532,7 @@ f(x)=f(x_k)+f^\prime(x_k)(x-x_k) + \cdots\,.\]</div>
 </div>
 <div class="section" id="gradient-descent">
 <h2>Gradient Descent<a class="headerlink" href="#gradient-descent" title="Permalink to this headline">¶</a></h2>
-<p>This method used is to minimize functions (does not work for root finding). In many nonlinear problems, we would like to minimize (or maximize) a function. An ideal 2D example is shown in figure <a class="reference internal" href="#fig-nlin-grad"><span class="std std-ref">A very simple example of the gradient descent method</span></a>. The algorithm moves in the direction of steepest descent. Note that the step size might change towards the search.</p>
+<p id="index-8">This method used is to minimize functions (does not work for root finding). In many nonlinear problems, we would like to minimize (or maximize) a function. An ideal 2D example is shown in figure <a class="reference internal" href="#fig-nlin-grad"><span class="std std-ref">A very simple example of the gradient descent method</span></a>. The algorithm moves in the direction of steepest descent. Note that the step size might change towards the search.</p>
 <div class="figure align-default" id="id15">
 <span id="fig-nlin-grad"></span><a class="reference internal image-reference" href="_images/steepest_descent.png"><img alt="_images/steepest_descent.png" src="_images/steepest_descent.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-text"><em>A very simple example of the gradient descent method</em></span><a class="headerlink" href="#id15" title="Permalink to this image">¶</a></p>

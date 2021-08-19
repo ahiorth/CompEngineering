@@ -1,0 +1,919 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/doconce/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/doconce/doconce/" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Covid-19, data and a simple compartment model">
+
+<title>Covid-19, data and a simple compartment model</title>
+
+<!-- Bootstrap style: bootswatch_readable -->
+<link href="https://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:64px;      /* fixed header height for style bootswatch_readable */
+  margin:-64px 0 0; /* negative fixed header height */
+}
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Introduction', 1, None, '___sec0'),
+              ('Exercise 1', 1, None, '___sec1'),
+              ('Exercise 2', 1, None, '___sec2'),
+              ('Using the SI-model to describe the spread of COVID-19',
+               1,
+               None,
+               '___sec3'),
+              ('Exercise 3', 1, 'exercise:no_hope', 'exercise:no_hope'),
+              ('Exercise 4', 1, None, '___sec5'),
+              ('Exercise 5', 1, None, '___sec6'),
+              ('Conclusion and Discussion', 1, None, '___sec7'),
+              ('Self-reflections', 1, None, '___sec8'),
+              ('Bibliography', 1, None, '___sec9')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript" async
+ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="covid19_solution-readable.html">Covid-19, data and a simple compartment model</a>
+  </div>
+
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="#___sec0" style="font-size: 80%;">Introduction</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec1" style="font-size: 80%;">Exercise 1</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec2" style="font-size: 80%;">Exercise 2</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec3" style="font-size: 80%;">Using the SI-model to describe the spread of COVID-19</a></li>
+     <!-- navigation toc: --> <li><a href="#exercise:no_hope" style="font-size: 80%;">Exercise 3</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec5" style="font-size: 80%;">Exercise 4</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec6" style="font-size: 80%;">Exercise 5</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec7" style="font-size: 80%;">Conclusion and Discussion</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec8" style="font-size: 80%;">Self-reflections</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec9" style="font-size: 80%;">Bibliography</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0000"></a>
+<!-- ------------------- main content ---------------------- -->
+
+
+
+<div class="jumbotron">
+<center><h1>Covid-19, data and a simple compartment model</h1></center>  <!-- document title -->
+
+<p>
+<!-- author(s): Aksel Hiorth and Oddbj&#248;rn N&#248;dland -->
+
+<center>
+<b>Aksel Hiorth and Oddbj&#248;rn N&#248;dland</b> 
+</center>
+
+<p>
+<!-- institution(s) -->
+
+<br>
+<p>
+<center><h4>Aug 19, 2021</h4></center> <!-- date -->
+<br>
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b>How to write an abstract</b>
+The abstract should focus on the <em>key</em> ideas in the report, <em>key</em> results,
+and implications of your findings.
+</div>
+
+
+<p>
+<b>Abstract.</b> <p>
+In this project, a simple \( SI \) (Susceptible, Infected)-model is used to analyze
+the first 250 days of the Corona virus outbreak. In areas with high population
+density, a model with a constant disease transmission rate, \( \beta \), fits the
+data well, provided we match the total number of infected people to the data.
+In areas with a lower population density, as in the Nordic countries,
+the same model works poorly.
+Extending the model to allow for a time-dependent \( \beta \) makes it possible
+to account for varying governmental responses among countries.
+The results presented here supports the notion that the governmental
+response was stronger in Hubei, China compared to Norway.
+
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b>How to write the introduction</b>
+Use the introduction to place your work in context, and outline your
+approach to the problems under investigation. It is good to cite some
+appropriate references here, but make sure that you do not copy directly
+from other sources; that will be regarded as cheating!
+You will lose points and get a lower grade.
+
+<p>
+Also, the introduction should <em>not</em> be a copy of the handed-out exercise text,
+instead try to use your own words as much as possible.
+</div>
+
+
+<p>
+</div> <!-- end jumbotron -->
+
+<h1 id="___sec0" class="anchor">Introduction  </h1>
+
+<p>
+The Corona virus disease, COVID-19, is brought on by infectious contact with
+<em>SARS-CoV-2, severe acute respiratory syndrome coronavirus 2</em> <a href="#SarsCov2">[1]</a>.
+Since its original discovery in Wuhan, China <a href="#zhou2020pneumonia">[2]</a>, it
+spread rapidly to most of the world's countries and has cause a pandemic
+we are still in the middle of.
+
+<p>
+In this project we investigate the 250 first days of the Corona virus outbreak.
+The project is divided into two parts. In the first part, we import and view
+data on reported number of confirmed cases using the Python libraries <code>pandas</code>
+and <code>matplotlib</code>. The data can be freely downloaded from the Johns Hopkins
+git repository,
+<a href="https://github.com/CSSEGISandData/COVID-19" target="_self">Center for Systems Science and Engineering (CSSE) at
+Johns Hopkins University</a>.
+In the second part, we use a mathematical compartment model to interpret
+the data.
+Finally, we present our conclusions as well as reflections about what we
+learned working on the project.
+
+<h1 id="___sec1" class="anchor">Exercise 1  </h1>
+
+<p>
+<b>Part 1.</b>
+
+<p>
+We start by reading the contents of the text file <code>corona_data.dat</code> into a
+<code>pandas.DataFrame</code> object:
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span>df <span style="color: #666666">=</span> pd<span style="color: #666666">.</span>read_csv(<span style="color: #BA2121">&#39;../data/corona_data.dat&#39;</span>, sep<span style="color: #666666">=</span><span style="color: #BA2121">&#39;</span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121">&#39;</span>)
+</pre></div>
+<p>
+In the text file, columns of data are separated by a tab (<code>\t</code>) marker.
+Therefore, we have to use the command <code>sep='\t'</code> in order for the <code>read_csv</code>
+function to work properly
+(as explained in the <a href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html" target="_self">documentation</a>)
+
+<p>
+<b>Part 2.</b>
+
+<p>
+The data frame, <code>df</code>, now contains COVID-19 data from all countries,
+as well as several regions and other kinds of locations. If we want
+to extract only the data for a specific country, say Afghanistan,
+we can also do that very easily with <code>pandas</code>:
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span>df <span style="color: #666666">=</span> df[df[<span style="color: #BA2121">&#39;LOCATION&#39;</span>] <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;Afghanistan&#39;</span>]
+</pre></div>
+<p>
+The innermost command (<code>df['LOCATION'] == 'Afghanistan'</code>) returns an array
+of boolean variables (i.e., either <code>True</code> or <code>False</code>) signifying which entries
+have "Afghanistan" in the location column. Since <code>pandas</code> supports
+<a href="https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html" target="_self">boolean masking</a>,
+this array can in turn be passed to the original data frame,
+giving back a sub-dataframe containing only the rows corresponding to
+<code>True</code>.
+
+<p>
+<b>Part 3.</b>
+
+<p>
+Since we are interested in comparing data for different locations, we create
+a Python function that returns the data for one specific location:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">get_corona_data</span>(location, data_file<span style="color: #666666">=</span><span style="color: #BA2121">&#39;../data/corona_data.dat&#39;</span>):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    Extracts COVID-19 data for a specific location.</span>
+
+<span style="color: #BA2121; font-style: italic">    :param location: The name of the location (case-sensitive).</span>
+<span style="color: #BA2121; font-style: italic">    :param data_file: Path to file holding the COVID-19 data.</span>
+<span style="color: #BA2121; font-style: italic">                      It is expected that columns of data are</span>
+<span style="color: #BA2121; font-style: italic">                      separated by tabs, and that there is a</span>
+<span style="color: #BA2121; font-style: italic">                      column called &quot;LOCATION&quot; with names of</span>
+<span style="color: #BA2121; font-style: italic">                      each country, region, etc.</span>
+<span style="color: #BA2121; font-style: italic">    :return: A pandas DataFrame with COVID-19 data for the</span>
+<span style="color: #BA2121; font-style: italic">             input location.</span>
+<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+    df <span style="color: #666666">=</span> pd<span style="color: #666666">.</span>read_csv(data_file, sep<span style="color: #666666">=</span><span style="color: #BA2121">&#39;</span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121">&#39;</span>)
+    <span style="color: #008000; font-weight: bold">try</span>:
+        df <span style="color: #666666">=</span> df[df[<span style="color: #BA2121">&#39;LOCATION&#39;</span>] <span style="color: #666666">==</span> location]
+    <span style="color: #008000; font-weight: bold">except</span>:
+        <span style="color: #008000">print</span>(<span style="color: #BA2121">f&#39;Could not find data for location </span><span style="color: #BB6688; font-weight: bold">{</span>location<span style="color: #BB6688; font-weight: bold">}</span><span style="color: #BA2121">...&#39;</span>)
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">None</span>
+    <span style="color: #008000; font-weight: bold">return</span> df
+</pre></div>
+<p>
+<!-- This allows us to re-use essentially the same code in many places simply by -->
+<!-- calling the function with different input arguments. -->
+
+<h1 id="___sec2" class="anchor">Exercise 2  </h1>
+
+<p>
+<b>Part 1.</b>
+
+<p>
+As an example of how to visualize the data, we again use Afghanistan.
+However, note that we will not spend time on interpreting the outbreak in
+this country.
+
+<p>
+Before making any plots, we choose to extract the underlying NumPy arrays
+holding the data on time and confirmed cases:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span>time <span style="color: #666666">=</span> df[<span style="color: #BA2121">&#39;ELAPSED_TIME_SINCE_OUTBREAK&#39;</span>]<span style="color: #666666">.</span>to_numpy()
+confirmed <span style="color: #666666">=</span> df[<span style="color: #BA2121">&#39;CONFIRMED&#39;</span>]<span style="color: #666666">.</span>to_numpy()
+</pre></div>
+<p>
+Note that this is not really necessary, because we can also pass
+<code>pandas.DataSeries</code> objects directly to the plotting commands
+
+<p>
+
+<!-- begin inline comment -->
+<font color="red">(<b>Tip 1</b>: If you are uncertain about what kind of an object a variable <code>x</code> refers to, the command <code>type(x)</code> provides the answer!)</font>
+<!-- end inline comment -->
+
+<p>
+<b>Part 2.</b>
+
+<p>
+To visualize the data for Afghanistan, we input the arrays from the
+previous part to the <code>scatter</code> function provided by <code>matplotlib</code>:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span>fig, ax <span style="color: #666666">=</span> plt<span style="color: #666666">.</span>subplots()
+ax<span style="color: #666666">.</span>grid()
+ax<span style="color: #666666">.</span>set_xlabel(<span style="color: #BA2121">&#39;Time since initial outbreak (days)&#39;</span>)
+ax<span style="color: #666666">.</span>set_ylabel(<span style="color: #BA2121">&#39;Number of confirmed cases&#39;</span>)
+ax<span style="color: #666666">.</span>scatter(time, confirmed, color<span style="color: #666666">=</span><span style="color: #BA2121">&#39;black&#39;</span>)
+</pre></div>
+<p>
+<b>Part 3.</b>
+and 4
+
+<p>
+Generalizing what we just did, we write a Python function to create plots for
+an <em>arbitrary location</em>:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">plot_confirmed_cases</span>(location, data_file<span style="color: #666666">=</span><span style="color: #BA2121">&#39;../data/corona_data.dat&#39;</span>):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    Plots the number of confirmed COVID-19 cases for a specific</span>
+<span style="color: #BA2121; font-style: italic">    location.</span>
+
+<span style="color: #BA2121; font-style: italic">    :param location: The name of the location (case-sensitive).</span>
+<span style="color: #BA2121; font-style: italic">    :param data_file: Path to file holding the COVID-19 data.</span>
+<span style="color: #BA2121; font-style: italic">                      It is expected that columns of data are</span>
+<span style="color: #BA2121; font-style: italic">                      separated by tabs, and that there is a</span>
+<span style="color: #BA2121; font-style: italic">                      column called &quot;LOCATION&quot; with names of</span>
+<span style="color: #BA2121; font-style: italic">                      each country, region, etc.</span>
+<span style="color: #BA2121; font-style: italic">    :return: A matplotlib.pyplot.figure object.</span>
+<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+    <span style="color: #408080; font-style: italic"># Get data</span>
+    df <span style="color: #666666">=</span> get_corona_data(location, data_file)
+    time <span style="color: #666666">=</span> df[<span style="color: #BA2121">&#39;ELAPSED_TIME_SINCE_OUTBREAK&#39;</span>]<span style="color: #666666">.</span>to_numpy()
+    confirmed <span style="color: #666666">=</span> df[<span style="color: #BA2121">&#39;CONFIRMED&#39;</span>]<span style="color: #666666">.</span>to_numpy()
+
+    <span style="color: #408080; font-style: italic"># Make plot</span>
+    fig, ax <span style="color: #666666">=</span> plt<span style="color: #666666">.</span>subplots()
+    ax<span style="color: #666666">.</span>set_title(location)
+    ax<span style="color: #666666">.</span>grid()
+    ax<span style="color: #666666">.</span>set_xlabel(<span style="color: #BA2121">&#39;Time since initial outbreak (days)&#39;</span>)
+    ax<span style="color: #666666">.</span>set_ylabel(<span style="color: #BA2121">&#39;Number of confirmed cases&#39;</span>)
+    ax<span style="color: #666666">.</span>scatter(time, confirmed, color<span style="color: #666666">=</span><span style="color: #BA2121">&#39;black&#39;</span>)
+    <span style="color: #008000; font-weight: bold">return</span> fig
+</pre></div>
+<p>
+Note that we return the figure object from the function; this allows us to
+customize the plot further outside of the function should we wish to do so.
+
+<p>
+<b>Part 5.</b>
+
+<p>
+Next, we plot number of confirmed cases in Hubei and Norway:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span>fig_hubei <span style="color: #666666">=</span> plot_confirmed_cases(<span style="color: #BA2121">&#39;Hubei&#39;</span>)
+fig_norway <span style="color: #666666">=</span> plot_confirmed_cases(<span style="color: #BA2121">&#39;Norway&#39;</span>)
+</pre></div>
+<p>
+To build intuition about the COVID-19 outbreak, we want to compare the data with
+a simple mathematical model. Therefore, we will come back to these data
+below, after having introduced our model of choice.
+
+<h1 id="___sec3" class="anchor">Using the SI-model to describe the spread of COVID-19 </h1>
+
+<p>
+Most models for epidemics are some sort of compartment model <a href="#kermack1927contribution">[3]</a>.
+These models first divide the total population into a set of boxes or compartments,
+each of which represents a possible "disease state" (healthy, exposed, infected, recovered, vaccinated, dead, etc.)
+Next, differential equations are set up to describe how individuals "flow"
+from one compartment to another. Obviously, compartment models come in many
+different flavours, and they have greatly varying complexity.
+Since this is an introductory project, we will use an extremely simple
+model, the <em>deterministic SI-model</em> <a href="#batista2021simulation">[4]</a>:
+
+$$
+\begin{align}
+\tag{1}
+\frac{\mathrm{d}S(t)}{\mathrm{d}t} &= -\beta\cdot\frac{S(t)I(t)}{N} \\ 
+\tag{2}
+\frac{\mathrm{d}I(t)}{\mathrm{d}t} &= +\beta\cdot\frac{S(t)I(t)}{N} \,.
+\end{align}
+$$
+
+<p>
+In the above equations, \( N \) is the total population size, \( S(t) \) denotes the
+number of susceptible people at time \( t \), the population at risk of being
+infected, while \( I(t) \) denotes the number of infected (sick) individuals.
+Since there are only two compartments, we must have \( S(t)+I(t)=N \) at all times.
+This implies that people never die or recover from the disease, and that
+eventually everyone will be infected, a clear weakness with the model.
+
+<h1 id="exercise:no_hope" class="anchor">Exercise 3</h1>
+
+<p>
+<b>Part 1.</b>
+
+<p>
+The analytical solution to equation <a href="#mjx-eqn-2">(2)</a> can be derived by
+first inserting \( S(t)=N-I(t) \), separating variables, and integrating:
+$$
+\begin{align}
+\displaystyle\int_{I_0}^{I(t)}\frac{\mathrm{d}I(t)}{I(t)(N-I(t))} \mathrm{d}I
+&= \displaystyle\int_{0}^{t}\frac{\beta}{N}\mathrm{d}t=\beta t\,,
+\tag{3}
+\end{align}
+$$
+
+where \( I_0=I(0) \). To calculate the integral on the left, we can use use partial
+fractions to split the integrand into a sum of two parts:
+$$
+\begin{align}
+\displaystyle\int_{I_0}^{I(t)}\left(\frac{1}{I} + \frac{1}{N-I}\right)
+\mathrm{d}I &= \left[\ln{I} - \ln{(N-I)}\right]_{I_0}^{I(t)} 
+\tag{4}\\ 
+&= \ln{(\frac{I}{N-I})}_{I_0}^{I(t)}  
+\tag{5}\\ 
+&= \ln{\frac{I(t)}{N-I(t)}} - \ln{\frac{I_0}{N-I_0}} 
+\tag{6}\\ 
+&= \ln{\frac{I(t)}{N-I(t)}} + \ln{\frac{S_0}{I_0}}\,.
+\tag{7}
+\end{align}
+$$
+
+<p>
+Hence, taking the exponential on both sides of the original integral:
+$$
+\begin{align}
+\frac{I(t)}{N-I(t)} &= \frac{I_0}{S_0}\cdot \exp{(\beta t)}  
+\tag{8}\\ 
+\tag{9}
+I(t) &= \frac{S_0+I_0}{1+\frac{S_0}{I_0}\exp(-\beta{t})}\,.
+\end{align}
+$$
+
+where \( S_0=S(0) \), and where we have used that \( S_0 + I_0=N \).
+Finally, the number of susceptible people are:
+$$
+\begin{align}
+\tag{10}
+S(t) = N - I(t) = \frac{(S_0+I_0)\frac{S_0}{I_0}\exp(-\beta{t})}{1+\frac{S_0}{I_0}\exp(-\beta{t})} \,.
+\end{align}
+$$
+
+<h1 id="___sec5" class="anchor">Exercise 4 </h1>
+
+<p>
+<b>Part 1.</b>
+
+<p>
+The following Python function calculates the analytical solution
+to the SI-model, equations <a href="#mjx-eqn-10">(10)</a>
+and <a href="#mjx-eqn-9">(9)</a>:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">calc_SI_model</span>(t, S0, I0, beta):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    :param t: An array of times.</span>
+<span style="color: #BA2121; font-style: italic">    :param S0: The initial number of susceptible people.</span>
+<span style="color: #BA2121; font-style: italic">    :param I0: The initial number of infected people.</span>
+<span style="color: #BA2121; font-style: italic">    :param beta: The disease transmission rate parameter.</span>
+<span style="color: #BA2121; font-style: italic">    :return: A tuple of arrays holding S(t) and I(t).</span>
+<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+    I <span style="color: #666666">=</span> (S0<span style="color: #666666">+</span>I0)<span style="color: #666666">/</span>(<span style="color: #666666">1.0</span> <span style="color: #666666">+</span> S0<span style="color: #666666">*</span>np<span style="color: #666666">.</span>exp(<span style="color: #666666">-</span>beta<span style="color: #666666">*</span>t)<span style="color: #666666">/</span>I0)
+    S <span style="color: #666666">=</span> S0 <span style="color: #666666">+</span> I0 <span style="color: #666666">-</span> I
+    <span style="color: #008000; font-weight: bold">return</span> S, I
+</pre></div>
+<p>
+<b>Part 2.</b>
+
+<p>
+Next, we implement a new function that combines the SI-model with the
+plot function:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">compare_confirmed_cases_with_model</span>(location, S0, I0, beta,
+                                       data_file<span style="color: #666666">=</span><span style="color: #BA2121">&#39;../data/corona_data.dat&#39;</span>):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    Plots the number of confirmed COVID-19 cases for a specific</span>
+<span style="color: #BA2121; font-style: italic">    location.</span>
+
+<span style="color: #BA2121; font-style: italic">    :param location: The name of the location (case-sensitive).</span>
+<span style="color: #BA2121; font-style: italic">    :param S0: The initial number of susceptibles in the model.</span>
+<span style="color: #BA2121; font-style: italic">    :param I0: The initial number of infected people in the model.</span>
+<span style="color: #BA2121; font-style: italic">    :param beta: The model disease transmission rate parameter.</span>
+<span style="color: #BA2121; font-style: italic">    :param data_file: Path to file holding the COVID-19 data.</span>
+<span style="color: #BA2121; font-style: italic">                      It is expected that columns of data are</span>
+<span style="color: #BA2121; font-style: italic">                      separated by tabs, and that there is a</span>
+<span style="color: #BA2121; font-style: italic">                      column called &quot;LOCATION&quot; with names of</span>
+<span style="color: #BA2121; font-style: italic">                      each country, region, etc.</span>
+<span style="color: #BA2121; font-style: italic">    :return: A matplotlib.pyplot.figure object.</span>
+<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+    <span style="color: #408080; font-style: italic"># Calculate S(t) and I(t) from the analytical solution</span>
+    t <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, <span style="color: #666666">250</span>, <span style="color: #666666">251</span>)
+    St, It <span style="color: #666666">=</span> calc_SI_model(t, S0, I0, beta)
+
+    <span style="color: #408080; font-style: italic"># Plot the data, and return the data</span>
+    fig <span style="color: #666666">=</span> plot_confirmed_cases(location, data_file)
+    <span style="color: #408080; font-style: italic"># Add modelled I(t) to the same figure</span>
+    ax <span style="color: #666666">=</span> fig<span style="color: #666666">.</span>axes[<span style="color: #666666">0</span>]
+    ax<span style="color: #666666">.</span>plot(t, It)
+    <span style="color: #008000; font-weight: bold">return</span> fig
+</pre></div>
+<p>
+<b>Part 3.</b>
+
+<p>
+The city of Wuhan is located in the province of Hubei. Since COVID-19 first
+arose in Wuhan <a href="#zhou2020pneumonia">[2]</a>, the data for Hubei is of special
+interest when studying the dynamics of the disease transmission.
+As remarked previously, the simple SI-model predicts that everyone
+in the population will be infected eventually.
+On the other hand, the data for Hubei indicates that the Corona
+virus spread very quickly after the initial outbreak, but then reached a
+plateau level much lower than the total population size.
+Assuming the data to be trustworthy, this is most likely a consequence of
+strong countermeasures being put in place in Hubei.
+
+<p>
+To match the model to the data, we therefore set \( N \) equal to the final number
+of confirmed cases in Hubei. For simplicity we also assume that at time \( t=0 \),
+the number of infected individuals was \( I_0=1 \), hence \( S_0=N-1 \).
+We manually adjust \( S_0 \) and \( \beta \) to get a match between model and data:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span>df <span style="color: #666666">=</span> get_corona_data(<span style="color: #BA2121">&#39;Hubei&#39;</span>)
+N <span style="color: #666666">=</span> df[<span style="color: #BA2121">&#39;CONFIRMED&#39;</span>]<span style="color: #666666">.</span>iloc[<span style="color: #666666">-1</span>]
+fig_hubei_model <span style="color: #666666">=</span> compare_confirmed_cases_with_model(<span style="color: #BA2121">&#39;Hubei&#39;</span>, N<span style="color: #666666">-1</span>, <span style="color: #666666">1</span>, <span style="color: #666666">0.6</span>)
+</pre></div>
+<p>
+<b>Part 4.</b>
+
+<p>
+For comparison purposes, it might be interesting to study how the virus
+spread in a more confined space. One such example comes from the
+cruise ship <em>Diamond Princess</em>.
+There were \( S_0=712 \) confirmed cases of the Corona virus aboard
+the cruise ship <a href="#WikiDiamondPrincess">[5]</a>.
+If we use the same \( \beta \)-value we history-matched to the Hubei data,
+we get:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span>compare_confirmed_cases_with_model(<span style="color: #BA2121">&#39;Diamond Princess&#39;</span>, <span style="color: #666666">712</span>, <span style="color: #666666">1</span>, <span style="color: #666666">0.6</span>)
+</pre></div>
+<p>
+It should be remarked that the total number of passengers were
+about five times larger <a href="#WikiDiamondPrincess">[5]</a>.
+
+<p>
+<b>Part 5.</b>
+
+<p>
+As with the case of Hubei, we cannot use the total population size of Norway
+for \( S_0 \), because that would lead to millions of people being infected in
+the model calculation.
+A challenge with matching this particular data set is there is not a single
+plateau level for the disease; instead, there is a second wave starting at
+around 150 days. Therefore, the history-match will clearly be poorer for
+Norway overall than for the previous two locations.
+
+<p>
+To make things simple, we ignore the second wave and only focus on the initial
+period. After 150 days, the number of confirmed cases is close to 8000-9000,
+so we choose \( S_0=8000 \):
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span>compare_confirmed_cases_with_model(<span style="color: #BA2121">&#39;Norway&#39;</span>, <span style="color: #666666">8000</span>, <span style="color: #666666">1</span>, <span style="color: #666666">0.6</span>)
+compare_confirmed_cases_with_model(<span style="color: #BA2121">&#39;Norway&#39;</span>, <span style="color: #666666">8000</span>, <span style="color: #666666">1</span>, <span style="color: #666666">0.27</span>)
+</pre></div>
+<p>
+As seen in the above two plots, we have to lower \( \beta \) in order to
+capture the trend in the data.
+One interpretation is that, initially, the disease spread more slowly in
+Norway than in Hubei. At the same time, the countermeasures were not as
+effective in Norway.
+
+<h1 id="___sec6" class="anchor">Exercise 5 </h1>
+
+<p>
+We have seen that the \( SI \)-model works quite well provided that
+the disease a) spreads very quickly, and b) levels out thereafter.
+However, there are several clear weaknessnes with the model.
+One big problem has to do with the fact that there is only two compartments
+in the model; as remarked several times, this means that people
+can never recover from the disease in the model, i.e., everyone will eventually
+be infected. A more realistic model would add extra compartments, to account
+for not only recovered individuals, but also dead people, vaccinated ones, etc.
+
+<p>
+Another issue has to do with the \( \beta \)-factor, which is a measure of the
+"effective probability of infection". We have so far assumed \( \beta \) to be
+constant, but in reality we know that it should change with time.
+While some factors could lead to a larger risk of disease transmission
+(e.g., mutated variants of the virus <a href="#adam2021scientists">[6]</a>),
+it is likely that \( \beta \) will decrease due to strong
+countermeasures put in place by the world's different governments.
+To capture this kind of behavior, we again use a simple model and
+suppose that \( \beta \) declines exponentially:
+$$
+\begin{equation}
+\beta(t)=\beta_0 e^{-\lambda t}.
+\tag{11}
+\end{equation}
+$$
+
+<p>
+One can prove that equations similar to <a href="#mjx-eqn-9">(9)</a>
+and <a href="#mjx-eqn-10">(10)</a> still hold; all we have to do is to
+replace the product \( \beta t \) with
+$$
+\begin{equation}
+\beta t \to \int_0^t\beta_0e^{-\lambda t}dt=\frac{\beta_0}{\lambda}(1-e^{-\lambda t}).
+\tag{12}
+\end{equation}
+$$
+
+<p>
+In the above expression, \( \beta_0 \) is the initial infection rate,
+while the exponenial decline parameter, \( \lambda \), is used to capture
+effects of counter-measures: A high value of \( \lambda \) indicates strong
+disease-prevention, while in the limit \( \lambda\rightarrow{0} \) we recover
+our original SI-model that has no intervention effects.
+
+<p>
+<b>Part 1.</b>
+
+<p>
+We implement the exponential decline model by modifying the
+functions we made previously: we include both \( \beta \) and \( \lambda \) as
+input arguments, and simply let \( \lambda=0 \) by default:
+
+<p>
+
+<!-- begin inline comment -->
+<font color="red">(<b>Tip 2</b>: If you choose this way of implementing your code, you are allowed to skip straight to the "most advanced version" in your handed-in project. This way you avoid copying and pasting almost identical code in your project, and you reduce the risk of introducing bugs!)</font>
+<!-- end inline comment -->
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #408080; font-style: italic"># We replace the old function &quot;calc_SI_model&quot; by this:</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">calc_SI_model</span>(t, S0, I0, beta, lam<span style="color: #666666">=0.0</span>):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    :param t: An array of times.</span>
+<span style="color: #BA2121; font-style: italic">    :param S0: The initial number of susceptible people.</span>
+<span style="color: #BA2121; font-style: italic">    :param I0: The initial number of infected people.</span>
+<span style="color: #BA2121; font-style: italic">    :param beta: The disease transmission rate parameter.</span>
+<span style="color: #BA2121; font-style: italic">    :param lam: Decline parameter for exponential decline</span>
+<span style="color: #BA2121; font-style: italic">                of beta (default: 0.0).</span>
+<span style="color: #BA2121; font-style: italic">    :return: A tuple of arrays holding S(t) and I(t).</span>
+<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+    bt <span style="color: #666666">=</span> (beta<span style="color: #666666">/</span>lam)<span style="color: #666666">*</span>(<span style="color: #666666">1.0</span> <span style="color: #666666">-</span> np<span style="color: #666666">.</span>exp(<span style="color: #666666">-</span>lam<span style="color: #666666">*</span>t)) <span style="color: #008000; font-weight: bold">if</span> lam <span style="color: #666666">&gt;</span> <span style="color: #666666">0</span> <span style="color: #008000; font-weight: bold">else</span> beta<span style="color: #666666">*</span>t
+    I <span style="color: #666666">=</span> (S0<span style="color: #666666">+</span>I0)<span style="color: #666666">/</span>(<span style="color: #666666">1.0</span> <span style="color: #666666">+</span> S0<span style="color: #666666">*</span>np<span style="color: #666666">.</span>exp(<span style="color: #666666">-</span>bt)<span style="color: #666666">/</span>I0)
+    S <span style="color: #666666">=</span> S0 <span style="color: #666666">+</span> I0 <span style="color: #666666">-</span> I
+    <span style="color: #008000; font-weight: bold">return</span> S, I
+</pre></div>
+<p>
+Similarly, we update our last plotting function in two places by passing
+in the extra input argument:
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #408080; font-style: italic"># Replace the old &quot;comparison function&quot; with this:</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">compare_confirmed_cases_with_model</span>(location,
+                                       S0,
+                                       I0,
+                                       beta,
+                                       lam<span style="color: #666666">=0.0</span>,
+                                       data_file<span style="color: #666666">=</span><span style="color: #BA2121">&#39;../data/corona_data.dat&#39;</span>):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    Plots the number of confirmed COVID-19 cases for a specific</span>
+<span style="color: #BA2121; font-style: italic">    location.</span>
+
+<span style="color: #BA2121; font-style: italic">    :param location: The name of the location (case-sensitive).</span>
+<span style="color: #BA2121; font-style: italic">    :param S0: The initial number of susceptibles in the model.</span>
+<span style="color: #BA2121; font-style: italic">    :param I0: The initial number of infected people in the model.</span>
+<span style="color: #BA2121; font-style: italic">    :param beta: The model disease transmission rate parameter.</span>
+<span style="color: #BA2121; font-style: italic">    :param lam: Decline parameter for exponential decline</span>
+<span style="color: #BA2121; font-style: italic">                of beta (default: 0.0).</span>
+<span style="color: #BA2121; font-style: italic">    :param data_file: Path to file holding the COVID-19 data.</span>
+<span style="color: #BA2121; font-style: italic">                      It is expected that columns of data are</span>
+<span style="color: #BA2121; font-style: italic">                      separated by tabs, and that there is a</span>
+<span style="color: #BA2121; font-style: italic">                      column called &quot;LOCATION&quot; with names of</span>
+<span style="color: #BA2121; font-style: italic">                      each country, region, etc.</span>
+<span style="color: #BA2121; font-style: italic">    :return: A matplotlib.pyplot.figure object.</span>
+<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+    <span style="color: #408080; font-style: italic"># Calculate S(t) and I(t) from the analytical solution</span>
+    t <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, <span style="color: #666666">250</span>, <span style="color: #666666">251</span>)
+    St, It <span style="color: #666666">=</span> calc_SI_model(t, S0, I0, beta, lam)
+
+    <span style="color: #408080; font-style: italic"># Plot the data, and return the data</span>
+    fig <span style="color: #666666">=</span> plot_confirmed_cases(location, data_file)
+    <span style="color: #408080; font-style: italic"># Add modelled I(t) to the same figure</span>
+    ax <span style="color: #666666">=</span> fig<span style="color: #666666">.</span>axes[<span style="color: #666666">0</span>]
+    ax<span style="color: #666666">.</span>plot(t, It)
+    <span style="color: #008000; font-weight: bold">return</span> fig
+</pre></div>
+<p>
+<b>Part 2.</b>
+
+<p>
+The actual population size of Hubei has been reported
+as 57.8 million <a href="#ChinaPopulation">[7]</a>. Let us try using this value
+as input to the exponential-decline SI-model. By repeated trial-and-error,
+we find a combination that works reasonably well:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span>compare_confirmed_cases_with_model(<span style="color: #BA2121">&#39;Hubei&#39;</span>, <span style="color: #666666">57.8e6</span>, <span style="color: #666666">1</span>, <span style="color: #666666">2.0</span>, <span style="color: #666666">0.18</span>)
+</pre></div>
+<p>
+Note that we have more than tripled the initial \( \beta \)-factor compared to
+our previous match (now \( \beta_0=2 \) vs. before 0.6) We are still able to
+capture the trend in the data, though, by tuning \( \lambda \) accordingly.
+This example illustrates the fact that different models may fit the same
+data equally well, and that values of fitted parameters do not always
+have a clear-cut "physical interpretation". However, as long as we apply the
+<em>same model to different locations</em> we may compare the fitted parameters and
+hopefully learn something useful.
+
+<p>
+The updated SI-model behaves differently from the original one in that the
+disease outbreak will not reach the whole population.
+However, it is still the case that the model can only account a single wave.
+This is because \( \beta(t)\rightarrow{0} \) as \( t\rightarrow{\infty} \),
+which means that after some time, no one will be infected anymore,
+regardless of how many infectious individuals there are in the population.
+
+<p>
+<b>Part 3.</b>
+
+<p>
+The population of Norway is approximately 5.4 million <a href="#NorwayPopSSB">[8]</a>.
+If we use the \( \beta- \) and $\lambda-$values fitted to the Hubei data in order
+to predict the disease outbreak in Norway, we get:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span>compare_confirmed_cases_with_model(<span style="color: #BA2121">&#39;Hubei&#39;</span>, <span style="color: #666666">5.4e6</span>, <span style="color: #666666">1</span>, <span style="color: #666666">2.0</span>, <span style="color: #666666">0.18</span>)
+</pre></div>
+<p>
+We see that we drastically overpredict the number of COVID-19 cases in Norway.
+
+<p>
+<b>Part 4.</b>
+
+<p>
+By trial-and-error, we find an improved match for the initial disease
+transmission period in Norway:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span>compare_confirmed_cases_with_model(<span style="color: #BA2121">&#39;Norway&#39;</span>, <span style="color: #666666">5.4e6</span>, <span style="color: #666666">1</span>, <span style="color: #666666">0.8</span>, <span style="color: #666666">0.0898</span>)
+</pre></div>
+<p>
+If we can assume that the value of \( \lambda \) represents the government
+response, this means that while the initial outbreak was more severe in
+Hubei than in Norway, countermeasures were less strict in Norway
+(\( \beta_{0, \text{Hubei}} \) > \( \beta_{0, \text{Norway}} \), \( \lambda_\text{Norway} \) < \( \lambda_\text{Hubei} \)), which fits
+well with what has been reported in the media <a href="#CovidGovResponseTracker">[9]</a>.
+
+<h1 id="___sec7" class="anchor">Conclusion and Discussion </h1>
+
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b>What did you learn?</b>
+What are the implications of your findings? Are there any weaknesses or
+limitations in your approach? What can be improved?
+</div>
+
+
+<p>
+It is surprising that the SI-model can describe the data so well.
+Countries are very different, but still the spread of COVID-19
+are captured using similar model parameters for different places.
+When interpreting the data, we  can therefore compare different countries
+quantitatively, e.g., how fast the disease spreads, and the strength of
+governmental responses.
+We find that the governmental countermeasures were much stronger in Hubei than
+in Norway. However, many more countries should be analyzed with the model
+before we can conclude that an exponential decline model for \( \beta \) makes
+sense.
+
+<p>
+The work in this report supports the notion that we can use compartment
+models to analyze the Corona virus outbreak. To make the model more realistic,
+additional compartments should be introduced, to account for people are
+infected without being sick (asymptomatics), people who have recovered from
+the virus, dead people, vaccinated people, and so on.
+For large countries, or for very spread-out populations, compartments could also
+be introduced for different regions, and then one should allow for some sort of
+non-neighbour flow between them to account for traffic (buses, trains, airplanes etc.)
+
+<h1 id="___sec8" class="anchor">Self-reflections </h1>
+
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b>Self-reflections</b>
+Self-reflections are an important part of the learning process.
+Take time to reflect on what you did that was good or bad. Be specific.
+What <em>specifically</em> were you pleased with? What did you not like?
+What do you want to improve next time? Do you have any suggestions or
+feedback about the project itself?
+</div>
+
+
+<p>
+<b>Aksel:</b>
+I started too late on the projects, next time I will start immediately, visit the lab every Wednesday and work continuously. We worked quite well as a team. I enjoyed to see how we could use a model to analyze data, and extract knowledge. However, I think that the model is too simple to capture the complexity of how an infectious disease spreads. It would be very interesting to see how the model could be improved to capture more effects, like vaccination, social distancing, etc.
+
+<p>
+<b>Oddbj&#248;rn:</b>
+I worked on the project in-between several other tasks, and I did most of the writing work close to the deadline. Though I think the project went reasonably well, it is probably better if I start earlier next time. Being a former mathematics student, I really enjoyed learning about how the Corona virus can be modelled with differential equations. The project allowed also gave me appreciation for how difficult it can be to analyze real-world data; it would be exciting to continue in the future by gradually extending the complexity of the model to allow for more realism!
+
+<h1 id="___sec9" class="anchor">Bibliography </h1>
+
+<p>
+<!-- begin bibliography -->
+
+<ol>
+ <li> <div id="SarsCov2"></div> <b>C. S. G. o. t. I. C. o. T. o. Viruses</b>. 
+    The Species Severe Acute Respiratory Syndrome-Related Coronavirus: Classifying 2019-NCoV and Naming It SARS-CoV-2,
+    <em>Nature microbiology</em>,
+    5(4),
+    pp. 536,
+    2020.</li>
+ <li> <div id="zhou2020pneumonia"></div> <b>P. Zhou, X.-L. Yang, X.-G. Wang, B. Hu, L. Zhang, W. Zhang, H.-R. Si, Y. Zhu, B. Li, C.-L. Huang et al.</b>. 
+    A Pneumonia Outbreak Associated With a New Coronavirus of Probable Bat Origin,
+    <em>Nature</em>,
+    579(7798),
+    pp. 270-273,
+    2020.</li>
+ <li> <div id="kermack1927contribution"></div> <b>W. O. Kermack and A. G. McKendrick</b>. 
+    A Contribution to the Mathematical Theory of Epidemics—I,
+    <em>Proceedings of the Royal Society of London. Series A, Containing papers of a mathematical and physical character</em>,
+    115(772),
+    pp. 700-721,
+    1927.</li>
+ <li> <div id="batista2021simulation"></div> <b>A. M. Batista, S. L. Souza, K. C. Iarosz, A. C. Almeida, J. D. Szezech, E. C. Gabrick, M. Mugnaine, G. L. d. Santos and I. L. Caldas</b>. 
+    Simulation of Deterministic Compartmental Models for Infectious Diseases Dynamics,
+    <em>arXiv preprint arXiv:2106.02085</em>,
+    2021.</li>
+ <li> <div id="WikiDiamondPrincess"></div> <b>Wikipedia</b>. 
+    COVID-19 Pandemic on Diamond Princess,
+    2021,
+    Accessed: 2021-08-17,
+    <a href="https://en.wikipedia.org/wiki/COVID-19_pandemic_on_Diamond_Princess" target="_self"><tt>https://en.wikipedia.org/wiki/COVID-19_pandemic_on_Diamond_Princess</tt></a>.</li>
+ <li> <div id="adam2021scientists"></div> <b>D. Adam</b>. 
+    What Scientists Know About New, Fast-Spreading Coronavirus Variants.,
+    <em>Nature</em>,
+    2021.</li>
+ <li> <div id="ChinaPopulation"></div> <b>N. B. o. S. o. China</b>. 
+    Communiqué of the Seventh National Population Census[1] (No. 3) - Population by Region,
+    November 1, 2020,
+    Accessed: 2021-08-17,
+    <a href="http://www.stats.gov.cn/english/PressRelease/202105/t20210510_1817188.html" target="_self"><tt>http://www.stats.gov.cn/english/PressRelease/202105/t20210510_1817188.html</tt></a>.</li>
+ <li> <div id="NorwayPopSSB"></div> <b>S. Norway</b>. 
+    Population in Norway, 2nd Quarter 2021,
+    Updated: 19 August 2021,
+    Accessed: 2021-08-19,
+    <a href="https://www.ssb.no/en/befolkning/folketall/statistikk/befolkning" target="_self"><tt>https://www.ssb.no/en/befolkning/folketall/statistikk/befolkning</tt></a>.</li>
+ <li> <div id="CovidGovResponseTracker"></div> <b>U. o. O. B. S. o. Government</b>. 
+    COVID-19 GOVERNMENT RESPONSE TRACKER,
+    2021,
+    Accessed: 2021-08-17,
+    <a href="https://www.bsg.ox.ac.uk/research/research-projects/covid-19-government-response-tracker" target="_self"><tt>https://www.bsg.ox.ac.uk/research/research-projects/covid-19-government-response-tracker</tt></a>.</li>
+</ol>
+
+<!-- end bibliography -->
+
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

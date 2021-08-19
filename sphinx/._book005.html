@@ -59,7 +59,7 @@ in a specific case, it is important to understand the limitation and advantages 
 have a basic understanding of the development. There might also be some cases where you would like to adapt an integration scheme to your specific needs.</p>
 <div class="section" id="the-midpoint-rule">
 <h3>The Midpoint Rule<a class="headerlink" href="#the-midpoint-rule" title="Permalink to this headline">¶</a></h3>
-<p>Numerical integration is encountered in numerous applications in physics and engineering sciences.
+<p id="index-0">Numerical integration is encountered in numerous applications in physics and engineering sciences.
 Let us first consider the most simple case, a function <span class="math notranslate nohighlight">\(f(x)\)</span>, which is a function of one variable, <span class="math notranslate nohighlight">\(x\)</span>. The most straight forward way of calculating the area <span class="math notranslate nohighlight">\(\int_a^bf(x)dx\)</span> is
 simply to divide the area under the function into <span class="math notranslate nohighlight">\(N\)</span> equal rectangular slices with size <span class="math notranslate nohighlight">\(h=(b-a)/N\)</span>, as illustrated in figure <a class="reference internal" href="#fig-numint-mid"><span class="std std-ref">Integrating a function with the midpoint rule</span></a>. The area of one box is:</p>
 <div class="math notranslate nohighlight" id="eq-eq-numint-mid0">
@@ -129,7 +129,7 @@ therefore we choose the convention of having the first element to start at <span
 </div>
 <div class="section" id="the-trapezoidal-rule">
 <h3>The Trapezoidal Rule<a class="headerlink" href="#the-trapezoidal-rule" title="Permalink to this headline">¶</a></h3>
-<p>The numerical error in the above example is quite low, only about 2$%$ for <span class="math notranslate nohighlight">\(N=5\)</span>.
+<p id="index-1">The numerical error in the above example is quite low, only about 2$%$ for <span class="math notranslate nohighlight">\(N=5\)</span>.
 However, by just looking at the graph above it seems likely that we can develop a better algorithm by using trapezoids instead of rectangles,
 see figure <a class="reference internal" href="#fig-numint-trap"><span class="std std-ref">Integrating a function with the trapezoidal rule</span></a>.</p>
 <div class="figure align-default" id="id6">
@@ -211,7 +211,7 @@ performance than the trapezoidal rule. In the next section we will investigate t
 </div>
 <div class="section" id="numerical-errors-on-integrals">
 <h3>Numerical Errors on Integrals<a class="headerlink" href="#numerical-errors-on-integrals" title="Permalink to this headline">¶</a></h3>
-<p>It is important to know the accuracy of the methods we are using, otherwise we do not know if the
+<p id="index-2">It is important to know the accuracy of the methods we are using, otherwise we do not know if the
 computer produce correct results. In the previous examples we were able to estimate the error because we knew the analytical result. However, if we know the
 analytical result there is no reason to use the computer to calculate the result(!). Thus, we need a general method to estimate the error, and let the computer
 run until a desired accuracy is reached.</p>
@@ -311,8 +311,8 @@ E_T\simeq \frac{h^2}{12}\left[f^\prime(b)-f^\prime(a)\right]=\frac{(b-a)^2}{12N^
 </div>
 </div>
 <div class="section" id="practical-estimation-of-errors-on-integrals-richardson-extrapolation">
-<span id="sec-numint-parct"></span><h3>Practical Estimation of Errors on Integrals (Richardson Extrapolation)<a class="headerlink" href="#practical-estimation-of-errors-on-integrals-richardson-extrapolation" title="Permalink to this headline">¶</a></h3>
-<p>From the example above we were able to estimate the number of steps needed to reach (at least) a certain precision.
+<h3>Practical Estimation of Errors on Integrals (Richardson Extrapolation)<a class="headerlink" href="#practical-estimation-of-errors-on-integrals-richardson-extrapolation" title="Permalink to this headline">¶</a></h3>
+<p id="index-3">From the example above we were able to estimate the number of steps needed to reach (at least) a certain precision.
 In many practical cases we do not deal with functions, but with data and it can be difficult to evaluate the derivative.
 We also saw from the example above that the algorithm gives a higher precision than what we asked for.
 How can we avoid doing too many iterations? A very simple solution to this question is to double the number of intervals until
@@ -402,7 +402,7 @@ A possible algorithm is then:
 </div>
 <div class="section" id="romberg-integration">
 <h2>Romberg Integration<a class="headerlink" href="#romberg-integration" title="Permalink to this headline">¶</a></h2>
-<p>The adaptive algorithm for the trapezoidal rule in the previous section can be easily improved by remembering
+<p id="index-4">The adaptive algorithm for the trapezoidal rule in the previous section can be easily improved by remembering
 that the true integral was given by <a class="footnote-reference brackets" href="#romerr" id="id3">2</a> : <span class="math notranslate nohighlight">\(I=I_i+ch_i^2+\mathcal{O}(h^4)\)</span>. The error term was in the previous example only used to
 check if the desired tolerance was achieved, but we could also have added it to our estimate of the integral to reach an accuracy to fourth order:</p>
 <dl class="footnote brackets">
@@ -579,7 +579,7 @@ section uses 20480 and 9069 function evaluations, respectively.</p>
 </div>
 <div class="section" id="gaussian-quadrature">
 <h2>Gaussian Quadrature<a class="headerlink" href="#gaussian-quadrature" title="Permalink to this headline">¶</a></h2>
-<p>Many of the methods we have looked into are of the type:</p>
+<p id="index-5">Many of the methods we have looked into are of the type:</p>
 <div class="math notranslate nohighlight" id="eq-eq-numint-qq1">
 \[\tag{201}
 \int_a^b f(x) dx = \sum_{k=0}^{N-1} \omega_k f(x_k),\]</div>
@@ -698,9 +698,9 @@ Each time we increase <span class="math notranslate nohighlight">\(N\)</span> by
 increasing to <span class="math notranslate nohighlight">\(N=11\)</span> will reduce the error by a factor of <span class="math notranslate nohighlight">\(11^2=121\)</span>.</p>
 <div class="section" id="error-term-on-gaussian-integration">
 <h3>Error term on Gaussian Integration<a class="headerlink" href="#error-term-on-gaussian-integration" title="Permalink to this headline">¶</a></h3>
-<p>The Gaussian integration rule of order <span class="math notranslate nohighlight">\(N\)</span> integrates exactly a polynomial of order <span class="math notranslate nohighlight">\(2N-1\)</span>.
+<p id="index-6">The Gaussian integration rule of order <span class="math notranslate nohighlight">\(N\)</span> integrates exactly a polynomial of order <span class="math notranslate nohighlight">\(2N-1\)</span>.
 From Taylors error formula, see equation <a class="reference internal" href="._book002.html#eq-eq-taylor-error"><span class="std std-ref">(4)</span></a> in the chapter <a class="reference internal" href="._book002.html#ch-taylor"><span class="std std-ref">Finite differences</span></a>,
-we can easily see that the error term must be of order <span class="math notranslate nohighlight">\(2N\)</span>, and be proportional to <span class="math notranslate nohighlight">\(f^{(2N)}(\eta)\)</span>, see <span id="id4">[Ref3]</span> for more details on the derivation of error terms. The drawback with an analytical error term derived from series expansion is that it involves the derivative of the function. As we have already explained, this is very unpractical and it is much more practical to use the methods described in the section <a class="reference internal" href="#sec-numint-parct"><span class="std std-ref">Practical Estimation of Errors on Integrals (Richardson Extrapolation)</span></a>. Let us consider this in more detail, assume that we evaluate the integral using first a Gaussian integration rule with <span class="math notranslate nohighlight">\(N\)</span> points, and then <span class="math notranslate nohighlight">\(N+1\)</span> points. Our estimates of the &quot;exact&quot; integral, <span class="math notranslate nohighlight">\(I\)</span>,  would then be:</p>
+we can easily see that the error term must be of order <span class="math notranslate nohighlight">\(2N\)</span>, and be proportional to <span class="math notranslate nohighlight">\(f^{(2N)}(\eta)\)</span>, see <span id="id4">[Ref3]</span> for more details on the derivation of error terms. The drawback with an analytical error term derived from series expansion is that it involves the derivative of the function. As we have already explained, this is very unpractical and it is much more practical to use the methods described in the section <span class="xref std std-ref">sec:numint:parct</span>. Let us consider this in more detail, assume that we evaluate the integral using first a Gaussian integration rule with <span class="math notranslate nohighlight">\(N\)</span> points, and then <span class="math notranslate nohighlight">\(N+1\)</span> points. Our estimates of the &quot;exact&quot; integral, <span class="math notranslate nohighlight">\(I\)</span>,  would then be:</p>
 <div class="math notranslate nohighlight" id="eq-eq-numint-gerr1">
 \[\tag{221}
 I=I_N+ch_{N}^{2N},\]</div>
@@ -719,7 +719,7 @@ ch^N= I_{N+1}-I_N.\]</div>
 </div>
 <div class="section" id="integrating-functions-over-an-infinite-range">
 <h2>Integrating functions over an infinite range<a class="headerlink" href="#integrating-functions-over-an-infinite-range" title="Permalink to this headline">¶</a></h2>
-<p>Integrating a function over an infinite range can be done by the following trick. Assume that we would like to evaluate</p>
+<p id="index-7">Integrating a function over an infinite range can be done by the following trick. Assume that we would like to evaluate</p>
 <div class="math notranslate nohighlight" id="eq-eq-numint-inf">
 \[\tag{224}
 \int_a^\infty f(x) dx.\]</div>
