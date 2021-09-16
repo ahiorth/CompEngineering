@@ -144,7 +144,7 @@ MathJax.Hub.Config({
 <br>
 University of Stavanger
 <p>
-<center><h4>Aug 18, 2021</h4></center> <!-- date -->
+<center><h4>Sep 16, 2021</h4></center> <!-- date -->
 <br>
 <p>
 </div> <!-- end jumbotron -->
@@ -279,7 +279,7 @@ In the script below, we have implemented equation <a href="#mjx-eqn-8">(8)</a>.
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">analytical</span>(x):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">analytical</span>(x):
     <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>exp(<span style="color: #666666">-</span>x)
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">euler_step</span>(c_old, c_in, tau_inv,dt):
@@ -452,7 +452,7 @@ when \( h\to0 \). Below is an implementation of the Euler algorithm in this simp
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
 <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">euler</span>(tf,h):
     t<span style="color: #666666">=</span>[];f<span style="color: #666666">=</span>[]
@@ -566,7 +566,7 @@ Below is an implementation of the adaptive Euler algorithm:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">one_step</span>(c_old, c_in,h):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">one_step</span>(c_old, c_in,h):
     <span style="color: #008000; font-weight: bold">return</span> (<span style="color: #666666">1-</span>h)<span style="color: #666666">*</span>c_old<span style="color: #666666">+</span>h<span style="color: #666666">*</span>c_in
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">adaptive_euler</span>(c_into,c_init,t_final,tol<span style="color: #666666">=1e-4</span>):
@@ -675,7 +675,7 @@ Below is a Python implementation of equation <a href="#mjx-eqn-29">(29)</a>:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">fm</span>(c_old,c_in):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">fm</span>(c_old,c_in):
     <span style="color: #008000; font-weight: bold">return</span> c_in<span style="color: #666666">-</span>c_old
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">rk2_step</span>(c_old, c_in, h):
@@ -851,7 +851,7 @@ we should always get an amount that is equal to the original amount. Alternative
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span>mout <span style="color: #666666">+=</span> <span style="color: #666666">0.5*</span>(c_old<span style="color: #666666">+</span>c_new)<span style="color: #666666">*</span>q<span style="color: #666666">*</span>dt
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>mout <span style="color: #666666">+=</span> <span style="color: #666666">0.5*</span>(c_old<span style="color: #666666">+</span>c_new)<span style="color: #666666">*</span>q<span style="color: #666666">*</span>dt
 mbal  <span style="color: #666666">=</span> (c_new<span style="color: #666666">*</span>vol<span style="color: #666666">+</span>mout<span style="color: #666666">-</span>vol<span style="color: #666666">*</span>c_init)<span style="color: #666666">/</span>(vol<span style="color: #666666">*</span>c_init)
 </pre></div>
 <p>
@@ -888,7 +888,7 @@ problem this way, it makes more sense to calculate the mass out of the tank as \
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span>mout <span style="color: #666666">+=</span> c_old<span style="color: #666666">*</span>q<span style="color: #666666">*</span>dt
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>mout <span style="color: #666666">+=</span> c_old<span style="color: #666666">*</span>q<span style="color: #666666">*</span>dt
 mbal  <span style="color: #666666">=</span> (c_new<span style="color: #666666">*</span>vol<span style="color: #666666">+</span>mout<span style="color: #666666">-</span>vol<span style="color: #666666">*</span>c_init)<span style="color: #666666">/</span>(vol<span style="color: #666666">*</span>c_init)
 </pre></div>
 <p>

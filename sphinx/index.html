@@ -1,20 +1,19 @@
 
 <!DOCTYPE html>
 
-<html lang="1.0">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="1.0">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Modeling and Computational Engineering &#8212; _ Aksel Hiorth, the National IOR Centre &amp; Institute for Energy Resources, University of Stavanger documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Modeling and Computational Engineering" href="._book000.html" />
@@ -50,7 +49,7 @@
 <li class="toctree-l1"><a class="reference internal" href="._book000.html">Modeling and Computational Engineering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="._book001.html">Preface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="._book002.html">Finite differences</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="._book002.html#truncation-errors">Truncation Errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._book002.html#numerical-errors">Numerical Errors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._book002.html#taylor-polynomial-approximation">Taylor Polynomial Approximation</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="._book002.html#evaluation-of-polynomials">Evaluation of polynomials</a></li>
 </ul>
@@ -59,10 +58,11 @@
 <li class="toctree-l3"><a class="reference internal" href="._book002.html#round-off-errors">Round off Errors</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="._book002.html#higher-order-derivatives">Higher Order Derivatives</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="._book003.html">Solving linear systems</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="._book003.html#the-continuity-equation">The Continuity Equation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._book003.html#continuity-equation-as-a-linear-problem-in-progress">Continuity Equation as a linear problem (in progress)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._book003.html#solving-linear-equations">Solving linear equations</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="._book003.html#gauss-jordan-elimination">Gauss-Jordan elimination</a></li>
 <li class="toctree-l3"><a class="reference internal" href="._book003.html#pivoting">Pivoting</a></li>
@@ -83,6 +83,8 @@
 <li class="toctree-l2"><a class="reference internal" href="._book003.html#example-solving-the-heat-equation-using-linear-algebra">Example: Solving the heat equation using linear algebra</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="._book003.html#exercise-2-1-conservation-equation-or-the-continuity-equation">Exercise 2.1: Conservation Equation or the Continuity Equation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="._book003.html#exercise-2-2-curing-of-concrete-and-matrix-formulation">Exercise 2.2: Curing of Concrete and Matrix Formulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book003.html#exercise-2-3-solve-the-full-heat-equation">Exercise 2.3: Solve the full heat equation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book003.html#exercise-2-4-using-sparse-matrices-in-python">Exercise 2.4: Using sparse matrices in python</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="._book003.html#co-2-diffusion-into-aquifers">CO$_2$ diffusion into aquifers</a></li>
@@ -197,7 +199,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script type="text/javascript">$('#searchbox').show(0);</script>
 
 
 
@@ -214,7 +216,7 @@
       &copy;2021, Modeling and Computational Engineering.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.1</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.3.1</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

@@ -36,7 +36,7 @@ simply to divide the area under the function into :math:`N` equal rectangular sl
 
 .. math::
 
-    \tag{171}
+    \tag{177}
     M(x_k,x_k+h)=f(x_k+\frac{h}{2}) h,\
         
 
@@ -51,7 +51,7 @@ and the area of all the boxes is:
 
 .. math::
 
-    \tag{172}
+    \tag{178}
     =h\sum_{k=0}^{N-1}f(x_k+\frac{h}{2})=h\sum_{k=0}^{N-1}f(a+(k+\frac{1}{2})h).
         \
         
@@ -143,11 +143,11 @@ see figure :ref:`fig:numint:trap`.
 Earlier we approximated the area using the midpoint value: :math:`f(x_k+h/2)\cdot h`. Now we use :math:`A=A_1+A_2`, where :math:`A_1=f(x_k)\cdot h` 
 and :math:`A_2=(f(x_k+h)-f(x_k))\cdot h/2`, hence the area of one trapezoid is:
 
-.. _Eq:_auto51:
+.. _Eq:_auto46:
 
 .. math::
 
-    \tag{173}
+    \tag{179}
     A\equiv T(x_k,x_k+h)=(f(x_k+h)+f(x_k))h/2.
         
         
@@ -169,11 +169,11 @@ This is the trapezoidal rule, and for the whole interval we get:
         \left.\qquad\cdots + f(a+(N-2)h)+\frac{1}{2}f(b)\right]\nonumber 
         
 
-.. _Eq:_auto52:
+.. _Eq:_auto47:
 
 .. math::
 
-    \tag{174}
+    \tag{180}
     =h\left[\frac{1}{2}f(a)+\frac{1}{2}f(b)+\sum_{k=1}^{N-2}f(a+k h)\right].
         
         
@@ -228,11 +228,11 @@ series at the midpoint between :math:`x_k` and :math:`x_k+h`:
         f(x)=f(x_k+h/2)+f^\prime(x_k+h/2)(x-(x_k+h/2))\nonumber
         
 
-.. _Eq:_auto53:
+.. _Eq:_auto48:
 
 .. math::
 
-    \tag{175}
+    \tag{181}
     +\frac{1}{2!}f^{\prime\prime}(x_k+h/2)(x-(x_k+h/2))^2+\mathcal{O}(h^3)
         
         
@@ -244,11 +244,11 @@ Since :math:`f(x_k+h/2)` and its derivatives are constants it is straight forwar
         I(x_k,x_k+h)=\int_{x_k}^{x_k+h}\left[f(x_k+h/2)+f^\prime(x_k+h/2)(x-(x_k+h/2))\right.\nonumber
         
 
-.. _Eq:_auto54:
+.. _Eq:_auto49:
 
 .. math::
 
-    \tag{176}
+    \tag{182}
     \left.+\frac{1}{2!}f^{\prime\prime}(x_k+h/2)(x-(x_k+h/2))^2+\mathcal{O}(h^3)\right]dx
         
         
@@ -265,22 +265,22 @@ The first term is simply the midpoint rule, to evaluate the two other terms we m
         +\frac{1}{2}f^{\prime\prime}(x_k+h/2)\int_0^h(u-h/2)^2du+\mathcal{O}(h^4)\nonumber
         
 
-.. _Eq:_auto55:
+.. _Eq:_auto50:
 
 .. math::
 
-    \tag{177}
+    \tag{183}
     =f(x_k+h/2)\cdot h-\frac{h^3}{24}f^{\prime\prime}(x_k+h/2)+\mathcal{O}(h^4).
         
         
 
 Note that all the odd terms cancels out, i.e :math:`\int_0^h(u-h/2)^m=0` for :math:`m=1,3,5\ldots`. Thus the error for the midpoint rule, :math:`E_{M,k}`, on this particular interval is:
 
-.. _Eq:_auto56:
+.. _Eq:_auto51:
 
 .. math::
 
-    \tag{178}
+    \tag{184}
     E_{M,k}=I(x_k,x_k+h)-f(x_k+h/2)\cdot h=-\frac{h^3}{24}f^{\prime\prime}(x_k+h/2),
         
         
@@ -293,15 +293,15 @@ with the maximal value on the interval :math:`[a,b]`, :math:`f^{\prime\prime}(\e
 
 .. math::
 
-    \tag{179}
+    \tag{185}
     E_{M}=\sum_{k=0}^{N-1}E_{M,k}=-\frac{h^3}{24}\sum_{k=0}^{N-1}f^{\prime\prime}(x_k+h/2)\leq-\frac{Nh^3}{24}f^{\prime\prime}(\eta),\
         
 
-.. _Eq:_auto57:
+.. _Eq:_auto52:
 
 .. math::
 
-    \tag{180}
+    \tag{186}
     E_{M}\leq-\frac{(b-a)^3}{24N^2}f^{\prime\prime}(\eta),
         
         
@@ -309,11 +309,11 @@ with the maximal value on the interval :math:`[a,b]`, :math:`f^{\prime\prime}(\e
 where we have used :math:`h=(b-a)/N`. We can do the exact same analysis for the trapezoidal rule, but then we expand the function around :math:`x_k-h` instead of the midpoint. 
 The error term is then:
 
-.. _Eq:_auto58:
+.. _Eq:_auto53:
 
 .. math::
 
-    \tag{181}
+    \tag{187}
     E_T=\frac{(b-a)^3}{12N^2}f^{\prime\prime}(\overline{\eta}).
         
         
@@ -323,36 +323,36 @@ evaluated in different points (:math:`\eta` and :math:`\overline{\eta}`). Thus i
 than the trapezoidal rule.
 
 Before we end this section we will rewrite the error terms in a more useful form as it is not so easy to evaluate 
-:math:`f^{\prime\prime}(\eta)` (since we do not know which value of :math:`\eta` to use). By taking a closer look at equation :ref:`(179) <Eq:eq:numint:em>`, 
+:math:`f^{\prime\prime}(\eta)` (since we do not know which value of :math:`\eta` to use). By taking a closer look at equation :ref:`(185) <Eq:eq:numint:em>`, 
 we see that it is closely related to the midpoint rule for :math:`\int_a^bf^{\prime\prime}(x)dx`, hence:
 
-.. _Eq:_auto59:
+.. _Eq:_auto54:
 
 .. math::
 
-    \tag{182}
+    \tag{188}
     E_{M}=-\frac{h^2}{24}h
         \sum_{k=0}^{N-1}f^{\prime\prime}(x_k+h/2)\simeq-\frac{h^2}{24}\int_a^b
         f^{\prime\prime}(x)dx
         
         
 
-.. _Eq:_auto60:
+.. _Eq:_auto55:
 
 .. math::
 
-    \tag{183}
+    \tag{189}
     E_M\simeq\frac{h^2}{24}\left[f^\prime(b)-f^\prime(a)\right]=-\frac{(b-a)^2}{24N^2}\left[f^\prime(b)-f^\prime(a)\right]
         
         
 
 The corresponding formula for the trapezoid formula is:
 
-.. _Eq:_auto61:
+.. _Eq:_auto56:
 
 .. math::
 
-    \tag{184}
+    \tag{190}
     E_T\simeq \frac{h^2}{12}\left[f^\prime(b)-f^\prime(a)\right]=\frac{(b-a)^2}{12N^2}\left[f^\prime(b)-f^\prime(a)\right]
         
         
@@ -417,22 +417,22 @@ Then we know that the true integral is :math:`I=I_1+c h_1^2`, where :math:`c` is
 then we get a new (better) estimate of the integral, :math:`I_2`, which is related to the true integral :math:`I` as: :math:`I=I_2+c h_2^2`. 
 Taking the difference between :math:`I_2` and :math:`I_1` give us an estimation of the error:
 
-.. _Eq:_auto62:
+.. _Eq:_auto57:
 
 .. math::
 
-    \tag{185}
+    \tag{191}
     I_2-I_1=I-c h_2^2-(I-ch_1^2)=3c h_2^2,
         
         
 
 where we have used the fact that :math:`h_1=2h_2`, Thus the error term is:
 
-.. _Eq:_auto63:
+.. _Eq:_auto58:
 
 .. math::
 
-    \tag{186}
+    \tag{192}
     E(a,b)=c h_2^2=\frac{1}{3}(I_2-I_1).
         
         
@@ -442,11 +442,11 @@ half the spacing we only need to evaluate for the values that lies halfway betwe
 to do this by using the trapezoidal rule, because it operates directly on the :math:`x_k` values and not the midpoint values. 
 The trapezoidal rule can now be written as:
 
-.. _Eq:_auto64:
+.. _Eq:_auto59:
 
 .. math::
 
-    \tag{187}
+    \tag{193}
     I_2(a,b)=h_2\left[\frac{1}{2}f(a)+\frac{1}{2}f(b)+\sum_{k=1}^{N_2-1}f(a+k h_2)\right],
         
         
@@ -456,22 +456,22 @@ The trapezoidal rule can now be written as:
         =h_2\left[\frac{1}{2}f(a)+\frac{1}{2}f(b)+\sum_{k=\text{even values}}^{N_2-1}f(a+k h_2)\right.\nonumber
         
 
-.. _Eq:_auto65:
+.. _Eq:_auto60:
 
 .. math::
 
-    \tag{188}
+    \tag{194}
     \left.\qquad+\sum_{k=\text{odd values}}^{N_2-1}f(a+k h_2)\right],
         
         
 
 in the last equation we have split the sum into odd an even values. The sum over the even values can be rewritten:
 
-.. _Eq:_auto66:
+.. _Eq:_auto61:
 
 .. math::
 
-    \tag{189}
+    \tag{195}
     \sum_{k=\text{even values}}^{N_2-1}f(a+k h_2)=\sum_{k=0}^{N_1-1}f(a+2k h_2)=\sum_{k=0}^{N_1-1}f(a+k h_1),
         
         
@@ -483,22 +483,22 @@ note that :math:`N_2` is replaced with :math:`N_1=N_2/2`, we can now rewrite :ma
         I_2(a,b)=h_2\left[\frac{1}{2}f(a)+\frac{1}{2}f(b)+\sum_{k=0}^{N_1-1}f(a+k h_1)\right.\nonumber
         
 
-.. _Eq:_auto67:
+.. _Eq:_auto62:
 
 .. math::
 
-    \tag{190}
+    \tag{196}
     \left.+\sum_{k=\text{odd values}}^{N_2-1}f(a+k h_2)\right]
         
         
 
 Note that the first terms are actually the trapezoidal rule for :math:`I_1`, hence:
 
-.. _Eq:_auto68:
+.. _Eq:_auto63:
 
 .. math::
 
-    \tag{191}
+    \tag{197}
     I_2(a,b)=\frac{1}{2}I_1(a,b)+h_2\sum_{k=\text{odd values}}^{N_2-1}f(a+k h_2).
         
         
@@ -558,11 +558,11 @@ check if the desired tolerance was achieved, but we could also have added it to 
 
 .. [#romerr] Note that all odd powers of :math:`h` is equal to zero, thus the corrections are always in even powers.  
 
-.. _Eq:_auto69:
+.. _Eq:_auto64:
 
 .. math::
 
-    \tag{192}
+    \tag{198}
     I=I_{i+1}+ch^2+\mathcal{O}(h^4)=I_{i+1}+\frac{1}{3}\left[I_{i+1}-I_{i}\right]+\mathcal{O}(h^4).
         
         
@@ -575,11 +575,11 @@ integral by one step size :math:`I_i=I+ch_i^4`, next we half the step size :math
         I_{i+1}-I_{i}=I-c h_{i+1}^4-(I-ch_i^4)=-c h_{i+1}^4+c(2h_{i+1})^4=15c h_{i+1}^4,\nonumber
         
 
-.. _Eq:_auto70:
+.. _Eq:_auto65:
 
 .. math::
 
-    \tag{193}
+    \tag{199}
     ch_{i+1}^4=\frac{1}{15}\left[I_{i+1}-I_{i}\right]+\mathcal{O}(h^6).
         
         
@@ -590,20 +590,20 @@ but now we are in the exact situation as before, we have not only the error term
 
 .. math::
 
-    \tag{194}
+    \tag{200}
     I=I_{i+1}+\frac{1}{15}\left[I_{i+1}-I_{i}\right]+\mathcal{O}(h^6).\
         
 
 Each time we half the step size we also gain a higher order accuracy in our numerical algorithm. Thus, there are two iterations going on at the same time; 
 one is the iteration that half the step size (:math:`i`), and the other one is the increasing number of higher order terms added (which we will denote :math:`m`). 
-We need to improve our notation, and replace the approximation of the integral (:math:`I_i`) with :math:`R_{i,m}`. Equation :ref:`(194) <Eq:eq:numint:rom>`, can now 
+We need to improve our notation, and replace the approximation of the integral (:math:`I_i`) with :math:`R_{i,m}`. Equation :ref:`(200) <Eq:eq:numint:rom>`, can now 
 be written:
 
-.. _Eq:_auto71:
+.. _Eq:_auto66:
 
 .. math::
 
-    \tag{195}
+    \tag{201}
     I=R_{i+1,2}+\frac{1}{15}\left[R_{i+1,2}-R_{i,2}\right]+\mathcal{O}(h^6).
         
         
@@ -614,7 +614,7 @@ A general formula valid for any :math:`m` can be found by realizing:
 
 .. math::
 
-    \tag{196}
+    \tag{202}
     I=R_{i+1,m+1}+c_mh_i^{2m+2}+\mathcal{O}(h_i^{2m+4})\
         
 
@@ -627,36 +627,36 @@ A general formula valid for any :math:`m` can be found by realizing:
 
 .. math::
 
-    \tag{197}
+    \tag{203}
     =R_{i,m+1}+2^{2m+2}c_mh_{i}^{2m+2}+\mathcal{O}(h_{i-1}^{2m+4}),\
         
 
-where, as before :math:`h_{i-1}=2h_i`. Subtracting equation :ref:`(196) <Eq:eq:numint:rom0>` and :ref:`(197) <Eq:eq:numint:rom1>`, we find an expression for the error term:
+where, as before :math:`h_{i-1}=2h_i`. Subtracting equation :ref:`(202) <Eq:eq:numint:rom0>` and :ref:`(203) <Eq:eq:numint:rom1>`, we find an expression for the error term:
 
 .. _Eq:eq:numint:rom2:
 
 .. math::
 
-    \tag{198}
+    \tag{204}
     c_mh_{i}^{2m+2}=\frac{1}{4^{m+1}-1}(R_{i,m}-R_{i-1,m})\
         
 
-Then the estimate for the integral in equation :ref:`(197) <Eq:eq:numint:rom1>` is:
+Then the estimate for the integral in equation :ref:`(203) <Eq:eq:numint:rom1>` is:
 
-.. _Eq:_auto72:
+.. _Eq:_auto67:
 
 .. math::
 
-    \tag{199}
+    \tag{205}
     I=R_{i,m+1}+\mathcal{O}(h_i^{2m+2})
         
         
 
-.. _Eq:_auto73:
+.. _Eq:_auto68:
 
 .. math::
 
-    \tag{200}
+    \tag{206}
     R_{i,m+1}=R_{i,m}+\frac{1}{4^{m+1}-1}(R_{i+1,m}-R_{i,m}).
         
         
@@ -812,7 +812,7 @@ Many of the methods we have looked into are of the type:
 
 .. math::
 
-    \tag{201}
+    \tag{207}
     \int_a^b f(x) dx = \sum_{k=0}^{N-1} \omega_k f(x_k),\
         
 
@@ -824,20 +824,20 @@ for :math:`k=0, 1, 2\ldots, N-1`. If we now allow for the function to be evaluat
 This realization is the basis for Gaussian Quadrature. We will explore this in the following, 
 but to make the development easier and less cumbersome, we transform the integral from the domain :math:`[a,b]` to :math:`[-1,1]`:
 
-.. _Eq:_auto74:
+.. _Eq:_auto69:
 
 .. math::
 
-    \tag{202}
+    \tag{208}
     \int_a^bf(t)dt=\frac{b-a}{2}\int_{-1}^{1}f(x)dx\text{ , where:}
         
         
 
-.. _Eq:_auto75:
+.. _Eq:_auto70:
 
 .. math::
 
-    \tag{203}
+    \tag{209}
     x=\frac{2}{b-a}t-\frac{b+a}{b-a}.
         
         
@@ -854,126 +854,133 @@ and then do the transformation back using: :math:`t=(b-a)x/2+(b+a)/2`.
 
 
 
-This idea is best understood by a couple of examples. Assume that we want to use :math:`N=1` in equation :ref:`(201) <Eq:eq:numint:qq1>`:
+This idea is best understood by a couple of examples. Assume that we want to use :math:`N=1` in equation :ref:`(207) <Eq:eq:numint:qq1>`:
 
-.. _Eq:_auto76:
+.. _Eq:_auto71:
 
 .. math::
 
-    \tag{204}
+    \tag{210}
     \int_{-1}^{1}f(x)\,dx\simeq\omega_0f(x_0).
         
         
 
 We now choose :math:`f(x)` to be a polynomial of as large a degree as possible, but with the requirement that the integral is exact. If :math:`f(x)=1`, we get:
 
-.. _Eq:_auto77:
+.. _Eq:_auto72:
 
 .. math::
 
-    \tag{205}
+    \tag{211}
     \int_{-1}^{1}f(x)\,dx=\int_{-1}^{1}1\,dx=2=\omega_0,
         
         
 
 hence :math:`\omega_0=2`. If we choose :math:`f(x)=x`, we get:
 
-.. _Eq:_auto78:
+.. _Eq:_auto73:
 
 .. math::
 
-    \tag{206}
+    \tag{212}
     \int_{-1}^{1}f(x)\,dx=\int_{-1}^{1}x\,dx=0=\omega_0f(x_0)=2x_0,
         
         
 
 hence :math:`x_0=0`. 
-The Gaussian integration rule for :math:`N=1` is:
+
+.. admonition:: The Gaussian integration rule for :math:`N=1` is
+
+   
+   .. math::
+           
+           \int_{-1}^{1}f(x)\,dx\simeq 2f(0)\text{, or: }\nonumber
+           
+   
+   .. _Eq:_auto74:
 
 .. math::
-        
-        \int_{-1}^{1}f(x)\,dx\simeq 2f(0)\text{, or: }\nonumber
-        
 
-.. _Eq:_auto79:
-
-.. math::
-
-    \tag{207}
+    \tag{213}
     \int_{a}^{b}f(t)\,dt\simeq\frac{b-a}{2}\,2f(\frac{b+a}{2})=(b-a)f(\frac{b+a}{2}).
-        
-        
 
-This equation is equal to the midpoint rule, by choosing :math:`b=a+h` we reproduce equation :ref:`(171) <Eq:eq:numint:mid0>`. If we choose :math:`N=2`:
 
-.. _Eq:_auto80:
+
+
+This equation is equal to the midpoint rule, by choosing :math:`b=a+h` we reproduce equation :ref:`(177) <Eq:eq:numint:mid0>`. If we choose :math:`N=2`:
+
+.. _Eq:_auto75:
 
 .. math::
 
-    \tag{208}
+    \tag{214}
     \int_{-1}^{1}f(x)\,dx\simeq\omega_0f(x_0)+\omega_1f(x_1),
         
         
 
 we can show that now $ f(x)=1,\,x,\,x^2\,x^3$ can be integrated exact:
 
-.. _Eq:_auto81:
+.. _Eq:_auto76:
 
 .. math::
 
-    \tag{209}
+    \tag{215}
     \int_{-1}^{1}1\,dx=2=\omega_0f(x_0)+\omega_1f(x_1)=\omega_0+\omega_1\,,
         
         
 
-.. _Eq:_auto82:
+.. _Eq:_auto77:
 
 .. math::
 
-    \tag{210}
+    \tag{216}
     \int_{-1}^{1}x\,dx=0=\omega_0f(x_0)+\omega_1f(x_1)=\omega_0x_0+\omega_1x_1\,,
         
         
 
-.. _Eq:_auto83:
+.. _Eq:_auto78:
 
 .. math::
 
-    \tag{211}
+    \tag{217}
     \int_{-1}^{1}x^2\,dx=\frac{2}{3}=\omega_0f(x_0)+\omega_1f(x_1)=\omega_0x_0^2+\omega_1x_1^2\,,
         
         
 
-.. _Eq:_auto84:
+.. _Eq:_auto79:
 
 .. math::
 
-    \tag{212}
+    \tag{218}
     \int_{-1}^{1}x^3\,dx=0=\omega_0f(x_0)+\omega_1f(x_1)=\omega_0x_0^3+\omega_1x_1^3\,,
         
         
 
 hence there are four unknowns and four equations. The solution is: :math:`\omega_0=\omega_1=1` and :math:`x_0=-x_1=1/\sqrt{3}`.
-The Gaussian integration rule for :math:`N=2` is:
 
-.. _Eq:_auto85:
+
+.. admonition:: The Gaussian integration rule for :math:`N=2` is
+
+   
+   .. _Eq:_auto80:
 
 .. math::
 
-    \tag{213}
+    \tag{219}
     \int_{-1}^{1}f(x)\,dx\simeq f(-\frac{1}{\sqrt{3}})+f(\frac{1}{\sqrt{3}})\, \text{, or:}
-        
-        
-
-.. _Eq:_auto86:
+           
+           
+   
+   .. _Eq:_auto81:
 
 .. math::
 
-    \tag{214}
+    \tag{220}
     \int_{a}^{b}f(x)\,dx\simeq \frac{b-a}{2}\left[f(-\frac{b-a}{2}\frac{1}{\sqrt{3}}+\frac{b+a}{2})
-        +f(\frac{b-a}{2}\frac{1}{\sqrt{3}}+\frac{b+a}{2})\right].
-        
-        
+           +f(\frac{b-a}{2}\frac{1}{\sqrt{3}}+\frac{b+a}{2})\right].
+
+
+
 
 .. code-block:: python
 
@@ -990,56 +997,56 @@ The case N=3
 
 For the case :math:`N=3`, we find that :math:`f(x)=1,x,x^2,x^3,x^4,x^5` can be integrated exactly:
 
-.. _Eq:_auto87:
+.. _Eq:_auto82:
 
 .. math::
 
-    \tag{215}
+    \tag{221}
     \int_{-1}^{1}1\,dx=2=\omega_0+\omega_1+\omega_2\,,
         
         
 
-.. _Eq:_auto88:
+.. _Eq:_auto83:
 
 .. math::
 
-    \tag{216}
+    \tag{222}
     \int_{-1}^{1}x\,dx=0=\omega_0x_0+\omega_1x_1+\omega_2x_2\,,
         
         
 
-.. _Eq:_auto89:
+.. _Eq:_auto84:
 
 .. math::
 
-    \tag{217}
+    \tag{223}
     \int_{-1}^{1}x^2\,dx=\frac{2}{3}=\omega_0x_0^2+\omega_1x_1^2+\omega_2x_2^2\,,
         
         
 
-.. _Eq:_auto90:
+.. _Eq:_auto85:
 
 .. math::
 
-    \tag{218}
+    \tag{224}
     \int_{-1}^{1}x^3\,dx=0=\omega_0x_0^3+\omega_1x_1^3+\omega_2x_2^3\,,
         
         
 
-.. _Eq:_auto91:
+.. _Eq:_auto86:
 
 .. math::
 
-    \tag{219}
+    \tag{225}
     \int_{-1}^{1}x^4\,dx=\frac{2}{5}=\omega_0x_0^4+\omega_1x_1^4+\omega_2x_2^4\,,
         
         
 
-.. _Eq:_auto92:
+.. _Eq:_auto87:
 
 .. math::
 
-    \tag{220}
+    \tag{226}
     \int_{-1}^{1}x^5\,dx=0=\omega_0x_0^5+\omega_1x_1^5+\omega_2x_2^5\,,
         
         
@@ -1072,14 +1079,14 @@ Error term on Gaussian Integration
    single: Gaussian quadrature, error term
 
 The Gaussian integration rule of order :math:`N` integrates exactly a polynomial of order :math:`2N-1`. 
-From Taylors error formula, see equation :ref:`(4) <Eq:eq:taylor:error>` in the chapter :ref:`ch:taylor`,
-we can easily see that the error term must be of order :math:`2N`, and be proportional to :math:`f^{(2N)}(\eta)`, see [Ref3]_ for more details on the derivation of error terms. The drawback with an analytical error term derived from series expansion is that it involves the derivative of the function. As we have already explained, this is very unpractical and it is much more practical to use the methods described in the section :ref:`sec:numint:parct`. Let us consider this in more detail, assume that we evaluate the integral using first a Gaussian integration rule with :math:`N` points, and then :math:`N+1` points. Our estimates of the "exact" integral, :math:`I`,  would then be:
+From Taylors error formula, see equation :ref:`(3) <Eq:eq:taylor:error>` in the chapter :ref:`ch:taylor`,
+we can easily see that the error term must be of order :math:`2N`, and be proportional to :math:`f^{(2N)}(\eta)`, see [Ref4]_ for more details on the derivation of error terms. The drawback with an analytical error term derived from series expansion is that it involves the derivative of the function. As we have already explained, this is very unpractical and it is much more practical to use the methods described in the section :ref:`sec:numint:parct`. Let us consider this in more detail, assume that we evaluate the integral using first a Gaussian integration rule with :math:`N` points, and then :math:`N+1` points. Our estimates of the "exact" integral, :math:`I`,  would then be:
 
 .. _Eq:eq:numint:gerr1:
 
 .. math::
 
-    \tag{221}
+    \tag{227}
     I=I_N+ch_{N}^{2N},
         
 
@@ -1087,18 +1094,18 @@ we can easily see that the error term must be of order :math:`2N`, and be propor
 
 .. math::
 
-    \tag{222}
+    \tag{228}
     I=I_{N+1}+ch_{N+1}^{2N+1}.
         
         
 
-In principle :math:`h_{N+1}\neq h_{N}`, but in the following we will assume that :math:`h_N\simeq h_{N+1}`, and :math:`h\ll 1`. Subtracting equation :ref:`(221) <Eq:eq:numint:gerr1>` and :ref:`(222) <Eq:eq:numint:gerr2>` we can show that a reasonable estimate for the error term :math:`ch^{2N}` would be:
+In principle :math:`h_{N+1}\neq h_{N}`, but in the following we will assume that :math:`h_N\simeq h_{N+1}`, and :math:`h\ll 1`. Subtracting equation :ref:`(227) <Eq:eq:numint:gerr1>` and :ref:`(228) <Eq:eq:numint:gerr2>` we can show that a reasonable estimate for the error term :math:`ch^{2N}` would be:
 
-.. _Eq:_auto93:
+.. _Eq:_auto88:
 
 .. math::
 
-    \tag{223}
+    \tag{229}
     ch^N= I_{N+1}-I_N.
         
         
@@ -1119,7 +1126,7 @@ Integrating a function over an infinite range can be done by the following trick
 
 .. math::
 
-    \tag{224}
+    \tag{230}
     \int_a^\infty f(x) dx.
         
         
@@ -1143,7 +1150,7 @@ then if :math:`x=a`, :math:`z=0`, and if :math:`x\to\infty` then :math:`z\to1`, 
 
 .. math::
 
-    \tag{225}
+    \tag{231}
     \int_a^\infty f(x) dx = \int_0^1 f(a+\frac{z}{1-z}) \frac{dz}{(1-z)^2}.
         
         
@@ -1154,11 +1161,11 @@ There are no general answers to this question, and one need to decide from case 
 and the function to be integrated can be evaluated at any points all the methods above can be used. If the function to be integrated 
 is a set of observations at different times, that might be unevenly spaced, I would use the midpoint rule:
 
-.. _Eq:_auto94:
+.. _Eq:_auto89:
 
 .. math::
 
-    \tag{226}
+    \tag{232}
     I(a,b)=\int_a^bf(x)dx\simeq\sum_{k=0}^{N-1}M(x_k,x_k+h)=\sum_{k=0}^{N-1}h_if(x_k+\frac{h_i}{2})
         
         
@@ -1190,11 +1197,11 @@ Simpsons rule is an improvement over the midpoint and trapezoidal rule. It can b
 the results in the previous section. If we assume that the second derivative is reasonably well behaved on the interval :math:`x_k` 
 and :math:`x_k+h` and fairly constant we can assume that :math:`f^{\prime\prime}(\eta)\simeq f^{\prime\prime}(\overline{\eta})`, hence :math:`E_T=-2E_M`.
 
-.. _Eq:_auto95:
+.. _Eq:_auto90:
 
 .. math::
 
-    \tag{227}
+    \tag{233}
     I(x_k,x_k+h)=M(x_k,x_k+h)+E_M\text{ (midpoint rule)}
         
         
@@ -1204,40 +1211,40 @@ and :math:`x_k+h` and fairly constant we can assume that :math:`f^{\prime\prime}
         I(x_k,x_k+h)=T(x_k,x_k+h)+E_T\nonumber
         
 
-.. _Eq:_auto96:
+.. _Eq:_auto91:
 
 .. math::
 
-    \tag{228}
+    \tag{234}
     =T(x_k,x_k+h)-2E_M\text{ (trapezoidal rule)},
         
         
 
 we can now cancel out the error term by multiplying the first equation with 2 and adding the equations:
 
-.. _Eq:_auto97:
+.. _Eq:_auto92:
 
 .. math::
 
-    \tag{229}
+    \tag{235}
     3I(x_k,x_k+h)=2M(x_k,x_k+h)+T(x_k,x_k+h)
         
         
 
-.. _Eq:_auto98:
+.. _Eq:_auto93:
 
 .. math::
 
-    \tag{230}
+    \tag{236}
     =2f(x_k+\frac{h}{2}) h+\left[f(x_k+h)+f(x_k)\right] \frac{h}{2}
         
         
 
-.. _Eq:_auto99:
+.. _Eq:_auto94:
 
 .. math::
 
-    \tag{231}
+    \tag{237}
     I(x_k,x_k+h)=\frac{h}{6}\left[f(x_k)+4f(x_k+\frac{h}{2})+f(x_k+h)\right].
         
         
@@ -1254,20 +1261,20 @@ Now we can do as we did in the case of the trapezoidal rule, sum over all the el
         =\frac{h}{6}\left[f(a)+ 4f(a+\frac{h}{2})+2f(a+h)+4f(a+3\frac{h}{2})\right.\nonumber
         
 
-.. _Eq:_auto100:
+.. _Eq:_auto95:
 
 .. math::
 
-    \tag{232}
+    \tag{238}
     \left.\qquad+2f(a+2h)+\cdots+f(b)\right]
         
         
 
-.. _Eq:_auto101:
+.. _Eq:_auto96:
 
 .. math::
 
-    \tag{233}
+    \tag{239}
     =\frac{h^\prime}{3}\left[f(a)+ f(b) + 4\sum_{k= \text{odd}}^{N-2}f(a+k h^\prime)+2\sum_{k= \text{even}}^{N-2}f(a+k h^\prime)\right],
         
         

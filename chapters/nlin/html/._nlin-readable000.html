@@ -192,7 +192,7 @@ $$
 <br>
 University of Stavanger
 <p>
-<center><h4>Aug 18, 2021</h4></center> <!-- date -->
+<center><h4>Sep 16, 2021</h4></center> <!-- date -->
 <br>
 <p>
 </div> <!-- end jumbotron -->
@@ -440,7 +440,7 @@ Below is a straight forward (vanilla) implementation:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">iterative</span>(x,g,prec<span style="color: #666666">=1e-8</span>, MAXIT<span style="color: #666666">=1000</span>):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">iterative</span>(x,g,prec<span style="color: #666666">=1e-8</span>, MAXIT<span style="color: #666666">=1000</span>):
     <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;Approximate solution of x=g(x) by fixed point iterations.</span>
 <span style="color: #BA2121; font-style: italic">    x : starting point for iterations </span>
 <span style="color: #BA2121; font-style: italic">    eps : desired precision</span>
@@ -510,7 +510,7 @@ The right hand side will play the same role as \( g(x) \) above, where \( x \) n
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">dvdwEOS</span>(nu,t,p):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">dvdwEOS</span>(nu,t,p):
     <span style="color: #008000; font-weight: bold">return</span> (<span style="color: #666666">1+8*</span>t<span style="color: #666666">/</span>(p<span style="color: #666666">+3/</span>nu<span style="color: #666666">**2</span>))<span style="color: #666666">/3</span>
 </pre></div>
 <p>
@@ -518,7 +518,7 @@ Note that this function requires the values of \( \hat{P} \) and \( \hat{T} \), 
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">iterative</span>(x,g,<span style="color: #666666">*</span>args,prec<span style="color: #666666">=1e-8</span>):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">iterative</span>(x,g,<span style="color: #666666">*</span>args,prec<span style="color: #666666">=1e-8</span>):
     MAX_ITER<span style="color: #666666">=1000</span>
     eps <span style="color: #666666">=</span> <span style="color: #666666">1</span>
     n<span style="color: #666666">=0</span>
@@ -535,7 +535,7 @@ We can find the root by calling the function as:
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span>iterative(<span style="color: #666666">1</span>,dvdwEOS,<span style="color: #666666">1.2</span>,<span style="color: #666666">1.5</span>)
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>iterative(<span style="color: #666666">1</span>,dvdwEOS,<span style="color: #666666">1.2</span>,<span style="color: #666666">1.5</span>)
 </pre></div>
 <p>
 The program returns the correct solution after 71 iterations.
@@ -716,7 +716,7 @@ Below is an implementation of the bisection method.
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">bisection</span>(f,a,b,prec<span style="color: #666666">=1e-8</span>,MAXIT<span style="color: #666666">=100</span>):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">bisection</span>(f,a,b,prec<span style="color: #666666">=1e-8</span>,MAXIT<span style="color: #666666">=100</span>):
     <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;Approximate solution of f(x)=0 on interval [a,b] by bisection.</span>
 
 <span style="color: #BA2121; font-style: italic">    f   : f(x)=0.</span>
@@ -817,7 +817,7 @@ An implementation is shown below.
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">newton</span>(f,x, prec<span style="color: #666666">=1e-8</span>,MAXIT<span style="color: #666666">=500</span>):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">newton</span>(f,x, prec<span style="color: #666666">=1e-8</span>,MAXIT<span style="color: #666666">=500</span>):
     <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;Approximate solution of f(x)=0 by Newtons method.</span>
 <span style="color: #BA2121; font-style: italic">    The derivative of the function is calculated numerically</span>
 <span style="color: #BA2121; font-style: italic">    f   : f(x)=0.</span>
@@ -1145,7 +1145,7 @@ Below is an implementation of the gradient descent method with a constant learni
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">gradient_descent</span>(f,x,df, g<span style="color: #666666">=.001</span>, prec<span style="color: #666666">=1e-8</span>,MAXIT<span style="color: #666666">=10000</span>):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">gradient_descent</span>(f,x,df, g<span style="color: #666666">=.001</span>, prec<span style="color: #666666">=1e-8</span>,MAXIT<span style="color: #666666">=10000</span>):
     <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;Minimize f(x) by gradient descent.</span>
 <span style="color: #BA2121; font-style: italic">    f   : min(f(x))</span>
 <span style="color: #BA2121; font-style: italic">    x   : starting point </span>
@@ -1174,7 +1174,7 @@ The linear regression is implemented as below
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span>x_obs_ <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([<span style="color: #666666">0</span>, <span style="color: #666666">1</span>, <span style="color: #666666">2</span>, <span style="color: #666666">3</span>, <span style="color: #666666">4</span>, <span style="color: #666666">5</span>, <span style="color: #666666">6</span>, <span style="color: #666666">7</span>, <span style="color: #666666">8</span>, <span style="color: #666666">9</span>]) 
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>x_obs_ <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([<span style="color: #666666">0</span>, <span style="color: #666666">1</span>, <span style="color: #666666">2</span>, <span style="color: #666666">3</span>, <span style="color: #666666">4</span>, <span style="color: #666666">5</span>, <span style="color: #666666">6</span>, <span style="color: #666666">7</span>, <span style="color: #666666">8</span>, <span style="color: #666666">9</span>]) 
 y_obs_ <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([<span style="color: #666666">1</span>, <span style="color: #666666">3</span>, <span style="color: #666666">2</span>, <span style="color: #666666">5</span>, <span style="color: #666666">7</span>, <span style="color: #666666">8</span>, <span style="color: #666666">8</span>, <span style="color: #666666">9</span>, <span style="color: #666666">10</span>, <span style="color: #666666">12</span>]) 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">plot_regression_line</span>(b,x<span style="color: #666666">=</span>x_obs_, y<span style="color: #666666">=</span>y_obs_): 
     <span style="color: #008000; font-weight: bold">global</span> N_

@@ -31,7 +31,7 @@ A nonlinear equation is simply an equation that is not linear. That means that w
 
 .. math::
 
-    \tag{112}
+    \tag{118}
     e^{-x}=x^2.
         
         
@@ -42,7 +42,7 @@ Traditionally one collect all the terms on one side, to solve an equation of the
 
 .. math::
 
-    \tag{113}
+    \tag{119}
     f(x)=x^2-e^{-x}=0.
         
         
@@ -56,18 +56,18 @@ In figure :ref:`fig:nlin:fx`, the solution is shown graphically. Note that in on
 
    *Notice that the root is located at the same place (:math:`x=0.703467417`)*
 
-In the case of more than one unknown, or a set of equations that must be satisfied simultaneously, equation :ref:`(113) <Eq:eq:nlin:fx>` is replaced with a vector equation
+In the case of more than one unknown, or a set of equations that must be satisfied simultaneously, equation :ref:`(119) <Eq:eq:nlin:fx>` is replaced with a vector equation
 
 .. _Eq:eq:nlin:fvec:
 
 .. math::
 
-    \tag{114}
+    \tag{120}
     \mathbf{f}(\mathbf{x})=\mathbf{0}.
         
         
 
-Although this equation looks quite similar to equation :ref:`(113) <Eq:eq:nlin:fx>`, this equation is *much* harder to solve. The only methods we will cover is the Newton Rapson method, which is a very good method if a good starting point is given. If you have a multidimensional problem, the advice is to try Newton-Raphson, if this method fails you need to try more advanced method, see e.g. [Ref5]_.
+Although this equation looks quite similar to equation :ref:`(119) <Eq:eq:nlin:fx>`, this equation is *much* harder to solve. The only methods we will cover is the Newton Rapson method, which is a very good method if a good starting point is given. If you have a multidimensional problem, the advice is to try Newton-Raphson, if this method fails you need to try more advanced method, see e.g. [Ref6]_.
 
 Example: van der Waals equation of state
 ========================================
@@ -77,23 +77,23 @@ Before we begin with the numerical algorithms, let us consider an example: the v
 
 .. math::
 
-    \tag{115}
+    \tag{121}
     P\nu=R_gT,
         
         
 
-where :math:`\nu=V/n` is the molar volume of the gas, :math:`P` is the pressure, :math:`V` is the volume, :math:`T` is the temperature, :math:`n` is the number of moles of the gas, and :math:`R_g` is the ideal gas constant.  This equation is an example of an *equation of state* (EOS), it relates :math:`P`, :math:`T`, and :math:`\nu`. Thus if we know the pressure and temperature of the gas, we can calculate :math:`\nu`. Equation :ref:`(115) <Eq:eq:nlin:pvt>` assumes that there are no interactions between the molecules in the gas. Clearly, this is too simplistic, and because of this one normally uses an EOS that better reflect the physical properties of the substance. A very famous EOS is the van der Waal EOS, which is a slight modification of equation :ref:`(115) <Eq:eq:nlin:pvt>`:
+where :math:`\nu=V/n` is the molar volume of the gas, :math:`P` is the pressure, :math:`V` is the volume, :math:`T` is the temperature, :math:`n` is the number of moles of the gas, and :math:`R_g` is the ideal gas constant.  This equation is an example of an *equation of state* (EOS), it relates :math:`P`, :math:`T`, and :math:`\nu`. Thus if we know the pressure and temperature of the gas, we can calculate :math:`\nu`. Equation :ref:`(121) <Eq:eq:nlin:pvt>` assumes that there are no interactions between the molecules in the gas. Clearly, this is too simplistic, and because of this one normally uses an EOS that better reflect the physical properties of the substance. A very famous EOS is the van der Waal EOS, which is a slight modification of equation :ref:`(121) <Eq:eq:nlin:pvt>`:
 
 .. _Eq:eq:nlin:vdw:
 
 .. math::
 
-    \tag{116}
+    \tag{122}
     \left(P+\frac{a}{\nu^2}\right)\left(\nu-b\right)=R_gT.
         
         
 
-:math:`a` and :math:`b` are material constants that needs to be determined experimentally. This equation is *not* used in industrial design, but most equations used in practice are based on equation :ref:`(116) <Eq:eq:nlin:vdw>`. Multiplying equation :ref:`(116) <Eq:eq:nlin:vdw>` with :math:`\nu^2`, we get a non linear equation that is cubic in the molar volume. It turns out that cubic EOS are a class of equations that are quite successful in modeling the behavior of real systems [Ref6]_. However equation :ref:`(116) <Eq:eq:nlin:vdw>` is a good starting point for more complex and realistic equations.
+:math:`a` and :math:`b` are material constants that needs to be determined experimentally. This equation is *not* used in industrial design, but most equations used in practice are based on equation :ref:`(122) <Eq:eq:nlin:vdw>`. Multiplying equation :ref:`(122) <Eq:eq:nlin:vdw>` with :math:`\nu^2`, we get a non linear equation that is cubic in the molar volume. It turns out that cubic EOS are a class of equations that are quite successful in modeling the behavior of real systems [Ref7]_. However equation :ref:`(122) <Eq:eq:nlin:vdw>` is a good starting point for more complex and realistic equations.
 
 It is common practice to rescale EOS with respect to the critical point. At the critical point we have [ref]:
 
@@ -101,7 +101,7 @@ It is common practice to rescale EOS with respect to the critical point. At the 
 
 .. math::
 
-    \tag{117}
+    \tag{123}
     \left.\frac{\partial P}{\partial \nu}\right|_{T_c,P_c} =0
          
         
@@ -110,29 +110,29 @@ It is common practice to rescale EOS with respect to the critical point. At the 
 
 .. math::
 
-    \tag{118}
+    \tag{124}
     \left.\frac{\partial^2 P}{\partial \nu^2}\right|_{T_c,P_c} =0
          
         
 
-From equation :ref:`(117) <Eq:eq:nlin:crit1>`,  :ref:`(118) <Eq:eq:nlin:crit2>`, and :ref:`(116) <Eq:eq:nlin:vdw>`, it follows:
+From equation :ref:`(123) <Eq:eq:nlin:crit1>`,  :ref:`(124) <Eq:eq:nlin:crit2>`, and :ref:`(122) <Eq:eq:nlin:vdw>`, it follows:
 
 .. _Eq:eq:nlin:crit3:
 
 .. math::
 
-    \tag{119}
+    \tag{125}
     \nu_c=3b\quad,P_c=\frac{a}{27b^2}\quad,R_gT_c=\frac{8a}{27b^2}.
         
         
 
-Inserting these equations into equation :ref:`(116) <Eq:eq:nlin:vdw>`, and defining the *reduced* quantities :math:`\hat{P}=P/P_c`, :math:`\hat{T}=T/T_c`, :math:`\hat{\nu}=\nu/\nu_c`, we get
+Inserting these equations into equation :ref:`(122) <Eq:eq:nlin:vdw>`, and defining the *reduced* quantities :math:`\hat{P}=P/P_c`, :math:`\hat{T}=T/T_c`, :math:`\hat{\nu}=\nu/\nu_c`, we get
 
 .. _Eq:eq:nlin:vdwr:
 
 .. math::
 
-    \tag{120}
+    \tag{126}
     \left(\hat{P}+\frac{3}{\hat{\nu}^2}\right)\left(3\hat{\nu}-1\right)=8\hat{T}.
         
         
@@ -159,7 +159,7 @@ In figure :ref:`fig:nlin:vdw`, we have plotted the isotherms. Note that if :math
 Exercise 3.1: van der Waal EOS and CO$_2$
 -----------------------------------------
 
-Use equation :ref:`(116) <Eq:eq:nlin:vdw>`, and the parameters for CO$_2$: a=3.640 L$^2$bar/mol, and b=0.04267 L/mol, to test the van der Waal EOS in equation :ref:`(116) <Eq:eq:nlin:vdw>`. Use that at 2 MPa and 100 $^\circ$C, CO$_2$ has a specific volume of 0.033586 m$^3$/kg.
+Use equation :ref:`(122) <Eq:eq:nlin:vdw>`, and the parameters for CO$_2$: a=3.640 L$^2$bar/mol, and b=0.04267 L/mol, to test the van der Waal EOS in equation :ref:`(122) <Eq:eq:nlin:vdw>`. Use that at 2 MPa and 100 $^\circ$C, CO$_2$ has a specific volume of 0.033586 m$^3$/kg.
 
 .. --- begin solution of exercise ---
 
@@ -181,20 +181,20 @@ A simple (but not always possible) way of solving a nonlinear equation is to ref
 
 .. math::
 
-    \tag{121}
+    \tag{127}
     x=g(x).
         
         
 
 The algorithm for solving this equation is to guess at a starting point, :math:`x_0`, evaluate :math:`x_1=g(x_0)`, :math:`x_2=g(x_1)`, and so on. In some circumstances we might end up at a stable point, where :math:`x` does not change. This point is termed a *fixed point*.
 
-Note that the form of :math:`g(x)` is not uniquely determined. For our function defined in equation :ref:`(112) <Eq:eq:nlin:exp>`, we can solve for :math:`x` directly
+Note that the form of :math:`g(x)` is not uniquely determined. For our function defined in equation :ref:`(118) <Eq:eq:nlin:exp>`, we can solve for :math:`x` directly
 
 .. _Eq:eq:nlin:g2:
 
 .. math::
 
-    \tag{122}
+    \tag{128}
     x=e^{-x/2},
         
         
@@ -205,7 +205,7 @@ or we could write:
 
 .. math::
 
-    \tag{123}
+    \tag{129}
     x=x-x^2+e^{-x}.
         
         
@@ -267,18 +267,18 @@ If we start at :math:`x=0`, it will take 174 iterations using :math:`x-x^2+e^{-x
 Exercise 3.3: Finding the molar volume from the van der Waal EOS by fixed point iteration
 -----------------------------------------------------------------------------------------
 
-Extend the code above to take as argument the van der Waal EOS. For simplicity we will use the rescaled EOS in equation :ref:`(120) <Eq:eq:nlin:vdwr>`. Show that for the reduced temperature, $\hat{T}$=1.2, and pressure, $\hat{P}$=1.5, the reduced molar volume :math:`\hat{nu}` is 1.3522091.
+Extend the code above to take as argument the van der Waal EOS. For simplicity we will use the rescaled EOS in equation :ref:`(126) <Eq:eq:nlin:vdwr>`. Show that for the reduced temperature, $\hat{T}$=1.2, and pressure, $\hat{P}$=1.5, the reduced molar volume :math:`\hat{nu}` is 1.3522091.
 
 .. --- begin solution of exercise ---
 
 **Solution.**
-First we rewrite equation :ref:`(120) <Eq:eq:nlin:vdwr>` in a more useful form
+First we rewrite equation :ref:`(126) <Eq:eq:nlin:vdwr>` in a more useful form
 
 .. _Eq:eq:nlin:sp:
 
 .. math::
 
-    \tag{124}
+    \tag{130}
     \hat{\nu}=\frac{1}{3}(1+\frac{8\hat{T}}{\hat{P}+3/\hat{\nu}^2})
         
         
@@ -322,13 +322,13 @@ The program returns the correct solution after 71 iterations.
 
 When do the fixed point method fail?
 ------------------------------------
-If we replace :math:`e^{-x}` with :math:`e^{1-x^2}` in equation :ref:`(123) <Eq:eq:nlin:g3>`, our method will not give a solution. You can easily verify that the :math:`x=1` is a solution, so why does our method fail? To investigate this in a bit more detail, we turn to Taylors formula (once again). Assume that the root is located at :math:`x^*`, and our guess is :math:`x_k`, then the next :math:`x`-value will be
+If we replace :math:`e^{-x}` with :math:`e^{1-x^2}` in equation :ref:`(129) <Eq:eq:nlin:g3>`, our method will not give a solution. You can easily verify that the :math:`x=1` is a solution, so why does our method fail? To investigate this in a bit more detail, we turn to Taylors formula (once again). Assume that the root is located at :math:`x^*`, and our guess is :math:`x_k`, then the next :math:`x`-value will be
 
 .. _Eq:eq:nlin:t1:
 
 .. math::
 
-    \tag{125}
+    \tag{131}
     x_{k+1}=g(x_0)=g(x^*)+g^\prime(x^*)(x_k-x^*)+\cdots
         
         
@@ -339,7 +339,7 @@ The true solution is :math:`x^*`, hence :math:`x^*=f(x^*)`, and we can write
 
 .. math::
 
-    \tag{126}
+    \tag{132}
     x_{k+1}-x^*=g^\prime(x^*)(x_k-x^*),
         
         
@@ -350,7 +350,7 @@ where we have neglected higher order terms. The point is: at each iteration we w
 
 .. math::
 
-    \tag{127}
+    \tag{133}
     |g^\prime(x^*)|<1. 
         
         
@@ -361,7 +361,7 @@ In our example above we saw that if :math:`g(x)=x-x^2+e^{-x}`, we used 172 itera
 
 .. math::
 
-    \tag{128}
+    \tag{134}
     |g^\prime(x^*)|^n=\varepsilon.
         
         
@@ -369,14 +369,14 @@ In our example above we saw that if :math:`g(x)=x-x^2+e^{-x}`, we used 172 itera
 We expect to use :math:`\log|h^\prime(x^*)|/\log|g^\prime(x^*)|\simeq10` more iterations using :math:`g(x)` compared to :math:`h(x)`, which is close to the observed value of 172/19$\simeq 9$.
 What to do when the fixed point method fail
 -------------------------------------------
-As discussed in [Ref7]_, there might be an elegant solution whenever :math:`|g^\prime(x^*)|>1`. If it is possible to invert the :math:`g(x)`, we can show that the derivative of the inverse function
+As discussed in [Ref8]_, there might be an elegant solution whenever :math:`|g^\prime(x^*)|>1`. If it is possible to invert the :math:`g(x)`, we can show that the derivative of the inverse function
 $ { g^\prime }^{-1} (x^*)  = 1/g^\prime (x^*) $. Why is this useful? Because if :math:`x^*=g(x^*)` is the solution we are searching for, then this is equivalent to :math:`x^*={g}^{-1}(x^*)` *if and only if* we can invert :math:`g(x)`. Note that in many cases it is not possible to invert :math:`g(x)`. Let us first show that $ { g^\prime }^{-1} (x^*)  = 1/g^\prime (x^*) $. For simplicity write
 
-.. _Eq:_auto38:
+.. _Eq:_auto33:
 
 .. math::
 
-    \tag{129}
+    \tag{135}
     y = g(x)\Leftarrow x=g^{-1}(y),
         
         
@@ -387,7 +387,7 @@ taking the derivative with respect to x gives
 
 .. math::
 
-    \tag{130}
+    \tag{136}
     \frac{d}{dx}g^{-1}(y)=\frac{dx}{dx}=1,
         
 
@@ -395,7 +395,7 @@ taking the derivative with respect to x gives
 
 .. math::
 
-    \tag{131}
+    \tag{137}
     \frac{dg^{-1}(y)}{dy}\frac{dy}{dx}=\frac{dx}{dx}=1,
         
 
@@ -403,18 +403,18 @@ taking the derivative with respect to x gives
 
 .. math::
 
-    \tag{132}
+    \tag{138}
     \frac{dg^{-1}(y)}{dy}=\frac{1}{\frac{dy}{dx}}=\frac{1}{g^{\prime}(x)}
         =\frac{1}{g^{\prime}(g^{-1}(y))}.
         
 
-Going from equation :ref:`(130) <Eq:eq:nlin:fpi1>` to :ref:`(131) <Eq:eq:nlin:fpi2>`, we have used the chain rule. Equation :ref:`(132) <Eq:eq:nlin:fpi3>` is general, let us now specify to our fixed point iteration. Then we can use :math:`x^*=g(x^*)=y^*`, and :math:`x^*=g^{-1}(y^*)=g^{-1}(x^*)` hence we can write the last equation as
+Going from equation :ref:`(136) <Eq:eq:nlin:fpi1>` to :ref:`(137) <Eq:eq:nlin:fpi2>`, we have used the chain rule. Equation :ref:`(138) <Eq:eq:nlin:fpi3>` is general, let us now specify to our fixed point iteration. Then we can use :math:`x^*=g(x^*)=y^*`, and :math:`x^*=g^{-1}(y^*)=g^{-1}(x^*)` hence we can write the last equation as
 
 .. _Eq:eq:nlin:fpif:
 
 .. math::
 
-    \tag{133}
+    \tag{139}
     \frac{d}{dx}g^{-1}(x^*)=\frac{1}{g^{\prime}(x^*)}.
         
         
@@ -437,11 +437,11 @@ First, we calculate the derivative of :math:`g(x)`, :math:`g^\prime(x)=-2xe^{1-x
 
 Inverting :math:`y=g(x)` gives us $ g^{-1} (y)=\sqrt{1-\ln y}$. Note that :math:`y^*=x^*=1` is a solution to this equation as it should be. The derivative is
 
-.. _Eq:_auto39:
+.. _Eq:_auto34:
 
 .. math::
 
-    \tag{134}
+    \tag{140}
     {g^{-1}}^\prime(y)=-\frac{1}{2\sqrt{1-\ln y}},
         
         
@@ -464,30 +464,30 @@ The rate of convergence is the speed at which a *convergent* sequence approach t
 
 .. math::
 
-    \tag{135}
+    \tag{141}
     \lim_{k\to\infty}=\frac{|x_{k+1}-x^*|}{|x_k-x^*|}=\mu
         
         
 
-Inserting equation :ref:`(126) <Eq:eq:nlin:t2>` in equation :ref:`(135) <Eq:eq:nlin:linconv>`, we get:
+Inserting equation :ref:`(132) <Eq:eq:nlin:t2>` in equation :ref:`(141) <Eq:eq:nlin:linconv>`, we get:
 
 .. _Eq:eq:nlin:ling:
 
 .. math::
 
-    \tag{136}
+    \tag{142}
     \lim_{k\to\infty}=\frac{|x_{k+1}-x_k|}{x_k-x^*}
         =\frac{|g^\prime(x^*)(x_k-x^*)|}{|x_k-x^*|}=|g^\prime(x^*)|.
         
         
 
-Hence the fixed point iteration is expected to converge *linearly* to the correct solution. The definition in equation :ref:`(135) <Eq:eq:nlin:linconv>`, can be extended to include the definition of quadratic, cubic, etc. convergence:
+Hence the fixed point iteration is expected to converge *linearly* to the correct solution. The definition in equation :ref:`(141) <Eq:eq:nlin:linconv>`, can be extended to include the definition of quadratic, cubic, etc. convergence:
 
 .. _Eq:eq:nlin:qconv:
 
 .. math::
 
-    \tag{137}
+    \tag{143}
     \lim_{k\to\infty}=\frac{|x_{k+1}-x^*|}{|x_k-x^*|^q}=\mu.
         
         
@@ -582,18 +582,18 @@ If :math:`c_n` is the midpoint after :math:`n` steps, the difference between the
 
 .. math::
 
-    \tag{138}
+    \tag{144}
     |c_n-x^*| \le \frac{|b-a|}{2^n}
         
         
 
-Using our previous definition in equation :ref:`(137) <Eq:eq:nlin:qconv>`, we find that
+Using our previous definition in equation :ref:`(143) <Eq:eq:nlin:qconv>`, we find that
 
 .. _Eq:eq:nlin:bsc1:
 
 .. math::
 
-    \tag{139}
+    \tag{145}
     \lim_{k\to\infty}=\frac{|c_{k+1}-x^*|}{|c_k-x^*|}\le\frac{|b-a|/2^{n+1}}{|b-a|/2^n}=\frac{1}{2},
         
         
@@ -619,12 +619,12 @@ We can easily derive the algorithm by finding the formula for the tangent line. 
 
 .. math::
 
-    \tag{140}
+    \tag{146}
     x_{k+1}=x_k-\frac{f(x_k)}{f^\prime(x_k)}.
         
         
 
-Note that the derivative of :math:`f(x)` enters in equation :ref:`(140) <Eq:eq:nlin:newton>`, which means that if our function has a extremal value in our search domain, Newtons method most likely will fail. In particular :math:`x_1`, and :math:`x_4` in the figure to the right in figure :ref:`fig:nlin:newton2` are bad starting point for Newtons method.
+Note that the derivative of :math:`f(x)` enters in equation :ref:`(146) <Eq:eq:nlin:newton>`, which means that if our function has a extremal value in our search domain, Newtons method most likely will fail. In particular :math:`x_1`, and :math:`x_4` in the figure to the right in figure :ref:`fig:nlin:newton2` are bad starting point for Newtons method.
 
 .. _fig:nlin:newton2:
 
@@ -676,7 +676,7 @@ Rate of convergence          (3)
 
 .. math::
 
-    \tag{141}
+    \tag{147}
     x_{k+1}=g(x_k)=g(x^*)+g^\prime(x^*)(x_k-x^*)+\frac{1}{2}g^{\prime\prime}(x^*)(x_k-x^*)^2,
         
         
@@ -687,7 +687,7 @@ where we have skipped all higher order terms. You can easily verify that
 
 .. math::
 
-    \tag{142}
+    \tag{148}
     g^\prime(x) =\frac{f^{\prime\prime}(x)f(x)}{f^\prime(x)^2}
          
         
@@ -696,19 +696,19 @@ where we have skipped all higher order terms. You can easily verify that
 
 .. math::
 
-    \tag{143}
+    \tag{149}
     g^{\prime\prime}(x) =\frac{(f^{\prime\prime\prime}(x)f^\prime(x)-2f^{\prime\prime}(x)^2f^\prime(x))f(x)
         +f^{\prime\prime}(x)f^\prime(x)^2}{f^\prime(x)^4}.
         
         
 
-:math:`x^*` is a solution, hence :math:`f(x^*)=0`, we then find from equation :ref:`(142) <Eq:eq:nlin:gn2>` and :ref:`(143) <Eq:eq:nlin:gn3>` that :math:`g^\prime(x^*)=0`, and :math:`g^{\prime\prime}(x^*)=f^{\prime\prime}(x^*)/f^{\prime}(x^*)^2`. Thus from equation :ref:`(141) <Eq:eq:nlin:nsec>` we get
+:math:`x^*` is a solution, hence :math:`f(x^*)=0`, we then find from equation :ref:`(148) <Eq:eq:nlin:gn2>` and :ref:`(149) <Eq:eq:nlin:gn3>` that :math:`g^\prime(x^*)=0`, and :math:`g^{\prime\prime}(x^*)=f^{\prime\prime}(x^*)/f^{\prime}(x^*)^2`. Thus from equation :ref:`(147) <Eq:eq:nlin:nsec>` we get
 
 .. _Eq:eq:nlin:nsecn:
 
 .. math::
 
-    \tag{144}
+    \tag{150}
     x_{k+1}=x^*+\frac{1}{2}\frac{f^{\prime\prime}(x^*)}{f^{\prime}(x^*)^2}(x_k-x^*)^2,
         
         
@@ -719,7 +719,7 @@ or equivalently:
 
 .. math::
 
-    \tag{145}
+    \tag{151}
     \frac{x_{k+1}-x^*}{(x-x^*)^2}=\frac{1}{2}\frac{f^{\prime\prime}(x^*)}{f^{\prime}(x^*)^2}.
         
         
@@ -753,7 +753,7 @@ The root is located at :math:`x^*=0.70346742`.
 
 .. admonition:: A good starting point is crucial
 
-   Note that it is not given which method is best, but if we are ''close'' to the root Newtons method is usually superior. If we are far away, other methods might work better. In many cases one uses a more stable method far away from the root, and then ''polish up'' the root by a couple of Newton iterations [Ref5]_. See also Brents method which combines bisection and linear interpolation (secant method) [Ref5]_.
+   Note that it is not given which method is best, but if we are ''close'' to the root Newtons method is usually superior. If we are far away, other methods might work better. In many cases one uses a more stable method far away from the root, and then ''polish up'' the root by a couple of Newton iterations [Ref6]_. See also Brents method which combines bisection and linear interpolation (secant method) [Ref6]_.
 
 
 
@@ -773,18 +773,18 @@ The Newtons method is very good if you can choose a good starting point, and you
 
 .. math::
 
-    \tag{146}
+    \tag{152}
     f^\prime(x_k)\to \frac{f(x_k)-f(x_{k-1})}{x_k-x_{k-1}}.
         
         
 
-Inserting this equation into equation :ref:`(140) <Eq:eq:nlin:newton>`, we get
+Inserting this equation into equation :ref:`(146) <Eq:eq:nlin:newton>`, we get
 
-.. _Eq:_auto40:
+.. _Eq:_auto35:
 
 .. math::
 
-    \tag{147}
+    \tag{153}
     x_{k+1}=x_k-f(x_k)\frac{x_k-x_{k-1}}{f(x_k)-f(x_{k-1})}{\nonumber}
         
         
@@ -793,7 +793,7 @@ Inserting this equation into equation :ref:`(140) <Eq:eq:nlin:newton>`, we get
 
 .. math::
 
-    \tag{148}
+    \tag{154}
     =\frac{x_{k-1}f(x_k)-x_kf(x_{k-1})}{f(x_k)-f(x_{k-1})}. 
         
 
@@ -812,13 +812,13 @@ Rate of convergence          (4)
 .. index::
    single: secant method, rate of convergence
 
-The derivation of the rate of convergence for the secant method is a bit more involved. To simplify the notation we introduce the notation :math:`\varepsilon_k\equiv x_k-x^*`, where :math:`x^*` is the exact solution. Subtracting :math:`x^*` from each side of equation :ref:`(148) <Eq:eq:nlin:sec2>` we get
+The derivation of the rate of convergence for the secant method is a bit more involved. To simplify the notation we introduce the notation :math:`\varepsilon_k\equiv x_k-x^*`, where :math:`x^*` is the exact solution. Subtracting :math:`x^*` from each side of equation :ref:`(154) <Eq:eq:nlin:sec2>` we get
 
-.. _Eq:_auto41:
+.. _Eq:_auto36:
 
 .. math::
 
-    \tag{149}
+    \tag{155}
     \varepsilon_{k+1}=x_{k+1}-x^*=\frac{x_{k-1}f(x_k)-x_kf(x_{k-1})}{f(x_k)-f(x_{k-1})}-x^*, {\nonumber}
         
         
@@ -827,65 +827,65 @@ The derivation of the rate of convergence for the secant method is a bit more in
 
 .. math::
 
-    \tag{150}
+    \tag{156}
     \varepsilon_{k+1}=\frac{\varepsilon_{k-1}f(x_k)-\varepsilon_k f(x_{k-1})}{f(x_k)-f(x_{k-1})},
         
         
 
 we now make a Taylor expansion of :math:`f(x_k)` and :math:`f(x_{k-1})` about the root :math:`x^*`
 
-.. _Eq:_auto42:
+.. _Eq:_auto37:
 
 .. math::
 
-    \tag{151}
+    \tag{157}
     f(x_k) =f(x^*)+f^\prime(x^*)(x_k-x^*)+\frac{1}{2}f^{\prime\prime}(x^*)(x_k-x^*)^2+\cdots ,{\nonumber}
         
         
 
-.. _Eq:_auto43:
+.. _Eq:_auto38:
 
 .. math::
 
-    \tag{152}
+    \tag{158}
     =f^\prime(x^*)\varepsilon_k+\frac{1}{2}f^{\prime\prime}(x^*)\varepsilon_k^2+\cdots .
         
         
 
-.. _Eq:_auto44:
+.. _Eq:_auto39:
 
 .. math::
 
-    \tag{153}
+    \tag{159}
     f(x_{k-1}) =f(x^*)+f^\prime(x^*)(x_{k-1}-x^*)+\frac{1}{2}f^{\prime\prime}(x^*)(x_{k-1}-x^*)^2+\cdots,{\nonumber}
         
         
 
-.. _Eq:_auto45:
+.. _Eq:_auto40:
 
 .. math::
 
-    \tag{154}
+    \tag{160}
     =f^\prime(x^*)\varepsilon_{k-1}+\frac{1}{2}f^{\prime\prime}(x^*)\varepsilon_{k-1}^2+\cdots ,
         
         
 
-where we have used the fact that :math:`f(x^*)=0`. Inserting these equations into equation :ref:`(150) <Eq:eq:nlin:sec3>` and neglecting terms of order :math:`\varepsilon_k^3` we get
+where we have used the fact that :math:`f(x^*)=0`. Inserting these equations into equation :ref:`(156) <Eq:eq:nlin:sec3>` and neglecting terms of order :math:`\varepsilon_k^3` we get
 
-.. _Eq:_auto46:
+.. _Eq:_auto41:
 
 .. math::
 
-    \tag{155}
+    \tag{161}
     \varepsilon_{k+1}=\frac{\varepsilon_{k-1}\left[f^\prime(x^*)\varepsilon_k+\frac{1}{2}f^{\prime\prime}(x^*)\varepsilon_k^2\right] -\varepsilon_k\left[ f^\prime(x^*)\varepsilon_{k-1}+\frac{1}{2}f^{\prime\prime}(x^*)\varepsilon_{k-1}^2\right]}{f^\prime(x^*)\varepsilon_k+\frac{1}{2}f^{\prime\prime}(x^*)\varepsilon_k^2-\left[ f^\prime(x^*)\varepsilon_{k-1}+\frac{1}{2}f^{\prime\prime}(x^*)\varepsilon_{k-1}^2\right]},{\nonumber}
         
         
 
-.. _Eq:_auto47:
+.. _Eq:_auto42:
 
 .. math::
 
-    \tag{156}
+    \tag{162}
     =\frac{\varepsilon_k\varepsilon_{k-1}\left[\varepsilon_k-\varepsilon_{k-1}\right]}{\left[f^\prime(x^*)+\frac{1}{2}f^{\prime\prime}(x^*)(\varepsilon_k+\varepsilon_{k-1})\right](\varepsilon_k-\varepsilon_{k-1})},{\nonumber}
         
         
@@ -894,37 +894,37 @@ where we have used the fact that :math:`f(x^*)=0`. Inserting these equations int
 
 .. math::
 
-    \tag{157}
+    \tag{163}
     =\frac{f^{\prime\prime}(x^*)}{2f^\prime(x^*)}\varepsilon_k\varepsilon_{k-1},
         
 
-where we have neglected higher powers of :math:`\varepsilon`. We are searching for a solution of the form :math:`\varepsilon_{k+1}=K\varepsilon_k^q`, :math:`q` is the rate of convergence. We can invert this equation to get :math:`\varepsilon_k=K^{-1/q}\varepsilon_{k+1}^{1/q}`, or alternatively :math:`\varepsilon_{k-1}=K^{-1/q}\varepsilon_{k}^{1/q}` (just set :math:`k\to k-1`). Inserting these equations into equation :ref:`(157) <Eq:eq:nlin:sec4>`
+where we have neglected higher powers of :math:`\varepsilon`. We are searching for a solution of the form :math:`\varepsilon_{k+1}=K\varepsilon_k^q`, :math:`q` is the rate of convergence. We can invert this equation to get :math:`\varepsilon_k=K^{-1/q}\varepsilon_{k+1}^{1/q}`, or alternatively :math:`\varepsilon_{k-1}=K^{-1/q}\varepsilon_{k}^{1/q}` (just set :math:`k\to k-1`). Inserting these equations into equation :ref:`(163) <Eq:eq:nlin:sec4>`
 
 .. _Eq:eq:nlin:sec5:
 
 .. math::
 
-    \tag{158}
+    \tag{164}
     \varepsilon_k^q=\frac{f^{\prime\prime}(x^*)}{2f^\prime(x^*)}\varepsilon_kK^{-1/q}\varepsilon_{k}^{1/q}.
         
         
 
 Clearly, if this equation is to have a solution we must have
 
-.. _Eq:_auto48:
+.. _Eq:_auto43:
 
 .. math::
 
-    \tag{159}
+    \tag{165}
     \frac{f^{\prime\prime}(x^*)}{2f^\prime(x^*)}K^{-1/q} =1{\nonumber}
         
         
 
-.. _Eq:_auto49:
+.. _Eq:_auto44:
 
 .. math::
 
-    \tag{160}
+    \tag{166}
     \varepsilon_k^q=\varepsilon_k\varepsilon_{k}^{1/q}=\varepsilon_{k}^{1+1/q},
         
         
@@ -936,26 +936,26 @@ Newton Rapson method
 
 .. index:: Newton Rapson method
 
-The derivation of Newtons method, equation :ref:`(140) <Eq:eq:nlin:newton>`, done in the previous section was based on figure :ref:`fig:nlin:newton`. We will now derive it using a slightly different approach, but which lends itself easier to extend Newtons method to higher dimensions. The starting point is to expand the function around :math:`x_k`, using Taylors formula
+The derivation of Newtons method, equation :ref:`(146) <Eq:eq:nlin:newton>`, done in the previous section was based on figure :ref:`fig:nlin:newton`. We will now derive it using a slightly different approach, but which lends itself easier to extend Newtons method to higher dimensions. The starting point is to expand the function around :math:`x_k`, using Taylors formula
 
 .. _Eq:eq:nlin:nt:
 
 .. math::
 
-    \tag{161}
+    \tag{167}
     f(x)=f(x_k)+f^\prime(x_k)(x-x_k) + \cdots\,.
         
         
 
-Equation :ref:`(140) <Eq:eq:nlin:newton>` can be derived from equation :ref:`(161) <Eq:eq:nlin:nt>` by simply demanding that we keep the linear terms, and that the next point :math:`x_{k+1}` is located where the linear approximation intersects the :math:`x`-axis, i.e. simply set :math:`f(x)=0`, and :math:`x=x_{k+1}` in equation :ref:`(161) <Eq:eq:nlin:nt>`.
+Equation :ref:`(146) <Eq:eq:nlin:newton>` can be derived from equation :ref:`(167) <Eq:eq:nlin:nt>` by simply demanding that we keep the linear terms, and that the next point :math:`x_{k+1}` is located where the linear approximation intersects the :math:`x`-axis, i.e. simply set :math:`f(x)=0`, and :math:`x=x_{k+1}` in equation :ref:`(167) <Eq:eq:nlin:nt>`.
 
-In higher order dimensions, we solve equation :ref:`(114) <Eq:eq:nlin:fvec>`, and equation :ref:`(161) <Eq:eq:nlin:nt>` is
+In higher order dimensions, we solve equation :ref:`(120) <Eq:eq:nlin:fvec>`, and equation :ref:`(167) <Eq:eq:nlin:nt>` is
 
 .. _Eq:eq:nlin:ntd:
 
 .. math::
 
-    \tag{162}
+    \tag{168}
     \mathbf{f}(\mathbf{x})=\mathbf{f}(\mathbf{x}_k)+ \mathbf{J}(\mathbf{x}_k)(\mathbf{x}-\mathbf{x}_k) + \cdots\,.
         
         
@@ -966,7 +966,7 @@ In higher order dimensions, we solve equation :ref:`(114) <Eq:eq:nlin:fvec>`, an
 
 .. math::
 
-    \tag{163}
+    \tag{169}
     \mathbf{x}_{k+1}=\mathbf{x}_k-\mathbf{J}^{-1}(\mathbf{x}_k)\mathbf{f}(\mathbf{x}_k). 
         
         
@@ -978,7 +978,7 @@ To make the mathematics a bit more clear, let us specify to :math:`2D`. Assume t
 
 .. math::
 
-    \tag{164}
+    \tag{170}
     \mathbf{J}(\mathbf{x}_k)=
         \left(
         \begin{array}{cc}
@@ -1009,7 +1009,7 @@ Assume that we have a function :math:`\mathbf{f}(\mathbf{x})`, that we would lik
 
 .. math::
 
-    \tag{165}
+    \tag{171}
     \mathbf{x}_{k+1}=\mathbf{x}_{k}-\gamma\nabla\mathbf{f}.
         
         
@@ -1027,7 +1027,7 @@ A very typical example is if we have a model and we would like to fit some param
 
 .. math::
 
-    \tag{166}
+    \tag{172}
     S=\sum_i(y_i-f(x_i,\mathbf{\beta}))^2.
         
         
@@ -1038,29 +1038,29 @@ Specializing to linear regression, we choose the model to be linear
 
 .. math::
 
-    \tag{167}
+    \tag{173}
     f(x_i,\mathbf{\beta})=b_0+b_1x_i.
         
         
 
-Equation :ref:`(166) <Eq:eq:nlin:lsq>` now takes the form
+Equation :ref:`(172) <Eq:eq:nlin:lsq>` now takes the form
 
 .. _Eq:eq:nlin:lsq2:
 
 .. math::
 
-    \tag{168}
+    \tag{174}
     S=\sum_i(y_i-b_0+b_1x_i)^2.
         
         
 
 The gradients are:
 
-.. _Eq:_auto50:
+.. _Eq:_auto45:
 
 .. math::
 
-    \tag{169}
+    \tag{175}
     \frac{\partial S}{\partial b_0}=-2\sum_i(y_i-b_0+b_1x_i),{\nonumber}
         
         
@@ -1069,7 +1069,7 @@ The gradients are:
 
 .. math::
 
-    \tag{170}
+    \tag{176}
     \frac{\partial S}{\partial b_1}=-2\sum_i(y_i-b_0+b_1x_i)x_i,.
         
         
@@ -1194,6 +1194,6 @@ The first four iterations are shown in figure :ref:`fig:nlin:grsc`. If we choose
 Other Useful Methods
 ====================
 
-In this chapter we have covered the *basic*, but you should now be well equipped to dive into other methods. We highly recommend [Ref5]_ as a starting point, although the code examples are written in C++, the theory is presented in a very accurate, but informal way.
+In this chapter we have covered the *basic*, but you should now be well equipped to dive into other methods. We highly recommend [Ref6]_ as a starting point, although the code examples are written in C++, the theory is presented in a very accurate, but informal way.
 * Brents method:  uses root bracketing, bisection, and inverse quadratic interpolation. The 1D method of choice if the function and not its derivative is known
 
