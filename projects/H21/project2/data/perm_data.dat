@@ -1,0 +1,13 @@
+# Data from a single phase core flooding experiment
+# cylindrical core diameter (1 inch) 3.81cm
+# length 7 cm
+# water viscosity 1 cP
+q[ml/s]	DP[atm]
+0.1	0.396
+0.2	0.170
+0.3	0.720
+0.6	0.369
+1	1.406
+1.5	2.318
+2	8.0
+

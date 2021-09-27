@@ -1,0 +1,18 @@
+# Example data from a drawdown well test.
+#
+# Units: [time]=hours, [pressure]=psi.
+time	well_pressure
+0	1900
+10	1849
+20	1784
+40	1726
+80	1661
+150	1595
+300	1508
+500	1421
+800	1320
+1200	1211
+1500	1131
+2000	986
+2500	856
+3000	718
