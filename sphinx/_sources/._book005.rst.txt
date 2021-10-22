@@ -76,49 +76,30 @@ Below is a Python code, where this algorithm is implemented for :math:`\int_0^\p
     def f(x):
         return np.sin(x)
     
-    def int_midpoint(lower_limit, upper_limit,func,N):
-        """ calculates the area of func over the domain lower_limit
-            to upper limit using N integration points """
-        h    = (upper_limit-lower_limit)/N
-        area = 0.
-        for k in range(0,N): # loop over k=0,1,..,N-1
-            val = lower_limit+(k+0.5)*h # midpoint value 
-            area += func(val)*h
-        return area        
-    N
+    def midpoint(f,a,b,N):
+        """
+        f : function to be integrated on the domain [a,b]
+        N : number of integration points
+        """
+        h=(b-a)/N
+        x=np.arange(a+0.5*h,b,h)
+        return h*np.sum(f(x))
+    N=10
     a=0
     b=np.pi
-    Area = int_midpoint(a,b,f,N)
+    Area = midpoint(f,a,b,N)
     print('Numerical value= ', Area)
-    print('Error= ', (2-Area)/2) # Analytical result is 2
+    print('Error= ', (2-Area)) # Analytical result is 2
 
 
 .. note::
-   There are many ways to calculate loops in a programming language. If you were coding in a lower level programming language like Fortran, C or C++, you would probably implement the loop like (in Python syntax):
+   In the implementation above, we have taken advantage of Numpys ability to pass a vector to a function. This greatly enhances the speed and makes clean, readable code. If you were coding in a lower level programming language like Fortran, C or C++, you would probably implement the loop like (in Python syntax):
    
    .. code-block:: python
    
        for k in range(0,N): # loop over k=0,1,..,N-1
            val = lower_limit+(k+0.5)*h # midpoint value
            area += func(val)
-       return area*h
-   
-   However, in Python, you would always try to avoid loops because they are generally slow. A more efficient way of implementing the above rule would be to replace the loop with list comprehension
-   
-   .. code-block:: python
-   
-       val  = [lower_limit+(k+0.5)*h for k in range(N)]
-       ff   = func(val)
-       area = np.sum(ff)
-       return area*h
-   
-   or even faster only using numpy
-   
-   .. code-block:: python
-   
-       val  = np.arange(lower_limit+0.5*h,upper_limit,h)
-       ff   = func(val)
-       area = np.sum(ff)
        return area*h
 
 
@@ -183,15 +164,14 @@ Below is a python implementation:
 
 .. code-block:: python
 
-    def int_trapez(lower_limit, upper_limit,func,N):
-        """ calculates the area of func over the domain lower_limit
-            to upper limit using N integration points """
-        h       = (upper_limit-lower_limit)/N
-        area    = func(lower_limit)+func(upper_limit)
-        area   *= 0.5
-        val     = np.arange(lower_limit+h,upper_limit,h)
-        area   += np.sum(func(val))
-        return area*h #notice: multiply with h after the sum
+    def trapezoidal(f,a,b,N):
+        """
+        f : function to be integrated on the domain [a,b]
+        N : number of integration points
+        """
+        h=(b-a)/N
+        x=np.arange(a+h,b,h)
+        return h*(0.5*f(a)+0.5*f(b)+np.sum(f(x)))
 
 In the table below, we have calculated the numerical error for various values of :math:`N`.
 
@@ -357,47 +337,6 @@ The corresponding formula for the trapezoid formula is:
         
         
 
-Now, we can make an algorithm that automatically choose the number of steps to reach (at least) a predefined accuracy:
-
-.. code-block:: python
-
-    import numpy as np
-    # Function to be integrated
-    def f(x):
-        return np.sin(x)
-    #Numerical derivative of function
-    def df(x,func):
-        dh=1e-5 # some low step size
-        return (func(x+dh)-func(x))/dh 
-    
-    #Adaptive midpoint rule, "adaptive" because the number of 
-    #function evaluations depends on the integrand
-    def int_adaptive_midpoint(lower_limit, upper_limit,func,tol):
-        dfa  = df(lower_limit,func) # derivative in point a 
-        dfb  = df(upper_limit,func) # derivative in point b
-        N    = abs((upper_limit-lower_limit)**2*(dfb-dfa)/24/tol)
-        N    = int(np.sqrt(N)) + 1  # +1 as int rounds down
-        h    = (upper_limit-lower_limit)/N
-        area = 0.
-        print('Number of intervals = ', N)
-        for k in range(0,N): # loop over k=0,1,..,N-1
-            val = lower_limit+(k+0.5)*h # midpoint value 
-            area += func(val)
-        return area*h
-                    
-    prec=1e-4
-    a=0
-    b=np.pi
-    Area = int_adaptive_midpoint(a,b,f,prec)
-    print('Numerical value = ', Area)
-    print('Error           = ', (2-Area)) # Analytical result is 2
-
-
-.. note::
-   In Python it is sometimes convenient to enter default values for the arguments in a function. In the above example, we could also have written the function definition as\\ ``def int_adaptive_midpoint(func, lower_limit, upper_limit,`` \\ ``tol=1e-8):``. If the ``tol`` parameter is not given the code will assume an accuracy of :math:`10^{-8}`.
-
-
-
 Practical Estimation of Errors on Integrals (Richardson Extrapolation)
 ----------------------------------------------------------------------
 
@@ -519,31 +458,29 @@ Below is a Python implementation:
 
 .. code-block:: python
 
-    def int_adaptive_trapez(lower_limit, upper_limit,func,tol):
+    def int_adaptive_trapez2(lower_limit, upper_limit,func,tol):
         """
         adaptive quadrature, integrate a function from lower_limit
         to upper_limit within tol*(upper_limit-lower_limit)
+    
         """
-        N0=1
-        h       = (upper_limit-lower_limit)/N0
-        area    = (func(lower_limit)+func(upper_limit))*0.5*h
-        calc_tol = 2*tol + 1 # just larger than tol to enter the while loop
-        TOL= tol*np.abs(h)   # note N0=1
+        S=[]
+        S.append([lower_limit,upper_limit])
+        I=0
         iterations=0
-        while(calc_tol>TOL):
-            iterations+=1
-            N = N0*2
-            h = (upper_limit-lower_limit)/N
-            odd_terms=0
-            for k in range (1,N,2): # 1, 3, 5, ... , N-1
-                val  = lower_limit + k*h
-                odd_terms += func(val)
-            new_area = 0.5*area + h*odd_terms
-            calc_tol = abs(new_area-area)/3 
-            area     = new_area # store new values for next iteration
-            N0       = N        # update number of slices
-        print('Number of intervals = ', N, ' iterations: ',iterations)
-        return area #while loop ended and we can return the area
+        while S:
+            iterations +=1
+            a,b=S.pop(-1) # last element
+            m=(b+a)*0.5   # midpoint
+            I1=0.5*(b-a)*(func(a)+func(b)) #trapezoidal for 1 interval 
+            I2=0.25*(b-a)*(func(a)+func(b)+2*func(m)) #trapezoidal for 2 intervals
+            if(np.abs(I1-I2)<3*np.abs((b-a)*tol)):
+                I+=I2     # accuarcy met
+            else:
+                S.append([a,m]) # half the interval 
+                S.append([m,b])
+        print("Number of iterations: ", iterations)
+        return I
 
 If you compare the number of terms used in the adaptive trapezoidal rule, which was developed by halving the step size, and the adaptive midpoint rule that was derived on the basis of the theoretical error term, you will find the adaptive midpoint rule is more efficient. So why go through all this trouble? In the next section we will see that the development we did for the adaptive trapezoidal rule is closely related to Romberg integration, which is *much* more effective.
 
@@ -689,25 +626,25 @@ Below is a Python implementation:
 
 .. code-block:: python
 
-    def int_romberg(func,lower_limit, upper_limit,tol,show=False):
-        """ calculates the area of func over the domain lower_limit
-            to upper limit for the given tol, if show=True the triangular
+    def int_romberg(func,a, b,tol,show=False):
+        """ calculates the area of func on the domain [a,b]
+            for the given tol, if show=True the triangular
             array of intermediate results are printed """
         Nmax = 100
         R = np.empty([Nmax,Nmax]) # storage buffer
-        h = (upper_limit-lower_limit) # step size
-        R[0,0]    =.5*(func(lower_limit)+func(upper_limit))*h
+        h = (b-a) # step size
+        R[0,0]    =.5*(func(a)+func(b))*h
         N = 1
         for i in range(1,Nmax):
             h /= 2
             N *= 2
             odd_terms=0
             for k in range (1,N,2): # 1, 3, 5, ... , N-1
-                val        = lower_limit + k*h
+                val        = a + k*h
                 odd_terms += func(val)
     		# add the odd terms to the previous estimate	
             R[i,0]   = 0.5*R[i-1,0] + h*odd_terms 
-            for m in range(0,i): # m = 0, 1, ..., i-1
+            for m in range(i): 
     			# add all higher order terms in h
                 R[i,m+1]   = R[i,m] + (R[i,m]-R[i-1,m])/(4**(m+1)-1)                  
     		# check tolerance, best guess			
@@ -725,7 +662,7 @@ Below is a Python implementation:
             print("Steps StepSize Results")
             for idx in range(i+1):
                 print(elem[idx],' ',
-                      "{:.6f}".format((upper_limit-lower_limit)/2**idx),end = ' ')
+                      "{:.6f}".format((b-a)/2**idx),end = ' ')
                 for l in range(idx+1):
                     print("{:.6f}".format(R[idx,l]),end = ' ')
                 print('')  
@@ -778,7 +715,7 @@ Note the use of the list ``S``, we remove the interval :math:`[a,b]` from the li
         m=0.5*(a+b)
         return (b-a)/6*(func(a)+func(b)+4*func(m))
     
-    def int_adaptive_simpson(a, b,func,tol):
+    def int_adaptive_simpson(func,a, b,tol):
         """
         adaptive quadrature, integrate a function from a
         to b within tol*(b-a) uses simpsons rule

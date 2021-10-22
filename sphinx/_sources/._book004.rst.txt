@@ -1085,7 +1085,7 @@ Below is an implementation of the gradient descent method with a constant learni
 
 .. code-block:: python
 
-    def gradient_descent(f,x,df, g=.001, prec=1e-8,MAXIT=10000):
+    def gradient_descent(f,x,df, g=.001, prec=1e-8,MAXIT=10):
         '''Minimize f(x) by gradient descent.
         f   : min(f(x))
         x   : starting point 
@@ -1098,7 +1098,8 @@ Below is an implementation of the gradient descent method with a constant learni
         '''
         x_old = x
         for n in range(MAXIT):
-            x_new = x_old - g*df(x_old)       
+            plot_regression_line(x_old)  
+            x_new = x_old - g*df(x_old)
             if(abs(np.max(x_new-x_old))<prec):
                 print('Found solution:', x_new, 
                       ', after:', n, 'iterations.' )
@@ -1143,8 +1144,54 @@ The linear regression is implemented as below
         plt.show() 
     
     
+    def Jacobian(x,f,dx=1e-5):
+        N=len(x)
+        x0=np.copy(x)
+        f0=f(x)
+        J=np.zeros(shape=(N,N))
+        for j in range(N):
+            x[j] = x[j] +  dx
+            for i in range(N):   
+                J[i][j] = (f(x)[i]-f0[i])/dx
+            x[j] = x[j] -  dx
+        return J
+    
+    
+    
+    
+    def newton_rapson(x,f,J=None, jacobian=False, prec=1e-8,MAXIT=100):
+        '''Approximate solution of f(x)=0 by Newtons method.
+        The derivative of the function is calculated numerically
+        f   : f(x)=0.
+        J   : Jacobian
+        x   : starting point  
+        eps : desired precision
         
-    def gradient_descent(f,x,df, g=.001, prec=1e-8,MAXIT=10000):
+        Returns x when it is closer than eps to the root, 
+        unless MAX_ITERATIONS are not exceeded
+        '''
+        MAX_ITERATIONS=MAXIT
+        x_old = np.copy(x)
+        for n in range(MAX_ITERATIONS):
+            plot_regression_line(x_old) 
+            if not jacobian:
+                J_=Jacobian(x_old,f)
+            else:
+                J_=J(x_old)
+            z=np.linalg.solve(J_,-f(x_old))
+            x_new=x_old+z
+            if(np.sum(abs(x_new-x_old))<prec):
+                print('Found solution:', x_new, 
+                      ', after:', n, 'iterations.' )
+                return x_new
+            x_old=np.copy(x_new)
+        print('Max number of iterations: ', MAXIT, ' reached.') 
+        print('Try to increase MAXIT or decrease prec')
+        print('Returning best guess, value of function is: ', f(x_new))
+        return x_new
+    
+    
+    def gradient_descent(f,x,df, g=.001, prec=1e-8,MAXIT=10):
         '''Minimize f(x) by gradient descent.
         f   : min(f(x))
         x   : starting point 
@@ -1157,7 +1204,8 @@ The linear regression is implemented as below
         '''
         x_old = x
         for n in range(MAXIT):
-            x_new = x_old - g*df(x_old)       
+            plot_regression_line(x_old)  
+            x_new = x_old - g*df(x_old)
             if(abs(np.max(x_new-x_old))<prec):
                 print('Found solution:', x_new, 
                       ', after:', n, 'iterations.' )
@@ -1176,6 +1224,17 @@ The linear regression is implemented as below
         return np.array([-2*np.sum(y-b[0]-b[1]*x),
                          -2*np.sum((y-b[0]-b[1]*x)*x)])
     
+    def J(b,x=x_obs_,y=y_obs_):
+        N=len(b)
+        J=np.zeros(shape=(N,N))
+        xs=np.sum(x)
+        J[0][0]=2*len(x)
+        J[0][1]=2*xs
+        J[1][0]=2*xs
+        J[1][1]=2*np.sum(x*x)
+        return J
+    N_=0
+    print('Gradient ')
     b=np.array([0,0])
 
 The first four iterations are shown in figure :ref:`fig:nlin:grsc`. If we choose a learning rate that is too high, we will move past the minimum, and the solution will oscillate. This can be avoided by lowering the learning rate as we iterate, by e.g. replacing ``g`` with ``g/(n+1)`` in the implementation above.

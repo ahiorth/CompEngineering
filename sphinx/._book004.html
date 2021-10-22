@@ -1,19 +1,20 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="1.0">
+<html lang="1.0">
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Solving nonlinear equations &#8212; _ Aksel Hiorth, the National IOR Centre &amp; Institute for Energy Resources, University of Stavanger documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Numerical integration" href="._book005.html" />
@@ -568,7 +569,7 @@ S=\sum_i(y_i-b_0+b_1x_i)^2.\]</div>
 </ul>
 <p><strong>Solution.</strong>
 Below is an implementation of the gradient descent method with a constant learning rate</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gradient_descent</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">df</span><span class="p">,</span> <span class="n">g</span><span class="o">=.</span><span class="mi">001</span><span class="p">,</span> <span class="n">prec</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span><span class="n">MAXIT</span><span class="o">=</span><span class="mi">10000</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gradient_descent</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">df</span><span class="p">,</span> <span class="n">g</span><span class="o">=.</span><span class="mi">001</span><span class="p">,</span> <span class="n">prec</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span><span class="n">MAXIT</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Minimize f(x) by gradient descent.</span>
 <span class="sd">    f   : min(f(x))</span>
 <span class="sd">    x   : starting point</span>
@@ -581,6 +582,7 @@ Below is an implementation of the gradient descent method with a constant learni
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="n">x_old</span> <span class="o">=</span> <span class="n">x</span>
     <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">MAXIT</span><span class="p">):</span>
+        <span class="n">plot_regression_line</span><span class="p">(</span><span class="n">x_old</span><span class="p">)</span>
         <span class="n">x_new</span> <span class="o">=</span> <span class="n">x_old</span> <span class="o">-</span> <span class="n">g</span><span class="o">*</span><span class="n">df</span><span class="p">(</span><span class="n">x_old</span><span class="p">)</span>
         <span class="k">if</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x_new</span><span class="o">-</span><span class="n">x_old</span><span class="p">))</span><span class="o">&lt;</span><span class="n">prec</span><span class="p">):</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Found solution:&#39;</span><span class="p">,</span> <span class="n">x_new</span><span class="p">,</span>
@@ -624,8 +626,54 @@ Below is an implementation of the gradient descent method with a constant learni
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
 
+<span class="k">def</span> <span class="nf">Jacobian</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">dx</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">):</span>
+    <span class="n">N</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x0</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">f0</span><span class="o">=</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">J</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">N</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span>  <span class="n">dx</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+            <span class="n">J</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">f0</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">/</span><span class="n">dx</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span>  <span class="n">dx</span>
+    <span class="k">return</span> <span class="n">J</span>
 
-<span class="k">def</span> <span class="nf">gradient_descent</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">df</span><span class="p">,</span> <span class="n">g</span><span class="o">=.</span><span class="mi">001</span><span class="p">,</span> <span class="n">prec</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span><span class="n">MAXIT</span><span class="o">=</span><span class="mi">10000</span><span class="p">):</span>
+
+
+
+<span class="k">def</span> <span class="nf">newton_rapson</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">J</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">jacobian</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">prec</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span><span class="n">MAXIT</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Approximate solution of f(x)=0 by Newtons method.</span>
+<span class="sd">    The derivative of the function is calculated numerically</span>
+<span class="sd">    f   : f(x)=0.</span>
+<span class="sd">    J   : Jacobian</span>
+<span class="sd">    x   : starting point</span>
+<span class="sd">    eps : desired precision</span>
+
+<span class="sd">    Returns x when it is closer than eps to the root,</span>
+<span class="sd">    unless MAX_ITERATIONS are not exceeded</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">MAX_ITERATIONS</span><span class="o">=</span><span class="n">MAXIT</span>
+    <span class="n">x_old</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">MAX_ITERATIONS</span><span class="p">):</span>
+        <span class="n">plot_regression_line</span><span class="p">(</span><span class="n">x_old</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">jacobian</span><span class="p">:</span>
+            <span class="n">J_</span><span class="o">=</span><span class="n">Jacobian</span><span class="p">(</span><span class="n">x_old</span><span class="p">,</span><span class="n">f</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">J_</span><span class="o">=</span><span class="n">J</span><span class="p">(</span><span class="n">x_old</span><span class="p">)</span>
+        <span class="n">z</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">J_</span><span class="p">,</span><span class="o">-</span><span class="n">f</span><span class="p">(</span><span class="n">x_old</span><span class="p">))</span>
+        <span class="n">x_new</span><span class="o">=</span><span class="n">x_old</span><span class="o">+</span><span class="n">z</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">x_new</span><span class="o">-</span><span class="n">x_old</span><span class="p">))</span><span class="o">&lt;</span><span class="n">prec</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Found solution:&#39;</span><span class="p">,</span> <span class="n">x_new</span><span class="p">,</span>
+                  <span class="s1">&#39;, after:&#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="s1">&#39;iterations.&#39;</span> <span class="p">)</span>
+            <span class="k">return</span> <span class="n">x_new</span>
+        <span class="n">x_old</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">x_new</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Max number of iterations: &#39;</span><span class="p">,</span> <span class="n">MAXIT</span><span class="p">,</span> <span class="s1">&#39; reached.&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Try to increase MAXIT or decrease prec&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Returning best guess, value of function is: &#39;</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">x_new</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">x_new</span>
+
+
+<span class="k">def</span> <span class="nf">gradient_descent</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">df</span><span class="p">,</span> <span class="n">g</span><span class="o">=.</span><span class="mi">001</span><span class="p">,</span> <span class="n">prec</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span><span class="n">MAXIT</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Minimize f(x) by gradient descent.</span>
 <span class="sd">    f   : min(f(x))</span>
 <span class="sd">    x   : starting point</span>
@@ -638,6 +686,7 @@ Below is an implementation of the gradient descent method with a constant learni
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="n">x_old</span> <span class="o">=</span> <span class="n">x</span>
     <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">MAXIT</span><span class="p">):</span>
+        <span class="n">plot_regression_line</span><span class="p">(</span><span class="n">x_old</span><span class="p">)</span>
         <span class="n">x_new</span> <span class="o">=</span> <span class="n">x_old</span> <span class="o">-</span> <span class="n">g</span><span class="o">*</span><span class="n">df</span><span class="p">(</span><span class="n">x_old</span><span class="p">)</span>
         <span class="k">if</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x_new</span><span class="o">-</span><span class="n">x_old</span><span class="p">))</span><span class="o">&lt;</span><span class="n">prec</span><span class="p">):</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Found solution:&#39;</span><span class="p">,</span> <span class="n">x_new</span><span class="p">,</span>
@@ -657,6 +706,17 @@ Below is an implementation of the gradient descent method with a constant learni
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">),</span>
                      <span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">y</span><span class="o">-</span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">x</span><span class="p">)])</span>
 
+<span class="k">def</span> <span class="nf">J</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="n">x_obs_</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">y_obs_</span><span class="p">):</span>
+    <span class="n">N</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">J</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">N</span><span class="p">))</span>
+    <span class="n">xs</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">J</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">J</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">xs</span>
+    <span class="n">J</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">xs</span>
+    <span class="n">J</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">J</span>
+<span class="n">N_</span><span class="o">=</span><span class="mi">0</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Gradient &#39;</span><span class="p">)</span>
 <span class="n">b</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -749,7 +809,7 @@ Below is an implementation of the gradient descent method with a constant learni
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
 
 
 
@@ -766,7 +826,7 @@ Below is an implementation of the gradient descent method with a constant learni
       &copy;2021, Modeling and Computational Engineering.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.3.1</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.1</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

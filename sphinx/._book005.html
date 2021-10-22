@@ -1,19 +1,20 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="1.0">
+<html lang="1.0">
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Numerical integration &#8212; _ Aksel Hiorth, the National IOR Centre &amp; Institute for Energy Resources, University of Stavanger documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="Solving nonlinear equations" href="._book004.html" />
@@ -84,43 +85,28 @@ therefore we choose the convention of having the first element to start at <span
 <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">int_midpoint</span><span class="p">(</span><span class="n">lower_limit</span><span class="p">,</span> <span class="n">upper_limit</span><span class="p">,</span><span class="n">func</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; calculates the area of func over the domain lower_limit</span>
-<span class="sd">        to upper limit using N integration points &quot;&quot;&quot;</span>
-    <span class="n">h</span>    <span class="o">=</span> <span class="p">(</span><span class="n">upper_limit</span><span class="o">-</span><span class="n">lower_limit</span><span class="p">)</span><span class="o">/</span><span class="n">N</span>
-    <span class="n">area</span> <span class="o">=</span> <span class="mf">0.</span>
-    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">N</span><span class="p">):</span> <span class="c1"># loop over k=0,1,..,N-1</span>
-        <span class="n">val</span> <span class="o">=</span> <span class="n">lower_limit</span><span class="o">+</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mf">0.5</span><span class="p">)</span><span class="o">*</span><span class="n">h</span> <span class="c1"># midpoint value</span>
-        <span class="n">area</span> <span class="o">+=</span> <span class="n">func</span><span class="p">(</span><span class="n">val</span><span class="p">)</span><span class="o">*</span><span class="n">h</span>
-    <span class="k">return</span> <span class="n">area</span>
-<span class="n">N</span>
+<span class="k">def</span> <span class="nf">midpoint</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    f : function to be integrated on the domain [a,b]</span>
+<span class="sd">    N : number of integration points</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">h</span><span class="o">=</span><span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">N</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="mf">0.5</span><span class="o">*</span><span class="n">h</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">h</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">h</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="n">N</span><span class="o">=</span><span class="mi">10</span>
 <span class="n">a</span><span class="o">=</span><span class="mi">0</span>
 <span class="n">b</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
-<span class="n">Area</span> <span class="o">=</span> <span class="n">int_midpoint</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">N</span><span class="p">)</span>
+<span class="n">Area</span> <span class="o">=</span> <span class="n">midpoint</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">N</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Numerical value= &#39;</span><span class="p">,</span> <span class="n">Area</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error= &#39;</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="o">-</span><span class="n">Area</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># Analytical result is 2</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error= &#39;</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="o">-</span><span class="n">Area</span><span class="p">))</span> <span class="c1"># Analytical result is 2</span>
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>There are many ways to calculate loops in a programming language. If you were coding in a lower level programming language like Fortran, C or C++, you would probably implement the loop like (in Python syntax):</p>
+<p>In the implementation above, we have taken advantage of Numpys ability to pass a vector to a function. This greatly enhances the speed and makes clean, readable code. If you were coding in a lower level programming language like Fortran, C or C++, you would probably implement the loop like (in Python syntax):</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">N</span><span class="p">):</span> <span class="c1"># loop over k=0,1,..,N-1</span>
     <span class="n">val</span> <span class="o">=</span> <span class="n">lower_limit</span><span class="o">+</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mf">0.5</span><span class="p">)</span><span class="o">*</span><span class="n">h</span> <span class="c1"># midpoint value</span>
     <span class="n">area</span> <span class="o">+=</span> <span class="n">func</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
-<span class="k">return</span> <span class="n">area</span><span class="o">*</span><span class="n">h</span>
-</pre></div>
-</div>
-<p>However, in Python, you would always try to avoid loops because they are generally slow. A more efficient way of implementing the above rule would be to replace the loop with list comprehension</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">val</span>  <span class="o">=</span> <span class="p">[</span><span class="n">lower_limit</span><span class="o">+</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mf">0.5</span><span class="p">)</span><span class="o">*</span><span class="n">h</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span>
-<span class="n">ff</span>   <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
-<span class="n">area</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ff</span><span class="p">)</span>
-<span class="k">return</span> <span class="n">area</span><span class="o">*</span><span class="n">h</span>
-</pre></div>
-</div>
-<p>or even faster only using numpy</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">val</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">lower_limit</span><span class="o">+</span><span class="mf">0.5</span><span class="o">*</span><span class="n">h</span><span class="p">,</span><span class="n">upper_limit</span><span class="p">,</span><span class="n">h</span><span class="p">)</span>
-<span class="n">ff</span>   <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
-<span class="n">area</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ff</span><span class="p">)</span>
 <span class="k">return</span> <span class="n">area</span><span class="o">*</span><span class="n">h</span>
 </pre></div>
 </div>
@@ -152,15 +138,14 @@ A\equiv T(x_k,x_k+h)=(f(x_k+h)+f(x_k))h/2.\]</div>
 =h\left[\frac{1}{2}f(a)+\frac{1}{2}f(b)+\sum_{k=1}^{N-2}f(a+k h)\right].\]</div>
 <p>Note that this formula was bit more involved to derive, but it requires only one more function evaluations compared to the midpoint rule.
 Below is a python implementation:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">int_trapez</span><span class="p">(</span><span class="n">lower_limit</span><span class="p">,</span> <span class="n">upper_limit</span><span class="p">,</span><span class="n">func</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; calculates the area of func over the domain lower_limit</span>
-<span class="sd">        to upper limit using N integration points &quot;&quot;&quot;</span>
-    <span class="n">h</span>       <span class="o">=</span> <span class="p">(</span><span class="n">upper_limit</span><span class="o">-</span><span class="n">lower_limit</span><span class="p">)</span><span class="o">/</span><span class="n">N</span>
-    <span class="n">area</span>    <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">lower_limit</span><span class="p">)</span><span class="o">+</span><span class="n">func</span><span class="p">(</span><span class="n">upper_limit</span><span class="p">)</span>
-    <span class="n">area</span>   <span class="o">*=</span> <span class="mf">0.5</span>
-    <span class="n">val</span>     <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">lower_limit</span><span class="o">+</span><span class="n">h</span><span class="p">,</span><span class="n">upper_limit</span><span class="p">,</span><span class="n">h</span><span class="p">)</span>
-    <span class="n">area</span>   <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">func</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">area</span><span class="o">*</span><span class="n">h</span> <span class="c1">#notice: multiply with h after the sum</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">trapezoidal</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    f : function to be integrated on the domain [a,b]</span>
+<span class="sd">    N : number of integration points</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">h</span><span class="o">=</span><span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">N</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">h</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">h</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">+</span><span class="mf">0.5</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
 </pre></div>
 </div>
 <p>In the table below, we have calculated the numerical error for various values of <span class="math notranslate nohighlight">\(N\)</span>.</p>
@@ -271,43 +256,6 @@ E_M\simeq\frac{h^2}{24}\left[f^\prime(b)-f^\prime(a)\right]=-\frac{(b-a)^2}{24N^
 <div class="math notranslate nohighlight" id="eq-auto56">
 \[\tag{190}
 E_T\simeq \frac{h^2}{12}\left[f^\prime(b)-f^\prime(a)\right]=\frac{(b-a)^2}{12N^2}\left[f^\prime(b)-f^\prime(a)\right]\]</div>
-<p>Now, we can make an algorithm that automatically choose the number of steps to reach (at least) a predefined accuracy:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="c1"># Function to be integrated</span>
-<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="c1">#Numerical derivative of function</span>
-<span class="k">def</span> <span class="nf">df</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">func</span><span class="p">):</span>
-    <span class="n">dh</span><span class="o">=</span><span class="mf">1e-5</span> <span class="c1"># some low step size</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">dh</span><span class="p">)</span><span class="o">-</span><span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">/</span><span class="n">dh</span>
-
-<span class="c1">#Adaptive midpoint rule, &quot;adaptive&quot; because the number of</span>
-<span class="c1">#function evaluations depends on the integrand</span>
-<span class="k">def</span> <span class="nf">int_adaptive_midpoint</span><span class="p">(</span><span class="n">lower_limit</span><span class="p">,</span> <span class="n">upper_limit</span><span class="p">,</span><span class="n">func</span><span class="p">,</span><span class="n">tol</span><span class="p">):</span>
-    <span class="n">dfa</span>  <span class="o">=</span> <span class="n">df</span><span class="p">(</span><span class="n">lower_limit</span><span class="p">,</span><span class="n">func</span><span class="p">)</span> <span class="c1"># derivative in point a</span>
-    <span class="n">dfb</span>  <span class="o">=</span> <span class="n">df</span><span class="p">(</span><span class="n">upper_limit</span><span class="p">,</span><span class="n">func</span><span class="p">)</span> <span class="c1"># derivative in point b</span>
-    <span class="n">N</span>    <span class="o">=</span> <span class="nb">abs</span><span class="p">((</span><span class="n">upper_limit</span><span class="o">-</span><span class="n">lower_limit</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">dfb</span><span class="o">-</span><span class="n">dfa</span><span class="p">)</span><span class="o">/</span><span class="mi">24</span><span class="o">/</span><span class="n">tol</span><span class="p">)</span>
-    <span class="n">N</span>    <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">N</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span>  <span class="c1"># +1 as int rounds down</span>
-    <span class="n">h</span>    <span class="o">=</span> <span class="p">(</span><span class="n">upper_limit</span><span class="o">-</span><span class="n">lower_limit</span><span class="p">)</span><span class="o">/</span><span class="n">N</span>
-    <span class="n">area</span> <span class="o">=</span> <span class="mf">0.</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of intervals = &#39;</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">N</span><span class="p">):</span> <span class="c1"># loop over k=0,1,..,N-1</span>
-        <span class="n">val</span> <span class="o">=</span> <span class="n">lower_limit</span><span class="o">+</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mf">0.5</span><span class="p">)</span><span class="o">*</span><span class="n">h</span> <span class="c1"># midpoint value</span>
-        <span class="n">area</span> <span class="o">+=</span> <span class="n">func</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">area</span><span class="o">*</span><span class="n">h</span>
-
-<span class="n">prec</span><span class="o">=</span><span class="mf">1e-4</span>
-<span class="n">a</span><span class="o">=</span><span class="mi">0</span>
-<span class="n">b</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
-<span class="n">Area</span> <span class="o">=</span> <span class="n">int_adaptive_midpoint</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">prec</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Numerical value = &#39;</span><span class="p">,</span> <span class="n">Area</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error           = &#39;</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="o">-</span><span class="n">Area</span><span class="p">))</span> <span class="c1"># Analytical result is 2</span>
-</pre></div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>In Python it is sometimes convenient to enter default values for the arguments in a function. In the above example, we could also have written the function definition as\ <code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">int_adaptive_midpoint(func,</span> <span class="pre">lower_limit,</span> <span class="pre">upper_limit,</span></code> \ <code class="docutils literal notranslate"><span class="pre">tol=1e-8):</span></code>. If the <code class="docutils literal notranslate"><span class="pre">tol</span></code> parameter is not given the code will assume an accuracy of <span class="math notranslate nohighlight">\(10^{-8}\)</span>.</p>
-</div>
 </div>
 <div class="section" id="practical-estimation-of-errors-on-integrals-richardson-extrapolation">
 <h3>Practical Estimation of Errors on Integrals (Richardson Extrapolation)<a class="headerlink" href="#practical-estimation-of-errors-on-integrals-richardson-extrapolation" title="Permalink to this headline">¶</a></h3>
@@ -369,31 +317,29 @@ A possible algorithm is then:
 <li><p>If yes quit, if not, return to 2, and continue until <span class="math notranslate nohighlight">\(E_i(a,b)=\frac{1}{3}(I_{i+1}-I_{i})\)</span> is lower than the tolerance</p></li>
 </ol>
 <p>Below is a Python implementation:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">int_adaptive_trapez</span><span class="p">(</span><span class="n">lower_limit</span><span class="p">,</span> <span class="n">upper_limit</span><span class="p">,</span><span class="n">func</span><span class="p">,</span><span class="n">tol</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">int_adaptive_trapez2</span><span class="p">(</span><span class="n">lower_limit</span><span class="p">,</span> <span class="n">upper_limit</span><span class="p">,</span><span class="n">func</span><span class="p">,</span><span class="n">tol</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    adaptive quadrature, integrate a function from lower_limit</span>
 <span class="sd">    to upper_limit within tol*(upper_limit-lower_limit)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">N0</span><span class="o">=</span><span class="mi">1</span>
-    <span class="n">h</span>       <span class="o">=</span> <span class="p">(</span><span class="n">upper_limit</span><span class="o">-</span><span class="n">lower_limit</span><span class="p">)</span><span class="o">/</span><span class="n">N0</span>
-    <span class="n">area</span>    <span class="o">=</span> <span class="p">(</span><span class="n">func</span><span class="p">(</span><span class="n">lower_limit</span><span class="p">)</span><span class="o">+</span><span class="n">func</span><span class="p">(</span><span class="n">upper_limit</span><span class="p">))</span><span class="o">*</span><span class="mf">0.5</span><span class="o">*</span><span class="n">h</span>
-    <span class="n">calc_tol</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">tol</span> <span class="o">+</span> <span class="mi">1</span> <span class="c1"># just larger than tol to enter the while loop</span>
-    <span class="n">TOL</span><span class="o">=</span> <span class="n">tol</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>   <span class="c1"># note N0=1</span>
+    <span class="n">S</span><span class="o">=</span><span class="p">[]</span>
+    <span class="n">S</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">lower_limit</span><span class="p">,</span><span class="n">upper_limit</span><span class="p">])</span>
+    <span class="n">I</span><span class="o">=</span><span class="mi">0</span>
     <span class="n">iterations</span><span class="o">=</span><span class="mi">0</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">calc_tol</span><span class="o">&gt;</span><span class="n">TOL</span><span class="p">):</span>
-        <span class="n">iterations</span><span class="o">+=</span><span class="mi">1</span>
-        <span class="n">N</span> <span class="o">=</span> <span class="n">N0</span><span class="o">*</span><span class="mi">2</span>
-        <span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="n">upper_limit</span><span class="o">-</span><span class="n">lower_limit</span><span class="p">)</span><span class="o">/</span><span class="n">N</span>
-        <span class="n">odd_terms</span><span class="o">=</span><span class="mi">0</span>
-        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">N</span><span class="p">,</span><span class="mi">2</span><span class="p">):</span> <span class="c1"># 1, 3, 5, ... , N-1</span>
-            <span class="n">val</span>  <span class="o">=</span> <span class="n">lower_limit</span> <span class="o">+</span> <span class="n">k</span><span class="o">*</span><span class="n">h</span>
-            <span class="n">odd_terms</span> <span class="o">+=</span> <span class="n">func</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
-        <span class="n">new_area</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">area</span> <span class="o">+</span> <span class="n">h</span><span class="o">*</span><span class="n">odd_terms</span>
-        <span class="n">calc_tol</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">new_area</span><span class="o">-</span><span class="n">area</span><span class="p">)</span><span class="o">/</span><span class="mi">3</span>
-        <span class="n">area</span>     <span class="o">=</span> <span class="n">new_area</span> <span class="c1"># store new values for next iteration</span>
-        <span class="n">N0</span>       <span class="o">=</span> <span class="n">N</span>        <span class="c1"># update number of slices</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of intervals = &#39;</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="s1">&#39; iterations: &#39;</span><span class="p">,</span><span class="n">iterations</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">area</span> <span class="c1">#while loop ended and we can return the area</span>
+    <span class="k">while</span> <span class="n">S</span><span class="p">:</span>
+        <span class="n">iterations</span> <span class="o">+=</span><span class="mi">1</span>
+        <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="o">=</span><span class="n">S</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># last element</span>
+        <span class="n">m</span><span class="o">=</span><span class="p">(</span><span class="n">b</span><span class="o">+</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="mf">0.5</span>   <span class="c1"># midpoint</span>
+        <span class="n">I1</span><span class="o">=</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">func</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">+</span><span class="n">func</span><span class="p">(</span><span class="n">b</span><span class="p">))</span> <span class="c1">#trapezoidal for 1 interval</span>
+        <span class="n">I2</span><span class="o">=</span><span class="mf">0.25</span><span class="o">*</span><span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">func</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">+</span><span class="n">func</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">func</span><span class="p">(</span><span class="n">m</span><span class="p">))</span> <span class="c1">#trapezoidal for 2 intervals</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">I1</span><span class="o">-</span><span class="n">I2</span><span class="p">)</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">((</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">tol</span><span class="p">)):</span>
+            <span class="n">I</span><span class="o">+=</span><span class="n">I2</span>     <span class="c1"># accuarcy met</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">S</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">a</span><span class="p">,</span><span class="n">m</span><span class="p">])</span> <span class="c1"># half the interval</span>
+            <span class="n">S</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">m</span><span class="p">,</span><span class="n">b</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of iterations: &quot;</span><span class="p">,</span> <span class="n">iterations</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">I</span>
 </pre></div>
 </div>
 <p>If you compare the number of terms used in the adaptive trapezoidal rule, which was developed by halving the step size, and the adaptive midpoint rule that was derived on the basis of the theoretical error term, you will find the adaptive midpoint rule is more efficient. So why go through all this trouble? In the next section we will see that the development we did for the adaptive trapezoidal rule is closely related to Romberg integration, which is <em>much</em> more effective.</p>
@@ -467,25 +413,25 @@ R_{i,m+1}=R_{i,m}+\frac{1}{4^{m+1}-1}(R_{i+1,m}-R_{i,m}).\]</div>
 which we also use correct the integral in the current step to reach a higher accuracy.
 Thus the error on the integral will always be lower than the user specified tolerance.
 Below is a Python implementation:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">int_romberg</span><span class="p">(</span><span class="n">func</span><span class="p">,</span><span class="n">lower_limit</span><span class="p">,</span> <span class="n">upper_limit</span><span class="p">,</span><span class="n">tol</span><span class="p">,</span><span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; calculates the area of func over the domain lower_limit</span>
-<span class="sd">        to upper limit for the given tol, if show=True the triangular</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">int_romberg</span><span class="p">(</span><span class="n">func</span><span class="p">,</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span><span class="n">tol</span><span class="p">,</span><span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; calculates the area of func on the domain [a,b]</span>
+<span class="sd">        for the given tol, if show=True the triangular</span>
 <span class="sd">        array of intermediate results are printed &quot;&quot;&quot;</span>
     <span class="n">Nmax</span> <span class="o">=</span> <span class="mi">100</span>
     <span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">([</span><span class="n">Nmax</span><span class="p">,</span><span class="n">Nmax</span><span class="p">])</span> <span class="c1"># storage buffer</span>
-    <span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="n">upper_limit</span><span class="o">-</span><span class="n">lower_limit</span><span class="p">)</span> <span class="c1"># step size</span>
-    <span class="n">R</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>    <span class="o">=.</span><span class="mi">5</span><span class="o">*</span><span class="p">(</span><span class="n">func</span><span class="p">(</span><span class="n">lower_limit</span><span class="p">)</span><span class="o">+</span><span class="n">func</span><span class="p">(</span><span class="n">upper_limit</span><span class="p">))</span><span class="o">*</span><span class="n">h</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span> <span class="c1"># step size</span>
+    <span class="n">R</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>    <span class="o">=.</span><span class="mi">5</span><span class="o">*</span><span class="p">(</span><span class="n">func</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">+</span><span class="n">func</span><span class="p">(</span><span class="n">b</span><span class="p">))</span><span class="o">*</span><span class="n">h</span>
     <span class="n">N</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">Nmax</span><span class="p">):</span>
         <span class="n">h</span> <span class="o">/=</span> <span class="mi">2</span>
         <span class="n">N</span> <span class="o">*=</span> <span class="mi">2</span>
         <span class="n">odd_terms</span><span class="o">=</span><span class="mi">0</span>
         <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">N</span><span class="p">,</span><span class="mi">2</span><span class="p">):</span> <span class="c1"># 1, 3, 5, ... , N-1</span>
-            <span class="n">val</span>        <span class="o">=</span> <span class="n">lower_limit</span> <span class="o">+</span> <span class="n">k</span><span class="o">*</span><span class="n">h</span>
+            <span class="n">val</span>        <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">k</span><span class="o">*</span><span class="n">h</span>
             <span class="n">odd_terms</span> <span class="o">+=</span> <span class="n">func</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
             <span class="c1"># add the odd terms to the previous estimate</span>
         <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>   <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">h</span><span class="o">*</span><span class="n">odd_terms</span>
-        <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">i</span><span class="p">):</span> <span class="c1"># m = 0, 1, ..., i-1</span>
+        <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
                     <span class="c1"># add all higher order terms in h</span>
             <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>   <span class="o">=</span> <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">m</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">m</span><span class="p">]</span><span class="o">-</span><span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">m</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="mi">4</span><span class="o">**</span><span class="p">(</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
             <span class="c1"># check tolerance, best guess</span>
@@ -503,7 +449,7 @@ Below is a Python implementation:</p>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Steps StepSize Results&quot;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">elem</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span><span class="s1">&#39; &#39;</span><span class="p">,</span>
-                  <span class="s2">&quot;</span><span class="si">{:.6f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">((</span><span class="n">upper_limit</span><span class="o">-</span><span class="n">lower_limit</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="o">**</span><span class="n">idx</span><span class="p">),</span><span class="n">end</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+                  <span class="s2">&quot;</span><span class="si">{:.6f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">((</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="o">**</span><span class="n">idx</span><span class="p">),</span><span class="n">end</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:.6f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span><span class="n">l</span><span class="p">]),</span><span class="n">end</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
@@ -550,7 +496,7 @@ section uses 20480 and 9069 function evaluations, respectively.</p>
     <span class="n">m</span><span class="o">=</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="mi">6</span><span class="o">*</span><span class="p">(</span><span class="n">func</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">+</span><span class="n">func</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="o">+</span><span class="mi">4</span><span class="o">*</span><span class="n">func</span><span class="p">(</span><span class="n">m</span><span class="p">))</span>
 
-<span class="k">def</span> <span class="nf">int_adaptive_simpson</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span><span class="n">func</span><span class="p">,</span><span class="n">tol</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">int_adaptive_simpson</span><span class="p">(</span><span class="n">func</span><span class="p">,</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span><span class="n">tol</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    adaptive quadrature, integrate a function from a</span>
 <span class="sd">    to b within tol*(b-a) uses simpsons rule</span>
@@ -869,7 +815,7 @@ Make a Python program that uses the Midpoint rule to integrate experimental data
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
 
 
 
@@ -886,7 +832,7 @@ Make a Python program that uses the Midpoint rule to integrate experimental data
       &copy;2021, Modeling and Computational Engineering.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.3.1</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.1</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

@@ -1,11 +1,11 @@
 <!--
 Automatically generated HTML file from DocOnce source
-(https://github.com/hplgit/doconce/)
+(https://github.com/doconce/doconce/)
 -->
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="generator" content="DocOnce: https://github.com/doconce/doconce/" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="Ordinary Differential Equations">
 <meta name="keywords" content="continuous stirred tank reactor (CSTR),Eulers method,Eulers method, error analysis,Eulers method, adaptive step size,Runge-Kutta,Runge-Kutta, adaptive step size,adaptive step size,stiff equations,implicit method">
@@ -144,7 +144,7 @@ MathJax.Hub.Config({
 <br>
 University of Stavanger
 <p>
-<center><h4>Sep 16, 2021</h4></center> <!-- date -->
+<center><h4>Oct 22, 2021</h4></center> <!-- date -->
 <br>
 <p>
 </div> <!-- end jumbotron -->
@@ -244,7 +244,7 @@ and that the flow rate is 1 liter/min, we find that $\tau$=1000min=0.69days and 
 by 90$\%$ to 3.5 gram/liter.
 
 <p>
-<div class="alert alert-block alert-success alert-text-normal"><b>The CSTR.</b>
+<div class="alert alert-block alert-success alert-text-normal"><b>The CSTR</b>
 You might think that the CSTR is a very simple model, and it is, but this type of model is the basic building blocks in chemical engineering.
 By putting CSTR tanks in series and/or connecting them with pipes, the efficiency of manufacturing various type of chemicals
 can be investigated. Although the CSTR is an idealized model for the part of a chemical factory, it is actually a <em>very good</em> model 
@@ -279,7 +279,7 @@ In the script below, we have implemented equation <a href="#mjx-eqn-8">(8)</a>.
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">analytical</span>(x):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">analytical</span>(x):
     <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>exp(<span style="color: #666666">-</span>x)
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">euler_step</span>(c_old, c_in, tau_inv,dt):
@@ -344,7 +344,7 @@ $$
 As we found earlier $\tau = 1000$min, thus a step size of e.g. 1 min would correspond to a dimensionless time step of 
 $\Delta t\to$1min/1000min$=10^{-3}$. This number can be directly compared to the value \( 10^{-8} \), which is the lowest value we can
 choose without getting into trouble with round off errors on the machine. 
-<div class="alert alert-block alert-success alert-text-normal"><b>Dimensionless variables.</b>
+<div class="alert alert-block alert-success alert-text-normal"><b>Dimensionless variables</b>
 It is a  good idea (necessary) to formulate our equations in terms of dimensionless variables.
 The algorithms we develop can then be used in the same form regardless of changes in the system size and flow rates.
 Thus we do not need to rewrite the algorithm each time the physical system changes. This also means that if you use
@@ -452,7 +452,7 @@ when \( h\to0 \). Below is an implementation of the Euler algorithm in this simp
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
 <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">euler</span>(tf,h):
     t<span style="color: #666666">=</span>[];f<span style="color: #666666">=</span>[]
@@ -566,7 +566,7 @@ Below is an implementation of the adaptive Euler algorithm:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">one_step</span>(c_old, c_in,h):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">one_step</span>(c_old, c_in,h):
     <span style="color: #008000; font-weight: bold">return</span> (<span style="color: #666666">1-</span>h)<span style="color: #666666">*</span>c_old<span style="color: #666666">+</span>h<span style="color: #666666">*</span>c_in
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">adaptive_euler</span>(c_into,c_init,t_final,tol<span style="color: #666666">=1e-4</span>):
@@ -609,7 +609,7 @@ In figure <a href="#fig:ode:adapt_euler">3</a> the result of the implementation 
 Note that the number of steps for an accuracy of \( 10^{-6} \) is only about 3000. Without knowing anything about the accuracy, we would have to assume
 that we needed a step size of the order of \( h \) in order to reach a local accuracy of \( h \) because of equation <a href="#mjx-eqn-12">(12)</a>. In the current case,
 we would have needed \( 10^7 \) steps, which would lead to unnecessary long simulation times.
-<div class="alert alert-block alert-success alert-text-normal"><b>Local error and bounds.</b>
+<div class="alert alert-block alert-success alert-text-normal"><b>Local error and bounds</b>
 In the previous example we set an absolute tolerance, and required that our estimate \( y_n \) always is within a certain bound
 of the true  solution \( y(t_n) \), i.e. \( |y(t_n)-y_n|\le\epsilon^\prime \). This is a very strong demand, and sometimes it makes more 
 sense to require that we also accept a relative tolerance proportional to function value. In some areas the solution might have a very large
@@ -675,7 +675,7 @@ Below is a Python implementation of equation <a href="#mjx-eqn-29">(29)</a>:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">fm</span>(c_old,c_in):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">fm</span>(c_old,c_in):
     <span style="color: #008000; font-weight: bold">return</span> c_in<span style="color: #666666">-</span>c_old
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">rk2_step</span>(c_old, c_in, h):
@@ -851,7 +851,7 @@ we should always get an amount that is equal to the original amount. Alternative
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>mout <span style="color: #666666">+=</span> <span style="color: #666666">0.5*</span>(c_old<span style="color: #666666">+</span>c_new)<span style="color: #666666">*</span>q<span style="color: #666666">*</span>dt
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span>mout <span style="color: #666666">+=</span> <span style="color: #666666">0.5*</span>(c_old<span style="color: #666666">+</span>c_new)<span style="color: #666666">*</span>q<span style="color: #666666">*</span>dt
 mbal  <span style="color: #666666">=</span> (c_new<span style="color: #666666">*</span>vol<span style="color: #666666">+</span>mout<span style="color: #666666">-</span>vol<span style="color: #666666">*</span>c_init)<span style="color: #666666">/</span>(vol<span style="color: #666666">*</span>c_init)
 </pre></div>
 <p>
@@ -888,7 +888,7 @@ problem this way, it makes more sense to calculate the mass out of the tank as \
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>mout <span style="color: #666666">+=</span> c_old<span style="color: #666666">*</span>q<span style="color: #666666">*</span>dt
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span>mout <span style="color: #666666">+=</span> c_old<span style="color: #666666">*</span>q<span style="color: #666666">*</span>dt
 mbal  <span style="color: #666666">=</span> (c_new<span style="color: #666666">*</span>vol<span style="color: #666666">+</span>mout<span style="color: #666666">-</span>vol<span style="color: #666666">*</span>c_init)<span style="color: #666666">/</span>(vol<span style="color: #666666">*</span>c_init)
 </pre></div>
 <p>
@@ -1055,7 +1055,7 @@ The reason is that there are now <em>two time scales</em> in the system, \( \tau
 we can use, because we should never use step sizes larger than a tank volume. Thus if you use the code in the previous section to solve equation
 <a href="#mjx-eqn-50">(50)</a> and <a href="#mjx-eqn-51">(51)</a>, it will not find the correct solution, unless the step size is lower than \( 10^{-3} \). Equations of this type
 are known as <em>stiff</em>. 
-<div class="alert alert-block alert-success alert-text-normal"><b>Stiff equations.</b>
+<div class="alert alert-block alert-success alert-text-normal"><b>Stiff equations</b>
 There is no precise definition of ''stiff'', but it is used to describe a system of differential equations, where the numerical solution becomes unstable unless
 a very small step size is chosen. Such systems occurs because there are several (length, time) scales in the system, and the numerical solution is constrained
 by the shortest length scale. You should always be careful on how you scale your variables in order to make the system dimensionless, which is of 
@@ -1081,7 +1081,7 @@ the method is known as <em>implicit</em>. Implicit methods are always stable, me
 getting oscillating solution. It does not mean that we will get a more accurate solution, actually explicit methods are usually more accurate.
 
 <p>
-<div class="alert alert-block alert-success alert-text-normal"><b>Explicit and Implicit methods.</b>
+<div class="alert alert-block alert-success alert-text-normal"><b>Explicit and Implicit methods</b>
 Explicit methods are often called <em>forward</em> methods, as they use only information from the previous step to estimate the next value. The explicit
 methods are easy to implement, but get into trouble if the step size is too large. Implicit methods are often called <em>backward</em> methods as the next 
 step cannot be calculated directly from the previous solution, usually a non-linear equation has to be solved. Implicit methods are generally much
@@ -1153,6 +1153,95 @@ $$
 We will also assume (for simplicity) that in our starting point \( t=t_0 \), the numerical solution, \( y_0 \), is equal to the true solution, \( y(t_0) \), hence \( y(t_0)=y_0 \).
 
 <p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_1_4" style="font-size: 80%;"></a>
+<a href="#exer_1_4" data-toggle="collapse">
+<b>Solution.</b>
+</a>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_1_4">
+
+<p>
+The local error, is the difference between the numerical solution and the true solution:
+$$
+\begin{align}
+\epsilon^*&=y(t_0+h)-y_{1}^*=y(t_0)+y^{\prime}(t_0)h+\frac{1}{2}y^{\prime\prime}(t_0)h^2+\mathcal{O}(h^3)\nonumber\\ 
+&-\left[y_0+hf(y_0,t_0+h)\right],
+\tag{59}
+\end{align}
+$$
+
+where we have used Taylor expansion to expand the true solution around \( t_0 \), and equation <a href="#mjx-eqn-58">(58)</a>.
+Using equation <a href="#mjx-eqn-57">(57)</a> to replace \( y^\prime(t_0) \) with \( f(y_0,t_0) \), we find:
+$$
+\begin{align}
+\epsilon^*=&y(t_0+h)-y_{1}^*=\frac{1}{2}y^{\prime\prime}(t_0)h^2\equiv ch^2,
+\tag{60}
+\end{align}
+$$
+
+where we have ignored terms of higher order than \( h^2 \), and defined \( c \) as \( c=y^{\prime\prime}(t_0)/2 \). Next we take two steps of size \( h/2 \) to
+reach \( y_1 \):  
+$$
+\begin{align}
+y_{1/2}&=y_0+\frac{h}{2}f(y_0,t_0),\tag{61}\\ 
+y_{1}&=y_{1/2}+\frac{h}{2}f(y_{1/2},t_0+h/2),\tag{62}\\ 
+y_{1}&=y_{0}+\frac{h}{2}f(y_0,t_0)+\frac{h}{2}f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2).\tag{63}
+\end{align}
+$$
+
+Note that we have inserted
+equation <a href="#mjx-eqn-61">(61)</a> into equation <a href="#mjx-eqn-62">(62)</a> to arrive at equation <a href="#mjx-eqn-63">(63)</a>. The truncation error in this case is, as before:
+$$
+\begin{align}
+\epsilon&=y(t_0+h)-y_{1}=y(t_0)+y^{\prime}(t_0)h+\frac{1}{2}y^{\prime\prime}(t_0)h^2+\mathcal{O}(h^3)\nonumber\\ 
+&-\left[y_{0}+\frac{h}{2}f(y_0,t_0)+\frac{h}{2}f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2)\right].\tag{64}
+\end{align}
+$$
+
+This equation is slightly more complicated, due to the term involving \( f \) inside the last parenthesis, we can use Taylor expansion to expand it about \( (y_0,t_0) \):
+$$
+\begin{align}
+&f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2)=f(y_0,t_0)\nonumber\\ 
+&+\frac{h}{2}\left[f(y_0,t_0)\left.\frac{\partial f}{\partial y}\right|_{y=y_0,t=t_0}
++\left.\frac{\partial f}{\partial t}\right|_{y=y_0,t=t_0}\right]+\mathcal{O}(h^2).\tag{65}
+\end{align}
+$$
+
+It turns out that this equation is related to \( y^{\prime\prime}(t_0,y_0) \), which can be seen by differentiating equation <a href="#mjx-eqn-57">(57)</a>:
+$$
+\begin{align}
+\frac{d^2y}{dt^2}&=\frac{df(y,t)}{dt}=\frac{\partial f(y,t)}{\partial y}\frac{dy}{dt}+\frac{\partial f(y,t)}{\partial t}
+=\frac{\partial f(y,t)}{\partial y}f(y,t)+\frac{\partial f(y,t)}{\partial t}.\tag{66}
+\end{align}
+$$
+
+Hence, equation <a href="#mjx-eqn-65">(65)</a> can be written:
+$$
+\begin{align}
+f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2)=f(y_0,t_0)+\frac{h}{2}y^{\prime\prime}(t_0,y_0),\tag{67}
+\end{align}
+$$
+
+hence the truncation error in equation <a href="#mjx-eqn-64">(64)</a> can finally be written:
+$$
+\begin{align}
+\epsilon=&y(t_1)-y_{1}=\frac{h^2}{4} y^{\prime\prime}(y_0,t_0)=\frac{1}{2}ch^2,\tag{68}
+\end{align}
+$$
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
 <b>a)</b>
 Show that when we take one step of size \( h \) from \( t_0 \) to \( t_1=t_0+h \), \( c=y^{\prime\prime}(t_0)/2 \) in equation <a href="#mjx-eqn-19">(19)</a>.
 
@@ -1174,7 +1263,7 @@ $$
 \begin{align}
 \epsilon^*&=y(t_0+h)-y_{1}^*=y(t_0)+y^{\prime}(t_0)h+\frac{1}{2}y^{\prime\prime}(t_0)h^2+\mathcal{O}(h^3)\nonumber\\ 
 &-\left[y_0+hf(y_0,t_0+h)\right],
-\tag{59}
+\tag{69}
 \end{align}
 $$
 
@@ -1183,13 +1272,11 @@ Using equation <a href="#mjx-eqn-57">(57)</a> to replace \( y^\prime(t_0) \) wit
 $$
 \begin{align}
 \epsilon^*=&y(t_0+h)-y_{1}^*=\frac{1}{2}y^{\prime\prime}(t_0)h^2\equiv ch^2,
-\tag{60}
+\tag{70}
 \end{align}
 $$
 
 hence \( c=y^{\prime\prime}(t_0)/2 \).
-
-<p>
 </div></p>
 </div>
 </p>
@@ -1203,7 +1290,7 @@ Show that when we take two steps of size \( h/2 \) from \( t_0 \) to \( t_1=t_0+
 $$
 \begin{align}
 y_{1}&=y_{0}+\frac{h}{2}f(y_0,t_0)+\frac{h}{2}f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2).
-\tag{61}
+\tag{71}
 \end{align}
 $$
 
@@ -1221,16 +1308,14 @@ $$
 
 $$
 \begin{align}
-y_{1/2}&=y_0+\frac{h}{2}f(y_0,t_0),\tag{62}\\ 
-y_{1}&=y_{1/2}+\frac{h}{2}f(y_{1/2},t_0+h/2),\tag{63}\\ 
-y_{1}&=y_{0}+\frac{h}{2}f(y_0,t_0)+\frac{h}{2}f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2).\tag{64}
+y_{1/2}&=y_0+\frac{h}{2}f(y_0,t_0),\tag{72}\\ 
+y_{1}&=y_{1/2}+\frac{h}{2}f(y_{1/2},t_0+h/2),\tag{73}\\ 
+y_{1}&=y_{0}+\frac{h}{2}f(y_0,t_0)+\frac{h}{2}f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2).\tag{74}
 \end{align}
 $$
 
 Note that we have inserted
-equation <a href="#mjx-eqn-62">(62)</a> into equation <a href="#mjx-eqn-63">(63)</a> to arrive at equation <a href="#mjx-eqn-64">(64)</a>.
-
-<p>
+equation <a href="#mjx-eqn-72">(72)</a> into equation <a href="#mjx-eqn-73">(73)</a> to arrive at equation <a href="#mjx-eqn-74">(74)</a>.
 </div></p>
 </div>
 </p>
@@ -1257,95 +1342,6 @@ Find an expression for the local error when using two steps of size \( h/2 \), a
 $$
 \begin{align}
 \epsilon&=y(t_0+h)-y_{1}=y(t_0)+y^{\prime}(t_0)h+\frac{1}{2}y^{\prime\prime}(t_0)h^2+\mathcal{O}(h^3)\nonumber\\ 
-&-\left[y_{0}+\frac{h}{2}f(y_0,t_0)+\frac{h}{2}f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2)\right].\tag{65}
-\end{align}
-$$
-
-This equation is slightly more complicated, due to the term involving \( f \) inside the last parenthesis, we can use Taylor expansion to expand it about \( (y_0,t_0) \):
-$$
-\begin{align}
-&f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2)=f(y_0,t_0)\nonumber\\ 
-&+\frac{h}{2}\left[f(y_0,t_0)\left.\frac{\partial f}{\partial y}\right|_{y=y_0,t=t_0}
-+\frac{h}{2}\left.\frac{\partial f}{\partial t}\right|_{y=y_0,t=t_0}\right]+\mathcal{O}(h^2).\tag{66}
-\end{align}
-$$
-
-It turns out that this equation is related to \( y^{\prime\prime}(t_0,y_0) \), which can be seen by differentiating equation <a href="#mjx-eqn-57">(57)</a>:
-$$
-\begin{align}
-\frac{d^2y}{dt^2}&=\frac{df(y,t)}{dt}=\frac{\partial f(y,t)}{\partial y}\frac{dy}{dt}+\frac{\partial f(y,t)}{\partial t}
-=\frac{\partial f(y,t)}{\partial y}f(y,t)+\frac{\partial f(y,t)}{\partial t}.\tag{67}
-\end{align}
-$$
-
-Hence, equation <a href="#mjx-eqn-66">(66)</a> can be written:
-$$
-\begin{align}
-f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2)=f(y_0,t_0)+\frac{h}{2}y^{\prime\prime}(t_0,y_0),\tag{68}
-\end{align}
-$$
-
-hence the truncation error in equation <a href="#mjx-eqn-65">(65)</a> can finally be written:
-$$
-\begin{align}
-\epsilon=&y(t_1)-y_{1}=\frac{h^2}{4} y^{\prime\prime}(y_0,t_0)=\frac{1}{2}ch^2,\tag{69}
-\end{align}
-$$
-
-<p>
-</div></p>
-</div>
-</p>
-
-<p>
-<!-- --- end answer of exercise --- -->
-
-<p>
-<!-- --- begin solution of exercise --- -->
-
-<p>
-<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
- data-target="#exer_1_7" style="font-size: 80%;"></a>
-<a href="#exer_1_7" data-toggle="collapse">
-<b>Solution.</b>
-</a>
-<div class="collapse-group">
-<p><div class="collapse" id="exer_1_7">
-
-<p>
-The local error, is the difference between the numerical solution and the true solution:
-$$
-\begin{align}
-\epsilon^*&=y(t_0+h)-y_{1}^*=y(t_0)+y^{\prime}(t_0)h+\frac{1}{2}y^{\prime\prime}(t_0)h^2+\mathcal{O}(h^3)\nonumber\\ 
-&-\left[y_0+hf(y_0,t_0+h)\right],
-\tag{70}
-\end{align}
-$$
-
-where we have used Taylor expansion to expand the true solution around \( t_0 \), and equation <a href="#mjx-eqn-58">(58)</a>.
-Using equation <a href="#mjx-eqn-57">(57)</a> to replace \( y^\prime(t_0) \) with \( f(y_0,t_0) \), we find:
-$$
-\begin{align}
-\epsilon^*=&y(t_0+h)-y_{1}^*=\frac{1}{2}y^{\prime\prime}(t_0)h^2\equiv ch^2,
-\tag{71}
-\end{align}
-$$
-
-where we have ignored terms of higher order than \( h^2 \), and defined \( c \) as \( c=y^{\prime\prime}(t_0)/2 \). Next we take two steps of size \( h/2 \) to
-reach \( y_1 \):  
-$$
-\begin{align}
-y_{1/2}&=y_0+\frac{h}{2}f(y_0,t_0),\tag{72}\\ 
-y_{1}&=y_{1/2}+\frac{h}{2}f(y_{1/2},t_0+h/2),\tag{73}\\ 
-y_{1}&=y_{0}+\frac{h}{2}f(y_0,t_0)+\frac{h}{2}f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2).\tag{74}
-\end{align}
-$$
-
-Note that we have inserted
-equation <a href="#mjx-eqn-72">(72)</a> into equation <a href="#mjx-eqn-73">(73)</a> to arrive at equation <a href="#mjx-eqn-74">(74)</a>. The truncation error in this case is, as before:
-$$
-\begin{align}
-\epsilon&=y(t_0+h)-y_{1}=y(t_0)+y^{\prime}(t_0)h+\frac{1}{2}y^{\prime\prime}(t_0)h^2+\mathcal{O}(h^3)\nonumber\\ 
 &-\left[y_{0}+\frac{h}{2}f(y_0,t_0)+\frac{h}{2}f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2)\right].\tag{75}
 \end{align}
 $$
@@ -1355,7 +1351,7 @@ $$
 \begin{align}
 &f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2)=f(y_0,t_0)\nonumber\\ 
 &+\frac{h}{2}\left[f(y_0,t_0)\left.\frac{\partial f}{\partial y}\right|_{y=y_0,t=t_0}
-+\left.\frac{\partial f}{\partial t}\right|_{y=y_0,t=t_0}\right]+\mathcal{O}(h^2).\tag{76}
++\frac{h}{2}\left.\frac{\partial f}{\partial t}\right|_{y=y_0,t=t_0}\right]+\mathcal{O}(h^2).\tag{76}
 \end{align}
 $$
 
@@ -1381,13 +1377,12 @@ $$
 \end{align}
 $$
 
-<p>
 </div></p>
 </div>
 </p>
 
 <p>
-<!-- --- end solution of exercise --- -->
+<!-- --- end answer of exercise --- -->
 
 <p>
 <!-- --- end exercise --- -->

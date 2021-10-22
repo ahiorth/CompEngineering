@@ -1,11 +1,11 @@
 <!--
 Automatically generated HTML file from DocOnce source
-(https://github.com/hplgit/doconce/)
+(https://github.com/doconce/doconce/)
 -->
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="generator" content="DocOnce: https://github.com/doconce/doconce/" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="Modeling and Computational Engineering">
 <meta name="keywords" content="numerical error,Taylor polynomial,truncation error,Taylor polynomial, error term,Maclaurin series,forward difference,backward difference,central difference,central difference,round off erros,machine precision,IEEE 754-1985 standard,round off errors,continuity equation,Gauss-Jordan elimination,pivoting,LU decomposition,Jacobi method,Gauss-Seidel method,linear regression,sparse matrix,Thomas algorithm,fixed-point iteration,rate of convergence,bisection method,rate of convergence,Newtons method,Newtons method, rate of convergence,secant method,secant method, rate of convergence,Newton Rapson method,gradient descent,midpoint method,trapezoidal method,numerical integrals, error,Richardson extrapolation,Romberg integration,Gaussian quadrature,Gaussian quadrature, error term,numerical integral, infinite,continuous stirred tank reactor (CSTR),Eulers method,Eulers method, error analysis,Eulers method, adaptive step size,Runge-Kutta,Runge-Kutta, adaptive step size,adaptive step size,stiff equations,implicit method,Monte Carlo integration,random number generators,Mersenne Twister,encryption,Monte Carlo Integration, error,binomial distribution,mean,variance,Monte Carlo integration, mean value,recursive functions,central limit theorem,birthday paradox">
@@ -260,7 +260,7 @@ MathJax.Hub.Config({
 <!-- newcommands_keep.tex -->
 $$
 \newcommand{\no}{\nonumber}
-\newcommand{\co}{\text{CO$_{2}$}}
+\newcommand{\co}{CO$_2$}
 $$
 
 
@@ -512,7 +512,7 @@ $$
 In figure <a href="#fig:nlin:vdw">12</a>, we have plotted the isotherms. Note that if \( \hat{T} < 1 \) (\( T < T_c \)), there might be more than one solution for the molar volume. This is clearly unphysical and additional constraints are needed. For the curve \( \hat{T}=0.9 \), the dashed lined shows that for \( \hat{P}=0.7 \), there are three solutions. This is a typical behavior of the cubic EOS, and physically it corresponds to the saturated case, where the vapor and liquid phase co-exist. The left root is the liquid state and the right root is the vapor state. The root in the middle represents a meta stable state.
 
 <p>
-<div class="alert alert-block alert-success alert-text-normal"><b>It never hurts to look at your function.</b>
+<div class="alert alert-block alert-success alert-text-normal"><b>It never hurts to look at your function</b>
 The example in figure <a href="#fig:nlin:vdw">12</a> illustrates some important points. Solving a nonlinear problem might be very easy in part of the parameter space (e.g. when \( T>T_c \) there are only one solution), but extremely hard in other part of the parameter space (e.g. when \( T < T_c \), where there are multiple solutions). However, much of the trick to find a solution is to choose a good starting point. When there are multiple solutions we need to start close to the physical solution.
 </div>
 
@@ -613,7 +613,7 @@ Below is a straight forward (vanilla) implementation:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">iterative</span>(x,g,prec<span style="color: #666666">=1e-8</span>, MAXIT<span style="color: #666666">=1000</span>):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">iterative</span>(x,g,prec<span style="color: #666666">=1e-8</span>, MAXIT<span style="color: #666666">=1000</span>):
     <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;Approximate solution of x=g(x) by fixed point iterations.</span>
 <span style="color: #BA2121; font-style: italic">    x : starting point for iterations </span>
 <span style="color: #BA2121; font-style: italic">    eps : desired precision</span>
@@ -683,7 +683,7 @@ The right hand side will play the same role as \( g(x) \) above, where \( x \) n
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">dvdwEOS</span>(nu,t,p):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">dvdwEOS</span>(nu,t,p):
     <span style="color: #008000; font-weight: bold">return</span> (<span style="color: #666666">1+8*</span>t<span style="color: #666666">/</span>(p<span style="color: #666666">+3/</span>nu<span style="color: #666666">**2</span>))<span style="color: #666666">/3</span>
 </pre></div>
 <p>
@@ -691,7 +691,7 @@ Note that this function requires the values of \( \hat{P} \) and \( \hat{T} \), 
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">iterative</span>(x,g,<span style="color: #666666">*</span>args,prec<span style="color: #666666">=1e-8</span>):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">iterative</span>(x,g,<span style="color: #666666">*</span>args,prec<span style="color: #666666">=1e-8</span>):
     MAX_ITER<span style="color: #666666">=1000</span>
     eps <span style="color: #666666">=</span> <span style="color: #666666">1</span>
     n<span style="color: #666666">=0</span>
@@ -708,7 +708,7 @@ We can find the root by calling the function as:
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>iterative(<span style="color: #666666">1</span>,dvdwEOS,<span style="color: #666666">1.2</span>,<span style="color: #666666">1.5</span>)
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span>iterative(<span style="color: #666666">1</span>,dvdwEOS,<span style="color: #666666">1.2</span>,<span style="color: #666666">1.5</span>)
 </pre></div>
 <p>
 The program returns the correct solution after 71 iterations.
@@ -889,7 +889,7 @@ Below is an implementation of the bisection method.
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">bisection</span>(f,a,b,prec<span style="color: #666666">=1e-8</span>,MAXIT<span style="color: #666666">=100</span>):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">bisection</span>(f,a,b,prec<span style="color: #666666">=1e-8</span>,MAXIT<span style="color: #666666">=100</span>):
     <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;Approximate solution of f(x)=0 on interval [a,b] by bisection.</span>
 
 <span style="color: #BA2121; font-style: italic">    f   : f(x)=0.</span>
@@ -933,7 +933,7 @@ Below is an implementation of the bisection method.
     <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">None</span>
 </pre></div>
 <p>
-<div class="alert alert-block alert-success alert-text-normal"><b>Warnings.</b>
+<div class="alert alert-block alert-success alert-text-normal"><b>Warnings</b>
 Note that the implementation of the bisection algorithm is only a few lines of code, and most of the code is to give warnings to the user. In this case it is important to do additional checking, and give the user warnings. If $f(c)$=0, then we must stop and return the exact solution. If we only test if \( f(a)\cdot f(c) \) is greater or lower than zero the algorithm would fail.
 </div>
 
@@ -990,7 +990,7 @@ An implementation is shown below.
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">newton</span>(f,x, prec<span style="color: #666666">=1e-8</span>,MAXIT<span style="color: #666666">=500</span>):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">newton</span>(f,x, prec<span style="color: #666666">=1e-8</span>,MAXIT<span style="color: #666666">=500</span>):
     <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;Approximate solution of f(x)=0 by Newtons method.</span>
 <span style="color: #BA2121; font-style: italic">    The derivative of the function is calculated numerically</span>
 <span style="color: #BA2121; font-style: italic">    f   : f(x)=0.</span>
@@ -1092,7 +1092,7 @@ The root is located at \( x^*=0.70346742 \).
 </center>
 
 <p>
-<div class="alert alert-block alert-success alert-text-normal"><b>A good starting point is crucial.</b>
+<div class="alert alert-block alert-success alert-text-normal"><b>A good starting point is crucial</b>
 Note that it is not given which method is best, but if we are ''close'' to the root Newtons method is usually superior. If we are far away, other methods might work better. In many cases one uses a more stable method far away from the root, and then ''polish up'' the root by a couple of Newton iterations <a href="._book008.html#press2001">[6]</a>. See also Brents method which combines bisection and linear interpolation (secant method) <a href="._book008.html#press2001">[6]</a>.
 </div>
 
@@ -1318,7 +1318,7 @@ Below is an implementation of the gradient descent method with a constant learni
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">gradient_descent</span>(f,x,df, g<span style="color: #666666">=.001</span>, prec<span style="color: #666666">=1e-8</span>,MAXIT<span style="color: #666666">=10000</span>):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">gradient_descent</span>(f,x,df, g<span style="color: #666666">=.001</span>, prec<span style="color: #666666">=1e-8</span>,MAXIT<span style="color: #666666">=10</span>):
     <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;Minimize f(x) by gradient descent.</span>
 <span style="color: #BA2121; font-style: italic">    f   : min(f(x))</span>
 <span style="color: #BA2121; font-style: italic">    x   : starting point </span>
@@ -1331,7 +1331,8 @@ Below is an implementation of the gradient descent method with a constant learni
 <span style="color: #BA2121; font-style: italic">    &#39;&#39;&#39;</span>
     x_old <span style="color: #666666">=</span> x
     <span style="color: #008000; font-weight: bold">for</span> n <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(MAXIT):
-        x_new <span style="color: #666666">=</span> x_old <span style="color: #666666">-</span> g<span style="color: #666666">*</span>df(x_old)       
+        plot_regression_line(x_old)  
+        x_new <span style="color: #666666">=</span> x_old <span style="color: #666666">-</span> g<span style="color: #666666">*</span>df(x_old)
         <span style="color: #008000; font-weight: bold">if</span>(<span style="color: #008000">abs</span>(np<span style="color: #666666">.</span>max(x_new<span style="color: #666666">-</span>x_old))<span style="color: #666666">&lt;</span>prec):
             <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Found solution:&#39;</span>, x_new, 
                   <span style="color: #BA2121">&#39;, after:&#39;</span>, n, <span style="color: #BA2121">&#39;iterations.&#39;</span> )
@@ -1347,7 +1348,7 @@ The linear regression is implemented as below
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>x_obs_ <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([<span style="color: #666666">0</span>, <span style="color: #666666">1</span>, <span style="color: #666666">2</span>, <span style="color: #666666">3</span>, <span style="color: #666666">4</span>, <span style="color: #666666">5</span>, <span style="color: #666666">6</span>, <span style="color: #666666">7</span>, <span style="color: #666666">8</span>, <span style="color: #666666">9</span>]) 
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span>x_obs_ <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([<span style="color: #666666">0</span>, <span style="color: #666666">1</span>, <span style="color: #666666">2</span>, <span style="color: #666666">3</span>, <span style="color: #666666">4</span>, <span style="color: #666666">5</span>, <span style="color: #666666">6</span>, <span style="color: #666666">7</span>, <span style="color: #666666">8</span>, <span style="color: #666666">9</span>]) 
 y_obs_ <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([<span style="color: #666666">1</span>, <span style="color: #666666">3</span>, <span style="color: #666666">2</span>, <span style="color: #666666">5</span>, <span style="color: #666666">7</span>, <span style="color: #666666">8</span>, <span style="color: #666666">8</span>, <span style="color: #666666">9</span>, <span style="color: #666666">10</span>, <span style="color: #666666">12</span>]) 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">plot_regression_line</span>(b,x<span style="color: #666666">=</span>x_obs_, y<span style="color: #666666">=</span>y_obs_): 
     <span style="color: #008000; font-weight: bold">global</span> N_
@@ -1377,8 +1378,54 @@ y_obs_ <span style="color: #666666">=</span> np<span style="color: #666666">.</s
     plt<span style="color: #666666">.</span>show() 
 
 
-    
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">gradient_descent</span>(f,x,df, g<span style="color: #666666">=.001</span>, prec<span style="color: #666666">=1e-8</span>,MAXIT<span style="color: #666666">=10000</span>):
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">Jacobian</span>(x,f,dx<span style="color: #666666">=1e-5</span>):
+    N<span style="color: #666666">=</span><span style="color: #008000">len</span>(x)
+    x0<span style="color: #666666">=</span>np<span style="color: #666666">.</span>copy(x)
+    f0<span style="color: #666666">=</span>f(x)
+    J<span style="color: #666666">=</span>np<span style="color: #666666">.</span>zeros(shape<span style="color: #666666">=</span>(N,N))
+    <span style="color: #008000; font-weight: bold">for</span> j <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(N):
+        x[j] <span style="color: #666666">=</span> x[j] <span style="color: #666666">+</span>  dx
+        <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(N):   
+            J[i][j] <span style="color: #666666">=</span> (f(x)[i]<span style="color: #666666">-</span>f0[i])<span style="color: #666666">/</span>dx
+        x[j] <span style="color: #666666">=</span> x[j] <span style="color: #666666">-</span>  dx
+    <span style="color: #008000; font-weight: bold">return</span> J
+
+
+
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">newton_rapson</span>(x,f,J<span style="color: #666666">=</span><span style="color: #008000; font-weight: bold">None</span>, jacobian<span style="color: #666666">=</span><span style="color: #008000; font-weight: bold">False</span>, prec<span style="color: #666666">=1e-8</span>,MAXIT<span style="color: #666666">=100</span>):
+    <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;Approximate solution of f(x)=0 by Newtons method.</span>
+<span style="color: #BA2121; font-style: italic">    The derivative of the function is calculated numerically</span>
+<span style="color: #BA2121; font-style: italic">    f   : f(x)=0.</span>
+<span style="color: #BA2121; font-style: italic">    J   : Jacobian</span>
+<span style="color: #BA2121; font-style: italic">    x   : starting point  </span>
+<span style="color: #BA2121; font-style: italic">    eps : desired precision</span>
+<span style="color: #BA2121; font-style: italic">    </span>
+<span style="color: #BA2121; font-style: italic">    Returns x when it is closer than eps to the root, </span>
+<span style="color: #BA2121; font-style: italic">    unless MAX_ITERATIONS are not exceeded</span>
+<span style="color: #BA2121; font-style: italic">    &#39;&#39;&#39;</span>
+    MAX_ITERATIONS<span style="color: #666666">=</span>MAXIT
+    x_old <span style="color: #666666">=</span> np<span style="color: #666666">.</span>copy(x)
+    <span style="color: #008000; font-weight: bold">for</span> n <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(MAX_ITERATIONS):
+        plot_regression_line(x_old) 
+        <span style="color: #008000; font-weight: bold">if</span> <span style="color: #AA22FF; font-weight: bold">not</span> jacobian:
+            J_<span style="color: #666666">=</span>Jacobian(x_old,f)
+        <span style="color: #008000; font-weight: bold">else</span>:
+            J_<span style="color: #666666">=</span>J(x_old)
+        z<span style="color: #666666">=</span>np<span style="color: #666666">.</span>linalg<span style="color: #666666">.</span>solve(J_,<span style="color: #666666">-</span>f(x_old))
+        x_new<span style="color: #666666">=</span>x_old<span style="color: #666666">+</span>z
+        <span style="color: #008000; font-weight: bold">if</span>(np<span style="color: #666666">.</span>sum(<span style="color: #008000">abs</span>(x_new<span style="color: #666666">-</span>x_old))<span style="color: #666666">&lt;</span>prec):
+            <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Found solution:&#39;</span>, x_new, 
+                  <span style="color: #BA2121">&#39;, after:&#39;</span>, n, <span style="color: #BA2121">&#39;iterations.&#39;</span> )
+            <span style="color: #008000; font-weight: bold">return</span> x_new
+        x_old<span style="color: #666666">=</span>np<span style="color: #666666">.</span>copy(x_new)
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Max number of iterations: &#39;</span>, MAXIT, <span style="color: #BA2121">&#39; reached.&#39;</span>) 
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Try to increase MAXIT or decrease prec&#39;</span>)
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Returning best guess, value of function is: &#39;</span>, f(x_new))
+    <span style="color: #008000; font-weight: bold">return</span> x_new
+
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">gradient_descent</span>(f,x,df, g<span style="color: #666666">=.001</span>, prec<span style="color: #666666">=1e-8</span>,MAXIT<span style="color: #666666">=10</span>):
     <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;Minimize f(x) by gradient descent.</span>
 <span style="color: #BA2121; font-style: italic">    f   : min(f(x))</span>
 <span style="color: #BA2121; font-style: italic">    x   : starting point </span>
@@ -1391,7 +1438,8 @@ y_obs_ <span style="color: #666666">=</span> np<span style="color: #666666">.</s
 <span style="color: #BA2121; font-style: italic">    &#39;&#39;&#39;</span>
     x_old <span style="color: #666666">=</span> x
     <span style="color: #008000; font-weight: bold">for</span> n <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(MAXIT):
-        x_new <span style="color: #666666">=</span> x_old <span style="color: #666666">-</span> g<span style="color: #666666">*</span>df(x_old)       
+        plot_regression_line(x_old)  
+        x_new <span style="color: #666666">=</span> x_old <span style="color: #666666">-</span> g<span style="color: #666666">*</span>df(x_old)
         <span style="color: #008000; font-weight: bold">if</span>(<span style="color: #008000">abs</span>(np<span style="color: #666666">.</span>max(x_new<span style="color: #666666">-</span>x_old))<span style="color: #666666">&lt;</span>prec):
             <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Found solution:&#39;</span>, x_new, 
                   <span style="color: #BA2121">&#39;, after:&#39;</span>, n, <span style="color: #BA2121">&#39;iterations.&#39;</span> )
@@ -1410,6 +1458,17 @@ y_obs_ <span style="color: #666666">=</span> np<span style="color: #666666">.</s
     <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>array([<span style="color: #666666">-2*</span>np<span style="color: #666666">.</span>sum(y<span style="color: #666666">-</span>b[<span style="color: #666666">0</span>]<span style="color: #666666">-</span>b[<span style="color: #666666">1</span>]<span style="color: #666666">*</span>x),
                      <span style="color: #666666">-2*</span>np<span style="color: #666666">.</span>sum((y<span style="color: #666666">-</span>b[<span style="color: #666666">0</span>]<span style="color: #666666">-</span>b[<span style="color: #666666">1</span>]<span style="color: #666666">*</span>x)<span style="color: #666666">*</span>x)])
 
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">J</span>(b,x<span style="color: #666666">=</span>x_obs_,y<span style="color: #666666">=</span>y_obs_):
+    N<span style="color: #666666">=</span><span style="color: #008000">len</span>(b)
+    J<span style="color: #666666">=</span>np<span style="color: #666666">.</span>zeros(shape<span style="color: #666666">=</span>(N,N))
+    xs<span style="color: #666666">=</span>np<span style="color: #666666">.</span>sum(x)
+    J[<span style="color: #666666">0</span>][<span style="color: #666666">0</span>]<span style="color: #666666">=2*</span><span style="color: #008000">len</span>(x)
+    J[<span style="color: #666666">0</span>][<span style="color: #666666">1</span>]<span style="color: #666666">=2*</span>xs
+    J[<span style="color: #666666">1</span>][<span style="color: #666666">0</span>]<span style="color: #666666">=2*</span>xs
+    J[<span style="color: #666666">1</span>][<span style="color: #666666">1</span>]<span style="color: #666666">=2*</span>np<span style="color: #666666">.</span>sum(x<span style="color: #666666">*</span>x)
+    <span style="color: #008000; font-weight: bold">return</span> J
+N_<span style="color: #666666">=0</span>
+<span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Gradient &#39;</span>)
 b<span style="color: #666666">=</span>np<span style="color: #666666">.</span>array([<span style="color: #666666">0</span>,<span style="color: #666666">0</span>])
 </pre></div>
 <p>

@@ -1,19 +1,20 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="1.0">
+<html lang="1.0">
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Solving linear systems &#8212; _ Aksel Hiorth, the National IOR Centre &amp; Institute for Energy Resources, University of Stavanger documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Solving nonlinear equations" href="._book004.html" />
@@ -981,17 +982,17 @@ in speed is seen?</p></li>
 <div class="math notranslate nohighlight" id="eq-eq-lin-co2-diff">
 \[\tag{102}
 \frac{\partial C(z,t)}{\partial t}=\frac{\partial }{\partial z}\left(K(z)\frac{\partial C(z,t)}{\partial z}\right),\]</div>
-<p>where <span class="math notranslate nohighlight">\(C(z,t)\)</span> is the concentration of text{CO$_{2}$}as a function of depth (<span class="math notranslate nohighlight">\(z\)</span>) and time <span class="math notranslate nohighlight">\(t\)</span>, and <span class="math notranslate nohighlight">\(K(z)\)</span> is the diffusion constant of text{CO$_{2}$}as a function of depth. This equation can be discretized using standard techniques, to help in that respect consider figure <a class="reference internal" href="#fig-lin-co2-diff"><span class="std std-ref">Discretization for diffusion of text{CO$_{2}$}into an aquifer, including boundary conditions</span></a>.</p>
+<p>where <span class="math notranslate nohighlight">\(C(z,t)\)</span> is the concentration of {CO$_2$}as a function of depth (<span class="math notranslate nohighlight">\(z\)</span>) and time <span class="math notranslate nohighlight">\(t\)</span>, and <span class="math notranslate nohighlight">\(K(z)\)</span> is the diffusion constant of {CO$_2$}as a function of depth. This equation can be discretized using standard techniques, to help in that respect consider figure <a class="reference internal" href="#fig-lin-co2-diff"><span class="std std-ref">Discretization for diffusion of {CO$_2$}into an aquifer, including boundary conditions</span></a>.</p>
 <div class="figure align-default" id="id13">
 <span id="fig-lin-co2-diff"></span><a class="reference internal image-reference" href="_images/co2_diff.png"><img alt="_images/co2_diff.png" src="_images/co2_diff.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-text">Discretization for diffusion of text{CO$_{2}$}into an aquifer, including boundary conditions</span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text">Discretization for diffusion of {CO$_2$}into an aquifer, including boundary conditions</span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
 </div>
 <p>In the following we will assume that there are only four nodes (<span class="math notranslate nohighlight">\(i=0\ldots 3\)</span>) in the physical domain, and two ghost nodes <span class="math notranslate nohighlight">\(i=-1\)</span>, and <span class="math notranslate nohighlight">\(i=4\)</span>. There are many ways to attack this problem, but in the following we will borrow ideas from Finite Volume. Finite volume methods is a way of discretizing equations such that we <em>conserve mass</em>. The diffusion equation as it is derived in figure <a class="reference internal" href="#fig-nlin-heat"><span class="std std-ref">Conservation of energy and the continuity equation</span></a>, express that the flux of something (heat, particles, etc) leaving the box surface minus the flux entering the surface of the box is equal to the rate of change of something inside the box. We can formulate this mathematically as:</p>
 <div class="math notranslate nohighlight" id="eq-eq-lin-co2fv">
 \[\tag{103}
 \frac{\partial C(z,t)}{\partial t}\simeq\frac{1}{h}\left[\left.K(z)\frac{\partial C(z,t)}{\partial z}\right|_{i+1/2}
     -\left.K(z)\frac{\partial C(z,t)}{\partial z}\right|_{i-1/2}\right]\]</div>
-<p>The notation <span class="math notranslate nohighlight">\(i\pm1/2\)</span>, means that the flux is to be evaluated <em>at the surface</em> of the box (i.e. halfway between the red dots in figure <a class="reference internal" href="#fig-lin-co2-diff"><span class="std std-ref">Discretization for diffusion of text{CO$_{2}$}into an aquifer, including boundary conditions</span></a>). <span class="math notranslate nohighlight">\(K(z)\)</span> is the diffusion constant, and it is known everywhere, so this is simple to evaluate at the surface. The concentrations are only known at the center of each box, the red dots in figure <a class="reference internal" href="#fig-lin-co2-diff"><span class="std std-ref">Discretization for diffusion of text{CO$_{2}$}into an aquifer, including boundary conditions</span></a>. The derivative of the concentration can be evaluated using the central difference formula (remember that the distance between the red dot and edge of the box is <span class="math notranslate nohighlight">\(h/2\)</span>), hence</p>
+<p>The notation <span class="math notranslate nohighlight">\(i\pm1/2\)</span>, means that the flux is to be evaluated <em>at the surface</em> of the box (i.e. halfway between the red dots in figure <a class="reference internal" href="#fig-lin-co2-diff"><span class="std std-ref">Discretization for diffusion of {CO$_2$}into an aquifer, including boundary conditions</span></a>). <span class="math notranslate nohighlight">\(K(z)\)</span> is the diffusion constant, and it is known everywhere, so this is simple to evaluate at the surface. The concentrations are only known at the center of each box, the red dots in figure <a class="reference internal" href="#fig-lin-co2-diff"><span class="std std-ref">Discretization for diffusion of {CO$_2$}into an aquifer, including boundary conditions</span></a>. The derivative of the concentration can be evaluated using the central difference formula (remember that the distance between the red dot and edge of the box is <span class="math notranslate nohighlight">\(h/2\)</span>), hence</p>
 <div class="math notranslate nohighlight" id="eq-eq-lin-co2fv2">
 \[\tag{104}
 \frac{C_i^{n+1}-C_i^n}{\Delta t}=\frac{1}{h}\left[K_{i+1/2}\frac{ C_{i+1}-C_{i}}{h}-K_{i-1/2}\frac{ C_{i}-C_{i-1}}{h}\right],\]</div>
@@ -1004,7 +1005,7 @@ in speed is seen?</p></li>
 \[\tag{106}
 +\frac{1-\theta}{h}\left[K_{i+1/2}
     \frac{C_{i+1}^{n+1}-C_{i}^{n+1}}{h}-K_{i-1/2}\frac{ C_{i}^{n+1}-C_{i-1}^{n+1}}{h}\right],\]</div>
-<p>hence if <span class="math notranslate nohighlight">\(\theta=1\)</span> the scheme is explicit, if <span class="math notranslate nohighlight">\(\theta=0\)</span> the scheme is implicit, and if <span class="math notranslate nohighlight">\(\theta=1/2\)</span>, the scheme is called the Crank-Nicolson method. The first and last boundary are special, let us first consider the <span class="math notranslate nohighlight">\(i=0\)</span>, this is where the sea is in contact with the text{CO$_{2}$}in the atmosphere, and the flux is <span class="math notranslate nohighlight">\(k_w(C_0-C_{eq})\)</span>, hence</p>
+<p>hence if <span class="math notranslate nohighlight">\(\theta=1\)</span> the scheme is explicit, if <span class="math notranslate nohighlight">\(\theta=0\)</span> the scheme is implicit, and if <span class="math notranslate nohighlight">\(\theta=1/2\)</span>, the scheme is called the Crank-Nicolson method. The first and last boundary are special, let us first consider the <span class="math notranslate nohighlight">\(i=0\)</span>, this is where the sea is in contact with the {CO$_2$}in the atmosphere, and the flux is <span class="math notranslate nohighlight">\(k_w(C_0-C_{eq})\)</span>, hence</p>
 <div class="math notranslate nohighlight" id="eq-auto26">
 \[\tag{107}
 \frac{C_0^{n+1}-C_0^n}{\Delta t}=\frac{\theta}{h}\left[K_{i+1/2}
@@ -1036,7 +1037,7 @@ in speed is seen?</p></li>
 +\theta\alpha K_{i+1/2}C_{i+1}^{n}
     +\theta\alpha K_{i-1/2}C_{i-1}^{n},\]</div>
 <p>where <span class="math notranslate nohighlight">\(\alpha\equiv\Delta t/h^2\)</span>.
-Next, we want to write down the corresponding matrix equations for four grid nodes as indicated in figure <a class="reference internal" href="#fig-lin-co2-diff"><span class="std std-ref">Discretization for diffusion of text{CO$_{2}$}into an aquifer, including boundary conditions</span></a>. Notice that we need to use the equations in figure <a class="reference internal" href="#fig-lin-co2-diff"><span class="std std-ref">Discretization for diffusion of text{CO$_{2}$}into an aquifer, including boundary conditions</span></a>, for <span class="math notranslate nohighlight">\(C_{-1}\)</span>, and <span class="math notranslate nohighlight">\(C_4\)</span>. The left and right hand coefficient matrix <span class="math notranslate nohighlight">\(\mathbf{L}\)</span>, and <span class="math notranslate nohighlight">\(\mathbf{R}\)</span> are given as</p>
+Next, we want to write down the corresponding matrix equations for four grid nodes as indicated in figure <a class="reference internal" href="#fig-lin-co2-diff"><span class="std std-ref">Discretization for diffusion of {CO$_2$}into an aquifer, including boundary conditions</span></a>. Notice that we need to use the equations in figure <a class="reference internal" href="#fig-lin-co2-diff"><span class="std std-ref">Discretization for diffusion of {CO$_2$}into an aquifer, including boundary conditions</span></a>, for <span class="math notranslate nohighlight">\(C_{-1}\)</span>, and <span class="math notranslate nohighlight">\(C_4\)</span>. The left and right hand coefficient matrix <span class="math notranslate nohighlight">\(\mathbf{L}\)</span>, and <span class="math notranslate nohighlight">\(\mathbf{R}\)</span> are given as</p>
 <div class="math notranslate nohighlight" id="eq-auto31">
 \[ \begin{align}\begin{aligned}\tag{115}
 {\tiny\\\begin{split}    \begin{pmatrix}
@@ -1141,7 +1142,7 @@ Next, we want to write down the corresponding matrix equations for four grid nod
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
 
 
 
@@ -1158,7 +1159,7 @@ Next, we want to write down the corresponding matrix equations for four grid nod
       &copy;2021, Modeling and Computational Engineering.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.3.1</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.1</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

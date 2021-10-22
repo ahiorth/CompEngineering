@@ -1542,14 +1542,14 @@ The transport of CO$_2$ into aquifers can be described according to the diffusio
         
         
 
-where :math:`C(z,t)` is the concentration of \text{CO$_{2}$}\ as a function of depth (:math:`z`) and time :math:`t`, and :math:`K(z)` is the diffusion constant of \text{CO$_{2}$}\ as a function of depth. This equation can be discretized using standard techniques, to help in that respect consider figure :ref:`fig:lin:co2_diff`.
+where :math:`C(z,t)` is the concentration of {CO$_2$}\ as a function of depth (:math:`z`) and time :math:`t`, and :math:`K(z)` is the diffusion constant of {CO$_2$}\ as a function of depth. This equation can be discretized using standard techniques, to help in that respect consider figure :ref:`fig:lin:co2_diff`.
 
 .. _fig:lin:co2_diff:
 
 .. figure:: co2_diff.png
    :width: 400
 
-   Discretization for diffusion of \text{CO$_{2}$}\ into an aquifer, including boundary conditions
+   Discretization for diffusion of {CO$_2$}\ into an aquifer, including boundary conditions
 
 In the following we will assume that there are only four nodes (:math:`i=0\ldots 3`) in the physical domain, and two ghost nodes :math:`i=-1`, and :math:`i=4`. There are many ways to attack this problem, but in the following we will borrow ideas from Finite Volume. Finite volume methods is a way of discretizing equations such that we *conserve mass*. The diffusion equation as it is derived in figure :ref:`fig:nlin:heat`, express that the flux of something (heat, particles, etc) leaving the box surface minus the flux entering the surface of the box is equal to the rate of change of something inside the box. We can formulate this mathematically as:
 
@@ -1596,7 +1596,7 @@ notice that we have discretized the time derivative, and that we have introduced
         
         
 
-hence if :math:`\theta=1` the scheme is explicit, if :math:`\theta=0` the scheme is implicit, and if :math:`\theta=1/2`, the scheme is called the Crank-Nicolson method. The first and last boundary are special, let us first consider the :math:`i=0`, this is where the sea is in contact with the \text{CO$_{2}$}\ in the atmosphere, and the flux is :math:`k_w(C_0-C_{eq})`, hence
+hence if :math:`\theta=1` the scheme is explicit, if :math:`\theta=0` the scheme is implicit, and if :math:`\theta=1/2`, the scheme is called the Crank-Nicolson method. The first and last boundary are special, let us first consider the :math:`i=0`, this is where the sea is in contact with the {CO$_2$}\ in the atmosphere, and the flux is :math:`k_w(C_0-C_{eq})`, hence
 
 .. _Eq:_auto26:
 

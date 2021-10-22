@@ -1,11 +1,11 @@
 <!--
 Automatically generated HTML file from DocOnce source
-(https://github.com/hplgit/doconce/)
+(https://github.com/doconce/doconce/)
 -->
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="generator" content="DocOnce: https://github.com/doconce/doconce/" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="Monte Carlo Methods">
 <meta name="keywords" content="Monte Carlo integration,random number generators,Mersenne Twister,encryption,Monte Carlo Integration, error,binomial distribution,mean,variance,Monte Carlo integration, mean value,recursive functions,central limit theorem,birthday paradox">
@@ -162,7 +162,7 @@ MathJax.Hub.Config({
 <br>
 University of Stavanger
 <p>
-<center><h4>Sep 16, 2021</h4></center> <!-- date -->
+<center><h4>Oct 22, 2021</h4></center> <!-- date -->
 <br>
 <p>
 </div> <!-- end jumbotron -->
@@ -246,7 +246,7 @@ which is equivalent to pick random numbers from a <em>uniform</em> distribution.
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">estimate_pi</span>(N,d):
 <span style="color: #408080; font-style: italic">#   random.seed(2)</span>
@@ -290,12 +290,12 @@ times you will see that the results changes from time to time. This
 makes sense as the coordinates \( x \) and \( y \) are chosen at random.
 
 <p>
-<div class="alert alert-block alert-success alert-text-normal"><b>A note on performance.</b>
+<div class="alert alert-block alert-success alert-text-normal"><b>A note on performance</b>
 The code above is not efficient and for MC simulations we usually have to use many random numbers. Instead of
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>,N):
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>,N):
         x<span style="color: #666666">=</span>np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>uniform(<span style="color: #666666">0</span>,d)
         y<span style="color: #666666">=</span>np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>uniform(<span style="color: #666666">0</span>,d)
 </pre></div>
@@ -304,7 +304,7 @@ one should avoid loops, and take advantage of build in functions in Numpy
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>x<span style="color: #666666">=</span>np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>uniform(<span style="color: #666666">0</span>,d,size<span style="color: #666666">=</span>N)
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%; margin: 0;"><span></span>x<span style="color: #666666">=</span>np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>uniform(<span style="color: #666666">0</span>,d,size<span style="color: #666666">=</span>N)
 y<span style="color: #666666">=</span>np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>uniform(<span style="color: #666666">0</span>,d,size<span style="color: #666666">=</span>N)
 </pre></div>
 <p>
@@ -412,7 +412,7 @@ $$
 \end{align}
 $$
 
-<div class="alert alert-block alert-success alert-text-normal"><b>Mean and variance.</b>
+<div class="alert alert-block alert-success alert-text-normal"><b>Mean and variance</b>
 The mean of a distribution is simply the <em>sum</em> divided by the <em>count</em>,
 the symbol \( \mu \) or \( \overline{x} \) is usually used. For \( N \) observations, \( x_i \),
 \( \mu=\sum_i x_i/N \). The mean is just an average, it could e.g. be the sum of all the heights of
@@ -566,7 +566,7 @@ Below is an implementation:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x,D2):
     <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">2*</span>np<span style="color: #666666">.</span>sqrt((D2<span style="color: #666666">-</span>x<span style="color: #666666">*</span>x))
@@ -604,7 +604,7 @@ some random fluctuations and in some cases it performs poorer.
 </div> <!-- cell row -->
 <p>
 We also see that in this case the error scales as \( 1/\sqrt{N} \).
-<div class="alert alert-block alert-success alert-text-normal"><b>Notice.</b>
+<div class="alert alert-block alert-success alert-text-normal"><b>Notice</b>
 At first sight it might be a little counter intuitive that if we
 multiply the average value of the function with the size of the
 integration domain we get an estimate for the integral, as illustrated
@@ -734,7 +734,7 @@ the number of points that hits inside the hyper sphere:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">mc_nballII</span>(N<span style="color: #666666">=1000</span>,D<span style="color: #666666">=3</span>,R<span style="color: #666666">=1</span>):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">mc_nballII</span>(N<span style="color: #666666">=1000</span>,D<span style="color: #666666">=3</span>,R<span style="color: #666666">=1</span>):
     <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
 <span style="color: #BA2121; font-style: italic">    Calculates the volume of a hypersphere using accept and reject</span>
 <span style="color: #BA2121; font-style: italic">    N: Number of random points</span>
@@ -808,7 +808,7 @@ zero. Below is an implementation that uses recursive function calls
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">dd_trapez</span>(lower_limit,upper_limit,func,x,i,N,D):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">dd_trapez</span>(lower_limit,upper_limit,func,x,i,N,D):
     h <span style="color: #666666">=</span> (upper_limit<span style="color: #666666">-</span>lower_limit)<span style="color: #666666">/</span>N
     <span style="color: #008000; font-weight: bold">if</span>(i <span style="color: #666666">==</span> D<span style="color: #666666">-1</span>):
         funci<span style="color: #666666">=</span>d1_trapez
@@ -826,12 +826,12 @@ zero. Below is an implementation that uses recursive function calls
     <span style="color: #008000; font-weight: bold">return</span> area<span style="color: #666666">*</span>h
 </pre></div>
 <p>
-<div class="alert alert-block alert-danger alert-text-normal"><b>Recursive functions.</b>
+<div class="alert alert-block alert-danger alert-text-normal"><b>Recursive functions</b>
 Recursive implementation is very elegant, and more transparent, but it comes with a price. The reason is that when a function is called additional memory is allocated to store the local variables. If we where to calculate \( 100! \), 100 copies of the variable \( n \) are created, whereas using a loop only one variable is created. Each time a function is called more memory is allocated, and if the recursive calls are too many it might cause memory overflow. If you try to call <code>fact_rec(1000)</code>, Python will give an error, because the maximum number of recursions are reached, it can be changed by:
 <p>
 
 <!-- code=text typeset with pygments style "default" -->
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>import sys
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%; margin: 0;"><span></span>import sys
 sys.setrecursionlimit(1500)
 </pre></div>
 <p>
@@ -839,7 +839,7 @@ sys.setrecursionlimit(1500)
 
 
 <p>
-<div class="alert alert-block alert-success alert-text-normal"><b>Error Analysis in higher dimensions.</b>
+<div class="alert alert-block alert-success alert-text-normal"><b>Error Analysis in higher dimensions</b>
 In the chapter about numerical integration, we did an error analysis
 on the trapezoidal rule and found that it scaled as \( h^2 \). As we see
 from the example above, a higher order integration is simply to do a
@@ -910,7 +910,7 @@ distribution</em>. Write a Python function that returns the average of
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">average</span>(N):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">average</span>(N):
     x<span style="color: #666666">=</span>[np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>uniform() <span style="color: #008000; font-weight: bold">for</span> _ <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(N)]
     <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>mean(x)
 
@@ -954,7 +954,7 @@ Calculate the average \( M \) times and make a histogram of the values.
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">hist</span>(M,N<span style="color: #666666">=100</span>):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">hist</span>(M,N<span style="color: #666666">=100</span>):
 </pre></div>
 <p>
 </div></p>
@@ -983,7 +983,7 @@ Repeat the above exercise for a Poisson distribution.
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">average3</span>(N):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">average3</span>(N):
     x<span style="color: #666666">=</span>np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>uniform(size<span style="color: #666666">=</span>N)
     <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>mean(x)
     
@@ -1061,7 +1061,7 @@ one just picks a random day at year.
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">datetime</span> <span style="color: #008000; font-weight: bold">import</span> date
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">datetime</span> <span style="color: #008000; font-weight: bold">import</span> date
 <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">get_date</span>():
@@ -1106,7 +1106,7 @@ otherwise.
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">NoPeople</span>(p):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">NoPeople</span>(p):
     <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot; pick random dates in a year, return 1 if two</span>
 <span style="color: #BA2121; font-style: italic">        is in the same date before p is reached &quot;&quot;&quot;</span>
     dates<span style="color: #666666">=</span>[]
@@ -1150,7 +1150,7 @@ return the fraction of groups that had two persons with the same birthday.
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">BP</span>(p, N):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">BP</span>(p, N):
     prob<span style="color: #666666">=0.</span>;
     <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(N):
         prob <span style="color: #666666">+=</span> NoPeople(p)
@@ -1161,8 +1161,6 @@ return the fraction of groups that had two persons with the same birthday.
 <p>
 By trial an error, we find that 23 persons is needed in order to have
 a probability of
-
-<p>
 </div></p>
 </div>
 </p>

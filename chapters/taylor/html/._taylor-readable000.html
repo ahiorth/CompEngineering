@@ -1,11 +1,11 @@
 <!--
 Automatically generated HTML file from DocOnce source
-(https://github.com/hplgit/doconce/)
+(https://github.com/doconce/doconce/)
 -->
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="generator" content="DocOnce: https://github.com/doconce/doconce/" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="Finite differences">
 <meta name="keywords" content="numerical error,Taylor polynomial,truncation error,Taylor polynomial, error term,Maclaurin series,forward difference,backward difference,central difference,central difference,round off erros,machine precision,IEEE 754-1985 standard,round off errors">
@@ -154,7 +154,7 @@ $$
 <br>
 University of Stavanger
 <p>
-<center><h4>Sep 16, 2021</h4></center> <!-- date -->
+<center><h4>Oct 22, 2021</h4></center> <!-- date -->
 <br>
 <p>
 </div> <!-- end jumbotron -->
@@ -180,7 +180,7 @@ To simulate a physical system in a computer model, we usually have to make space
 
 <p>
 Most physical systems are described in terms of <em>differential equations</em>. A differential equation describe how a physical phenomenon evolves in space and time. The solution to a differential equation is a function of space and/or time. The function could describe the temperature evolution of the earth, it could be growth of cancer cells, the water pressure in an oil reservoir, the list is endless. If we can solve the model analytically, the answer is given in terms of a known function. Most of the models cannot be solved analytically, then we have to rely on computers to help us. The computer does not have any concept of continuous functions, a function is always evaluated at some specific points in space and/or time. 
-<div class="alert alert-block alert-success alert-text-normal"><b>Numerical errors.</b>
+<div class="alert alert-block alert-success alert-text-normal"><b>Numerical errors</b>
 To represent a function of space and/or time in a computer, the function needs to be discretized. When a function is discretized it leads to discretization errors. The difference between the "true" answer and the answer obtained from a practical (numerical) calculation is called the <em>numerical error</em>.
 </div>
 
@@ -232,7 +232,7 @@ $$
 \end{align}
 $$
 
-<div class="alert alert-block alert-success alert-text-normal"><b>The magic of Taylors formula.</b>
+<div class="alert alert-block alert-success alert-text-normal"><b>The magic of Taylors formula</b>
 Taylors formula, equation <a href="#mjx-eqn-2">(2)</a>, states that if we know the function value and its derivative <em>in a single point \( c \)</em>, we can estimate the function everywhere <em>using only  information from the single point \( c \)</em>. How can this be, how can information in a single point be used to predict the behavior of the function everywhere? One way of thinking about it could be to imagine an object moving in a constant gravitational field without air resistance. Newtons laws then tells us that  if we know the starting point e.g. (\( x(0) \)), the velocity (\( v=dx/dt \)), and the acceleration (\( a=dv/dt=d^2x/dt^2 \)) in that point we can predict the trajectory of the object. This trajectory is exactly the first terms in Taylors formula, \( x(t)=x(0) + vt+at^2/2 \).
 </div>
 
@@ -259,7 +259,7 @@ Notice that the mathematical formula is basically the next order term (\( n+1 \)
 </div>
 
 Notice that if \( c \) is very far from \( x \) the truncation error increases. The fact that we do not know the value of \( \eta \) is usually not a problem, in many cases we just replace \( f(\eta) \) with the maximum value it can take on the domain. Equation <a href="#mjx-eqn-3">(3)</a> gives us an direct estimate of discretization error. 
-<div class="alert alert-block alert-success alert-text-normal"><b>Example: evaluate \( \sin x \).</b>
+<div class="alert alert-block alert-success alert-text-normal"><b>Example: evaluate \( \sin x \)</b>
 Whenever you do e.g. <code>np.sin(1)</code> in Python or an equivalent statement in another language, Python has to tell the computer how to evaluate \( \sin x \) at \( x=1 \). Write a Python code that calculates \( \sin x \) up to a user specified accuracy.
 
 <p>
@@ -277,7 +277,7 @@ If we want to calculate \( \sin x \) to a precision lower than a specified value
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
 
 <span style="color: #408080; font-style: italic"># Sinus implementation using the Maclaurin Serie</span>
 <span style="color: #408080; font-style: italic"># By setting a value for eps this value will be used</span>
@@ -324,7 +324,7 @@ do:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>pol <span style="color: #666666">=</span> a[<span style="color: #666666">0</span>]
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span>pol <span style="color: #666666">=</span> a[<span style="color: #666666">0</span>]
 <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>,n<span style="color: #666666">+1</span>):
 	pol <span style="color: #666666">=</span> pol <span style="color: #666666">+</span> a[i]<span style="color: #666666">*</span>x<span style="color: #666666">**</span>i
 </pre></div>
@@ -334,7 +334,7 @@ each loop, we can use the previous calculation to save the number of multiplicat
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>pol <span style="color: #666666">=</span> a[<span style="color: #666666">0</span>] <span style="color: #666666">+</span> a[<span style="color: #666666">1</span>]<span style="color: #666666">*</span>x
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span>pol <span style="color: #666666">=</span> a[<span style="color: #666666">0</span>] <span style="color: #666666">+</span> a[<span style="color: #666666">1</span>]<span style="color: #666666">*</span>x
 power <span style="color: #666666">=</span> x
 <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">2</span>,n<span style="color: #666666">+1</span>):
 	power  <span style="color: #666666">=</span> power<span style="color: #666666">*</span>x
@@ -357,7 +357,7 @@ and so on. This can be implemented as:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>pol <span style="color: #666666">=</span> a[n]
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span>pol <span style="color: #666666">=</span> a[n]
 <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(n<span style="color: #666666">-1</span>,<span style="color: #666666">1</span>,<span style="color: #666666">-1</span>):
 	pol  <span style="color: #666666">=</span> a[i] <span style="color: #666666">+</span> pol<span style="color: #666666">*</span>x
 </pre></div>
@@ -430,7 +430,7 @@ f^{\prime\prime}(x) = \frac{f(x+h)+f(x-h)-2f(x)}{h^2}- \frac{h^2}{12}f^{(4)}(\et
 $$
 
 <p>
-<div class="alert alert-block alert-success alert-text-normal"><b>Example: calculate the numerical derivative and second derivative of \( \sin x \).</b>
+<div class="alert alert-block alert-success alert-text-normal"><b>Example: calculate the numerical derivative and second derivative of \( \sin x \)</b>
 Choose a specific point, e.g. \( x=1 \), and calculate the numerical error for various values of the step size \( h \).
 <b>Solution:</b>
 The derivative of \( \sin x \) is \( \cos x \), we can calculate the numerical derivatives using Python
@@ -438,7 +438,7 @@ The derivative of \( \sin x \) is \( \cos x \), we can calculate the numerical d
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
     <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>sin(x)
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">fd</span>(f,x,h):
  <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
@@ -504,7 +504,7 @@ $$
 
 This is very similar to our usual scientific notation where we represents large (or small numbers) as \( \pm q E m=\pm q 10^{m} \). The processor in a computer handles a chunk of bits at one time, this chunk of bit is usually termed <em>word</em>. The number of bits (or byte which almost always means a group of eight bits) in a word is handled as a unit by a processor.   
 Most modern computers uses 64-bits (8 bytes) processors. We are not going too much into all the details, the most important message is that the units handled by the processor are <em>finite</em>. Thus we cannot, in general, store numbers in a computer with infinite accuracy.
-<div class="alert alert-block alert-success alert-text-normal"><b>Machine Precision.</b>
+<div class="alert alert-block alert-success alert-text-normal"><b>Machine Precision</b>
 Machine precision, \( \epsilon_M \) is the smallest number we can add to one and get something different than one, i.e. \( 1+\epsilon_M>1 \). For a 64-bits computer this value is \( \epsilon_M=2^{-52}\simeq2.2210^{-16} \).
 </div>
 
@@ -512,7 +512,7 @@ In the next section we explain exactly why the machine precision has this value,
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000">print</span>(<span style="color: #666666">1+2**-52</span>) <span style="color: #408080; font-style: italic"># prints a value larger than 1</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000">print</span>(<span style="color: #666666">1+2**-52</span>) <span style="color: #408080; font-style: italic"># prints a value larger than 1</span>
 <span style="color: #008000">print</span>(<span style="color: #666666">1+2**-53</span>) <span style="color: #408080; font-style: italic"># prints 1.0</span>
 </pre></div>
 <p>
@@ -520,7 +520,7 @@ Next, consider the simple calculation
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>a<span style="color: #666666">=0.1+0.2</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span>a<span style="color: #666666">=0.1+0.2</span>
 b<span style="color: #666666">=0.3</span>
 <span style="color: #008000">print</span>(a<span style="color: #666666">==</span>b) <span style="color: #408080; font-style: italic"># gives False</span>
 </pre></div>
@@ -538,12 +538,12 @@ Thus in the computer 0.2 will be represented as \( 0.1999\ldots \) and when we a
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>a<span style="color: #666666">=0.125+0.25</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span>a<span style="color: #666666">=0.125+0.25</span>
 b<span style="color: #666666">=0.375</span>
 <span style="color: #008000">print</span>(a<span style="color: #666666">==</span>b) <span style="color: #408080; font-style: italic"># gives True</span>
 </pre></div>
 <p>
-<div class="alert alert-block alert-success alert-text-normal"><b>Comparing two floats.</b>
+<div class="alert alert-block alert-success alert-text-normal"><b>Comparing two floats</b>
 Whenever you want to compare if two floats, \( a \) and \( b \), are equal in a computer program, you should never do \( a==b \) because of round off errors. Rather you should choose a variant of \( |a-b| < \epsilon \), where you check if the numbers are <em>close enough</em>. In practice you also might want to normalize the values and do \( |1-b/a| < \epsilon \).
 </div>
 
@@ -551,14 +551,14 @@ The round off errors can also play a very big role in calculations, it is partic
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>h<span style="color: #666666">=2**-53</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span>h<span style="color: #666666">=2**-53</span>
 a<span style="color: #666666">=1+</span>h
 b<span style="color: #666666">=1-</span>h
 <span style="color: #008000">print</span>((a<span style="color: #666666">-</span>b)<span style="color: #666666">/</span>h) <span style="color: #408080; font-style: italic"># analytical result is 2</span>
 </pre></div>
 <p>
 The calculation above is very similar to the calculation done when evaluating derivatives, and if you run the code you will see that Python does not give the expected value of 2.
-<div class="alert alert-block alert-success alert-text-normal"><b>Choosing the right step size.</b>
+<div class="alert alert-block alert-success alert-text-normal"><b>Choosing the right step size</b>
 A step size that is too low will give higher numerical error because round off errors dominate the numerical error.
 </div>
 
@@ -566,7 +566,7 @@ At the end we will mention a simple trick that you can use sometimes to avoid ro
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>x<span style="color: #666666">=1</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span>x<span style="color: #666666">=1</span>
 h<span style="color: #666666">=0.0002</span> 
 temp <span style="color: #666666">=</span> x<span style="color: #666666">+</span>h
 h<span style="color: #666666">=</span>temp<span style="color: #666666">-</span>x
@@ -668,7 +668,7 @@ What about the machine precision? The machine precision, \( \epsilon_M \), is th
 
 <h3 id="___sec8" class="anchor">Round off error and truncation error in numerical derivatives </h3>
 
-<div class="alert alert-block alert-success alert-text-normal"><b>Round Off Errors.</b>
+<div class="alert alert-block alert-success alert-text-normal"><b>Round Off Errors</b>
 All numerical floating point operations introduces round off errors at each step in the calculation due to finite word size, these errors accumulate in long simulations and introduce random errors in the final results. After \( N \) operations the error is at least \( \sqrt{N}\epsilon_M \) (the square root is a random walk estimate, and we assume that the errors are randomly distributed). The round off errors can be much, much higher when numbers of equal magnitude are subtracted. You might be so unlucky that after one operation the answer is completely dominated by round off errors.
 </div>
 
