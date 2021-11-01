@@ -1,0 +1,864 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Spread of Infectious Diseases">
+
+<title>Spread of Infectious Diseases</title>
+
+<!-- Bootstrap style: bootswatch_readable -->
+<link href="https://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:64px;      /* fixed header height for style bootswatch_readable */
+  margin:-64px 0 0; /* negative fixed header height */
+}
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Theory: Compartment models',
+               1,
+               'sec:compartment_models',
+               'sec:compartment_models'),
+              ('Theory: SI-model', 2, None, '___sec1'),
+              ('Exercise 1: Is the model any good?', 1, None, '___sec2'),
+              ('Exercise 2: Finding optimal parameter values',
+               1,
+               None,
+               '___sec3'),
+              ('Theory: SEIRD-model', 2, None, '___sec4'),
+              ('Exercise 3: Write a general (adaptive Runge-Kutta) solver',
+               1,
+               None,
+               '___sec5'),
+              ('Exercise 4: Fit the SEIRD-model to data', 1, None, '___sec6'),
+              ('Guidelines for project submission', 1, None, '___sec7'),
+              ('Appendix A: Implementing ODE solvers using standalone '
+               'functions',
+               1,
+               None,
+               '___sec8'),
+              ('Bibliography', 1, None, '___sec9')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript" async
+ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\firstderivative}[1]{\dot{{#1}}}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="project3-readable.html">Spread of Infectious Diseases</a>
+  </div>
+
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="#sec:compartment_models" style="font-size: 80%;"><b>Theory: Compartment models</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Theory: SI-model</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec2" style="font-size: 80%;"><b>Exercise 1: Is the model any good?</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec3" style="font-size: 80%;"><b>Exercise 2: Finding optimal parameter values</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Theory: SEIRD-model</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec5" style="font-size: 80%;"><b>Exercise 3: Write a general (adaptive Runge-Kutta) solver</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec6" style="font-size: 80%;"><b>Exercise 4: Fit the SEIRD-model to data</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec7" style="font-size: 80%;"><b>Guidelines for project submission</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec8" style="font-size: 80%;"><b>Appendix A: Implementing ODE solvers using standalone functions</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec9" style="font-size: 80%;"><b>Bibliography</b></a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0000"></a>
+<!-- ------------------- main content ---------------------- -->
+
+
+
+<div class="jumbotron">
+<center><h1>Spread of Infectious Diseases</h1></center>  <!-- document title -->
+
+<p>
+<!-- author(s): MOD510: Mandatory project \#3, and Deadline: 14. November (23:59) -->
+
+<center>
+<b>MOD510: Mandatory project \#3</b> 
+</center>
+
+<center>
+<b>Deadline: 14. November (23:59)</b> 
+</center>
+
+<p>
+<!-- institution(s) -->
+
+<br>
+<p>
+<center><h4>Nov 1, 2021</h4></center> <!-- date -->
+<br>
+<p>
+<b>Learning objectives.</b>
+By completing this project, the student will:
+
+<ul>
+<li> Describe the spread of the Corona virus disease (COVID-19) with simple compartment models.</li>
+<li> Implement a Runge-Kutta solver with adaptive time step control, and apply it to the compartment models.</li>
+<li> Constrain model input parameters by comparing with data for different locations.</li>
+</ul>
+
+<b>Read this before you start</b>
+<div id="sec:introduction"></div>
+
+<p>
+In the <code>data</code> folder of the project you will find data for the first 600 days of the corona outbreak. When modeling data using an ODE model, we need to know the <em>initial conditions</em>. In this project we will assume only one person to be infected initially, and investigate how well the model fits with the data. As you will see later in this project, the model we are using cannot in the current state simulate several waves of infections. <em>Therefore we recommend you to only use data from the first wave (\( \sim \) 200 days) when determining model parameters</em>.
+(Note: In the exercises (and solution to the exercises) from the ODE chapter <a href="#hiorth">[1]</a> you can find examples of implementation of a general ODE solver.)
+
+<p>
+</div> <!-- end jumbotron -->
+
+<h1 id="sec:compartment_models" class="anchor">Theory: Compartment models</h1>
+
+<p>
+Compartment models <a href="#kermack1927contribution">[2]</a> are widely used to study
+the spread of diseases in a population. In these models, the total population
+in an area is partitioned into a set of compartments, representing the
+possible "disease states" (healthy, infected, recovered, etc.).
+Ordinary differential equations (ODEs) are set up to describe how
+individuals "flow" from one compartment to another. The equations can be
+either deterministic or stochastic. While stochastic models are more
+realistic, they are also more complex to analyze, and in this project we  will only
+consider deterministic models.
+
+<h2 id="___sec1" class="anchor">Theory: SI-model </h2>
+
+<p>
+We first consider the SI-model (figure <a href="#fig:SI_model">1</a>), which consists of just two compartments:
+
+<ol>
+<li> \( S \) - Susceptible: people at risk of infection.</li>
+<li> \( I \) - Infected people.</li>
+</ol>
+
+<center> <!-- figure label: --> <div id="fig:SI_model"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 1:  The \( SI \)-model: \( S \) and \( I \) can be viewed as a "mixing tank", in which individuals meet with equal probability, and the chance of getting infected is the same for everyone. Note that "transport" is exclusively in one direction, from the class of susceptible people to infected ones.  <!-- caption label: fig:SI_model --> </p></center>
+<p><img src="fig-project3/SI.png" align="bottom" width=800></p>
+</center>
+
+<p>
+For each time \( t \), \( S(t) \) denotes the number of susceptible people, while
+\( I(t) \) is the number of infected people. To develop a mathematical model,
+we must calculate the rate of flow between the two compartments.
+We start by making some general observations:
+
+<ul>
+<li> During an arbitrary time interval \( \Delta{t} \), a certain number of individuals will come into contact.</li>
+<li> Whenever a healthy person meets a sick person, there is a certain probability that the healthy person is infected.</li>
+</ul>
+
+We shall take our imagined population to be <em>well-mixed</em>, meaning that pairs
+of individuals interact with equal probability.
+Let \( N \) denote the total population size, and let \( \mathcal{C}(N) \) denote
+the rate at which <em>any</em> individual in the population contacts <em>any</em> another
+individual, i.e., the average number of contacts made per unit time.
+We can estimate the change in the healthy population from time \( t \)
+to \( t+\Delta{t} \) from
+$$
+\begin{equation}
+S(t+\Delta t)-S(t) = -\mathcal{C}(N)\cdot{\Delta t}
+\cdot{p}\cdot{q}\cdot{S(t)}\,.
+\tag{1}
+\end{equation}
+$$
+
+where \( p \) is the conditional probability that a given contact is between a
+susceptible and infected individual, and \( q \) is the probability that such an
+encounter leads to disease transmission.
+Because of the well-mixed condition, a good assumption is that
+\( p=I(t)/N \); thus, the challenge consists in estimating \( \mathcal{C}(N) \) and \( q \).
+In principle, both of these parameters may vary in time, but for now we shall
+regard them as constant. By merging them into a single factor, \( \beta \), we
+get
+$$
+\begin{align}
+S(t+\Delta t)-S(t) = -\beta\cdot{\Delta t}\cdot\frac{S(t)I(t)}{N}\,,
+\tag{2}
+\end{align}
+$$
+
+Finally, by dividing by \( \Delta t \) and letting \( \Delta t \rightarrow 0 \),
+we obtain the following ODE:
+$$
+\begin{align}
+\tag{3}
+\frac{\mathrm{d}S(t)}{\mathrm{d}t} =-\beta\cdot\frac{S(t)I(t)}{N} \,.
+\end{align}
+$$
+
+Similarly, the evolution of the sick population is given by:
+$$
+\begin{align}
+\tag{4}
+\frac{\mathrm{d}I(t)}{\mathrm{d}t} =+\beta\cdot\frac{S(t)I(t)}{N} \,.
+\end{align}
+$$
+
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b><font color="black">How to interpret \( \beta \)?</font>.</b>
+
+<p>
+<font color="black">By saying that \( \beta \) is constant, we have made two very strong assumptions:</font>
+
+<ul>
+<li> <font color="black">People make the same number of contacts regardless of population size, and independent of time.</font></li>
+<li> <font color="black">The probability of becoming sick, given that you meet an infected person, is always the same.</font></li>
+</ul>
+
+<font color="black">In reality, \( \beta \) is time-dependent,
+as it implicitly accounts for a lot of biomedical, physical, and sociological
+factors.
+For example, in the beginning of an outbreak, \( \beta \) is likely to be
+large, because people might not yet understand the severity of the situation,
+or they may be in denial. As people start to realize the danger
+and fight back against the disease, \( \beta \) will most likely decrease.</font>
+</div>
+
+
+<p>
+It can be a good idea to convert a model into dimensionless form.
+This is especially true when the goal is to fit the model to data,
+because it can reduce the number of free parameters and/or make sure that
+"typical solutions" have "reasonable" values (e.g., not too large values,
+which can be a problem for certain numerical algorithms).
+In this project we will scale the equations with respect total population size:
+
+<ul>
+<li> Let \( s(t)=S(t)/N \) denote the <em>fraction</em> of the total population that is susceptible (at any time \( t \)).</li>
+<li> Let \( i(t)=I(t)/N \) be the <em>fraction</em> of infected people.</li>
+</ul>
+
+<div class="alert alert-block alert-success alert-text-normal"><b><font color="black">The scaled \( SI \)-model</font>.</b>
+<font color="black">
+$$
+\begin{align}
+\tag{5}
+\firstderivative{s}(t) &= -\beta(t)\cdot s(t) \cdot i(t)\,, \\ 
+\tag{6}
+\firstderivative{i}(t) &= \beta(t) \cdot s(t) \cdot i(t) \,.
+\end{align}
+$$
+
+Here we have introduced the short-hand notation \( \firstderivative{f < /font>=df(t)/dt \).
+}
+</div>
+
+
+<p>
+If \( \beta(t)=\beta \) is constant, the analytical solution to the SI-model is
+$$
+\begin{align}
+\tag{7}
+s(t) &=\frac{\frac{s_0}{i_0}\exp(-\beta{t})}{1+\frac{s_0}{i_0}\exp(-\beta{t})} \,, \\ 
+\tag{8}
+i(t) &=\frac{1}{1+\frac{s_0}{i_0}\exp(-\beta{t})}\,,
+\end{align}
+$$
+
+where \( i_0=i(0)=I(0)/N \), and \( s_0=s(0)=S(0)/N \).
+<div class="alert alert-block alert-success alert-text-normal"><b>Notice.</b>
+When plotting the model and data, you can choose to normalize the data by dividing with the maximum number of infected people <em>or</em> multiply \( s(t) \) and \( i(t) \) with the population size.
+</div>
+
+
+<h1 id="___sec2" class="anchor">Exercise 1: Is the model any good? </h1>
+
+<p>
+&quot;All models are wrong, but some are useful&quot; is a famous quote attributed to
+the English statistician G. E. Box <a href="#box1976science">[3]</a>.
+Clearly, the \( SI \)-model is very simple; it contains a <em>single</em> free
+parameter, \( \beta \). Is it useful? That is, can we learn something
+about the spread of the Corona virus, which in turn can be used to take
+preventive measures?
+
+<p>
+The only way we can investigate this question is to compare the model with data.
+We will use data found at the Github repository <a href="https://github.com/CSSEGISandData/COVID-19" target="_self">Center for Systems Science
+and Engineering (CSSE) at Johns Hopkins University</a>.
+We have already extracted country-level data for you, and stored it in a
+processed format in the text file <code>data/corona_data.dat</code>.
+Data for the Hubei province in China, where it is believed that the virus
+first arose, is also included in the text file.
+
+<p>
+<b>Part 1.</b>
+
+<p>
+To increase readability and reusability of code, it is important to break
+it into smaller pieces. For example, it is almost always a good idea to separate
+the reading and (pre)processing of data from plotting, and further from model
+calculations.
+
+<ul>
+<li> Make a Python function that a) extracts Corona data for a specific location and b) returns the results in the form of a Pandas dataframe.</li>
+<li> Make one or several functions that takes as input the dataframe for a specific location, and makes a plot showing the number of confirmed cases and/or deaths of COVID-19. Allow for the possibility of including predictions of the analytical SI-model in the same figure.</li>
+</ul>
+
+Tips: Consider using boolean flags and/or optional input arguments. It may also prove useful to return a <a href="https://matplotlib.org/stable/api/figure_api.html" target="_self">Figure object</a> from one of your functions. However if you do this, do <em>not</em> end your function with <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.show.html" target="_self">plt.show()</a>; that would trigger the creation of a new, blank figure.
+
+<p>
+<b>Part 2.</b>
+
+<ul>
+<li> Choose four specific locations (e.g. Hubei, Norway, Sweden etc.). Use the functions you just made to plot the cumulative number of confirmed cases of COVID-19 versus time.</li>
+</ul>
+
+<b>Part 3.</b>
+
+<ul>
+<li> Make another figure showing the cumulative number of deaths (for the same locations).</li>
+</ul>
+
+<b>Part 4.</b>
+
+<ul>
+<li> Can the the simple SI-model explain the observations you plotted in parts 2 and 3? If the answer is yes, can you think of other situations in which it cannot? If no, why not?</li>
+</ul>
+
+<h1 id="___sec3" class="anchor">Exercise 2: Finding optimal parameter values </h1>
+
+<p>
+We want to choose a value for \( \beta \) such that the SI-model comes close to
+the data. Finding "optimal" parameter values will in the following be based on
+the <a href="https://en.wikipedia.org/wiki/Least_squares#Solving_the_least_squares_problem" target="_self">method of least squares</a>.
+Specifically, the objective function we want to minimize is the sum of squared
+residuals,
+$$
+\begin{align}
+\tag{9}
+\text{SSR} = \sum_{i=0}^{N_d-1}r_i^2=\sum_{i=0}^{N_d-1}(d_i-m_i)^2\,,
+\end{align}
+$$
+
+where \( N_d \) is the number of data points, \( d_i \) is the \( i \)-th data point,
+and \( m_i \) is the corresponding model prediction. For the \( SI \)-model,
+we are only going to compare with the cumulative number of reported cases
+of COVID-19, and we let \( m_i=i(t_i;\beta) \). The optimal parameter value for \( \beta \) can then be found where the least square estimate (objective function)  has the minimum value, this is equivalent to stating that the derivative of the least square estimate should be zero.
+
+<p>
+The derivative of the objective function is
+$$
+\begin{align}
+\tag{10}
+\frac{d\text{SSR}}{d\beta}&=2\sum_{i=0}^{N-1}r_i\frac{dr_i}{d\beta}
+= -2\sum_{i=0}^{N-1}(d_i-i(t_i;\beta))\frac{di(t;\beta)}{d\beta}\,,
+\end{align}
+$$
+
+where the derivative of \( i(t;\beta) \) with respect to \( \beta \) can be found
+from equation <a href="#mjx-eqn-8">(8)</a>:
+$$
+\begin{equation}
+\tag{11}
+\frac{di(t;\beta)}{d\beta}=\frac{\frac{s_0}{i_0}te^{-\beta t}}{\left(1+s_0e^{-\beta t}\right)^2}\,.
+\end{equation}
+$$
+
+<p>
+<b>Part 1.</b>
+
+<ul>
+<li> Write two Python functions, one that calculates SSR for a given location, and another that calculates the derivative of SSR for a given location.</li>
+</ul>
+
+<b>Part 2.</b>
+
+<p>
+Choose a few different locations.
+
+<ul>
+<li> For each location, use the functions you just made to plot both SSR and its derivative as a function of \( \beta \) (in the same figure).</li>
+<li> What do you observe regarding the shape of the functions?</li>
+</ul>
+
+Tip: It might be a good idea to exclude some of the data points.
+
+<p>
+<b>Part 3.</b>
+
+<p>
+In the course we have covered several algorithms that are useful for
+finding roots and/or minima of functions, e.g., fixed point iteration,
+Newton's Raphson's method, the bisection method, the secant method,
+and gradient descent.
+
+<ul>
+<li> Implement at (least) one of the methods listed above, and use it to find the \( \beta \)-value that minimizes SSR. Do this for each of the locations you chose in Part 2.</li>
+<li> Can you always expect to find an optimal \( \beta \)-value with your chosen algorithm(s)? Why / why not?</li>
+</ul>
+
+<h2 id="___sec4" class="anchor">Theory: SEIRD-model </h2>
+
+<p>
+<center> <!-- figure label: --> <div id="fig:p3:seird"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 2:  Illustration of the \( SEIRD \) model.  <!-- caption label: fig:p3:seird --> </p></center>
+<p><img src="fig-project3/seird.png" align="bottom" width=800></p>
+</center>
+
+<p>
+We extend the SI-model by adding three more compartments:
+
+<ul>
+<li> \( E(t) \): the number of <em>exposed</em> people; people that have been infectied, but that are not yet contagious to others.</li>
+<li> \( R(t) \): the number of <em>recovered</em> (immune) individuals.</li>
+<li> \( D(t) \): the number of <em>dead</em> people.</li>
+</ul>
+
+As with the SI-model, we scale all unknowns by dividing them by the total
+population size, \( N \).
+
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b><font color="black">The scaled \( SEIRD \)-model</font>.</b>
+<font color="black">
+$$
+\begin{align}
+\tag{12}
+\firstderivative{s}(t) &= -\beta(t)\cdot i(t)\cdot s(t) \,, \\ 
+\tag{13}
+\firstderivative{e}(t) &= \beta(t)\cdot i(t)\cdot s(t) - \tau_{\text{inc}}^{-1}\cdot e(t) \,, \\ 
+\tag{14}
+\firstderivative{i}(t) &= \tau_{\text{inc}}^{-1}\cdot e(t) - \tau_{\text{sick}}^{-1}\cdot i(t) \,, \\ 
+\tag{15}
+\firstderivative{r}(t) &= (1-f_d)\cdot\tau_{\text{sick}}^{-1}\cdot i(t) \,, \\ 
+\tag{16}
+\firstderivative{d}(t) &= f_d \cdot\tau_{\text{sick}}^{-1}\cdot i(t)\,.
+\end{align}
+$$
+
+</font>
+</div>
+
+
+<p>
+The new model parameters are explained in the table below.
+
+<p>
+
+<div class="row">
+  <div class="col-xs-12">
+    <table class="table table-striped table-hover table-condensed">
+<thead>
+<tr><td align="center"><b> Parameter description </b></td> <td align="center"><b>         Symbol         </b></td> <td align="center"><b>              Suggested value               </b></td> <td align="center"><b>          Unit          </b></td> </tr>
+</thead>
+<tbody>
+<tr><td align="center">   Mean incubation time       </td> <td align="center">   \( \tau_{\text{inc}} \)     </td> <td align="center">   5.0 <a href="#lauer2020incubation">[4]</a>      </td> <td align="center">   days                        </td> </tr>
+<tr><td align="center">   Mean infectious period     </td> <td align="center">   \( \tau_{\text{sick}} \)    </td> <td align="center">   21.0 <a href="#bi2020epidemiology">[5]</a>      </td> <td align="center">   days                        </td> </tr>
+<tr><td align="center">   Infection fatality rate    </td> <td align="center">   \( f_d \)                   </td> <td align="center">   0.02 <a href="#staerk2021estimating">[6]</a>    </td> <td align="center">   dimensionless (fraction)    </td> </tr>
+</tbody>
+    </table>
+  </div> <!-- col-xs-12 -->
+</div> <!-- cell row -->
+<p>
+Let \( C(t) \) denote the cumulative number of cases of COVID-19 at time \( t \).
+For the SI-model we assumed \( C(t)=I(t) \), however that is not true for
+the SEIRD-model: \( I(t) \) now only accounts for the number individuals
+that are infected <em>at the specific  time t</em>. Nor is \( C(t) \) equal to the sum of
+all \( I(t) \)-values, because that will lead to counting individuals more
+than once (people stay sick for more than a single day).
+In this project, we propose the following formula:
+$$
+\begin{equation}
+\tag{17}
+C(t) = I(t) + R(t) + D(t)\,.
+\end{equation}
+$$
+
+The rationale for this choice is as follows: if a person is included in the
+statistics for the number of cases of COVID-19, either the person is sick right
+now, or the person has been sick before and is now either recovered or dead.
+
+<h1 id="___sec5" class="anchor">Exercise 3: Write a general (adaptive Runge-Kutta) solver </h1>
+
+<p>
+In this exercise you will do two things. First, you are going to
+implement an adaptive Runge-Kutta solver for an <em>arbitrary</em> system of ODEs
+of the form
+$$
+\begin{equation}
+\tag{18}
+\frac{d\vec{y}}{dt}=\vec{f}(\vec{y},t)\,,
+\end{equation}
+$$
+
+where the solution \( \vec{y} \) may be a vector. Since the equation system is
+completely generic, the solver has to take in <em>as argument</em> the function that
+computes the right hand side-vector; that is, you are not allowed to hard-code
+in a specific model. In addition, the solver needs to know the starting time,
+\( t_0 \), the corresponding initial condition(s) \( \vec{f}(\vec{y},t) \), as well
+as the final simulation time, \( t_f \).
+
+<p>
+In the second part you are going to test the solver on the particular case of
+the SI-model, equations <a href="#mjx-eqn-5">(5)</a> and <a href="#mjx-eqn-6">(6)</a>.
+This is useful, because we know the analytical solution and can therefore
+check the accuracy of our solver implementation.
+
+<p>
+<b>Part 1.</b>
+
+<ul>
+<li> Implement the Adaptive Runge-Kutta method for a general ODE system. Use Runge-Kutta fourth order and Richardson extrapolation to choose time steps.</li>
+</ul>
+
+<b>Part 2.</b>
+
+<ul>
+<li> Apply your ODE-solver to the SI-model. Choose a value for \( \beta \) that you think makes sense.</li>
+<li> Compare the output of your solver with the analytical solution, equations <a href="#mjx-eqn-5">(5)</a> and <a href="#mjx-eqn-6">(6)</a>.</li>
+<li> Does the numerical solver reproduce the analytical result at \( t=t_f \) within the expected numerical accuracy?</li> 
+</ul>
+
+<b>Part 3.</b>
+
+<ul>
+<li> Apply your ODE-solver to the SEIRD-model. Use the same value for \( \beta \) as in the previous part, and the same \( t_0 \) and \( t_f \). For the other model parameters, use the suggested values listed in the table above.</li>
+<li> Based on the output from your ODE-solver, use equation <a href="#mjx-eqn-17">(17)</a> to plot the cumulative number of cases of COVID-19. In the same plot, include \( I(t) \) from the previous part.</li>
+</ul>
+
+<h1 id="___sec6" class="anchor">Exercise 4: Fit the SEIRD-model to data </h1>
+
+<p>
+In this exercise we are going to fit the SEIRD-model to data.
+To be able to do that we first have to make sure that our ODE-solver can
+calculate values of \( C(t) \) at certain <em>report times</em>, i.e., at the times when
+we have recorded observations. The adaptive solver chooses time steps
+automatically based on numerical accuracy, however in most situations that will
+not yield the report times we need.
+
+<p>
+<b>Part 1.</b>
+
+<ul>
+<li> Write a new solver that can take in an optional vector of report times, and return the solution only at those times.</li>
+</ul>
+
+For example, if your ODE-solver is called <code>my_odeint</code>, you might want to call it as
+follows (of course, the details depends on your implementation):
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>t0 <span style="color: #666666">=</span> <span style="color: #666666">0.0</span>  <span style="color: #408080; font-style: italic"># initial time</span>
+tf <span style="color: #666666">=</span> <span style="color: #666666">10.0</span>  <span style="color: #408080; font-style: italic"># final time</span>
+report_times <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(t0, tf, <span style="color: #666666">11</span>)
+<span style="color: #408080; font-style: italic"># f is the rhs of the ODE-model, y0 the initial condition.</span>
+<span style="color: #408080; font-style: italic"># we do not need the t0 and tf as they can be found inside the function by</span>
+<span style="color: #408080; font-style: italic"># t0=np.min(report_times), and tf=np.max(report_times)</span>
+solution <span style="color: #666666">=</span> my_odeint(f, y0,report_times)
+</pre></div>
+<p>
+<b>Part 2.</b>
+
+<p>
+Read the documentation for SciPy's ODE-solver, <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.odeint.html" target="_self"><tt>scipy.integrate.odeint</tt></a>.
+
+<ul>
+<li> Simulate a scenario with the SEIRD-model using both your solver and <code>odeint</code>. Show that the output from the solvers agree (make at least one figure!)</li>
+</ul>
+
+<b>Part 3.</b>
+
+<p>
+Read the documentation for  <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.curve_fit.html" target="_self"><tt>scipy.curve_fit</tt></a>.
+
+<ul>
+<li> Combine <code>curve_fit</code> with your custom ODE-solver to find optimal \( \beta \)-values for the SI-model - choose one of the same locations that you used in Exercise 2. Verify that you get the same results as in that exercise.</li>
+</ul>
+
+<b>Part 4.</b>
+
+<ul>
+<li> Combine <code>curve_fit</code> with your custom ODE-solver to find optimal parameter values for the SEIRD-model. Use the same location as in part 3. How does the \( \beta \)-value change compared to the SI-model?</li>
+</ul>
+
+Note: You should experiment with which parameters in the SEIRD-model you are tuning to data, and which ones are kept fixed at their suggested values.
+
+<p>
+<b>Part 5.</b>
+
+<p>
+In reality, diseases never spread at a constant rate, especially not when
+the disease is deadly and people and governments starts to take action.
+However, these actions are very hard to model.
+As a simple extension to the SI-model, we instead assume that the
+Covid-infection rate declines exponentially:
+$$
+\begin{equation}
+\beta(t)=\beta_0 e^{-\lambda t}.
+\tag{19}
+\end{equation}
+$$
+
+The analytical solution has a the same form as before; we simply have to
+modify equations <a href="#mjx-eqn-7">(7)</a>
+and <a href="#mjx-eqn-8">(8)</a> by making the following replacement:
+$$
+\begin{equation}
+\beta t \to \int_0^t\beta_0e^{-\lambda t}dt=\frac{\beta_0}{\lambda}(1-e^{-\lambda t})\,.
+\tag{20}
+\end{equation}
+$$
+
+
+<ul>
+<li> Apply the new model to the same datasets as was considered in Exercise 2 (for the start of the pandemic</li> 
+<li> How do the fitted \( \beta_0 \)-values compare to the values you found for the constant \( \beta \)-models?</li>
+<li> Assume that a high \( \lambda \) implies a strong governmental response. Do your estimated \( \lambda \)-values match your expectations?</li>
+</ul>
+
+<div class="alert alert-block alert-success alert-text-normal"><b>IMPORTANT.</b>
+
+<p>
+At relevant places in your notebook, discuss the following points:
+
+<ul>
+<li> What makes it hard (impossible) to match the SI- or SEIRD-model to the entire course of the pandemic?</li>
+<li> What do you learn from the models? How do they help in interpreting data?</li>
+<li> Could you have reached the same conclusions without a model?</li>
+</ul>
+</div>
+
+
+<h1 id="___sec7" class="anchor">Guidelines for project submission </h1>
+
+<p>
+You should bear the following points in mind when working on the project:
+
+<ul>
+<li> Start your notebook by providing a short introduction in which you outline the nature of the problem(s) to be investigated.</li>
+<li> End your notebook with a brief summary of what you feel you learned from the project (if anything). Also, if you have any general comments or suggestions for what could be improved in future assignments, this is the place to do it.</li>
+<li> All code that you make use of should be present in the notebook, and it should ideally execute without any errors (especially run-time errors). If you are not able to fix everything before the deadline, you should give your best understanding of what is not working, and how you might go about fixing it.</li>
+<li> Avoid duplicating code! If you find yourself copying and pasting a lot of code, it is a strong indication that you should define reuseable functions and/or classes.</li>
+<li> If you use an algorithm that is not fully described in the assignment text, you should try to explain it in your own words. This also applies if the method is described elsewhere in the course material.</li>
+<li> In some cases it may suffice to explain your work via comments in the code itself, but other times you might want to include a more elaborate explanation in terms of, e.g., mathematics and/or pseudocode.</li>
+<li> In general, it is a good habit to comment your code (though it can be overdone).</li>
+<li> When working with approximate solutions to equations, it is very useful to check your results against known exact (analytical) solutions, should they be available.</li>
+<li> It is also a good test of a model implementation to study what happens at known 'edge cases'.</li>
+<li> Any figures you include should be easily understandable. You should label axes appropriately, and depending on the problem, include other legends etc. Also, you should discuss your figures in the main text.</li>
+<li> It is always good if you can reflect a little bit around <em>why</em> you see what you see.</li>
+</ul>
+
+<h1 id="___sec8" class="anchor">Appendix A: Implementing ODE solvers using standalone functions </h1>
+Here we will give you some tips on implementing an ODE solver. In the exercises to the ODE chapter in the book <a href="#hiorth">[1]</a>, you will find the following code as a possible solution (the full code is not shown here)
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">rk4_step</span>(func,y,t,dt):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    Integrates from time t to t+h using RK4</span>
+<span style="color: #BA2121; font-style: italic">    func = right hand side of ODE</span>
+<span style="color: #BA2121; font-style: italic">    y = solution vector</span>
+<span style="color: #BA2121; font-style: italic">    t = current time</span>
+<span style="color: #BA2121; font-style: italic">    dt = step size</span>
+<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+    k1<span style="color: #666666">=</span>dt<span style="color: #666666">*</span>func(y,t)
+    k2<span style="color: #666666">=</span>dt<span style="color: #666666">*</span>func(y<span style="color: #666666">+0.5*</span>k1,t<span style="color: #666666">+0.5*</span>dt)
+    k3<span style="color: #666666">=</span>dt<span style="color: #666666">*</span>func(y<span style="color: #666666">+0.5*</span>k2,t<span style="color: #666666">+0.5*</span>dt)
+    k4<span style="color: #666666">=</span>dt<span style="color: #666666">*</span>func(y<span style="color: #666666">+</span>k3,t<span style="color: #666666">+</span>dt)
+    <span style="color: #008000; font-weight: bold">return</span> (k1<span style="color: #666666">+2*</span>k2<span style="color: #666666">+2*</span>k3<span style="color: #666666">+</span>k4)<span style="color: #666666">/6</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">rk_adpative</span>(func,y0,t0,tf,rel_tol<span style="color: #666666">=1e-5</span>,abs_tol<span style="color: #666666">=1e-5</span>,p<span style="color: #666666">=4</span>):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    solves an ODE with known initial conditions</span>
+<span style="color: #BA2121; font-style: italic">    from time ti to t_final</span>
+<span style="color: #BA2121; font-style: italic">    ti = start time</span>
+<span style="color: #BA2121; font-style: italic">    y0 = initial conditions at time t0</span>
+<span style="color: #BA2121; font-style: italic">    tf = end time</span>
+<span style="color: #BA2121; font-style: italic">    rel_tol relative toleranse</span>
+<span style="color: #BA2121; font-style: italic">    abs_tol absolute toleranse</span>
+<span style="color: #BA2121; font-style: italic">    p order of numerical method, could set p=2 and </span>
+<span style="color: #BA2121; font-style: italic">    change rk4_step to rk2_step</span>
+<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+    <span style="color: #666666">...</span> <span style="color: #408080; font-style: italic"># see exercise for full solution </span>
+    	y_new <span style="color: #666666">=</span> y_old <span style="color: #666666">+</span> rk4_step(func,y_old,ti,DT)
+    <span style="color: #666666">...</span> 
+    <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>array(t),np<span style="color: #666666">.</span>array(y) <span style="color: #408080; font-style: italic"># cast to numpy arrays</span>
+</pre></div>
+<p>
+A major drawback in these functions are the fact that <code>func</code> will contain additional parameters that you would like to pass as arguments, e.g. in our case we would like to pass \( \beta \) as a parameter. Maybe we would like to define our function as <code>def si_model(y,t,beta):</code>, but this would not work as the above code assumes that the function only have two arguments <code>y</code>, and <code>t</code>. In Python there is a very simple way you can add <em>any number of arguments</em> simply adding <code>*args</code> to your function
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">rk4_step</span>(func,y,t,dt,<span style="color: #666666">*</span>args):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    Integrates from time t to t+h using RK4</span>
+<span style="color: #BA2121; font-style: italic">    func = right hand side of ODE</span>
+<span style="color: #BA2121; font-style: italic">    y = solution vector</span>
+<span style="color: #BA2121; font-style: italic">    t = current time</span>
+<span style="color: #BA2121; font-style: italic">    dt = step size</span>
+<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+    k1<span style="color: #666666">=</span>dt<span style="color: #666666">*</span>func(y,t)
+    k2<span style="color: #666666">=</span>dt<span style="color: #666666">*</span>func(y<span style="color: #666666">+0.5*</span>k1,t<span style="color: #666666">+0.5*</span>dt)
+    k3<span style="color: #666666">=</span>dt<span style="color: #666666">*</span>func(y<span style="color: #666666">+0.5*</span>k2,t<span style="color: #666666">+0.5*</span>dt)
+    k4<span style="color: #666666">=</span>dt<span style="color: #666666">*</span>func(y<span style="color: #666666">+</span>k3,t<span style="color: #666666">+</span>dt)
+    <span style="color: #008000; font-weight: bold">return</span> (k1<span style="color: #666666">+2*</span>k2<span style="color: #666666">+2*</span>k3<span style="color: #666666">+</span>k4)<span style="color: #666666">/6</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">rk_adpative</span>(func,y0,t0,tf,<span style="color: #666666">*</span>args,rel_tol<span style="color: #666666">=1e-5</span>,abs_tol<span style="color: #666666">=1e-5</span>,p<span style="color: #666666">=4</span>):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    solves an ODE with known initial conditions</span>
+<span style="color: #BA2121; font-style: italic">    from time ti to t_final</span>
+<span style="color: #BA2121; font-style: italic">    ti = start time</span>
+<span style="color: #BA2121; font-style: italic">    y0 = initial conditions at time t0</span>
+<span style="color: #BA2121; font-style: italic">    tf = end time</span>
+<span style="color: #BA2121; font-style: italic">    rel_tol relative toleranse</span>
+<span style="color: #BA2121; font-style: italic">    abs_tol absolute toleranse</span>
+<span style="color: #BA2121; font-style: italic">    p order of numerical method, could set p=2 and </span>
+<span style="color: #BA2121; font-style: italic">    change rk4_step to rk2_step</span>
+<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+    <span style="color: #666666">...</span> <span style="color: #408080; font-style: italic"># see exercise for full solution </span>
+    	y_new <span style="color: #666666">=</span> y_old <span style="color: #666666">+</span> rk4_step(func,y_old,ti,DT,<span style="color: #666666">*</span>args)
+    <span style="color: #666666">...</span> 
+    <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>array(t),np<span style="color: #666666">.</span>array(y) <span style="color: #408080; font-style: italic"># cast to numpy arrays</span>
+</pre></div>
+<p>
+Now you can do
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">si_model</span>(y,t,beta):
+    <span style="color: #666666">...</span><span style="color: #408080; font-style: italic"># code</span>
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">..</span>
+
+rk_adpative(si_model,y0,t0,tf,beta)
+</pre></div>
+<p>
+In the later part of the project you are going to return the solution at the certain times, determined by an input vector of times <code>report_times</code>. There are probably many ways of achieving this, one suggestion would be to calculate a vector of \( \Delta t \), <code>dt_list=report_times[1:]-report_times[:-1]</code>. We can then make sure that our ODE solver does not choose a time step larger than is needed to reach a report time.
+
+<h1 id="___sec9" class="anchor">Bibliography </h1>
+
+<p>
+<!-- begin bibliography -->
+
+<ol>
+ <li> <div id="hiorth"></div> <b>A. Hiorth</b>. 
+    <em>Computational Engineering and Modeling</em>,
+    https://github.com/ahiorth/CompEngineering,
+    2021.</li>
+ <li> <div id="kermack1927contribution"></div> <b>W. O. Kermack and A. G. McKendrick</b>. 
+    A Contribution to the Mathematical Theory of Epidemics—I,
+    <em>Proceedings of the Royal Society of London. Series A, Containing papers of a mathematical and physical character</em>,
+    115(772),
+    pp. 700-721,
+    1927.</li>
+ <li> <div id="box1976science"></div> <b>G. E. Box</b>. 
+    Science and Statistics,
+    <em>Journal of the American Statistical Association</em>,
+    71(356),
+    pp. 791-799,
+    1976.</li>
+ <li> <div id="lauer2020incubation"></div> <b>S. A. Lauer, K. H. Grantz, Q. Bi, F. K. Jones, Q. Zheng, H. R. Meredith, A. S. Azman, N. G. Reich and J. Lessler</b>. 
+    The Incubation Period of Coronavirus Disease 2019 (COVID-19) From Publicly Reported Confirmed Cases: Estimation and Application,
+    <em>Annals of internal medicine</em>,
+    172(9),
+    pp. 577-582,
+    2020.</li>
+ <li> <div id="bi2020epidemiology"></div> <b>Q. Bi, Y. Wu, S. Mei, C. Ye, X. Zou, Z. Zhang, X. Liu, L. Wei, S. A. Truelove and T. Zhang</b>. 
+    Epidemiology and Transmission of COVID-19 in 391 Cases and 1286 of Their Close Contacts in Shenzhen, China: a Retrospective Cohort Study,
+    <em>The Lancet Infectious Diseases</em>,
+    20(8),
+    pp. 911-919,
+    2020.</li>
+ <li> <div id="staerk2021estimating"></div> <b>C. Staerk, T. Wistuba and A. Mayr</b>. 
+    Estimating Effective Infection Fatality Rates During the Course of the COVID-19 Pandemic in Germany,
+    <em>BMC Public Health</em>,
+    21(1),
+    pp. 1-9,
+    2021.</li>
+</ol>
+
+<!-- end bibliography -->
+
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+
