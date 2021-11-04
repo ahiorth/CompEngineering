@@ -65,7 +65,11 @@ code { color: inherit; background-color: transparent; }
                1,
                None,
                '___sec8'),
-              ('Bibliography', 1, None, '___sec9')]}
+              ('Suggestion on how to choose exact report steps',
+               2,
+               None,
+               '___sec9'),
+              ('Bibliography', 1, None, '___sec10')]}
 end of tocinfo -->
 
 <body>
@@ -119,7 +123,8 @@ $$
      <!-- navigation toc: --> <li><a href="#___sec6" style="font-size: 80%;"><b>Exercise 4: Fit the SEIRD-model to data</b></a></li>
      <!-- navigation toc: --> <li><a href="#___sec7" style="font-size: 80%;"><b>Guidelines for project submission</b></a></li>
      <!-- navigation toc: --> <li><a href="#___sec8" style="font-size: 80%;"><b>Appendix A: Implementing ODE solvers using standalone functions</b></a></li>
-     <!-- navigation toc: --> <li><a href="#___sec9" style="font-size: 80%;"><b>Bibliography</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Suggestion on how to choose exact report steps</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec10" style="font-size: 80%;"><b>Bibliography</b></a></li>
 
         </ul>
       </li>
@@ -156,7 +161,7 @@ $$
 
 <br>
 <p>
-<center><h4>Nov 1, 2021</h4></center> <!-- date -->
+<center><h4>Nov 4, 2021</h4></center> <!-- date -->
 <br>
 <p>
 <b>Learning objectives.</b>
@@ -383,7 +388,7 @@ Tips: Consider using boolean flags and/or optional input arguments. It may also 
 <b>Part 4.</b>
 
 <ul>
-<li> Can the the simple SI-model explain the observations you plotted in parts 2 and 3? If the answer is yes, can you think of other situations in which it cannot? If no, why not?</li>
+<li> Can the simple SI-model explain the observations you plotted in parts 2 and 3? If the answer is yes, can you think of other situations in which it cannot? If no, why not?</li>
 </ul>
 
 <h1 id="___sec3" class="anchor">Exercise 2: Finding optimal parameter values </h1>
@@ -421,7 +426,7 @@ from equation <a href="#mjx-eqn-8">(8)</a>:
 $$
 \begin{equation}
 \tag{11}
-\frac{di(t;\beta)}{d\beta}=\frac{\frac{s_0}{i_0}te^{-\beta t}}{\left(1+s_0e^{-\beta t}\right)^2}\,.
+\frac{di(t;\beta)}{d\beta}=\frac{\frac{s_0}{i_0}te^{-\beta t}}{\left(1+\frac{s_0}{i_0}e^{-\beta t}\right)^2}\,.
 \end{equation}
 $$
 
@@ -759,10 +764,10 @@ A major drawback in these functions are the fact that <code>func</code> will con
 <span style="color: #BA2121; font-style: italic">    t = current time</span>
 <span style="color: #BA2121; font-style: italic">    dt = step size</span>
 <span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
-    k1<span style="color: #666666">=</span>dt<span style="color: #666666">*</span>func(y,t)
-    k2<span style="color: #666666">=</span>dt<span style="color: #666666">*</span>func(y<span style="color: #666666">+0.5*</span>k1,t<span style="color: #666666">+0.5*</span>dt)
-    k3<span style="color: #666666">=</span>dt<span style="color: #666666">*</span>func(y<span style="color: #666666">+0.5*</span>k2,t<span style="color: #666666">+0.5*</span>dt)
-    k4<span style="color: #666666">=</span>dt<span style="color: #666666">*</span>func(y<span style="color: #666666">+</span>k3,t<span style="color: #666666">+</span>dt)
+    k1<span style="color: #666666">=</span>dt<span style="color: #666666">*</span>func(y,t,<span style="color: #666666">*</span>args)
+    k2<span style="color: #666666">=</span>dt<span style="color: #666666">*</span>func(y<span style="color: #666666">+0.5*</span>k1,t<span style="color: #666666">+0.5*</span>dt,<span style="color: #666666">*</span>args)
+    k3<span style="color: #666666">=</span>dt<span style="color: #666666">*</span>func(y<span style="color: #666666">+0.5*</span>k2,t<span style="color: #666666">+0.5*</span>dt,<span style="color: #666666">*</span>args)
+    k4<span style="color: #666666">=</span>dt<span style="color: #666666">*</span>func(y<span style="color: #666666">+</span>k3,t<span style="color: #666666">+</span>dt,<span style="color: #666666">*</span>args)
     <span style="color: #008000; font-weight: bold">return</span> (k1<span style="color: #666666">+2*</span>k2<span style="color: #666666">+2*</span>k3<span style="color: #666666">+</span>k4)<span style="color: #666666">/6</span>
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">rk_adpative</span>(func,y0,t0,tf,<span style="color: #666666">*</span>args,rel_tol<span style="color: #666666">=1e-5</span>,abs_tol<span style="color: #666666">=1e-5</span>,p<span style="color: #666666">=4</span>):
@@ -787,16 +792,23 @@ Now you can do
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">si_model</span>(y,t,beta):
-    <span style="color: #666666">...</span><span style="color: #408080; font-style: italic"># code</span>
-    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">..</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">si_model_rhs</span>(y,t,beta,tau_inc,tau_sick,fd):
+    s<span style="color: #666666">=</span>y[<span style="color: #666666">0</span>]
+    e<span style="color: #666666">=</span>y[<span style="color: #666666">1</span>]
+    i<span style="color: #666666">=</span>y[<span style="color: #666666">2</span>]
+    r<span style="color: #666666">=</span>y[<span style="color: #666666">3</span>]
+    d<span style="color: #666666">=</span>y[<span style="color: #666666">4</span>]
+    <span style="color: #008000; font-weight: bold">return</span> [−beta<span style="color: #666666">*</span>i<span style="color: #666666">*</span>s, <span style="color: #666666">...</span>] <span style="color: #408080; font-style: italic"># complete code</span>
 
-rk_adpative(si_model,y0,t0,tf,beta)
+rk_adpative(si_model_rhs,y0,t0,tf,beta,tau_inc,tau_sick,fd)
 </pre></div>
 <p>
-In the later part of the project you are going to return the solution at the certain times, determined by an input vector of times <code>report_times</code>. There are probably many ways of achieving this, one suggestion would be to calculate a vector of \( \Delta t \), <code>dt_list=report_times[1:]-report_times[:-1]</code>. We can then make sure that our ODE solver does not choose a time step larger than is needed to reach a report time.
+Note that we can call <code>rk_adaptive</code> with as many arguments as we would like to pass to the SI model.
 
-<h1 id="___sec9" class="anchor">Bibliography </h1>
+<h2 id="___sec9" class="anchor">Suggestion on how to choose exact report steps  </h2>
+In the later part of the project you are going to return the solution at the certain times, determined by an input vector of times <code>report_times</code>. There are probably many ways of achieving this, one suggestion would be to calculate a vector which contains the time difference between each step <code>dt_list=report_times[1:]-report_times[:-1]</code>. We can then make sure that our ODE solver does not choose a time step larger than is needed to reach each report time. Assume \( dt \) (= <code>dt_list[0]</code> )  is the time it takes from \( 0 \) to the first report time step \( t_1 \), and \( \Delta T \) is the time step suggested by our ODE solver. If \( dt < \Delta T \) then we have to set \( \Delta T = dt \) to make sure that we calculate the solution at \( t=t_1 \) and not overstep. On the other hand, if \( dt>\Delta T \), we allow the next step, but updates \( dt = dt -\Delta T \), and eventually we reach our report step. Once the report step is reached we pick the next \( dt \) from our list.
+
+<h1 id="___sec10" class="anchor">Bibliography </h1>
 
 <p>
 <!-- begin bibliography -->
