@@ -1,1233 +1,1258 @@
 .. !split
 
-.. _ch:numint:
+.. _ch:nlin:
 
-Numerical integration
-%%%%%%%%%%%%%%%%%%%%%
+Solving nonlinear equations
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Numerical Integration
-=====================
-Before diving into the details of this section, it is worth pointing out that the derivation of the algorithms in this section follows a general pattern:
+.. Contrary to linear equations, you will most likely find that the functions available in
 
-1. We start with a mathematical model (in this case an integral)
+.. various Python library will *not* cover your needs and in many cases fail to give you
 
-2. The mathematical model is formulated in discrete form 
+.. the correct solution. The reason for this is that the solution of a nonlinear equation # is greatly
 
-3. Then we design an algorithm to solve the model 
+.. dependent on the starting point, and a combination of various techniques  must be used.
 
-4. The numerical solution for a test case is compared with the true solution (could be an analytical solution or data)
+In this chapter we will cover some theory related to the solution of nonlinear equations, and introduce the most used methods. A nonlinear problem is represented as a single equation or a system of equations, where the response is not changing proportionally to the input.  Almost all physical systems are nonlinear, and one frequent use of the methods presented in this chapter is to determine model parameters by matching a nonlinear model to data. 
 
-5. Error analysis: we investigate the accuracy of the algorithm by changing the number of iterations and/or make changes to the implementation or algorithm
+Numerical methods that is guaranteed to find a solution (if it exists) are called *closed methods*, and *open* other vise. In many cases the closed methods requires more iterations for well behaved functions than the open methods. For one dimensional problems we will cover: fixed point iteration, bisection, Newton's method, and the secant method.
+For  multidimensional problems we will cover Newton-Rapson method, which is a direct extension of Newton's method in one
+dimension, and the steepest decent. The main challenge is that there are (usually) more than one solution, the solution that
+*you* want for a specific problem is usually dictated by the underlying physics. If computational speed is not an issue, the
+ method of choice is usually the bisection method. It is guaranteed to give an answer, but it might be slow. If speed is an issue, usually Newton's or the secant method will be the fastest (but it depends on the starting point). The secant method is sometimes preferred if the derivative of the function is costly to evaluate. Brents method is a method that combine the secant and bisection method (not covered), and is guaranteed to find a solution if the root is bracketed. 
 
-In many cases you would not use your own implementation to calculate an integral, but in order to understand which method to use 
-in a specific case, it is important to understand the limitation and advantages of the different algorithms. The only way to achieve this is to 
-have a basic understanding of the development. There might also be some cases where you would like to adapt an integration scheme to your specific needs. 
+In many practical, engineering, applications one usually implements some of the methods described below directly inside functions. This is because it is usually faster than calling a separate all purpose nonlinear solver, and that one usually has a very good idea of what a good starting point for the nonlinear solver is. 
 
-The Midpoint Rule
------------------
-
-.. index:: midpoint method
-
-Numerical integration is encountered in numerous applications in physics and engineering sciences. 
-Let us first consider the most simple case, a function :math:`f(x)`, which is a function of one variable, :math:`x`. The most straight forward way of calculating the area :math:`\int_a^bf(x)dx` is 
-simply to divide the area under the function into :math:`N` equal rectangular slices with size :math:`h=(b-a)/N`, as illustrated in figure :ref:`fig:numint:mid`. The area of one box is:
-
-.. _Eq:eq:numint:mid0:
-
-.. math::
-
-    \tag{177}
-    M(x_k,x_k+h)=f(x_k+\frac{h}{2}) h,\
-        
-
-and the area of all the boxes is:
-
-.. math::
-        
-        I(a,b)=\int_a^bf(x)dx\simeq\sum_{k=0}^{N-1}M(x_k,x_k+h)\nonumber
-        
-
-.. _Eq:eq:numint:mid1:
-
-.. math::
-
-    \tag{178}
-    =h\sum_{k=0}^{N-1}f(x_k+\frac{h}{2})=h\sum_{k=0}^{N-1}f(a+(k+\frac{1}{2})h).
-        \
-        
-
-Note that the sum goes from :math:`k=0,1,\ldots,N-1`, a total of :math:`N` elements. We could have chosen to let the sum go from :math:`k=1,2,\ldots,N`. 
-In Python, C, C++ and many other programming languages the arrays start by indexing the elements from :math:`0,1,\ldots` to :math:`N-1`, 
-therefore we choose the convention of having the first element to start at :math:`k=0`.
-
-.. _fig:numint:mid:
-
-.. figure:: func_sq.png
-   :width: 800
-
-   *Integrating a function with the midpoint rule*
-
-Below is a Python code, where this algorithm is implemented for :math:`\int_0^\pi\sin (x)dx`
-
-.. code-block:: python
-
-    import numpy as np
-    # Function to be integrated
-    def f(x):
-        return np.sin(x)
-    
-    def midpoint(f,a,b,N):
-        """
-        f : function to be integrated on the domain [a,b]
-        N : number of integration points
-        """
-        h=(b-a)/N
-        x=np.arange(a+0.5*h,b,h)
-        return h*np.sum(f(x))
-    N=10
-    a=0
-    b=np.pi
-    Area = midpoint(f,a,b,N)
-    print('Numerical value= ', Area)
-    print('Error= ', (2-Area)) # Analytical result is 2
-
-
-.. note::
-   In the implementation above, we have taken advantage of Numpys ability to pass a vector to a function. This greatly enhances the speed and makes clean, readable code. If you were coding in a lower level programming language like Fortran, C or C++, you would probably implement the loop like (in Python syntax):
-   
-   .. code-block:: python
-   
-       for k in range(0,N): # loop over k=0,1,..,N-1
-           val = lower_limit+(k+0.5)*h # midpoint value
-           area += func(val)
-       return area*h
-
-
-
-
-The Trapezoidal Rule
---------------------
-
-.. index:: trapezoidal method
-
-The numerical error in the above example is quite low, only about 2$\%$ for :math:`N=5`. 
-However, by just looking at the graph above it seems likely that we can develop a better algorithm by using trapezoids instead of rectangles, 
-see figure :ref:`fig:numint:trap`.
-
-.. _fig:numint:trap:
-
-.. figure:: func_tr.png
-   :width: 800
-
-   *Integrating a function with the trapezoidal rule*
-
-Earlier we approximated the area using the midpoint value: :math:`f(x_k+h/2)\cdot h`. Now we use :math:`A=A_1+A_2`, where :math:`A_1=f(x_k)\cdot h` 
-and :math:`A_2=(f(x_k+h)-f(x_k))\cdot h/2`, hence the area of one trapezoid is:
-
-.. _Eq:_auto46:
-
-.. math::
-
-    \tag{179}
-    A\equiv T(x_k,x_k+h)=(f(x_k+h)+f(x_k))h/2.
-        
-        
-
-This is the trapezoidal rule, and for the whole interval we get:
-
-.. math::
-        
-        I(a,b)=\int_a^bf(x)dx\simeq\frac{1}{2}h\sum_{k=0}^{N-1}\left[f(x_k+h)+f(x_k)\right] \nonumber 
-        
-
-.. math::
-          
-        =h\left[\frac{1}{2}f(a)+f(a+h) + f(a+2h) +\nonumber\right. 
-        
-
-.. math::
-          
-        \left.\qquad\cdots + f(a+(N-2)h)+\frac{1}{2}f(b)\right]\nonumber 
-        
-
-.. _Eq:_auto47:
-
-.. math::
-
-    \tag{180}
-    =h\left[\frac{1}{2}f(a)+\frac{1}{2}f(b)+\sum_{k=1}^{N-2}f(a+k h)\right].
-        
-        
-
-Note that this formula was bit more involved to derive, but it requires only one more function evaluations compared to the midpoint rule. 
-Below is a python implementation:
-
-.. code-block:: python
-
-    def trapezoidal(f,a,b,N):
-        """
-        f : function to be integrated on the domain [a,b]
-        N : number of integration points
-        """
-        h=(b-a)/N
-        x=np.arange(a+h,b,h)
-        return h*(0.5*f(a)+0.5*f(b)+np.sum(f(x)))
-
-In the table below, we have calculated the numerical error for various values of :math:`N`.
-
-=========  =========  ==============  =================  
-:math:`N`  :math:`h`  Error Midpoint  Error Trapezoidal  
-=========  =========  ==============  =================  
-    1         3.14        -57\%             100\%        
-    5        0.628       -1.66\%            3.31\%       
-    10       0.314       -0.412\%          0.824\%       
-   100       0.031      -4.11E-3\%        8.22E-3\%      
-=========  =========  ==============  =================  
-
-Note that we get the surprising result that this algorithm performs poorer, a factor of 2 than the midpoint rule.
-How can this be explained? By just looking at figure :ref:`fig:numint:mid`, we see that the midpoint rule actually over predicts the area from :math:`[x_k,x_k+h/2]` 
- and under predicts in the interval :math:`[x_k+h/2,x_{k+1}]` or vice versa. The net effect is that for many cases the midpoint rule give a slightly better 
- performance than the trapezoidal rule. In the next section we will investigate this more formally.
-
-Numerical Errors on Integrals
------------------------------
-
-.. index::
-   single: numerical integrals, error
-
-It is important to know the accuracy of the methods we are using, otherwise we do not know if the
-computer produce correct results. In the previous examples we were able to estimate the error because we knew the analytical result. However, if we know the 
-analytical result there is no reason to use the computer to calculate the result(!). Thus, we need a general method to estimate the error, and let the computer 
-run until a desired accuracy is reached. 
-
-In order to analyze the midpoint rule in more detail we approximate the function by a Taylor 
-series at the midpoint between :math:`x_k` and :math:`x_k+h`: 
-
-.. math::
-        
-        f(x)=f(x_k+h/2)+f^\prime(x_k+h/2)(x-(x_k+h/2))\nonumber
-        
-
-.. _Eq:_auto48:
-
-.. math::
-
-    \tag{181}
-    +\frac{1}{2!}f^{\prime\prime}(x_k+h/2)(x-(x_k+h/2))^2+\mathcal{O}(h^3)
-        
-        
-
-Since :math:`f(x_k+h/2)` and its derivatives are constants it is straight forward to integrate :math:`f(x)`:
-
-.. math::
-        
-        I(x_k,x_k+h)=\int_{x_k}^{x_k+h}\left[f(x_k+h/2)+f^\prime(x_k+h/2)(x-(x_k+h/2))\right.\nonumber
-        
-
-.. _Eq:_auto49:
-
-.. math::
-
-    \tag{182}
-    \left.+\frac{1}{2!}f^{\prime\prime}(x_k+h/2)(x-(x_k+h/2))^2+\mathcal{O}(h^3)\right]dx
-        
-        
-
-The first term is simply the midpoint rule, to evaluate the two other terms we make the substitution: :math:`u=x-x_k`:
-
-.. math::
-        
-        I(x_k,x_k+h)=f(x_k+h/2)\cdot h+f^\prime(x_k+h/2)\int_0^h(u-h/2)du\nonumber
-        
-
-.. math::
-          
-        +\frac{1}{2}f^{\prime\prime}(x_k+h/2)\int_0^h(u-h/2)^2du+\mathcal{O}(h^4)\nonumber
-        
-
-.. _Eq:_auto50:
-
-.. math::
-
-    \tag{183}
-    =f(x_k+h/2)\cdot h-\frac{h^3}{24}f^{\prime\prime}(x_k+h/2)+\mathcal{O}(h^4).
-        
-        
-
-Note that all the odd terms cancels out, i.e :math:`\int_0^h(u-h/2)^m=0` for :math:`m=1,3,5\ldots`. Thus the error for the midpoint rule, :math:`E_{M,k}`, on this particular interval is:
-
-.. _Eq:_auto51:
-
-.. math::
-
-    \tag{184}
-    E_{M,k}=I(x_k,x_k+h)-f(x_k+h/2)\cdot h=-\frac{h^3}{24}f^{\prime\prime}(x_k+h/2),
-        
-        
-
-where we have ignored higher order terms. We can easily sum up the error on all the intervals, but clearly :math:`f^{\prime\prime}(x_k+h/2)` will 
-not, in general, have the same value on all intervals. However, an upper bound for the error can be found by replacing :math:`f^{\prime\prime}(x_k+h/2)` 
-with the maximal value on the interval :math:`[a,b]`, :math:`f^{\prime\prime}(\eta)`:
-
-.. _Eq:eq:numint:em:
-
-.. math::
-
-    \tag{185}
-    E_{M}=\sum_{k=0}^{N-1}E_{M,k}=-\frac{h^3}{24}\sum_{k=0}^{N-1}f^{\prime\prime}(x_k+h/2)\leq-\frac{Nh^3}{24}f^{\prime\prime}(\eta),\
-        
-
-.. _Eq:_auto52:
-
-.. math::
-
-    \tag{186}
-    E_{M}\leq-\frac{(b-a)^3}{24N^2}f^{\prime\prime}(\eta),
-        
-        
-
-where we have used :math:`h=(b-a)/N`. We can do the exact same analysis for the trapezoidal rule, but then we expand the function around :math:`x_k-h` instead of the midpoint. 
-The error term is then:
-
-.. _Eq:_auto53:
-
-.. math::
-
-    \tag{187}
-    E_T=\frac{(b-a)^3}{12N^2}f^{\prime\prime}(\overline{\eta}).
-        
-        
-
-At the first glance it might look like the midpoint rule always is better than the trapezoidal rule, but note that the second derivative is 
-evaluated in different points (:math:`\eta` and :math:`\overline{\eta}`). Thus it is possible to construct examples where the midpoint rule performs poorer 
-than the trapezoidal rule.
-
-Before we end this section we will rewrite the error terms in a more useful form as it is not so easy to evaluate 
-:math:`f^{\prime\prime}(\eta)` (since we do not know which value of :math:`\eta` to use). By taking a closer look at equation :ref:`(185) <Eq:eq:numint:em>`, 
-we see that it is closely related to the midpoint rule for :math:`\int_a^bf^{\prime\prime}(x)dx`, hence:
-
-.. _Eq:_auto54:
-
-.. math::
-
-    \tag{188}
-    E_{M}=-\frac{h^2}{24}h
-        \sum_{k=0}^{N-1}f^{\prime\prime}(x_k+h/2)\simeq-\frac{h^2}{24}\int_a^b
-        f^{\prime\prime}(x)dx
-        
-        
-
-.. _Eq:_auto55:
-
-.. math::
-
-    \tag{189}
-    E_M\simeq\frac{h^2}{24}\left[f^\prime(b)-f^\prime(a)\right]=-\frac{(b-a)^2}{24N^2}\left[f^\prime(b)-f^\prime(a)\right]
-        
-        
-
-The corresponding formula for the trapezoid formula is:
-
-.. _Eq:_auto56:
-
-.. math::
-
-    \tag{190}
-    E_T\simeq \frac{h^2}{12}\left[f^\prime(b)-f^\prime(a)\right]=\frac{(b-a)^2}{12N^2}\left[f^\prime(b)-f^\prime(a)\right]
-        
-        
-
-Practical Estimation of Errors on Integrals (Richardson Extrapolation)
-----------------------------------------------------------------------
-
-.. index:: Richardson extrapolation
-
-From the example above we were able to estimate the number of steps needed to reach (at least) a certain precision. 
-In many practical cases we do not deal with functions, but with data and it can be difficult to evaluate the derivative. 
-We also saw from the example above that the algorithm gives a higher precision than what we asked for. 
-How can we avoid doing too many iterations? A very simple solution to this question is to double the number of intervals until 
-a desired accuracy is reached. The following analysis holds for both the trapezoid and midpoint method, because in both cases 
-the (global) error scale as :math:`h^2` [#trapez]_.
-
-.. [#trapez] You can do the following analysis by assuming that the local error is :math:`h^3`, but then you need to take into account that you need to take twice as many steps, which will give the same result.
-
-Assume that we have evaluated the integral with a step size :math:`h_1`, and the computed result is :math:`I_1`. 
-Then we know that the true integral is :math:`I=I_1+c h_1^2`, where :math:`c` is a constant that is unknown. If we now half the step size: :math:`h_2=h_1/2`, 
-then we get a new (better) estimate of the integral, :math:`I_2`, which is related to the true integral :math:`I` as: :math:`I=I_2+c h_2^2`. 
-Taking the difference between :math:`I_2` and :math:`I_1` give us an estimation of the error:
-
-.. _Eq:_auto57:
-
-.. math::
-
-    \tag{191}
-    I_2-I_1=I-c h_2^2-(I-ch_1^2)=3c h_2^2,
-        
-        
-
-where we have used the fact that :math:`h_1=2h_2`, Thus the error term is:
-
-.. _Eq:_auto58:
-
-.. math::
-
-    \tag{192}
-    E(a,b)=c h_2^2=\frac{1}{3}(I_2-I_1).
-        
-        
-
-This might seem like we need to evaluate the integral twice as many times as needed. This is not the case, by choosing to exactly 
-half the spacing we only need to evaluate for the values that lies halfway between the original points. We will demonstrate how 
-to do this by using the trapezoidal rule, because it operates directly on the :math:`x_k` values and not the midpoint values. 
-The trapezoidal rule can now be written as:
-
-.. _Eq:_auto59:
-
-.. math::
-
-    \tag{193}
-    I_2(a,b)=h_2\left[\frac{1}{2}f(a)+\frac{1}{2}f(b)+\sum_{k=1}^{N_2-1}f(a+k h_2)\right],
-        
-        
-
-.. math::
-          
-        =h_2\left[\frac{1}{2}f(a)+\frac{1}{2}f(b)+\sum_{k=\text{even values}}^{N_2-1}f(a+k h_2)\right.\nonumber
-        
-
-.. _Eq:_auto60:
-
-.. math::
-
-    \tag{194}
-    \left.\qquad+\sum_{k=\text{odd values}}^{N_2-1}f(a+k h_2)\right],
-        
-        
-
-in the last equation we have split the sum into odd an even values. The sum over the even values can be rewritten:
-
-.. _Eq:_auto61:
-
-.. math::
-
-    \tag{195}
-    \sum_{k=\text{even values}}^{N_2-1}f(a+k h_2)=\sum_{k=0}^{N_1-1}f(a+2k h_2)=\sum_{k=0}^{N_1-1}f(a+k h_1),
-        
-        
-
-note that :math:`N_2` is replaced with :math:`N_1=N_2/2`, we can now rewrite :math:`I_2` as:
-
-.. math::
-        
-        I_2(a,b)=h_2\left[\frac{1}{2}f(a)+\frac{1}{2}f(b)+\sum_{k=0}^{N_1-1}f(a+k h_1)\right.\nonumber
-        
-
-.. _Eq:_auto62:
-
-.. math::
-
-    \tag{196}
-    \left.+\sum_{k=\text{odd values}}^{N_2-1}f(a+k h_2)\right]
-        
-        
-
-Note that the first terms are actually the trapezoidal rule for :math:`I_1`, hence:
-
-.. _Eq:_auto63:
-
-.. math::
-
-    \tag{197}
-    I_2(a,b)=\frac{1}{2}I_1(a,b)+h_2\sum_{k=\text{odd values}}^{N_2-1}f(a+k h_2).
-        
-        
-
-The factor :math:`1/2` in front of :math:`I_1(a,b)`, appears because :math:`h_2=h_1/2`. 
-A possible algorithm is then:
-1. Choose a low number of steps to evaluate the integral, :math:`I_0`, the first time, e.g. :math:`N_0=1`
-
-2. Double the number of steps, :math:`N_1=2N_0` 
-
-3. Calculate the missing values by summing over the odd number of steps :math:`\sum_{k=\text{odd values}}^{N_1-1}f(a+k h_1)`
-
-4. Check if :math:`E_1(a,b)=\frac{1}{3}(I_1-I_0)` is lower than a specific tolerance
-
-5. If yes quit, if not, return to 2, and continue until :math:`E_i(a,b)=\frac{1}{3}(I_{i+1}-I_{i})` is lower than the tolerance  
-
-Below is a Python implementation:
-
-.. code-block:: python
-
-    def int_adaptive_trapez2(lower_limit, upper_limit,func,tol):
-        """
-        adaptive quadrature, integrate a function from lower_limit
-        to upper_limit within tol*(upper_limit-lower_limit)
-    
-        """
-        S=[]
-        S.append([lower_limit,upper_limit])
-        I=0
-        iterations=0
-        while S:
-            iterations +=1
-            a,b=S.pop(-1) # last element
-            m=(b+a)*0.5   # midpoint
-            I1=0.5*(b-a)*(func(a)+func(b)) #trapezoidal for 1 interval 
-            I2=0.25*(b-a)*(func(a)+func(b)+2*func(m)) #trapezoidal for 2 intervals
-            if(np.abs(I1-I2)<3*np.abs((b-a)*tol)):
-                I+=I2     # accuarcy met
-            else:
-                S.append([a,m]) # half the interval 
-                S.append([m,b])
-        print("Number of iterations: ", iterations)
-        return I
-
-If you compare the number of terms used in the adaptive trapezoidal rule, which was developed by halving the step size, and the adaptive midpoint rule that was derived on the basis of the theoretical error term, you will find the adaptive midpoint rule is more efficient. So why go through all this trouble? In the next section we will see that the development we did for the adaptive trapezoidal rule is closely related to Romberg integration, which is *much* more effective.
-
-Romberg Integration
+Nonlinear equations
 ===================
+A nonlinear equation is simply an equation that is not linear. That means that when the variables changes the response is not changing proportional to the values of the variables. Solving a nonlinear equation always proceeds by *iterations*, we start with one or several initial guesses and then search for the solution. In many cases we do not know beforehand if the equation actually has a solution, or multiple solutions. An example of a nonlinear problem is:
 
-.. index:: Romberg integration
-
-The adaptive algorithm for the trapezoidal rule in the previous section can be easily improved by remembering 
-that the true integral was given by [#romerr]_ : :math:`I=I_i+ch_i^2+\mathcal{O}(h^4)`. The error term was in the previous example only used to 
-check if the desired tolerance was achieved, but we could also have added it to our estimate of the integral to reach an accuracy to fourth order:
-
-.. [#romerr] Note that all odd powers of :math:`h` is equal to zero, thus the corrections are always in even powers.  
-
-.. _Eq:_auto64:
+.. _Eq:eq:nlin:exp:
 
 .. math::
 
-    \tag{198}
-    I=I_{i+1}+ch^2+\mathcal{O}(h^4)=I_{i+1}+\frac{1}{3}\left[I_{i+1}-I_{i}\right]+\mathcal{O}(h^4).
+    \tag{118}
+    e^{-x}=x^2.
         
         
 
-As before the error term :math:`\mathcal{O}(h^4)`, can be written as: :math:`ch^4`. Now we can proceed as in the previous section: First we estimate the 
-integral by one step size :math:`I_i=I+ch_i^4`, next we half the step size :math:`I_{i+1}=I+ch_{i+1}^4` and use these two estimates to calculate the error term:
+Traditionally one collect all the terms on one side, to solve an equation of the form
 
-.. math::
-        
-        I_{i+1}-I_{i}=I-c h_{i+1}^4-(I-ch_i^4)=-c h_{i+1}^4+c(2h_{i+1})^4=15c h_{i+1}^4,\nonumber
-        
-
-.. _Eq:_auto65:
+.. _Eq:eq:nlin:fx:
 
 .. math::
 
-    \tag{199}
-    ch_{i+1}^4=\frac{1}{15}\left[I_{i+1}-I_{i}\right]+\mathcal{O}(h^6).
+    \tag{119}
+    f(x)=x^2-e^{-x}=0.
         
         
 
-but now we are in the exact situation as before, we have not only the error term but the correction up to order :math:`h^4` for this integral:
+In figure :ref:`fig:nlin:fx`, the solution is shown graphically. Note that in one case the solution is when the graph of :math:`e^{-x}`, and :math:`x^2` intersect, whereas in the other case the root is located when :math:`x^2-e^{-x}` intersect the $x-$axis. 
 
-.. _Eq:eq:numint:rom:
+.. _fig:nlin:fx:
 
-.. math::
-
-    \tag{200}
-    I=I_{i+1}+\frac{1}{15}\left[I_{i+1}-I_{i}\right]+\mathcal{O}(h^6).\
-        
-
-Each time we half the step size we also gain a higher order accuracy in our numerical algorithm. Thus, there are two iterations going on at the same time; 
-one is the iteration that half the step size (:math:`i`), and the other one is the increasing number of higher order terms added (which we will denote :math:`m`). 
-We need to improve our notation, and replace the approximation of the integral (:math:`I_i`) with :math:`R_{i,m}`. Equation :ref:`(200) <Eq:eq:numint:rom>`, can now 
-be written:
-
-.. _Eq:_auto66:
-
-.. math::
-
-    \tag{201}
-    I=R_{i+1,2}+\frac{1}{15}\left[R_{i+1,2}-R_{i,2}\right]+\mathcal{O}(h^6).
-        
-        
-
-A general formula valid for any :math:`m` can be found by realizing:
-
-.. _Eq:eq:numint:rom0:
-
-.. math::
-
-    \tag{202}
-    I=R_{i+1,m+1}+c_mh_i^{2m+2}+\mathcal{O}(h_i^{2m+4})\
-        
-
-.. math::
-          
-        I=R_{i,m+1}+c_mh_{i-1}^{2m+2}+\mathcal{O}(h_{i-1}^{2m+4})\nonumber
-        
-
-.. _Eq:eq:numint:rom1:
-
-.. math::
-
-    \tag{203}
-    =R_{i,m+1}+2^{2m+2}c_mh_{i}^{2m+2}+\mathcal{O}(h_{i-1}^{2m+4}),\
-        
-
-where, as before :math:`h_{i-1}=2h_i`. Subtracting equation :ref:`(202) <Eq:eq:numint:rom0>` and :ref:`(203) <Eq:eq:numint:rom1>`, we find an expression for the error term:
-
-.. _Eq:eq:numint:rom2:
-
-.. math::
-
-    \tag{204}
-    c_mh_{i}^{2m+2}=\frac{1}{4^{m+1}-1}(R_{i,m}-R_{i-1,m})\
-        
-
-Then the estimate for the integral in equation :ref:`(203) <Eq:eq:numint:rom1>` is:
-
-.. _Eq:_auto67:
-
-.. math::
-
-    \tag{205}
-    I=R_{i,m+1}+\mathcal{O}(h_i^{2m+2})
-        
-        
-
-.. _Eq:_auto68:
-
-.. math::
-
-    \tag{206}
-    R_{i,m+1}=R_{i,m}+\frac{1}{4^{m+1}-1}(R_{i+1,m}-R_{i,m}).
-        
-        
-
-A possible algorithm is then:
-
-1. Evaluate :math:`R_{0,0}=\frac{1}{2}\left[f(a)+f(b)\right](b-a)` as the first estimate
-
-2. Double the number of steps, :math:`N_{i+1}=2N_i` or half the step size :math:`h_{i+1}=h_i/2` 
-
-3. Calculate the missing values by summing over the odd number of steps :math:`\sum_{k=\text{odd values}}^{N_1-1}f(a+k h_{i+1})`
-
-4. Correct the estimate by adding *all* the higher order error term :math:`R_{i,m+1}=R_{i,m}+\frac{1}{4^m-1}(R_{i+1,m+1}-R_{i,m+1})`
-
-5. Check if the error term is lower than a specific tolerance :math:`E_{i,m}(a,b)=\frac{1}{4^{m+1}-1}(R_{i,m}-R_{i-1,m})`, if yes quit, if no goto 2, increase :math:`i` and :math:`m` by one
-
-The algorithm is illustrated in figure :ref:`fig:numint:romberg`.
-
-.. _fig:numint:romberg:
-
-.. figure:: romberg.png
+.. figure:: fx.png
    :width: 400
 
-   Illustration of the Romberg algorithm. Note that for each new evaluation of the integral :math:`R_{i,0}`, all the correction terms :math:`R_{i,m}` (for :math:`m>0`) must be evaluated again
+   *Notice that the root is located at the same place (:math:`x=0.703467417`)*
 
-Note that the tolerance term is not the correct one as it uses the error estimate for the current step, 
-which we also use correct the integral in the current step to reach a higher accuracy. 
-Thus the error on the integral will always be lower than the user specified tolerance.
-Below is a Python implementation:
+In the case of more than one unknown, or a set of equations that must be satisfied simultaneously, equation :ref:`(119) <Eq:eq:nlin:fx>` is replaced with a vector equation
 
-.. code-block:: python
-
-    def int_romberg(func,a, b,tol,show=False):
-        """ calculates the area of func on the domain [a,b]
-            for the given tol, if show=True the triangular
-            array of intermediate results are printed """
-        Nmax = 100
-        R = np.empty([Nmax,Nmax]) # storage buffer
-        h = (b-a) # step size
-        R[0,0]    =.5*(func(a)+func(b))*h
-        N = 1
-        for i in range(1,Nmax):
-            h /= 2
-            N *= 2
-            odd_terms=0
-            for k in range (1,N,2): # 1, 3, 5, ... , N-1
-                val        = a + k*h
-                odd_terms += func(val)
-    		# add the odd terms to the previous estimate	
-            R[i,0]   = 0.5*R[i-1,0] + h*odd_terms 
-            for m in range(i): 
-    			# add all higher order terms in h
-                R[i,m+1]   = R[i,m] + (R[i,m]-R[i-1,m])/(4**(m+1)-1)                  
-    		# check tolerance, best guess			
-            calc_tol = abs(R[i,i]-R[i-1,i-1])       
-            if(calc_tol<tol):
-                break  # estimated precision reached 
-        if(i == Nmax-1):
-            print('Romberg routine did not converge after ',
-                  Nmax, 'iterations!')
-        else:      
-            print('Number of intervals = ', N)
-    
-        if(show==True):
-            elem = [2**idx for idx in range(i+1)]
-            print("Steps StepSize Results")
-            for idx in range(i+1):
-                print(elem[idx],' ',
-                      "{:.6f}".format((b-a)/2**idx),end = ' ')
-                for l in range(idx+1):
-                    print("{:.6f}".format(R[idx,l]),end = ' ')
-                print('')  
-        return R[i,i] #return the best estimate
-
-Note that the Romberg integration only uses 32 function evaluations to reach a precision of :math:`10^{-8}`, whereas the adaptive midpoint and trapezoidal rule in the previous
-section uses 20480 and 9069 function evaluations, respectively. 
-
-Alternative implementation of adaptive integration
---------------------------------------------------
-Before we proceed, we will consider an alternative implementation of the adaptive method presented in the previous sections, with the following modification
-1. We will use Simpsons rule (see the exercise at the end), which takes the following form :math:`\int_a^bf(x)dx\simeq\frac{h}{6}\left[f(a)+4f(a+\frac{h}{2})+2f(a+h)+ 4f(a+3\frac{h}{2})+2f(a+2h)+\cdots+f(b)\right]`
-
-2. We only divide the intervals needed to reach the desired accuracy.
-
-Simpsons rule is accurate up to :math:`\mathcal{O}(h^4)`, and by following the same arguments as above we can estimate the error as :math:`E_i(a,b)=\frac{1}{15}(I_{i+1}-I_{i})`. The factor 1/15 (as opposed to 1/3) originates from the higher order accuracy. The integration proceeds as follows
-* ``S`` is an empty list
-
-* ``S.append([a,b])``
-
-* :math:`I=0`
-
-* ``while S not empty do:``
-
-  * ``[a,b]=S.pop(-1)``
-
-  * :math:`m=(b+a)/2`
-
-  * :math:`I_1=` ``simpson_step(a,b)``
-
-  * :math:`I_2=` ``simpson_step(a,m)+simpson_step(m,b)``
-
-  * if :math:`|I_1-I_2|<15|b-a|\cdot tol`
-
-    * :math:`I+=I_2`
-
-  * else:
-
-    * ``S.append([a,m])``
-
-    * ``S.append([m,b])``
-
-  * return :math:`I`
-
-Note the use of the list ``S``, we remove the interval :math:`[a,b]` from the list and calculates the integral. If the integral is not accurate enough we add to new intervals to the list, and continue until we reach the desired accuracy, then we proceed with the next interval. Since we remove (``pop``) the element from the list, we know that we will finish the evaluation once the list is empty. This algorithm allows for different sub interval to have different degrees of subdivisions, contrary to Rombergs algorithm. The full python implementation is shown below
-
-.. code-block:: python
-
-    def simpson_step(a, b,func):
-        m=0.5*(a+b)
-        return (b-a)/6*(func(a)+func(b)+4*func(m))
-    
-    def int_adaptive_simpson(func,a, b,tol):
-        """
-        adaptive quadrature, integrate a function from a
-        to b within tol*(b-a) uses simpsons rule
-        """
-        S=[]
-        S.append([a,b])
-        I=0
-        iterations=0
-        while S:
-            iterations +=1
-            a,b=S.pop(-1) # last element
-            m=(b+a)*0.5   # midpoint
-            I1=simpson_step(a,b,func) #simpsons for 1 interval 
-            I2=simpson_step(a,m,func)+simpson_step(m,b,func) # ...2 intervals
-            if(np.abs(I1-I2)<15*np.abs((b-a)*tol)):
-                I+=I2     # accuarcy met
-            else:
-                S.append([a,m]) # half the interval 
-                S.append([m,b])
-        print("Number of iterations: ", iterations)
-        return I
-
-Gaussian Quadrature
-===================
-
-.. index:: Gaussian quadrature
-
-Many of the methods we have looked into are of the type:
-
-.. _Eq:eq:numint:qq1:
+.. _Eq:eq:nlin:fvec:
 
 .. math::
 
-    \tag{207}
-    \int_a^b f(x) dx = \sum_{k=0}^{N-1} \omega_k f(x_k),\
+    \tag{120}
+    \mathbf{f}(\mathbf{x})=\mathbf{0}.
+        
         
 
-where the function is evaluated at fixed interval. For the midpoint rule :math:`\omega_k=h` for all values of :math:`k`, for the trapezoid rule 
-:math:`\omega_k=h/2` for the endpoints and :math:`h` for all the interior points. 
-For the Simpsons rule (see exercise) :math:`\omega_k=h/3, 4h/3,2h/3,4h/3,\ldots,4h/3,h/3`. 
-Note that all the methods we have looked at so far samples the function in equal spaced points, :math:`f(a+k h)`, 
-for :math:`k=0, 1, 2\ldots, N-1`. If we now allow for the function to be evaluated at unevenly spaced points, we can do a lot better. 
-This realization is the basis for Gaussian Quadrature. We will explore this in the following, 
-but to make the development easier and less cumbersome, we transform the integral from the domain :math:`[a,b]` to :math:`[-1,1]`:
+Although this equation looks quite similar to equation :ref:`(119) <Eq:eq:nlin:fx>`, this equation is *much* harder to solve. The only methods we will cover is the Newton Rapson method, which is a very good method if a good starting point is given. If you have a multidimensional problem, the advice is to try Newton-Raphson, if this method fails you need to try more advanced method, see e.g. [Ref7]_.
 
-.. _Eq:_auto69:
+Example: van der Waals equation of state
+========================================
+Before we begin with the numerical algorithms, let us consider an example: the van der Waals equation of state. The purpose is to illustrate some of the typical challenges. You are probably familiar with the ideal gas law:
+
+.. _Eq:eq:nlin:pvt:
 
 .. math::
 
-    \tag{208}
-    \int_a^bf(t)dt=\frac{b-a}{2}\int_{-1}^{1}f(x)dx\text{ , where:}
+    \tag{121}
+    P\nu=R_gT,
         
         
 
-.. _Eq:_auto70:
+where :math:`\nu=V/n` is the molar volume of the gas, :math:`P` is the pressure, :math:`V` is the volume, :math:`T` is the temperature, :math:`n` is the number of moles of the gas, and :math:`R_g` is the ideal gas constant.  This equation is an example of an *equation of state* (EOS), it relates :math:`P`, :math:`T`, and :math:`\nu`. Thus if we know the pressure and temperature of the gas, we can calculate :math:`\nu`. Equation :ref:`(121) <Eq:eq:nlin:pvt>` assumes that there are no interactions between the molecules in the gas. Clearly, this is too simplistic, and because of this one normally uses an EOS that better reflect the physical properties of the substance. A very famous EOS is the van der Waal EOS, which is a slight modification of equation :ref:`(121) <Eq:eq:nlin:pvt>`:
+
+.. _Eq:eq:nlin:vdw:
 
 .. math::
 
-    \tag{209}
-    x=\frac{2}{b-a}t-\frac{b+a}{b-a}.
+    \tag{122}
+    \left(P+\frac{a}{\nu^2}\right)\left(\nu-b\right)=R_gT.
         
         
 
-The factor in front comes from the fact that :math:`dt=(b-a)dx/2`, thus we can develop our algorithms on the domain :math:`[-1,1]`, 
-and then do the transformation back using: :math:`t=(b-a)x/2+(b+a)/2`.
+:math:`a` and :math:`b` are material constants that needs to be determined experimentally. This equation is *not* used in industrial design, but most equations used in practice are based on equation :ref:`(122) <Eq:eq:nlin:vdw>`. Multiplying equation :ref:`(122) <Eq:eq:nlin:vdw>` with :math:`\nu^2`, we get a non linear equation that is cubic in the molar volume. It turns out that cubic EOS are a class of equations that are quite successful in modeling the behavior of real systems [Ref8]_. However equation :ref:`(122) <Eq:eq:nlin:vdw>` is a good starting point for more complex and realistic equations.
 
+It is common practice to rescale EOS with respect to the critical point. At the critical point we have [ref]:
 
-.. note::
-   The idea we will explore is as follows:
-   If we can approximate the function to be integrated on the domain :math:`[-1,1]` (or on :math:`[a,b]`) as a 
-   polynomial of as *large a degree as possible*, then the numerical integral of this polynomial will be very close to the integral of the 
-   function we are seeking.
-
-
-
-This idea is best understood by a couple of examples. Assume that we want to use :math:`N=1` in equation :ref:`(207) <Eq:eq:numint:qq1>`:
-
-.. _Eq:_auto71:
+.. _Eq:eq:nlin:crit1:
 
 .. math::
 
-    \tag{210}
-    \int_{-1}^{1}f(x)\,dx\simeq\omega_0f(x_0).
-        
+    \tag{123}
+    \left.\frac{\partial P}{\partial \nu}\right|_{T_c,P_c} =0
+         
         
 
-We now choose :math:`f(x)` to be a polynomial of as large a degree as possible, but with the requirement that the integral is exact. If :math:`f(x)=1`, we get:
-
-.. _Eq:_auto72:
+.. _Eq:eq:nlin:crit2:
 
 .. math::
 
-    \tag{211}
-    \int_{-1}^{1}f(x)\,dx=\int_{-1}^{1}1\,dx=2=\omega_0,
-        
+    \tag{124}
+    \left.\frac{\partial^2 P}{\partial \nu^2}\right|_{T_c,P_c} =0
+         
         
 
-hence :math:`\omega_0=2`. If we choose :math:`f(x)=x`, we get:
+From equation :ref:`(123) <Eq:eq:nlin:crit1>`,  :ref:`(124) <Eq:eq:nlin:crit2>`, and :ref:`(122) <Eq:eq:nlin:vdw>`, it follows:
 
-.. _Eq:_auto73:
+.. _Eq:eq:nlin:crit3:
 
 .. math::
 
-    \tag{212}
-    \int_{-1}^{1}f(x)\,dx=\int_{-1}^{1}x\,dx=0=\omega_0f(x_0)=2x_0,
+    \tag{125}
+    \nu_c=3b\quad,P_c=\frac{a}{27b^2}\quad,R_gT_c=\frac{8a}{27b^2}.
         
         
 
-hence :math:`x_0=0`. 
+Inserting these equations into equation :ref:`(122) <Eq:eq:nlin:vdw>`, and defining the *reduced* quantities :math:`\hat{P}=P/P_c`, :math:`\hat{T}=T/T_c`, :math:`\hat{\nu}=\nu/\nu_c`, we get
 
-.. admonition:: The Gaussian integration rule for :math:`N=1` is
-
-   
-   .. math::
-           
-           \int_{-1}^{1}f(x)\,dx\simeq 2f(0)\text{, or: }\nonumber
-           
-   
-   .. _Eq:_auto74:
+.. _Eq:eq:nlin:vdwr:
 
 .. math::
 
-    \tag{213}
-    \int_{a}^{b}f(t)\,dt\simeq\frac{b-a}{2}\,2f(\frac{b+a}{2})=(b-a)f(\frac{b+a}{2}).
-
-
-
-
-This equation is equal to the midpoint rule, by choosing :math:`b=a+h` we reproduce equation :ref:`(177) <Eq:eq:numint:mid0>`. If we choose :math:`N=2`:
-
-.. _Eq:_auto75:
-
-.. math::
-
-    \tag{214}
-    \int_{-1}^{1}f(x)\,dx\simeq\omega_0f(x_0)+\omega_1f(x_1),
+    \tag{126}
+    \left(\hat{P}+\frac{3}{\hat{\nu}^2}\right)\left(3\hat{\nu}-1\right)=8\hat{T}.
         
         
 
-we can show that now $ f(x)=1,\,x,\,x^2\,x^3$ can be integrated exact:
+.. _fig:nlin:vdw:
 
-.. _Eq:_auto76:
+.. figure:: vdw.png
+   :width: 400
 
-.. math::
+   *van der Waal isotherms*
 
-    \tag{215}
-    \int_{-1}^{1}1\,dx=2=\omega_0f(x_0)+\omega_1f(x_1)=\omega_0+\omega_1\,,
-        
-        
+In figure :ref:`fig:nlin:vdw`, we have plotted the isotherms. Note that if :math:`\hat{T}<1` (:math:`T<T_c`), there might be more than one solution for the molar volume. This is clearly unphysical and additional constraints are needed. For the curve :math:`\hat{T}=0.9`, the dashed lined shows that for :math:`\hat{P}=0.7`, there are three solutions. This is a typical behavior of the cubic EOS, and physically it corresponds to the saturated case, where the vapor and liquid phase co-exist. The left root is the liquid state and the right root is the vapor state. The root in the middle represents a meta stable state.
 
-.. _Eq:_auto77:
 
-.. math::
+.. admonition:: It never hurts to look at your function
 
-    \tag{216}
-    \int_{-1}^{1}x\,dx=0=\omega_0f(x_0)+\omega_1f(x_1)=\omega_0x_0+\omega_1x_1\,,
-        
-        
+   The example in figure :ref:`fig:nlin:vdw` illustrates some important points. Solving a nonlinear problem might be very easy in part of the parameter space (e.g. when :math:`T>T_c` there are only one solution), but extremely hard in other part of the parameter space (e.g. when :math:`T<T_c`, where there are multiple solutions). However, much of the trick to find a solution is to choose a good starting point. When there are multiple solutions we need to start close to the physical solution.
 
-.. _Eq:_auto78:
 
-.. math::
 
-    \tag{217}
-    \int_{-1}^{1}x^2\,dx=\frac{2}{3}=\omega_0f(x_0)+\omega_1f(x_1)=\omega_0x_0^2+\omega_1x_1^2\,,
-        
-        
-
-.. _Eq:_auto79:
-
-.. math::
-
-    \tag{218}
-    \int_{-1}^{1}x^3\,dx=0=\omega_0f(x_0)+\omega_1f(x_1)=\omega_0x_0^3+\omega_1x_1^3\,,
-        
-        
-
-hence there are four unknowns and four equations. The solution is: :math:`\omega_0=\omega_1=1` and :math:`x_0=-x_1=1/\sqrt{3}`.
-
-
-.. admonition:: The Gaussian integration rule for :math:`N=2` is
-
-   
-   .. _Eq:_auto80:
-
-.. math::
-
-    \tag{219}
-    \int_{-1}^{1}f(x)\,dx\simeq f(-\frac{1}{\sqrt{3}})+f(\frac{1}{\sqrt{3}})\, \text{, or:}
-           
-           
-   
-   .. _Eq:_auto81:
-
-.. math::
-
-    \tag{220}
-    \int_{a}^{b}f(x)\,dx\simeq \frac{b-a}{2}\left[f(-\frac{b-a}{2}\frac{1}{\sqrt{3}}+\frac{b+a}{2})
-           +f(\frac{b-a}{2}\frac{1}{\sqrt{3}}+\frac{b+a}{2})\right].
-
-
-
-
-.. code-block:: python
-
-    def int_gaussquad2(func, lower_limit, upper_limit):
-        x   = np.array([-1/np.sqrt(3.),1/np.sqrt(3)])
-        w   = np.array([1, 1])
-        xp  = 0.5*(upper_limit-lower_limit)*x
-        xp += 0.5*(upper_limit+lower_limit)
-        area = np.sum(w*func(xp))
-        return area*0.5*(upper_limit-lower_limit)
-
-The case N=3
-~~~~~~~~~~~~
-
-For the case :math:`N=3`, we find that :math:`f(x)=1,x,x^2,x^3,x^4,x^5` can be integrated exactly:
-
-.. _Eq:_auto82:
-
-.. math::
-
-    \tag{221}
-    \int_{-1}^{1}1\,dx=2=\omega_0+\omega_1+\omega_2\,,
-        
-        
-
-.. _Eq:_auto83:
-
-.. math::
-
-    \tag{222}
-    \int_{-1}^{1}x\,dx=0=\omega_0x_0+\omega_1x_1+\omega_2x_2\,,
-        
-        
-
-.. _Eq:_auto84:
-
-.. math::
-
-    \tag{223}
-    \int_{-1}^{1}x^2\,dx=\frac{2}{3}=\omega_0x_0^2+\omega_1x_1^2+\omega_2x_2^2\,,
-        
-        
-
-.. _Eq:_auto85:
-
-.. math::
-
-    \tag{224}
-    \int_{-1}^{1}x^3\,dx=0=\omega_0x_0^3+\omega_1x_1^3+\omega_2x_2^3\,,
-        
-        
-
-.. _Eq:_auto86:
-
-.. math::
-
-    \tag{225}
-    \int_{-1}^{1}x^4\,dx=\frac{2}{5}=\omega_0x_0^4+\omega_1x_1^4+\omega_2x_2^4\,,
-        
-        
-
-.. _Eq:_auto87:
-
-.. math::
-
-    \tag{226}
-    \int_{-1}^{1}x^5\,dx=0=\omega_0x_0^5+\omega_1x_1^5+\omega_2x_2^5\,,
-        
-        
-
-the solution to these equations are :math:`\omega_{0,1,2}=5/9, 8/9, 5/9` and :math:`x_{1,2,3}=-\sqrt{3/5},0,\sqrt{3/5}`. Below is a Python implementation:
-
-.. code-block:: python
-
-    def int_gaussquad3(lower_limit, upper_limit,func):
-        x  = np.array([-np.sqrt(3./5.),0.,np.sqrt(3./5.)])
-        w  = np.array([5./9., 8./9., 5./9.])
-        xp = 0.5*(upper_limit-lower_limit)*x
-        xp += 0.5*(upper_limit+lower_limit)
-        area = np.sum(w*func(xp))
-        return area*0.5*(upper_limit-lower_limit)
-
-Note that the Gaussian quadrature converges very fast. From :math:`N=2` to :math:`N=3` function evaluation we reduce the error (in this specific case) 
-from 6.5% to 0.1%. Our standard trapezoidal formula needs more than 20 function evaluations to achieve this, the Romberg method uses 4-5 function
-evaluations. How can this be? If we use the standard Taylor formula for the function to be integrated, we know that for :math:`N=2` the Taylor 
-formula must be integrated up to :math:`x^3`, so the error term is proportional to :math:`h^4f^{(4)}(\xi)` (where :math:`\xi` is some x-value in :math:`[a,b]`). 
-:math:`h` is the step size, and we can replace it with :math:`h\sim (b-a)/N`, thus the error scale as :math:`c_N/N^4` (where :math:`c_N` is a constant). 
-Following the same argument, we find for :math:`N=3` that the error term is :math:`h^6f^{(6)}(\xi)` or that the error term scale as :math:`c_N/N^6`. 
-Each time we increase :math:`N` by a factor of one, the error term reduces by :math:`N^2`. Thus if we evaluate the integral for :math:`N=10`, 
-increasing to :math:`N=11` will reduce the error by a factor of :math:`11^2=121`.
-
-Error term on Gaussian Integration
-----------------------------------
-
-.. index::
-   single: Gaussian quadrature, error term
-
-The Gaussian integration rule of order :math:`N` integrates exactly a polynomial of order :math:`2N-1`. 
-From Taylors error formula, see equation :ref:`(3) <Eq:eq:taylor:error>` in the chapter :ref:`ch:taylor`,
-we can easily see that the error term must be of order :math:`2N`, and be proportional to :math:`f^{(2N)}(\eta)`, see [Ref4]_ for more details on the derivation of error terms. The drawback with an analytical error term derived from series expansion is that it involves the derivative of the function. As we have already explained, this is very unpractical and it is much more practical to use the methods described in the section :ref:`sec:numint:parct`. Let us consider this in more detail, assume that we evaluate the integral using first a Gaussian integration rule with :math:`N` points, and then :math:`N+1` points. Our estimates of the "exact" integral, :math:`I`,  would then be:
-
-.. _Eq:eq:numint:gerr1:
-
-.. math::
-
-    \tag{227}
-    I=I_N+ch_{N}^{2N},
-        
-
-.. _Eq:eq:numint:gerr2:
-
-.. math::
-
-    \tag{228}
-    I=I_{N+1}+ch_{N+1}^{2N+1}.
-        
-        
-
-In principle :math:`h_{N+1}\neq h_{N}`, but in the following we will assume that :math:`h_N\simeq h_{N+1}`, and :math:`h\ll 1`. Subtracting equation :ref:`(227) <Eq:eq:numint:gerr1>` and :ref:`(228) <Eq:eq:numint:gerr2>` we can show that a reasonable estimate for the error term :math:`ch^{2N}` would be:
-
-.. _Eq:_auto88:
-
-.. math::
-
-    \tag{229}
-    ch^N= I_{N+1}-I_N.
-        
-        
-
-If this estimate is lower than a given tolerance we can be quite confident that the higher order estimate :math:`I_{N+1}` approximate the true integral within our error estimate. This is the method implemented in SciPy, `integrate.quadrature <https://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.integrate.quadrature.html>`__
-
-Common Weight functions for Classical Gaussian Quadratures
-----------------------------------------------------------
-Integrating functions over an infinite range
-============================================
-
-.. index::
-   single: numerical integral, infinite
-
-Integrating a function over an infinite range can be done by the following trick. Assume that we would like to evaluate
-
-.. _Eq:eq:numint:inf:
-
-.. math::
-
-    \tag{230}
-    \int_a^\infty f(x) dx.
-        
-        
-
-If we introduce the following substitution
-
-.. math::
-        
-        z=\frac{x-a}{1+x-a},
-        
-        
-        or equivalently
-        
-        x=a+\frac{z}{1-z},
-        
-        
-
-then if :math:`x=a`, :math:`z=0`, and if :math:`x\to\infty` then :math:`z\to1`, hence:
-
-.. _Eq:eq:numint:infs3:
-
-.. math::
-
-    \tag{231}
-    \int_a^\infty f(x) dx = \int_0^1 f(a+\frac{z}{1-z}) \frac{dz}{(1-z)^2}.
-        
-        
-
-Which method to use in a specific case? (NOT COMPLETED)
--------------------------------------------------------
-There are no general answers to this question, and one need to decide from case to case. If computational speed is not an issue, 
-and the function to be integrated can be evaluated at any points all the methods above can be used. If the function to be integrated 
-is a set of observations at different times, that might be unevenly spaced, I would use the midpoint rule:
-
-.. _Eq:_auto89:
-
-.. math::
-
-    \tag{232}
-    I(a,b)=\int_a^bf(x)dx\simeq\sum_{k=0}^{N-1}M(x_k,x_k+h)=\sum_{k=0}^{N-1}h_if(x_k+\frac{h_i}{2})
-        
-        
-
-This is because we do not know anything about the function between the points, only when it is observed, and the formula uses only 
-the information at the observation points. There is a second more subtle reason, and that is the fact that in many cases the 
-observations a different times are the {\it average} value of the observable quantity and it those cases the midpoint 
-rule would be the exact answer. 
 
 .. --- begin exercise ---
 
-Exercise 4.1: Numerical Integration
------------------------------------
+Exercise 4.1: van der Waal EOS and CO$_2$
+-----------------------------------------
 
-**a)**
-Show that for a linear function, :math:`y=a\cdot x+b` both the trapezoidal rule and the rectangular rule are exact
-
-**b)**
-Consider :math:`I(a,b)=\int_a^bf(x)dx` for :math:`f(x)=x^2`. The analytical result is :math:`I(a,b)=\frac{b^3-a^3}{3}`. Use the Trapezoidal and 
-  Midpoint rule to evaluate these integrals and show that the error for the Trapezoidal rule is exactly twice as big as the Midpoint rule.
-
-**c)**
-Use the fact that the error term on the trapezoidal rule is twice as big as the midpoint rule to derive Simpsons formula: :math:`I(a,b)=\sum_{k=0}^{N-1}I(x_k,x_k+h)=\frac{h}{6}\left[f(a)+ 4f(a+\frac{h}{2})+2f(a+h)+4f(a+3\frac{h}{2})+2f(a+2h)+\cdots+f(b)\right]` Hint: :math:`I(x_k,x_k+h)=M(x_k,x_k+h)+E_M` (midpoint rule) and :math:`I(x_k,x_k+h)=T(x_k,x_k+h)+E_T=T(x_k,x_k+h)-2E_M` (trapezoidal rule).
+Use equation :ref:`(122) <Eq:eq:nlin:vdw>`, and the parameters for CO$_2$: a=3.640 L$^2$bar/mol, and b=0.04267 L/mol, to test the van der Waal EOS in equation :ref:`(122) <Eq:eq:nlin:vdw>`. Use that at 2 MPa and 100 $^\circ$C, CO$_2$ has a specific volume of 0.033586 m$^3$/kg.
 
 .. --- begin solution of exercise ---
 
 **Solution.**
-Simpsons rule is an improvement over the midpoint and trapezoidal rule. It can be derived in different ways, we will make use of 
-the results in the previous section. If we assume that the second derivative is reasonably well behaved on the interval :math:`x_k` 
-and :math:`x_k+h` and fairly constant we can assume that :math:`f^{\prime\prime}(\eta)\simeq f^{\prime\prime}(\overline{\eta})`, hence :math:`E_T=-2E_M`.
-
-.. _Eq:_auto90:
-
-.. math::
-
-    \tag{233}
-    I(x_k,x_k+h)=M(x_k,x_k+h)+E_M\text{ (midpoint rule)}
-        
-        
-
-.. math::
-          
-        I(x_k,x_k+h)=T(x_k,x_k+h)+E_T\nonumber
-        
-
-.. _Eq:_auto91:
-
-.. math::
-
-    \tag{234}
-    =T(x_k,x_k+h)-2E_M\text{ (trapezoidal rule)},
-        
-        
-
-we can now cancel out the error term by multiplying the first equation with 2 and adding the equations:
-
-.. _Eq:_auto92:
-
-.. math::
-
-    \tag{235}
-    3I(x_k,x_k+h)=2M(x_k,x_k+h)+T(x_k,x_k+h)
-        
-        
-
-.. _Eq:_auto93:
-
-.. math::
-
-    \tag{236}
-    =2f(x_k+\frac{h}{2}) h+\left[f(x_k+h)+f(x_k)\right] \frac{h}{2}
-        
-        
-
-.. _Eq:_auto94:
-
-.. math::
-
-    \tag{237}
-    I(x_k,x_k+h)=\frac{h}{6}\left[f(x_k)+4f(x_k+\frac{h}{2})+f(x_k+h)\right].
-        
-        
-
-Now we can do as we did in the case of the trapezoidal rule, sum over all the elements:
-
-.. math::
-        
-        I(a,b)=\sum_{k=0}^{N-1}I(x_k,x_k+h)\nonumber
-        
-
-.. math::
-          
-        =\frac{h}{6}\left[f(a)+ 4f(a+\frac{h}{2})+2f(a+h)+4f(a+3\frac{h}{2})\right.\nonumber
-        
-
-.. _Eq:_auto95:
-
-.. math::
-
-    \tag{238}
-    \left.\qquad+2f(a+2h)+\cdots+f(b)\right]
-        
-        
-
-.. _Eq:_auto96:
-
-.. math::
-
-    \tag{239}
-    =\frac{h^\prime}{3}\left[f(a)+ f(b) + 4\sum_{k= \text{odd}}^{N-2}f(a+k h^\prime)+2\sum_{k= \text{even}}^{N-2}f(a+k h^\prime)\right],
-        
-        
-
-note that in the last equation we have changed the step size :math:`h=2h^\prime`.
+The calculation is straight forward, but it is easy to get an error due to units. We will use SI units: a=0.3640 m$^6$Pa/mol, b=4.267$\cdot10^{-5}$ m$^3$/mol, $R$=8.314J/mol K.  The molar volume is obtained by multiplying by the molar weight of CO$_2$: :math:`M_w` = 44 g/mol, hence $\nu=1.478\cdot10^{-3}$m$^3$/mol. Using :math:`P=RT/(\nu-b)-a/\nu^2=1.993` MPa, or an error of :math:`0.3\%`.
 
 .. --- end solution of exercise ---
 
-**d)**
-Show that for :math:`N=2` (:math:`f(x)=1,x,x^3`), the points and Gaussian quadrature rule for :math:`\int_{0}^{1}x^{1/2}f(x)\,dx`
-is :math:`\omega_{0,1}=-\sqrt{70}{150} + 1/3, \sqrt{70}{150} + 1/3`
-and :math:`x_{0,1}=-2\sqrt{70}{63} + 5/9, 2\sqrt{70}{63} + 5/9`
-1. Integrate :math:`\int_0^1x^{1/2}\cos x\,dx` using the rule derived in the exercise above and compare with the standard Gaussian quadrature rule for (:math:`N=2`, and :math:`N=3`).
+.. --- end exercise ---
 
-**e)**
-Make a Python program that uses the Midpoint rule to integrate experimental data that are unevenly spaced and given in the form of two arrays.
+Fixed-point iteration
+=====================
+
+.. index:: fixed-point iteration
+
+A simple (but not always possible) way of solving a nonlinear equation is to reformulate the problem :math:`f(x)=0` to a problem of the form
+
+.. _Eq:eq:nlin:g:
+
+.. math::
+
+    \tag{127}
+    x=g(x).
+        
+        
+
+The algorithm for solving this equation is to guess at a starting point, :math:`x_0`, evaluate :math:`x_1=g(x_0)`, :math:`x_2=g(x_1)`, and so on. In some circumstances we might end up at a stable point, where :math:`x` does not change. This point is termed a *fixed point*.
+
+Note that the form of :math:`g(x)` is not uniquely determined. For our function defined in equation :ref:`(118) <Eq:eq:nlin:exp>`, we can solve for :math:`x` directly
+
+.. _Eq:eq:nlin:g2:
+
+.. math::
+
+    \tag{128}
+    x=e^{-x/2},
+        
+        
+
+or we could write:
+
+.. _Eq:eq:nlin:g3:
+
+.. math::
+
+    \tag{129}
+    x=x-x^2+e^{-x}.
+        
+        
+
+These functions are illustrated in figure :ref:`fig:nlin:fg`, by visual inspection they look very similar, but as we will show in the next exercise the convergence is quite different. 
+
+.. _fig:nlin:fg:
+
+.. figure:: f_g_comb.png
+   :width: 400
+
+   *Two examples of iterative functions, that will give the same solution*
+
+.. --- begin exercise ---
+
+Exercise 4.2: Implement the fixed point iteration
+-------------------------------------------------
+
+Write a Python function that utilizes the fixed point algorithm in the previous section, find the root of :math:`f(x)=x^2-e^{-x}`. In one case use :math:`g(x)=e^{-x/2}`, and in the other case use :math:`g(x)=x-x^2+e^{-x}`. How many iterations does it take in each case?
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+Below is a straight forward (vanilla) implementation:
+
+.. code-block:: python
+
+    def iterative(x,g,prec=1e-8, MAXIT=1000):
+        '''Approximate solution of x=g(x) by fixed point iterations.
+        x : starting point for iterations 
+        eps : desired precision
+        Returns x when x does not change more than prec
+        and number of iterations MAXIT are not exceeded
+        '''
+        eps = 1
+        n=0
+        while eps>prec and n < MAXIT:
+            x_next = g(x)
+            eps = np.abs(x-x_next)
+            x = x_next
+            n += 1
+            if(np.isinf(x)):
+                print('Quitting .. maybe bad starting point?')
+                return x
+        if (n<MAXIT):
+            print('Found solution: ', x, ' After ', n, 'iterations')
+        else:
+            print('Max number of iterations exceeded')
+        return x
+
+If we start at :math:`x=0`, it will take 174 iterations using :math:`x-x^2+e^{-x}` (:math:`g(x)`) and only 19 for :math:`e^{-x/2}` (:math:`h(x)`), the root is $x$=0.70346742.
+
+.. --- end solution of exercise ---
 
 .. --- end exercise ---
+
+.. --- begin exercise ---
+
+Exercise 4.3: Finding the molar volume from the van der Waal EOS by fixed point iteration
+-----------------------------------------------------------------------------------------
+
+Extend the code above to take as argument the van der Waal EOS. For simplicity we will use the rescaled EOS in equation :ref:`(126) <Eq:eq:nlin:vdwr>`. Show that for the reduced temperature, $\hat{T}$=1.2, and pressure, $\hat{P}$=1.5, the reduced molar volume :math:`\hat{nu}` is 1.3522091.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+First we rewrite equation :ref:`(126) <Eq:eq:nlin:vdwr>` in a more useful form
+
+.. _Eq:eq:nlin:sp:
+
+.. math::
+
+    \tag{130}
+    \hat{\nu}=\frac{1}{3}(1+\frac{8\hat{T}}{\hat{P}+3/\hat{\nu}^2})
+        
+        
+
+The right hand side will play the same role as :math:`g(x)` above, where :math:`x` now is the reduced molar volume, and can be implemented in Python as:
+
+.. code-block:: python
+
+    def dvdwEOS(nu,t,p):
+        return (1+8*t/(p+3/nu**2))/3
+
+Note that this function requires the values of :math:`\hat{P}` and :math:`\hat{T}`, in addition to :math:`\hat{\nu}` to return a value. Thus in order to use the fixed point iteration method implemented above, we need to pass arguments to our function. This can easily be achieved by taking advantage of Pythons ``*args`` functionality. By simply rewriting our implementation slightly:
+
+.. code-block:: python
+
+    def iterative(x,g,*args,prec=1e-8):
+        MAX_ITER=1000
+        eps = 1
+        n=0
+        while eps>prec and n < MAX_ITER:
+            x_next = g(x,*args)
+            eps = np.abs(x-x_next)
+            x = x_next
+            n += 1
+        print('Number of iterations: ', n)
+        return x
+
+We can find the root by calling the function as:
+
+.. code-block:: python
+
+    iterative(1,dvdwEOS,1.2,1.5)
+
+The program returns the correct solution after 71 iterations.
+
+.. --- end solution of exercise ---
+
+.. --- end exercise ---
+
+.. _sec:nlin:fp:
+
+When do the fixed point method fail?
+------------------------------------
+If we replace :math:`e^{-x}` with :math:`e^{1-x^2}` in equation :ref:`(129) <Eq:eq:nlin:g3>`, our method will not give a solution. You can easily verify that the :math:`x=1` is a solution, so why does our method fail? To investigate this in a bit more detail, we turn to Taylors formula (once again). Assume that the root is located at :math:`x^*`, and our guess is :math:`x_k`, then the next :math:`x`-value will be
+
+.. _Eq:eq:nlin:t1:
+
+.. math::
+
+    \tag{131}
+    x_{k+1}=g(x_0)=g(x^*)+g^\prime(x^*)(x_k-x^*)+\cdots
+        
+        
+
+The true solution is :math:`x^*`, hence :math:`x^*=f(x^*)`, and we can write
+
+.. _Eq:eq:nlin:t2:
+
+.. math::
+
+    \tag{132}
+    x_{k+1}-x^*=g^\prime(x^*)(x_k-x^*),
+        
+        
+
+where we have neglected higher order terms. The point is: at each iteration we want the distance :math:`x_1-x^*` to decrease, i.e. to be smaller than :math:`x_0-x^*`. This can only be achieved if
+
+.. _Eq:eq:nlin:fpi:
+
+.. math::
+
+    \tag{133}
+    |g^\prime(x^*)|<1. 
+        
+        
+
+In our example above we saw that if :math:`g(x)=x-x^2+e^{-x}`, we used 172 iterations and only 19 iterations if we replaced :math:`g(x)` with :math:`h(x)=e^{-x/2}` to converge to the *same* root $x$=0.70346742. We can now understand this, because :math:`g^\prime(x)=1-2x-e^{-x}` and :math:`g(x^*)\simeq-0.90`, whereas :math:`h^\prime(x)=-e^{-x/2}/2`, and :math:`h^\prime(x^*)\simeq0.35`. We expect the number of iterations, :math:`n`, needed to reach a certain precision, :math:`\varepsilon`, to scale as
+
+.. _Eq:eq:nlin:scale:
+
+.. math::
+
+    \tag{134}
+    |g^\prime(x^*)|^n=\varepsilon.
+        
+        
+
+We expect to use :math:`\log|h^\prime(x^*)|/\log|g^\prime(x^*)|\simeq10` more iterations using :math:`g(x)` compared to :math:`h(x)`, which is close to the observed value of 172/19$\simeq 9$.
+What to do when the fixed point method fail
+-------------------------------------------
+As discussed in [Ref9]_, there might be an elegant solution whenever :math:`|g^\prime(x^*)|>1`. If it is possible to invert the :math:`g(x)`, we can show that the derivative of the inverse function
+$ { g^\prime }^{-1} (x^*)  = 1/g^\prime (x^*) $. Why is this useful? Because if :math:`x^*=g(x^*)` is the solution we are searching for, then this is equivalent to :math:`x^*={g}^{-1}(x^*)` *if and only if* we can invert :math:`g(x)`. Note that in many cases it is not possible to invert :math:`g(x)`. Let us first show that $ { g^\prime }^{-1} (x^*)  = 1/g^\prime (x^*) $. For simplicity write
+
+.. _Eq:_auto33:
+
+.. math::
+
+    \tag{135}
+    y = g(x)\Leftarrow x=g^{-1}(y),
+        
+        
+
+taking the derivative with respect to x gives
+
+.. _Eq:eq:nlin:fpi1:
+
+.. math::
+
+    \tag{136}
+    \frac{d}{dx}g^{-1}(y)=\frac{dx}{dx}=1,
+        
+
+.. _Eq:eq:nlin:fpi2:
+
+.. math::
+
+    \tag{137}
+    \frac{dg^{-1}(y)}{dy}\frac{dy}{dx}=\frac{dx}{dx}=1,
+        
+
+.. _Eq:eq:nlin:fpi3:
+
+.. math::
+
+    \tag{138}
+    \frac{dg^{-1}(y)}{dy}=\frac{1}{\frac{dy}{dx}}=\frac{1}{g^{\prime}(x)}
+        =\frac{1}{g^{\prime}(g^{-1}(y))}.
+        
+
+Going from equation :ref:`(136) <Eq:eq:nlin:fpi1>` to :ref:`(137) <Eq:eq:nlin:fpi2>`, we have used the chain rule. Equation :ref:`(138) <Eq:eq:nlin:fpi3>` is general, let us now specify to our fixed point iteration. Then we can use :math:`x^*=g(x^*)=y^*`, and :math:`x^*=g^{-1}(y^*)=g^{-1}(x^*)` hence we can write the last equation as
+
+.. _Eq:eq:nlin:fpif:
+
+.. math::
+
+    \tag{139}
+    \frac{d}{dx}g^{-1}(x^*)=\frac{1}{g^{\prime}(x^*)}.
+        
+        
+
+.. --- begin exercise ---
+
+Exercise 4.4: Solve :math:`x=e^{1-x^2}` using fixed point iteration
+-------------------------------------------------------------------
+
+The solution to :math:`x=e^{1-x^2}` is clearly :math:`x=1`.
+
+* First try the fixed point method using :math:`g(x)=e^{1-x^2}` to find the root :math:`x=1`. Try to start very close to the true solution :math:`x=1`. What is the value of :math:`g^\prime(x^*)`?
+
+* Next, invert :math:`g(x)`, what is the derivative of :math:`g^{-1}(x^*)`? Try the fixed point method using :math:`g^{-1}(x^*)`
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+First, we calculate the derivative of :math:`g(x)`, :math:`g^\prime(x)=-2xe^{1-x^2}`, hence :math:`g^\prime(x^*)=-2` and :math:`|g^\prime(x^*)|>1`. This is an unstable fixed point, and if we start a little bit off from this point we will spiral away from it.
+
+Inverting :math:`y=g(x)` gives us $ g^{-1} (y)=\sqrt{1-\ln y}$. Note that :math:`y^*=x^*=1` is a solution to this equation as it should be. The derivative is
+
+.. _Eq:_auto34:
+
+.. math::
+
+    \tag{140}
+    {g^{-1}}^\prime(y)=-\frac{1}{2\sqrt{1-\ln y}},
+        
+        
+
+and $ {g^{-1}}^\prime(y^*)=-1/2 $.
+It takes about 30 iterations to reach the correct solution :math:`y^*=1`, when the starting point is :math:`y=0`.
+
+.. --- end solution of exercise ---
+
+.. --- end exercise ---
+
+Rate of convergence          (1)
+================================
+
+.. index:: rate of convergence
+
+The rate of convergence is the speed at which a *convergent* sequence approach the limit. Assume that our sequence :math:`x_{k}` converges to the number :math:`x^*`, the sequence is said to *converge linearly* to :math:`x^*` if there exists a number :math:`\mu\in<0,1>`, such that
+
+.. _Eq:eq:nlin:linconv:
+
+.. math::
+
+    \tag{141}
+    \lim_{k\to\infty}=\frac{|x_{k+1}-x^*|}{|x_k-x^*|}=\mu
+        
+        
+
+Inserting equation :ref:`(132) <Eq:eq:nlin:t2>` in equation :ref:`(141) <Eq:eq:nlin:linconv>`, we get:
+
+.. _Eq:eq:nlin:ling:
+
+.. math::
+
+    \tag{142}
+    \lim_{k\to\infty}=\frac{|x_{k+1}-x_k|}{x_k-x^*}
+        =\frac{|g^\prime(x^*)(x_k-x^*)|}{|x_k-x^*|}=|g^\prime(x^*)|.
+        
+        
+
+Hence the fixed point iteration is expected to converge *linearly* to the correct solution. The definition in equation :ref:`(141) <Eq:eq:nlin:linconv>`, can be extended to include the definition of quadratic, cubic, etc. convergence:
+
+.. _Eq:eq:nlin:qconv:
+
+.. math::
+
+    \tag{143}
+    \lim_{k\to\infty}=\frac{|x_{k+1}-x^*|}{|x_k-x^*|^q}=\mu.
+        
+        
+
+If :math:`q=2` the convergence is said to be quadratic and so on.
+
+The bisection method
+====================
+
+.. index:: bisection method
+
+The idea behind bisection is that the root is bracketed, i.e. that there exists two points :math:`a` and :math:`b`, such that :math:`f(a)\cdot f(b)<0`. In practice it might be a challenge to find these two points. However, if you know that the function has a only root between two values, and that speed is not a big issue this method guarantees that the root will be found within a finite number of steps. The basic idea behind the method is to divide the interval into two (i.e. bisecting the interval). The method only works if the function is continuous on the interval. 
+
+.. _fig:nlin:bisection:
+
+.. figure:: bisection.png
+   :width: 400
+
+   *Illustration of the bisection method for the van der Waal EOS*
+
+The algorithm is as follows:
+* Test if :math:`f(a)\cdot f(b)<0`, if not return an error message
+
+* Calculate the midpoint :math:`c=(a+b)/2`. If :math:`f(a)\cdot f(c)<0` the root is in the interval :math:`[a,c]`, else the root is in the interval :math:`[c,b]`
+
+* Half the interval, and test in which interval the root lies, and continue until a convergence criterion.
+
+In figure :ref:`fig:nlin:bisection`, there is a graphical illustration.
+Below is an implementation of the bisection method.
+
+.. code-block:: python
+
+    def bisection(f,a,b,prec=1e-8,MAXIT=100):
+        '''Approximate solution of f(x)=0 on interval [a,b] by bisection.
+    
+        f   : f(x)=0.
+        a,b : brackets the root f(a)*f(b) has to be negative 
+        eps : desired precision
+        
+        Returns the midpoint when it is closer than eps to the root, 
+        unless MAXIT are not exceeded
+        '''
+        if f(a)*f(b) >= 0:
+            print('You need to bracket the root, f(a)*f(b) >= 0')
+            return None
+        an = a
+        bn = b
+        cn = 0.5*(an + bn)
+        c_old = cn - 10*prec
+        n=0
+        while np.abs(cn-c_old)>=prec and n<MAXIT:
+            c_old = cn 
+            f_cn = f(cn)
+            if f(an)*f_cn < 0:
+                bn = cn
+            elif f(bn)*f_cn < 0:
+                an = cn
+            elif f_cn == 0:
+                print('Found exact solution ', cn, 
+                      ' after ', n, 'iterations' )
+                return cn
+            else:
+                print('Bisection method fails.')
+                return None
+            cn = 0.5*(an+bn)
+            n += 1
+        if n<MAXIT-1:
+            print('Found solution ', cn,' after ', n, 'iterations' )
+            return cn
+        else:
+            print('Max number of iterations: ', MAXIT, ' reached.') 
+            print('Try to increase MAXIT or decrease prec')
+            print('Returning best guess, value of function is: ', f_cn)
+        return None
+
+
+.. admonition:: Warnings
+
+   Note that the implementation of the bisection algorithm is only a few lines of code, and most of the code is to give warnings to the user. In this case it is important to do additional checking, and give the user warnings. If $f(c)$=0, then we must stop and return the exact solution. If we only test if :math:`f(a)\cdot f(c)` is greater or lower than zero the algorithm would fail.
+
+
+
+
+Rate of convergence          (2)
+--------------------------------
+
+.. index:: rate of convergence
+
+If :math:`c_n` is the midpoint after :math:`n` steps, the difference between the solution :math:`x^*` and :math:`c_n` is
+
+.. _Eq:eq:nlin:bisec:
+
+.. math::
+
+    \tag{144}
+    |c_n-x^*| \le \frac{|b-a|}{2^n}
+        
+        
+
+Using our previous definition in equation :ref:`(143) <Eq:eq:nlin:qconv>`, we find that
+
+.. _Eq:eq:nlin:bsc1:
+
+.. math::
+
+    \tag{145}
+    \lim_{k\to\infty}=\frac{|c_{k+1}-x^*|}{|c_k-x^*|}\le\frac{|b-a|/2^{n+1}}{|b-a|/2^n}=\frac{1}{2},
+        
+        
+
+hence the bisection method converges linearly.
+Newtons method
+==============
+
+.. index:: Newtons method
+
+Newtons method is one of the most used methods. If it converges, it converges quadratically to the correct solution. The drawback is that contrary to the bisection method it may fail if a bad starting point is given. Newtons method for finding the root of a function :math:`f(x)=0` is illustrated in figure :ref:`fig:nlin:newton`. The main idea is to use more information about the function in the search of the root. In this case we want to find the point where the tangent of the function in :math:`x_k` intersect the $x-$axis, and take that as our next point, :math:`x_{k+1}`. 
+
+.. _fig:nlin:newton:
+
+.. figure:: newton_comb.png
+   :width: 400
+
+   *Illustration of Newtons method for the van der Waals EOS*
+
+We can easily derive the algorithm by finding the formula for the tangent line. Using :math:`y=ax+b` for the tangent line, we immediately know that :math:`a=f^\prime(x_k)`. :math:`b` can be found as we know that the line intersects :math:`(x_k,f(x_k))`: :math:`f(x_k)=f^\prime(x_k)x_k+b`, hence the equation for the tangent line is :math:`y=f^\prime(x_k)x+f(x_k)-f^\prime(x_k)x_k`. The next point is located where :math:`y` crosses the :math:`x`-axis, hence :math:`0=f^\prime(x_k)x_{k+1}+f(x_k)-f^\prime(x_k)x_k`. Rearranging this equation, we can write Newtons method in the standard form
+
+.. _Eq:eq:nlin:newton:
+
+.. math::
+
+    \tag{146}
+    x_{k+1}=x_k-\frac{f(x_k)}{f^\prime(x_k)}.
+        
+        
+
+Note that the derivative of :math:`f(x)` enters in equation :ref:`(146) <Eq:eq:nlin:newton>`, which means that if our function has a extremal value in our search domain, Newtons method most likely will fail. In particular :math:`x_1`, and :math:`x_4` in the figure to the right in figure :ref:`fig:nlin:newton2` are bad starting point for Newtons method.
+
+.. _fig:nlin:newton2:
+
+.. figure:: newton2.png
+   :width: 400
+
+   *Illustration of some of the possible challenges with Newtons method. Note that if the derivative is zero somewhere in the search interval, Newtons method will fail*
+
+An implementation is shown below.
+
+.. code-block:: python
+
+    def newton(f,x, prec=1e-8,MAXIT=500):
+        '''Approximate solution of f(x)=0 by Newtons method.
+        The derivative of the function is calculated numerically
+        f   : f(x)=0.
+        x   : starting point  
+        eps : desired precision
+        
+        Returns x when it is closer than eps to the root, 
+        unless MAX_ITERATIONS are not exceeded
+        '''
+        MAX_ITERATIONS=MAXIT
+        x_old = x
+        h     = 1e-4
+        for n in range(MAX_ITERATIONS):
+            x_new = x_old - 2*h*f(x_old)/(f(x_old+h)-f(x_old-h))
+            if(abs(x_new-x_old)<prec):
+                print('Found solution:', x_new, 
+                      ', after:', n, 'iterations.' )
+                return x_new
+            x_old=x_new
+        print('Max number of iterations: ', MAXIT, ' reached.') 
+        print('Try to increase MAXIT or decrease prec')
+        print('Returning best guess, value of function is: ', f(x_new))
+        return x_new
+
+Comparing figure :ref:`fig:nlin:bisection` and :ref:`fig:nlin:newton`, you immediately get the sense that Newtons method converges faster, and indeed it does. 
+
+Rate of convergence          (3)
+--------------------------------
+
+.. index::
+   single: Newtons method, rate of convergence
+
+ Newtons method is similar to the fixed point method, but where we do not use :math:`g(x)=x-f(x)`, but :math:`g(x)=x-\frac{f(x)}{f^\prime(x)}`. We will now analyze Newtons method, using the same approach as in the section :ref:`sec:nlin:fp`. First we expand :math:`g(x)` around the root :math:`x^*`
+
+.. _Eq:eq:nlin:nsec:
+
+.. math::
+
+    \tag{147}
+    x_{k+1}=g(x_k)=g(x^*)+g^\prime(x^*)(x_k-x^*)+\frac{1}{2}g^{\prime\prime}(x^*)(x_k-x^*)^2,
+        
+        
+
+where we have skipped all higher order terms. You can easily verify that
+
+.. _Eq:eq:nlin:gn2:
+
+.. math::
+
+    \tag{148}
+    g^\prime(x) =\frac{f^{\prime\prime}(x)f(x)}{f^\prime(x)^2}
+         
+        
+
+.. _Eq:eq:nlin:gn3:
+
+.. math::
+
+    \tag{149}
+    g^{\prime\prime}(x) =\frac{(f^{\prime\prime\prime}(x)f^\prime(x)-2f^{\prime\prime}(x)^2f^\prime(x))f(x)
+        +f^{\prime\prime}(x)f^\prime(x)^2}{f^\prime(x)^4}.
+        
+        
+
+:math:`x^*` is a solution, hence :math:`f(x^*)=0`, we then find from equation :ref:`(148) <Eq:eq:nlin:gn2>` and :ref:`(149) <Eq:eq:nlin:gn3>` that :math:`g^\prime(x^*)=0`, and :math:`g^{\prime\prime}(x^*)=f^{\prime\prime}(x^*)/f^{\prime}(x^*)^2`. Thus from equation :ref:`(147) <Eq:eq:nlin:nsec>` we get
+
+.. _Eq:eq:nlin:nsecn:
+
+.. math::
+
+    \tag{150}
+    x_{k+1}=x^*+\frac{1}{2}\frac{f^{\prime\prime}(x^*)}{f^{\prime}(x^*)^2}(x_k-x^*)^2,
+        
+        
+
+or equivalently:
+
+.. _Eq:eq:nlin:nsecn2:
+
+.. math::
+
+    \tag{151}
+    \frac{x_{k+1}-x^*}{(x-x^*)^2}=\frac{1}{2}\frac{f^{\prime\prime}(x^*)}{f^{\prime}(x^*)^2}.
+        
+        
+
+The denominator has a power of two, and hence Newtons method is *quadratic* convergent (assuming that the sequence :math:`x_{k+1}` is a convergent sequence). Note that it also follows from the analyses above that Newtons method will fail if the derivative at the root, :math:`f^\prime(x^*)`, is zero.
+
+.. --- begin exercise ---
+
+Exercise 4.5: Compare Newtons, Bisection and the Fixed Point method
+-------------------------------------------------------------------
+
+Find the root of :math:`f(x)=x^2-e^{-x}` using bisection, fixed point,  and Newtons method, start at :math:`x=0`. How many iterations do you need to use reach a precision of :math:`10^{-8}`? What happens if you widen the search domain or start further away from the root?
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+The root is located at :math:`x^*=0.70346742`.
+* Fixed point method: we saw earlier that using :math:`g(x)=x-f(x)` used 174 iterations, and :math:`g(x)=\sqrt{x^2-f(x)}` used 19 iterations. If we start at :math:`x=-100`, :math:`g(x)=x-f(x)` fails, and  :math:`g(x)=\sqrt{x^2-f(x)}` uses only 21 iterations, and at :math:`x=100` we use 20 iterations.
+
+* Bisection method: it use 25 iterations for :math:`a=0`, and :math:`b=1` (implementation shown earlier in the chapter). Choosing :math:`a=-b=-100` we use 33 iterations.
+
+* Newtons method: it use only 5 function evaluations (implementation above) starting at  :math:`x=0`. Starting at :math:`x=-100`, it uses 106 iterations. Newtons method is slow in this case because the function is very steep around the starting point, see figure :ref:`fig:nlin:newton_bad`. Starting at :math:`x=100`, we only use 10 iterations.
+
+.. _fig:nlin:newton_bad:
+
+.. figure:: newton_bad.png
+   :width: 400
+
+   *Newtons method performs poorly far away due to the shape of the function close to :math:`x=-100`, bisection performs much better while the fixed point method fails*
+
+
+.. admonition:: A good starting point is crucial
+
+   Note that it is not given which method is best, but if we are ''close'' to the root Newtons method is usually superior. If we are far away, other methods might work better. In many cases one uses a more stable method far away from the root, and then ''polish up'' the root by a couple of Newton iterations [Ref7]_. See also Brents method which combines bisection and linear interpolation (secant method) [Ref7]_.
+
+
+
+
+.. --- end solution of exercise ---
+
+.. --- end exercise ---
+
+Secant method
+=============
+
+.. index:: secant method
+
+The Newtons method is very good if you can choose a good starting point, and you can give in an analytical formula for the derivative. In some cases it is not possible to calculate the derivative analytically, then a very good method of choice is the secant method. It can be derived by simply replacing the derivative in Newtons method by the finite difference approximation
+
+.. _Eq:eq:nlin:sec1:
+
+.. math::
+
+    \tag{152}
+    f^\prime(x_k)\to \frac{f(x_k)-f(x_{k-1})}{x_k-x_{k-1}}.
+        
+        
+
+Inserting this equation into equation :ref:`(146) <Eq:eq:nlin:newton>`, we get
+
+.. _Eq:_auto35:
+
+.. math::
+
+    \tag{153}
+    x_{k+1}=x_k-f(x_k)\frac{x_k-x_{k-1}}{f(x_k)-f(x_{k-1})}{\nonumber}
+        
+        
+
+.. _Eq:eq:nlin:sec2:
+
+.. math::
+
+    \tag{154}
+    =\frac{x_{k-1}f(x_k)-x_kf(x_{k-1})}{f(x_k)-f(x_{k-1})}. 
+        
+
+For a graphical illustration see figure :ref:`fig:nlin:secant`
+
+.. _fig:nlin:secant:
+
+.. figure:: secant.png
+   :width: 400
+
+   A graphical illustration of the secant method. Note that the starting points :math:`x_0` and :math:`x_1` do not need to be close. The next point is where the (secant) line crosses the :math:`x`-axis
+
+Rate of convergence          (4)
+--------------------------------
+
+.. index::
+   single: secant method, rate of convergence
+
+The derivation of the rate of convergence for the secant method is a bit more involved. To simplify the notation we introduce the notation :math:`\varepsilon_k\equiv x_k-x^*`, where :math:`x^*` is the exact solution. Subtracting :math:`x^*` from each side of equation :ref:`(154) <Eq:eq:nlin:sec2>` we get
+
+.. _Eq:_auto36:
+
+.. math::
+
+    \tag{155}
+    \varepsilon_{k+1}=x_{k+1}-x^*=\frac{x_{k-1}f(x_k)-x_kf(x_{k-1})}{f(x_k)-f(x_{k-1})}-x^*, {\nonumber}
+        
+        
+
+.. _Eq:eq:nlin:sec3:
+
+.. math::
+
+    \tag{156}
+    \varepsilon_{k+1}=\frac{\varepsilon_{k-1}f(x_k)-\varepsilon_k f(x_{k-1})}{f(x_k)-f(x_{k-1})},
+        
+        
+
+we now make a Taylor expansion of :math:`f(x_k)` and :math:`f(x_{k-1})` about the root :math:`x^*`
+
+.. _Eq:_auto37:
+
+.. math::
+
+    \tag{157}
+    f(x_k) =f(x^*)+f^\prime(x^*)(x_k-x^*)+\frac{1}{2}f^{\prime\prime}(x^*)(x_k-x^*)^2+\cdots ,{\nonumber}
+        
+        
+
+.. _Eq:_auto38:
+
+.. math::
+
+    \tag{158}
+    =f^\prime(x^*)\varepsilon_k+\frac{1}{2}f^{\prime\prime}(x^*)\varepsilon_k^2+\cdots .
+        
+        
+
+.. _Eq:_auto39:
+
+.. math::
+
+    \tag{159}
+    f(x_{k-1}) =f(x^*)+f^\prime(x^*)(x_{k-1}-x^*)+\frac{1}{2}f^{\prime\prime}(x^*)(x_{k-1}-x^*)^2+\cdots,{\nonumber}
+        
+        
+
+.. _Eq:_auto40:
+
+.. math::
+
+    \tag{160}
+    =f^\prime(x^*)\varepsilon_{k-1}+\frac{1}{2}f^{\prime\prime}(x^*)\varepsilon_{k-1}^2+\cdots ,
+        
+        
+
+where we have used the fact that :math:`f(x^*)=0`. Inserting these equations into equation :ref:`(156) <Eq:eq:nlin:sec3>` and neglecting terms of order :math:`\varepsilon_k^3` we get
+
+.. _Eq:_auto41:
+
+.. math::
+
+    \tag{161}
+    \varepsilon_{k+1}=\frac{\varepsilon_{k-1}\left[f^\prime(x^*)\varepsilon_k+\frac{1}{2}f^{\prime\prime}(x^*)\varepsilon_k^2\right] -\varepsilon_k\left[ f^\prime(x^*)\varepsilon_{k-1}+\frac{1}{2}f^{\prime\prime}(x^*)\varepsilon_{k-1}^2\right]}{f^\prime(x^*)\varepsilon_k+\frac{1}{2}f^{\prime\prime}(x^*)\varepsilon_k^2-\left[ f^\prime(x^*)\varepsilon_{k-1}+\frac{1}{2}f^{\prime\prime}(x^*)\varepsilon_{k-1}^2\right]},{\nonumber}
+        
+        
+
+.. _Eq:_auto42:
+
+.. math::
+
+    \tag{162}
+    =\frac{\varepsilon_k\varepsilon_{k-1}\left[\varepsilon_k-\varepsilon_{k-1}\right]}{\left[f^\prime(x^*)+\frac{1}{2}f^{\prime\prime}(x^*)(\varepsilon_k+\varepsilon_{k-1})\right](\varepsilon_k-\varepsilon_{k-1})},{\nonumber}
+        
+        
+
+.. _Eq:eq:nlin:sec4:
+
+.. math::
+
+    \tag{163}
+    =\frac{f^{\prime\prime}(x^*)}{2f^\prime(x^*)}\varepsilon_k\varepsilon_{k-1},
+        
+
+where we have neglected higher powers of :math:`\varepsilon`. We are searching for a solution of the form :math:`\varepsilon_{k+1}=K\varepsilon_k^q`, :math:`q` is the rate of convergence. We can invert this equation to get :math:`\varepsilon_k=K^{-1/q}\varepsilon_{k+1}^{1/q}`, or alternatively :math:`\varepsilon_{k-1}=K^{-1/q}\varepsilon_{k}^{1/q}` (just set :math:`k\to k-1`). Inserting these equations into equation :ref:`(163) <Eq:eq:nlin:sec4>`
+
+.. _Eq:eq:nlin:sec5:
+
+.. math::
+
+    \tag{164}
+    \varepsilon_k^q=\frac{f^{\prime\prime}(x^*)}{2f^\prime(x^*)}\varepsilon_kK^{-1/q}\varepsilon_{k}^{1/q}.
+        
+        
+
+Clearly, if this equation is to have a solution we must have
+
+.. _Eq:_auto43:
+
+.. math::
+
+    \tag{165}
+    \frac{f^{\prime\prime}(x^*)}{2f^\prime(x^*)}K^{-1/q} =1{\nonumber}
+        
+        
+
+.. _Eq:_auto44:
+
+.. math::
+
+    \tag{166}
+    \varepsilon_k^q=\varepsilon_k\varepsilon_{k}^{1/q}=\varepsilon_{k}^{1+1/q},
+        
+        
+
+or :math:`q=1+1/q`. Solving this equation we get :math:`q=(1\pm\sqrt{5})/2`, neglecting the negative solution, we find the rate of convergence for the secant method :math:`q=(1+\sqrt{5})/2\simeq 1.618`.
+
+Newton Rapson method
+====================
+
+.. index:: Newton Rapson method
+
+The derivation of Newtons method, equation :ref:`(146) <Eq:eq:nlin:newton>`, done in the previous section was based on figure :ref:`fig:nlin:newton`. We will now derive it using a slightly different approach, but which lends itself easier to extend Newtons method to higher dimensions. The starting point is to expand the function around :math:`x_k`, using Taylors formula
+
+.. _Eq:eq:nlin:nt:
+
+.. math::
+
+    \tag{167}
+    f(x)=f(x_k)+f^\prime(x_k)(x-x_k) + \cdots\,.
+        
+        
+
+Equation :ref:`(146) <Eq:eq:nlin:newton>` can be derived from equation :ref:`(167) <Eq:eq:nlin:nt>` by simply demanding that we keep the linear terms, and that the next point :math:`x_{k+1}` is located where the linear approximation intersects the :math:`x`-axis, i.e. simply set :math:`f(x)=0`, and :math:`x=x_{k+1}` in equation :ref:`(167) <Eq:eq:nlin:nt>`.
+
+In higher order dimensions, we solve equation :ref:`(120) <Eq:eq:nlin:fvec>`, and equation :ref:`(167) <Eq:eq:nlin:nt>` is
+
+.. _Eq:eq:nlin:ntd:
+
+.. math::
+
+    \tag{168}
+    \mathbf{f}(\mathbf{x})=\mathbf{f}(\mathbf{x}_k)+ \mathbf{J}(\mathbf{x}_k)(\mathbf{x}-\mathbf{x}_k) + \cdots\,.
+        
+        
+
+:math:`\mathbf{J}(\mathbf{x}_k)` is the Jacobian. As before, we simply set  :math:`\mathbf{f}(\mathbf{x})=\mathbf{0}`, :math:`\mathbf{x}=\mathbf{x}_{k+1}`, and keep the linear terms, hence
+
+.. _Eq:eq:nlin:ntd2:
+
+.. math::
+
+    \tag{169}
+    \mathbf{x}_{k+1}=\mathbf{x}_k-\mathbf{J}^{-1}(\mathbf{x}_k)\mathbf{f}(\mathbf{x}_k). 
+        
+        
+
+To make the mathematics a bit more clear, let us specify to :math:`2D`. Assume that
+:math:`\mathbf{f}(\mathbf{x})=[f_x(x,y),f_y(x,y)]`, then the Jacobian is
+
+.. _Eq:eq:nlin:jac:
+
+.. math::
+
+    \tag{170}
+    \mathbf{J}(\mathbf{x}_k)=
+        \left(
+        \begin{array}{cc}
+        \frac{\partial f_x}{\partial x}&\frac{\partial f_x}{\partial y}\\ 
+        \frac{\partial f_y}{\partial x}&\frac{\partial f_y}{\partial y}
+        \end{array}
+        \right).
+        
+        
+
+Gradient Descent
+================
+
+.. index:: gradient descent
+
+This method used is to minimize functions (does not work for root finding). In many nonlinear problems, we would like to minimize (or maximize) a function. An ideal 2D example is shown in figure :ref:`fig:nlin:grad`. The algorithm moves in the direction of steepest descent. Note that the step size might change towards the search. 
+
+.. _fig:nlin:grad:
+
+.. figure:: steepest_descent.png
+   :width: 400
+
+   *A very simple example of the gradient descent method*
+
+Assume that we have a function :math:`\mathbf{f}(\mathbf{x})`, that we would like to minimize. The gradient descent algorithm is simply to update parameters according to the derivative (gradient) of :math:`\mathbf{f}`
+
+.. _Eq:eq:nlin:stpdc:
+
+.. math::
+
+    \tag{171}
+    \mathbf{x}_{k+1}=\mathbf{x}_{k}-\gamma\nabla\mathbf{f}.
+        
+        
+
+:math:`\gamma` is the learning rate, and a good choice of :math:`\gamma` is important. :math:`\gamma` might also change from one iteration to the other, and does not have to be constant.  
+
+.. --- begin exercise ---
+
+Exercise 4.6: Gradient descent solution of linear regression
+------------------------------------------------------------
+
+A very typical example is if we have a model and we would like to fit some parameters of the model to a data set (e.g. linear regression). Assume that we have observations :math:`(x_i,y_i)` and model predictions :math:`f(x_i,\mathbf{\beta})`, the model parameters are contained in the vector :math:`\mathbf{\beta}`. The *least square*, :math:`S`, is the square of the sum of all the *residuals*, i.e. the difference between the observations and model predictions 
+
+.. _Eq:eq:nlin:lsq:
+
+.. math::
+
+    \tag{172}
+    S=\sum_i(y_i-f(x_i,\mathbf{\beta}))^2.
+        
+        
+
+Specializing to linear regression, we choose the model to be linear
+
+.. _Eq:eq:nlin:lin:
+
+.. math::
+
+    \tag{173}
+    f(x_i,\mathbf{\beta})=b_0+b_1x_i.
+        
+        
+
+Equation :ref:`(172) <Eq:eq:nlin:lsq>` now takes the form
+
+.. _Eq:eq:nlin:lsq2:
+
+.. math::
+
+    \tag{174}
+    S=\sum_i(y_i-b_0+b_1x_i)^2.
+        
+        
+
+The gradients are:
+
+.. _Eq:_auto45:
+
+.. math::
+
+    \tag{175}
+    \frac{\partial S}{\partial b_0}=-2\sum_i(y_i-b_0+b_1x_i),{\nonumber}
+        
+        
+
+.. _Eq:eq:nlin:dlsq:
+
+.. math::
+
+    \tag{176}
+    \frac{\partial S}{\partial b_1}=-2\sum_i(y_i-b_0+b_1x_i)x_i,.
+        
+        
+
+* Implement the gradient descent method using a constant learning rate of :math:`10^{-3}`, to minimize the least square function
+
+* Test the linear regression on the data set :math:`x_i=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]`, and :math:`y=[1, 3, 2, 5, 7, 8, 8, 9, 10, 12]`, choose a starting value :math:`(b_0,b_1)=(0,0)`. What happens if you increase the learning rate?
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+Below is an implementation of the gradient descent method with a constant learning rate
+
+.. code-block:: python
+
+    def gradient_descent(f,x,df, g=.001, prec=1e-8,MAXIT=10):
+        '''Minimize f(x) by gradient descent.
+        f   : min(f(x))
+        x   : starting point 
+        df  : derivative of f(x)
+        g   : learning rate
+        prec: desired precision
+        
+        Returns x when it is closer than eps to the root, 
+        unless MAXIT are not exceeded
+        '''
+        x_old = x
+        for n in range(MAXIT):
+            plot_regression_line(x_old)  
+            x_new = x_old - g*df(x_old)
+            if(abs(np.max(x_new-x_old))<prec):
+                print('Found solution:', x_new, 
+                      ', after:', n, 'iterations.' )
+                return x_new
+            x_old=x_new
+        print('Max number of iterations: ', MAXIT, ' reached.') 
+        print('Try to increase MAXIT or decrease prec')
+        print('Returning best guess, value of function is: ', f(x_new))
+        return x_new
+
+The linear regression is implemented as below
+
+.. code-block:: python
+
+    x_obs_ = np.array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]) 
+    y_obs_ = np.array([1, 3, 2, 5, 7, 8, 8, 9, 10, 12]) 
+    def plot_regression_line(b,x=x_obs_, y=y_obs_): 
+        global N_
+        # plotting the actual points as scatter plot 
+        plt.scatter(x, y, color = "m", 
+                   marker = "o", s = 30,label="data") 
+      
+        # predicted response vector 
+        y_pred = b[0] + b[1]*x
+      
+        # plotting the regression line
+        if(len(b)>1):
+    #        plt.plot(x, y_pred, color = "g", label = "R-squared = {0:.3f}".format(b[2]))
+            plt.plot(x, y_pred, color = "g", label = "iteration:" + str(N_) +", (b[0],b[1])= ({0:.3f}".format(b[0]) + ", {0:.3f})".format(b[1]))
+            plt.legend()
+        else:
+            plt.plot(x, y_pred, color = "g")
+      
+        # putting labels 
+        plt.xlabel('x') 
+        plt.ylabel('y') 
+        plt.grid()
+        plt.legend()
+    #    plt.savefig('../fig-nlin/stdec'+str(N_)+'.png', bbox_inches='tight',transparent=True)
+        N_=N_+1  
+        # function to show plot 
+        plt.show() 
+    
+    
+    def Jacobian(x,f,dx=1e-5):
+        N=len(x)
+        x0=np.copy(x)
+        f0=f(x)
+        J=np.zeros(shape=(N,N))
+        for j in range(N):
+            x[j] = x[j] +  dx
+            for i in range(N):   
+                J[i][j] = (f(x)[i]-f0[i])/dx
+            x[j] = x[j] -  dx
+        return J
+    
+    
+    
+    
+    def newton_rapson(x,f,J=None, jacobian=False, prec=1e-8,MAXIT=100):
+        '''Approximate solution of f(x)=0 by Newtons method.
+        The derivative of the function is calculated numerically
+        f   : f(x)=0.
+        J   : Jacobian
+        x   : starting point  
+        eps : desired precision
+        
+        Returns x when it is closer than eps to the root, 
+        unless MAX_ITERATIONS are not exceeded
+        '''
+        MAX_ITERATIONS=MAXIT
+        x_old = np.copy(x)
+        for n in range(MAX_ITERATIONS):
+            plot_regression_line(x_old) 
+            if not jacobian:
+                J_=Jacobian(x_old,f)
+            else:
+                J_=J(x_old)
+            z=np.linalg.solve(J_,-f(x_old))
+            x_new=x_old+z
+            if(np.sum(abs(x_new-x_old))<prec):
+                print('Found solution:', x_new, 
+                      ', after:', n, 'iterations.' )
+                return x_new
+            x_old=np.copy(x_new)
+        print('Max number of iterations: ', MAXIT, ' reached.') 
+        print('Try to increase MAXIT or decrease prec')
+        print('Returning best guess, value of function is: ', f(x_new))
+        return x_new
+    
+    
+    def gradient_descent(f,x,df, g=.001, prec=1e-8,MAXIT=10):
+        '''Minimize f(x) by gradient descent.
+        f   : min(f(x))
+        x   : starting point 
+        df  : derivative of f(x)
+        g   : learning rate
+        prec: desired precision
+        
+        Returns x when it is closer than eps to the root, 
+        unless MAXIT are not exceeded
+        '''
+        x_old = x
+        for n in range(MAXIT):
+            plot_regression_line(x_old)  
+            x_new = x_old - g*df(x_old)
+            if(abs(np.max(x_new-x_old))<prec):
+                print('Found solution:', x_new, 
+                      ', after:', n, 'iterations.' )
+                return x_new
+            x_old=x_new
+        print('Max number of iterations: ', MAXIT, ' reached.') 
+        print('Try to increase MAXIT or decrease prec')
+        print('Returning best guess, value of function is: ', f(x_new))
+        return x_new
+    #end
+    
+    def S(b,x=x_obs_,y=y_obs_):
+        return np.sum((y-b[0]-b[1]*x)**2)
+    
+    def dS(b,x=x_obs_,y=y_obs_):
+        return np.array([-2*np.sum(y-b[0]-b[1]*x),
+                         -2*np.sum((y-b[0]-b[1]*x)*x)])
+    
+    def J(b,x=x_obs_,y=y_obs_):
+        N=len(b)
+        J=np.zeros(shape=(N,N))
+        xs=np.sum(x)
+        J[0][0]=2*len(x)
+        J[0][1]=2*xs
+        J[1][0]=2*xs
+        J[1][1]=2*np.sum(x*x)
+        return J
+    N_=0
+    print('Gradient ')
+    b=np.array([0,0])
+
+The first four iterations are shown in figure :ref:`fig:nlin:grsc`. If we choose a learning rate that is too high, we will move past the minimum, and the solution will oscillate. This can be avoided by lowering the learning rate as we iterate, by e.g. replacing ``g`` with ``g/(n+1)`` in the implementation above.
+
+.. _fig:nlin:grsc:
+
+.. figure:: stdec_comb.png
+   :width: 400
+
+   *First four iterations of the gradient descent solution of linear regression*
+
+.. --- end solution of exercise ---
+
+.. --- end exercise ---
+
+Other Useful Methods
+====================
+
+In this chapter we have covered the *basic*, but you should now be well equipped to dive into other methods. We highly recommend [Ref7]_ as a starting point, although the code examples are written in C++, the theory is presented in a very accurate, but informal way.
+* Brents method:  uses root bracketing, bisection, and inverse quadratic interpolation. The 1D method of choice if the function and not its derivative is known
 

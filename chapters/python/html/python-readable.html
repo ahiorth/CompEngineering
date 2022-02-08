@@ -1,0 +1,649 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Writing Python code">
+<meta name="keywords" content="types,basic types,lists,list comprehension">
+
+<title>Writing Python code</title>
+
+<!-- Bootstrap style: bootswatch_readable -->
+<link href="https://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:64px;      /* fixed header height for style bootswatch_readable */
+  margin:-64px 0 0; /* negative fixed header height */
+}
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Table of contents',
+               1,
+               'table_of_contents',
+               'table_of_contents'),
+              ('Personal Guidelines', 1, None, '___sec0'),
+              ('Code editor', 2, None, '___sec1'),
+              ('Types in Python', 1, None, '___sec2'),
+              ('Basic types', 2, None, '___sec3'),
+              ('Lists', 2, None, '___sec4'),
+              ('List arithmetic', 3, None, '___sec5'),
+              ('List slicing', 3, None, '___sec6'),
+              ('Numpy arrays', 2, None, '___sec7'),
+              ('Array slicing', 3, None, '___sec8'),
+              ('Looping', 1, None, '___sec9'),
+              ('For loops', 2, None, '___sec10'),
+              ('While loops', 2, None, '___sec11'),
+              ('Functions in Python', 2, None, '___sec12'),
+              ('Defining a mathematical function', 2, None, '___sec13'),
+              ('Scope of variables', 2, None, '___sec14'),
+              ('References', 1, None, '___sec15')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript" async
+ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="python-readable.html">Writing Python code</a>
+  </div>
+
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec0" style="font-size: 80%;"><b>Personal Guidelines</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Code editor</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec2" style="font-size: 80%;"><b>Types in Python</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Basic types</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Lists</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List arithmetic</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List slicing</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Numpy arrays</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Array slicing</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec9" style="font-size: 80%;"><b>Looping</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;For loops</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;While loops</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Functions in Python</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Defining a mathematical function</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Scope of variables</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec15" style="font-size: 80%;"><b>References</b></a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0000"></a>
+<!-- ------------------- main content ---------------------- -->
+
+
+
+<div class="jumbotron">
+<center><h1>Writing Python code</h1></center>  <!-- document title -->
+
+<p>
+<!-- author(s): Aksel Hiorth, the National IOR Centre &amp; Institute for Energy Resources, -->
+
+<center>
+<b>Aksel Hiorth, the National IOR Centre &amp; Institute for Energy Resources,</b> 
+</center>
+
+<p>
+<!-- institution(s) -->
+
+<br>
+University of Stavanger
+<p>
+<center><h4>Feb 8, 2022</h4></center> <!-- date -->
+<br>
+<p>
+</div> <!-- end jumbotron -->
+
+<h1 id="table_of_contents">Table of contents</h2>
+
+<p>
+<a href="#___sec0"> Personal Guidelines  </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec1"> Code editor </a><br>
+<a href="#___sec2"> Types in Python </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec3"> Basic types </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec4"> Lists </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec7"> Numpy arrays  </a><br>
+<a href="#___sec9"> Looping </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec10"> For loops </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec11"> While loops </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec12"> Functions in Python </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec13"> Defining a mathematical function </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec14"> Scope of variables  </a><br>
+<a href="#___sec15"> References </a><br>
+</p>
+<p>
+In this chapter we cover some aspects of how to write (good) Python code. As you might have discovered tasks can be solved in many different ways in Python. This is clearly a strength because you would most likely be able to solve any task thrown at you. On the other hand it is a weakness, because code can get messy and hard to follow, especially if you solve the same task in different part of your code using different libraries or syntax.
+
+<p>
+In this chapter I will explain how I tend to solve some common tasks, in this process we will also cover some stuff that you should know. If you need more information on each topic below, there are plenty of online sources.
+
+<p>
+The code examples are meant as an inspiration, and maybe you do not agree and have solutions that you think are much better. If that is the case I would love to know, and I can update this chapter.
+
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b>Speed and readability.</b>
+Many people are concerned about speed or execution time. My advice is to focus on readable code, and get the job done. When the code is working it is very easy to go back and change out parts that are slow. Particularly you can use the magic commands <code>%timeit</code> to check performance of different functions. There is also the option of using <a href="https://numba.pydata.org/" target="_self">Numba</a>, which translate python code into optimized machine code.
+</div>
+
+
+<h1 id="___sec0" class="anchor">Personal Guidelines  </h1>
+It is important to have a some guidelines when coding, and for Python there are clear style guides <a href="https://www.python.org/dev/peps/pep-0008/" target="_self">PEP 8</a>. Take a look at the official guidelines, and  make some specific rules for yourself, and stick to them. The reason for this is that if you make a large code, people will recognize your style and it is easier to understand the code. If you are working in team, it is even more important - try to agree on some basic rules, e.g.
+
+<p>
+<b>Code Guidelines:</b>
+
+<ul>
+<li> Variable names should be meaningful</li>
+<li> Naming of variables and functions, should you write <code>def my_fynction(...):</code> or <code>def MyFunction(..)</code>, i.e are words separated by underscore or capital letter. Personally I use capital letters for class definition, and underscore for function definitions.</li>
+<li> (Almost) always use doc string, you would be amazed how easy it is to forget what a function does. Shorter (private) functions usually do not need comments or doc strings, <em>if you use good variable names</em> - it should then be easy to understand what is happening by just looking at the code.</li>
+<li> Inline comments should be used sparingly, only where strictly necessary.</li>
+<li> Strive to make code general, in particular not type specific. In Python it is easy to make functions that will work if a list (array) or a single value is passed.</li>
+<li> Use exception handling, in particular for larger projects.</li>
+<li> DRY - Do not Repeat Yourself <a href="#thomas2019pragmatic">[1]</a>. If you need to change the code more than one place to extend it, you will forget.</li>
+<li> The DRY principle also applies to <em>knowledge sharing</em>, it is not only about copy and paste line of code, but knowledge should only be represented in one place.</li> 
+<li> Import libraries using the syntax <code>import library as ..</code>, Numpy would typically be <code>import numpy as np</code>. The syntax <code>from numpy import *</code> could lead to conflicts between modules as functions could have the same name in two different modules.</li>
+</ul>
+
+<b>Work Guidelines:</b>
+
+<ul>
+<li> Do not copy and paste code without understanding it. It is OK to be inspired of others, but in some cases the code example are unnecessary complicates, but perhaps more important you will get a code with a mix of different styles.</li>
+<li> Stick to a limited number of libraries, I try to do as much as possible with <a href="https://numpy.org/" target="_self">Numpy</a>, <a href="https://pandas.pydata.org/" target="_self">Pandas</a>, and  <a href="https://matplotlib.org/" target="_self">Matplotlib</a>. I only do plotting with Matplotlib, and do not use the build in functionality of Pandas.</li>
+<li> Unexpected behavior of functions, functions should be able to discover if something are wrong with arguments, and give warnings.</li>
+</ul>
+
+<h2 id="___sec1" class="anchor">Code editor </h2>
+You would like to use an editor that gives you some help. It is particularly useful when you do not remember a variable or function name, you can guess at the name and a drop down list will appear which will let you pick the name or function you want. If you enter  a function name, the editor will write some useful information about the function, some screenshots are shown in figure <a href="#fig:py:vscode">1</a>.
+
+<p>
+<center> <!-- figure label: --> <div id="fig:py:vscode"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 1:  A screenshot of vscode (left) the editor helps to identify which variable name you mean, (right) the editor show relevant of the function you would like to call.  <!-- caption label: fig:py:vscode --> </p></center>
+<p><img src="fig-python/vscode.png" align="bottom" width=800></p>
+</center>
+
+<p>
+Currently my favorite editor is <a href="https://code.visualstudio.com/" target="_self">vscode</a>, it can be used for any language, and there are a lot of add ins that can be installed to make the coding experience more pleasant. Spyder is also a very good alternative, but this editor is mainly for Python. It takes some time to learn how an editor work, so it is good if it can be used for multiple purposes.  However, always be open to new ideas and products, it will only make you more efficient. As an example, in some cases you will have a particular difficult error in the code, and then it could help to open and run that code in a different editor, you might get a slightly different error messages, which could help you locate the error.
+
+<h1 id="___sec2" class="anchor">Types in Python </h1>
+In Python you do not need to define types as in a compiled language, this an advantage as you need to do less writing, and it is also easier to create functions that will work with any kind of type.
+
+<h2 id="___sec3" class="anchor">Basic types </h2>
+I will assume that you are familiar with the common types like floats (for real numbers), strings (text, lines, word, a character), integer (whole numbers), Boolean (True, False). What is sometimes useful is to be able to test what kind of type a variable is, this can be done with <code>type()</code>
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>my_float <span style="color: #666666">=</span> <span style="color: #666666">2.0</span> 
+my_int   <span style="color: #666666">=</span> <span style="color: #666666">3</span>
+my_bool  <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">True</span>
+<span style="color: #008000">print</span>(<span style="color: #008000">type</span>(my_float))
+<span style="color: #008000">print</span>(<span style="color: #008000">type</span>(my_int))
+<span style="color: #008000">print</span>(<span style="color: #008000">type</span>(my_bool))
+</pre></div>
+<p>
+The output of the code above will be <code>float, int, bool</code>. If you want to test the value of a variable you can do
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">isinstance</span>(my_int,<span style="color: #008000">int</span>):
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;My variable is integer&#39;</span>)
+<span style="color: #008000; font-weight: bold">else</span>:
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;My variable is not integer&#39;</span>)
+</pre></div>
+<p>
+Python also has build in support for complex number, they are written <code>1+2j</code>, <code>j</code> is used as the complex number. Note there is no multiplication between the number 2 and <code>j</code>.
+
+<h2 id="___sec4" class="anchor">Lists </h2>
+
+<p>
+ Lists are extremely useful, and they have some very nice syntax that in my mind is more elegant than Numpy arrays. Whenever you want to do more than one thing with only a slight change, you should think of lists. Lists are defined using the square bracket <code>[]</code> symbols
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>my_list <span style="color: #666666">=</span> []      <span style="color: #408080; font-style: italic"># an empty list</span>
+my_list <span style="color: #666666">=</span> []<span style="color: #666666">*10</span>   <span style="color: #408080; font-style: italic"># still an empty list ...</span>
+my_list <span style="color: #666666">=</span> [<span style="color: #666666">0</span>]<span style="color: #666666">*10</span>  <span style="color: #408080; font-style: italic"># a list with 10 zeros</span>
+my_list <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;one&#39;</span>, <span style="color: #BA2121">&#39;two&#39;</span>,<span style="color: #BA2121">&#39;three&#39;</span>] <span style="color: #408080; font-style: italic"># a list of strings</span>
+my_list <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;one&#39;</span>]<span style="color: #666666">*10</span> <span style="color: #408080; font-style: italic"># a list with 10 equal string elements </span>
+</pre></div>
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b>Notice.</b>
+To get the first element in a list, we do e.g. <code>my_list[0]</code>. In a list with 10 elements the last element would be <code>my_list[9]</code>, the length of a list can be found by using the <code>len()</code> function, i.e. <code>len(my_list)=10</code>. Thus, the last element can also be found by doing <code>my_list[len(my_list)-1]</code>. However, in Python you can always get the last element by doing <code>my_list[-1]</code>, the second last element would be <code>my_list[-2]</code> and so on.
+</div>
+
+Sometimes you do not want to initialize the list with everything equal, and it can be tiresome to write everything out yourself. If that is the case you can use <em>list comprehension</em>
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>my_list <span style="color: #666666">=</span> [i <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">10</span>)] <span style="color: #408080; font-style: italic"># a list from 0,1,..,9</span>
+my_list <span style="color: #666666">=</span> [i<span style="color: #666666">**3</span> <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">10</span>)] <span style="color: #408080; font-style: italic"># a list with elements 0,1,8, ..,729</span>
+</pre></div>
+<p>
+We will cover for loop below, but basically what is done is that the statement <code>i in range(10)</code>, gives <code>i</code> the value 0, 1, \( \ldots \), 9 and the first <code>i</code> inside the list tells python to use that value as the element in the list. Using this syntax, there are plenty of opportunities to initialize. Maybe you want to pick from a list words that contain a particular subset of characters
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>my_list  <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;hammer&#39;</span>, <span style="color: #BA2121">&#39;nail&#39;</span>,<span style="color: #BA2121">&#39;saw&#39;</span>,<span style="color: #BA2121">&#39;lipstick&#39;</span>,<span style="color: #BA2121">&#39;shirt&#39;</span>]
+new_list <span style="color: #666666">=</span> [i <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> my_list <span style="color: #008000; font-weight: bold">if</span> <span style="color: #BA2121">&#39;a&#39;</span> <span style="color: #AA22FF; font-weight: bold">in</span> i]
+</pre></div>
+<p>
+Now <code>new_list=['hammer', 'nail', 'saw']</code>.
+
+<h3 id="___sec5" class="anchor">List arithmetic </h3>
+
+I showed you some examples above, where we used multiplication to create a list with equal copies of a single element, you can also join two lists by using addition
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>my_list  <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;hammer&#39;</span>,<span style="color: #BA2121">&#39;saw&#39;</span>]
+my_list2 <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;screw&#39;</span>,<span style="color: #BA2121">&#39;nail&#39;</span>,<span style="color: #BA2121">&#39;glue&#39;</span>]
+new_list <span style="color: #666666">=</span> my_list <span style="color: #666666">+</span> my_list2
+</pre></div>
+<p>
+Now <code>new_list=['hammer', 'saw', 'screw', 'nail', 'glue']</code>, we can also multiply the list with an integer and get a larger list with several copies of the original list.
+
+<h3 id="___sec6" class="anchor">List slicing </h3>
+
+Clearly we can access elements in a list by using the index to the element, i.e. first element is <code>my_list[0]</code>, and the last element is <code>my_list[-1]</code>. Python also has very nice syntax to pick out a subset of a list. The syntax is <code>my_list[start:stop:step]</code>, the step makes it possible to skip elements
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>my_list<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;hammer&#39;</span>, <span style="color: #BA2121">&#39;saw&#39;</span>, <span style="color: #BA2121">&#39;screw&#39;</span>, <span style="color: #BA2121">&#39;nail&#39;</span>, <span style="color: #BA2121">&#39;glue&#39;</span>]
+my_list[:]      <span style="color: #408080; font-style: italic"># [&#39;hammer&#39;, &#39;saw&#39;, &#39;screw&#39;, &#39;nail&#39;, &#39;glue&#39;]</span>
+my_list[<span style="color: #666666">1</span>:]     <span style="color: #408080; font-style: italic"># [&#39;saw&#39;, &#39;screw&#39;, &#39;nail&#39;, &#39;glue&#39;]</span>
+my_list[:<span style="color: #666666">-1</span>]    <span style="color: #408080; font-style: italic"># [&#39;hammer&#39;, &#39;saw&#39;, &#39;screw&#39;, &#39;nail&#39;]</span>
+my_list[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>]   <span style="color: #408080; font-style: italic"># [&#39;saw&#39;, &#39;screw&#39;, &#39;nail&#39;]</span>
+my_list[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>:<span style="color: #666666">2</span>] <span style="color: #408080; font-style: italic"># [&#39;saw&#39;,&#39;nail&#39;]</span>
+my_list[::<span style="color: #666666">1</span>]    <span style="color: #408080; font-style: italic"># [&#39;hammer&#39;, &#39;saw&#39;, &#39;screw&#39;, &#39;nail&#39;, &#39;glue&#39;]</span>
+my_list[::<span style="color: #666666">2</span>]    <span style="color: #408080; font-style: italic"># [&#39;hammer&#39;, &#39;screw&#39;, &#39;glue&#39;]</span>
+</pre></div>
+<p>
+Sometimes you have lists of lists, if you want to get e.g. the first element of each list you cannot access those elements using list slicing, you have to use a for loop or list comprehension
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>my_list  <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;hammer&#39;</span>,<span style="color: #BA2121">&#39;saw&#39;</span>]
+my_list2 <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;screw&#39;</span>,<span style="color: #BA2121">&#39;nail&#39;</span>,<span style="color: #BA2121">&#39;glue&#39;</span>]
+new_list<span style="color: #666666">=</span>[my_list,my_list2]
+<span style="color: #408080; font-style: italic"># extract the first element of each list</span>
+new_list2 <span style="color: #666666">=</span> [ <span style="color: #008000">list</span>[<span style="color: #666666">0</span>] <span style="color: #008000; font-weight: bold">for</span> <span style="color: #008000">list</span> <span style="color: #AA22FF; font-weight: bold">in</span> new_list]
+</pre></div>
+<p>
+<code>new_list2=['hammer','screw']</code>
+
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b>When to use lists.</b>
+Use lists if you have mixed types, and as storage containers. Be careful when you do numerical computation to mix lists and Numpy arrays, adding two lists e.g. <code>[1,2]+[1,1]</code>, will give you <code>[1,2,1,1]</code>, whereas adding two Numpy arrays will give you <code>[2,3]</code>.
+</div>
+
+
+<h2 id="___sec7" class="anchor">Numpy arrays  </h2>
+Numpy arrays are awesome, and should be your preferred choice when doing numerical operations. We import Numpy as <code>import numpy as np</code>, some examples of initialization
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>my_array<span style="color: #666666">=</span>np<span style="color: #666666">.</span>array([<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">2</span>,<span style="color: #666666">3</span>]) <span style="color: #408080; font-style: italic"># initialized from list</span>
+my_array<span style="color: #666666">=</span>np<span style="color: #666666">.</span>zeros(<span style="color: #666666">10</span>) <span style="color: #408080; font-style: italic"># array with 10 elements equal to zero</span>
+my_array<span style="color: #666666">=</span>np<span style="color: #666666">.</span>ones(<span style="color: #666666">10</span>)  <span style="color: #408080; font-style: italic"># array with 10 elements equal to one</span>
+</pre></div>
+<p>
+A typical use of Numpy arrays is when you want to create equal spaced numbers to evaluate a function, this can be done in (at least) two ways
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>my_array<span style="color: #666666">=</span>np<span style="color: #666666">.</span>arange(<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">0.2</span>) <span style="color: #408080; font-style: italic"># [0, 0.2, 0.4, 0.6, 0.8]</span>
+my_array<span style="color: #666666">=</span>np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">5</span>) <span style="color: #408080; font-style: italic"># [0., 0.25, 0.5, 0.75, 1.]</span>
+</pre></div>
+<p>
+Note that in the last case, the edges of the domain (0,1) are included, and is probably the outcome you want in most cases.
+
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b>Do not mix Numpy arrays and lists in functions.</b>
+If a function is written to use  Numpy arrays as <em>arguments</em>, make sure that it <em>returns</em> Numpy arrays. If you have to use a list inside the function to e.g. store the results of a calculation, convert the list to a Numpy array before returning it by <code>np.array(my_list)</code>.
+</div>
+
+
+<h3 id="___sec8" class="anchor">Array slicing </h3>
+
+As with lists you can access elements in Numpy arrays in the same way as lists, the syntax is <code>my_array[start,stop,step]</code>
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>my_array<span style="color: #666666">=</span>np<span style="color: #666666">.</span>arange(<span style="color: #666666">0</span>,<span style="color: #666666">6</span>,<span style="color: #666666">1</span>)
+my_array[:]      <span style="color: #408080; font-style: italic"># [0,1,2,3,4,5]</span>
+my_array[<span style="color: #666666">1</span>:]     <span style="color: #408080; font-style: italic"># [1,2,3,4,5]</span>
+my_array[:<span style="color: #666666">-1</span>]    <span style="color: #408080; font-style: italic"># [0,1,2,3,4]</span>
+my_array[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>]   <span style="color: #408080; font-style: italic"># [1,2,3,4]</span>
+my_array[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>:<span style="color: #666666">2</span>] <span style="color: #408080; font-style: italic"># [1,3]</span>
+my_array[::<span style="color: #666666">2</span>]    <span style="color: #408080; font-style: italic"># [0,2,4]</span>
+</pre></div>
+<p>
+However, as opposed to lists all the basic mathematical operations addition, subtraction, multiplication are meaningful (<em>if the arrays have equal length, or shape</em>)
+<p>
+
+<!-- code=text typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>my_array  = np.array([0,1,2])
+my_array2 = np.array([3,4,5])
+my_array+my_array2 # [3,5,7]
+my_array*my_array2 # [0,4,10]
+my_array/my_array2 # [0,.25,.4]
+</pre></div>
+<p>
+Note that the operations does what you would expect them to do. If we have arrays of arrays, we can easily access elements in the arrays
+<p>
+
+<!-- code=text typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>my_array  = np.array([[0,1,2],[3,4,5]])
+my_array[0,:] # [0,1,2]
+my_array[1,:] # [3,4,5]
+my_array[:,0] # [0,3]
+my_array[:,1] # [1,4]
+</pre></div>
+<p>
+Not the extra <code>[]</code> in the definition of <code>my_array</code>.  Numpy arrays have a shape property, which makes it very easy to create different matrices. The array <code>[0,1,2,3,4,5]</code> has shape (6,), but we can change the shape to create e.g. a \( 2\times3 \) matrix
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>my_array  <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">2</span>,<span style="color: #666666">3</span>,<span style="color: #666666">4</span>,<span style="color: #666666">5</span>])
+my_array<span style="color: #666666">.</span>shape <span style="color: #666666">=</span> (<span style="color: #666666">2</span>,<span style="color: #666666">3</span>) <span style="color: #408080; font-style: italic"># [[0,1,2],[3,4,5]]</span>
+my_array<span style="color: #666666">.</span>shape <span style="color: #666666">=</span> (<span style="color: #666666">3</span>,<span style="color: #666666">2</span>) <span style="color: #408080; font-style: italic"># [[0,1],[2,3],[4,5]]</span>
+</pre></div>
+
+<h1 id="___sec9" class="anchor">Looping </h1>
+There are basically two ways of iterating through lists or to do a series of computations, using a for-loop or a while-loop. During a numerical computation we typically iterate through time, from time zero to the end time to calculate e.g. the position of an object.
+
+<h2 id="___sec10" class="anchor">For loops </h2>
+A typical example of a for loop is to loop over a list and do something, and maybe during the execution we would like to store the results in a list
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>numbers<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;one&#39;</span>,<span style="color: #BA2121">&#39;two&#39;</span>,<span style="color: #BA2121">&#39;three&#39;</span>,<span style="color: #BA2121">&#39;one&#39;</span>,<span style="color: #BA2121">&#39;two&#39;</span>]
+result<span style="color: #666666">=</span>[] <span style="color: #408080; font-style: italic"># has to be declared as empty</span>
+<span style="color: #008000; font-weight: bold">for</span> number <span style="color: #AA22FF; font-weight: bold">in</span> numbers:
+    <span style="color: #008000; font-weight: bold">if</span> number <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;one&#39;</span>:
+       result<span style="color: #666666">.</span>append(<span style="color: #666666">1</span>) 
+</pre></div>
+<p>
+After executing this code <code>result=[1, 1]</code>. The <code>number</code> variable changes during the iteration, and takes the value of each element in the list. Note that I use <code>numbers</code> for the list and <code>number</code> as the iterator, this makes it quite easy to read and understand the code. In many cases you want to have the index, not only the element in the list
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>numbers  <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;one&#39;</span>,<span style="color: #BA2121">&#39;two&#39;</span>,<span style="color: #BA2121">&#39;three&#39;</span>,<span style="color: #BA2121">&#39;one&#39;</span>,<span style="color: #BA2121">&#39;two&#39;</span>]
+numerics <span style="color: #666666">=</span> [  <span style="color: #666666">1</span>  ,  <span style="color: #666666">2</span>  ,   <span style="color: #666666">3</span>   , <span style="color: #666666">1</span>   , <span style="color: #666666">2</span>   ]
+result<span style="color: #666666">=</span>[] <span style="color: #408080; font-style: italic"># has to be declared as empty</span>
+<span style="color: #008000; font-weight: bold">for</span> idx,number <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">enumerate</span>(numbers):
+    <span style="color: #008000; font-weight: bold">if</span> number <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;one&#39;</span>:
+       result<span style="color: #666666">.</span>append(numerics[idx]) 
+</pre></div>
+<p>
+After executing this code <code>result=[1, 1]</code>. In this case the function <code>enumerate(numbers)</code> returns two values: the index, which is stored in <code>idx</code>, and the value of the list element, which is stored in <code>number</code>.
+
+<p>
+In many cases you might be in a situation that you want to plot more than one function in a plot. It is then very tempting to copy and paste the previous code, but it is more elegant to use a for loop and lists
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
+x_val   <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">100</span>) <span style="color: #408080; font-style: italic"># 100 equal spaced points from 0 to 1</span>
+y_vals  <span style="color: #666666">=</span> [x_val,x_val<span style="color: #666666">*</span>x_val]
+labels  <span style="color: #666666">=</span> [<span style="color: #BA2121">r&#39;x&#39;</span>, <span style="color: #BA2121">r&#39;$x^2$&#39;</span>]
+cols    <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;r&#39;</span>,<span style="color: #BA2121">&#39;g&#39;</span>]
+points  <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;-*&#39;</span>,<span style="color: #BA2121">&#39;-^&#39;</span>]
+<span style="color: #008000; font-weight: bold">for</span> idx,y_val <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">enumerate</span>(y_vals):
+    plt<span style="color: #666666">.</span>plot(x_val,y_val,points[idx],c<span style="color: #666666">=</span>cols[idx],label<span style="color: #666666">=</span>labels[idx])
+plt<span style="color: #666666">.</span>grid()
+plt<span style="color: #666666">.</span>legend()
+plt<span style="color: #666666">.</span>show()
+</pre></div>
+
+<h2 id="___sec11" class="anchor">While loops </h2>
+In most cases a for loop can also be written as a while loops and vice versa. In python you would prefer to use a for loop whenever you are iterating over a fixed number of elements. This makes the code easy to read. In cases where we are waiting for input or time is involved it may make more sense to use a while loop. Typically you would use a while loop when you do not know at the start when to stop iterating. The syntax of the while loop is to do something while a condition is true
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+finished <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">False</span>
+<span style="color: #008000">sum</span> <span style="color: #666666">=0</span>
+<span style="color: #008000; font-weight: bold">while</span> <span style="color: #AA22FF; font-weight: bold">not</span> finished:
+      <span style="color: #008000">sum</span> <span style="color: #666666">+=</span> np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>random()
+      <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">sum</span> <span style="color: #666666">&gt;=</span> <span style="color: #666666">10.</span>:
+      	 finished <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">True</span>
+</pre></div>
+<p>
+In some cases we are iterating from \( t_0 \), \( t_1 \), etc. to a final time \( t_f \), if we use a fixed time step, \( \Delta t \), we can calculate the number of steps at the beginning i.e \( N= \text{int} ((t_f-t_0)/\Delta t) \), and use a for loop. On the other hand, in the more fancy algorithm we change the time step as the simulation proceeds and then we would choose a while loop, e.g. <code>while t0 &lt;= tf:</code>.
+
+<h2 id="___sec12" class="anchor">Functions in Python </h2>
+When to use functions? There is no particular rule, <em>but whenever you
+start to copy and paste code from one place to another, you should
+consider to use a function</em>. Functions makes the code easier to read.
+It is not easy to identify which part of a program is a good candidate
+for a function, it requires skill and experience. Most likely you will
+end up changing the function definitions as your program develops.
+
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b>Use short functions.</b>
+Short functions makes the code easier to read. Each function has a particular task, and it does only one thing. If functions does too many tasks there is a chance that you will have several functions doing some of the same operations. Whenever you want to extend the program you might have to make changes several places in the code. The chance then is that you will forget to do the change in some of the functions and introduce a bug.
+</div>
+
+
+<h2 id="___sec13" class="anchor">Defining a mathematical function </h2>
+Throughout this course you will write many functions that does mathematical operations. In many cases you would also pass a function to another function to make your code more modular. Lets say we want to calculate the derivative of \( \sin x \), using the most basic definition of a derivative \( f^\prime(x) = f(x+\Delta x)-f(x)/\Delta x \), we could do it as
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">derivative_of_sine</span>(x,delta_x):
+    <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39; returns the derivative of sin x &#39;&#39;&#39;</span>
+    <span style="color: #008000; font-weight: bold">return</span> (np<span style="color: #666666">.</span>sin(x<span style="color: #666666">+</span>delta_x)<span style="color: #666666">-</span>np<span style="color: #666666">.</span>sin(x))<span style="color: #666666">/</span>delta_x
+
+<span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;The derivative of sinx at x=0 is :&#39;</span>, derivative_of_sine(<span style="color: #666666">0</span>,<span style="color: #666666">1e-3</span>))
+</pre></div>
+<p>
+If we would like to calculate the derivative in multiple points, that is straight forward since we have used the Numpy version of \( \sin x \).
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>x<span style="color: #666666">=</span>np<span style="color: #666666">.</span>array([<span style="color: #666666">0</span>,<span style="color: #666666">.5</span>,<span style="color: #666666">1</span>])
+<span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;The derivative of sinx at x=0,0.5,1 is :&#39;</span>, derivative_of_sine(x,<span style="color: #666666">1e-3</span>))
+</pre></div>
+<p>
+We will return in a later chapter why \( \Delta x=10^{-3} \) is a reasonable choice. 
+However, the challenge with our implementation is that if we want to calculate the derivative of another function we have to implement the derivative rule again for that function. It is better to have a separate function that calculates the derivative
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
+    <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>sin(x)
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">df</span>(x,f,delta_x<span style="color: #666666">=1e-3</span>):
+    <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39; returns the derivative of f &#39;&#39;&#39;</span>
+    <span style="color: #008000; font-weight: bold">return</span> (f(x<span style="color: #666666">+</span>delta_x)<span style="color: #666666">-</span>f(x))<span style="color: #666666">/</span>delta_x
+<span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;The derivative of sinx at x=0 is :&#39;</span>, df(<span style="color: #666666">0</span>,f))
+</pre></div>
+<p>
+Note also that we have put <code>delta_x=1e-3</code> as a <em>default argument</em>. Default arguments have to come at the end of the argument lists, <code>df(x,delta_x=1e-3,f)</code> is not allowed. All of this looks well and good, but what you would experience is that your functions would not be as simple as \( \sin x \). In many cases your functions need additional arguments to be evaluated e.g.:
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">s</span>(t,s0,v0,a):
+    <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;</span>
+<span style="color: #BA2121; font-style: italic">    s0 : initial starting point</span>
+<span style="color: #BA2121; font-style: italic">    v0 : initial velocity</span>
+<span style="color: #BA2121; font-style: italic">    a  : acceleration</span>
+<span style="color: #BA2121; font-style: italic">    returns the distance traveled</span>
+<span style="color: #BA2121; font-style: italic">    &#39;&#39;&#39;</span>
+    <span style="color: #008000; font-weight: bold">return</span> s0<span style="color: #666666">+</span>v0<span style="color: #666666">*</span>t<span style="color: #666666">+</span>a<span style="color: #666666">*</span>t<span style="color: #666666">*</span>t<span style="color: #666666">/2</span> 
+</pre></div>
+<p>
+How can we calculate the derivative of this function? If we try to do <code>df(1,s)</code> we will get the following message
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #D2413A; font-weight: bold">TypeError</span>: s() missing <span style="color: #666666">3</span> required positional
+	   arguments: <span style="color: #BA2121">&#39;s0&#39;</span>, <span style="color: #BA2121">&#39;v0&#39;</span>, <span style="color: #AA22FF; font-weight: bold">and</span> <span style="color: #BA2121">&#39;a&#39;</span>
+</pre></div>
+<p>
+This happens because the <code>df</code> function expect that the function we send into the argument list has a call signature <code>f(x)</code>. What many people do is that they use global variable, that is to define <code>s0, v0, a</code> at the top of the code. This is not a good solution. Python has a special variable <code>*args</code> which can be used to pass multiple arguments to your function, thus if we rewrite <code>df</code> like this
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x,<span style="color: #666666">*</span>args):
+    <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>sin(x)
+   
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">df</span>(x,f,<span style="color: #666666">*</span>args,delta_x<span style="color: #666666">=1e-3</span>):
+    <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39; returns the derivative of f &#39;&#39;&#39;</span>
+    <span style="color: #008000; font-weight: bold">return</span> (f(x<span style="color: #666666">+</span>delta_x,<span style="color: #666666">*</span>args)<span style="color: #666666">-</span>f(x,<span style="color: #666666">*</span>args))<span style="color: #666666">/</span>delta_x
+</pre></div>
+<p>
+we can do (assuming <code>s0=0</code>, <code>v0=1</code>, and <code>a=9.8</code>)
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;The derivative of sinx at x=0 is :&#39;</span>, df(<span style="color: #666666">0</span>,f))
+<span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;The derivative of s(t) at t=1 is :&#39;</span>, df(<span style="color: #666666">0</span>,s,<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">9.8</span>))
+</pre></div>
+
+<h2 id="___sec14" class="anchor">Scope of variables  </h2>
+In small programs you would not care about scope, but once you have several functions, you will easily get into trouble if you do not consider the scope of a variable. By scope of a variable we mean where it is available, first some simple examples
+
+<p>
+<b>A variable created inside a function is only available within the function:</b>
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
+    a<span style="color: #666666">=10</span>
+    b<span style="color: #666666">=20</span>
+    <span style="color: #008000; font-weight: bold">return</span> a<span style="color: #666666">*</span>x<span style="color: #666666">+</span>b
+</pre></div>
+<p>
+Doing <code>print(a)</code> outside the function would create an error: <code>name 'a' is not defined</code>. What happens if we defined a variable <code>a</code> outside the function
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>a<span style="color: #666666">=2</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
+    a<span style="color: #666666">=10</span>
+    b<span style="color: #666666">=20</span>
+    <span style="color: #008000; font-weight: bold">return</span> a<span style="color: #666666">*</span>x<span style="color: #666666">+</span>b
+</pre></div>
+<p>
+If we first call the function <code>f(0)</code>, and then do <code>print(a)</code> Python would give the answer <code>2</code>, <em>not</em> <code>10</code>. A <em>local</em> variable <code>a</code> is created inside <code>f(x)</code>, that does not interfere with the variable <code>a</code> defined outside the function.
+<b>The <code>global</code> keyword can be used to pass and access variables in functions:</b>
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">global</span> a
+a<span style="color: #666666">=2</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
+    <span style="color: #008000; font-weight: bold">global</span> a
+    a<span style="color: #666666">=10</span>
+    b<span style="color: #666666">=20</span>
+    <span style="color: #008000; font-weight: bold">return</span> a<span style="color: #666666">*</span>x<span style="color: #666666">+</span>b
+</pre></div>
+<p>
+In this case <code>print(a)</code> <em>before</em> calling <code>f(x)</code> would give the answer <code>2</code> and <em>after</em> calling <code>f(x)</code> would give <code>10</code>.
+<div class="alert alert-block alert-success alert-text-normal"><b>Use of global variables.</b>
+Sometimes global variables can be very useful, and help you to make the code simpler. But, make sure to use a <em>naming convention</em>  for them, e.g. end all the global variables with an underscore. In the example above we would write <code>global a_</code>. A person reading the code would then know that all variables ending with an underscore are global, and can be altered by many functions.
+</div>
+
+
+<h1 id="___sec15" class="anchor">References </h1>
+
+<p>
+<!-- begin bibliography -->
+
+<ol>
+ <li> <div id="thomas2019pragmatic"></div> <b>D. Thomas and A. Hunt</b>. 
+    <em>The Pragmatic Programmer: Your Journey to Mastery</em>,
+    Addison-Wesley Professional,
+    2019.</li>
+</ol>
+
+<!-- end bibliography -->
+
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

@@ -1,14 +1,14 @@
 <!--
 Automatically generated HTML file from DocOnce source
-(https://github.com/doconce/doconce/)
+(https://github.com/hplgit/doconce/)
 -->
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="DocOnce: https://github.com/doconce/doconce/" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="Finite differences">
-<meta name="keywords" content="numerical error,Taylor polynomial,truncation error,Taylor polynomial, error term,Maclaurin series,forward difference,backward difference,central difference,central difference,round off erros,machine precision,IEEE 754-1985 standard,round off errors">
+<meta name="keywords" content="numerical error,Taylor polynomial,truncation error,Taylor polynomial, error term,Maclaurin series,forward difference,backward difference,central difference,central difference,roundoff erros,machine precision,IEEE 754-1985 standard,roundoff errors">
 
 <title>Finite differences</title>
 
@@ -56,13 +56,13 @@ code { color: inherit; background-color: transparent; }
                None,
                '___sec3'),
               ('Higher order derivative', 3, None, '___sec4'),
-              ('Round off Errors', 2, None, '___sec5'),
+              ('Roundoff Errors', 2, None, '___sec5'),
               ('Binary numbers', 3, None, '___sec6'),
               ('Floating point numbers and the IEEE 754-1985 standard',
                3,
                None,
                '___sec7'),
-              ('Round off error and truncation error in numerical derivatives',
+              ('Roundoff error and truncation error in numerical derivatives',
                3,
                None,
                '___sec8'),
@@ -116,10 +116,10 @@ $$
      <!-- navigation toc: --> <li><a href="#___sec2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Evaluation of polynomials</a></li>
      <!-- navigation toc: --> <li><a href="#___sec3" style="font-size: 80%;"><b>Calculating Numerical Derivatives of Functions</b></a></li>
      <!-- navigation toc: --> <li><a href="#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Higher order derivative</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Round off Errors</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Roundoff Errors</a></li>
      <!-- navigation toc: --> <li><a href="#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Binary numbers</a></li>
      <!-- navigation toc: --> <li><a href="#___sec7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Floating point numbers and the IEEE 754-1985 standard</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Round off error and truncation error in numerical derivatives</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Roundoff error and truncation error in numerical derivatives</a></li>
      <!-- navigation toc: --> <li><a href="#___sec9" style="font-size: 80%;"><b>Bibliography</b></a></li>
 
         </ul>
@@ -154,7 +154,7 @@ $$
 <br>
 University of Stavanger
 <p>
-<center><h4>Oct 22, 2021</h4></center> <!-- date -->
+<center><h4>Feb 8, 2022</h4></center> <!-- date -->
 <br>
 <p>
 </div> <!-- end jumbotron -->
@@ -166,7 +166,7 @@ University of Stavanger
 <a href="#___sec1"> Taylor Polynomial Approximation </a><br>
 &nbsp; &nbsp; &nbsp; <a href="#___sec2"> Evaluation of polynomials </a><br>
 <a href="#___sec3"> Calculating Numerical Derivatives of Functions </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec5"> Round off Errors </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec5"> Roundoff Errors </a><br>
 <a href="#___sec9"> Bibliography </a><br>
 </p>
 <p>
@@ -180,7 +180,7 @@ To simulate a physical system in a computer model, we usually have to make space
 
 <p>
 Most physical systems are described in terms of <em>differential equations</em>. A differential equation describe how a physical phenomenon evolves in space and time. The solution to a differential equation is a function of space and/or time. The function could describe the temperature evolution of the earth, it could be growth of cancer cells, the water pressure in an oil reservoir, the list is endless. If we can solve the model analytically, the answer is given in terms of a known function. Most of the models cannot be solved analytically, then we have to rely on computers to help us. The computer does not have any concept of continuous functions, a function is always evaluated at some specific points in space and/or time. 
-<div class="alert alert-block alert-success alert-text-normal"><b>Numerical errors</b>
+<div class="alert alert-block alert-success alert-text-normal"><b>Numerical errors.</b>
 To represent a function of space and/or time in a computer, the function needs to be discretized. When a function is discretized it leads to discretization errors. The difference between the "true" answer and the answer obtained from a practical (numerical) calculation is called the <em>numerical error</em>.
 </div>
 
@@ -232,7 +232,7 @@ $$
 \end{align}
 $$
 
-<div class="alert alert-block alert-success alert-text-normal"><b>The magic of Taylors formula</b>
+<div class="alert alert-block alert-success alert-text-normal"><b>The magic of Taylors formula.</b>
 Taylors formula, equation <a href="#mjx-eqn-2">(2)</a>, states that if we know the function value and its derivative <em>in a single point \( c \)</em>, we can estimate the function everywhere <em>using only  information from the single point \( c \)</em>. How can this be, how can information in a single point be used to predict the behavior of the function everywhere? One way of thinking about it could be to imagine an object moving in a constant gravitational field without air resistance. Newtons laws then tells us that  if we know the starting point e.g. (\( x(0) \)), the velocity (\( v=dx/dt \)), and the acceleration (\( a=dv/dt=d^2x/dt^2 \)) in that point we can predict the trajectory of the object. This trajectory is exactly the first terms in Taylors formula, \( x(t)=x(0) + vt+at^2/2 \).
 </div>
 
@@ -259,7 +259,7 @@ Notice that the mathematical formula is basically the next order term (\( n+1 \)
 </div>
 
 Notice that if \( c \) is very far from \( x \) the truncation error increases. The fact that we do not know the value of \( \eta \) is usually not a problem, in many cases we just replace \( f(\eta) \) with the maximum value it can take on the domain. Equation <a href="#mjx-eqn-3">(3)</a> gives us an direct estimate of discretization error. 
-<div class="alert alert-block alert-success alert-text-normal"><b>Example: evaluate \( \sin x \)</b>
+<div class="alert alert-block alert-success alert-text-normal"><b>Example: evaluate \( \sin x \).</b>
 Whenever you do e.g. <code>np.sin(1)</code> in Python or an equivalent statement in another language, Python has to tell the computer how to evaluate \( \sin x \) at \( x=1 \). Write a Python code that calculates \( \sin x \) up to a user specified accuracy.
 
 <p>
@@ -277,7 +277,7 @@ If we want to calculate \( \sin x \) to a precision lower than a specified value
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
 
 <span style="color: #408080; font-style: italic"># Sinus implementation using the Maclaurin Serie</span>
 <span style="color: #408080; font-style: italic"># By setting a value for eps this value will be used</span>
@@ -324,7 +324,7 @@ do:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span>pol <span style="color: #666666">=</span> a[<span style="color: #666666">0</span>]
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>pol <span style="color: #666666">=</span> a[<span style="color: #666666">0</span>]
 <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>,n<span style="color: #666666">+1</span>):
 	pol <span style="color: #666666">=</span> pol <span style="color: #666666">+</span> a[i]<span style="color: #666666">*</span>x<span style="color: #666666">**</span>i
 </pre></div>
@@ -334,7 +334,7 @@ each loop, we can use the previous calculation to save the number of multiplicat
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span>pol <span style="color: #666666">=</span> a[<span style="color: #666666">0</span>] <span style="color: #666666">+</span> a[<span style="color: #666666">1</span>]<span style="color: #666666">*</span>x
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>pol <span style="color: #666666">=</span> a[<span style="color: #666666">0</span>] <span style="color: #666666">+</span> a[<span style="color: #666666">1</span>]<span style="color: #666666">*</span>x
 power <span style="color: #666666">=</span> x
 <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">2</span>,n<span style="color: #666666">+1</span>):
 	power  <span style="color: #666666">=</span> power<span style="color: #666666">*</span>x
@@ -357,7 +357,7 @@ and so on. This can be implemented as:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span>pol <span style="color: #666666">=</span> a[n]
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>pol <span style="color: #666666">=</span> a[n]
 <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(n<span style="color: #666666">-1</span>,<span style="color: #666666">1</span>,<span style="color: #666666">-1</span>):
 	pol  <span style="color: #666666">=</span> a[i] <span style="color: #666666">+</span> pol<span style="color: #666666">*</span>x
 </pre></div>
@@ -416,7 +416,7 @@ where \( \eta\in[x-h,x+h] \). Note that the error term in this equation is <em>o
 <center> <!-- figure label: --> <div id="fig:taylor:fd"></div> <!-- FIGURE -->
 <hr class="figure">
 <center><p class="caption">Figure 3:  A graphical interpretation of the forward and central difference formula.  <!-- caption label: fig:taylor:fd --> </p></center>
-<p><img src="fig-taylor/fd.png" align="bottom" width=400></p>
+<p><img src="fig-taylor/fd.png" align="bottom" width=800></p>
 </center>
 
 <h3 id="___sec4" class="anchor">Higher order derivative </h3>
@@ -430,7 +430,7 @@ f^{\prime\prime}(x) = \frac{f(x+h)+f(x-h)-2f(x)}{h^2}- \frac{h^2}{12}f^{(4)}(\et
 $$
 
 <p>
-<div class="alert alert-block alert-success alert-text-normal"><b>Example: calculate the numerical derivative and second derivative of \( \sin x \)</b>
+<div class="alert alert-block alert-success alert-text-normal"><b>Example: calculate the numerical derivative and second derivative of \( \sin x \).</b>
 Choose a specific point, e.g. \( x=1 \), and calculate the numerical error for various values of the step size \( h \).
 <b>Solution:</b>
 The derivative of \( \sin x \) is \( \cos x \), we can calculate the numerical derivatives using Python
@@ -438,7 +438,7 @@ The derivative of \( \sin x \) is \( \cos x \), we can calculate the numerical d
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
     <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>sin(x)
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">fd</span>(f,x,h):
  <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
@@ -479,7 +479,7 @@ In figure <a href="#fig:taylor:df2">4</a> you can see the figure produced by the
 <center> <!-- figure label: --> <div id="fig:taylor:df2"></div> <!-- FIGURE -->
 <hr class="figure">
 <center><p class="caption">Figure 4:  Numerical error of derivatives of \( \sin x \) for various step sizes.  <!-- caption label: fig:taylor:df2 --> </p></center>
-<p><img src="fig-taylor/df2_mod.png" align="bottom" width=400></p>
+<p><img src="fig-taylor/df2_mod.png" align="bottom" width=800></p>
 </center>
 
 <p>
@@ -491,9 +491,9 @@ There are several important lessons from figure <a href="#fig:taylor:df2">4</a>
 <li> At a certain point the numerical error start to <em>increase</em>. For the forward difference formula this happens at \( ~10^{-8} \).</li>
 </ol>
 
-The numerical error has a minimum, <em>it does not continue to decrease when \( h \) decreases</em>. The explanation for this behavior is two competing effects: <em>truncation errors</em> and <em>round off errors</em>. The truncation errors have already been discussed in great detail, in the next section we will explain round off errors.
+The numerical error has a minimum, <em>it does not continue to decrease when \( h \) decreases</em>. The explanation for this behavior is two competing effects: <em>truncation errors</em> and <em>roundoff errors</em>. The truncation errors have already been discussed in great detail, in the next section we will explain roundoff errors.
 
-<h2 id="___sec5" class="anchor">Round off Errors </h2>
+<h2 id="___sec5" class="anchor">Roundoff Errors </h2>
 In a computer a floating point number,$x$, is represented as:
 $$
 \begin{align}
@@ -504,7 +504,7 @@ $$
 
 This is very similar to our usual scientific notation where we represents large (or small numbers) as \( \pm q E m=\pm q 10^{m} \). The processor in a computer handles a chunk of bits at one time, this chunk of bit is usually termed <em>word</em>. The number of bits (or byte which almost always means a group of eight bits) in a word is handled as a unit by a processor.   
 Most modern computers uses 64-bits (8 bytes) processors. We are not going too much into all the details, the most important message is that the units handled by the processor are <em>finite</em>. Thus we cannot, in general, store numbers in a computer with infinite accuracy.
-<div class="alert alert-block alert-success alert-text-normal"><b>Machine Precision</b>
+<div class="alert alert-block alert-success alert-text-normal"><b>Machine Precision.</b>
 Machine precision, \( \epsilon_M \) is the smallest number we can add to one and get something different than one, i.e. \( 1+\epsilon_M>1 \). For a 64-bits computer this value is \( \epsilon_M=2^{-52}\simeq2.2210^{-16} \).
 </div>
 
@@ -512,7 +512,7 @@ In the next section we explain exactly why the machine precision has this value,
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000">print</span>(<span style="color: #666666">1+2**-52</span>) <span style="color: #408080; font-style: italic"># prints a value larger than 1</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000">print</span>(<span style="color: #666666">1+2**-52</span>) <span style="color: #408080; font-style: italic"># prints a value larger than 1</span>
 <span style="color: #008000">print</span>(<span style="color: #666666">1+2**-53</span>) <span style="color: #408080; font-style: italic"># prints 1.0</span>
 </pre></div>
 <p>
@@ -520,7 +520,7 @@ Next, consider the simple calculation
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span>a<span style="color: #666666">=0.1+0.2</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>a<span style="color: #666666">=0.1+0.2</span>
 b<span style="color: #666666">=0.3</span>
 <span style="color: #008000">print</span>(a<span style="color: #666666">==</span>b) <span style="color: #408080; font-style: italic"># gives False</span>
 </pre></div>
@@ -538,35 +538,35 @@ Thus in the computer 0.2 will be represented as \( 0.1999\ldots \) and when we a
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span>a<span style="color: #666666">=0.125+0.25</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>a<span style="color: #666666">=0.125+0.25</span>
 b<span style="color: #666666">=0.375</span>
 <span style="color: #008000">print</span>(a<span style="color: #666666">==</span>b) <span style="color: #408080; font-style: italic"># gives True</span>
 </pre></div>
 <p>
-<div class="alert alert-block alert-success alert-text-normal"><b>Comparing two floats</b>
-Whenever you want to compare if two floats, \( a \) and \( b \), are equal in a computer program, you should never do \( a==b \) because of round off errors. Rather you should choose a variant of \( |a-b| < \epsilon \), where you check if the numbers are <em>close enough</em>. In practice you also might want to normalize the values and do \( |1-b/a| < \epsilon \).
+<div class="alert alert-block alert-success alert-text-normal"><b>Comparing two floats.</b>
+Whenever you want to compare if two floats, \( a \) and \( b \), are equal in a computer program, you should never do \( a==b \) because of roundoff errors. Rather you should choose a variant of \( |a-b| < \epsilon \), where you check if the numbers are <em>close enough</em>. In practice you also might want to normalize the values and do \( |1-b/a| < \epsilon \).
 </div>
 
-The round off errors can also play a very big role in calculations, it is particularly apparent when subtracting two numbers of similar magnitude as illustrated in the following code
+The roundoff errors can also play a very big role in calculations, it is particularly apparent when subtracting two numbers of similar magnitude as illustrated in the following code
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span>h<span style="color: #666666">=2**-53</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>h<span style="color: #666666">=2**-53</span>
 a<span style="color: #666666">=1+</span>h
 b<span style="color: #666666">=1-</span>h
 <span style="color: #008000">print</span>((a<span style="color: #666666">-</span>b)<span style="color: #666666">/</span>h) <span style="color: #408080; font-style: italic"># analytical result is 2</span>
 </pre></div>
 <p>
 The calculation above is very similar to the calculation done when evaluating derivatives, and if you run the code you will see that Python does not give the expected value of 2.
-<div class="alert alert-block alert-success alert-text-normal"><b>Choosing the right step size</b>
-A step size that is too low will give higher numerical error because round off errors dominate the numerical error.
+<div class="alert alert-block alert-success alert-text-normal"><b>Choosing the right step size.</b>
+A step size that is too low will give higher numerical error because roundoff errors dominate the numerical error.
 </div>
 
-At the end we will mention a simple trick that you can use sometimes to avoid round off errors <a href="#flannery1992numerical">[1]</a>. In practice we can never get rid of round off errors in the calculation \( f(x+h) \), but since we can choose the step size \( h \) we can choose to choose values such that \( x \) and \( x+h \) differ by an exact binary number
+At the end we will mention a simple trick that you can use sometimes to avoid roundoff errors <a href="#flannery1992numerical">[1]</a>. In practice we can never get rid of roundoff errors in the calculation \( f(x+h) \), but since we can choose the step size \( h \) we can choose to choose values such that \( x \) and \( x+h \) differ by an exact binary number
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span>x<span style="color: #666666">=1</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>x<span style="color: #666666">=1</span>
 h<span style="color: #666666">=0.0002</span> 
 temp <span style="color: #666666">=</span> x<span style="color: #666666">+</span>h
 h<span style="color: #666666">=</span>temp<span style="color: #666666">-</span>x
@@ -619,13 +619,13 @@ The scientific notation is commonly referred to as <em>floating point representa
 
 <h3 id="___sec7" class="anchor">Floating point numbers and the IEEE 754-1985 standard </h3>
 
-A 64 bits word size is commonly referred to as <em>double precision</em>, whereas a 32 bits word size is termed <em>single precision</em>. In the following we will consider a 64 bits word size. We would like to know: what is the round off error, what is the largest number that can be represented in the computer, and what is the smallest number? Almost all floating point numbers are represented in <em>normalized</em> form. In normalized form the mantissa is written as \( M=1.F \), and it is only \( F \) that is stored,   \( F \) is termed the <em>fraction</em>. We will return to the special case of some of the unnormalized numbers later. In the IEEE standard one bit is reserved for the sign, 52 for the fraction (\( F \)) and 11 for the exponent (\( m \)), see figure <a href="#fig:taylor:64bit">5</a> for an illustration.
+A 64 bits word size is commonly referred to as <em>double precision</em>, whereas a 32 bits word size is termed <em>single precision</em>. In the following we will consider a 64 bits word size. We would like to know: what is the roundoff error, what is the largest number that can be represented in the computer, and what is the smallest number? Almost all floating point numbers are represented in <em>normalized</em> form. In normalized form the mantissa is written as \( M=1.F \), and it is only \( F \) that is stored,   \( F \) is termed the <em>fraction</em>. We will return to the special case of some of the unnormalized numbers later. In the IEEE standard one bit is reserved for the sign, 52 for the fraction (\( F \)) and 11 for the exponent (\( m \)), see figure <a href="#fig:taylor:64bit">5</a> for an illustration.
 
 <p>
 <center> <!-- figure label: --> <div id="fig:taylor:64bit"></div> <!-- FIGURE -->
 <hr class="figure">
 <center><p class="caption">Figure 5:  Representation of a 64 bits floating point number according to the IEEE 754-1985 standard. For a 32 bits floating point number, 8, is reserved for the exponent and 23 for the fraction.  <!-- caption label: fig:taylor:64bit --> </p></center>
-<p><img src="fig-taylor/64bit.png" align="bottom" width=400></p>
+<p><img src="fig-taylor/64bit.png" align="bottom" width=800></p>
 </center>
 
 <p>
@@ -666,33 +666,33 @@ Python has a third numeric type called long int, which can use the available mem
 <p>
 What about the machine precision? The machine precision, \( \epsilon_M \), is the <em>smallest possible number that can be added to one, and get a number larger than one</em>, i.e. \( 1+\epsilon_M>1 \).  The smallest possible value of the mantissa is \( 0.000\ldots 01=2^{-52} \), thus the lowest number must be of the form \( 2^{-52}\cdot 2^{m} \). If the exponent , \( m \), is lower than 0 then when we add this number to 1, we will only get 1. Thus the machine precision is \( \epsilon_M=2^{-52}=2.22\cdot10^{-16} \) (for 32 bits \( 2^{-23}=1.19\cdot10^{-7} \)). In practical terms this means that e.g. the value of \( \pi \) is \( 3.14159265358979323846264338\ldots \), but in Python it can only be represented by 16 digits: \( 3.141592653589793 \).
 
-<h3 id="___sec8" class="anchor">Round off error and truncation error in numerical derivatives </h3>
+<h3 id="___sec8" class="anchor">Roundoff error and truncation error in numerical derivatives </h3>
 
-<div class="alert alert-block alert-success alert-text-normal"><b>Round Off Errors</b>
-All numerical floating point operations introduces round off errors at each step in the calculation due to finite word size, these errors accumulate in long simulations and introduce random errors in the final results. After \( N \) operations the error is at least \( \sqrt{N}\epsilon_M \) (the square root is a random walk estimate, and we assume that the errors are randomly distributed). The round off errors can be much, much higher when numbers of equal magnitude are subtracted. You might be so unlucky that after one operation the answer is completely dominated by round off errors.
+<div class="alert alert-block alert-success alert-text-normal"><b>Roundoff Errors.</b>
+All numerical floating point operations introduces roundoff errors at each step in the calculation due to finite word size, these errors accumulate in long simulations and introduce random errors in the final results. After \( N \) operations the error is at least \( \sqrt{N}\epsilon_M \) (the square root is a random walk estimate, and we assume that the errors are randomly distributed). The roundoff errors can be much, much higher when numbers of equal magnitude are subtracted. You might be so unlucky that after one operation the answer is completely dominated by roundoff errors.
 </div>
 
 
 <p>
-The round off error when we represent a floating point number \( x \) in the 
+The roundoff error when we represent a floating point number \( x \) in the 
 machine will be of the order \( x/10^{16} \) (<em>not</em> \( 10^{-16} \)). In general, when we evaluate a function the error will be of the order 
-\( \epsilon|f(x)| \), where \( \epsilon\sim10^{-16} \). Thus equation <a href="#mjx-eqn-9">(9)</a> is modified in the following way when we take into account the round off errors:
+\( \epsilon|f(x)| \), where \( \epsilon\sim10^{-16} \). Thus equation <a href="#mjx-eqn-9">(9)</a> is modified in the following way when we take into account the roundoff errors:
 $$
 \begin{align}
 f^\prime(x)=\frac{f(x+h)-f(x)}{h}\pm\frac{2\epsilon|f(x)|}{h}-\frac{h}{2}f^{\prime\prime}(\eta),\tag{20}
 \end{align}
 $$
 
-we do not know the sign of the round off error, so the total error \( R_2 \) is:
+we do not know the sign of the roundoff error, so the total error \( R_2 \) is:
 $$
 \begin{align}
 R_2=\frac{2\epsilon|f(x)|}{h}+\frac{h}{2}|f^{\prime\prime}(\eta)|.\tag{21}
 \end{align}
 $$
 
-We have put absolute values around the function and its derivative to get the maximal error, it might be the case that the round off error cancel part of the 
-truncation error. However, the round off error is random in nature and will change from machine to machine, and each time we run the program. 
-Note that the round off error increases when \( h \) decreases, and the approximation error decreases when \( h \) decreases. This is exactly what we saw in figure <a href="#fig:taylor:df2">4</a>. We can find the 
+We have put absolute values around the function and its derivative to get the maximal error, it might be the case that the roundoff error cancel part of the 
+truncation error. However, the roundoff error is random in nature and will change from machine to machine, and each time we run the program. 
+Note that the roundoff error increases when \( h \) decreases, and the approximation error decreases when \( h \) decreases. This is exactly what we saw in figure <a href="#fig:taylor:df2">4</a>. We can find the 
 best step size, by differentiating \( R_2 \) and put it equal to zero:
 $$
 \begin{align}

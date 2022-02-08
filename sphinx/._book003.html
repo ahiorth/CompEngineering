@@ -1,24 +1,23 @@
 
 <!DOCTYPE html>
 
-<html lang="1.0">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="1.0">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Solving linear systems &#8212; _ Aksel Hiorth, the National IOR Centre &amp; Institute for Energy Resources, University of Stavanger documentation</title>
+    <title>Finite differences &#8212; _ Aksel Hiorth, the National IOR Centre &amp; Institute for Energy Resources, University of Stavanger documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Solving nonlinear equations" href="._book004.html" />
-    <link rel="prev" title="Finite differences" href="._book002.html" />
+    <link rel="next" title="Solving linear systems" href="._book004.html" />
+    <link rel="prev" title="Writing Python code" href="._book002.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -43,1029 +42,395 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="solving-linear-systems">
-<span id="ch-lin"></span><h1>Solving linear systems<a class="headerlink" href="#solving-linear-systems" title="Permalink to this headline">¶</a></h1>
-<p>Most problems in nature are nonlinear. That means that the system response is not proportional to the system variables, e.g. doubling the CO$_2$ concentration in the atmosphere does not lead to a doubling of the earth surface temperature. Still, linear solvers lies at the heart of all grid based models describing e.g. the earths climate. The reason is that although the <em>global</em> model is nonlinear, the model can be formulated <em>locally</em> as a linear model. Typically the simulation code solves the nonlinear problem through a series of steps where each step is a solution of a linear problem. The topic of solving linear systems of equations have been extensively studied, and sophisticated linear equation solving packages have been developed. Python uses functions from the <a class="reference external" href="https://en.wikipedia.org/wiki/LAPACK">LAPACK</a> library.</p>
-<p>In the next sections we will show in detail how differential equations can be solved as a linear problem. We will first start off by deriving one of the most useful differential equations describing conservation of a quantity, e.g. mass, energy, momentum, charge.</p>
-<div class="section" id="the-continuity-equation">
-<h2>The Continuity Equation<a class="headerlink" href="#the-continuity-equation" title="Permalink to this headline">¶</a></h2>
-<p id="index-0">The continuity equation is fundamental to all mathematical models describing a physical phenomenon. To gain more understanding of its origin we will take the time to derive it from first principles. We will do so in one dimension, consider a volume in space between <span class="math notranslate nohighlight">\(A(x)\)</span> and <span class="math notranslate nohighlight">\(A(x+dx)\)</span> in figure <a class="reference internal" href="#fig-lin-flux"><span class="std std-ref">A closed volume,  \( V(x)=A(x)dx \) , where a quantity flows in and out (illustrated by the green lines), there is also a possibility for generation or loss of the same quantity inside the volume</span></a>. To be concrete we will assume that the green arrows represents the flow of heat. Thus there are heat flowing into and out of the system, and also heat that can be generated within the system by e.g. chemical reactions. The conservation equation can be formulated with words</p>
-<div class="figure align-default" id="id9">
-<span id="fig-lin-flux"></span><a class="reference internal image-reference" href="_images/flux.png"><img alt="_images/flux.png" src="_images/flux.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-text"><em>A closed volume,  \( V(x)=A(x)dx \) , where a quantity flows in and out (illustrated by the green lines), there is also a possibility for generation or loss of the same quantity inside the volume</em></span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
+  <div class="section" id="finite-differences">
+<span id="ch-taylor"></span><h1>Finite differences<a class="headerlink" href="#finite-differences" title="Permalink to this headline">¶</a></h1>
+<p>The mathematics introduced in this chapter is absolutely essential in order to understand the development of numerical algorithms. We strongly advice you to study it carefully, implement python scripts and investigate the results, reproduce the analytical derivations and compare with the numerical solutions.</p>
+<div class="section" id="numerical-errors">
+<h2>Numerical Errors<a class="headerlink" href="#numerical-errors" title="Permalink to this headline">¶</a></h2>
+<p>To simulate a physical system in a computer model, we usually have to make space and time discrete. In order to simulate e.g. a rocket flying into space we typically find the position of the rocket at a specific time <span class="math notranslate nohighlight">\(t\)</span>, and the computer model calculates the new position at a later time <span class="math notranslate nohighlight">\(t+h\)</span>. <span class="math notranslate nohighlight">\(h\)</span> is a step size, and if we assume it is one minute, then we have discretized one hour into 60 discrete chunks of time. The challenge for any modeler is to know if 1 minute is too short or too long? If <span class="math notranslate nohighlight">\(h\)</span> was one second instead of one minute, one hour would be split into 3600 pieces. The simulation time would go up, but would the <em>accuracy</em> of our calculation be any better? The goal of any numerical simulation is to keep the numerical error to an acceptable level. We will never get rid of it as you will see in this chapter.</p>
+<p>Most physical systems are described in terms of <em>differential equations</em>. A differential equation describe how a physical phenomenon evolves in space and time. The solution to a differential equation is a function of space and/or time. The function could describe the temperature evolution of the earth, it could be growth of cancer cells, the water pressure in an oil reservoir, the list is endless. If we can solve the model analytically, the answer is given in terms of a known function. Most of the models cannot be solved analytically, then we have to rely on computers to help us. The computer does not have any concept of continuous functions, a function is always evaluated at some specific points in space and/or time.</p>
+<div class="admonition-numerical-errors admonition">
+<p class="admonition-title">Numerical errors</p>
+<p id="index-0">To represent a function of space and/or time in a computer, the function needs to be discretized. When a function is discretized it leads to discretization errors. The difference between the &quot;true&quot; answer and the answer obtained from a practical (numerical) calculation is called the <em>numerical error</em>.</p>
 </div>
-<div class="math notranslate nohighlight" id="eq-auto5">
-\[\tag{26}
-\frac{\text{heat into V(x)}}{\text{time}}-\frac{\text{heat out of V(x)}}{\text{time}}
-    +\frac{\text{heat generated in V(x)}}{\text{time}} {\nonumber}\]</div>
-<div class="math notranslate nohighlight" id="eq-eq-lin-flux">
-\[\tag{27}
-= \frac{\text{change of heat in V(x)}}{\text{time}}.\]</div>
-<p>We formulate the conservation equation per time, because we would like to investigate the time dependency of heat flow. The next step is to replace the terms ''heat into/out of'' with a useful mathematical quantity. It turns out that the term <em>flux</em> is particularly useful, because it is an <em>intensive</em> quantity. An intensive quantity is a quantity that is <em>independent of the system size</em>, like density. The flux is denoted by the symbol <span class="math notranslate nohighlight">\(J\)</span></p>
-<div class="math notranslate nohighlight">
-\[J(x)=\frac{\text{quantity (heat)}}{\text{area}\cdot\text{time}},
-label{}\]</div>
-<p>and was first introduced by Isaac Newton. Thus to find the amount of heat transported through a surface per time we simply multiply the flux with the surface area. Next, we define the heat per volume as <span class="math notranslate nohighlight">\(q(x)\)</span>, and the heat produced per volume as <span class="math notranslate nohighlight">\(\sigma\)</span>. Then equation <a class="reference internal" href="#eq-eq-lin-flux"><span class="std std-ref">(27)</span></a> can be written</p>
-<div class="math notranslate nohighlight" id="eq-auto6">
-\[\tag{28}
-\frac{J(x)A(x)}{dt}-\frac{J(x+dx)A(x+dx)}{dt}+
-    \frac{\sigma(t+dt)V(x)-\sigma(t)V(x)}{dt}{\nonumber}\]</div>
-<div class="math notranslate nohighlight" id="eq-eq-lin-cont1">
-\[\tag{29}
-=
-    \frac{q(t+dt)V(x)-q(t)V(x)}{dt}.\]</div>
-<p>Using Taylor expansion we can write</p>
-<div class="math notranslate nohighlight" id="eq-eq-lin-cont2">
-\[\tag{30}
-J(x+dx)A(x+dx) =J(x)A(x)+\frac{d(J(x)A(x)}{dx}dx+{\cal O}(dx^2),\]</div>
-<div class="math notranslate nohighlight" id="eq-auto7">
-\[\tag{31}
-\sigma(t+dt) =\sigma(t)+\frac{d\sigma}{dt}dt+{\cal O}(dt^2),{\nonumber}\]</div>
-<div class="math notranslate nohighlight" id="eq-eq-lin-cont3">
-\[\tag{32}
-q(t+dt) =q(t)+\frac{dq}{dt}dt+{\cal O}(dt^2),\]</div>
-<p>Inserting these equations into equation:ref:<cite>(29) &lt;Eq:eq:lin:cont1&gt;</cite>, using <span class="math notranslate nohighlight">\(V(x)=A(x)dx\)</span>, and taking the limit <span class="math notranslate nohighlight">\(dx,dt\to0\)</span> we arrive at</p>
-<div class="admonition-the-continuity-equation-in-1-dimension admonition">
-<p class="admonition-title">The continuity equation in 1 dimension</p>
+<p>When we divide space and time into finite pieces to represent them in a computer, a natural question to ask is how many pieces do we need. Consider an almost trivial example, let say you want visualize the function <span class="math notranslate nohighlight">\(f(x)=\sin x\)</span>. To do this we need to choose where, which values of <span class="math notranslate nohighlight">\(x\)</span>, we want to evaluate our function. Clearly, we want to use as few points as possible but still capture shape of the true function.
+In figure <a class="reference internal" href="#fig-taylor-sinx"><span class="std std-ref">A plot of  \( sin x \)  for different spacing of the  \( x \) -values</span></a>, we have plotted <span class="math notranslate nohighlight">\(\sin x\)</span> for various discretization (spacing between the points) in the interval <span class="math notranslate nohighlight">\([-\pi,\pi]\)</span>.</p>
+<div class="figure align-default" id="id2">
+<span id="fig-taylor-sinx"></span><a class="reference internal image-reference" href="_images/func_plot.png"><img alt="_images/func_plot.png" src="_images/func_plot.png" style="width: 600px;" /></a>
+<p class="caption"><span class="caption-text"><em>A plot of  \( sin x \)  for different spacing of the  \( x \) -values</em></span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
 </div>
-<div class="math notranslate nohighlight" id="eq-eq-lin-cont4">
-\[\tag{33}
--\frac{d(J(x)A(x))}{dx}+\frac{d\sigma(t)}{dt}A(x)=\frac{dq(t)}{dt}A(x).\]</div>
-<p>We have kept the area in equation <a class="reference internal" href="#eq-eq-lin-cont4"><span class="std std-ref">(33)</span></a>, because we are only considering flow of heat in one dimension and then we can allow for the area to change in the <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(z\)</span> dimension. When the continuity equation is derived in three dimensions, one consider a volume <span class="math notranslate nohighlight">\(V(x,y,z)=dxdydz\)</span>, then the area in equation <a class="reference internal" href="#eq-eq-lin-cont4"><span class="std std-ref">(33)</span></a> will drop out and <span class="math notranslate nohighlight">\(d/dx\to\nabla=[\partial/\partial x, \partial/\partial y, \partial/\partial z]\)</span></p>
-<div class="admonition-the-continuity-equation-in-3-dimensions admonition">
-<p class="admonition-title">The continuity equation in 3 dimensions</p>
+<p>From the figure we see that in some areas only a couple of points are needed in order to
+represent the function well, and in some areas more points are needed. To state it more clearly; between <span class="math notranslate nohighlight">\([-1,1]\)</span> a linear function (few points) approximate <span class="math notranslate nohighlight">\(\sin x\)</span> well,
+whereas in the area where the derivative of the function changes more rapidly e.g. in <span class="math notranslate nohighlight">\([-2,-1]\)</span>, we need the points to be more closely spaced to capture the behavior of the true function.</p>
+<p>What is a <em>good representation</em> representation of the true function? We cannot rely on visual inspection every time, and most of the time we do not know the true answer so we would not know what to compare it with. In the next section we will show how Taylor polynomial representation of a function is a natural starting point to answer this question.</p>
 </div>
-<div class="math notranslate nohighlight" id="eq-eq-lin-cont5">
-\[\tag{34}
--\nabla\cdot\mathbf{J}+\frac{d\sigma(t)}{dt}=\frac{dq(t)}{dt}.\]</div>
-</div>
-<div class="section" id="continuity-equation-as-a-linear-problem-in-progress">
-<h2>Continuity Equation as a linear problem (in progress)<a class="headerlink" href="#continuity-equation-as-a-linear-problem-in-progress" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="solving-linear-equations">
-<h2>Solving linear equations<a class="headerlink" href="#solving-linear-equations" title="Permalink to this headline">¶</a></h2>
-<p>There are a number of excellent books covering this topic, see e.g. <span id="id1">[Ref2]</span> <span id="id2">[Ref3]</span> <span id="id3">[Ref4]</span> <span id="id4">[Ref5]</span>.
-In most of the examples covered in this course we will encounter problems where we have a set of <em>linearly independent</em> equations and one equation for each unknown. For these type of problems there are a number of methods that can be used, and they will find a solution in a finite number of steps. If a solution cannot be found it is usually because the equations are not linearly independent, and our formulation of the physical problem is wrong.</p>
-<p>Assume that we would like to solve the following set of equations:</p>
-<div class="math notranslate nohighlight" id="eq-eq-lin-la">
-\[\tag{35}
-2x_0+x_1+x_2+3x_3=1,\]</div>
-<div class="math notranslate nohighlight" id="eq-eq-lin-lb">
-\[\tag{36}
-x_0+x_1+3x_2+x_3=-3,\]</div>
-<div class="math notranslate nohighlight" id="eq-eq-lin-lc">
-\[\tag{37}
-x_0+4x_1+x_2+x_3=2,\]</div>
-<div class="math notranslate nohighlight" id="eq-eq-lin-ld">
-\[\tag{38}
-x_0+x_1+x_2+x_3=1.\]</div>
-<p>These equations can be written in matrix form as:</p>
-<div class="math notranslate nohighlight" id="eq-eq-lin-mat">
-\[\tag{39}
-\mathbf{A\cdot x}=\mathbf{b},\]</div>
-<p>where:</p>
-<div class="math notranslate nohighlight" id="eq-eq-lin-mata">
-\[\begin{split}\tag{40}
-\mathbf{A}\equiv\begin{pmatrix}
-    2&amp;1&amp;1&amp;3\\
-    1&amp;1&amp;3&amp;1\\
-    1&amp;4&amp;1&amp;1\\
-    1&amp;1&amp;2&amp;2
-    \end{pmatrix}
-    \qquad
-    \mathbf{b}\equiv
-    \begin{pmatrix}
-    1\\-3\\2\\1
-    \end{pmatrix}
-    \qquad
-    \mathbf{x}\equiv
-    \begin{pmatrix}
-    x_0\\x_1\\x_2\\x_3
-    \end{pmatrix}.\end{split}\]</div>
-<p>You can easily verify that <span class="math notranslate nohighlight">\(x_0=-4, x_1=1, x_2=-1, x_3= 3\)</span> is the
-solution to the above equations by direct substitution. If we were to
-replace one of the above equations with a linear combination of any of
-the other equations, e.g. replace equation <a class="reference internal" href="#eq-eq-lin-ld"><span class="std std-ref">(38)</span></a> with
-<span class="math notranslate nohighlight">\(3x_0+2x_1+4x_2+4x_3=-2\)</span>, there would be no unique solution (infinite
-number of solutions). This can be checked by calculating the determinant of the matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>, if <span class="math notranslate nohighlight">\(\det \mathbf{A}=0\)</span>,
-What is the difficulty in solving these equations? Clearly if none of the equations are linearly dependent, and we have <span class="math notranslate nohighlight">\(N\)</span> independent linear equations, it should be straight forward to solve them? Two major numerical problems are i) even if the equations are not exact linear combinations of each other, they could be very close, and as the numerical algorithm progresses they could at some stage become linearly dependent due to roundoff errors. ii) roundoff errors may accumulate if the number of equations are large <span id="id5">[Ref2]</span>.</p>
-<div class="section" id="gauss-jordan-elimination">
-<h3>Gauss-Jordan elimination<a class="headerlink" href="#gauss-jordan-elimination" title="Permalink to this headline">¶</a></h3>
-<p id="index-1">Let us continue the discussion by consider Gauss-Jordan elimination, which is a <em>direct</em> method. A direct method uses a final set of operations to obtain a solution. According to <span id="id6">[Ref2]</span> Gauss-Jordan elimination is the method of choice if we want to find the inverse of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>. However, it is slow when it comes to calculate the solution of equation
-<a class="reference internal" href="#eq-eq-lin-mat"><span class="std std-ref">(39)</span></a>. Even if speed and memory use is not an issue, it is also not advised to first find the inverse, <span class="math notranslate nohighlight">\(\mathbf{A}^{-1}\)</span>, of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>, then multiply it with <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> to obtain the solution, due to roundoff errors (Roundoff errors occur whenever we subtract to numbers that are very close to each other). To simplify our notation, we write equation <a class="reference internal" href="#eq-eq-lin-mata"><span class="std std-ref">(40)</span></a> as:</p>
-<div class="math notranslate nohighlight" id="eq-auto8">
-\[\begin{split}\tag{41}
-\left(
-    \begin{array}{cccc|c}
-    2&amp;1&amp;1&amp;3&amp;1\\
-    1&amp;1&amp;3&amp;1&amp;-3\\
-    1&amp;4&amp;1&amp;1&amp;2\\
-    1&amp;1&amp;2&amp;2&amp;1
-    \end{array}
-    \right).\end{split}\]</div>
-<p>The numbers to the left of the vertical dash is the matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>, and to the right is the vector <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>. The Gauss-Jordan elimination procedure proceeds by doing the same operation on the right and left side of the dash, and the goal is to get only zeros on the lower triangular part of the matrix. This is achieved by multiplying rows with the same (nonzero) number, swapping rows, adding a multiple of a row to another:</p>
-<div class="math notranslate nohighlight" id="eq-eq-lin-gj1">
-\[\begin{split}\tag{42}
-\left(
-    \begin{array}{cccc|c}
-    2&amp;1&amp;1&amp;3&amp;1\\
-    1&amp;1&amp;3&amp;1&amp;-3\\
-    1&amp;4&amp;1&amp;1&amp;2\\
-    1&amp;1&amp;2&amp;2&amp;1
-    \end{array}
-    \right)\to
-    \left(
-    \begin{array}{cccc|c}
-    2&amp;1&amp;1&amp;3&amp;1\\
-    0&amp;1/2&amp;5/2&amp;-1/2&amp;-7/2\\
-    0&amp;7/2&amp;1/2&amp;-1/2&amp;3/2\\
-    0&amp;1/2&amp;3/2&amp;1/2&amp;1/2
-    \end{array}
-    \right)\to\\end{split}\]</div>
-<div class="math notranslate nohighlight" id="eq-auto9">
-\[\begin{split}\tag{43}
-\left(
-    \begin{array}{cccc|c}
-    2&amp;1&amp;1&amp;3&amp;1\\
-    0&amp;1/2&amp;5/2&amp;-1/2&amp;-7/2\\
-    0&amp;0&amp;-17&amp;3&amp;26\\
-    0&amp;0&amp;1&amp;-1&amp;4
-    \end{array}
-    \right)
-    \to
-    \left(
-    \begin{array}{cccc|c}
-    2&amp;1&amp;1&amp;3&amp;1\\
-    0&amp;1/2&amp;5/2&amp;-1/2&amp;-7/2\\
-    0&amp;0&amp;-17&amp;3&amp;26\\
-    0&amp;0&amp;0&amp;14/17&amp;42/17
-    \end{array}
-    \right){\nonumber}\end{split}\]</div>
-<p>The operations done are: (<span class="math notranslate nohighlight">\(1\to2\)</span>) multiply first row with <span class="math notranslate nohighlight">\(-1/2\)</span> and add to second, third and the fourth row, (<span class="math notranslate nohighlight">\(2\to 3\)</span>) multiply second row with <span class="math notranslate nohighlight">\(-7\)</span>, and add to third row, multiply second row with <span class="math notranslate nohighlight">\(-1\)</span> and add to fourth row, (<span class="math notranslate nohighlight">\(3\to4\)</span>) multiply third row with <span class="math notranslate nohighlight">\(-1/17\)</span> and add to fourth row. These operations can easily be coded into Python:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span> <span class="p">]],</span><span class="nb">float</span><span class="p">)</span>
-<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="nb">float</span><span class="p">)</span>
-<span class="n">N</span><span class="o">=</span><span class="mi">4</span>
-<span class="c1"># Gauss-Jordan Elimination</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>
-    <span class="n">fact</span>    <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">:,</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">:,]</span> <span class="o">-=</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">fact</span><span class="p">,</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,])</span>
-    <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">:]</span>  <span class="o">-=</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">fact</span>
-</pre></div>
-</div>
-<p>Notice that the final matrix has only zeros beyond the diagonal, such a matrix is called <em>upper triangular</em>. We still have not found the final solution, but from an upper triangular (or lower triangular) matrix it is trivial to determine the solution. The last row immediately gives us <span class="math notranslate nohighlight">\(14/17z=42/17\)</span> or <span class="math notranslate nohighlight">\(z=3\)</span>, now we have the solution for z and the next row gives: <span class="math notranslate nohighlight">\(-17y+3z=26\)</span> or <span class="math notranslate nohighlight">\(y=(26-3\cdot3)/(-17)=-1\)</span>, and so on. In a more general form, we can write our solution of the matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> after making it upper triangular as:</p>
-<div class="math notranslate nohighlight" id="eq-eq-lin-back">
-\[\begin{split}\tag{44}
-\begin{pmatrix}
-    a^\prime_{0,0}&amp;a^\prime_{0,1}&amp;a^\prime_{0,2}&amp;a^\prime_{0,3}\\
-    0&amp;a^\prime_{1,1}&amp;a^\prime_{1,2}&amp;a^\prime_{1,3}\\
-    0&amp;0&amp;a^\prime_{2,2}&amp;a^\prime_{2,3}\\
-    0&amp;0&amp;0&amp;a^\prime_{3,3}
-    \end{pmatrix}
-    \cdot
-    \begin{pmatrix}
-    x_0\\
-    x_1\\
-    x_2\\
-    x_3
-    \end{pmatrix}
-    =
-    \begin{pmatrix}
-    b^\prime_{0}\\
-    b^\prime_{1}\\
-    b^\prime_{2}\\
-    b^\prime_{3}
-    \end{pmatrix}\end{split}\]</div>
-<p>The back substitution can then be written formally as:</p>
-<div class="math notranslate nohighlight" id="eq-eq-lin-back2">
-\[\tag{45}
-x_i=\frac{1}{a^\prime_{ii}}\left[b_i^\prime-\sum_{j=i+1}^{N-1}a^\prime_{ij}x_j\right],\quad i=N-1,N-2,\ldots,0\]</div>
-<p>The back substitution can now easily be implemented in Python as:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Back substitution</span>
-<span class="n">sol</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="nb">float</span><span class="p">)</span>
-<span class="n">sol</span><span class="p">[</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">b</span><span class="p">[</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="n">A</span><span class="p">[</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-    <span class="n">sol</span><span class="p">[</span><span class="n">N</span><span class="o">-</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="n">N</span><span class="o">-</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">[(</span><span class="n">N</span><span class="o">-</span><span class="n">i</span><span class="p">),],</span><span class="n">sol</span><span class="p">))</span><span class="o">/</span><span class="n">A</span><span class="p">[</span><span class="n">N</span><span class="o">-</span><span class="n">i</span><span class="p">,</span><span class="n">N</span><span class="o">-</span><span class="n">i</span><span class="p">]</span>
-</pre></div>
-</div>
-<p>Notice that in the Python implementation, we have used vector operations instead of for loops. This makes the code more efficient, but it could also be implemented with for loops:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Back substitution - for loop</span>
-<span class="n">sol</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="nb">float</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-    <span class="n">sol</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>
-        <span class="n">sol</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">sol</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-    <span class="n">sol</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
-</pre></div>
-</div>
-<p>There are at least two things to notice with our implementation:
-* Matrix and vector notation makes the code more compact and efficient. In order to understand the implementation it is advised to put <span class="math notranslate nohighlight">\(i=1, 2, 3, 4\)</span>, and then execute the statements in the Gauss-Jordan elimination and compare with equation <a class="reference internal" href="#eq-eq-lin-gj1"><span class="std std-ref">(42)</span></a>.</p>
-<ul class="simple">
-<li><p>The implementation of the Gauss-Jordan elimination is not robust, in particular one could easily imagine cases where one of the leading coefficients turned out as zero, and the routine would fail when we divide by <code class="docutils literal notranslate"><span class="pre">A[i-1,i-1]</span></code>. By simply changing equation <a class="reference internal" href="#eq-eq-lin-lb"><span class="std std-ref">(36)</span></a> to <span class="math notranslate nohighlight">\(2x_0+x_1+3x_2+x_3=-3\)</span>, when doing the first Gauss-Jordan elimination, both <span class="math notranslate nohighlight">\(x_0\)</span> and <span class="math notranslate nohighlight">\(x_1\)</span> would be canceled. In the next iteration we try to divide next equation by the leading coefficient of <span class="math notranslate nohighlight">\(x_1\)</span>, which is zero, and the whole procedure fails.</p></li>
-</ul>
-</div>
-<div class="section" id="pivoting">
-<h3>Pivoting<a class="headerlink" href="#pivoting" title="Permalink to this headline">¶</a></h3>
-<p id="index-2">The solution to the last problem is solved by what is called <em>pivoting</em>. The element that we divide on is called the <em>pivot element</em>. It actually turns out that even if we do Gauss-Jordan elimination <em>without</em> encountering a zero pivot element, the Gauss-Jordan procedure is numerically unstable in the presence of roundoff errors <span id="id7">[Ref2]</span>. There are two versions of pivoting, <em>full pivoting</em> and <em>partial pivoting</em>. In partial pivoting we only interchange rows, while in full pivoting we also interchange rows and columns. Partial pivoting is much easier to implement, and the algorithm is as follows:
-1. Find the row in <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> with largest absolute value in front of <span class="math notranslate nohighlight">\(x_0\)</span> and change with the first equation, switch corresponding elements in <span class="math notranslate nohighlight">\(\mathbf{b}\)</span></p>
-<ol class="arabic simple" start="2">
-<li><p>Do one Gauss-Jordan elimination, find the row in <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> with the largest absolute value in front of <span class="math notranslate nohighlight">\(x_1\)</span> and switch with the second (same for <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>), and so on.</p></li>
+<div class="section" id="taylor-polynomial-approximation">
+<h2>Taylor Polynomial Approximation<a class="headerlink" href="#taylor-polynomial-approximation" title="Permalink to this headline">¶</a></h2>
+<p>How can we evaluate numerical errors if we do not know the true answer? There are at least two answers to this</p>
+<ol class="arabic simple">
+<li><p>The pragmatic engineering approach is to do a simulation with a coarse grid, then refine the grid until the solution does not change very much. This is perfectly fine <em>if you know that your numerical code is bug free</em>, because even if the simulation converges to a solution we do not know if it is the <em>true solution</em>. In too many cases this is not so. Therefore even in well tested industrial codes, it is always good to test them on a simple test case where you know the exact solution.</p></li>
+<li><p>Taylors formula can be used to represent any continuous function with continuous derivatives or most solutions to a mathematical model. Taylors formula gives us an estimate of the numerical error introduced when we divide space and time into finite pieces.</p></li>
 </ol>
-<p>For a linear equation we can multiply with a number on each side and the equation would be unchanged, so if we where to multiply one of the equations with a large value, we are almost sure that this equation would be placed first by our algorithm. This seems a bit strange as our mathematical problem is the same. Sometimes the linear algebra routines tries to normalize the equations to find the pivot element that would have been the largest element if all equations were normalized according to some rule, this is called <em>implicit pivoting</em>.
-LU decomposition
-----------------</p>
-<p id="index-3">As we have already seen, if the matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is reduced to a triangular form it is trivial to calculate the solution by using back substitution. Thus if it was possible to decompose the matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> as follows:</p>
-<div class="math notranslate nohighlight" id="eq-eq-lin-lu">
-\[\tag{46}
-\mathbf{A}=\mathbf{L}\cdot\mathbf{U}\]</div>
-<div class="math notranslate nohighlight" id="eq-auto10">
-\[\begin{split}\tag{47}
-\begin{pmatrix}
-    a_{0,0}&amp;a_{0,1}&amp;a_{0,2}&amp;a_{0,3}\\
-    a_{1,0}&amp;a_{1,1}&amp;a_{1,2}&amp;a_{1,3}\\
-    a_{2,0}&amp;a_{2,1}&amp;a_{2,2}&amp;a_{2,3}\\
-    a_{3,0}&amp;a_{3,1}&amp;a_{3,2}&amp;a_{3,3}
-    \end{pmatrix}
-    =
-    \begin{pmatrix}
-    l_{0,0}&amp;0&amp;0&amp;0\\
-    l_{1,0}&amp;l_{1,1}&amp;0&amp;0\\
-    l_{2,0}&amp;l_{2,1}&amp;l_{2,2}&amp;0\\
-    l_{3,0}&amp;l_{3,1}&amp;l_{3,2}&amp;l_{3,3}
-    \end{pmatrix}
-    \cdot
-    \begin{pmatrix}
-    u_{0,0}&amp;u_{0,1}&amp;u_{0,2}&amp;u_{0,3}\\
-    0&amp;u_{1,1}&amp;u_{1,2}&amp;u_{1,3}\\
-    0&amp;0&amp;u_{2,2}&amp;u_{2,3}\\
-    0&amp;0&amp;0&amp;u_{3,3}
-    \end{pmatrix}.\end{split}\]</div>
-<p>The solution procedure would then be to rewrite equation <a class="reference internal" href="#eq-eq-lin-mat"><span class="std std-ref">(39)</span></a> as:</p>
-<div class="math notranslate nohighlight" id="eq-eq-lin-matb">
-\[\tag{48}
-\mathbf{A\cdot x}=\mathbf{L}\cdot\mathbf{U}\cdot\mathbf{x}=\mathbf{b},\]</div>
-<p>If we define a new vector <span class="math notranslate nohighlight">\(\mathbf{y}\)</span>:</p>
-<div class="math notranslate nohighlight" id="eq-auto11">
-\[\tag{49}
-\mathbf{y}\equiv\mathbf{U}\cdot\mathbf{x},\]</div>
-<p>we can first solve for the <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> vector:</p>
-<div class="math notranslate nohighlight" id="eq-eq-lin-for">
-\[\tag{50}
-\mathbf{L}\cdot\mathbf{y}=\mathbf{b},\]</div>
-<p>and then for <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>:</p>
-<div class="math notranslate nohighlight" id="eq-auto12">
-\[\tag{51}
-\mathbf{U}\cdot\mathbf{x}=\mathbf{y}.\]</div>
-<p>Note that the solution to equation <a class="reference internal" href="#eq-eq-lin-for"><span class="std std-ref">(50)</span></a> would be done by <em>forward substitution</em>:</p>
-<div class="math notranslate nohighlight" id="eq-eq-lin-back3">
-\[\tag{52}
-y_i=\frac{1}{l_{ii}}\left[b_i-\sum_{j=0}^{i-1}l_{ij}x_j\right],\quad i=1,2,\ldots N-1.\]</div>
-<p>Why go to all this trouble? First of all it requires (slightly) less operations to calculate the LU decomposition and doing the forward and backward substitution than the Gauss-Jordan procedure discussed earlier. Secondly, and more importantly, is the fact that in many cases one would like to calculate the solution for different values of the <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> vector in equation <a class="reference internal" href="#eq-eq-lin-matb"><span class="std std-ref">(48)</span></a>. If we do the LU decomposition first we can calculate the solution quite fast using backward and forward substitution for any value of the <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> vector.</p>
-<p>The NumPy function <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.solve.html">solve</a>, uses LU decomposition and partial pivoting, and we can find the solution to our previous problem simply by the following code:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="kn">import</span> <span class="n">solve</span>
-<span class="n">x</span><span class="o">=</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="section" id="iterative-methods">
-<h2>Iterative methods<a class="headerlink" href="#iterative-methods" title="Permalink to this headline">¶</a></h2>
-<p>The methods described so far are what is called <em>direct</em> methods. The direct methods for very large systems might suffer from round off errors. That means that even if the computer has found a solution, the solution is &quot;polluted&quot; by round off errors, or stated more clearly: your solution for <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, when entered into the original equation <span class="math notranslate nohighlight">\(\mathbf{A}\mathbf{x}\neq\mathbf{b}\)</span>. Below we will describe one trick, and two alternative methods to the direct methods.
-Iterative improvement
----------------------
-The first method <span id="id8">[Ref6]</span> assumes that we already have solved the matrix equation <a class="reference internal" href="#eq-eq-lin-mat"><span class="std std-ref">(39)</span></a>, and obtained an <em>estimate</em> <span class="math notranslate nohighlight">\(\mathbf{\hat{x}}\)</span> of the true solution <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>. Assume that <span class="math notranslate nohighlight">\(\mathbf{\hat{x}}=\mathbf{x}+\delta\mathbf{x}\)</span>, and that</p>
-<div class="math notranslate nohighlight" id="eq-eq-lin-itb">
-\[\tag{53}
-\mathbf{A}\cdot\mathbf{\hat{x}}=\mathbf{A}\cdot(\mathbf{x}+\delta\mathbf{x})=\mathbf{b}+\delta\mathbf{b},\]</div>
-<p>subtracting equation <a class="reference internal" href="#eq-eq-lin-mat"><span class="std std-ref">(39)</span></a> we get</p>
-<div class="math notranslate nohighlight" id="eq-eq-lin-itb2">
-\[\tag{54}
-\mathbf{A}\cdot\delta\mathbf{x}=\delta\mathbf{b}.\]</div>
-<p>Solving equation <a class="reference internal" href="#eq-eq-lin-itb"><span class="std std-ref">(53)</span></a> for <span class="math notranslate nohighlight">\(\delta\mathbf{b}\)</span> an inserting in the equation above, we get</p>
-<div class="math notranslate nohighlight" id="eq-eq-lin-itb3">
-\[\tag{55}
-\mathbf{A}\cdot\delta\mathbf{x}=\mathbf{A}\cdot\mathbf{\hat{x}}-\mathbf{b}.\]</div>
-<p>The usefulness of this method assumes that we have already obtained the LU decomposition of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>, and if possible one should use a higher precision to calculate the right hand side, since there will be a lot of cancellations. Then the whole computational process it is simply to calculate the right hand side and backsubstitute. The improved solution is then obtained by subtracting <span class="math notranslate nohighlight">\(\delta\mathbf{x}\)</span> from <span class="math notranslate nohighlight">\(\mathbf{\hat{x}}\)</span>.</p>
-<div class="section" id="the-jacobi-method">
-<h3>The Jacobi method<a class="headerlink" href="#the-jacobi-method" title="Permalink to this headline">¶</a></h3>
-<p id="index-4">A completely different approach is the Jacobian method, which is simply to decompose the <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> matrix in the following way</p>
-<div class="math notranslate nohighlight" id="eq-eq-lin-dr">
-\[\tag{56}
-\mathbf{A}=\mathbf{D}+\mathbf{R}\]</div>
-<div class="math notranslate nohighlight" id="eq-auto13">
-\[\begin{split}\tag{57}
-&amp;\begin{pmatrix}
-    a_{0,0}&amp;a_{0,1}&amp;a_{0,2}&amp;a_{0,3}\\
-    a_{1,0}&amp;a_{1,1}&amp;a_{1,2}&amp;a_{1,3}\\
-    a_{2,0}&amp;a_{2,1}&amp;a_{2,2}&amp;a_{2,3}\\
-    a_{3,0}&amp;a_{3,1}&amp;a_{3,2}&amp;a_{3,3}
-    \end{pmatrix}
-    {\nonumber}\end{split}\]</div>
-<div class="math notranslate nohighlight" id="eq-eq-lin-dr2">
-\[\begin{split}\tag{58}
-=
-    \begin{pmatrix}
-    a_{0,0}&amp;0&amp;0&amp;0\\
-    0&amp;a_{1,1}&amp;0&amp;0\\
-    0&amp;0&amp;a_{2,2}&amp;0\\
-    0&amp;0&amp;0&amp;a_{3,3}
-    \end{pmatrix}
-    +
-    \begin{pmatrix}
-    0&amp;a_{0,1}&amp;a_{0,2}&amp;a_{0,3}\\
-    a_{1,0}&amp;0&amp;a_{1,2}&amp;a_{1,3}\\
-    a_{2,0}&amp;a_{2,1}&amp;0&amp;a_{2,3}\\
-    a_{3,0}&amp;a_{3,1}&amp;a_{3,2}&amp;0
-    \end{pmatrix}.\end{split}\]</div>
-<p>We can then write equation <a class="reference internal" href="#eq-eq-lin-mat"><span class="std std-ref">(39)</span></a> as</p>
-<div class="math notranslate nohighlight" id="eq-eq-lin-jc">
-\[\tag{59}
-\mathbf{D}\mathbf{x}=\mathbf{b}-\mathbf{R}\cdot\mathbf{x}.\]</div>
-<p>How does this help us? First of all, the matrix <span class="math notranslate nohighlight">\(\mathbf{D}\)</span> is easy to invert as it is diagonal, the inverse can be found by simply replace <span class="math notranslate nohighlight">\(a_{ii}\to 1/a_{ii}\)</span>. But <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> is still present on the right hand side? This is where the <em>iterations</em> comes into play, we simply guess at an initial solution <span class="math notranslate nohighlight">\(\mathbf{x}^k\)</span>, and then we use equation <a class="reference internal" href="#eq-eq-lin-jc"><span class="std std-ref">(59)</span></a> to calculate the next solution <span class="math notranslate nohighlight">\(\mathbf{x}^{k+1}\)</span>, and so on</p>
-<div class="math notranslate nohighlight" id="eq-eq-lin-jc2">
-\[\tag{60}
-\mathbf{x}^{k+1}=\mathbf{D}^{-1}(\mathbf{b}-\mathbf{R}\cdot\mathbf{x}^{k}).\]</div>
-<p>Lets write it out on component form for a <span class="math notranslate nohighlight">\(4\times4\)</span> matrix to see what is going on</p>
-<div class="math notranslate nohighlight" id="eq-eq-lin-jc3a">
-\[\tag{61}
-x_0^{k+1} =\frac{1}{a_{00}}(b_0-a_{01}x_1^k-a_{02}x_2^k-a_{03}x_3^k),\]</div>
-<div class="math notranslate nohighlight" id="eq-eq-lin-jc3b">
-\[\tag{62}
-x_1^{k+1} =\frac{1}{a_{11}}(b_1-a_{10}x_0^k-a_{12}x_2^k-a_{13}x_3^k),\]</div>
-<div class="math notranslate nohighlight" id="eq-eq-lin-jc3c">
-\[\tag{63}
-x_2^{k+1} =\frac{1}{a_{22}}(b_2-a_{20}x_0^k-a_{21}x_1^k-a_{23}x_3^k),\]</div>
-<div class="math notranslate nohighlight" id="eq-eq-lin-jc3d">
-\[\tag{64}
-x_3^{k+1} =\frac{1}{a_{33}}(b_3-a_{30}x_0^k-a_{31}x_1^k-a_{32}x_2^k).\]</div>
-<p>Below is a Python implementation</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">solve_jacobi</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">x</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span><span class="n">w</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="n">EPS</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Solves the linear system Ax=b using the Jacobian method, stops if</span>
-<span class="sd">    solution is not found after max_iter or if solution changes less</span>
-<span class="sd">    than EPS</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">==-</span><span class="mi">1</span><span class="p">):</span> <span class="c1">#default guess</span>
-        <span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
-    <span class="n">D</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-    <span class="n">R</span><span class="o">=</span><span class="n">A</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
-    <span class="n">eps</span><span class="o">=</span><span class="mi">1</span>
-    <span class="n">x_old</span><span class="o">=</span><span class="n">x</span>
-    <span class="nb">iter</span><span class="o">=</span><span class="mi">0</span>
-    <span class="n">w</span><span class="o">=</span><span class="mf">0.1</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">eps</span><span class="o">&gt;</span><span class="n">EPS</span> <span class="ow">and</span> <span class="nb">iter</span><span class="o">&lt;</span><span class="n">max_iter</span><span class="p">):</span>
-        <span class="nb">iter</span><span class="o">+=</span><span class="mi">1</span>
-        <span class="n">x</span><span class="o">=</span><span class="n">w</span><span class="o">*</span><span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">R</span><span class="p">,</span><span class="n">x_old</span><span class="p">))</span><span class="o">/</span><span class="n">D</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">w</span><span class="p">)</span><span class="o">*</span><span class="n">x_old</span>
-        <span class="n">eps</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">x_old</span><span class="p">))</span>
-        <span class="n">x_old</span><span class="o">=</span><span class="n">x</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;found solution after &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">iter</span><span class="p">)</span> <span class="o">+</span><span class="s1">&#39; iterations&#39;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">x</span>
-</pre></div>
-</div>
-<p>A sufficient criteria for the Jacobian method to converge is if the matrix <span class="math notranslate nohighlight">\(A\)</span> is diagonally dominant. In the implementation above we have included a weight, which sometimes can help in the convergence even if the matrix is not diagonally dominant.</p>
-<p>The iterative method can be appealing if we do not need a high accuracy, we can choose to stop whenever <span class="math notranslate nohighlight">\(|\mathbf{x}^{k+1}-\mathbf{x}^k|\)</span> is small enough. For the direct method we have to follow through all the way.</p>
-<div class="admonition-convergence admonition">
-<p class="admonition-title">Convergence</p>
-<p>The Jacobi method converges if the matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is strictly diagonally dominant. Strictly diagonally dominant means that the absolute value of each entry on the diagonal is greater than the sum of the absolute values of the other entries in the same row, i.e if <span class="math notranslate nohighlight">\(|a_{00}|&gt;|a_{01}+a_{02}+\cdots|\)</span>. In general it can be shown that a iterative scheme <span class="math notranslate nohighlight">\(\mathbf{x}^{k+1}=\mathbf{P}\cdot \mathbf{x}^k+\mathbf{q}\)</span> is convergent <em>if and only if</em> every eigenvalue, <span class="math notranslate nohighlight">\(\lambda\)</span>, of <span class="math notranslate nohighlight">\(\mathbf{P}\)</span> satisfies <span class="math notranslate nohighlight">\(|\lambda|&lt;1\)</span>, i.e. the <em>spectral radius</em> <span class="math notranslate nohighlight">\(\rho(\mathbf{P})&lt;1\)</span>.</p>
-</div>
-</div>
-<div class="section" id="the-gauss-seidel-method">
-<h3>The Gauss-Seidel method<a class="headerlink" href="#the-gauss-seidel-method" title="Permalink to this headline">¶</a></h3>
-<p id="index-5">It is tempting in equation <a class="reference internal" href="#eq-eq-lin-jc3a"><span class="std std-ref">(61)</span></a> to use our estimate of <span class="math notranslate nohighlight">\(x_0^{k+1}\)</span> in the next equation, equation <a class="reference internal" href="#eq-eq-lin-jc3b"><span class="std std-ref">(62)</span></a>, instead of <span class="math notranslate nohighlight">\(x_0^k\)</span>. After all our estimate <span class="math notranslate nohighlight">\(x_0^{k+1}\)</span> is an <em>improved</em> estimate. This is actually the Gauss-Seidel method. This method also has the advantage that if there are memory issues, one can overwrite the old value of <span class="math notranslate nohighlight">\(x_i^k\)</span>. Usually the Gauss-Seidel method converges faster, but not always. A plus for the Jacobi method is that is can be  parallelised, as the calculations is only dependent on the old values and do not require information about the new values as for the Gauss Seidel method. Below is a Python implementation of the Gauss-Seidel method</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">solve_GS</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">x</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="n">EPS</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Solves the linear system Ax=b using the Gauss-Seidel method, stops if</span>
-<span class="sd">    solution is not found after max_iter or if solution changes less</span>
-<span class="sd">    than EPS</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">==-</span><span class="mi">1</span><span class="p">):</span>
-        <span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
-    <span class="n">D</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-    <span class="n">R</span><span class="o">=</span><span class="n">A</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
-    <span class="n">eps</span><span class="o">=</span><span class="mi">1</span>
-    <span class="nb">iter</span><span class="o">=</span><span class="mi">0</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">eps</span><span class="o">&gt;</span><span class="n">EPS</span> <span class="ow">and</span> <span class="nb">iter</span><span class="o">&lt;</span><span class="n">max_iter</span><span class="p">):</span>
-        <span class="nb">iter</span><span class="o">+=</span><span class="mi">1</span>
-        <span class="n">eps</span><span class="o">=</span><span class="mf">0.</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)):</span>
-            <span class="n">tmp</span><span class="o">=</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-            <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">,:],</span><span class="n">x</span><span class="p">))</span><span class="o">/</span><span class="n">D</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-            <span class="n">eps</span><span class="o">+=</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">tmp</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;found solution after &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">iter</span><span class="p">)</span> <span class="o">+</span><span class="s1">&#39; iterations&#39;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">x</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="section" id="example-linear-regression">
-<h2>Example: Linear regression<a class="headerlink" href="#example-linear-regression" title="Permalink to this headline">¶</a></h2>
-<p id="index-6">In the previous section, we considered a system of <span class="math notranslate nohighlight">\(N\)</span> equations and <span class="math notranslate nohighlight">\(N\)</span> unknown (<span class="math notranslate nohighlight">\(x_0, x_1,\ldots, x_N\)</span>). In general we might have more equations than unknowns or more unknowns than equations. An example of the former is linear regression, we might have many data points and we would like to fit a line through the points. How do you fit a single lines to more than two points that does not line on the same line? One way to do it is to minimize the distance from the line to the points, as illustrated in figure <a class="reference internal" href="#fig-lin-reg"><span class="std std-ref">Linear regression by minimizing the total distance to all the points</span></a>.</p>
-<div class="figure align-default" id="id10">
-<span id="fig-lin-reg"></span><a class="reference internal image-reference" href="_images/reg.png"><img alt="_images/reg.png" src="_images/reg.png" style="width: 800px;" /></a>
-<p class="caption"><span class="caption-text"><em>Linear regression by minimizing the total distance to all the points</em></span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
-</div>
-<p>Mathematically we can express the distance between a data point <span class="math notranslate nohighlight">\((x_i,y_i)\)</span> and the line <span class="math notranslate nohighlight">\(f(x)\)</span> as <span class="math notranslate nohighlight">\(y_i-f(x_i)\)</span>. Note that this difference can be negative or positive depending if the data point lies below or above the line. We can then take the absolute value of all the distances, and try to minimize them. When we minimize something we take the derivative of the expression and put it equal to zero.  As you might remember from Calculus it is extremely hard to work with the derivative of the absolute value, because it is discontinuous. A much better approach is to square each distance and sum them:</p>
-<div class="math notranslate nohighlight" id="eq-eq-lin-lsq">
-\[\tag{65}
-S=\sum_{i=0}^{N-1}(y_i-f(x_i))^2=\sum_{i=0}^{N-1}(y_i-a_0-a_1x_i)^2.\]</div>
-<p>(For the example in figure <a class="reference internal" href="#fig-lin-reg"><span class="std std-ref">Linear regression by minimizing the total distance to all the points</span></a>, <span class="math notranslate nohighlight">\(N=5\)</span>.) This is the idea behind <em>least square</em>, and linear regression. One thing you should be aware of is that points lying far from the line will contribute more to equation <a class="reference internal" href="#eq-eq-lin-lsq"><span class="std std-ref">(65)</span></a>. The underlying assumption is that each data point provides equally precise information about the process, this is often not the case. When analyzing experimental data, there may be points deviating from the expected behaviour, it is then important to investigate if these points are more affected by measurements errors than the others. If that is the case one should give them less weight in the least square estimate, by extending the formula above:</p>
-<div class="math notranslate nohighlight" id="eq-eq-lin-lsqm">
-\[\tag{66}
-S=\sum_{i=0}^{N-1}\omega_i(y_i-f(x_i))^2=\sum_{i=0}^3\omega_i(y_i-a_0-a_1x_i)^2,\]</div>
-<p><span class="math notranslate nohighlight">\(\omega_i\)</span> is a weight factor.</p>
-<div class="section" id="solving-least-square-using-algebraic-equations">
-<h3>Solving least square, using algebraic equations<a class="headerlink" href="#solving-least-square-using-algebraic-equations" title="Permalink to this headline">¶</a></h3>
-<p>Let us continue with equation <a class="reference internal" href="#eq-eq-lin-lsq"><span class="std std-ref">(65)</span></a>, the algebraic solution is to simply find the value of <span class="math notranslate nohighlight">\(a_0\)</span> and <span class="math notranslate nohighlight">\(a_1\)</span> that minimizes <span class="math notranslate nohighlight">\(S\)</span>:</p>
-<div class="math notranslate nohighlight" id="eq-eq-lin-ls1">
-\[\tag{67}
-\frac{\partial S}{\partial a_0} =-2\sum_{i=0}^{N-1}(y_i-a_0-a_1x_i)=0,\]</div>
-<div class="math notranslate nohighlight" id="eq-eq-lin-ls2">
-\[\tag{68}
-\frac{\partial S}{\partial a_1} =-2\sum_{i=0}^{N-1}(y_i-a_0-a_1x_i)x_i=0.\]</div>
-<p>Defining the mean value as <span class="math notranslate nohighlight">\(\overline{x}=\sum_ix_i/N\)</span> and <span class="math notranslate nohighlight">\(\overline{y}=\sum_iy_i/N\)</span>, we can write equation <a class="reference internal" href="#eq-eq-lin-ls1"><span class="std std-ref">(67)</span></a> and <a class="reference internal" href="#eq-eq-lin-ls2"><span class="std std-ref">(68)</span></a>  as:</p>
-<div class="math notranslate nohighlight" id="eq-eq-lin-ls1a">
-\[\tag{69}
-\sum_{i=0}^{N-1}(y_i-a_0-a_1x_i)=N\overline{y}-a_0N-a_1N\overline{x}=0,\]</div>
-<div class="math notranslate nohighlight" id="eq-eq-lin-ls2b">
-\[\tag{70}
-\sum_{i=0}^{N-1}(y_i-a_0-a_1x_i)x_i=\sum_iy_ix_i-a_0N\overline{x}-a_1\sum_ix_ix_i=0.\]</div>
-<p>Solving equation <a class="reference internal" href="#eq-eq-lin-ls1a"><span class="std std-ref">(69)</span></a> with respect to <span class="math notranslate nohighlight">\(a_0\)</span>, and inserting the expression into equation <a class="reference internal" href="#eq-eq-lin-ls2b"><span class="std std-ref">(70)</span></a>, we find:</p>
-<div class="math notranslate nohighlight" id="eq-eq-lin-ls1c">
-\[\tag{71}
-a_0=\overline{y}-a_1\overline{x},\]</div>
-<div class="math notranslate nohighlight" id="eq-eq-lin-ls2d">
-\[\tag{72}
-a_1=\frac{\sum_iy_ix_i-N\overline{x}\overline{y}}{\sum_ix_i^2-N\overline{x}^2}
-    =\frac{\sum_i(x_i-\overline{x})(y_i-\overline{y})}{\sum_i(x_i-\overline{x})^2}.\]</div>
-<p>We leave it as an exercise to show the last expression for <span class="math notranslate nohighlight">\(a_1\)</span>.
-Clearly the equation <a class="reference internal" href="#eq-eq-lin-ls2d"><span class="std std-ref">(72)</span></a> above will in most cases have
-a solution. But in addition to a solution, it would be good to have an
-idea of the goodness of the fit. Intuitively it make sense to add all
-the distances (residuals) <span class="math notranslate nohighlight">\(d_i\)</span> in figure <a class="reference internal" href="#fig-lin-reg"><span class="std std-ref">Linear regression by minimizing the total distance to all the points</span></a>. This is
-basically what is done when calculating <span class="math notranslate nohighlight">\(R^2\)</span> (R-squared). However, we
-would also like to compare the <span class="math notranslate nohighlight">\(R^2\)</span> between different
-datasets. Therefor we need to normalize the sum of residuals, and
-therefore the following form of the <span class="math notranslate nohighlight">\(R^2\)</span> is used:</p>
-<div class="math notranslate nohighlight" id="eq-eq-lin-r2">
-\[\tag{73}
-R^2=1-\frac{\sum_{i=0}^{N-1}(y_i-f(x_i))^2}{\sum_{i=0}^{N-1}(y_i-\overline{y})^2}.\]</div>
-<p>In python we can implement equation <a class="reference internal" href="#eq-eq-lin-ls1c"><span class="std std-ref">(71)</span></a>, <a class="reference internal" href="#eq-eq-lin-ls2d"><span class="std std-ref">(72)</span></a> and <a class="reference internal" href="#eq-eq-lin-r2"><span class="std std-ref">(73)</span></a> as:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">OLS</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-    <span class="c1"># returns regression coefficients</span>
-    <span class="c1"># in ordinary least square</span>
-    <span class="c1"># x: observations</span>
-    <span class="c1"># y: response</span>
-    <span class="c1"># R^2: R-squared</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># number of data points</span>
-
-    <span class="c1"># mean of x and y vector</span>
-    <span class="n">m_x</span><span class="p">,</span> <span class="n">m_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-
-    <span class="c1"># calculating cross-deviation and deviation about x</span>
-    <span class="n">SS_xy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">n</span><span class="o">*</span><span class="n">m_y</span><span class="o">*</span><span class="n">m_x</span>
-    <span class="n">SS_xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">n</span><span class="o">*</span><span class="n">m_x</span><span class="o">*</span><span class="n">m_x</span>
-
-    <span class="c1"># calculating regression coefficients</span>
-    <span class="n">b_1</span> <span class="o">=</span> <span class="n">SS_xy</span> <span class="o">/</span> <span class="n">SS_xx</span>
-    <span class="n">b_0</span> <span class="o">=</span> <span class="n">m_y</span> <span class="o">-</span> <span class="n">b_1</span><span class="o">*</span><span class="n">m_x</span>
-
-    <span class="c1">#R^2</span>
-    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">b_0</span> <span class="o">+</span> <span class="n">b_1</span><span class="o">*</span><span class="n">x</span>
-    <span class="n">S_yy</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">y</span><span class="p">)</span> <span class="o">-</span> <span class="n">n</span><span class="o">*</span><span class="n">m_y</span><span class="o">*</span><span class="n">m_y</span>
-    <span class="n">y_res</span>  <span class="o">=</span> <span class="n">y</span><span class="o">-</span><span class="n">y_pred</span>
-    <span class="n">S_res</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y_res</span><span class="o">*</span><span class="n">y_res</span><span class="p">)</span>
-
-    <span class="k">return</span><span class="p">(</span><span class="n">b_0</span><span class="p">,</span> <span class="n">b_1</span><span class="p">,</span><span class="mi">1</span><span class="o">-</span><span class="n">S_res</span><span class="o">/</span><span class="n">S_yy</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="least-square-as-a-linear-algebra-problem">
-<h3>Least square as a linear algebra problem<a class="headerlink" href="#least-square-as-a-linear-algebra-problem" title="Permalink to this headline">¶</a></h3>
-<p>It turns out that the least square problem can be formulated as a
-matrix problem. (Two great explanations see <a class="reference external" href="https://medium.com/&#64;andrew.chamberlain/the-linear-algebra-view-of-least-squares-regression-f67044b7f39b">linear regression by
-matrices</a>,
-and
-<a class="reference external" href="https://medium.com/&#64;andrew.chamberlain/a-more-elegant-view-of-r-squared-a0a14c177dc3">$R^2$-squared</a>.)
-If we define a matrix <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> containing the observations <span class="math notranslate nohighlight">\(x_i\)</span>
-as:</p>
-<div class="math notranslate nohighlight" id="eq-eq-lin-mreg1">
-\[\begin{split}\tag{74}
-\mathbf{X} =
-    \begin{pmatrix}
-    1&amp;x_0\\
-    1&amp;x_1\\
-    \vdots&amp;\vdots\\
-    1&amp;x_{N-1}
-    \end{pmatrix}.\end{split}\]</div>
-<p>We introduce a vector containing all the response <span class="math notranslate nohighlight">\(\mathbf{y}\)</span>, and the
-regression coefficients <span class="math notranslate nohighlight">\(\mathbf{a}=(a_0,a_1)\)</span>. Then we can write
-equation <a class="reference internal" href="#eq-eq-lin-lsqm"><span class="std std-ref">(66)</span></a> as a matrix equation:</p>
-<div class="math notranslate nohighlight" id="eq-eq-lin-mregs">
-\[\tag{75}
-S=(\mathbf{y}-\mathbf{X\cdot a})^T(\mathbf{y}-\mathbf{X\cdot a}).\]</div>
-<p><em>Note that this equation can easily be extended to more than one
-observation variable $x_i$</em>. By simply differentiating equation
-<a class="reference internal" href="#eq-eq-lin-mregs"><span class="std std-ref">(75)</span></a> with respect to <span class="math notranslate nohighlight">\(\mathbf{a}\)</span>, we can show that
-the derivative has a minimum when (see proof below):</p>
-<div class="math notranslate nohighlight" id="eq-eq-lin-mregs2">
-\[\tag{76}
-\mathbf{X}^T\mathbf{X a}=\mathbf{X}^T\mathbf{y}\]</div>
-<p>Below is a python implementation of equation <a class="reference internal" href="#eq-eq-lin-mregs2"><span class="std std-ref">(76)</span></a>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">OLSM</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-    <span class="c1"># returns regression coefficients</span>
-    <span class="c1"># in ordinary least square using solve function</span>
-    <span class="c1"># x: observations</span>
-    <span class="c1"># y: response</span>
-
-    <span class="n">XT</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span><span class="n">x</span><span class="p">],</span><span class="nb">float</span><span class="p">)</span>
-    <span class="n">X</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">XT</span><span class="p">)</span>
-    <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">XT</span><span class="p">,</span><span class="n">X</span><span class="p">)</span>
-    <span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">XT</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">solve</span><span class="p">(</span><span class="n">B</span><span class="p">,</span><span class="n">C</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="working-with-matrices-on-component-form">
-<h3>Working with matrices on component form<a class="headerlink" href="#working-with-matrices-on-component-form" title="Permalink to this headline">¶</a></h3>
-<p>Whenever you want to do some manipulation with matrices, it is very useful to simply write them on component form. If we multiply two matrices <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> to form a new matrix <span class="math notranslate nohighlight">\(\mathbf{C}\)</span>, the components of the new matrix is simply <span class="math notranslate nohighlight">\(\mathbf{C}_{ij}=\sum_k\mathbf{A}_{ik}\mathbf{B}_{kj}\)</span>. The strength of doing this is that the elements of a matrix, e.g. <span class="math notranslate nohighlight">\(\mathbf{A}_{ik}\)</span> are <em>numbers</em>, and we can move them around. Proving that e.g. <span class="math notranslate nohighlight">\((\mathbf{A}\mathbf{B})^T=\mathbf{B}^T\mathbf{A}^T\)</span> is straight forward using the component form. The transpose of a matrix is simply to exchange columns and rows, hence <span class="math notranslate nohighlight">\(\mathbf{C}_{ij}^T=\mathbf{C}_{ji}\)</span></p>
-<div class="math notranslate nohighlight" id="eq-eq-lin-trans">
-\[\tag{77}
-\mathbf{C}_{ij}^T=\mathbf{C}_{ji}=\sum_k\mathbf{A}_{jk}\mathbf{B}_{ki}=\sum_k\mathbf{B}^T_{ik}\mathbf{A}^T_{kj}
-    =(\mathbf{B}^T\mathbf{A}^T)_{ij},\]</div>
-<p>thus <span class="math notranslate nohighlight">\(\mathbf{C}^T=\mathbf{B}^T\mathbf{A}^T\)</span>. To derive equation <a class="reference internal" href="#eq-eq-lin-mregs2"><span class="std std-ref">(76)</span></a>, we need to take the derivative of equation <a class="reference internal" href="#eq-eq-lin-mregs2"><span class="std std-ref">(76)</span></a> with respect to <span class="math notranslate nohighlight">\(\mathbf{a}\)</span>.
-What we mean by this is that we want to evaluate <span class="math notranslate nohighlight">\(\partial S/\partial a_k\)</span> for all the components of <span class="math notranslate nohighlight">\(\mathbf{a}\)</span>.
-A useful rule is <span class="math notranslate nohighlight">\(\partial a_i/\partial a_k=\delta_{ik}\)</span>, where <span class="math notranslate nohighlight">\(\delta_{ik}\)</span> is the Kronecker delta, it takes the value of one if <span class="math notranslate nohighlight">\(i=k\)</span> and zero otherwise. We can write <span class="math notranslate nohighlight">\(S=\mathbf{y}^T\mathbf{y}-\mathbf{y}\mathbf{X\cdot a}
--(\mathbf{X\cdot a})^T\mathbf{y}-(\mathbf{X\cdot a})^T\mathbf{X\cdot a}\)</span>. All terms that do not contain <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> are zero, thus we only need to evaluate the following terms</p>
-<div class="math notranslate nohighlight" id="eq-auto14">
-\[\tag{78}
-\frac{\partial}{a_k}(\mathbf{X\cdot a})^T\mathbf{y} =\frac{\partial}{a_k}(\mathbf{a}^T\cdot \mathbf{X}^T\mathbf{y})=\frac{\partial}{a_k}\sum_{ij}\mathbf{a}^T_i\mathbf{X}^T_{ij}\mathbf{y}_j
-    =\sum_{ij}\delta_{ik}\mathbf{X}^T_{ij}\mathbf{y}_j{\nonumber}\]</div>
-<div class="math notranslate nohighlight" id="eq-auto15">
-\[\tag{79}
-=\sum_{j}\mathbf{X}^T_{kj}\mathbf{y}_j=\mathbf{X}^T\mathbf{y}\]</div>
-<div class="math notranslate nohighlight" id="eq-auto16">
-\[\tag{80}
-\frac{\partial}{a_k}\mathbf{y}^T\mathbf{X\cdot a}=\frac{\partial}{a_k}\sum_{ij}\mathbf{y}^T_i\mathbf{X}_{ij}\mathbf{a}_j
-    =\sum_{ij}\mathbf{y}^T_i\mathbf{X}_{ij}\delta_{jk}=\sum_{j}\mathbf{y}^T_{i}\mathbf{X}_{ik}{\nonumber}\]</div>
-<div class="math notranslate nohighlight" id="eq-auto17">
-\[\tag{81}
-=\sum_{j}\mathbf{y}^T_{i}\mathbf{X}^T_{ki}=\mathbf{X}^T\mathbf{y}\]</div>
-<div class="math notranslate nohighlight" id="eq-auto18">
-\[\tag{82}
-\frac{\partial}{a_k} (\mathbf{X\cdot a})^T\mathbf{X\cdot a}=
-    \frac{\partial}{a_k}\sum_{ijl} \mathbf{a}^T_i\mathbf{X}^T_{ij}\mathbf{X}_{jl}\mathbf{a}_l=
-    \sum_{ijl}(\delta_{ik}\mathbf{X}^T_{ij}\mathbf{X}_{jl}\mathbf{a}_l+\mathbf{a}^T_i\mathbf{X}^T_{ij}\mathbf{X}_{jl}\delta_{lk}){\nonumber}\]</div>
-<div class="math notranslate nohighlight" id="eq-auto19">
-\[\tag{83}
-=\sum_{jl}\mathbf{X}^T_{kj}\mathbf{X}_{jl}
-    \mathbf{a}_l+\sum_{ij}\mathbf{a}^T_i\mathbf{X}^T_{ij}\mathbf{X}_{jk}{\nonumber}\]</div>
+<p>There are many ways of representing a function, <span class="math notranslate nohighlight">\(f(x)\)</span>, like Fourier series, Legendre polynomials, but perhaps one of the most widely used is Taylor polynomials.
+Taylor series are perfect for computers, simply because it makes it possible to evaluate any function with a set of limited operations: <em>addition, subtraction, and multiplication</em>. Let us start off with the formal definition:</p>
+<div class="admonition-taylor-polynomial admonition">
+<p class="admonition-title">Taylor polynomial</p>
+<p id="index-1">The Taylor polynomial, <span class="math notranslate nohighlight">\(P_n(x)\)</span> of degree <span class="math notranslate nohighlight">\(n\)</span> of a function <span class="math notranslate nohighlight">\(f(x)\)</span> at the point <span class="math notranslate nohighlight">\(c\)</span> is defined as:</p>
 <div class="math notranslate nohighlight">
-\[=\mathbf{X}^T\mathbf{X}\mathbf{a}+\sum_{ij}\mathbf{X}^T_{kj}\mathbf{X}_{ji}\mathbf{a}_i
-= 2\mathbf{X}^T\mathbf{X}\mathbf{a}.
-label{}\]</div>
-<p>It then follows that <span class="math notranslate nohighlight">\(\partial S/\partial \mathbf{a} = 0\)</span> when</p>
-<div class="math notranslate nohighlight" id="eq-eq-lin-matpr">
-\[\tag{84}
-\mathbf{X}^T\mathbf{X a}=\mathbf{X}^T\mathbf{y}.\]</div>
+\[P_n(x) = f(c)+f^\prime(c)(x-c)+\frac{f^{\prime\prime}(c)}{2!}(x-c)^2+\cdots+\frac{f^{(n)}(c)}{n!}(x-c)^n\nonumber\]</div>
 </div>
+<div class="math notranslate nohighlight" id="eq-eq-taylor-taylori">
+\[\tag{1}
+=\sum_{k=0}^n\frac{f^{(k)}(c)}{k!}(x-c)^k.\]</div>
+<p>Note that <span class="math notranslate nohighlight">\(x\)</span> can be anything, space, time, temperature etc. If the series is around the point <span class="math notranslate nohighlight">\(c=0\)</span>, the Taylor polynomial <span class="math notranslate nohighlight">\(P_n(x)\)</span> is often called a Maclaurin polynomial. If the series converge (i.e. that the higher order terms approach zero), then we can represent the function <span class="math notranslate nohighlight">\(f(x)\)</span> with its corresponding Taylor series around the point <span class="math notranslate nohighlight">\(x=c\)</span>:</p>
+<div class="math notranslate nohighlight" id="eq-eq-taylor-taylor">
+\[\tag{2}
+f(x) = f(c)+f^\prime(c)(x-c)+\frac{f^{\prime\prime}(c)}{2!}(x-c)^2+\cdots
+    =\sum_{k=0}^\infty\frac{f^{(k)}}{k!}(x-c)^k.\]</div>
+<div class="admonition-the-magic-of-taylors-formula admonition">
+<p class="admonition-title">The magic of Taylors formula</p>
+<p>Taylors formula, equation <a class="reference internal" href="#eq-eq-taylor-taylor"><span class="std std-ref">(2)</span></a>, states that if we know the function value and its derivative <em>in a single point $c$</em>, we can estimate the function everywhere <em>using only  information from the single point $c$</em>. How can this be, how can information in a single point be used to predict the behavior of the function everywhere? One way of thinking about it could be to imagine an object moving in a constant gravitational field without air resistance. Newtons laws then tells us that  if we know the starting point e.g. (<span class="math notranslate nohighlight">\(x(0)\)</span>), the velocity (<span class="math notranslate nohighlight">\(v=dx/dt\)</span>), and the acceleration (<span class="math notranslate nohighlight">\(a=dv/dt=d^2x/dt^2\)</span>) in that point we can predict the trajectory of the object. This trajectory is exactly the first terms in Taylors formula, <span class="math notranslate nohighlight">\(x(t)=x(0) + vt+at^2/2\)</span>.</p>
 </div>
-<div class="section" id="sparse-matrices-and-thomas-algorithm">
-<h2>Sparse matrices and Thomas algorithm<a class="headerlink" href="#sparse-matrices-and-thomas-algorithm" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="index-7"></span><p id="index-8">In many practical examples, such as solving partial differential
-equations the matrices could be quite large and also contain a lot of
-zeros. A very important class of such matrices are <em>banded matrices</em>
-this is a type of <em>sparse matrices</em> containing a lot of zero elements,
-and the non-zero elements are confined to diagonal bands. In the
-following we will focus on one important type of sparse matrix the
-tridiagonal. In the next section we will show how it enters naturally
-in solving the heat equation. It turns out that solving banded
-matrices is quite simple, and can be coded quite efficiently. As with
-the Gauss-Jordan example, lets consider a concrete example:</p>
-<div class="math notranslate nohighlight" id="eq-auto20">
-\[\begin{split}\tag{85}
-\left(
-    \begin{array}{ccccc|c}
-    b_0&amp;c_0&amp;0&amp;0&amp;0&amp;r_0\\
-    a_1&amp;b_1&amp;c_1&amp;0&amp;0&amp;r_1\\
-    0&amp;a_2&amp;b_2&amp;c_2&amp;0&amp;r_2\\
-    0&amp; 0&amp;a_3&amp;b_3&amp;c_3&amp;r_3\\
-    0&amp; 0&amp; 0&amp;a_4&amp;b_4&amp;r_4
-    \end{array}
-    \right)\end{split}\]</div>
-<p>The right hand side is represented with <span class="math notranslate nohighlight">\(r_i\)</span>. The first Gauss-Jordan
-step is simply to divide by <span class="math notranslate nohighlight">\(b_0\)</span>, then we multiply with <span class="math notranslate nohighlight">\(-a_1\)</span> and
-add to second row:</p>
-<div class="math notranslate nohighlight" id="eq-auto21">
-\[\begin{split}\tag{86}
-\to \left(
-    \begin{array}{ccccc|c}
-    1&amp;c_0^\prime&amp;0&amp;0&amp;0&amp;r_0^\prime\\
-    0&amp;b_1-a_1c_0^\prime&amp;c_1&amp;0&amp;0&amp;r_1-a_0r_0^\prime\\
-    0&amp;a_2&amp;b_2&amp;c_2&amp;0&amp;r_2\\
-    0&amp; 0&amp;a_3&amp;b_3&amp;c_3&amp;r_3\\
-    0&amp; 0&amp; 0&amp;a_4&amp;b_4&amp;r_4
-    \end{array}
-    \right),\end{split}\]</div>
-<p>Note that we have introduced some new symbols to simplify the
-notation: <span class="math notranslate nohighlight">\(c_0^\prime=c_0/b_0\)</span> and <span class="math notranslate nohighlight">\(r_0^\prime=r_0/b_0\)</span>. Then we
-divide by <span class="math notranslate nohighlight">\(b_1-a_1c_0^\prime\)</span>:</p>
-<div class="math notranslate nohighlight" id="eq-auto22">
-\[\begin{split}\tag{87}
-\left(
-    \begin{array}{ccccc|c}
-    1&amp;c_0^\prime&amp;0&amp;0&amp;0&amp;r_0^\prime\\
-    0&amp;1&amp;c_1^\prime&amp;0&amp;0&amp;r_1^\prime\\
-    0&amp;a_2&amp;b_2&amp;c_2&amp;0&amp;r_2\\
-    0&amp; 0&amp;a_3&amp;b_3&amp;c_3&amp;r_3\\
-    0&amp; 0&amp; 0&amp;a_4&amp;b_4&amp;r_4
-    \end{array}
-    \right),\end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\(c_1^\prime=c_1/(b_1-a_1c_0^\prime)\)</span> and
-<span class="math notranslate nohighlight">\(r_1^\prime=(r_1-a_0r_0^\prime)/(b_1-a_1c_0^\prime)\)</span>. If you continue
-in this manner, you can easily convince yourself that to transform a
-tridiagonal matrix to the following form:</p>
-<div class="math notranslate nohighlight" id="eq-auto23">
-\[\begin{split}\tag{88}
-\to \left(
-    \begin{array}{ccccc|c}
-    1&amp;c_0^\prime&amp;0&amp;0&amp;0&amp;r_0^\prime\\
-    0&amp;1&amp;c_1^\prime&amp;0&amp;0&amp;r_1^\prime\\
-    0&amp;0&amp;1&amp;c_2^\prime&amp;0&amp;r_2^\prime\\
-    0&amp; 0&amp;0&amp;1&amp;c_3^\prime&amp;r_3^\prime\\
-    0&amp; 0&amp; 0&amp;0&amp;1&amp;r_4^\prime
-    \end{array}
-    \right),\end{split}\]</div>
-<p>where:</p>
-<div class="math notranslate nohighlight" id="eq-eq-lin-th0">
-\[\tag{89}
-c_0^\prime =\frac{c_0}{b_0} \qquad r_0^\prime={r_0}{b_0}\]</div>
-<div class="math notranslate nohighlight" id="eq-eq-lin-thi">
-\[\tag{90}
-c_i^\prime
-    =\frac{c_i}{b_i-a_ic_{i-1}^\prime}\qquad
-    r_i^\prime=\frac{r_i-a_ir_{i-1}^\prime}{b_i-a_ic_{i-1}^\prime}
-    \quad\text{, for }i=1,2,\ldots,N-1\]</div>
-<p>Note that we where able to reduce the tridiagonal matrix to an <em>upper
-triangular</em> matrix in only <em>one</em> Gauss-Jordan step. This equation can
-readily be solved using back-substitution, which can also be
-simplified as there are a lot of zeros in the upper part. Let us
-denote the unknowns <span class="math notranslate nohighlight">\(x_i\)</span> as we did for the Gauss-Jordan case, now we
-can find the solution as follows:</p>
-<div class="math notranslate nohighlight" id="eq-eq-lin-this0">
-\[\tag{91}
-x_{N-1}  = r_{N-1}^\prime\]</div>
-<div class="math notranslate nohighlight" id="eq-eq-lin-thisi">
-\[\tag{92}
-x_i      = r_i^\prime-x_{i+1}c_i^\prime\quad\text{, for } i=N-2,N-3,\ldots,0\]</div>
-<p>Equation <a class="reference internal" href="#eq-eq-lin-th0"><span class="std std-ref">(89)</span></a>, <a class="reference internal" href="#eq-eq-lin-thi"><span class="std std-ref">(90)</span></a>, <a class="reference internal" href="#eq-eq-lin-this0"><span class="std std-ref">(91)</span></a>
-and <a class="reference internal" href="#eq-eq-lin-thisi"><span class="std std-ref">(92)</span></a> is known as the Thomas algorithm after
-Llewellyn Thomas.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Clearly tridiagonal matrices can be solved much more efficiently with
-the Thomas algorithm than
-using a standard library, such as LU-decomposition. This is
-because the solution method takes advantages of the <em>symmetry</em> of the
-problem. We will not show it here, but it can be shown that the Thomas
-algorithm is stable whenever <span class="math notranslate nohighlight">\(|b_i|\ge |a_i|+|c_i|\)</span>. If the algorithm
-fails, an advice is first to use the standard <code class="docutils literal notranslate"><span class="pre">solve</span></code> function in
-python. If this gives a solution, then <em>pivoting</em> combined with the
-Thomas algorithm might do the trick.</p>
+<p>An example of how Taylors formula works for a known function, can be seen in figure <a class="reference internal" href="#fig-mac-sin"><span class="std std-ref">Nine first terms of the Maclaurin series of \sin x</span></a>, where we show the first nine terms in the Maclaurin series for <span class="math notranslate nohighlight">\(\sin x\)</span> (all even terms are zero).</p>
+<div class="figure align-default" id="id3">
+<span id="fig-mac-sin"></span><a class="reference internal image-reference" href="_images/mac_sin.png"><img alt="_images/mac_sin.png" src="_images/mac_sin.png" style="width: 600px;" /></a>
+<p class="caption"><span class="caption-text">Nine first terms of the Maclaurin series of <span class="math notranslate nohighlight">\(\sin x\)</span></span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
 </div>
+<p>Notice that close to <span class="math notranslate nohighlight">\(x=0\)</span> we only need one term, as we move further away from this point more and more term needs to be added. Thus, Taylors formula is only exact if we include an infinite number of terms. In practice we only include a limited number of terms and truncate the series up to a given order. Luckily, Taylors formula include an estimate of the error we do when we truncate the series.</p>
+<div class="admonition-truncation-error-in-taylors-formula admonition" id="index-2">
+<p class="admonition-title">Truncation error in Taylors formula</p>
+<div class="math notranslate nohighlight" id="index-3">
+\[R_n(x)=f(x)-P_n(x)=\frac{f^{(n+1)}(\eta)}{(n+1)!}(x-c)^{n+1}\nonumber\]</div>
 </div>
-<div class="section" id="example-solving-the-heat-equation-using-linear-algebra">
-<h2>Example: Solving the heat equation using linear algebra<a class="headerlink" href="#example-solving-the-heat-equation-using-linear-algebra" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="exercise-2-1-conservation-equation-or-the-continuity-equation">
-<h3>Exercise 2.1: Conservation Equation or the Continuity Equation<a class="headerlink" href="#exercise-2-1-conservation-equation-or-the-continuity-equation" title="Permalink to this headline">¶</a></h3>
-<div class="figure align-default" id="id11">
-<span id="fig-nlin-heat"></span><a class="reference internal image-reference" href="_images/heat.png"><img alt="_images/heat.png" src="_images/heat.png" style="width: 700px;" /></a>
-<p class="caption"><span class="caption-text"><em>Conservation of energy and the continuity equation</em></span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
+<div class="math notranslate nohighlight" id="eq-eq-taylor-error">
+\[ \begin{align}\begin{aligned} \tag{3}
+ =\frac{1}{n!}\int_c^x(x-\tau)^{n}f^{(n+1)}(\tau)d\tau,\\\
+Notice that the mathematical formula is basically the next order term ( \( n+1 \) ) in the Taylor series, but with  \( f^{(n+1)}(c)\to f^{(n+1)}(\eta) \) .  \( \eta \)  is an (unknown) value in the domain  \( [x,c] \) .\end{aligned}\end{align} \]</div>
+<p>Notice that if <span class="math notranslate nohighlight">\(c\)</span> is very far from <span class="math notranslate nohighlight">\(x\)</span> the truncation error increases. The fact that we do not know the value of <span class="math notranslate nohighlight">\(\eta\)</span> is usually not a problem, in many cases we just replace <span class="math notranslate nohighlight">\(f(\eta)\)</span> with the maximum value it can take on the domain. Equation <a class="reference internal" href="#eq-eq-taylor-error"><span class="std std-ref">(3)</span></a> gives us an direct estimate of discretization error.</p>
+<div class="admonition-example-evaluate-math-sin-x admonition">
+<p class="admonition-title">Example: evaluate <span class="math notranslate nohighlight">\(\sin x\)</span></p>
+<p>Whenever you do e.g. <code class="docutils literal notranslate"><span class="pre">np.sin(1)</span></code> in Python or an equivalent statement in another language, Python has to tell the computer how to evaluate <span class="math notranslate nohighlight">\(\sin x\)</span> at <span class="math notranslate nohighlight">\(x=1\)</span>. Write a Python code that calculates <span class="math notranslate nohighlight">\(\sin x\)</span> up to a user specified accuracy.</p>
+<p><strong>Solution</strong>
+The Maclaurin series of <span class="math notranslate nohighlight">\(\sin x\)</span> is:</p>
 </div>
-<p>In figure <a class="reference internal" href="#fig-nlin-heat"><span class="std std-ref">Conservation of energy and the continuity equation</span></a>, the continuity equation is derived for
-heat flow.
-Heat equation for solids
-~~~~~~~~~~~~~~~~~~~~~~~~</p>
-<p>As derived in the beginning of this chapter the heat equation for a solid is</p>
-<div class="math notranslate nohighlight" id="eq-eq-nlin-heateq">
-\[\tag{93}
-\frac{d^2T}{dx^2}+\frac{\dot{\sigma}}{k}=\frac{\rho c_p}{k}\frac{dT}{dt},\]</div>
-<p>where <span class="math notranslate nohighlight">\(\dot{\sigma}\)</span> is the rate of heat generation in the solid. This
-equation can be used as a starting point for many interesting
-models. In this exercise we will investigate the <em>steady state</em>
-solution, <em>steady state</em> is just a fancy way of expressing that we
-want the solution that <em>does not change with time</em>. This is achieved
-by ignoring the derivative with respect to time in equation
-<a class="reference internal" href="#eq-eq-nlin-heateq"><span class="std std-ref">(93)</span></a>. We want to study a system with size <span class="math notranslate nohighlight">\(L\)</span>, and is
-it good practice to introduce a dimensionless variable: <span class="math notranslate nohighlight">\(y=x/L\)</span>.</p>
-<p><strong>Part 1.</strong></p>
-<p>Show that equation <a class="reference internal" href="#eq-eq-nlin-heateq"><span class="std std-ref">(93)</span></a> now takes the following form:</p>
-<div class="math notranslate nohighlight" id="eq-eq-nlin-heat2">
-\[\tag{94}
-\frac{d^2T }{dy^2}+\frac{\dot{\sigma}L^2}{k}=0\]</div>
-</div>
-<div class="section" id="exercise-2-2-curing-of-concrete-and-matrix-formulation">
-<h3>Exercise 2.2: Curing of Concrete and Matrix Formulation<a class="headerlink" href="#exercise-2-2-curing-of-concrete-and-matrix-formulation" title="Permalink to this headline">¶</a></h3>
-<p>Curing of concrete is one particular example that we can investigate
-with equation <a class="reference internal" href="#eq-eq-nlin-heat2"><span class="std std-ref">(94)</span></a>. When concrete is curing, there are
-a lot of chemical reactions happening, these reactions generate
-heat. This is a known issue, and if the temperature rises too much
-compared to the surroundings, the concrete may fracture.  In the
-following we will, for simplicity, assume that the rate of heat
-generated during curing is constant, $dot{sigma}=$100 W/m$^3$. The
-left end (at <span class="math notranslate nohighlight">\(x=0\)</span>) is insulated, meaning that there is no flow of
-heat over that boundary, hence <span class="math notranslate nohighlight">\(dT/dx=0\)</span> at <span class="math notranslate nohighlight">\(x=0\)</span>. On the right hand
-side the temperature is kept constant, <span class="math notranslate nohighlight">\(x(L)=y(1)=T_1\)</span>, assumed to be
-equal to the ambient temperature of $T_1=25^circ$C.  The concrete
-thermal conductivity is assumed to be <span class="math notranslate nohighlight">\(k=1.65\)</span> W/m$^circ$C.</p>
-<p><strong>Part 1.</strong></p>
-<p>Show that the solution to equation <a class="reference internal" href="#eq-eq-nlin-heat2"><span class="std std-ref">(94)</span></a> in this case is:</p>
-<div class="math notranslate nohighlight" id="eq-eq-nlin-heatsol">
-\[\tag{95}
-T(y)=\frac{\dot{\sigma}L^2}{2k}(1-y^2)+T_1.\]</div>
-<p><strong>Part 2.</strong>
-In order to solve equation <a class="reference internal" href="#eq-eq-nlin-heat2"><span class="std std-ref">(94)</span></a> numerically, we need to discretize
-it. Show that equation <a class="reference internal" href="#eq-eq-nlin-heat2"><span class="std std-ref">(94)</span></a> now takes the following form:</p>
-<div class="math notranslate nohighlight" id="eq-eq-nlin-heat3">
-\[\tag{96}
-T_{i+1}+T_{i-1}-2T_i=-h^2\beta,\]</div>
-<p>where <span class="math notranslate nohighlight">\(\beta=\dot{\sigma}L^2/k\)</span>.</p>
-<div class="figure align-default" id="id12">
-<span id="fig-nlin-hgrid"></span><a class="reference internal image-reference" href="_images/heat_grid.png"><img alt="_images/heat_grid.png" src="_images/heat_grid.png" style="width: 200px;" /></a>
-<p class="caption"><span class="caption-text">Finite difference grid for <span class="math notranslate nohighlight">\(N=4\)</span></span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
-</div>
-<p>In figure <a class="reference internal" href="#fig-nlin-hgrid"><span class="std std-ref">Finite difference grid for N=4</span></a>, the finite difference grid is shown for
-<span class="math notranslate nohighlight">\(N=4\)</span>.</p>
-<p><strong>Part 3.</strong></p>
-<p>Show that equation <a class="reference internal" href="#eq-eq-nlin-heat3"><span class="std std-ref">(96)</span></a> including the boundary conditions for <span class="math notranslate nohighlight">\(N=4\)</span> can be written as the following matrix equation</p>
-<div class="math notranslate nohighlight" id="eq-eq-lin-heats">
-\[\begin{split}\tag{97}
-\left(
-    \begin{array}{cccc}
-    -\gamma&amp;\gamma&amp;0&amp;0\\
-    1&amp;-2&amp;1&amp;0\\
-    0&amp;1&amp;-2&amp;1\\
-    0&amp;0&amp;1&amp;-2\\
-    \end{array}
-    \right)
-    \left(
-    \begin{array}{c}
-    T_0\\
-    T_1\\
-    T_2\\
-    T_3\\
-    \end{array}
-    \right)
-    =
-    \left(
-    \begin{array}{c}
-    -h^2\beta\\
-    -h^2\beta\\
-    -h^2\beta\\
-    -h^2\beta-25
-    \end{array}
-    \right).\end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\gamma=2\)</span> for the central difference scheme and 1 for the forward difference scheme.</p>
-<p><strong>Part 4.</strong>
-* Solve the set of equations in equation <a class="reference internal" href="#eq-eq-lin-heats"><span class="std std-ref">(97)</span></a> using <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.solve.html">numpy.linalg.solve</a>.</p>
-<ul class="simple">
-<li><p>Write the code so that you can easily switch between the central difference scheme and forward difference</p></li>
-<li><p>Evaluate the numerical error as you change <span class="math notranslate nohighlight">\(h\)</span>, how does it scale? Is it what you expect?</p></li>
-</ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sc</span>
-<span class="kn">import</span> <span class="nn">scipy.sparse.linalg</span>
-<span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="kn">import</span> <span class="n">solve</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="math notranslate nohighlight" id="eq-sin">
+<span id="index-4"></span>\[ \begin{align}\begin{aligned} \tag{4}
+ \sin x = x-\frac{x^3}{3!}+\frac{x^5}{5!}-\frac{x^7}{7!}+\cdots=\sum_{k=0}^{\infty}\frac{(-1)^n}{(2n+1)!}x^{2n+1}.\\If we want to calculate  \( \sin x \)  to a precision lower than a specified value we can do it as follows:\\.. code-block:: python\\    import numpy as np\\    # Sinus implementation using the Maclaurin Serie
+    # By setting a value for eps this value will be used
+    # if not provided
+    def my_sin(x,eps=1e-16):
+        f = power = x
+        x2 = x*x
+        sign = 1
+        i=0
+        while(power&gt;=eps):
+            sign = - sign
+            power *= x2/(2*i+2)/(2*i+3)
+            f += sign*power
+            i += 1
+        print('No function evaluations: ', i)
+        return f\\    x=0.8
+    eps = 1e-9
+    print(my_sin(x,eps), 'error = ', np.sin(x)-my_sin(x,eps))\\This implementation needs some explanation:\\* The error term is given in equation :ref:`(3) &lt;Eq:eq:taylor:error&gt;`, and it is an even power in  \( x \) . We do not which  \( \eta \)  to use in equation :ref:`(3) &lt;Eq:eq:taylor:error&gt;`, instead we simply say that the error in our estimate is smaller than the highest order term. Thus, we stop the evaluation if the highest order term in the series is lower than the uncertainty. Note that the final error has to be smaller as the higher order terms in any convergent series is smaller than the previous.  Our estimate should then always be better than the specified accuracy.\\* We evaluate the polynomials in the Taylor series by using the previous values too avoid too many multiplications within the loop, we do this by using the following identity:\\.. math::\\          \sin x=\sum_{k=0}^{\infty} (-1)^nt_n, \text{ where: } t_n\equiv\frac{x^{2n+1}}{(2n+1)!}, \text{ hence :}\nonumber\\
+.. math::\\          t_{n+1}=\frac{x^{2(n+1)+1}}{(2(n+1)+1)!}=\frac{x^{2n+1}x^2}{(2n+1)! (2n+2)(2n+3)}\nonumber\\
+.. _Eq:_auto1:\end{aligned}\end{align} \]</div>
+<div class="math notranslate nohighlight">
+\[\tag{5}
+=t_n\frac{x^2}{(2n+2)(2n+3)}\]</div>
+<div class="section" id="evaluation-of-polynomials">
+<h3>Evaluation of polynomials<a class="headerlink" href="#evaluation-of-polynomials" title="Permalink to this headline">¶</a></h3>
+<p>How to evaluate a polynomial of the type: <span class="math notranslate nohighlight">\(p_n(x)=a_0+a_1x+a_2x^2+\cdots+a_nx^n\)</span>? We already saw a hint in the previous section that it can be done in different ways. One way is simply to
+do:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pol</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">pol</span> <span class="o">=</span> <span class="n">pol</span> <span class="o">+</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="n">i</span>
 </pre></div>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">central_difference</span><span class="o">=</span><span class="kc">False</span>
-<span class="c1"># set simulation parameters</span>
-<span class="n">h</span><span class="o">=</span><span class="mf">0.25</span>
-<span class="n">L</span><span class="o">=</span><span class="mf">1.0</span>
-<span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">L</span><span class="o">/</span><span class="n">h</span><span class="p">))</span>
-<span class="n">Tb</span><span class="o">=</span><span class="mi">25</span> <span class="c1">#rhs</span>
-<span class="n">sigma</span><span class="o">=</span><span class="mi">100</span>
-<span class="n">k</span><span class="o">=</span><span class="mf">1.65</span>
-<span class="n">beta</span> <span class="o">=</span> <span class="n">sigma</span><span class="o">*</span><span class="n">L</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="n">k</span>
-
-<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">h</span>
-
-<span class="k">def</span> <span class="nf">analytical</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">beta</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="n">Tb</span>
-<span class="k">def</span> <span class="nf">tri_diag</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">k1</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">k2</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">k3</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; a,b,c diagonal terms</span>
-<span class="sd">        default k-values for 4x4 matrix:</span>
-<span class="sd">        | b0 c0 0  0 |</span>
-<span class="sd">        | a0 b1 c1 0 |</span>
-<span class="sd">        | 0  a1 b2 c2|</span>
-<span class="sd">        | 0  0  a2 b3|</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">k1</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">k2</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">k3</span><span class="p">)</span>
-<span class="c1"># defina a, b and c vector</span>
-<span class="n">a</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">b</span><span class="o">=..</span>
-<span class="n">c</span><span class="o">=..</span>
-
-<span class="k">if</span> <span class="n">central_difference</span><span class="p">:</span>
-    <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span> <span class="o">...</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=...</span>
-
-<span class="n">A</span><span class="o">=</span><span class="n">tri_diag</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="c1"># view matrix - compare with N=4 to make sure no bugs</span>
-<span class="c1"># define rhs vector</span>
-<span class="n">d</span><span class="o">=...</span>
-<span class="c1">#rhs boundary condition</span>
-<span class="n">d</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">=...</span>
-
-<span class="n">Tn</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">d</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">Tn</span><span class="p">)</span>
+<p>Note that there are <span class="math notranslate nohighlight">\(n\)</span> additions, whereas there are <span class="math notranslate nohighlight">\(1 + 2 +3+\cdots+n=n(n+1)/2\)</span> multiplications for all the iterations. Instead of evaluating the powers all over in
+each loop, we can use the previous calculation to save the number of multiplications:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pol</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span>
+<span class="n">power</span> <span class="o">=</span> <span class="n">x</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">power</span>  <span class="o">=</span> <span class="n">power</span><span class="o">*</span><span class="n">x</span>
+    <span class="n">pol</span>    <span class="o">=</span> <span class="n">pol</span> <span class="o">+</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">power</span>
 </pre></div>
 </div>
-<p>The correct solution for <span class="math notranslate nohighlight">\(L=1\)</span> m, and <span class="math notranslate nohighlight">\(h=1/4\)</span>, is: $[T_0,T_1.T_2,T_3]$=[55.3030303 , 53.40909091, 47.72727273, 38.25757576] (central difference) and $[T_0,T_1.T_2,T_3]$=[62.87878788, 59.09090909, 51.51515152, 40.15151515] (forward difference)</p>
-</div>
-<div class="section" id="exercise-2-3-solve-the-full-heat-equation">
-<h3>Exercise 2.3: Solve the full heat equation<a class="headerlink" href="#exercise-2-3-solve-the-full-heat-equation" title="Permalink to this headline">¶</a></h3>
-<p><strong>Part 1.</strong>
-Replace the time derivative in equation <a class="reference internal" href="#eq-eq-nlin-heateq"><span class="std std-ref">(93)</span></a> with</p>
-<div class="math notranslate nohighlight" id="eq-eq-lin-dt">
-\[\tag{98}
-\frac{dT}{dt}\simeq\frac{T(t+\Delta t)-T(t)}{\Delta t}=\frac{T^{n+1}-T^n}{\Delta t},\]</div>
-<p>and show that by using an <em>implicit formulation</em> (i.e. that the second derivative with respect to <span class="math notranslate nohighlight">\(x\)</span> is to be evaluated at <span class="math notranslate nohighlight">\(T(t+\Delta t)\equiv T^{n+1}\)</span>) that equation <a class="reference internal" href="#eq-eq-nlin-heateq"><span class="std std-ref">(93)</span></a> can be written</p>
-<div class="math notranslate nohighlight" id="eq-eq-lin-imp">
-\[\tag{99}
-T_{i+1}^{n+1}+T_{i-1}^{n+1}-(2+\frac{\alpha h^2}{\Delta t})T_i^{n+1}=-h^2\beta-\frac{\alpha h^2 }{\Delta t}T_i^n,\]</div>
-<p>where <span class="math notranslate nohighlight">\(\alpha\equiv\rho c_p/k\)</span>.</p>
-<p><strong>Part 2.</strong></p>
-<p>Use the central difference formulation for the boundary condition and show that for four nodes we can formulate equation <a class="reference internal" href="#eq-eq-lin-imp"><span class="std std-ref">(99)</span></a> as the following matrix equation</p>
-<div class="math notranslate nohighlight" id="eq-auto24">
-\[\begin{split}\tag{100}
-\left(
-    \begin{array}{cccc}
-    -(2+\frac{\alpha h^2}{\Delta t})&amp;2&amp;0&amp;0\\
-    1&amp;-(2+\frac{\alpha h^2}{\Delta t})&amp;1&amp;0\\
-    0&amp;1&amp;-(2+\frac{\alpha h^2}{\Delta t})&amp;1\\
-    0&amp;0&amp;1&amp;-(2+\frac{\alpha h^2}{\Delta t})\\
-    \end{array}
-    \right)
-    \left(
-    \begin{array}{c}
-    T_0^{n+1}\\
-    T_1^{n+1}\\
-    T_2^{n+1}\\
-    T_3^{n+1}\\
-    \end{array}
-    \right){\nonumber}\end{split}\]</div>
-<div class="math notranslate nohighlight" id="eq-eq-lin-heatfull">
-\[\begin{split}\tag{101}
-=
-    \left(
-    \begin{array}{c}
-    -h^2\beta\\
-    -h^2\beta\\
-    -h^2\beta\\
-    -h^2\beta-25
-    \end{array}
-    \right)
-    -\frac{\alpha h^2 }{\Delta t}
-    \left(
-    \begin{array}{c}
-    T_0^n\\
-    T_1^n\\
-    T_2^n\\
-    T_3^n\\
-    \end{array}
-    \right)\end{split}\]</div>
-<p><strong>Part 3.</strong>
-Assume that the initial temperature in the concrete is $25^circ$C, $rho$=2400 kg/m$^3$, a specific heat capacity <span class="math notranslate nohighlight">\(c_p=\)</span> 1000 W/kg K, and a time step of <span class="math notranslate nohighlight">\(\Delta t=86400\)</span> s (1 day). Solve equation <a class="reference internal" href="#eq-eq-lin-heatfull"><span class="std std-ref">(101)</span></a>, plot the result each day and compare the result after 50 days with the steady state solution in equation <a class="reference internal" href="#eq-eq-nlin-heatsol"><span class="std std-ref">(95)</span></a>.</p>
-</div>
-<div class="section" id="exercise-2-4-using-sparse-matrices-in-python">
-<h3>Exercise 2.4: Using sparse matrices in python<a class="headerlink" href="#exercise-2-4-using-sparse-matrices-in-python" title="Permalink to this headline">¶</a></h3>
-<p>In this part we are going to create a sparse matrix in python and use <code class="docutils literal notranslate"><span class="pre">scipy.sparse.linalg.spsolve</span></code> to solve it. The matrix is created using <code class="docutils literal notranslate"><span class="pre">scipy.sparse.spdiags</span></code>.</p>
-<p><strong>Part 1.</strong>
-Extend the code you developed in the last exercises to also be able to use sparse matrices, by e.g. a logical switch. Sparse matrices may be defined as follows</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scipy.sparse.linalg</span>
-
-<span class="c1">#right hand side</span>
-<span class="c1"># rhs vector</span>
-<span class="n">d</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="o">-</span><span class="n">h</span><span class="o">*</span><span class="n">h</span><span class="o">*</span><span class="n">beta</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
-<span class="c1">#rhs - constant temperature</span>
-<span class="n">Tb</span><span class="o">=</span><span class="mi">25</span>
-<span class="n">d</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">d</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">Tb</span>
-<span class="c1">#Set up sparse matrix</span>
-<span class="n">diagonals</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="n">n</span><span class="p">))</span>
-<span class="n">diagonals</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span><span class="o">=</span> <span class="mi">1</span>
-<span class="n">diagonals</span><span class="p">[</span><span class="mi">1</span><span class="p">,:]</span><span class="o">=</span> <span class="o">-</span><span class="mi">2</span>
-<span class="n">diagonals</span><span class="p">[</span><span class="mi">2</span><span class="p">,:]</span><span class="o">=</span> <span class="mi">1</span>
-<span class="c1">#No flux boundary condition</span>
-<span class="n">diagonals</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span> <span class="mi">2</span>
-<span class="n">A_sparse</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">spdiags</span><span class="p">(</span><span class="n">diagonals</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span><span class="nb">format</span><span class="o">=</span><span class="s1">&#39;csc&#39;</span><span class="p">)</span>
-<span class="c1"># to view matrix - do this and check that it is correct!</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">A_sparse</span><span class="o">.</span><span class="n">todense</span><span class="p">())</span>
-<span class="c1"># solve matrix</span>
-<span class="n">Tb</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">spsolve</span><span class="p">(</span><span class="n">A_sparse</span><span class="p">,</span><span class="n">d</span><span class="p">)</span>
-
-<span class="c1"># if you like you can use timeit to check the efficiency</span>
-<span class="c1"># %timeit sc.sparse.linalg.spsolve( ... )</span>
+<p>In this case there are still <span class="math notranslate nohighlight">\(n\)</span> additions, but now there are <span class="math notranslate nohighlight">\(2n-1\)</span> multiplications. For <span class="math notranslate nohighlight">\(n=15\)</span>, this amounts to 120 for the first, and 29 for the second method.
+Polynomials can also be evaluated using <em>nested multiplication</em>:</p>
+<div class="math notranslate nohighlight">
+\[p_1  = a_0+a_1x\nonumber\]</div>
+<div class="math notranslate nohighlight">
+\[p_2  = a_0+a_1x+a_2x^2=a_0+x(a_1+a_2x)\nonumber\]</div>
+<div class="math notranslate nohighlight">
+\[p_3  = a_0+a_1x+a_2x^2+a_3x^3=a_0+x(a_1+x(a_2+a_3x))\nonumber\]</div>
+<div class="math notranslate nohighlight" id="eq-auto2">
+\[\tag{6}
+\vdots\]</div>
+<p>and so on. This can be implemented as:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pol</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">pol</span>  <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">pol</span><span class="o">*</span><span class="n">x</span>
 </pre></div>
 </div>
-<ul class="simple">
-<li><p>Compare the sparse solver with the standard Numpy solver using
-<code class="docutils literal notranslate"><span class="pre">%timeit</span></code>, how large must the linear system be before an improvement
-in speed is seen?</p></li>
-</ul>
+<p>In this case we only have <span class="math notranslate nohighlight">\(n\)</span> multiplications. So if you know beforehand exactly how many terms is needed to calculate the series, this method would be the preferred method, and is implemented in NumPy as <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.polyval.html#r138ee7027ddf-1">polyval</a>.</p>
 </div>
 </div>
-<div class="section" id="co-2-diffusion-into-aquifers">
-<h2>CO$_2$ diffusion into aquifers<a class="headerlink" href="#co-2-diffusion-into-aquifers" title="Permalink to this headline">¶</a></h2>
-<p>The transport of CO$_2$ into aquifers can be described according to the diffusion equation</p>
-<div class="math notranslate nohighlight" id="eq-eq-lin-co2-diff">
-\[\tag{102}
-\frac{\partial C(z,t)}{\partial t}=\frac{\partial }{\partial z}\left(K(z)\frac{\partial C(z,t)}{\partial z}\right),\]</div>
-<p>where <span class="math notranslate nohighlight">\(C(z,t)\)</span> is the concentration of {CO$_2$}as a function of depth (<span class="math notranslate nohighlight">\(z\)</span>) and time <span class="math notranslate nohighlight">\(t\)</span>, and <span class="math notranslate nohighlight">\(K(z)\)</span> is the diffusion constant of {CO$_2$}as a function of depth. This equation can be discretized using standard techniques, to help in that respect consider figure <a class="reference internal" href="#fig-lin-co2-diff"><span class="std std-ref">Discretization for diffusion of {CO$_2$}into an aquifer, including boundary conditions</span></a>.</p>
-<div class="figure align-default" id="id13">
-<span id="fig-lin-co2-diff"></span><a class="reference internal image-reference" href="_images/co2_diff.png"><img alt="_images/co2_diff.png" src="_images/co2_diff.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-text">Discretization for diffusion of {CO$_2$}into an aquifer, including boundary conditions</span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
+<div class="section" id="calculating-numerical-derivatives-of-functions">
+<h2>Calculating Numerical Derivatives of Functions<a class="headerlink" href="#calculating-numerical-derivatives-of-functions" title="Permalink to this headline">¶</a></h2>
+<p>As stated earlier many models are described by differential equations. Differential equations contains derivatives, and we need to tell the computer how to calculate those. By using a simple transformation, <span class="math notranslate nohighlight">\(x\to x+h\)</span> and <span class="math notranslate nohighlight">\(c\to x\)</span> (hence <span class="math notranslate nohighlight">\(x-c\to h\)</span>), Taylors formula in equation <a class="reference internal" href="#eq-eq-taylor-taylor"><span class="std std-ref">(2)</span></a> can be written</p>
+<div class="math notranslate nohighlight" id="eq-eq-taylor-t">
+\[\tag{7}
+f(x+h)=f(x)+f^\prime(x)h+\frac{1}{2}f^{\prime\prime}(x)h^2+\cdots.\]</div>
+<p>This is useful because this equation contains the derivative of <span class="math notranslate nohighlight">\(f(x)\)</span> on the right hand side. To be even more explicit let us truncate the series to a certain power. Remember that you can always do this but we need to replace <span class="math notranslate nohighlight">\(x\)</span> with <span class="math notranslate nohighlight">\(\eta\)</span> in the last term we choose to keep</p>
+<div class="math notranslate nohighlight" id="eq-eq-taylor-t3">
+\[\tag{8}
+f(x+h)=f(x)+f^\prime(x)h+\frac{1}{2}f^{\prime\prime}(\eta)h^2\]</div>
+<p>where <span class="math notranslate nohighlight">\(\eta\in[x,x+h]\)</span>. Solving this equation with respect to <span class="math notranslate nohighlight">\(f^\prime(x)\)</span> gives us</p>
+<div class="math notranslate nohighlight" id="eq-eq-taylor-fd">
+\[\tag{9}
+f^\prime(x)=\frac{f(x+h)-f(x)}{h}-\frac{1}{2}f^{\prime\prime}(\eta)h.\]</div>
+<p>Note that if <span class="math notranslate nohighlight">\(h\to0\)</span>, this expression is equal to the definition of the derivative. The beauty of equation <a class="reference internal" href="#eq-eq-taylor-fd"><span class="std std-ref">(9)</span></a> is that it contains an expression for the error we make <em>when  \( h \)  is not zero</em>. Equation <a class="reference internal" href="#eq-eq-taylor-fd"><span class="std std-ref">(9)</span></a> is usually called the <em>forward difference</em>
+.. index:: forward difference</p>
+<p>. As you might guess, we can also choose to use the <em>backward difference</em>
+.. index:: backward difference</p>
+<blockquote>
+<div><p>by simply replacing <span class="math notranslate nohighlight">\(h\to-h\)</span>. Is equation <a class="reference internal" href="#eq-eq-taylor-fd"><span class="std std-ref">(9)</span></a> the only formula for the derivative? The answer is no, and we are going to derive the formula for the <em>central difference</em></p>
+</div></blockquote>
+<p id="index-5">, by writing Taylors formula for <span class="math notranslate nohighlight">\(x+h\)</span> and <span class="math notranslate nohighlight">\(x-h\)</span> up to the third order</p>
+<div class="math notranslate nohighlight" id="eq-eq-taylor-c1">
+\[\tag{10}
+f(x+h)=f(x)+f^\prime(x)h+\frac{1}{2}f^{\prime\prime}(x)h^2+\frac{1}{3!}f^{(3)}(\eta_1)h^3,\]</div>
+<div class="math notranslate nohighlight" id="eq-eq-taylor-c2">
+\[\tag{11}
+f(x-h)=f(x)-f^\prime(x)h+\frac{1}{2}f^{\prime\prime}(x)h^2-\frac{1}{3!}f^{(3)}(\eta_2)h^3.\]</div>
+<p>where <span class="math notranslate nohighlight">\(\eta_1\in[x,x+h]\)</span>, and <span class="math notranslate nohighlight">\(\eta_2\in[x-h,x]\)</span>. Subtracting  equation <a class="reference internal" href="#eq-eq-taylor-c1"><span class="std std-ref">(10)</span></a> and <a class="reference internal" href="#eq-eq-taylor-c2"><span class="std std-ref">(11)</span></a>, we get the following expression for the central difference
+.. index:: central difference</p>
+<div class="math notranslate nohighlight" id="eq-eq-taylor-cd">
+\[\tag{12}
+f^\prime(x)=\frac{f(x+h)-f(x-h)}{2h} -\frac{h^2}{6}f^{(3)}(\eta),\]</div>
+<p>where <span class="math notranslate nohighlight">\(\eta\in[x-h,x+h]\)</span>. Note that the error term in this equation is <em>one order higher</em> than in equation <a class="reference internal" href="#eq-eq-taylor-fd"><span class="std std-ref">(9)</span></a>, meaning that it is expected to be more accurate. In figure <a class="reference internal" href="#fig-taylor-fd"><span class="std std-ref">A graphical interpretation of the forward and central difference formula</span></a> there is a graphical interpretation of the finite difference approximations to the derivative.</p>
+<div class="figure align-default" id="id4">
+<span id="fig-taylor-fd"></span><a class="reference internal image-reference" href="_images/fd.png"><img alt="_images/fd.png" src="_images/fd.png" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-text"><em>A graphical interpretation of the forward and central difference formula</em></span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
 </div>
-<p>In the following we will assume that there are only four nodes (<span class="math notranslate nohighlight">\(i=0\ldots 3\)</span>) in the physical domain, and two ghost nodes <span class="math notranslate nohighlight">\(i=-1\)</span>, and <span class="math notranslate nohighlight">\(i=4\)</span>. There are many ways to attack this problem, but in the following we will borrow ideas from Finite Volume. Finite volume methods is a way of discretizing equations such that we <em>conserve mass</em>. The diffusion equation as it is derived in figure <a class="reference internal" href="#fig-nlin-heat"><span class="std std-ref">Conservation of energy and the continuity equation</span></a>, express that the flux of something (heat, particles, etc) leaving the box surface minus the flux entering the surface of the box is equal to the rate of change of something inside the box. We can formulate this mathematically as:</p>
-<div class="math notranslate nohighlight" id="eq-eq-lin-co2fv">
-\[\tag{103}
-\frac{\partial C(z,t)}{\partial t}\simeq\frac{1}{h}\left[\left.K(z)\frac{\partial C(z,t)}{\partial z}\right|_{i+1/2}
-    -\left.K(z)\frac{\partial C(z,t)}{\partial z}\right|_{i-1/2}\right]\]</div>
-<p>The notation <span class="math notranslate nohighlight">\(i\pm1/2\)</span>, means that the flux is to be evaluated <em>at the surface</em> of the box (i.e. halfway between the red dots in figure <a class="reference internal" href="#fig-lin-co2-diff"><span class="std std-ref">Discretization for diffusion of {CO$_2$}into an aquifer, including boundary conditions</span></a>). <span class="math notranslate nohighlight">\(K(z)\)</span> is the diffusion constant, and it is known everywhere, so this is simple to evaluate at the surface. The concentrations are only known at the center of each box, the red dots in figure <a class="reference internal" href="#fig-lin-co2-diff"><span class="std std-ref">Discretization for diffusion of {CO$_2$}into an aquifer, including boundary conditions</span></a>. The derivative of the concentration can be evaluated using the central difference formula (remember that the distance between the red dot and edge of the box is <span class="math notranslate nohighlight">\(h/2\)</span>), hence</p>
-<div class="math notranslate nohighlight" id="eq-eq-lin-co2fv2">
-\[\tag{104}
-\frac{C_i^{n+1}-C_i^n}{\Delta t}=\frac{1}{h}\left[K_{i+1/2}\frac{ C_{i+1}-C_{i}}{h}-K_{i-1/2}\frac{ C_{i}-C_{i-1}}{h}\right],\]</div>
-<p>notice that we have discretized the time derivative, and that we have introduced <span class="math notranslate nohighlight">\(n\)</span> to indicate the time step. On the right hand side there are is no time indicated, it turns out that we have a choice to put time step <span class="math notranslate nohighlight">\(n\)</span> or <span class="math notranslate nohighlight">\(n+1\)</span> on the concentrations on the right hand side. If we put <span class="math notranslate nohighlight">\(n\)</span> the scheme is said to be explicit, if we put <span class="math notranslate nohighlight">\(n+1\)</span>, the scheme is implicit. Implicit schemes are stable compared to explicit schemes, whereas explicit schemes has slightly higher numerical accuracy [<strong>TO DO 1</strong>: show this!]. In general we can write</p>
-<div class="math notranslate nohighlight" id="eq-auto25">
-\[\tag{105}
-\frac{C_i^{n+1}-C_i^n}{\Delta t}=\frac{\theta}{h}\left[K_{i+1/2}
-    \frac{C^n_{i+1}-C^n_{i}}{h}-K_{i-1/2}\frac{C^n_{i}-C^n_{i-1}}{h}\right]\]</div>
-<div class="math notranslate nohighlight" id="eq-eq-lin-co2fv23">
-\[\tag{106}
-+\frac{1-\theta}{h}\left[K_{i+1/2}
-    \frac{C_{i+1}^{n+1}-C_{i}^{n+1}}{h}-K_{i-1/2}\frac{ C_{i}^{n+1}-C_{i-1}^{n+1}}{h}\right],\]</div>
-<p>hence if <span class="math notranslate nohighlight">\(\theta=1\)</span> the scheme is explicit, if <span class="math notranslate nohighlight">\(\theta=0\)</span> the scheme is implicit, and if <span class="math notranslate nohighlight">\(\theta=1/2\)</span>, the scheme is called the Crank-Nicolson method. The first and last boundary are special, let us first consider the <span class="math notranslate nohighlight">\(i=0\)</span>, this is where the sea is in contact with the {CO$_2$}in the atmosphere, and the flux is <span class="math notranslate nohighlight">\(k_w(C_0-C_{eq})\)</span>, hence</p>
-<div class="math notranslate nohighlight" id="eq-auto26">
-\[\tag{107}
-\frac{C_0^{n+1}-C_0^n}{\Delta t}=\frac{\theta}{h}\left[K_{i+1/2}
-    \frac{C^n_{1}-C^n_{0}}{h}-k_w(C_0^n-C_{eq}^n)\right]\]</div>
-<div class="math notranslate nohighlight" id="eq-eq-lin-co2fv23b">
-\[\tag{108}
-+\frac{1-\theta}{h}\left[K_{i+1/2}
-    \frac{C_{1}^{n+1}-C_{0}^{n+1}}{h}-k_w(C_0^{n+1}-C_{eq}^{n+1})\right].\]</div>
-<p>For the last block the flux is zero towards the seafloor, and equation <a class="reference internal" href="#eq-eq-lin-co2fv23"><span class="std std-ref">(106)</span></a> can be written</p>
-<div class="math notranslate nohighlight" id="eq-auto27">
-\[\tag{109}
-\frac{C_3^{n+1}-C_3^n}{\Delta t}  =\frac{\theta}{h}\left[-K_{5/2}\frac{C^n_{3}-C^n_{2}}{h}\right]\]</div>
-<div class="math notranslate nohighlight" id="eq-eq-lin-co2fv23c">
-\[\tag{110}
-+\frac{1-\theta}{h}\left[-K_{5/2}\frac{ C_{3}^{n+1}-C_{2}^{n+1}}{h}\right].\]</div>
-<p>For the blocks <span class="math notranslate nohighlight">\(i=1\ldots2\)</span>, we can collect all terms with <span class="math notranslate nohighlight">\(n+1\)</span> on one side and terms with <span class="math notranslate nohighlight">\(n\)</span> on the other side and rewrite equation <a class="reference internal" href="#eq-eq-lin-co2fv23"><span class="std std-ref">(106)</span></a></p>
-<div class="math notranslate nohighlight" id="eq-auto28">
-\[\tag{111}
-\left[1+(1-\theta)\right. \left.\alpha(K_{i+1/2}+K_{i-1/2})\right]C_i^{n+1}{\nonumber}\]</div>
-<div class="math notranslate nohighlight" id="eq-auto29">
-\[\tag{112}
--(1-\theta)\alpha K_{i+1/2}C_{i+1}^{n+1}
-    -(1-\theta)\alpha K_{i-1/2}C_{i-1}^{n+1} {\nonumber}\]</div>
-<div class="math notranslate nohighlight" id="eq-auto30">
-\[\tag{113}
-=\left[1-\theta\right. \left.\alpha(K_{i+1/2}+K_{i-1/2})\right]C_i^{n}{\nonumber}\]</div>
-<div class="math notranslate nohighlight" id="eq-eq-lin-co2fv4">
-\[\tag{114}
-+\theta\alpha K_{i+1/2}C_{i+1}^{n}
-    +\theta\alpha K_{i-1/2}C_{i-1}^{n},\]</div>
-<p>where <span class="math notranslate nohighlight">\(\alpha\equiv\Delta t/h^2\)</span>.
-Next, we want to write down the corresponding matrix equations for four grid nodes as indicated in figure <a class="reference internal" href="#fig-lin-co2-diff"><span class="std std-ref">Discretization for diffusion of {CO$_2$}into an aquifer, including boundary conditions</span></a>. Notice that we need to use the equations in figure <a class="reference internal" href="#fig-lin-co2-diff"><span class="std std-ref">Discretization for diffusion of {CO$_2$}into an aquifer, including boundary conditions</span></a>, for <span class="math notranslate nohighlight">\(C_{-1}\)</span>, and <span class="math notranslate nohighlight">\(C_4\)</span>. The left and right hand coefficient matrix <span class="math notranslate nohighlight">\(\mathbf{L}\)</span>, and <span class="math notranslate nohighlight">\(\mathbf{R}\)</span> are given as</p>
-<div class="math notranslate nohighlight" id="eq-auto31">
-\[ \begin{align}\begin{aligned}\tag{115}
-{\tiny\\\begin{split}    \begin{pmatrix}
-    1+(1-\theta)\alpha(K_{1/2}+hk_w)&amp;-(1-\theta)\alpha K_{1/2}&amp;0&amp;0\\
-    -(1-\theta)\alpha K_{1/2}&amp;1+(1-\theta)\alpha(K_{3/2}+K_{1/2})&amp;-(1-\theta)\alpha K_{3/2} &amp;0\\
-    0&amp;-(1-\theta)\alpha K_{3/2}&amp;1+(1-\theta)\alpha(K_{5/2}+K_{3/2})&amp;-(1-\theta)\alpha K_{5/2} \\
-    0&amp;0&amp;-(1-\theta)\alpha K_{5/2}&amp;1+(1-\theta)\alpha K_{5/2}{\nonumber}
-    \end{pmatrix},\end{split}\\
-    }\end{aligned}\end{align} \]</div>
-<div class="math notranslate nohighlight" id="eq-auto32">
-\[ \begin{align}\begin{aligned}\tag{116}
-{\tiny\\\begin{split}    \begin{pmatrix}
-    1-\theta\alpha(K_{1/2}+hk_w)&amp;+\theta\alpha K_{1/2}&amp;0&amp;0\\
-    \theta\alpha K_{1/2}&amp;1-\theta\alpha(K_{3/2}+K_{1/2})&amp;\theta\alpha K_{3/2} &amp;0\\
-    0&amp;\theta\alpha K_{3/2}&amp;1-\theta\alpha(K_{5/2}+K_{3/2})&amp;\theta\alpha K_{5/2} \\
-    0&amp;0&amp;\theta\alpha K_{5/2}&amp;1-\theta\alpha K_{5/2}{\nonumber}
-    \end{pmatrix},\end{split}\\
-    }\end{aligned}\end{align} \]</div>
-<p>respectively. Introducing <span class="math notranslate nohighlight">\(\mathbf{S}=\left[k_wC_{eq}\Delta t/h,0,0,0\right]^T\)</span>, we can finally write the diffusion equation <a class="reference internal" href="#eq-eq-lin-co2-diff"><span class="std std-ref">(102)</span></a> as</p>
-<div class="math notranslate nohighlight" id="eq-eq-lin-discdif">
-\[\tag{117}
-\mathbf{L}\mathbf{C}^{n+1}=\mathbf{R}\mathbf{C}^n+\theta\mathbf{S}^n+(1-\theta)\mathbf{S}^{n+1}\]</div>
-<p>More stuff to do:
-1. Assume zero flux over the air water interface ($k_w$=0), show from the equations above that if we start with a uniform concentration in the sea ($mathbf{C}^n$=constant) that <span class="math notranslate nohighlight">\(\mathbf{C}^{n+1}\)</span> does not change (as it should).</p>
+<p>We are also now in the position to derive a formula for the second order derivative. Instead of subtracting equation <a class="reference internal" href="#eq-eq-taylor-c1"><span class="std std-ref">(10)</span></a> and <a class="reference internal" href="#eq-eq-taylor-c2"><span class="std std-ref">(11)</span></a>, we can add them. Then the first order derivative disappear and we are left with an expression for the second derivative</p>
+<div class="math notranslate nohighlight" id="eq-eq-taylor-2der">
+\[\tag{13}
+f^{\prime\prime}(x) = \frac{f(x+h)+f(x-h)-2f(x)}{h^2}- \frac{h^2}{12}f^{(4)}(\eta)
+    ,\]</div>
+<div class="admonition-example-calculate-the-numerical-derivative-and-second-derivative-of-math-sin-x admonition">
+<p class="admonition-title">Example: calculate the numerical derivative and second derivative of <span class="math notranslate nohighlight">\(\sin x\)</span></p>
+<p>Choose a specific point, e.g. <span class="math notranslate nohighlight">\(x=1\)</span>, and calculate the numerical error for various values of the step size <span class="math notranslate nohighlight">\(h\)</span>.
+<strong>Solution:</strong>
+The derivative of <span class="math notranslate nohighlight">\(\sin x\)</span> is <span class="math notranslate nohighlight">\(\cos x\)</span>, we can calculate the numerical derivatives using Python</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">fd</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">h</span><span class="p">):</span>
+ <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd"> calculates the forward difference approximation to</span>
+<span class="sd"> the numerical derivative of f in x</span>
+<span class="sd"> &quot;&quot;&quot;</span>
+ <span class="k">return</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">h</span><span class="p">)</span><span class="o">-</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">/</span><span class="n">h</span>
+
+<span class="k">def</span> <span class="nf">fc</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">h</span><span class="p">):</span>
+ <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd"> calculates the central difference approximation to</span>
+<span class="sd"> the numerical derivative of f in x</span>
+<span class="sd"> &quot;&quot;&quot;</span>
+ <span class="k">return</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">h</span><span class="p">)</span><span class="o">-</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">h</span><span class="p">))</span><span class="o">/</span><span class="n">h</span>
+
+<span class="k">def</span> <span class="nf">fdd</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">h</span><span class="p">):</span>
+ <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd"> calculates the numerical second order derivative</span>
+<span class="sd"> of f in x</span>
+<span class="sd"> &quot;&quot;&quot;</span>
+ <span class="k">return</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">h</span><span class="p">)</span><span class="o">+</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">h</span><span class="p">)</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">h</span><span class="o">*</span><span class="n">h</span><span class="p">)</span>
+<span class="n">x</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">h</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">15</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="n">fd</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">h</span><span class="p">)),</span> <span class="s1">&#39;-o&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;forward difference&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="n">fc</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">h</span><span class="p">)),</span><span class="s1">&#39;-x&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;central difference&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="n">fdd</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">h</span><span class="p">)),</span><span class="s1">&#39;-*&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;second derivative&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In figure <a class="reference internal" href="#fig-taylor-df2"><span class="std std-ref">Numerical error of derivatives of  \( sin x \)  for various step sizes</span></a> you can see the figure produced by the code above.</p>
+</div>
+<div class="figure align-default" id="id5">
+<span id="fig-taylor-df2"></span><a class="reference internal image-reference" href="_images/df2_mod.png"><img alt="_images/df2_mod.png" src="_images/df2_mod.png" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-text"><em>Numerical error of derivatives of  \( sin x \)  for various step sizes</em></span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+<p>There are several important lessons from figure <a class="reference internal" href="#fig-taylor-df2"><span class="std std-ref">Numerical error of derivatives of  \( sin x \)  for various step sizes</span></a>
+1. When the step size is high and decreasing (from right to left in the figure), we clearly see that the numerical error <em>decreases</em>.</p>
 <ol class="arabic simple" start="2">
-<li><p>Assume that if the concentration at a specific time <span class="math notranslate nohighlight">\(n\)</span> in the sea is equal to <span class="math notranslate nohighlight">\(\mathbf{C}_{eq}\)</span> then the concentration stays constant at all later times</p></li>
-<li><p>Add chemical reactions</p></li>
+<li><p>The numerical error scales as expected from right to left. The forward difference formula scales as <span class="math notranslate nohighlight">\(h\)</span>, i.e. decreasing the step size by 10 reduces the numerical error by 10. The central difference and second order derivative formula scales as <span class="math notranslate nohighlight">\(h^2\)</span>, reducing the step size by 10 reduces the numerical error by 100</p></li>
+<li><p>At a certain point the numerical error start to <em>increase</em>. For the forward difference formula this happens at  \(  10^{-8} \) .</p></li>
 </ol>
+<p>The numerical error has a minimum, <em>it does not continue to decrease when  \( h \)  decreases</em>. The explanation for this behavior is two competing effects: <em>truncation errors</em> and <em>roundoff errors</em>. The truncation errors have already been discussed in great detail, in the next section we will explain roundoff errors.</p>
+<div class="section" id="roundoff-errors">
+<h3>Roundoff Errors<a class="headerlink" href="#roundoff-errors" title="Permalink to this headline">¶</a></h3>
+<p id="index-6">In a computer a floating point number,$x$, is represented as:</p>
+<div class="math notranslate nohighlight" id="eq-eq-taylor-sci2">
+\[\tag{14}
+x=\pm q2^m.\]</div>
+<p>This is very similar to our usual scientific notation where we represents large (or small numbers) as <span class="math notranslate nohighlight">\(\pm q E m=\pm q 10^{m}\)</span>. The processor in a computer handles a chunk of bits at one time, this chunk of bit is usually termed <em>word</em>. The number of bits (or byte which almost always means a group of eight bits) in a word is handled as a unit by a processor.
+Most modern computers uses 64-bits (8 bytes) processors. We are not going too much into all the details, the most important message is that the units handled by the processor are <em>finite</em>. Thus we cannot, in general, store numbers in a computer with infinite accuracy.</p>
+<div class="admonition-machine-precision admonition">
+<p class="admonition-title">Machine Precision</p>
+<p id="index-7">Machine precision, <span class="math notranslate nohighlight">\(\epsilon_M\)</span> is the smallest number we can add to one and get something different than one, i.e. <span class="math notranslate nohighlight">\(1+\epsilon_M&gt;1\)</span>. For a 64-bits computer this value is <span class="math notranslate nohighlight">\(\epsilon_M=2^{-52}\simeq2.2210^{-16}\)</span>.</p>
+</div>
+<p>In the next section we explain exactly why the machine precision has this value, but if you just accept this for a moment we can demonstrate why the machine precision is important and why you need to care about it. First just to convince you that the machine precision has the value of <span class="math notranslate nohighlight">\(2^{-52}\)</span> in your computer you can do the following in Python</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="mi">2</span><span class="o">**-</span><span class="mi">52</span><span class="p">)</span> <span class="c1"># prints a value larger than 1</span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="mi">2</span><span class="o">**-</span><span class="mi">53</span><span class="p">)</span> <span class="c1"># prints 1.0</span>
+</pre></div>
+</div>
+<p>Next, consider the simple calculation</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="mf">0.1</span><span class="o">+</span><span class="mf">0.2</span>
+<span class="n">b</span><span class="o">=</span><span class="mf">0.3</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">==</span><span class="n">b</span><span class="p">)</span> <span class="c1"># gives False</span>
+</pre></div>
+</div>
+<p>Why is <code class="docutils literal notranslate"><span class="pre">a==b</span></code> false, the calculation involves only numbers with one decimal? The reason is that the computer uses the binary system, and in the binary system there is no way of representing 0.2 and 0.3 with a finite number of bits, as an example 0.2 in the binary system is</p>
+<div class="math notranslate nohighlight" id="eq-eq-taylor-02">
+\[\tag{15}
+0.2_{10}=0.0011001100\ldots_2 (=2^{-3}+2^{-4}+2^{-7}+2^{-8}+2^{-11}+\cdots)\]</div>
+<p>Note that we use the subscript <span class="math notranslate nohighlight">\(_{10}\)</span> and <span class="math notranslate nohighlight">\(_2\)</span> to represent the decimal and binary system respectively.
+Thus in the computer 0.2 will be represented as <span class="math notranslate nohighlight">\(0.1999\ldots\)</span> and when we add 0.1 we will get a number really close to 0.3 but not equal to 0.3. Some floats have an exact binary representation e.g. <span class="math notranslate nohighlight">\(0.125_{10}=2^{-8}_{10}=0.00000001_2\)</span>. Thus the following code will produce the expected result</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="mf">0.125</span><span class="o">+</span><span class="mf">0.25</span>
+<span class="n">b</span><span class="o">=</span><span class="mf">0.375</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">==</span><span class="n">b</span><span class="p">)</span> <span class="c1"># gives True</span>
+</pre></div>
+</div>
+<div class="admonition-comparing-two-floats admonition">
+<p class="admonition-title">Comparing two floats</p>
+<p>Whenever you want to compare if two floats, <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>, are equal in a computer program, you should never do <span class="math notranslate nohighlight">\(a==b\)</span> because of roundoff errors. Rather you should choose a variant of <span class="math notranslate nohighlight">\(|a-b|&lt;\epsilon\)</span>, where you check if the numbers are <em>close enough</em>. In practice you also might want to normalize the values and do <span class="math notranslate nohighlight">\(|1-b/a|&lt;\epsilon\)</span>.</p>
+</div>
+<p>The roundoff errors can also play a very big role in calculations, it is particularly apparent when subtracting two numbers of similar magnitude as illustrated in the following code</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">h</span><span class="o">=</span><span class="mi">2</span><span class="o">**-</span><span class="mi">53</span>
+<span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="o">+</span><span class="n">h</span>
+<span class="n">b</span><span class="o">=</span><span class="mi">1</span><span class="o">-</span><span class="n">h</span>
+<span class="nb">print</span><span class="p">((</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="n">h</span><span class="p">)</span> <span class="c1"># analytical result is 2</span>
+</pre></div>
+</div>
+<p>The calculation above is very similar to the calculation done when evaluating derivatives, and if you run the code you will see that Python does not give the expected value of 2.</p>
+<div class="admonition-choosing-the-right-step-size admonition">
+<p class="admonition-title">Choosing the right step size</p>
+<p>A step size that is too low will give higher numerical error because roundoff errors dominate the numerical error.</p>
+</div>
+<p>At the end we will mention a simple trick that you can use sometimes to avoid roundoff errors <span id="id1">[Ref2]</span>. In practice we can never get rid of roundoff errors in the calculation <span class="math notranslate nohighlight">\(f(x+h)\)</span>, but since we can choose the step size <span class="math notranslate nohighlight">\(h\)</span> we can choose to choose values such that <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(x+h\)</span> differ by an exact binary number</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">h</span><span class="o">=</span><span class="mf">0.0002</span>
+<span class="n">temp</span> <span class="o">=</span> <span class="n">x</span><span class="o">+</span><span class="n">h</span>
+<span class="n">h</span><span class="o">=</span><span class="n">temp</span><span class="o">-</span><span class="n">x</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">h</span><span class="p">)</span> <span class="c1"># improved value of h with exact binary representation</span>
+</pre></div>
+</div>
+<p>In the next sections we will show why <span class="math notranslate nohighlight">\(\epsilon_M=2^{-52}\)</span>, and why a finite word size leads necessary has to imply a maximum and minimum number.
+Binary numbers
+~~~~~~~~~~~~~~</p>
+<p>Binary numbers are used in computers because processors are made of billions of transistors, the end states of a transistor is off or on, representing a 0 or 1 in the binary system. Assume, for simplicity, that we have a processor that uses a word size of 4 bits (instead of 64 bits). How many <em>unsigned</em> (positive) integers can we represent in this processor? Lets write down all the possible combinations, of ones and zeros and also do the translation from base 2 numerical system to base 10 numerical system:</p>
+<div class="math notranslate nohighlight" id="eq-eq-taylor-bin4">
+\[\begin{split}\tag{16}
+\begin{matrix}
+    0&amp;0&amp;0&amp;0=0\cdot 2^3+0\cdot 2^2+0\cdot 2^1+0\cdot 2^0=0\\
+    0&amp;0&amp;0&amp;1=0\cdot 2^3+0\cdot 2^2+0\cdot 2^1+1\cdot 2^0=1\\
+    0&amp;0&amp;1&amp;0=0\cdot 2^3+0\cdot 2^2+1\cdot 2^1+0\cdot 2^0=2\\
+    0&amp;0&amp;1&amp;1=0\cdot 2^3+0\cdot 2^2+1\cdot 2^1+1\cdot 2^0=3\\
+    0&amp;1&amp;0&amp;0=0\cdot 2^3+1\cdot 2^2+0\cdot 2^1+0\cdot 2^0=4\\
+    0&amp;1&amp;0&amp;1=0\cdot 2^3+1\cdot 2^2+0\cdot 2^1+1\cdot 2^0=5\\
+    0&amp;1&amp;1&amp;0=0\cdot 2^3+1\cdot 2^2+1\cdot 2^1+0\cdot 2^0=6\\
+    0&amp;1&amp;1&amp;1=0\cdot 2^3+1\cdot 2^2+1\cdot 2^1+1\cdot 2^0=7\\
+    1&amp;0&amp;0&amp;0=1\cdot 2^3+0\cdot 2^2+0\cdot 2^1+0\cdot 2^0=8\\
+    1&amp;0&amp;0&amp;1=1\cdot 2^3+0\cdot 2^2+0\cdot 2^1+1\cdot 2^0=9\\
+    1&amp;0&amp;1&amp;0=1\cdot 2^3+0\cdot 2^2+1\cdot 2^1+0\cdot 2^0=10\\
+    1&amp;0&amp;1&amp;1=1\cdot 2^3+0\cdot 2^2+1\cdot 2^1+1\cdot 2^0=11\\
+    1&amp;1&amp;0&amp;0=1\cdot 2^3+1\cdot 2^2+0\cdot 2^1+0\cdot 2^0=12\\
+    1&amp;1&amp;0&amp;1=1\cdot 2^3+1\cdot 2^2+0\cdot 2^1+1\cdot 2^0=13\\
+    1&amp;1&amp;1&amp;0=1\cdot 2^3+1\cdot 2^2+1\cdot 2^1+0\cdot 2^0=14\\
+    1&amp;1&amp;1&amp;1=1\cdot 2^3+1\cdot 2^2+1\cdot 2^1+1\cdot 2^0=15
+    \end{matrix}
+    .\end{split}\]</div>
+<p>Hence, with a 4 bits word size, we can represent <span class="math notranslate nohighlight">\(2^4=16\)</span> integers. The largest number is <span class="math notranslate nohighlight">\(2^4-1=15\)</span>, and the smallest is zero. What about negative numbers? If we still keep to a 4 bits word size, there are still <span class="math notranslate nohighlight">\(2^4=16\)</span> numbers, but we distribute them differently. The common way to do it is to reserve the first bit to be a <em>sign</em> bit, a &quot;0&quot; is positive and &quot;1&quot; is negative, i.e. <span class="math notranslate nohighlight">\((-1)^0 = 1\)</span>, and <span class="math notranslate nohighlight">\((-1)^1=-1\)</span>. Replacing the first bit with a sign bit in equation <a class="reference internal" href="#eq-eq-taylor-bin4"><span class="std std-ref">(16)</span></a>, we get the following sequence of numbers 0,1,2,3,4,5,6,7,-0,-1,-2,-3,-4,-5,-6,-7. The &quot;-0&quot;, might seem strange but is used in the computer to extend the real number line <span class="math notranslate nohighlight">\(1/0=\infty\)</span>, whereas <span class="math notranslate nohighlight">\(1/-0=-\infty\)</span>. In general when there are <span class="math notranslate nohighlight">\(m\)</span> bits, we have a total of <span class="math notranslate nohighlight">\(2^m\)</span> numbers. If we include negative numbers, we can choose to have <span class="math notranslate nohighlight">\(2^{m-1}-1\)</span>, negative, and <span class="math notranslate nohighlight">\(2^{m-1}-1\)</span> positive numbers, negative zero and positive zero, i.e. <span class="math notranslate nohighlight">\(2^{m-1}-1+2^{m-1}-1+1+1=2^m\)</span>.</p>
+<p>What about real numbers? As stated earlier we use the scientific notation as in equation <a class="reference internal" href="#eq-eq-taylor-sci2"><span class="std std-ref">(14)</span></a>, but still the scientific notation might have a real number in front, e.g. <span class="math notranslate nohighlight">\(1.25\cdot 10^{-3}\)</span>. To represent the number <span class="math notranslate nohighlight">\(1.25\)</span> in binary format we use a decimal separator, just as with base 10. In this case 1.25 is 1.01 in binary format</p>
+<div class="math notranslate nohighlight" id="eq-eq-taylor-b2fr">
+\[\tag{17}
+1.01=1\cdot 2^0 + 0\cdot 2^{-1}+1\cdot 2^{-2}=1 + 0 + 0.25=1.25.\]</div>
+<p>The scientific notation is commonly referred to as <em>floating point representation</em>. The term &quot;floating point&quot; is used because the decimal point is not in the same place, in contrast to fixed point where the decimal point is always in the same place. To store the number 1e-8=0.00000001 in floating point format, we only need to store 1 and -8 (and possibly the sign), whereas in fixed point format we need to store all 9 numbers.  In equation <a class="reference internal" href="#eq-eq-taylor-bin4"><span class="std std-ref">(16)</span></a> we need to spend one bit to store the sign, leaving (in the case of 4 bits word size) three bits to be distributed among the <em>mantissa</em>, <span class="math notranslate nohighlight">\(q\)</span>, and the exponent, <span class="math notranslate nohighlight">\(m\)</span>. It is not given how many bits should be used for the mantissa and the exponent. Thus there are choices to be made, and all modern processors uses the same standard, the <a class="reference external" href="https://standards.ieee.org/standard/754-1985.html">IEEE Standard 754-1985</a>.</p>
+<div class="section" id="floating-point-numbers-and-the-ieee-754-1985-standard">
+<h4>Floating point numbers and the IEEE 754-1985 standard<a class="headerlink" href="#floating-point-numbers-and-the-ieee-754-1985-standard" title="Permalink to this headline">¶</a></h4>
+<p id="index-8">A 64 bits word size is commonly referred to as <em>double precision</em>, whereas a 32 bits word size is termed <em>single precision</em>. In the following we will consider a 64 bits word size. We would like to know: what is the roundoff error, what is the largest number that can be represented in the computer, and what is the smallest number? Almost all floating point numbers are represented in <em>normalized</em> form. In normalized form the mantissa is written as <span class="math notranslate nohighlight">\(M=1.F\)</span>, and it is only <span class="math notranslate nohighlight">\(F\)</span> that is stored,   <span class="math notranslate nohighlight">\(F\)</span> is termed the <em>fraction</em>. We will return to the special case of some of the unnormalized numbers later. In the IEEE standard one bit is reserved for the sign, 52 for the fraction (<span class="math notranslate nohighlight">\(F\)</span>) and 11 for the exponent (<span class="math notranslate nohighlight">\(m\)</span>), see figure <a class="reference internal" href="#fig-taylor-64bit"><span class="std std-ref">Representation of a 64 bits floating point number according to the IEEE 754-1985 standard. For a 32 bits floating point number, 8, is reserved for the exponent and 23 for the fraction</span></a> for an illustration.</p>
+<div class="figure align-default" id="id6">
+<span id="fig-taylor-64bit"></span><a class="reference internal image-reference" href="_images/64bit.png"><img alt="_images/64bit.png" src="_images/64bit.png" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-text"><em>Representation of a 64 bits floating point number according to the IEEE 754-1985 standard. For a 32 bits floating point number, 8, is reserved for the exponent and 23 for the fraction</em></span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</div>
+<p>The exponent must be positive to represent numbers with absolute value larger than one, and negative to represent numbers with absolute value less than one.  To make this more explicit the simple formula in equation <a class="reference internal" href="#eq-eq-taylor-sci2"><span class="std std-ref">(14)</span></a> is rewritten:</p>
+<div class="math notranslate nohighlight" id="eq-eq-taylor-ieee">
+\[\tag{18}
+\pm q 2^{E-e}.\]</div>
+<p>The number <span class="math notranslate nohighlight">\(e\)</span> is called the <em>bias</em> and has a fixed value, for 64 bits it is <span class="math notranslate nohighlight">\(2^{11-1}-1=1023\)</span> (32-bits: <span class="math notranslate nohighlight">\(e=2^{8-1}-1=127\)</span>). The number <span class="math notranslate nohighlight">\(E\)</span> is represented by 11 bits and can thus take on values from 0 to <span class="math notranslate nohighlight">\(2^11-1=2047\)</span>. If we have an exponent of e.g. -3, the computer adds 1023 to that number and store the number 1020. Two numbers are special numbers and reserved to represent infinity and zero, <span class="math notranslate nohighlight">\(E=0\)</span> and <span class="math notranslate nohighlight">\(E=2047\)</span>. Thus <em>the largest and smallest possible numerical value of the exponent is: 2046-1023=1023, and 1-1023=-1022, respectively</em>. The fraction of a normalized floating point number takes on values from <span class="math notranslate nohighlight">\(1.000\ldots 00\)</span> to <span class="math notranslate nohighlight">\(1.111\ldots 11\)</span>. Thus the lowest normalized number is</p>
+<div class="math notranslate nohighlight" id="eq-auto3">
+\[\tag{19}
+1.000 + \text{ (49 more zeros)}\cdot 2^{-1022}=2^0\cdot2^{-1022}{\nonumber}\]</div>
+<div class="math notranslate nohighlight">
+\[=2.2250738585072014\cdot 10^{-308}.
+label{}\]</div>
+<p>It is possible to represent smaller numbers than <span class="math notranslate nohighlight">\(2.22\cdot10^{-308}\)</span>, by allowing <em>unnormalized</em> values. If the exponent is -1022, then the mantissa can take on values from <span class="math notranslate nohighlight">\(1.000\ldots 00\)</span> to <span class="math notranslate nohighlight">\(0.000\ldots 01\)</span>, but then accuracy is lost. So the smallest possible number is <span class="math notranslate nohighlight">\(2^{-52}\cdot{2^-1022}\simeq4.94\cdot10^{-324}\)</span>.
+The highest normalized number is</p>
+<div class="math notranslate nohighlight" id="eq-auto4">
+\[\tag{20}
+1.111 + \text{ (49 more ones)}\cdot2^{1023}=(2^0+2^{-1}+2^{-2}+\cdots+2^{-52})\cdot2^{1023}{\nonumber}\]</div>
+<div class="math notranslate nohighlight">
+\[=(2-2^{-52})\cdot2^{1023}
+=1.7976931348623157\cdot 10^{308}.
+label{}\]</div>
+<p>If you enter <code class="docutils literal notranslate"><span class="pre">print(1.8*10**(308))</span></code> in Python, the answer will be <code class="docutils literal notranslate"><span class="pre">Inf</span></code>. If you enter <code class="docutils literal notranslate"><span class="pre">print(2*10**(308))</span></code>, Python will (normally) give an answer. This is because
+the number <span class="math notranslate nohighlight">\(1.8\cdot10^{308}\)</span> is floating point number, whereas <span class="math notranslate nohighlight">\(2\cdot 10^{308}\)</span> is an <em>integer</em>, and Python does something clever when it comes to representing integers.
+Python has a third numeric type called long int, which can use the available memory to represent an integer.</p>
+<p>What about the machine precision? The machine precision, <span class="math notranslate nohighlight">\(\epsilon_M\)</span>, is the <em>smallest possible number that can be added to one, and get a number larger than one</em>, i.e. <span class="math notranslate nohighlight">\(1+\epsilon_M&gt;1\)</span>.  The smallest possible value of the mantissa is <span class="math notranslate nohighlight">\(0.000\ldots 01=2^{-52}\)</span>, thus the lowest number must be of the form <span class="math notranslate nohighlight">\(2^{-52}\cdot 2^{m}\)</span>. If the exponent , <span class="math notranslate nohighlight">\(m\)</span>, is lower than 0 then when we add this number to 1, we will only get 1. Thus the machine precision is <span class="math notranslate nohighlight">\(\epsilon_M=2^{-52}=2.22\cdot10^{-16}\)</span> (for 32 bits <span class="math notranslate nohighlight">\(2^{-23}=1.19\cdot10^{-7}\)</span>). In practical terms this means that e.g. the value of <span class="math notranslate nohighlight">\(\pi\)</span> is <span class="math notranslate nohighlight">\(3.14159265358979323846264338\ldots\)</span>, but in Python it can only be represented by 16 digits: <span class="math notranslate nohighlight">\(3.141592653589793\)</span>.</p>
+</div>
+<div class="section" id="roundoff-error-and-truncation-error-in-numerical-derivatives">
+<h4>Roundoff error and truncation error in numerical derivatives<a class="headerlink" href="#roundoff-error-and-truncation-error-in-numerical-derivatives" title="Permalink to this headline">¶</a></h4>
+<div class="admonition-roundoff-errors admonition">
+<p class="admonition-title">Roundoff Errors</p>
+<p id="index-9">All numerical floating point operations introduces roundoff errors at each step in the calculation due to finite word size, these errors accumulate in long simulations and introduce random errors in the final results. After <span class="math notranslate nohighlight">\(N\)</span> operations the error is at least <span class="math notranslate nohighlight">\(\sqrt{N}\epsilon_M\)</span> (the square root is a random walk estimate, and we assume that the errors are randomly distributed). The roundoff errors can be much, much higher when numbers of equal magnitude are subtracted. You might be so unlucky that after one operation the answer is completely dominated by roundoff errors.</p>
+</div>
+<p>The roundoff error when we represent a floating point number <span class="math notranslate nohighlight">\(x\)</span> in the
+machine will be of the order <span class="math notranslate nohighlight">\(x/10^{16}\)</span> (<em>not</em> <span class="math notranslate nohighlight">\(10^{-16}\)</span>). In general, when we evaluate a function the error will be of the order
+<span class="math notranslate nohighlight">\(\epsilon|f(x)|\)</span>, where <span class="math notranslate nohighlight">\(\epsilon\sim10^{-16}\)</span>. Thus equation <a class="reference internal" href="#eq-eq-taylor-fd"><span class="std std-ref">(9)</span></a> is modified in the following way when we take into account the roundoff errors:</p>
+<div class="math notranslate nohighlight" id="eq-eq-taylor-derr2">
+\[\tag{21}
+f^\prime(x)=\frac{f(x+h)-f(x)}{h}\pm\frac{2\epsilon|f(x)|}{h}-\frac{h}{2}f^{\prime\prime}(\eta),\]</div>
+<p>we do not know the sign of the roundoff error, so the total error <span class="math notranslate nohighlight">\(R_2\)</span> is:</p>
+<div class="math notranslate nohighlight" id="eq-eq-taylor-derr3">
+\[\tag{22}
+R_2=\frac{2\epsilon|f(x)|}{h}+\frac{h}{2}|f^{\prime\prime}(\eta)|.\]</div>
+<p>We have put absolute values around the function and its derivative to get the maximal error, it might be the case that the roundoff error cancel part of the
+truncation error. However, the roundoff error is random in nature and will change from machine to machine, and each time we run the program.
+Note that the roundoff error increases when <span class="math notranslate nohighlight">\(h\)</span> decreases, and the approximation error decreases when <span class="math notranslate nohighlight">\(h\)</span> decreases. This is exactly what we saw in figure <a class="reference internal" href="#fig-taylor-df2"><span class="std std-ref">Numerical error of derivatives of  \( sin x \)  for various step sizes</span></a>. We can find the
+best step size, by differentiating <span class="math notranslate nohighlight">\(R_2\)</span> and put it equal to zero:</p>
+<div class="math notranslate nohighlight">
+\[\frac{dR_2}{dh}=-\frac{2\epsilon|f(x)|}{h^2}+\frac{1}{2}f^{\prime\prime}(\eta)=0\nonumber\]</div>
+<div class="math notranslate nohighlight" id="eq-eq-taylor-derr4">
+\[\tag{23}
+h=2\sqrt{\epsilon\left|\frac{f(x)}{f^{\prime\prime}(\eta)}\right|}\simeq 2\cdot10^{-8},\]</div>
+<p>In the last equation we have assumed that <span class="math notranslate nohighlight">\(f(x)\)</span> and its derivative is  \(  1 \) . This step size corresponds to an error of order <span class="math notranslate nohighlight">\(R_2\sim10^{-8}\)</span>.
+Inspecting figure <a class="reference internal" href="#fig-taylor-df2"><span class="std std-ref">Numerical error of derivatives of  \( sin x \)  for various step sizes</span></a> we see that the minimum is located at <span class="math notranslate nohighlight">\(h\sim10^{-8}\)</span>.</p>
+<p>We can perform a similar error analysis as we did before, and then we find for equation <a class="reference internal" href="#eq-eq-taylor-cd"><span class="std std-ref">(12)</span></a> and <a class="reference internal" href="#eq-eq-taylor-2der"><span class="std std-ref">(13)</span></a> that the total
+numerical error is:</p>
+<div class="math notranslate nohighlight" id="eq-eq-taylor-derr3b">
+\[\tag{24}
+R_3=\frac{\epsilon|f(x)|}{h}+\frac{h^2}{6}f^{(3)}(\eta),\]</div>
+<div class="math notranslate nohighlight" id="eq-eq-taylor-derr4b">
+\[\tag{25}
+R_4=\frac{4\epsilon|f(x)|}{h^2}+\frac{h^2}{12}f^{(4)}(\eta),\]</div>
+<p>respectively. Differentiating these two equations with respect to <span class="math notranslate nohighlight">\(h\)</span>, and set the equations equal to zero, we find an optimal step size of
+<span class="math notranslate nohighlight">\(h\sim10^{-5}\)</span> for equation <a class="reference internal" href="#eq-eq-taylor-derr3b"><span class="std std-ref">(24)</span></a>, which gives an error of <span class="math notranslate nohighlight">\(R_2\sim 10^{-16}/10^{-5}+(10^{-5})^2/6\simeq10^{-10}\)</span>, and <span class="math notranslate nohighlight">\(h\sim10^{-4}\)</span> for equation
+<a class="reference internal" href="#eq-eq-taylor-derr4b"><span class="std std-ref">(25)</span></a>, which gives an error of <span class="math notranslate nohighlight">\(R_4\sim 4\cdot10^{-16}/(10^{-4})^2+(10^{-4})^2/12\simeq10^{-8}\)</span>. Note that we get the surprising result for the first order
+derivative in equation <a class="reference internal" href="#eq-eq-taylor-cd"><span class="std std-ref">(12)</span></a>, that a higher step size gives a more accurate result.</p>
+</div>
+</div>
 </div>
 </div>
 
@@ -1089,47 +454,29 @@ Next, we want to write down the corresponding matrix equations for four grid nod
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="._book000.html">Modeling and Computational Engineering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="._book001.html">Preface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="._book002.html">Finite differences</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Solving linear systems</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#the-continuity-equation">The Continuity Equation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#continuity-equation-as-a-linear-problem-in-progress">Continuity Equation as a linear problem (in progress)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#solving-linear-equations">Solving linear equations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#gauss-jordan-elimination">Gauss-Jordan elimination</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#pivoting">Pivoting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._book002.html">Writing Python code</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Finite differences</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#numerical-errors">Numerical Errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#taylor-polynomial-approximation">Taylor Polynomial Approximation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#evaluation-of-polynomials">Evaluation of polynomials</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#iterative-methods">Iterative methods</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#the-jacobi-method">The Jacobi method</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#the-gauss-seidel-method">The Gauss-Seidel method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#calculating-numerical-derivatives-of-functions">Calculating Numerical Derivatives of Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#roundoff-errors">Roundoff Errors</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#example-linear-regression">Example: Linear regression</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#solving-least-square-using-algebraic-equations">Solving least square, using algebraic equations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#least-square-as-a-linear-algebra-problem">Least square as a linear algebra problem</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#working-with-matrices-on-component-form">Working with matrices on component form</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#sparse-matrices-and-thomas-algorithm">Sparse matrices and Thomas algorithm</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#example-solving-the-heat-equation-using-linear-algebra">Example: Solving the heat equation using linear algebra</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#exercise-2-1-conservation-equation-or-the-continuity-equation">Exercise 2.1: Conservation Equation or the Continuity Equation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#exercise-2-2-curing-of-concrete-and-matrix-formulation">Exercise 2.2: Curing of Concrete and Matrix Formulation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#exercise-2-3-solve-the-full-heat-equation">Exercise 2.3: Solve the full heat equation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#exercise-2-4-using-sparse-matrices-in-python">Exercise 2.4: Using sparse matrices in python</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#co-2-diffusion-into-aquifers">CO$_2$ diffusion into aquifers</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="._book004.html">Solving nonlinear equations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="._book005.html">Numerical integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._book004.html">Solving linear systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._book005.html">Solving nonlinear equations</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="._book002.html" title="previous chapter">Finite differences</a></li>
-      <li>Next: <a href="._book004.html" title="next chapter">Solving nonlinear equations</a></li>
+      <li>Previous: <a href="._book002.html" title="previous chapter">Writing Python code</a></li>
+      <li>Next: <a href="._book004.html" title="next chapter">Solving linear systems</a></li>
   </ul></li>
 </ul>
 </div>
@@ -1142,7 +489,7 @@ Next, we want to write down the corresponding matrix equations for four grid nod
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script type="text/javascript">$('#searchbox').show(0);</script>
 
 
 
@@ -1156,10 +503,10 @@ Next, we want to write down the corresponding matrix equations for four grid nod
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2021, Modeling and Computational Engineering.
+      &copy;2022, Modeling and Computational Engineering.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.1</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.3.1</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

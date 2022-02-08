@@ -1,11 +1,11 @@
 <!--
 Automatically generated HTML file from DocOnce source
-(https://github.com/doconce/doconce/)
+(https://github.com/hplgit/doconce/)
 -->
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="DocOnce: https://github.com/doconce/doconce/" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="Solving linear systems">
 <meta name="keywords" content="continuity equation,Gauss-Jordan elimination,pivoting,LU decomposition,Jacobi method,Gauss-Seidel method,linear regression,sparse matrix,Thomas algorithm">
@@ -110,7 +110,7 @@ MathJax.Hub.Config({
 <!-- newcommands_keep.tex -->
 $$
 \newcommand{\no}{\nonumber}
-\newcommand{\co}{CO$_2$}
+\newcommand{\co}{\text{CO$_{2}$}}
 $$
 
 
@@ -190,7 +190,7 @@ $$
 <br>
 University of Stavanger
 <p>
-<center><h4>Oct 22, 2021</h4></center> <!-- date -->
+<center><h4>Feb 8, 2022</h4></center> <!-- date -->
 <br>
 <p>
 </div> <!-- end jumbotron -->
@@ -237,7 +237,7 @@ The continuity equation is fundamental to all mathematical models describing a p
 <center> <!-- figure label: --> <div id="fig:lin:flux"></div> <!-- FIGURE -->
 <hr class="figure">
 <center><p class="caption">Figure 1:  A closed volume, \( V(x)=A(x)dx \), where a quantity flows in and out (illustrated by the green lines), there is also a possibility for generation or loss of the same quantity inside the volume.  <!-- caption label: fig:lin:flux --> </p></center>
-<p><img src="fig-lin/flux.png" align="bottom" width=400></p>
+<p><img src="fig-lin/flux.png" align="bottom" width=800></p>
 </center>
 
 $$
@@ -282,7 +282,7 @@ q(t+dt) &=q(t)+\frac{dq}{dt}dt+{\cal O}(dt^2),
 $$
 
 Inserting these equations into equation<a href="#mjx-eqn-4">(4)</a>, using \( V(x)=A(x)dx \), and taking the limit \( dx,dt\to0 \) we arrive at
-<div class="alert alert-block alert-success alert-text-normal"><b>The continuity equation in 1 dimension</b>
+<div class="alert alert-block alert-success alert-text-normal"><b>The continuity equation in 1 dimension.</b>
 $$
 \begin{equation}
 -\frac{d(J(x)A(x))}{dx}+\frac{d\sigma(t)}{dt}A(x)=\frac{dq(t)}{dt}A(x).
@@ -292,7 +292,7 @@ $$
 </div>
 
 We have kept the area in equation <a href="#mjx-eqn-8">(8)</a>, because we are only considering flow of heat in one dimension and then we can allow for the area to change in the \( y \) and \( z \) dimension. When the continuity equation is derived in three dimensions, one consider a volume \( V(x,y,z)=dxdydz \), then the area in equation <a href="#mjx-eqn-8">(8)</a> will drop out and \( d/dx\to\nabla=[\partial/\partial x, \partial/\partial y, \partial/\partial z] \) 
-<div class="alert alert-block alert-success alert-text-normal"><b>The continuity equation in 3 dimensions</b>
+<div class="alert alert-block alert-success alert-text-normal"><b>The continuity equation in 3 dimensions.</b>
 $$
 \begin{equation}
 -\nabla\cdot\mathbf{J}+\frac{d\sigma(t)}{dt}=\frac{dq(t)}{dt}.
@@ -417,7 +417,7 @@ The operations done are: (\( 1\to2 \)) multiply first row with \( -1/2 \) and ad
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span>A <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([[<span style="color: #666666">2</span>, <span style="color: #666666">1</span>, <span style="color: #666666">1</span>, <span style="color: #666666">3</span>],[<span style="color: #666666">1</span>, <span style="color: #666666">1</span>, <span style="color: #666666">3</span>, <span style="color: #666666">1</span>],
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>A <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([[<span style="color: #666666">2</span>, <span style="color: #666666">1</span>, <span style="color: #666666">1</span>, <span style="color: #666666">3</span>],[<span style="color: #666666">1</span>, <span style="color: #666666">1</span>, <span style="color: #666666">3</span>, <span style="color: #666666">1</span>],
               [<span style="color: #666666">1</span>, <span style="color: #666666">4</span>, <span style="color: #666666">1</span>, <span style="color: #666666">1</span>],[<span style="color: #666666">1</span>, <span style="color: #666666">1</span>, <span style="color: #666666">2</span>, <span style="color: #666666">2</span> ]],<span style="color: #008000">float</span>)
 b <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([<span style="color: #666666">1</span>,<span style="color: #666666">-3</span>,<span style="color: #666666">2</span>,<span style="color: #666666">1</span>],<span style="color: #008000">float</span>)
 N<span style="color: #666666">=4</span>
@@ -467,7 +467,7 @@ The back substitution can now easily be implemented in Python as:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #408080; font-style: italic"># Back substitution</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #408080; font-style: italic"># Back substitution</span>
 sol <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros(N,<span style="color: #008000">float</span>)
 sol[N<span style="color: #666666">-1</span>]<span style="color: #666666">=</span>b[N<span style="color: #666666">-1</span>]<span style="color: #666666">/</span>A[N<span style="color: #666666">-1</span>,N<span style="color: #666666">-1</span>]
 <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">2</span>,N<span style="color: #666666">+1</span>):
@@ -478,7 +478,7 @@ Notice that in the Python implementation, we have used vector operations instead
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #408080; font-style: italic"># Back substitution - for loop</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #408080; font-style: italic"># Back substitution - for loop</span>
 sol <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros(N,<span style="color: #008000">float</span>)
 <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(N<span style="color: #666666">-1</span>,<span style="color: #666666">-1</span>,<span style="color: #666666">-1</span>):
     sol[i]<span style="color: #666666">=</span> b[i]
@@ -585,7 +585,7 @@ The NumPy function <a href="https://docs.scipy.org/doc/numpy/reference/generated
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy.linalg</span> <span style="color: #008000; font-weight: bold">import</span> solve
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy.linalg</span> <span style="color: #008000; font-weight: bold">import</span> solve
 x<span style="color: #666666">=</span>solve(A,b)
 </pre></div>
 
@@ -690,7 +690,7 @@ Below is a Python implementation
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">solve_jacobi</span>(A,b,x<span style="color: #666666">=-1</span>,w<span style="color: #666666">=1</span>,max_iter<span style="color: #666666">=1000</span>,EPS<span style="color: #666666">=1e-6</span>):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">solve_jacobi</span>(A,b,x<span style="color: #666666">=-1</span>,w<span style="color: #666666">=1</span>,max_iter<span style="color: #666666">=1000</span>,EPS<span style="color: #666666">=1e-6</span>):
     <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
 <span style="color: #BA2121; font-style: italic">    Solves the linear system Ax=b using the Jacobian method, stops if</span>
 <span style="color: #BA2121; font-style: italic">    solution is not found after max_iter or if solution changes less </span>
@@ -717,7 +717,7 @@ A sufficient criteria for the Jacobian method to converge is if the matrix \( A 
 
 <p>
 The iterative method can be appealing if we do not need a high accuracy, we can choose to stop whenever \( |\mathbf{x}^{k+1}-\mathbf{x}^k| \) is small enough. For the direct method we have to follow through all the way.
-<div class="alert alert-block alert-success alert-text-normal"><b>Convergence</b>
+<div class="alert alert-block alert-success alert-text-normal"><b>Convergence.</b>
 The Jacobi method converges if the matrix \( \mathbf{A} \) is strictly diagonally dominant. Strictly diagonally dominant means that the absolute value of each entry on the diagonal is greater than the sum of the absolute values of the other entries in the same row, i.e if \( |a_{00}|>|a_{01}+a_{02}+\cdots| \). In general it can be shown that a iterative scheme \( \mathbf{x}^{k+1}=\mathbf{P}\cdot \mathbf{x}^k+\mathbf{q} \) is convergent <em>if and only if</em> every eigenvalue, \( \lambda \), of \( \mathbf{P} \) satisfies \( |\lambda| < 1 \), i.e. the <em>spectral radius</em> \( \rho(\mathbf{P}) < 1 \).
 </div>
 
@@ -728,7 +728,7 @@ It is tempting in equation <a href="#mjx-eqn-32">(32)</a> to use our estimate of
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">solve_GS</span>(A,b,x<span style="color: #666666">=-1</span>,max_iter<span style="color: #666666">=1000</span>,EPS<span style="color: #666666">=1e-6</span>):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">solve_GS</span>(A,b,x<span style="color: #666666">=-1</span>,max_iter<span style="color: #666666">=1000</span>,EPS<span style="color: #666666">=1e-6</span>):
     <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
 <span style="color: #BA2121; font-style: italic">    Solves the linear system Ax=b using the Gauss-Seidel method, stops if</span>
 <span style="color: #BA2121; font-style: italic">    solution is not found after max_iter or if solution changes less </span>
@@ -831,7 +831,7 @@ In python we can implement equation \eqref{eq:lin:ls1c}, <a href="#mjx-eqn-42">(
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">OLS</span>(x, y): 
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">OLS</span>(x, y): 
     <span style="color: #408080; font-style: italic"># returns regression coefficients</span>
     <span style="color: #408080; font-style: italic"># in ordinary least square</span>
     <span style="color: #408080; font-style: italic"># x: observations</span>
@@ -904,7 +904,7 @@ Below is a python implementation of equation <a href="#mjx-eqn-46">(46)</a>.
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">OLSM</span>(x, y): 
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">OLSM</span>(x, y): 
     <span style="color: #408080; font-style: italic"># returns regression coefficients</span>
     <span style="color: #408080; font-style: italic"># in ordinary least square using solve function</span>
     <span style="color: #408080; font-style: italic"># x: observations</span>
@@ -1069,7 +1069,7 @@ $$
 Equation <a href="#mjx-eqn-59">(59)</a>, \eqref{eq:lin:thi}, <a href="#mjx-eqn-60">(60)</a>
 and <a href="#mjx-eqn-61">(61)</a> is known as the Thomas algorithm after
 Llewellyn Thomas. 
-<div class="alert alert-block alert-success alert-text-normal"><b>Notice</b>
+<div class="alert alert-block alert-success alert-text-normal"><b>Notice.</b>
 Clearly tridiagonal matrices can be solved much more efficiently with
 the Thomas algorithm than
 using a standard library, such as LU-decomposition. This is
@@ -1240,7 +1240,7 @@ where \( \gamma=2 \) for the central difference scheme and 1 for the forward dif
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
 <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">scipy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">sc</span>
 <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">scipy.sparse.linalg</span>
 <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy.linalg</span> <span style="color: #008000; font-weight: bold">import</span> solve
@@ -1249,7 +1249,7 @@ where \( \gamma=2 \) for the central difference scheme and 1 for the forward dif
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span>central_difference<span style="color: #666666">=</span><span style="color: #008000; font-weight: bold">False</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>central_difference<span style="color: #666666">=</span><span style="color: #008000; font-weight: bold">False</span>
 <span style="color: #408080; font-style: italic"># set simulation parameters</span>
 h<span style="color: #666666">=0.25</span>
 L<span style="color: #666666">=1.0</span>
@@ -1390,7 +1390,7 @@ Extend the code you developed in the last exercises to also be able to use spars
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">scipy.sparse.linalg</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">scipy.sparse.linalg</span>
 
 <span style="color: #408080; font-style: italic">#right hand side</span>
 <span style="color: #408080; font-style: italic"># rhs vector</span>
@@ -1437,7 +1437,7 @@ where \( C(z,t) \) is the concentration of \co\ as a function of depth (\( z \))
 <center> <!-- figure label: --> <div id="fig:lin:co2_diff"></div> <!-- FIGURE -->
 <hr class="figure">
 <center><p class="caption">Figure 5:  Discretization for diffusion of \co\ into an aquifer, including boundary conditions.  <!-- caption label: fig:lin:co2_diff --> </p></center>
-<p><img src="fig-lin/co2_diff.png" align="bottom" width=400></p>
+<p><img src="fig-lin/co2_diff.png" align="bottom" width=800></p>
 </center>
 
 <p>

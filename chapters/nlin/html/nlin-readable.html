@@ -1,11 +1,11 @@
 <!--
 Automatically generated HTML file from DocOnce source
-(https://github.com/doconce/doconce/)
+(https://github.com/hplgit/doconce/)
 -->
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="DocOnce: https://github.com/doconce/doconce/" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="Solving non linear systems">
 <meta name="keywords" content="fixed-point iteration,rate of convergence,bisection method,rate of convergence,Newtons method,Newtons method, rate of convergence,secant method,secant method, rate of convergence,Newton Rapson method,gradient descent">
@@ -192,7 +192,7 @@ $$
 <br>
 University of Stavanger
 <p>
-<center><h4>Oct 22, 2021</h4></center> <!-- date -->
+<center><h4>Feb 8, 2022</h4></center> <!-- date -->
 <br>
 <p>
 </div> <!-- end jumbotron -->
@@ -268,7 +268,7 @@ In figure <a href="#fig:nlin:fx">1</a>, the solution is shown graphically. Note 
 <center> <!-- figure label: --> <div id="fig:nlin:fx"></div> <!-- FIGURE -->
 <hr class="figure">
 <center><p class="caption">Figure 1:  Notice that the root is located at the same place (\( x=0.703467417 \))  <!-- caption label: fig:nlin:fx --> </p></center>
-<p><img src="fig-nlin/fx.png" align="bottom" width=400></p>
+<p><img src="fig-nlin/fx.png" align="bottom" width=800></p>
 </center>
 
 <p>
@@ -332,14 +332,14 @@ $$
 <center> <!-- figure label: --> <div id="fig:nlin:vdw"></div> <!-- FIGURE -->
 <hr class="figure">
 <center><p class="caption">Figure 2:  van der Waal isotherms.  <!-- caption label: fig:nlin:vdw --> </p></center>
-<p><img src="fig-nlin/vdw.png" align="bottom" width=400></p>
+<p><img src="fig-nlin/vdw.png" align="bottom" width=800></p>
 </center>
 
 <p>
 In figure <a href="#fig:nlin:vdw">2</a>, we have plotted the isotherms. Note that if \( \hat{T} < 1 \) (\( T < T_c \)), there might be more than one solution for the molar volume. This is clearly unphysical and additional constraints are needed. For the curve \( \hat{T}=0.9 \), the dashed lined shows that for \( \hat{P}=0.7 \), there are three solutions. This is a typical behavior of the cubic EOS, and physically it corresponds to the saturated case, where the vapor and liquid phase co-exist. The left root is the liquid state and the right root is the vapor state. The root in the middle represents a meta stable state.
 
 <p>
-<div class="alert alert-block alert-success alert-text-normal"><b>It never hurts to look at your function</b>
+<div class="alert alert-block alert-success alert-text-normal"><b>It never hurts to look at your function.</b>
 The example in figure <a href="#fig:nlin:vdw">2</a> illustrates some important points. Solving a nonlinear problem might be very easy in part of the parameter space (e.g. when \( T>T_c \) there are only one solution), but extremely hard in other part of the parameter space (e.g. when \( T < T_c \), where there are multiple solutions). However, much of the trick to find a solution is to choose a good starting point. When there are multiple solutions we need to start close to the physical solution.
 </div>
 
@@ -412,7 +412,7 @@ These functions are illustrated in figure <a href="#fig:nlin:fg">3</a>, by visua
 <center> <!-- figure label: --> <div id="fig:nlin:fg"></div> <!-- FIGURE -->
 <hr class="figure">
 <center><p class="caption">Figure 3:  Two examples of iterative functions, that will give the same solution.  <!-- caption label: fig:nlin:fg --> </p></center>
-<p><img src="fig-nlin/f_g_comb.png" align="bottom" width=400></p>
+<p><img src="fig-nlin/f_g_comb.png" align="bottom" width=800></p>
 </center>
 
 <p>
@@ -440,7 +440,7 @@ Below is a straight forward (vanilla) implementation:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">iterative</span>(x,g,prec<span style="color: #666666">=1e-8</span>, MAXIT<span style="color: #666666">=1000</span>):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">iterative</span>(x,g,prec<span style="color: #666666">=1e-8</span>, MAXIT<span style="color: #666666">=1000</span>):
     <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;Approximate solution of x=g(x) by fixed point iterations.</span>
 <span style="color: #BA2121; font-style: italic">    x : starting point for iterations </span>
 <span style="color: #BA2121; font-style: italic">    eps : desired precision</span>
@@ -510,7 +510,7 @@ The right hand side will play the same role as \( g(x) \) above, where \( x \) n
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">dvdwEOS</span>(nu,t,p):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">dvdwEOS</span>(nu,t,p):
     <span style="color: #008000; font-weight: bold">return</span> (<span style="color: #666666">1+8*</span>t<span style="color: #666666">/</span>(p<span style="color: #666666">+3/</span>nu<span style="color: #666666">**2</span>))<span style="color: #666666">/3</span>
 </pre></div>
 <p>
@@ -518,7 +518,7 @@ Note that this function requires the values of \( \hat{P} \) and \( \hat{T} \), 
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">iterative</span>(x,g,<span style="color: #666666">*</span>args,prec<span style="color: #666666">=1e-8</span>):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">iterative</span>(x,g,<span style="color: #666666">*</span>args,prec<span style="color: #666666">=1e-8</span>):
     MAX_ITER<span style="color: #666666">=1000</span>
     eps <span style="color: #666666">=</span> <span style="color: #666666">1</span>
     n<span style="color: #666666">=0</span>
@@ -535,7 +535,7 @@ We can find the root by calling the function as:
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span>iterative(<span style="color: #666666">1</span>,dvdwEOS,<span style="color: #666666">1.2</span>,<span style="color: #666666">1.5</span>)
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>iterative(<span style="color: #666666">1</span>,dvdwEOS,<span style="color: #666666">1.2</span>,<span style="color: #666666">1.5</span>)
 </pre></div>
 <p>
 The program returns the correct solution after 71 iterations.
@@ -699,7 +699,7 @@ The idea behind bisection is that the root is bracketed, i.e. that there exists 
 <center> <!-- figure label: --> <div id="fig:nlin:bisection"></div> <!-- FIGURE -->
 <hr class="figure">
 <center><p class="caption">Figure 4:  Illustration of the bisection method for the van der Waal EOS.  <!-- caption label: fig:nlin:bisection --> </p></center>
-<p><img src="fig-nlin/bisection.png" align="bottom" width=400></p>
+<p><img src="fig-nlin/bisection.png" align="bottom" width=800></p>
 </center>
 
 <p>
@@ -716,7 +716,7 @@ Below is an implementation of the bisection method.
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">bisection</span>(f,a,b,prec<span style="color: #666666">=1e-8</span>,MAXIT<span style="color: #666666">=100</span>):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">bisection</span>(f,a,b,prec<span style="color: #666666">=1e-8</span>,MAXIT<span style="color: #666666">=100</span>):
     <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;Approximate solution of f(x)=0 on interval [a,b] by bisection.</span>
 
 <span style="color: #BA2121; font-style: italic">    f   : f(x)=0.</span>
@@ -760,7 +760,7 @@ Below is an implementation of the bisection method.
     <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">None</span>
 </pre></div>
 <p>
-<div class="alert alert-block alert-success alert-text-normal"><b>Warnings</b>
+<div class="alert alert-block alert-success alert-text-normal"><b>Warnings.</b>
 Note that the implementation of the bisection algorithm is only a few lines of code, and most of the code is to give warnings to the user. In this case it is important to do additional checking, and give the user warnings. If $f(c)$=0, then we must stop and return the exact solution. If we only test if \( f(a)\cdot f(c) \) is greater or lower than zero the algorithm would fail.
 </div>
 
@@ -791,7 +791,7 @@ Newtons method is one of the most used methods. If it converges, it converges qu
 <center> <!-- figure label: --> <div id="fig:nlin:newton"></div> <!-- FIGURE -->
 <hr class="figure">
 <center><p class="caption">Figure 5:  Illustration of Newtons method for the van der Waals EOS. <!-- caption label: fig:nlin:newton --> </p></center>
-<p><img src="fig-nlin/newton_comb.png" align="bottom" width=400></p>
+<p><img src="fig-nlin/newton_comb.png" align="bottom" width=800></p>
 </center>
 
 <p>
@@ -809,7 +809,7 @@ Note that the derivative of \( f(x) \) enters in equation <a href="#mjx-eqn-26">
 <center> <!-- figure label: --> <div id="fig:nlin:newton2"></div> <!-- FIGURE -->
 <hr class="figure">
 <center><p class="caption">Figure 6:  Illustration of some of the possible challenges with Newtons method. Note that if the derivative is zero somewhere in the search interval, Newtons method will fail.  <!-- caption label: fig:nlin:newton2 --> </p></center>
-<p><img src="fig-nlin/newton2.png" align="bottom" width=400></p>
+<p><img src="fig-nlin/newton2.png" align="bottom" width=800></p>
 </center>
 
 <p>
@@ -817,7 +817,7 @@ An implementation is shown below.
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">newton</span>(f,x, prec<span style="color: #666666">=1e-8</span>,MAXIT<span style="color: #666666">=500</span>):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">newton</span>(f,x, prec<span style="color: #666666">=1e-8</span>,MAXIT<span style="color: #666666">=500</span>):
     <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;Approximate solution of f(x)=0 by Newtons method.</span>
 <span style="color: #BA2121; font-style: italic">    The derivative of the function is calculated numerically</span>
 <span style="color: #BA2121; font-style: italic">    f   : f(x)=0.</span>
@@ -915,11 +915,11 @@ The root is located at \( x^*=0.70346742 \).
 <center> <!-- figure label: --> <div id="fig:nlin:newton_bad"></div> <!-- FIGURE -->
 <hr class="figure">
 <center><p class="caption">Figure 7:  Newtons method performs poorly far away due to the shape of the function close to \( x=-100 \), bisection performs much better while the fixed point method fails.  <!-- caption label: fig:nlin:newton_bad --> </p></center>
-<p><img src="fig-nlin/newton_bad.png" align="bottom" width=400></p>
+<p><img src="fig-nlin/newton_bad.png" align="bottom" width=800></p>
 </center>
 
 <p>
-<div class="alert alert-block alert-success alert-text-normal"><b>A good starting point is crucial</b>
+<div class="alert alert-block alert-success alert-text-normal"><b>A good starting point is crucial.</b>
 Note that it is not given which method is best, but if we are ''close'' to the root Newtons method is usually superior. If we are far away, other methods might work better. In many cases one uses a more stable method far away from the root, and then ''polish up'' the root by a couple of Newton iterations <a href="#press2001">[1]</a>. See also Brents method which combines bisection and linear interpolation (secant method) <a href="#press2001">[1]</a>.
 </div>
 
@@ -959,7 +959,7 @@ For a graphical illustration see figure <a href="#fig:nlin:secant">8</a>
 <center> <!-- figure label: --> <div id="fig:nlin:secant"></div> <!-- FIGURE -->
 <hr class="figure">
 <center><p class="caption">Figure 8:  A graphical illustration of the secant method. Note that the starting points \( x_0 \) and \( x_1 \) do not need to be close. The next point is where the (secant) line crosses the \( x \)-axis.  <!-- caption label: fig:nlin:secant --> </p></center>
-<p><img src="fig-nlin/secant.png" align="bottom" width=400></p>
+<p><img src="fig-nlin/secant.png" align="bottom" width=800></p>
 </center>
 
 <h2 id="___sec16" class="anchor">Rate of convergence </h2>
@@ -1068,7 +1068,7 @@ This method used is to minimize functions (does not work for root finding). In m
 <center> <!-- figure label: --> <div id="fig:nlin:grad"></div> <!-- FIGURE -->
 <hr class="figure">
 <center><p class="caption">Figure 9:  A very simple example of the gradient descent method.  <!-- caption label: fig:nlin:grad --> </p></center>
-<p><img src="fig-nlin/steepest_descent.png" align="bottom" width=400></p>
+<p><img src="fig-nlin/steepest_descent.png" align="bottom" width=800></p>
 </center>
 
 <p>
@@ -1145,7 +1145,7 @@ Below is an implementation of the gradient descent method with a constant learni
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">gradient_descent</span>(f,x,df, g<span style="color: #666666">=.001</span>, prec<span style="color: #666666">=1e-8</span>,MAXIT<span style="color: #666666">=10</span>):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">gradient_descent</span>(f,x,df, g<span style="color: #666666">=.001</span>, prec<span style="color: #666666">=1e-8</span>,MAXIT<span style="color: #666666">=10</span>):
     <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;Minimize f(x) by gradient descent.</span>
 <span style="color: #BA2121; font-style: italic">    f   : min(f(x))</span>
 <span style="color: #BA2121; font-style: italic">    x   : starting point </span>
@@ -1175,7 +1175,7 @@ The linear regression is implemented as below
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span>x_obs_ <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([<span style="color: #666666">0</span>, <span style="color: #666666">1</span>, <span style="color: #666666">2</span>, <span style="color: #666666">3</span>, <span style="color: #666666">4</span>, <span style="color: #666666">5</span>, <span style="color: #666666">6</span>, <span style="color: #666666">7</span>, <span style="color: #666666">8</span>, <span style="color: #666666">9</span>]) 
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>x_obs_ <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([<span style="color: #666666">0</span>, <span style="color: #666666">1</span>, <span style="color: #666666">2</span>, <span style="color: #666666">3</span>, <span style="color: #666666">4</span>, <span style="color: #666666">5</span>, <span style="color: #666666">6</span>, <span style="color: #666666">7</span>, <span style="color: #666666">8</span>, <span style="color: #666666">9</span>]) 
 y_obs_ <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([<span style="color: #666666">1</span>, <span style="color: #666666">3</span>, <span style="color: #666666">2</span>, <span style="color: #666666">5</span>, <span style="color: #666666">7</span>, <span style="color: #666666">8</span>, <span style="color: #666666">8</span>, <span style="color: #666666">9</span>, <span style="color: #666666">10</span>, <span style="color: #666666">12</span>]) 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">plot_regression_line</span>(b,x<span style="color: #666666">=</span>x_obs_, y<span style="color: #666666">=</span>y_obs_): 
     <span style="color: #008000; font-weight: bold">global</span> N_
@@ -1305,7 +1305,7 @@ The first four iterations are shown in figure <a href="#fig:nlin:grsc">10</a>. I
 <center> <!-- figure label: --> <div id="fig:nlin:grsc"></div> <!-- FIGURE -->
 <hr class="figure">
 <center><p class="caption">Figure 10:  First four iterations of the gradient descent solution of linear regression.  <!-- caption label: fig:nlin:grsc --> </p></center>
-<p><img src="fig-nlin/stdec_comb.png" align="bottom" width=400></p>
+<p><img src="fig-nlin/stdec_comb.png" align="bottom" width=800></p>
 </center>
 
 <p>

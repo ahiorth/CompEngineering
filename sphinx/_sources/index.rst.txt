@@ -1,3 +1,4 @@
+
 .. Master file automatically created by doconce sphinx_dir
 
 
@@ -18,6 +19,9 @@ Contents:
    ._book006
    ._book007
    ._book008
+   ._book009
+
+
 Index
 =====
 

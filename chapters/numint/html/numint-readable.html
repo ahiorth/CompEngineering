@@ -1,11 +1,11 @@
 <!--
 Automatically generated HTML file from DocOnce source
-(https://github.com/doconce/doconce/)
+(https://github.com/hplgit/doconce/)
 -->
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="DocOnce: https://github.com/doconce/doconce/" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="Numerical Integration">
 <meta name="keywords" content="midpoint method,trapezoidal method,numerical integrals, error,Richardson extrapolation,Romberg integration,Gaussian quadrature,Gaussian quadrature, error term,numerical integral, infinite">
@@ -165,7 +165,7 @@ MathJax.Hub.Config({
 <br>
 University of Stavanger
 <p>
-<center><h4>Oct 22, 2021</h4></center> <!-- date -->
+<center><h4>Feb 8, 2022</h4></center> <!-- date -->
 <br>
 <p>
 </div> <!-- end jumbotron -->
@@ -241,7 +241,7 @@ Below is a Python code, where this algorithm is implemented for \( \int_0^\pi\si
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
 <span style="color: #408080; font-style: italic"># Function to be integrated</span>
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
     <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>sin(x)
@@ -262,12 +262,12 @@ Area <span style="color: #666666">=</span> midpoint(f,a,b,N)
 <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Error= &#39;</span>, (<span style="color: #666666">2-</span>Area)) <span style="color: #408080; font-style: italic"># Analytical result is 2</span>
 </pre></div>
 <p>
-<div class="alert alert-block alert-success alert-text-normal"><b>Notice</b>
+<div class="alert alert-block alert-success alert-text-normal"><b>Notice.</b>
 In the implementation above, we have taken advantage of Numpys ability to pass a vector to a function. This greatly enhances the speed and makes clean, readable code. If you were coding in a lower level programming language like Fortran, C or C++, you would probably implement the loop like (in Python syntax):
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>,N): <span style="color: #408080; font-style: italic"># loop over k=0,1,..,N-1</span>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>,N): <span style="color: #408080; font-style: italic"># loop over k=0,1,..,N-1</span>
     val <span style="color: #666666">=</span> lower_limit<span style="color: #666666">+</span>(k<span style="color: #666666">+0.5</span>)<span style="color: #666666">*</span>h <span style="color: #408080; font-style: italic"># midpoint value</span>
     area <span style="color: #666666">+=</span> func(val)
 <span style="color: #008000; font-weight: bold">return</span> area<span style="color: #666666">*</span>h
@@ -314,7 +314,7 @@ Below is a python implementation:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">trapezoidal</span>(f,a,b,N):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">trapezoidal</span>(f,a,b,N):
     <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
 <span style="color: #BA2121; font-style: italic">    f : function to be integrated on the domain [a,b]</span>
 <span style="color: #BA2121; font-style: italic">    N : number of integration points</span>
@@ -525,7 +525,7 @@ Below is a Python implementation:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">int_adaptive_trapez2</span>(lower_limit, upper_limit,func,tol):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">int_adaptive_trapez2</span>(lower_limit, upper_limit,func,tol):
     <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
 <span style="color: #BA2121; font-style: italic">    adaptive quadrature, integrate a function from lower_limit</span>
 <span style="color: #BA2121; font-style: italic">    to upper_limit within tol*(upper_limit-lower_limit)</span>
@@ -636,7 +636,7 @@ The algorithm is illustrated in figure <a href="#fig:numint:romberg">3</a>.
 <center> <!-- figure label: --> <div id="fig:numint:romberg"></div> <!-- FIGURE -->
 <hr class="figure">
 <center><p class="caption">Figure 3:  Illustration of the Romberg algorithm. Note that for each new evaluation of the integral \( R_{i,0} \), all the correction terms \( R_{i,m} \) (for \( m>0 \)) must be evaluated again.  <!-- caption label: fig:numint:romberg --> </p></center>
-<p><img src="fig-numint/romberg.png" align="bottom" width=400></p>
+<p><img src="fig-numint/romberg.png" align="bottom" width=800></p>
 </center>
 
 <p>
@@ -647,7 +647,7 @@ Below is a Python implementation:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">int_romberg</span>(func,a, b,tol,show<span style="color: #666666">=</span><span style="color: #008000; font-weight: bold">False</span>):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">int_romberg</span>(func,a, b,tol,show<span style="color: #666666">=</span><span style="color: #008000; font-weight: bold">False</span>):
     <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot; calculates the area of func on the domain [a,b]</span>
 <span style="color: #BA2121; font-style: italic">        for the given tol, if show=True the triangular</span>
 <span style="color: #BA2121; font-style: italic">        array of intermediate results are printed &quot;&quot;&quot;</span>
@@ -736,7 +736,7 @@ Note the use of the list <code>S</code>, we remove the interval \( [a,b] \) from
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">simpson_step</span>(a, b,func):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">simpson_step</span>(a, b,func):
     m<span style="color: #666666">=0.5*</span>(a<span style="color: #666666">+</span>b)
     <span style="color: #008000; font-weight: bold">return</span> (b<span style="color: #666666">-</span>a)<span style="color: #666666">/6*</span>(func(a)<span style="color: #666666">+</span>func(b)<span style="color: #666666">+4*</span>func(m))
 
@@ -792,7 +792,7 @@ The factor in front comes from the fact that \( dt=(b-a)dx/2 \), thus we can dev
 and then do the transformation back using: \( t=(b-a)x/2+(b+a)/2 \).
 
 <p>
-<div class="alert alert-block alert-success alert-text-normal"><b>Notice</b>
+<div class="alert alert-block alert-success alert-text-normal"><b>Notice.</b>
 The idea we will explore is as follows:
 If we can approximate the function to be integrated on the domain \( [-1,1] \) (or on \( [a,b] \)) as a 
 polynomial of as <em>large a degree as possible</em>, then the numerical integral of this polynomial will be very close to the integral of the 
@@ -880,7 +880,7 @@ $$
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">int_gaussquad2</span>(func, lower_limit, upper_limit):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">int_gaussquad2</span>(func, lower_limit, upper_limit):
     x   <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([<span style="color: #666666">-1/</span>np<span style="color: #666666">.</span>sqrt(<span style="color: #666666">3.</span>),<span style="color: #666666">1/</span>np<span style="color: #666666">.</span>sqrt(<span style="color: #666666">3</span>)])
     w   <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([<span style="color: #666666">1</span>, <span style="color: #666666">1</span>])
     xp  <span style="color: #666666">=</span> <span style="color: #666666">0.5*</span>(upper_limit<span style="color: #666666">-</span>lower_limit)<span style="color: #666666">*</span>x
@@ -913,7 +913,7 @@ the solution to these equations are \( \omega_{0,1,2}=5/9, 8/9, 5/9 \) and \( x_
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%; margin: 0;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">int_gaussquad3</span>(lower_limit, upper_limit,func):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">int_gaussquad3</span>(lower_limit, upper_limit,func):
     x  <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([<span style="color: #666666">-</span>np<span style="color: #666666">.</span>sqrt(<span style="color: #666666">3./5.</span>),<span style="color: #666666">0.</span>,np<span style="color: #666666">.</span>sqrt(<span style="color: #666666">3./5.</span>)])
     w  <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([<span style="color: #666666">5./9.</span>, <span style="color: #666666">8./9.</span>, <span style="color: #666666">5./9.</span>])
     xp <span style="color: #666666">=</span> <span style="color: #666666">0.5*</span>(upper_limit<span style="color: #666666">-</span>lower_limit)<span style="color: #666666">*</span>x
@@ -1070,6 +1070,8 @@ I(a,b)&=\sum_{k=0}^{N-1}I(x_k,x_k+h)\nonumber\\
 $$
 
 note that in the last equation we have changed the step size \( h=2h^\prime \).
+
+<p>
 </div></p>
 </div>
 </p>
