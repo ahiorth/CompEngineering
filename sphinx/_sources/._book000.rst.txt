@@ -14,19 +14,11 @@ Modeling and Computational Engineering
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 :Authors: Aksel Hiorth, the National IOR Centre & Institute for Energy Resources, University of Stavanger
-:Date: Feb 8, 2022
+:Date: Feb 10, 2022
 
 *Summary.* (Work in Progress) The purpose of this document is to explain how computers solve mathematical models.
 Many of the most common numerical methods is presented, we show how to implement them in Python, and discuss the limitations.
 The mathematical formalism is kept to a minimum. All the material is available at
 `github <https://github.com/ahiorth/CompEngineering>`__. For each of the chapter there is a Jupyter `notebook <https://github.com/ahiorth/CompEngineering/tree/master/pub/chapters>`__. This makes it possible to run all the codes in this document.
 We strongly recommend to install Python from `Anaconda <https://www.anaconda.com/>`__. All documents have been prepared using `doconce <https://github.com/ahiorth/CompEngineering/tree/master/pub/chapters>`__.
-
-
-.. admonition:: Code Examples in this Book
-
-   The code examples in this book are not optimized for speed. This is book is not meant as an introduction to good Python practice, we use Python to implement the algorithms. The choice has been made to focus on clarity rather than speed, once you get familiar with Python you can easily optimize the code examples presented here.
-
-
-
 

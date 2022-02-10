@@ -440,7 +440,7 @@ In this case ``print(a)`` *before* calling ``f(x)`` would give the answer ``2`` 
 
 .. admonition:: Use of global variables
 
-   Sometimes global variables can be very useful, and help you to make the code simpler. But, make sure to use a *naming convention*  for them, e.g. end all the global variables with an underscore. In the example above we would write ``global a_``. A person reading the code would then know that all variables ending with an underscore are global, and can be altered by many functions.
+   Sometimes global variables can be very useful, and help you to make the code simpler. But, make sure to use a *naming convention*  for them, e.g. end all the global variables with an underscore. In the example above we would write ``global a_``. A person reading the code would then know that all variables ending with an underscore are global, and can potentially be modified by many functions.
 
 
 
