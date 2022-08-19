@@ -1,34 +1,31 @@
 <!--
-Automatically generated HTML file from DocOnce source
-(https://github.com/hplgit/doconce/)
+HTML file automatically generated from DocOnce source
+(https://github.com/doconce/doconce/)
+doconce format html book.do.txt CHAPTER=chapter BOOK=book APPENDIX=appendix --exercise_numbering=chapter --html_style=bootswatch_journal --html_code_style=inherit --html_output=book
 -->
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="generator" content="DocOnce: https://github.com/doconce/doconce/" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="Modeling and Computational Engineering">
 <meta name="keywords" content="types,basic types,lists,list comprehension,numerical error,Taylor polynomial,truncation error,Taylor polynomial, error term,Maclaurin series,forward difference,backward difference,central difference,central difference,roundoff erros,machine precision,IEEE 754-1985 standard,roundoff errors,continuity equation,Gauss-Jordan elimination,pivoting,LU decomposition,Jacobi method,Gauss-Seidel method,linear regression,sparse matrix,Thomas algorithm,fixed-point iteration,rate of convergence,bisection method,rate of convergence,Newtons method,Newtons method, rate of convergence,secant method,secant method, rate of convergence,Newton Rapson method,gradient descent,midpoint method,trapezoidal method,numerical integrals, error,Richardson extrapolation,Romberg integration,Gaussian quadrature,Gaussian quadrature, error term,numerical integral, infinite,continuous stirred tank reactor (CSTR),Eulers method,Eulers method, error analysis,Eulers method, adaptive step size,Runge-Kutta,Runge-Kutta, adaptive step size,adaptive step size,stiff equations,implicit method,Monte Carlo integration,random number generators,Mersenne Twister,encryption,Monte Carlo Integration, error,binomial distribution,mean,variance,Monte Carlo integration, mean value,recursive functions,central limit theorem,birthday paradox">
-
 <title>Modeling and Computational Engineering</title>
-
 <!-- Bootstrap style: bootswatch_journal -->
+<!-- doconce format html book.do.txt CHAPTER=chapter BOOK=book APPENDIX=appendix --exercise_numbering=chapter --html_style=bootswatch_journal --html_code_style=inherit --html_output=book -->
 <link href="https://netdna.bootstrapcdn.com/bootswatch/3.1.1/journal/bootstrap.min.css" rel="stylesheet">
 <!-- not necessary
 <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 -->
-
 <style type="text/css">
 /* Let inline verbatim have the same color as the surroundings */
 code { color: inherit; background-color: transparent; }
-
 /* Add scrollbar to dropdown menus in bootstrap navigation bar */
 .dropdown-menu {
    height: auto;
    max-height: 400px;
    overflow-x: hidden;
 }
-
 /* Adds an invisible element before each target to offset for the navigation
    bar */
 .anchor::before {
@@ -38,8 +35,6 @@ code { color: inherit; background-color: transparent; }
   margin:-60px 0 0; /* negative fixed header height */
 }
 </style>
-
-
 </head>
 
 <!-- tocinfo
@@ -49,102 +44,169 @@ code { color: inherit; background-color: transparent; }
                'table_of_contents',
                'table_of_contents'),
               ('Preface', 0, 'ch:preface', 'ch:preface'),
-              ('Writing Python code', 0, 'ch:pyt', 'ch:pyt'),
-              ('Personal Guidelines', 1, None, '___sec2'),
-              ('Code editor', 2, None, '___sec3'),
-              ('Types in Python', 1, None, '___sec4'),
-              ('Basic types', 2, None, '___sec5'),
-              ('Lists', 2, None, '___sec6'),
-              ('List arithmetic', 3, None, '___sec7'),
-              ('List slicing', 3, None, '___sec8'),
-              ('Numpy arrays', 2, None, '___sec9'),
-              ('Array slicing', 3, None, '___sec10'),
-              ('Looping', 1, None, '___sec11'),
-              ('For loops', 2, None, '___sec12'),
-              ('While loops', 2, None, '___sec13'),
-              ('Functions in Python', 2, None, '___sec14'),
-              ('Defining a mathematical function', 2, None, '___sec15'),
-              ('Scope of variables', 2, None, '___sec16'),
+              ('Introduction to Python', 0, 'ch:pyt', 'ch:pyt'),
+              ('Personal Guidelines', 1, None, 'personal-guidelines'),
+              ('Code editor', 2, None, 'code-editor'),
+              ('Types in Python', 1, None, 'types-in-python'),
+              ('Basic types', 2, None, 'basic-types'),
+              ('Lists', 2, None, 'lists'),
+              ('List arithmetic', 3, None, 'list-arithmetic'),
+              ('List slicing', 3, None, 'list-slicing'),
+              ('Numpy arrays', 2, None, 'numpy-arrays'),
+              ('Array slicing', 3, None, 'array-slicing'),
+              ('Dictionaries', 2, None, 'dictionaries'),
+              ('Looping', 1, None, 'looping'),
+              ('For loops', 2, None, 'for-loops'),
+              ('While loops', 2, None, 'while-loops'),
+              ('Functions in Python', 2, None, 'functions-in-python'),
+              ('Defining a mathematical function',
+               2,
+               None,
+               'defining-a-mathematical-function'),
+              ('Scope of variables', 2, None, 'scope-of-variables'),
+              ('Passing arrays and lists to functions',
+               2,
+               None,
+               'passing-arrays-and-lists-to-functions'),
+              ('Call by value or call by reference',
+               2,
+               None,
+               'call-by-value-or-call-by-reference'),
+              ('Floats and integers', 3, None, 'floats-and-integers'),
+              ('Lists and arrays', 3, None, 'lists-and-arrays'),
+              ('Mutable and immutable objects',
+               2,
+               None,
+               'mutable-and-immutable-objects'),
+              ('Introduction to Pandas', 0, 'ch:pan', 'ch:pan'),
+              ('What is Pandas?', 1, None, 'what-is-pandas'),
+              ('Creating a data frame', 1, None, 'creating-a-data-frame'),
+              ('From empty DataFrame', 2, None, 'from-empty-dataframe'),
+              ('From file', 2, None, 'from-file'),
+              ('Create DataFrame from dictionary',
+               2,
+               None,
+               'create-dataframe-from-dictionary'),
+              ('Manipulating DataFrames', 2, None, 'manipulating-dataframes'),
+              ('Selecting columns', 2, None, 'selecting-columns'),
+              ('Selecting rows', 2, None, 'selecting-rows'),
+              ('Performing mathematical operations on DataFrames',
+               2,
+               None,
+               'performing-mathematical-operations-on-dataframes'),
+              ('Example: mathematical operations on DataFrames',
+               3,
+               None,
+               'example-mathematical-operations-on-dataframes'),
+              ('Solution', 3, None, 'solution'),
+              ('Joining two DataFrames', 2, None, 'joining-two-dataframes'),
+              ('Appending DataFrames', 3, None, 'appending-dataframes'),
+              ('Merging DataFrames', 3, None, 'merging-dataframes'),
+              ('Grouping and summing', 2, None, 'grouping-and-summing'),
+              ('Simple statistics in Pandas',
+               2,
+               None,
+               'simple-statistics-in-pandas'),
               ('Finite differences', 0, 'ch:taylor', 'ch:taylor'),
-              ('Numerical Errors', 1, None, '___sec18'),
-              ('Taylor Polynomial Approximation', 1, None, '___sec19'),
-              ('Evaluation of polynomials', 2, None, '___sec20'),
+              ('Numerical Errors', 1, None, 'numerical-errors'),
+              ('Taylor Polynomial Approximation',
+               1,
+               None,
+               'taylor-polynomial-approximation'),
               ('Calculating Numerical Derivatives of Functions',
                1,
                None,
-               '___sec21'),
-              ('Higher order derivative', 3, None, '___sec22'),
-              ('Roundoff Errors', 2, None, '___sec23'),
-              ('Binary numbers', 3, None, '___sec24'),
+               'calculating-numerical-derivatives-of-functions'),
+              ('Higher order derivative', 3, None, 'higher-order-derivative'),
+              ('Roundoff Errors', 2, None, 'roundoff-errors'),
+              ('Binary numbers', 3, None, 'binary-numbers'),
               ('Floating point numbers and the IEEE 754-1985 standard',
                3,
                None,
-               '___sec25'),
+               'floating-point-numbers-and-the-ieee-754-1985-standard'),
               ('Roundoff error and truncation error in numerical derivatives',
                3,
                None,
-               '___sec26'),
+               'roundoff-error-and-truncation-error-in-numerical-derivatives'),
               ('Solving linear systems', 0, 'ch:lin', 'ch:lin'),
-              ('The Continuity Equation', 1, None, '___sec28'),
+              ('The Continuity Equation', 1, None, 'the-continuity-equation'),
               ('Continuity Equation as a linear problem (in progress)',
                1,
                None,
-               '___sec29'),
-              ('Solving linear equations', 1, None, '___sec30'),
-              ('Gauss-Jordan elimination', 2, None, '___sec31'),
-              ('Pivoting', 2, None, '___sec32'),
-              ('LU decomposition', 2, None, '___sec33'),
-              ('Iterative methods', 1, None, '___sec34'),
-              ('Iterative improvement', 2, None, '___sec35'),
-              ('The Jacobi method', 2, None, '___sec36'),
-              ('The Gauss-Seidel method', 2, None, '___sec37'),
-              ('Example: Linear regression', 1, None, '___sec38'),
+               'continuity-equation-as-a-linear-problem-in-progress'),
+              ('Solving linear equations', 1, None, 'solving-linear-equations'),
+              ('Gauss-Jordan elimination', 2, None, 'gauss-jordan-elimination'),
+              ('Pivoting', 2, None, 'pivoting'),
+              ('LU decomposition', 2, None, 'lu-decomposition'),
+              ('Iterative methods', 1, None, 'iterative-methods'),
+              ('Iterative improvement', 2, None, 'iterative-improvement'),
+              ('The Jacobi method', 2, None, 'the-jacobi-method'),
+              ('The Gauss-Seidel method', 2, None, 'the-gauss-seidel-method'),
+              ('Example: Linear regression',
+               1,
+               None,
+               'example-linear-regression'),
               ('Solving least square, using algebraic equations',
                2,
                None,
-               '___sec39'),
-              ('Least square as a linear algebra problem', 2, None, '___sec40'),
-              ('Working with matrices on component form', 2, None, '___sec41'),
-              ('Sparse matrices and Thomas algorithm', 1, None, '___sec42'),
+               'solving-least-square-using-algebraic-equations'),
+              ('Least square as a linear algebra problem',
+               2,
+               None,
+               'least-square-as-a-linear-algebra-problem'),
+              ('Working with matrices on component form',
+               2,
+               None,
+               'working-with-matrices-on-component-form'),
+              ('Sparse matrices and Thomas algorithm',
+               1,
+               None,
+               'sparse-matrices-and-thomas-algorithm'),
               ('Example: Solving the heat equation using linear algebra',
                1,
                None,
-               '___sec43'),
-              ('Exercise 3.1: Conservation Equation or the Continuity Equation',
+               'example-solving-the-heat-equation-using-linear-algebra'),
+              ('Exercise 4.1: Conservation Equation or the Continuity Equation',
                2,
                None,
-               '___sec44'),
-              ('Heat equation for solids', 3, None, '___sec45'),
-              ('Exercise 3.2: Curing of Concrete and Matrix Formulation',
+               'exercise-4-1-conservation-equation-or-the-continuity-equation'),
+              ('Heat equation for solids', 3, None, 'heat-equation-for-solids'),
+              ('Exercise 4.2: Curing of Concrete and Matrix Formulation',
                2,
                None,
-               '___sec46'),
-              ('Exercise 3.3: Solve the full heat equation',
+               'exercise-4-2-curing-of-concrete-and-matrix-formulation'),
+              ('Exercise 4.3: Solve the full heat equation',
                2,
                None,
-               '___sec47'),
-              ('Exercise 3.4: Using sparse matrices in python',
+               'exercise-4-3-solve-the-full-heat-equation'),
+              ('Exercise 4.4: Using sparse matrices in python',
                2,
                None,
-               '___sec48'),
-              ('CO$_2$ diffusion into aquifers', 1, None, '___sec49'),
+               'exercise-4-4-using-sparse-matrices-in-python'),
+              ('CO$_2$ diffusion into aquifers',
+               1,
+               None,
+               'co-_2-diffusion-into-aquifers'),
               ('Solving nonlinear equations', 0, 'ch:nlin', 'ch:nlin'),
-              ('Nonlinear equations', 1, None, '___sec51'),
-              ('Example: van der Waals equation of state', 1, None, '___sec52'),
-              ('Exercise 4.1: van der Waal EOS and CO$_2$',
+              ('Nonlinear equations', 1, None, 'nonlinear-equations'),
+              ('Example: van der Waals equation of state',
+               1,
+               None,
+               'example-van-der-waals-equation-of-state'),
+              ('Exercise 5.1: van der Waal EOS and CO$_2$',
                2,
                None,
-               '___sec53'),
-              ('Fixed-point iteration', 1, None, '___sec54'),
-              ('Exercise 4.2: Implement the fixed point iteration',
+               'exercise-5-1-van-der-waal-eos-and-co-_2'),
+              ('Fixed-point iteration', 1, None, 'fixed-point-iteration'),
+              ('Exercise 5.2: Implement the fixed point iteration',
                2,
                None,
-               '___sec55'),
-              ('Exercise 4.3: Finding the molar volume from the van der Waal '
+               'exercise-5-2-implement-the-fixed-point-iteration'),
+              ('Exercise 5.3: Finding the molar volume from the van der Waal '
                'EOS by fixed point iteration',
                2,
                None,
-               '___sec56'),
+               'exercise-5-3-finding-the-molar-volume-from-the-van-der-waal-eos-by-fixed-point-iteration'),
               ('When do the fixed point method fail?',
                2,
                'sec:nlin:fp',
@@ -152,105 +214,135 @@ code { color: inherit; background-color: transparent; }
               ('What to do when the fixed point method fail',
                2,
                None,
-               '___sec58'),
-              ('Exercise 4.4: Solve $x=e^{1-x^2}$ using fixed point iteration',
+               'what-to-do-when-the-fixed-point-method-fail'),
+              ('Exercise 5.4: Solve $x=e^{1-x^2}$ using fixed point iteration',
                2,
                None,
-               '___sec59'),
-              ('Rate of convergence', 1, None, '___sec60'),
-              ('The bisection method', 1, None, '___sec61'),
-              ('Rate of convergence', 2, None, '___sec62'),
-              ('Newtons method', 1, None, '___sec63'),
-              ('Rate of convergence', 2, None, '___sec64'),
-              ('Exercise 4.5: Compare Newtons, Bisection and the Fixed Point '
+               'exercise-5-4-solve-x-e-1-x-2-using-fixed-point-iteration'),
+              ('Rate of convergence', 1, None, 'rate-of-convergence'),
+              ('The bisection method', 1, None, 'the-bisection-method'),
+              ('Rate of convergence', 2, None, 'rate-of-convergence'),
+              ('Newtons method', 1, None, 'newtons-method'),
+              ('Rate of convergence', 2, None, 'rate-of-convergence'),
+              ('Exercise 5.5: Compare Newtons, Bisection and the Fixed Point '
                'method',
                2,
                None,
-               '___sec65'),
-              ('Secant method', 1, None, '___sec66'),
-              ('Rate of convergence', 2, None, '___sec67'),
-              ('Newton Rapson method', 1, None, '___sec68'),
-              ('Gradient Descent', 1, None, '___sec69'),
-              ('Exercise 4.6: Gradient descent solution of linear regression',
+               'exercise-5-5-compare-newtons-bisection-and-the-fixed-point-method'),
+              ('Secant method', 1, None, 'secant-method'),
+              ('Rate of convergence', 2, None, 'rate-of-convergence'),
+              ('Newton Rapson method', 1, None, 'newton-rapson-method'),
+              ('Gradient Descent', 1, None, 'gradient-descent'),
+              ('Exercise 5.6: Gradient descent solution of linear regression',
                2,
                None,
-               '___sec70'),
-              ('Other Useful Methods', 1, None, '___sec71'),
+               'exercise-5-6-gradient-descent-solution-of-linear-regression'),
+              ('Other Useful Methods', 1, None, 'other-useful-methods'),
               ('Numerical integration', 0, 'ch:numint', 'ch:numint'),
-              ('Numerical Integration', 1, None, '___sec73'),
-              ('The Midpoint Rule', 2, None, '___sec74'),
-              ('The Trapezoidal Rule', 2, None, '___sec75'),
-              ('Numerical Errors on Integrals', 2, None, '___sec76'),
+              ('Numerical Integration', 1, None, 'numerical-integration'),
+              ('The Midpoint Rule', 2, None, 'the-midpoint-rule'),
+              ('The Trapezoidal Rule', 2, None, 'the-trapezoidal-rule'),
+              ('Numerical Errors on Integrals',
+               2,
+               None,
+               'numerical-errors-on-integrals'),
               ('Practical Estimation of Errors on Integrals (Richardson '
                'Extrapolation)',
                2,
                None,
-               '___sec77'),
-              ('Romberg Integration', 1, None, '___sec78'),
+               'practical-estimation-of-errors-on-integrals-richardson-extrapolation'),
+              ('Romberg Integration', 1, None, 'romberg-integration'),
               ('Alternative implementation of adaptive integration',
                2,
                None,
-               '___sec79'),
-              ('Gaussian Quadrature', 1, None, '___sec80'),
-              ('The case N=3', 3, None, '___sec81'),
-              ('Error term on Gaussian Integration', 2, None, '___sec82'),
+               'alternative-implementation-of-adaptive-integration'),
+              ('Gaussian Quadrature', 1, None, 'gaussian-quadrature'),
+              ('The case N=3', 3, None, 'the-case-n-3'),
+              ('Error term on Gaussian Integration',
+               2,
+               None,
+               'error-term-on-gaussian-integration'),
               ('Common Weight functions for Classical Gaussian Quadratures',
                2,
                None,
-               '___sec83'),
+               'common-weight-functions-for-classical-gaussian-quadratures'),
               ('Integrating functions over an infinite range',
                1,
                None,
-               '___sec84'),
+               'integrating-functions-over-an-infinite-range'),
               ('Which method to use in a specific case? (NOT COMPLETED)',
                2,
                None,
-               '___sec85'),
-              ('Exercise 5.1: Numerical Integration', 2, None, '___sec86'),
-              ('Ordinary differential equations', 0, 'ch:ode', 'ch:ode'),
-              ('Ordinary Differential Equations', 1, None, '___sec88'),
-              ('A Simple Model for Fluid Flow', 1, None, '___sec89'),
-              ('Eulers Method', 1, None, '___sec90'),
-              ('Error Analysis - Eulers Method', 2, None, '___sec91'),
-              ('Adaptive step size - Eulers Method', 2, None, '___sec92'),
-              ('Runge-Kutta Methods', 1, None, '___sec93'),
-              ('Adaptive step size - Runge-Kutta Method', 2, None, '___sec94'),
-              ('Conservation of Mass', 2, None, '___sec95'),
-              ('Solving a set of ODE equations', 1, None, '___sec96'),
-              ('Stiff sets of ODE  and implicit methods', 1, None, '___sec97'),
-              ('Exercise 6.1: Truncation Error in Eulers Method',
+               'which-method-to-use-in-a-specific-case-not-completed'),
+              ('Exercise 6.1: Numerical Integration',
                2,
                None,
-               '___sec98'),
+               'exercise-6-1-numerical-integration'),
+              ('Ordinary differential equations', 0, 'ch:ode', 'ch:ode'),
+              ('Ordinary Differential Equations',
+               1,
+               None,
+               'ordinary-differential-equations'),
+              ('A Simple Model for Fluid Flow',
+               1,
+               None,
+               'a-simple-model-for-fluid-flow'),
+              ('Eulers Method', 1, None, 'eulers-method'),
+              ('Error Analysis - Eulers Method',
+               2,
+               None,
+               'error-analysis-eulers-method'),
+              ('Adaptive step size - Eulers Method',
+               2,
+               None,
+               'adaptive-step-size-eulers-method'),
+              ('Runge-Kutta Methods', 1, None, 'runge-kutta-methods'),
+              ('Adaptive step size - Runge-Kutta Method',
+               2,
+               None,
+               'adaptive-step-size-runge-kutta-method'),
+              ('Conservation of Mass', 2, None, 'conservation-of-mass'),
+              ('Solving a set of ODE equations',
+               1,
+               None,
+               'solving-a-set-of-ode-equations'),
+              ('Stiff sets of ODE  and implicit methods',
+               1,
+               None,
+               'stiff-sets-of-ode-and-implicit-methods'),
+              ('Exercise 7.1: Truncation Error in Eulers Method',
+               2,
+               None,
+               'exercise-7-1-truncation-error-in-eulers-method'),
               ('Monte Carlo Methods', 0, 'ch:mc', 'ch:mc'),
-              ('Monte Carlo Methods', 1, None, '___sec100'),
+              ('Monte Carlo Methods', 1, None, 'monte-carlo-methods'),
               ("Monte Carlo Integration  ''Hit and Miss''",
                1,
                None,
-               '___sec101'),
-              ('Random number generators', 2, None, '___sec102'),
-              ('Encryption', 2, None, '___sec103'),
+               'monte-carlo-integration-hit-and-miss'),
+              ('Random number generators', 2, None, 'random-number-generators'),
+              ('Encryption', 2, None, 'encryption'),
               ('Errors on Monte Carlo Integration and the Binomial '
                'Distribution',
                2,
                None,
-               '___sec104'),
-              ('The mean value method', 2, None, '___sec105'),
+               'errors-on-monte-carlo-integration-and-the-binomial-distribution'),
+              ('The mean value method', 2, None, 'the-mean-value-method'),
               ('Basic Properties of Probability Distributions',
                2,
                None,
-               '___sec106'),
+               'basic-properties-of-probability-distributions'),
               ('Example: Monte Carlo Integration of a Hyper Sphere',
                2,
                None,
-               '___sec107'),
-              ('Exercise 7.1: The central limit theorem',
+               'example-monte-carlo-integration-of-a-hyper-sphere'),
+              ('Exercise 8.1: The central limit theorem',
                2,
                'ex:mc:norm',
                'ex:mc:norm'),
-              ('Remarks', 3, None, '___sec109'),
-              ('Exercise 7.2: Birthday Paradox', 2, 'ex:mc:BP', 'ex:mc:BP'),
-              ('References', 1, None, '___sec111')]}
+              ('Remarks', 3, None, 'remarks'),
+              ('Exercise 8.2: Birthday Paradox', 2, 'ex:mc:BP', 'ex:mc:BP'),
+              ('References', 1, None, 'references')]}
 end of tocinfo -->
 
 <body>
@@ -277,8 +369,6 @@ $$
 
 
 
-
-    
 <!-- Bootstrap navigation bar -->
 <div class="navbar navbar-default navbar-fixed-top">
   <div class="navbar-header">
@@ -289,7 +379,6 @@ $$
     </button>
     <a class="navbar-brand" href="book.html">Modeling and Computational Engineering</a>
   </div>
-
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
@@ -297,117 +386,139 @@ $$
         <ul class="dropdown-menu">
      <!-- navigation toc: --> <li><a href="._book001.html#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
      <!-- navigation toc: --> <li><a href="._book001.html#ch:preface" style="font-size: 80%;"><b>Preface</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#ch:pyt" style="font-size: 80%;"><b>Writing Python code</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Personal Guidelines</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Code editor</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Types in Python</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Basic types</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lists</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List arithmetic</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List slicing</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Numpy arrays</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Array slicing</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Looping</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For loops</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;While loops</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Functions in Python</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Defining a mathematical function</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scope of variables</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#ch:pyt" style="font-size: 80%;"><b>Introduction to Python</b></a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#personal-guidelines" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Personal Guidelines</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#code-editor" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Code editor</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#types-in-python" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Types in Python</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#basic-types" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Basic types</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#lists" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lists</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#list-arithmetic" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List arithmetic</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#list-slicing" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List slicing</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#numpy-arrays" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Numpy arrays</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#array-slicing" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Array slicing</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#dictionaries" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dictionaries</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#looping" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Looping</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#for-loops" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For loops</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#while-loops" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;While loops</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#functions-in-python" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Functions in Python</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#defining-a-mathematical-function" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Defining a mathematical function</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#scope-of-variables" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scope of variables</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#passing-arrays-and-lists-to-functions" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Passing arrays and lists to functions</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#call-by-value-or-call-by-reference" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Call by value or call by reference</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#floats-and-integers" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Floats and integers</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#lists-and-arrays" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lists and arrays</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#mutable-and-immutable-objects" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mutable and immutable objects</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#ch:pan" style="font-size: 80%;"><b>Introduction to Pandas</b></a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#what-is-pandas" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;What is Pandas?</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#creating-a-data-frame" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Creating a data frame</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#from-empty-dataframe" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From empty DataFrame</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#from-file" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From file</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#create-dataframe-from-dictionary" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create DataFrame from dictionary</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#manipulating-dataframes" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Manipulating DataFrames</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#selecting-columns" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Selecting columns</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#selecting-rows" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Selecting rows</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#performing-mathematical-operations-on-dataframes" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Performing mathematical operations on DataFrames</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#example-mathematical-operations-on-dataframes" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example: mathematical operations on DataFrames</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#solution" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#joining-two-dataframes" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Joining two DataFrames</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#appending-dataframes" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Appending DataFrames</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#merging-dataframes" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Merging DataFrames</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#grouping-and-summing" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Grouping and summing</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#simple-statistics-in-pandas" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Simple statistics in Pandas</a></li>
      <!-- navigation toc: --> <li><a href="._book003.html#ch:taylor" style="font-size: 80%;"><b>Finite differences</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Numerical Errors</a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Taylor Polynomial Approximation</a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Evaluation of polynomials</a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec21" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Calculating Numerical Derivatives of Functions</a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Higher order derivative</a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Roundoff Errors</a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Binary numbers</a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Floating point numbers and the IEEE 754-1985 standard</a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec26" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Roundoff error and truncation error in numerical derivatives</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#numerical-errors" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Numerical Errors</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#taylor-polynomial-approximation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Taylor Polynomial Approximation</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#calculating-numerical-derivatives-of-functions" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Calculating Numerical Derivatives of Functions</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#higher-order-derivative" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Higher order derivative</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#roundoff-errors" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Roundoff Errors</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#binary-numbers" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Binary numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#floating-point-numbers-and-the-ieee-754-1985-standard" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Floating point numbers and the IEEE 754-1985 standard</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#roundoff-error-and-truncation-error-in-numerical-derivatives" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Roundoff error and truncation error in numerical derivatives</a></li>
      <!-- navigation toc: --> <li><a href="._book004.html#ch:lin" style="font-size: 80%;"><b>Solving linear systems</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec28" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The Continuity Equation</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec29" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Continuity Equation as a linear problem (in progress)</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec30" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Solving linear equations</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gauss-Jordan elimination</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pivoting</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec33" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LU decomposition</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec34" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Iterative methods</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec35" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iterative improvement</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Jacobi method</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec37" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Gauss-Seidel method</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec38" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Linear regression</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec39" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solving least square, using algebraic equations</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec40" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Least square as a linear algebra problem</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec41" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Working with matrices on component form</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec42" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Sparse matrices and Thomas algorithm</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec43" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Solving the heat equation using linear algebra</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec44" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 3.1: Conservation Equation or the Continuity Equation</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec45" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Heat equation for solids</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec46" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 3.2: Curing of Concrete and Matrix Formulation</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec47" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 3.3: Solve the full heat equation</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec48" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 3.4: Using sparse matrices in python</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec49" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;CO$_2$ diffusion into aquifers</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#the-continuity-equation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The Continuity Equation</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#continuity-equation-as-a-linear-problem-in-progress" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Continuity Equation as a linear problem (in progress)</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#solving-linear-equations" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Solving linear equations</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#gauss-jordan-elimination" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gauss-Jordan elimination</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#pivoting" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pivoting</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#lu-decomposition" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LU decomposition</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#iterative-methods" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Iterative methods</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#iterative-improvement" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iterative improvement</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#the-jacobi-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Jacobi method</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#the-gauss-seidel-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Gauss-Seidel method</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#example-linear-regression" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Linear regression</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#solving-least-square-using-algebraic-equations" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solving least square, using algebraic equations</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#least-square-as-a-linear-algebra-problem" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Least square as a linear algebra problem</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#working-with-matrices-on-component-form" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Working with matrices on component form</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#sparse-matrices-and-thomas-algorithm" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Sparse matrices and Thomas algorithm</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#example-solving-the-heat-equation-using-linear-algebra" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Solving the heat equation using linear algebra</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#exercise-4-1-conservation-equation-or-the-continuity-equation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.1: Conservation Equation or the Continuity Equation</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#heat-equation-for-solids" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Heat equation for solids</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#exercise-4-2-curing-of-concrete-and-matrix-formulation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.2: Curing of Concrete and Matrix Formulation</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#exercise-4-3-solve-the-full-heat-equation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.3: Solve the full heat equation</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#exercise-4-4-using-sparse-matrices-in-python" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.4: Using sparse matrices in python</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#co-_2-diffusion-into-aquifers" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;CO$_2$ diffusion into aquifers</a></li>
      <!-- navigation toc: --> <li><a href="._book005.html#ch:nlin" style="font-size: 80%;"><b>Solving nonlinear equations</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec51" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Nonlinear equations</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec52" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: van der Waals equation of state</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec53" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.1: van der Waal EOS and CO$_2$</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec54" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Fixed-point iteration</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec55" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.2: Implement the fixed point iteration</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec56" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.3: Finding the molar volume from the van der Waal EOS by fixed point iteration</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#nonlinear-equations" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Nonlinear equations</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#example-van-der-waals-equation-of-state" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: van der Waals equation of state</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#exercise-5-1-van-der-waal-eos-and-co-_2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.1: van der Waal EOS and CO$_2$</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#fixed-point-iteration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Fixed-point iteration</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#exercise-5-2-implement-the-fixed-point-iteration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.2: Implement the fixed point iteration</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#exercise-5-3-finding-the-molar-volume-from-the-van-der-waal-eos-by-fixed-point-iteration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.3: Finding the molar volume from the van der Waal EOS by fixed point iteration</a></li>
      <!-- navigation toc: --> <li><a href="._book005.html#sec:nlin:fp" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When do the fixed point method fail?</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec58" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;What to do when the fixed point method fail</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec59" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.4: Solve \( x=e^{1-x^2} \) using fixed point iteration</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec60" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec61" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The bisection method</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec62" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec63" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Newtons method</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec64" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec65" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.5: Compare Newtons, Bisection and the Fixed Point method</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec66" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Secant method</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec67" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec68" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Newton Rapson method</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec69" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Gradient Descent</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec70" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.6: Gradient descent solution of linear regression</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec71" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Other Useful Methods</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#what-to-do-when-the-fixed-point-method-fail" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;What to do when the fixed point method fail</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#exercise-5-4-solve-x-e-1-x-2-using-fixed-point-iteration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.4: Solve \( x=e^{1-x^2} \) using fixed point iteration</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#rate-of-convergence" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#the-bisection-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The bisection method</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#rate-of-convergence" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#newtons-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Newtons method</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#rate-of-convergence" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#exercise-5-5-compare-newtons-bisection-and-the-fixed-point-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.5: Compare Newtons, Bisection and the Fixed Point method</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#secant-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Secant method</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#rate-of-convergence" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#newton-rapson-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Newton Rapson method</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#gradient-descent" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Gradient Descent</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#exercise-5-6-gradient-descent-solution-of-linear-regression" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.6: Gradient descent solution of linear regression</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#other-useful-methods" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Other Useful Methods</a></li>
      <!-- navigation toc: --> <li><a href="._book006.html#ch:numint" style="font-size: 80%;"><b>Numerical integration</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec73" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Numerical Integration</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec74" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Midpoint Rule</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec75" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Trapezoidal Rule</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec76" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Numerical Errors on Integrals</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec77" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Practical Estimation of Errors on Integrals (Richardson Extrapolation)</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec78" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Romberg Integration</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec79" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alternative implementation of adaptive integration</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec80" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Gaussian Quadrature</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec81" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The case N=3</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec82" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Error term on Gaussian Integration</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec83" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Common Weight functions for Classical Gaussian Quadratures</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec84" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Integrating functions over an infinite range</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec85" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Which method to use in a specific case? (NOT COMPLETED)</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec86" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.1: Numerical Integration</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#numerical-integration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Numerical Integration</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#the-midpoint-rule" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Midpoint Rule</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#the-trapezoidal-rule" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Trapezoidal Rule</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#numerical-errors-on-integrals" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Numerical Errors on Integrals</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#practical-estimation-of-errors-on-integrals-richardson-extrapolation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Practical Estimation of Errors on Integrals (Richardson Extrapolation)</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#romberg-integration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Romberg Integration</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#alternative-implementation-of-adaptive-integration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alternative implementation of adaptive integration</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#gaussian-quadrature" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Gaussian Quadrature</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#the-case-n-3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The case N=3</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#error-term-on-gaussian-integration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Error term on Gaussian Integration</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#common-weight-functions-for-classical-gaussian-quadratures" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Common Weight functions for Classical Gaussian Quadratures</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#integrating-functions-over-an-infinite-range" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Integrating functions over an infinite range</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#which-method-to-use-in-a-specific-case-not-completed" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Which method to use in a specific case? (NOT COMPLETED)</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#exercise-6-1-numerical-integration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 6.1: Numerical Integration</a></li>
      <!-- navigation toc: --> <li><a href="#ch:ode" style="font-size: 80%;"><b>Ordinary differential equations</b></a></li>
-     <!-- navigation toc: --> <li><a href="#___sec88" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ordinary Differential Equations</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec89" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;A Simple Model for Fluid Flow</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec90" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Eulers Method</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec91" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Error Analysis - Eulers Method</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec92" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adaptive step size - Eulers Method</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec93" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Runge-Kutta Methods</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec94" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adaptive step size - Runge-Kutta Method</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec95" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Conservation of Mass</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec96" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Solving a set of ODE equations</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec97" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Stiff sets of ODE  and implicit methods</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec98" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 6.1: Truncation Error in Eulers Method</a></li>
+     <!-- navigation toc: --> <li><a href="#ordinary-differential-equations" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ordinary Differential Equations</a></li>
+     <!-- navigation toc: --> <li><a href="#a-simple-model-for-fluid-flow" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;A Simple Model for Fluid Flow</a></li>
+     <!-- navigation toc: --> <li><a href="#eulers-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Eulers Method</a></li>
+     <!-- navigation toc: --> <li><a href="#error-analysis-eulers-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Error Analysis - Eulers Method</a></li>
+     <!-- navigation toc: --> <li><a href="#adaptive-step-size-eulers-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adaptive step size - Eulers Method</a></li>
+     <!-- navigation toc: --> <li><a href="#runge-kutta-methods" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Runge-Kutta Methods</a></li>
+     <!-- navigation toc: --> <li><a href="#adaptive-step-size-runge-kutta-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adaptive step size - Runge-Kutta Method</a></li>
+     <!-- navigation toc: --> <li><a href="#conservation-of-mass" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Conservation of Mass</a></li>
+     <!-- navigation toc: --> <li><a href="#solving-a-set-of-ode-equations" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Solving a set of ODE equations</a></li>
+     <!-- navigation toc: --> <li><a href="#stiff-sets-of-ode-and-implicit-methods" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Stiff sets of ODE  and implicit methods</a></li>
+     <!-- navigation toc: --> <li><a href="#exercise-7-1-truncation-error-in-eulers-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 7.1: Truncation Error in Eulers Method</a></li>
      <!-- navigation toc: --> <li><a href="._book008.html#ch:mc" style="font-size: 80%;"><b>Monte Carlo Methods</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book008.html#___sec100" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Monte Carlo Methods</a></li>
-     <!-- navigation toc: --> <li><a href="._book008.html#___sec101" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Monte Carlo Integration  ''Hit and Miss''</a></li>
-     <!-- navigation toc: --> <li><a href="._book008.html#___sec102" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Random number generators</a></li>
-     <!-- navigation toc: --> <li><a href="._book008.html#___sec103" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Encryption</a></li>
-     <!-- navigation toc: --> <li><a href="._book008.html#___sec104" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Errors on Monte Carlo Integration and the Binomial Distribution</a></li>
-     <!-- navigation toc: --> <li><a href="._book008.html#___sec105" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The mean value method</a></li>
-     <!-- navigation toc: --> <li><a href="._book008.html#___sec106" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Basic Properties of Probability Distributions</a></li>
-     <!-- navigation toc: --> <li><a href="._book008.html#___sec107" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example: Monte Carlo Integration of a Hyper Sphere</a></li>
-     <!-- navigation toc: --> <li><a href="._book008.html#ex:mc:norm" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 7.1: The central limit theorem</a></li>
-     <!-- navigation toc: --> <li><a href="._book008.html#___sec109" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
-     <!-- navigation toc: --> <li><a href="._book008.html#ex:mc:BP" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 7.2: Birthday Paradox</a></li>
-     <!-- navigation toc: --> <li><a href="._book009.html#___sec111" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;References</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#monte-carlo-methods" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Monte Carlo Methods</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#monte-carlo-integration-hit-and-miss" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Monte Carlo Integration  ''Hit and Miss''</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#random-number-generators" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Random number generators</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#encryption" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Encryption</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#errors-on-monte-carlo-integration-and-the-binomial-distribution" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Errors on Monte Carlo Integration and the Binomial Distribution</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#the-mean-value-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The mean value method</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#basic-properties-of-probability-distributions" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Basic Properties of Probability Distributions</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#example-monte-carlo-integration-of-a-hyper-sphere" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example: Monte Carlo Integration of a Hyper Sphere</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#ex:mc:norm" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 8.1: The central limit theorem</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#remarks" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#ex:mc:BP" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 8.2: Birthday Paradox</a></li>
+     <!-- navigation toc: --> <li><a href="._book009.html#references" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;References</a></li>
 
         </ul>
       </li>
@@ -415,20 +526,16 @@ $$
   </div>
 </div>
 </div> <!-- end of navigation bar -->
-
 <div class="container">
-
 <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
-
 <a name="part0007"></a>
 <!-- !split -->
 
-<p>
-
-<center><h1 id="ch:ode" class="anchor">Ordinary differential equations</h1></center> <!-- chapter heading -->
-
-<h1 id="___sec88" class="anchor">Ordinary Differential Equations </h1>
-Physical systems evolves in space and time, and very often they are described by a ordinary differential equations (ODE) and/or
+<center>
+<h1 id="ch:ode" class="anchor">Ordinary differential equations</h1>
+</center> <!-- chapter heading -->
+<h1 id="ordinary-differential-equations" class="anchor">Ordinary Differential Equations </h1>
+<p>Physical systems evolves in space and time, and very often they are described by a ordinary differential equations (ODE) and/or
 partial differential equations (PDE). The difference between an ODE and a PDE is that an ODE only describes 
 the changes in one spatial dimension <em>or</em> time, whereas a PDE describes a system that evolves in the \( x- \), \( y- \), \( z- \) dimension 
 and/or in time. In the following we will spend a significant
@@ -439,107 +546,116 @@ However, all these algorithms, will at some point run into the same
 kind of troubles if used reckless. Thus we will use the Eulers method as a playground,
 investigate when the algorithm run into trouble and
 suggests ways to fix it, these approaches can easily be extended to the higher order methods. Most of the other algorithms boils down to the same idea of extrapolating
-a function using derivatives multiplied with a small step size.
-
-<h1 id="___sec89" class="anchor">A Simple Model for Fluid Flow </h1>
-Let us consider a simple example from chemical engineering, a continuous stirred tank reactor (CSTR), see figure <a href="#fig:ode:cstr">25</a>. 
+a function using derivatives multiplied with a small step size.  
+</p>
+<h1 id="a-simple-model-for-fluid-flow" class="anchor">A Simple Model for Fluid Flow </h1>
+<p>Let us consider a simple example from chemical engineering, a continuous stirred tank reactor (CSTR), see figure <a href="#fig:ode:cstr">32</a>. 
 The flow is incompressible (\( q_\text{out}=q_\text{in} \)), a fluid is entering
 on the top and exiting at the bottom, the tank has a fixed volume \( V \). Assume that the tank is filled with saltwater, and that freshwater is pumped into it, how much time does it 
 take before \( 90\% \) of the saltwater is replaced with freshwater? The tank is <em>well mixed</em>, illustrated with the propeller, this means that at every time the 
-concentration is uniform in the tank, i.e. that \( C(t)=C_\text{out}(t) \).
+concentration is uniform in the tank, i.e. that \( C(t)=C_\text{out}(t) \).  
+</p>
 
-<p>
 <center> <!-- figure label: --> <div id="fig:ode:cstr"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 25:  A continuous stirred tank model, \( C(t)=C_\text{out}(t) \), and \( q_\text{out}=q_\text{in} \).  <!-- caption label: fig:ode:cstr --> </p></center>
+<center>
+<p class="caption">Figure 32:  A continuous stirred tank model, \( C(t)=C_\text{out}(t) \), and \( q_\text{out}=q_\text{in} \).  <!-- caption label: fig:ode:cstr --> </p>
+</center>
 <p><img src="fig-ode/cstr.png" align="bottom" width=800></p>
 </center>
 
-<p>
-The concentration \( C \) is measured in gram of salt per liter water, and the flow rate \( q \) is liter of water per day. The model for the salt balance in this system can be described in words by:
+<p>The concentration \( C \) is measured in gram of salt per liter water, and the flow rate \( q \) is liter of water per day. The model for the salt balance in this system can be described in words by:</p>
 $$
 \begin{align}
 [\text{accumulation of salt}] &= [\text{salt into the system}] - [\text{salt out of the system}]\nonumber\\ 
-& + [\text{generation of salt}].\tag{6.1}
+& + [\text{generation of salt}].\tag{8.1}
 \end{align}
 $$
 
-In our case there are no generation of salt within the system so this term is zero. The flow of salt into the system during a time \( \Delta t \) is: 
+<p>In our case there are no generation of salt within the system so this term is zero. The flow of salt into the system during a time \( \Delta t \) is: 
 \( q_\text{in}(t)\cdot C_\text{in}(t)\cdot \Delta t=q(t)\cdot C_\text{in}(t)\cdot \Delta t \), 
 the flow of salt out of the system is: \( q_\text{out}(t)\cdot C_\text{out}(t)\cdot \Delta t=q(t)\cdot C(t)\cdot \Delta t \), and the accumulation during a time step is:
 \( C(t+\Delta t)\cdot V - C(t)\cdot V \), hence:
+</p>
 $$
 \begin{equation}
-C(t+\Delta t)\cdot V - C(t)\cdot V = q(t)\cdot C_\text{in}(t)\cdot \Delta t - q(t)\cdot C(t)\cdot \Delta t.\tag{6.2}
+C(t+\Delta t)\cdot V - C(t)\cdot V = q(t)\cdot C_\text{in}(t)\cdot \Delta t - q(t)\cdot C(t)\cdot \Delta t.\tag{8.2}
 \end{equation}
 $$
 
-Note that it is not a priori apparent, which time the concentrations and flow rates on the right hand side should be evaluated at, 
+<p>Note that it is not a priori apparent, which time the concentrations and flow rates on the right hand side should be evaluated at, 
 we could have chosen to evaluate them at \( t+\Delta t \), or at any time \( t\in [t,t+\Delta t] \). We will return to this point later in this chapter. Dividing by \( \Delta t \), and taking the limit
-\( \Delta t\to 0 \), we can write equation <a href="#mjx-eqn-6.2">(6.2)</a> as:
+\( \Delta t\to 0 \), we can write equation <a href="#mjx-eqn-8.2">(8.2)</a> as:
+</p>
 $$
 \begin{equation}
-V\frac{dC(t)}{dt} = q(t)\left[C_\text{in}(t) - C(t)\right].\tag{6.3}
+V\frac{dC(t)}{dt} = q(t)\left[C_\text{in}(t) - C(t)\right].\tag{8.3}
 \end{equation}
 $$
 
-Seawater contains about 35 gram salt/liter fluid, if we assume that the fresh water contains no salt, we have the boundary conditions
-\( C_\text{in}(t)=0 \), $C(0)=$35gram/l. The equation <a href="#mjx-eqn-6.3">(6.3)</a> the reduces to:
+<p>Seawater contains about 35 gram salt/liter fluid, if we assume that the fresh water contains no salt, we have the boundary conditions
+\( C_\text{in}(t)=0 \), $C(0)=$35gram/l. The equation <a href="#mjx-eqn-8.3">(8.3)</a> the reduces to:
+</p>
 $$
 \begin{equation}
-V\frac{dC(t)}{dt} = -qC(t),\tag{6.4}
+V\frac{dC(t)}{dt} = -qC(t),\tag{8.4}
 \end{equation}
 $$
 
-this equation can easily be solved, by dividing by \( C \), multiplying by \( dt \) and integrating:
+<p>this equation can easily be solved, by dividing by \( C \), multiplying by \( dt \) and integrating:</p>
 $$
 \begin{align}
 V\int_{C_0}^C\frac{dC}{C} &= -q\int_0^tdt,\nonumber\\ 
-C(t)&=C_0e^{-t/\tau},\text{ where } \tau\equiv \frac{V}{q}.\tag{6.5}
+C(t)&=C_0e^{-t/\tau},\text{ where } \tau\equiv \frac{V}{q}.\tag{8.5}
 \end{align}
 $$
 
-This equation can be inverted to give \( t=-\tau\ln[C(t)/C] \). If we assume that the volume of the tank is 1m$^3$=1000liters, 
+<p>This equation can be inverted to give \( t=-\tau\ln[C(t)/C] \). If we assume that the volume of the tank is 1m$^3$=1000liters, 
 and that the flow rate is 1 liter/min, we find that $\tau$=1000min=0.69days and that it takes about $-0.69\ln0.9\simeq1.6$days to reduce the concentration
-by 90$\%$ to 3.5 gram/liter.
+by 90$\%$ to 3.5 gram/liter.     
+</p>
 
-<p>
-<div class="alert alert-block alert-success alert-text-normal"><b>The CSTR.</b>
-You might think that the CSTR is a very simple model, and it is, but this type of model is the basic building blocks in chemical engineering.
+<div class="alert alert-block alert-success alert-text-normal"><b>The CSTR</b>
+<p>You might think that the CSTR is a very simple model, and it is, but this type of model is the basic building blocks in chemical engineering.
 By putting CSTR tanks in series and/or connecting them with pipes, the efficiency of manufacturing various type of chemicals
 can be investigated. Although the CSTR is an idealized model for the part of a chemical factory, it is actually a <em>very good</em> model 
 for fluid flow in a porous media. By connecting CSTR tanks in series, one can model how chemical tracers propagate in the subsurface. 
 The physical reason for this is that dispersion in porous media will play the role of the propellers and mix the concentration
-uniformly.
+uniformly.      
+</p>
 </div>
 
-
-<h1 id="___sec90" class="anchor">Eulers Method </h1>
-If the system gets slightly more complicated, e.g several tanks in series with a varying flow rate or if salt was generated in the tank, there is a
+<h1 id="eulers-method" class="anchor">Eulers Method </h1>
+<p>If the system gets slightly more complicated, e.g several tanks in series with a varying flow rate or if salt was generated in the tank, there is a
 good chance that we have to solve the equations numerically to obtain a solution.
-Actually, we have already developed a numerical algorithm to solve equation <a href="#mjx-eqn-6.3">(6.3)</a>, 
-before we arrived at equation <a href="#mjx-eqn-6.3">(6.3)</a> in equation <a href="#mjx-eqn-6.2">(6.2)</a>. This is a special case of Eulers method, which is basically to 
-replace the derivative in equation <a href="#mjx-eqn-6.3">(6.3)</a>, with \( (C(t+\Delta t)-C(t))/\Delta t \). By rewriting equation <a href="#mjx-eqn-6.2">(6.2)</a>, so that we
+Actually, we have already developed a numerical algorithm to solve equation <a href="#mjx-eqn-8.3">(8.3)</a>, 
+before we arrived at equation <a href="#mjx-eqn-8.3">(8.3)</a> in equation <a href="#mjx-eqn-8.2">(8.2)</a>. This is a special case of Eulers method, which is basically to 
+replace the derivative in equation <a href="#mjx-eqn-8.3">(8.3)</a>, with \( (C(t+\Delta t)-C(t))/\Delta t \). By rewriting equation <a href="#mjx-eqn-8.2">(8.2)</a>, so that we
 keep everything related to the new time step, \( t+\Delta t \), on one side, we get:
+</p>
 $$
 \begin{align}
-VC(t+\Delta t) &= VC(t) + qC_\text{in}(t) - qC(t),\tag{6.6}\\ 
-C(t+\Delta t) &= C(t) + \frac{\Delta t}{\tau}\left[C_\text{in}(t) - C(t)\right]\tag{6.7},
+VC(t+\Delta t) &= VC(t) + qC_\text{in}(t) - qC(t),\tag{8.6}\\ 
+C(t+\Delta t) &= C(t) + \frac{\Delta t}{\tau}\left[C_\text{in}(t) - C(t)\right]\tag{8.7},
 \end{align}
 $$
 
-we introduce the short hand notation: \( C(t)=C_n \), and \( C(t+\Delta t)=C_{n+1} \), hence the algorithm can be written more compact as:
+<p>we introduce the short hand notation: \( C(t)=C_n \), and \( C(t+\Delta t)=C_{n+1} \), hence the algorithm can be written more compact as:</p>
 $$
 \begin{equation}
-C_{n+1} = \left(1-\frac{\Delta t}{\tau}\right)C_n + \frac{\Delta t}{\tau}C_{\text{in},n}\tag{6.8},
+C_{n+1} = \left(1-\frac{\Delta t}{\tau}\right)C_n + \frac{\Delta t}{\tau}C_{\text{in},n}\tag{8.8},
 \end{equation}
 $$
 
-In the script below, we have implemented equation <a href="#mjx-eqn-6.8">(6.8)</a>.
-<p>
+<p>In the script below, we have implemented equation <a href="#mjx-eqn-8.8">(8.8)</a>.</p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">analytical</span>(x):
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">analytical</span>(x):
     <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>exp(<span style="color: #666666">-</span>x)
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">euler_step</span>(c_old, c_in, tau_inv,dt):
@@ -549,8 +665,8 @@ In the script below, we have implemented equation <a href="#mjx-eqn-6.8">(6.8)</
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">ode_solv</span>(c_into,c_init,t_final,vol,q,dt):
     f<span style="color: #666666">=</span>[];t<span style="color: #666666">=</span>[]
     tau_inv <span style="color: #666666">=</span> q<span style="color: #666666">/</span>vol
-    c_in    <span style="color: #666666">=</span> c_into <span style="color: #408080; font-style: italic">#freshwater into tank</span>
-    c_old   <span style="color: #666666">=</span> c_init <span style="color: #408080; font-style: italic">#seawater present </span>
+    c_in    <span style="color: #666666">=</span> c_into <span style="color: #3D7B7B; font-style: italic">#freshwater into tank</span>
+    c_old   <span style="color: #666666">=</span> c_init <span style="color: #3D7B7B; font-style: italic">#seawater present </span>
     ti<span style="color: #666666">=0.</span>
     <span style="color: #008000; font-weight: bold">while</span>(ti <span style="color: #666666">&lt;=</span> t_final):
         t<span style="color: #666666">.</span>append(ti); f<span style="color: #666666">.</span>append(c_old)
@@ -558,161 +674,187 @@ In the script below, we have implemented equation <a href="#mjx-eqn-6.8">(6.8)</
         c_old <span style="color: #666666">=</span> c_new
         ti   <span style="color: #666666">+=</span> dt
     <span style="color: #008000; font-weight: bold">return</span> t,f
-</pre></div>
-<p>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <center> <!-- figure label: --> <div id="fig:ode:euler"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 26:  The concentration in the tank for different step size \( \Delta t \).  <!-- caption label: fig:ode:euler --> </p></center>
+<center>
+<p class="caption">Figure 33:  The concentration in the tank for different step size \( \Delta t \).  <!-- caption label: fig:ode:euler --> </p>
+</center>
 <p><img src="fig-ode/euler.png" align="bottom" width=800></p>
 </center>
 
-<p>
-In figure <a href="#fig:ode:euler">26</a> the result of the implementation is shown for different values of \( \Delta t \) 
+<p>In figure <a href="#fig:ode:euler">33</a> the result of the implementation is shown for different values of \( \Delta t \) 
 Clearly we see that the results are dependent on the step size, as the step increases the numerical solution deviates from the analytical solution. At some point the 
-numerical algorithm fails completely, and produces results that have no meaning.
-
-<h2 id="___sec91" class="anchor">Error Analysis - Eulers Method </h2>
-There are two obvious questions:
-
+numerical algorithm fails completely, and produces results that have no meaning. 
+</p>
+<h2 id="error-analysis-eulers-method" class="anchor">Error Analysis - Eulers Method </h2>
+<p>There are two obvious questions:</p>
 <ol>
 <li> When does the algorithm produce unphysical results?</li>  
 <li> What is an appropriate step size?</li> 
 </ol>
-
-Let us consider the first question, clearly when the concentrations gets negative the solution is unphysical. From equation <a href="#mjx-eqn-6.8">(6.8)</a>, 
+<p>Let us consider the first question, clearly when the concentrations gets negative the solution is unphysical. From equation <a href="#mjx-eqn-8.8">(8.8)</a>, 
 we see that when \( \Delta t/\tau > 1 \), the concentration 
 become negative. For this specific case (the CSTR), there is a clear physical interpretation of this condition. Inserting \( \tau=V/q \), we can rewrite
 the condition \( \Delta t/\tau < 1 \) as \( q\Delta t < V \). The volume into the tank during one time step is: \( q\Delta t \), which means that
 whenever we <em>flush more than one tank volume through the tank during one time step, the algorithm fails</em>.
 When this happens the new concentration in the tank cannot be predicted from the old one. This makes sense, because we could have switched to a
-new solution (e.g. seawater) during that time step, then the new solution does not have any relation to the old solution.
+new solution (e.g. seawater) during that time step, then the new solution does not have any relation to the old solution. 
+</p>
 
-<p>
-The second question, "what is an appropriate step size?",  is a bit more difficult to answer.
+<p>The second question, "what is an appropriate step size?",  is a bit more difficult to answer.
 One strategy could be to simply use the results from chapter [Taylor], where we showed that the truncation error had a minimum value
 with a step size of \( 10^{-8} \)  (when using a first order Taylor approximation).
 How does the value \( 10^{-8} \) relate to the step sizes in minutes used in our Euler implementation?
-In order to see the connection, we need to rewrite equation <a href="#mjx-eqn-6.3">(6.3)</a> in a dimensionless form,
+In order to see the connection, we need to rewrite equation <a href="#mjx-eqn-8.3">(8.3)</a> in a dimensionless form,
 by making the following substitution:
  \( t\to t/\tau \):
+</p>
 $$
 \begin{equation}
-\frac{dC(\tau)}{d\tau} = \left[C_\text{in}(\tau) - C(\tau)\right].\tag{6.9}
+\frac{dC(\tau)}{d\tau} = \left[C_\text{in}(\tau) - C(\tau)\right].\tag{8.9}
 \end{equation}
 $$
 
-As we found earlier $\tau = 1000$min, thus a step size of e.g. 1 min would correspond to a dimensionless time step of 
+<p>As we found earlier $\tau = 1000$min, thus a step size of e.g. 1 min would correspond to a dimensionless time step of 
 $\Delta t\to$1min/1000min$=10^{-3}$. This number can be directly compared to the value \( 10^{-8} \), which is the lowest value we can
 choose without getting into trouble with round off errors on the machine. 
-<div class="alert alert-block alert-success alert-text-normal"><b>Dimensionless variables.</b>
-It is a  good idea (necessary) to formulate our equations in terms of dimensionless variables.
+</p>
+<div class="alert alert-block alert-success alert-text-normal"><b>Dimensionless variables</b>
+<p>It is a  good idea (necessary) to formulate our equations in terms of dimensionless variables.
 The algorithms we develop can then be used in the same form regardless of changes in the system size and flow rates.
 Thus we do not need to rewrite the algorithm each time the physical system changes. This also means that if you use
 an algorithm developed by someone else (e.g. in Matlab or Python), you should always formulate the ODE system in dimensionless
 form before using the algorithm.
+</p>
 
-<p>
-A second reason is that from a pure modeling point of view, dimensionless variables is a way of getting some
+<p>A second reason is that from a pure modeling point of view, dimensionless variables is a way of getting some
 understanding of what kind of combination of the physical parameters that describes the behavior of the system.
 For the case of the CSTR, there is a time scale \( \tau=V/q \), which 
 is an intrinsic measure of time in the system. No matter what the flow rate through the tank or the volume of the tank is,
 it will always take  0.1$\tau$ before
 the concentration in the tank is reduced by 90%.
+</p>
 </div>
 
-As already mentioned a step size of \( 10^{-8} \), is probably the smallest we can choose with respect to round off errors, 
+<p>As already mentioned a step size of \( 10^{-8} \), is probably the smallest we can choose with respect to round off errors, 
 but it is smaller than necessary and would lead to large simulation times. 
 If it takes 1 second to run the simulation with a step size of \( 10^{-3} \), it would take \( 10^5 \) seconds or 1 day
 with a step size of \( 10^{-8} \). 
 To continue the error analyses, we write our ODE for a general system as:
+</p>
 $$
 \begin{align}
-\frac{dy}{dt}=f(y,t),\tag{6.10}
+\frac{dy}{dt}=f(y,t),\tag{8.10}
 \end{align}
 $$
 
-or in discrete form:
+<p>or in discrete form:</p>
 $$
 \begin{align}
 \frac{y_{n+1}-y_n}{h}-\frac{h}{2}y^{\prime\prime}(\eta_n)&=f(y,t).\nonumber\\ 
 y_{n+1}&=y_n+hf(y,t)+\frac{h^2}{2}y^{\prime\prime}(\eta_n).
-\tag{6.11}
+\tag{8.11}
 \end{align}
 $$
 
-\( h \) is now the (dimensionless) step size, equal to \( \Delta t \) if the derivative is with respect to \( t \) or \( \Delta x \) if the derivative is respect to \( x \) etc. Note that we
+<p>\( h \) is now the (dimensionless) step size, equal to \( \Delta t \) if the derivative is with respect to \( t \) or \( \Delta x \) if the derivative is respect to \( x \) etc. Note that we
 have also included the error term related to the numerical derivative, \( \eta_n\in[t_n,t_n+h] \). At each step we get an error term,
 and the distance between the true solution and our estimate, the <em>local error</em>, after \( N \) steps is:
+</p>
 $$
 \begin{align}
 \epsilon=\sum_{n=0}^{N-1}\frac{h^2}{2}y^{\prime\prime}(\eta_n)&=\frac{h^2}{2}\sum_{n=0}^{N-1}f^\prime(y_n,\eta_n)\simeq\frac{h}{2}\int_{t_0}^{t_f}f^\prime(y,\eta)d\eta\nonumber\\ 
-&=\frac{h}{2}\left[f(y(t_f),t_f)-f(y(t_0),t_0)\right].\tag{6.12}
+&=\frac{h}{2}\left[f(y(t_f),t_f)-f(y(t_0),t_0)\right].\tag{8.12}
 \end{align}
 $$
 
-Note that when we replace the sum with an integral in the equation above, this is only correct if the step size is not too large.
-From equation <a href="#mjx-eqn-6.12">(6.12)</a>
+<p>Note that when we replace the sum with an integral in the equation above, this is only correct if the step size is not too large.
+From equation <a href="#mjx-eqn-8.12">(8.12)</a>
 we see that even if the error term on the numerical derivative is \( h^2 \), the local error is proportional to \( h \)
 (one order lower). This is because we accumulate errors for each step.
+</p>
 
-<p>
-In the following we specialize to the CSTR, to see if we can gain some additional insight. First we change variables in 
-equation <a href="#mjx-eqn-6.4">(6.4)</a>: \( y=C(t)/C_0 \), and \( x=t/\tau \), hence:
+<p>In the following we specialize to the CSTR, to see if we can gain some additional insight. First we change variables in 
+equation <a href="#mjx-eqn-8.4">(8.4)</a>: \( y=C(t)/C_0 \), and \( x=t/\tau \), hence:
+</p>
 $$
 \begin{equation}
-\frac{dy}{dx}=-y.\tag{6.13}
+\frac{dy}{dx}=-y.\tag{8.13}
 \end{equation}
 $$
 
-The solution to this equation is \( y(x)=e^{-x} \), substituting back for the new variables \( y \) and \( x \), we reproduce the result in equation <a href="#mjx-eqn-6.5">(6.5)</a>. 
-The local error, equation <a href="#mjx-eqn-6.12">(6.12)</a>, reduces to:
+<p>The solution to this equation is \( y(x)=e^{-x} \), substituting back for the new variables \( y \) and \( x \), we reproduce the result in equation <a href="#mjx-eqn-8.5">(8.5)</a>. 
+The local error, equation <a href="#mjx-eqn-8.12">(8.12)</a>, reduces to:
+</p>
 $$
 \begin{align}
-\epsilon=\frac{h}{2}\left[-y(x_f)+y(x_0)\right]=\frac{h}{2}\left[1-e^{-x_f}\right],\tag{6.14}
+\epsilon=\frac{h}{2}\left[-y(x_f)+y(x_0)\right]=\frac{h}{2}\left[1-e^{-x_f}\right],\tag{8.14}
 \end{align}
 $$
 
-we have assumed that \( x_0=t_0/\tau=0 \). This gives the estimated local error at time \( x_f \). For \( x_f=0 \), the 
+<p>we have assumed that \( x_0=t_0/\tau=0 \). This gives the estimated local error at time \( x_f \). For \( x_f=0 \), the 
 numerical error is zero, this makes sense because at \( x=0 \) we know the exact solution because of the initial conditions. When we move further away from the initial conditions, the
-numerical error increases, but equation <a href="#mjx-eqn-6.14">(6.14)</a> ensures us that as long as the step size is low enough we can get as
+numerical error increases, but equation <a href="#mjx-eqn-8.14">(8.14)</a> ensures us that as long as the step size is low enough we can get as
 close as possible to the true solution, since the error scales as \( h \) (at some point we might run into trouble with round off error in the computer).
+</p>
 
-<p>
-Can we prove directly that we get the analytical result? In this 
-case it is fairly simple, if we use Eulers method on equation <a href="#mjx-eqn-6.13">(6.13)</a>, we get:
+<p>Can we prove directly that we get the analytical result? In this 
+case it is fairly simple, if we use Eulers method on equation <a href="#mjx-eqn-8.13">(8.13)</a>, we get:
+</p>
 $$
 \begin{align}
 \frac{y_{n+1}-y_n}{h}&=-y_nf.\nonumber\\ 
 y_{n+1}&=(1-h)y_n,
-\tag{6.15}
+\tag{8.15}
 \end{align}
 $$
 
-or alternatively:
+<p>or alternatively:</p>
 $$
 \begin{align}
 y_1&=(1-h)y_0,\nonumber\\ 
 y_2&=(1-h)y_1=(1-h)^2y_0,\nonumber\\ 
 \vdots\nonumber\\ 
 y_{N+1}&=(1-h)^{N}y_0=(1-h)^{x_f/h}y_0.
-\tag{6.16}
+\tag{8.16}
 \end{align}
 $$
 
-In the last equation, we have used the the fact the number of steps, \( N \), is equal to the simulation time divided by the step size, hence: \( N=x_f/h \). From calculus,
+<p>In the last equation, we have used the the fact the number of steps, \( N \), is equal to the simulation time divided by the step size, hence: \( N=x_f/h \). From calculus,
 the equation above is one of the well known limits for the exponential function: \( \lim_{x\to\infty}(1+k/x)^{mx}=e^{mk} \), hence:
+</p>
 $$
 \begin{align}
 y_n&=(1-h)^{x_f/h}y_0\to e^{-x_f},
-\tag{6.17}
+\tag{8.17}
 \end{align}
 $$
 
-when \( h\to0 \). Below is an implementation of the Euler algorithm in this simple case, we also estimate the local error, and global error after \( N \) steps. 
-<p>
+<p>when \( h\to0 \). Below is an implementation of the Euler algorithm in this simple case, we also estimate the local error, and global error after \( N \) steps. </p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
 <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">euler</span>(tf,h):
     t<span style="color: #666666">=</span>[];f<span style="color: #666666">=</span>[]
@@ -729,213 +871,256 @@ when \( h\to0 \). Below is an implementation of the Euler algorithm in this simp
     <span style="color: #008000; font-weight: bold">return</span> t,f
                                         
 t,f<span style="color: #666666">=</span>euler(<span style="color: #666666">1</span>,<span style="color: #666666">1e-5</span>)
-</pre></div>
-<p>
-By changing the step size \( h \), you can easily verify that the local error systematically increases or decreases proportional to \( h \).
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>By changing the step size \( h \), you can easily verify that the local error systematically increases or decreases proportional to \( h \).
 Something curious happens with the global error when the 
 step size is changed, it does not change very much. The global error involves a second sum over the local error for each step,
-which can be approximated as a second integration in equation <a href="#mjx-eqn-6.14">(6.14)</a>:
+which can be approximated as a second integration in equation <a href="#mjx-eqn-8.14">(8.14)</a>:
+</p>
 $$
 \begin{align}
-\epsilon_\text{global}=\frac{1}{2}\int_{0}^{x_f}\left[-y(x)+y(0)\right]dx=\frac{1}{2}\left[x_f+e^{-x_f}-1\right].\tag{6.18}
+\epsilon_\text{global}=\frac{1}{2}\int_{0}^{x_f}\left[-y(x)+y(0)\right]dx=\frac{1}{2}\left[x_f+e^{-x_f}-1\right].\tag{8.18}
 \end{align}
 $$
 
-Note that the global error does not go to zero when the step size decreases, which can easily be verified by changing the step size. This is strange, but can be understood
+<p>Note that the global error does not go to zero when the step size decreases, which can easily be verified by changing the step size. This is strange, but can be understood
 by the following argument: when the step size decreases the local error scales as \( \sim h \), but the number of steps scales as \( 1/h \), so the global error must scale as \( h\times 1/h \)
 or some constant value. Usually it is much easier to control the local error than the global error, this should be kept in mind if you ever encounter a problem where it is 
-important control the global error. For the higher order methods that we will discuss later in this chapter, the global error will go to zero when \( h \) decreases.
+important control the global error. For the higher order methods that we will discuss later in this chapter, the global error will go to zero when \( h \) decreases.   
+</p>
 
-<p>
-The answer to our original question, ''What is an appropriate step size?'', will depend on what you want to achieve in terms of local or global error.
+<p>The answer to our original question, ''What is an appropriate step size?'', will depend on what you want to achieve in terms of local or global error.
 In most practical situations you would
 specify a local error that is acceptable for the problem under investigation and then choose a step size where the local error always is lower than this value. In the 
 next subsection we will investigate how to achieve this in practice.
-
-<h2 id="___sec92" class="anchor">Adaptive step size - Eulers Method </h2>
-We want to be sure that we use a step size that achieves a certain accuracy in our numerical solution, but at
+</p>
+<h2 id="adaptive-step-size-eulers-method" class="anchor">Adaptive step size - Eulers Method </h2>
+<p>We want to be sure that we use a step size that achieves a certain accuracy in our numerical solution, but at
 the same time that we do not waste simulation time using a too low step size. The following approach is similar to the one we derived for the Romberg integration, and
-a special case of what is known as Richardson Extrapolation. The method is easily extended to higher order methods.
+a special case of what is known as Richardson Extrapolation. The method is easily extended to higher order methods. 
+</p>
 
-<p>
-We know that Eulers algorithm is accurate to second order. Our estimate of the new value, \( y_1^* \)  
+<p>We know that Eulers algorithm is accurate to second order. Our estimate of the new value, \( y_1^* \)  
 (where we have used a$\,{}^*$ to indicate that we have used a step size of size \( h \)), should then be related to the true solution \( y(t_1) \) in the following way:
+</p>
 $$
 \begin{align}
-y^*_1=y(t_1)+ch^2.\tag{6.19}
+y^*_1=y(t_1)+ch^2.\tag{8.19}
 \end{align}
 $$
 
-The constant \( c \) is unknown, but it can be found by taking two smaller steps of size \( h/2 \). If the steps are not too large, our new estimate
+<p>The constant \( c \) is unknown, but it can be found by taking two smaller steps of size \( h/2 \). If the steps are not too large, our new estimate
 of the value \( y_1 \) will be related to the true solution as:
+</p>
 $$
 \begin{align}
-y_1=y(t_1)+2c\left(\frac{h}{2}\right)^2.\tag{6.20}
+y_1=y(t_1)+2c\left(\frac{h}{2}\right)^2.\tag{8.20}
 \end{align}
 $$
 
-The factor 2 in front of \( c \) is because we now need to take two steps, and we accumulate a total error of \( 2c(h/2)^2=ch^2/2 \). It might not be completely 
-obvious that the constant \( c \) should be the same in equation <a href="#mjx-eqn-6.19">(6.19)</a> and <a href="#mjx-eqn-6.20">(6.20)</a>. If you are not convinced, there is an exercise at the end 
+<p>The factor 2 in front of \( c \) is because we now need to take two steps, and we accumulate a total error of \( 2c(h/2)^2=ch^2/2 \). It might not be completely 
+obvious that the constant \( c \) should be the same in equation <a href="#mjx-eqn-8.19">(8.19)</a> and <a href="#mjx-eqn-8.20">(8.20)</a>. If you are not convinced, there is an exercise at the end 
 of the chapter.  
 We define:
+</p>
 $$
 \begin{align}
-\Delta\equiv y^*_1-y_1=c\frac{h^2}{2}.\tag{6.21}
+\Delta\equiv y^*_1-y_1=c\frac{h^2}{2}.\tag{8.21}
 \end{align}
 $$
 
-The truncation error in equation <a href="#mjx-eqn-6.20">(6.20)</a> is:
+<p>The truncation error in equation <a href="#mjx-eqn-8.20">(8.20)</a> is:</p>
 $$
 \begin{align}
-\epsilon=y(t_1)-y_1=2c\left(\frac{h}{2}\right)^2=\Delta.\tag{6.22}
+\epsilon=y(t_1)-y_1=2c\left(\frac{h}{2}\right)^2=\Delta.\tag{8.22}
 \end{align}
 $$
 
-Now we have everything we need: We want the local error to be smaller than some predefined
+<p>Now we have everything we need: We want the local error to be smaller than some predefined
 tolerance, \( \epsilon^\prime \), or equivalently 
 that \( \epsilon\le\epsilon^\prime \). 
 To achieve this we need to use an optimal step size, \( h^\prime \),  that gives us exactly the desired error:
+</p>
 $$
 \begin{align}
-\epsilon^\prime=c\frac{{h^\prime}^2}{2}.\tag{6.23}
+\epsilon^\prime=c\frac{{h^\prime}^2}{2}.\tag{8.23}
 \end{align}
 $$
 
-Dividing equation <a href="#mjx-eqn-6.23">(6.23)</a> by equation <a href="#mjx-eqn-6.22">(6.22)</a>, we can estimate the optimal step size:
+<p>Dividing equation <a href="#mjx-eqn-8.23">(8.23)</a> by equation <a href="#mjx-eqn-8.22">(8.22)</a>, we can estimate the optimal step size:</p>
 $$
 \begin{align}
-h^\prime=h\sqrt{\left|\frac{\epsilon^\prime}{\epsilon}\right|},\tag{6.24}
+h^\prime=h\sqrt{\left|\frac{\epsilon^\prime}{\epsilon}\right|},\tag{8.24}
 \end{align}
 $$
 
-where the estimated error, \( \epsilon \), is calculated from equation <a href="#mjx-eqn-6.22">(6.22)</a>.
-Equation <a href="#mjx-eqn-6.24">(6.24)</a> serves two purposes, if the estimated error \( \epsilon \) is higher than the tolerance, \( \epsilon^\prime \), we have specified it will 
+<p>where the estimated error, \( \epsilon \), is calculated from equation <a href="#mjx-eqn-8.22">(8.22)</a>.
+Equation <a href="#mjx-eqn-8.24">(8.24)</a> serves two purposes, if the estimated error \( \epsilon \) is higher than the tolerance, \( \epsilon^\prime \), we have specified it will 
 give us an estimate for the step size we should choose in order to achieve a higher accuracy, if on the other hand \( \epsilon^\prime > \epsilon \), then we 
-get an estimate for the next, larger step. Before the implementation we note, as we did for the Romberg integration, that equation <a href="#mjx-eqn-6.22">(6.22)</a> 
-also gives us an estimate for the error term in equation <a href="#mjx-eqn-6.20">(6.20)</a> as an improved estimate of \( y_1 \). This we get for
+get an estimate for the next, larger step. Before the implementation we note, as we did for the Romberg integration, that equation <a href="#mjx-eqn-8.22">(8.22)</a> 
+also gives us an estimate for the error term in equation <a href="#mjx-eqn-8.20">(8.20)</a> as an improved estimate of \( y_1 \). This we get for
 free and will make our Euler algorithm accurate to \( h^3 \), hence the improved Euler step, \( \hat{y_1} \), is to <em>subtract</em> the error
 term from our previous estimate:
+</p>
 $$
 \begin{align}
 \hat{y_1}=y_1-\epsilon=2y_1-y_1^*.
-\tag{6.25}
+\tag{8.25}
 \end{align}
 $$
 
-Below is an implementation of the adaptive Euler algorithm:
-<p>
+<p>Below is an implementation of the adaptive Euler algorithm:</p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">one_step</span>(c_old, c_in,h):
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">one_step</span>(c_old, c_in,h):
     <span style="color: #008000; font-weight: bold">return</span> (<span style="color: #666666">1-</span>h)<span style="color: #666666">*</span>c_old<span style="color: #666666">+</span>h<span style="color: #666666">*</span>c_in
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">adaptive_euler</span>(c_into,c_init,t_final,tol<span style="color: #666666">=1e-4</span>):
     f<span style="color: #666666">=</span>[];t<span style="color: #666666">=</span>[]
-    c_in    <span style="color: #666666">=</span> c_into <span style="color: #408080; font-style: italic">#freshwater into tank</span>
-    c_old   <span style="color: #666666">=</span> c_init <span style="color: #408080; font-style: italic">#seawater present </span>
+    c_in    <span style="color: #666666">=</span> c_into <span style="color: #3D7B7B; font-style: italic">#freshwater into tank</span>
+    c_old   <span style="color: #666666">=</span> c_init <span style="color: #3D7B7B; font-style: italic">#seawater present </span>
     ti<span style="color: #666666">=0.</span>; h_new<span style="color: #666666">=1e-3</span>;
     no_steps<span style="color: #666666">=0</span>
     global_err<span style="color: #666666">=0.</span>
     <span style="color: #008000; font-weight: bold">while</span>(ti <span style="color: #666666">&lt;=</span> t_final):
         t<span style="color: #666666">.</span>append(ti); f<span style="color: #666666">.</span>append(c_old)
-        toli<span style="color: #666666">=10.*</span>tol; <span style="color: #408080; font-style: italic"># a high init tolerance to enter while loop</span>
-        <span style="color: #008000; font-weight: bold">while</span>(toli<span style="color: #666666">&gt;</span>tol):<span style="color: #408080; font-style: italic"># first two small steps</span>
+        toli<span style="color: #666666">=10.*</span>tol; <span style="color: #3D7B7B; font-style: italic"># a high init tolerance to enter while loop</span>
+        <span style="color: #008000; font-weight: bold">while</span>(toli<span style="color: #666666">&gt;</span>tol):<span style="color: #3D7B7B; font-style: italic"># first two small steps</span>
             hi<span style="color: #666666">=</span>h_new
             k1 <span style="color: #666666">=</span> one_step(c_old,c_in,hi<span style="color: #666666">*.5</span>)
             k2 <span style="color: #666666">=</span> one_step(k1,c_in,hi<span style="color: #666666">*.5</span>)
-            <span style="color: #408080; font-style: italic"># ... and one large step</span>
+            <span style="color: #3D7B7B; font-style: italic"># ... and one large step</span>
             k3 <span style="color: #666666">=</span> one_step(c_old,c_in,hi)
             toli <span style="color: #666666">=</span> <span style="color: #008000">abs</span>(k3<span style="color: #666666">-</span>k2)
             h_new<span style="color: #666666">=</span>hi<span style="color: #666666">*</span>np<span style="color: #666666">.</span>sqrt(tol<span style="color: #666666">/</span>toli)
             no_steps<span style="color: #666666">+=3</span>
         toli<span style="color: #666666">=1.</span>
-        c_old<span style="color: #666666">=2*</span>k2<span style="color: #666666">-</span>k3 <span style="color: #408080; font-style: italic"># higher order correction</span>
- <span style="color: #408080; font-style: italic"># normal Euler, uncomment and inspect the global error</span>
- <span style="color: #408080; font-style: italic">#       c_old = k2 </span>
+        c_old<span style="color: #666666">=2*</span>k2<span style="color: #666666">-</span>k3 <span style="color: #3D7B7B; font-style: italic"># higher order correction</span>
+ <span style="color: #3D7B7B; font-style: italic"># normal Euler, uncomment and inspect the global error</span>
+ <span style="color: #3D7B7B; font-style: italic">#       c_old = k2 </span>
         ti   <span style="color: #666666">+=</span> hi
         global_err <span style="color: #666666">+=</span> <span style="color: #008000">abs</span>(np<span style="color: #666666">.</span>exp(<span style="color: #666666">-</span>ti)<span style="color: #666666">-</span>c_old)
     <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;No steps=&quot;</span>, no_steps, <span style="color: #BA2121">&quot;Global Error=&quot;</span>, global_err)
     <span style="color: #008000; font-weight: bold">return</span> t,f
-</pre></div>
-<p>
-<center> <!-- figure label: --> <div id="fig:ode:adapt_euler"></div> <!-- FIGURE -->
-<hr class="figure">
-<center><p class="caption">Figure 27:  The concentration in the tank using adaptive Euler. Number of Euler steps are: 3006, 117, 48 and 36 for the different step sizes.  <!-- caption label: fig:ode:adapt_euler --> </p></center>
-<p><img src="fig-ode/adaptive_euler.png" align="bottom" width=800></p>
-</center>
-
-<p>
-In figure <a href="#fig:ode:adapt_euler">27</a> the result of the implementation is shown. 
-Note that the number of steps for an accuracy of \( 10^{-6} \) is only about 3000. Without knowing anything about the accuracy, we would have to assume
-that we needed a step size of the order of \( h \) in order to reach a local accuracy of \( h \) because of equation <a href="#mjx-eqn-6.12">(6.12)</a>. In the current case,
-we would have needed \( 10^7 \) steps, which would lead to unnecessary long simulation times.
-<div class="alert alert-block alert-success alert-text-normal"><b>Local error and bounds.</b>
-In the previous example we set an absolute tolerance, and required that our estimate \( y_n \) always is within a certain bound
-of the true  solution \( y(t_n) \), i.e. \( |y(t_n)-y_n|\le\epsilon^\prime \). This is a very strong demand, and sometimes it makes more 
-sense to require that we also accept a relative tolerance proportional to function value. In some areas the solution might have a very large
-value, and then another possibility would be to have an \( \epsilon^\prime \) that varied with the function value: \( \epsilon^\prime = atol +|y|rtol \), where 'atol' is the absolute tolerance and 'rtol' is the relative tolerance. A sensible choice would be to set 'atol=rtol' (e.g. = \( 10^{-4} \)).
-
-<p>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 
-<h1 id="___sec93" class="anchor">Runge-Kutta Methods </h1>
+<center> <!-- figure label: --> <div id="fig:ode:adapt_euler"></div> <!-- FIGURE -->
+<hr class="figure">
+<center>
+<p class="caption">Figure 34:  The concentration in the tank using adaptive Euler. Number of Euler steps are: 3006, 117, 48 and 36 for the different step sizes.  <!-- caption label: fig:ode:adapt_euler --> </p>
+</center>
+<p><img src="fig-ode/adaptive_euler.png" align="bottom" width=800></p>
+</center>
 
-<p>
+<p>In figure <a href="#fig:ode:adapt_euler">34</a> the result of the implementation is shown. 
+Note that the number of steps for an accuracy of \( 10^{-6} \) is only about 3000. Without knowing anything about the accuracy, we would have to assume
+that we needed a step size of the order of \( h \) in order to reach a local accuracy of \( h \) because of equation <a href="#mjx-eqn-8.12">(8.12)</a>. In the current case,
+we would have needed \( 10^7 \) steps, which would lead to unnecessary long simulation times.
+</p>
+<div class="alert alert-block alert-success alert-text-normal"><b>Local error and bounds</b>
+<p>In the previous example we set an absolute tolerance, and required that our estimate \( y_n \) always is within a certain bound
+of the true  solution \( y(t_n) \), i.e. \( |y(t_n)-y_n|\le\epsilon^\prime \). This is a very strong demand, and sometimes it makes more 
+sense to require that we also accept a relative tolerance proportional to function value. In some areas the solution might have a very large
+value, and then another possibility would be to have an \( \epsilon^\prime \) that varied with the function value: \( \epsilon^\prime = atol +|y|rtol \), where 'atol' is the absolute tolerance and 'rtol' is the relative tolerance. A sensible choice would be to set 'atol=rtol' (e.g. = \( 10^{-4} \)). 
+</p>
+</div>
+
+<h1 id="runge-kutta-methods" class="anchor">Runge-Kutta Methods </h1>
+
 <center> <!-- figure label: --> <div id="fig:ode:rk"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 28:  Illustration of the Euler algorithm, and a motivation for using the slope a distance from the \( t_n \). <!-- caption label: fig:ode:rk --> </p></center>
+<center>
+<p class="caption">Figure 35:  Illustration of the Euler algorithm, and a motivation for using the slope a distance from the \( t_n \). <!-- caption label: fig:ode:rk --> </p>
+</center>
 <p><img src="fig-ode/rk_fig.png" align="bottom" width=800></p>
 </center>
 
-<p>
-The Euler method only have an accuracy of order \( h \), and a global error that do not go to zero as the step size decrease. 
-The Runge-Kutta methods may be motivated by inspecting the Euler method in figure <a href="#fig:ode:rk">28</a>. The Euler method uses information from
+<p>The Euler method only have an accuracy of order \( h \), and a global error that do not go to zero as the step size decrease. 
+The Runge-Kutta methods may be motivated by inspecting the Euler method in figure <a href="#fig:ode:rk">35</a>. The Euler method uses information from
 the previous time step to estimate the value at the new time step. The Runge Kutta methods uses the information about the slope between the
-points \( t_n \) and \( t_n+h \). By inspecting figure <a href="#fig:ode:rk">28</a>, we clearly see that by using the slope at \( t_n+h/2 \) would give us a
+points \( t_n \) and \( t_n+h \). By inspecting figure <a href="#fig:ode:rk">35</a>, we clearly see that by using the slope at \( t_n+h/2 \) would give us a
 significant improvement. The 2. order Runge-Kutta method can be derived by Taylor expanding the solution around \( t_n+h/2 \), we do this by
 setting \( t_n+h=t_n+h/2+h/2 \):
+</p>
 $$
 \begin{align}
 y(t_n+h)=y(t_n+\frac{h}{2})+\frac{h}{2}\left.\frac{dy}{dt}\right|_{t=t_n+h/2}+\frac{h^2}{4}\left.\frac{d^2y}{dt^2}\right|_{t=t_n+h/2}
-+\mathcal{O}(h^3).\tag{6.26}
++\mathcal{O}(h^3).\tag{8.26}
 \end{align}
 $$
 
-Similarly we can expand the solution in \( y(t_n) \) about \( t_n+h/2 \), by setting \( t_n=t_n+h/2-h/2 \):
+<p>Similarly we can expand the solution in \( y(t_n) \) about \( t_n+h/2 \), by setting \( t_n=t_n+h/2-h/2 \):</p>
 $$
 \begin{align}
 y(t_n)=y(t_n+\frac{h}{2})-\frac{h}{2}\left.\frac{dy}{dt}\right|_{t=t_n+h/2}+\frac{h^2}{4}\left.\frac{d^2y}{dt^2}\right|_{t=t_n+h/2}
--\mathcal{O}(h^3).\tag{6.27}
+-\mathcal{O}(h^3).\tag{8.27}
 \end{align}
 $$
 
-Subtracting these two equations the term \( y(t_n+\frac{h}{2}) \), and all even powers in the derivative cancels out:
+<p>Subtracting these two equations the term \( y(t_n+\frac{h}{2}) \), and all even powers in the derivative cancels out:</p>
 $$
 \begin{align}
 y(t_n+h)&=y(t_n)+h\left.\frac{dy}{dt}\right|_{t=t_n+h/2}+\mathcal{O}(h^3),\nonumber\\ 
-y(t_n+h)&=y(t_n)+hf(y_{n+h/2},t_n+h/2)+\mathcal{O}(h^3).\tag{6.28}
+y(t_n+h)&=y(t_n)+hf(y_{n+h/2},t_n+h/2)+\mathcal{O}(h^3).\tag{8.28}
 \end{align}
 $$
 
-In the last equation, we have used equation <a href="#mjx-eqn-6.10">(6.10)</a>. Note that we now have an expression that is very similar to Eulers algorithm,
+<p>In the last equation, we have used equation <a href="#mjx-eqn-8.10">(8.10)</a>. Note that we now have an expression that is very similar to Eulers algorithm,
 but it is accurate to order \( h^3 \). There is one problem, and that is that the function \( f \) is to be evaluated at the point \( y_{n+1/2}=y(t_n+h/2) \)
-which we do not know. This can be fixed by using Eulers algorithm: \( y_{n+1/2}=y_n+h/2f(y_n,t_n) \). We can do this even if Eulers algorithm has an error term of order \( h^2 \), because the \( f \) in equation <a href="#mjx-eqn-6.28">(6.28)</a> is multiplied by \( h \), and thus our algorithm is still has an error term of order \( h^3 \). 
+which we do not know. This can be fixed by using Eulers algorithm: \( y_{n+1/2}=y_n+h/2f(y_n,t_n) \). We can do this even if Eulers algorithm has an error term of order \( h^2 \), because the \( f \) in equation <a href="#mjx-eqn-8.28">(8.28)</a> is multiplied by \( h \), and thus our algorithm is still has an error term of order \( h^3 \). 
+</p>
 <div class="alert alert-block alert-success alert-text-normal"><b>The 2. order Runge-Kutta:</b>
 $$
 \begin{align}
 k_1&=hf(y_n,t_n)\nonumber\\ 
 k_2&=hf(y_n+\frac{1}{2}k_1,t_n+h/2)\nonumber\\ 
-y_{n+1}&=y_n+k_2\tag{6.29}
+y_{n+1}&=y_n+k_2\tag{8.29}
 \end{align}
 $$
 </div>
 
-Below is a Python implementation of equation <a href="#mjx-eqn-6.29">(6.29)</a>:
-<p>
+<p>Below is a Python implementation of equation <a href="#mjx-eqn-8.29">(8.29)</a>:</p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">fm</span>(c_old,c_in):
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">fm</span>(c_old,c_in):
     <span style="color: #008000; font-weight: bold">return</span> c_in<span style="color: #666666">-</span>c_old
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">rk2_step</span>(c_old, c_in, h):
@@ -945,8 +1130,8 @@ Below is a Python implementation of equation <a href="#mjx-eqn-6.29">(6.29)</a>:
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">ode_solv</span>(c_into,c_init,t_final,h):
     f<span style="color: #666666">=</span>[];t<span style="color: #666666">=</span>[]
-    c_in  <span style="color: #666666">=</span> c_into <span style="color: #408080; font-style: italic">#freshwater into tank</span>
-    c_old <span style="color: #666666">=</span> c_init <span style="color: #408080; font-style: italic">#seawater present </span>
+    c_in  <span style="color: #666666">=</span> c_into <span style="color: #3D7B7B; font-style: italic">#freshwater into tank</span>
+    c_old <span style="color: #666666">=</span> c_init <span style="color: #3D7B7B; font-style: italic">#seawater present </span>
     ti<span style="color: #666666">=0.</span>
     <span style="color: #008000; font-weight: bold">while</span>(ti <span style="color: #666666">&lt;=</span> t_final):
         t<span style="color: #666666">.</span>append(ti); f<span style="color: #666666">.</span>append(c_old)
@@ -954,27 +1139,43 @@ Below is a Python implementation of equation <a href="#mjx-eqn-6.29">(6.29)</a>:
         c_old <span style="color: #666666">=</span> c_new
         ti   <span style="color: #666666">+=</span> h
     <span style="color: #008000; font-weight: bold">return</span> t,f
-</pre></div>
-<p>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <center> <!-- figure label: --> <div id="fig:ode:rk2"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 29:  The concentration in the tank for different step size \( \Delta t \).  <!-- caption label: fig:ode:rk2 --> </p></center>
+<center>
+<p class="caption">Figure 36:  The concentration in the tank for different step size \( \Delta t \).  <!-- caption label: fig:ode:rk2 --> </p>
+</center>
 <p><img src="fig-ode/rk2.png" align="bottom" width=800></p>
 </center>
 
-<p>
-In figure <a href="#fig:ode:rk2">29</a> the result of the implementation is shown. 
+<p>In figure <a href="#fig:ode:rk2">36</a> the result of the implementation is shown. 
 Note that when comparing Runge-Kutta 2. order with Eulers method,
-see figure <a href="#fig:ode:rk2">29</a> and <a href="#fig:ode:euler">26</a>,
+see figure <a href="#fig:ode:rk2">36</a> and <a href="#fig:ode:euler">33</a>,
 we of course have 
 the obvious result that a larger step size can be taken, without loosing numerical accuracy. It is also worth noting that we can take steps that
 is larger than the tank volume. Eulers method failed whenever the time step was larger than one tank volume (\( h=t/\tau>1 \)), whereas the Runge-Kutta 
 method finds a physical solution for step sizes lower than twice the tank volume. If the step size is larger, we see that the concentration in the tank
-increases, which is clearly unphysical.
+increases, which is clearly unphysical. 
+</p>
 
-<p>
-The Runge-Kutta fourth order method is one of he most used methods, it is accurate to order \( h^4 \), and has an error of order \( h^5 \). The development of the 
+<p>The Runge-Kutta fourth order method is one of he most used methods, it is accurate to order \( h^4 \), and has an error of order \( h^5 \). The development of the 
 algorithm itself is similar to the 2. order method, but of course more involved. We just quote the result:
+</p>
 <div class="alert alert-block alert-success alert-text-normal"><b>The 4. order Runge-Kutta:</b>
 $$
 \begin{align}
@@ -982,72 +1183,73 @@ k_1&=hf(y_n,t_n)\nonumber\\
 k_2&=hf(y_n+\frac{1}{2}k_1,t_n+h/2)\nonumber\\ 
 k_3&=hf(y_n+\frac{1}{2}k_2,t_n+h/2)\nonumber\\ 
 k_4&=hf(y_n+k_3,t_n+h)\nonumber\\ 
-y_{n+1}&=y_n+\frac{1}{6}(k_1+2k_2+2k_3+k_4)\tag{6.30}
+y_{n+1}&=y_n+\frac{1}{6}(k_1+2k_2+2k_3+k_4)\tag{8.30}
 \end{align}
 $$
 </div>
 
-In figure <a href="#fig:ode:rk4">30</a> the result of the Runge-Kutta fourth order is shown, by comparing it to figure <a href="#fig:ode:rk2">29</a> it is easy to see that a larger step size can be chosen.     
-<!-- Below is a Python implementation of equation <a href="#mjx-eqn-6.30">(6.30)</a>: -->
+<p>In figure <a href="#fig:ode:rk4">37</a> the result of the Runge-Kutta fourth order is shown, by comparing it to figure <a href="#fig:ode:rk2">36</a> it is easy to see that a larger step size can be chosen.     </p>
+<!-- Below is a Python implementation of equation <a href="#mjx-eqn-8.30">(8.30)</a>: -->
 <!-- @@@CODE src-ode/rk4.py  fromto: def fm@# rest -->
 
-<p>
 <center> <!-- figure label: --> <div id="fig:ode:rk4"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 30:  The concentration in the tank for different step size \( \Delta t \).  <!-- caption label: fig:ode:rk4 --> </p></center>
+<center>
+<p class="caption">Figure 37:  The concentration in the tank for different step size \( \Delta t \).  <!-- caption label: fig:ode:rk4 --> </p>
+</center>
 <p><img src="fig-ode/rk4.png" align="bottom" width=800></p>
 </center>
 
-<p>
 <!-- % endif -->
-
-<h2 id="___sec94" class="anchor">Adaptive step size - Runge-Kutta Method </h2>
-Just as we did with Eulers method, we can implement an adaptive method. The derivation is exactly the same, but this time our method is accurate to
+<h2 id="adaptive-step-size-runge-kutta-method" class="anchor">Adaptive step size - Runge-Kutta Method </h2>
+<p>Just as we did with Eulers method, we can implement an adaptive method. The derivation is exactly the same, but this time our method is accurate to
 fourth order, hence the error term is of order \( h^5 \). We start by taking one large step of size \( h \), our estimate, \( y_1^* \) is related to the true 
 solution, \( y(t_1) \), in the following way:
+</p>
 $$
 \begin{align}
-y^*_1&=y(t_1)+ch^5,\tag{6.31}
+y^*_1&=y(t_1)+ch^5,\tag{8.31}
 \end{align}
 $$
 
-Next, we take two steps of half the size, \( h/2 \), hence:
+<p>Next, we take two steps of half the size, \( h/2 \), hence:</p>
 $$
 \begin{align}
-y_1&=y(t)+2c\left(\frac{h}{2}\right)^5.\tag{6.32}
+y_1&=y(t)+2c\left(\frac{h}{2}\right)^5.\tag{8.32}
 \end{align}
 $$
 
-Subtracting equation <a href="#mjx-eqn-6.31">(6.31)</a> and <a href="#mjx-eqn-6.32">(6.32)</a>, we find an expression similar to equation <a href="#mjx-eqn-6.21">(6.21)</a>:
+<p>Subtracting equation <a href="#mjx-eqn-8.31">(8.31)</a> and <a href="#mjx-eqn-8.32">(8.32)</a>, we find an expression similar to equation <a href="#mjx-eqn-8.21">(8.21)</a>:</p>
 $$
 \begin{align}
-\Delta\equiv& y_1^*-y_1=c\frac{15}{16}h^5,\tag{6.33}
+\Delta\equiv& y_1^*-y_1=c\frac{15}{16}h^5,\tag{8.33}
 \end{align}
 $$
 
-or \( c=16\Delta/(15h^5) \). For the Euler scheme, \( \Delta \) also happened to be equal to the truncation error, but in this case it is:
+<p>or \( c=16\Delta/(15h^5) \). For the Euler scheme, \( \Delta \) also happened to be equal to the truncation error, but in this case it is:</p>
 $$
 \begin{align}
-\epsilon=2c\left(\frac{h}{2}\right)^5=\frac{\Delta}{15}\tag{6.34}
+\epsilon=2c\left(\frac{h}{2}\right)^5=\frac{\Delta}{15}\tag{8.34}
 \end{align}
 $$
 
-we want the local error, \( \epsilon \), to be smaller than some tolerance, \( \epsilon^\prime \).  
+<p>we want the local error, \( \epsilon \), to be smaller than some tolerance, \( \epsilon^\prime \).  
 The optimal step size, \( h^\prime \),  that gives us exactly the desired error is then:
+</p>
 $$
 \begin{align}
-\epsilon^\prime=2c\left(\frac{{h^\prime}}{2}\right)^5.\tag{6.35}
+\epsilon^\prime=2c\left(\frac{{h^\prime}}{2}\right)^5.\tag{8.35}
 \end{align}
 $$
 
-Dividing equation <a href="#mjx-eqn-6.35">(6.35)</a> by equation <a href="#mjx-eqn-6.34">(6.34)</a>, we can estimate the optimal step size:
+<p>Dividing equation <a href="#mjx-eqn-8.35">(8.35)</a> by equation <a href="#mjx-eqn-8.34">(8.34)</a>, we can estimate the optimal step size:</p>
 $$
 \begin{align}
-h^\prime=h\left|\frac{\epsilon}{\epsilon}\right|^{1/5},\tag{6.36}
+h^\prime=h\left|\frac{\epsilon}{\epsilon}\right|^{1/5},\tag{8.36}
 \end{align}
 $$
 
-\( \epsilon \) can be calculated from equation <a href="#mjx-eqn-6.34">(6.34)</a>. In figure <a href="#fig:ode:adaptive_rk4">31</a> the result of an  implementation is shown (see the exercises). 
+<p>\( \epsilon \) can be calculated from equation <a href="#mjx-eqn-8.34">(8.34)</a>. In figure <a href="#fig:ode:adaptive_rk4">38</a> the result of an  implementation is shown (see the exercises). </p>
 <!-- Below is an implementation -->
 <!-- % if FORMAT == 'ipynb': -->
 <!-- Run the script below and inspect the results. -->
@@ -1056,18 +1258,17 @@ $$
 <!-- % if FORMAT != 'ipynb': -->
 <!-- @@@CODE src-ode/adaptive_rk4.py  fromto: def fm@# rest -->
 
-<p>
 <center> <!-- figure label: --> <div id="fig:ode:adaptive_rk4"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 31:  The concentration in the tank for different step size \( \Delta t \). Number of rk4 steps are: 138, 99, 72 and 66 for the different step sizes and 'rtol=0', for 'rtol=tol' the number of rk4 steps are 81, 72, 63, 63. <!-- caption label: fig:ode:adaptive_rk4 --> </p></center>
+<center>
+<p class="caption">Figure 38:  The concentration in the tank for different step size \( \Delta t \). Number of rk4 steps are: 138, 99, 72 and 66 for the different step sizes and 'rtol=0', for 'rtol=tol' the number of rk4 steps are 81, 72, 63, 63. <!-- caption label: fig:ode:adaptive_rk4 --> </p>
+</center>
 <p><img src="fig-ode/adaptive_rk4.png" align="bottom" width=800></p>
 </center>
 
-<p>
 <!-- % endif -->
 
-<p>
-In general we can use the same procedure any method accurate to order \( h^p \), and you can easily verify that:
+<p>In general we can use the same procedure any method accurate to order \( h^p \), and you can easily verify that:</p>
 <div class="alert alert-block alert-success alert-text-normal"><b>Error term and step size for a \( h^p \) method:</b>
 $$
 \begin{align}
@@ -1077,21 +1278,21 @@ h^\prime&=\beta h\left|\frac{\epsilon}{\epsilon_0}\right|^{\frac{1}{p+1}},label{
 \end{align}
 $$
 
-where \( \beta \) is a safety factor \( \beta\simeq0.8,0.9 \), and you should always be careful that the step size do not become too large so that
-the method breaks down. This can happens when \( \epsilon \) is very low, which may happen if \( y_1^*\simeq y_1 \) and/or if \( y_1^*\simeq y_1\simeq 0 \).
+<p>where \( \beta \) is a safety factor \( \beta\simeq0.8,0.9 \), and you should always be careful that the step size do not become too large so that
+the method breaks down. This can happens when \( \epsilon \) is very low, which may happen if \( y_1^*\simeq y_1 \) and/or if \( y_1^*\simeq y_1\simeq 0 \).  
+</p>
 </div>
 
-
-<h2 id="___sec95" class="anchor">Conservation of Mass </h2>
-A mathematical model of a physical system should always be formulated in such a way that it is
+<h2 id="conservation-of-mass" class="anchor">Conservation of Mass </h2>
+<p>A mathematical model of a physical system should always be formulated in such a way that it is
 consistent with the laws of nature. In practical situations this statement is usually equivalent to state that
 the mathematical model should respect conservation laws. The conservation laws can be conservation of mass, energy, momentum, 
 electrical charge, etc. In our
 example with the mixing tank, we were able to derive an expression for the concentration of salt out of
-the tank, equation <a href="#mjx-eqn-6.5">(6.5)</a>, by <em>demanding</em> conservation of mass (see equation <a href="#mjx-eqn-6.2">(6.2)</a>).
+the tank, equation <a href="#mjx-eqn-8.5">(8.5)</a>, by <em>demanding</em> conservation of mass (see equation <a href="#mjx-eqn-8.2">(8.2)</a>).
+</p>
 
-<p>
-A natural question to ask is then: If our mathematical model respect conservation of mass, are we sure that our 
+<p>A natural question to ask is then: If our mathematical model respect conservation of mass, are we sure that our 
 solution method respect conservation of mass? We of course expect that
 when the grid spacing approaches zero our numerical solution will get closer and closer to the analytical
 solution. Clearly when \( \Delta x\to 0 \), the mass is conserved. So what is the problem? The problem is that in many practical problems
@@ -1101,25 +1302,42 @@ be a very small part of a very big system. A very good test of any code is to in
 the conservation laws. If we know that our implementation respect e.g. mass conservation at the discrete level, we can easily
 test mass conservation by summing up all the mass entering, and subtracting the mass out of and present in our system.
 If the mass is not conserved exactly, there is a good chance that there is a bug in our implementation.
+</p>
 
-<p>
-If we now turn to our system, we know that the total amount of salt in the system when we start is \( C(0)V \).
+<p>If we now turn to our system, we know that the total amount of salt in the system when we start is \( C(0)V \).
 The amount entering is zero, and the amount leaving each time step is \( q(t)C(t)\Delta t \). Thus we should
 expect that if we add the amount of salt in the tank to the amount that has left the system
 we should always get an amount that is equal to the original amount. Alternatively, we expect
 \( \int_{t_0}^t qC(t)dt + C(t)V -C(0)V=0 \). Adding the following code in the <code>while(ti &lt;= t_final):</code> loop:
-<p>
+</p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>mout <span style="color: #666666">+=</span> <span style="color: #666666">0.5*</span>(c_old<span style="color: #666666">+</span>c_new)<span style="color: #666666">*</span>q<span style="color: #666666">*</span>dt
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">mout <span style="color: #666666">+=</span> <span style="color: #666666">0.5*</span>(c_old<span style="color: #666666">+</span>c_new)<span style="color: #666666">*</span>q<span style="color: #666666">*</span>dt
 mbal  <span style="color: #666666">=</span> (c_new<span style="color: #666666">*</span>vol<span style="color: #666666">+</span>mout<span style="color: #666666">-</span>vol<span style="color: #666666">*</span>c_init)<span style="color: #666666">/</span>(vol<span style="color: #666666">*</span>c_init)
-</pre></div>
-<p>
-it is possible to calculate the amount of mass lost (note that we have used the
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>it is possible to calculate the amount of mass lost (note that we have used the
 trapezoidal formula to calculate the integral). In the table below the fraction of mass lost relative to the original
 amount is shown for the various numerical methods.
-
-<p>
+</p>
 
 <div class="row">
   <div class="col-xs-6">
@@ -1136,86 +1354,109 @@ amount is shown for the various numerical methods.
     </table>
   </div> <!-- col-xs-6 -->
 </div> <!-- cell row -->
-<p>
-We clearly see from the table that the Runge-Kutta methods performs better than Eulers method, but
-<em>all of the methods violates mass balance</em>.
 
-<p>
-This might not be a surprise as we know that our numerical solution is always an approximation to the analytical solution. How can 
+<p>We clearly see from the table that the Runge-Kutta methods performs better than Eulers method, but
+<em>all of the methods violates mass balance</em>. 
+</p>
+
+<p>This might not be a surprise as we know that our numerical solution is always an approximation to the analytical solution. How can 
 we then formulate an algorithm that will respect conservation laws at the discrete level? It turns out that for Eulers method it is not
-so difficult. Eulers algorithm at the discrete level (see equation <a href="#mjx-eqn-6.6">(6.6)</a>) is actually a two-step process: first we inject the fresh water while we remove the ``old`` fluid <em>and then we mix</em>. By thinking about the
+so difficult. Eulers algorithm at the discrete level (see equation <a href="#mjx-eqn-8.6">(8.6)</a>) is actually a two-step process: first we inject the fresh water while we remove the ``old`` fluid <em>and then we mix</em>. By thinking about the
 problem this way, it makes more sense to calculate the mass out of the tank as \( \sum_kq_kC_k\Delta t_k \). If we in our implementation calculates the mass out of the tank as:
-<p>
+</p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>mout <span style="color: #666666">+=</span> c_old<span style="color: #666666">*</span>q<span style="color: #666666">*</span>dt
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">mout <span style="color: #666666">+=</span> c_old<span style="color: #666666">*</span>q<span style="color: #666666">*</span>dt
 mbal  <span style="color: #666666">=</span> (c_new<span style="color: #666666">*</span>vol<span style="color: #666666">+</span>mout<span style="color: #666666">-</span>vol<span style="color: #666666">*</span>c_init)<span style="color: #666666">/</span>(vol<span style="color: #666666">*</span>c_init)
-</pre></div>
-<p>
-We easily find that the mass is exactly conserved at every time for Eulers method. The concentration in the tank will of course not be any closer to the 
-analytical solution, but if our mixing tank was part of a much bigger system we could make sure that the mass would always be conserved if we make
-sure that the mass out of the tank and into the next part of the system was equal to \( qC(t)\Delta t \).
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<h1 id="___sec96" class="anchor">Solving a set of ODE equations </h1>
-What happens if we have more than one equation that needs to be solved? If we continue with our current example, we might be interested in what would happen 
+<p>We easily find that the mass is exactly conserved at every time for Eulers method. The concentration in the tank will of course not be any closer to the 
+analytical solution, but if our mixing tank was part of a much bigger system we could make sure that the mass would always be conserved if we make
+sure that the mass out of the tank and into the next part of the system was equal to \( qC(t)\Delta t \). 
+</p>
+<h1 id="solving-a-set-of-ode-equations" class="anchor">Solving a set of ODE equations </h1>
+<p>What happens if we have more than one equation that needs to be solved? If we continue with our current example, we might be interested in what would happen 
 if we had multiple tanks in series. This could be a very simple model to describe the cleaning  of a salty lake by injecting fresh water into it, but at 
-the same time this lake was connected to two nearby fresh water lakes, as illustrated in figure <a href="#fig:ode:cstr3">32</a>. The weakest part of the model is the assumption about 
+the same time this lake was connected to two nearby fresh water lakes, as illustrated in figure <a href="#fig:ode:cstr3">39</a>. The weakest part of the model is the assumption about 
 complete mixing, in a practical situation we could enforce complete mixing with the salty water in the first tank by injecting fresh water at multiple point in the 
 lake. For the two next lakes, the degree of mixing is not obvious, but salt water is heavier than fresh water and therefore it would sink and mix with the fresh water. Thus
 if the flow rate was slow, one might imaging that a more or less complete mixing could occur. Our model then could answer questions like, how long time would it take before most
 of the salt water is removed from the first lake, and how much time would it take before most of the salt water was cleared from the whole system? The answer to 
 these questions would give practical input on how much and how fast one should inject the fresh water to clean up the system. If we had 
-data from an actual system, we could compare our model predictions with data from the physical system, and investigate if our model description was correct.
+data from an actual system, we could compare our model predictions with data from the physical system, and investigate if our model description was correct. 
+</p>
 
-<p>
 <center> <!-- figure label: --> <div id="fig:ode:cstr3"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 32:  A simple model for cleaning a salty lake that is connected to two lakes down stream.  <!-- caption label: fig:ode:cstr3 --> </p></center>
+<center>
+<p class="caption">Figure 39:  A simple model for cleaning a salty lake that is connected to two lakes down stream.  <!-- caption label: fig:ode:cstr3 --> </p>
+</center>
 <p><img src="fig-ode/cstr3.png" align="bottom" width=800></p>
 </center>
 
-<p>
-For simplicity we will assume that all the lakes have the same volume, \( V \). The governing equations follows
-as before, by assuming mass balance (equation <a href="#mjx-eqn-6.1">(6.1)</a>):
+<p>For simplicity we will assume that all the lakes have the same volume, \( V \). The governing equations follows
+as before, by assuming mass balance (equation <a href="#mjx-eqn-8.1">(8.1)</a>):
+</p>
 $$
 \begin{align}
 C_0(t+\Delta t)\cdot V - C_0(t)\cdot V &= q(t)\cdot C_\text{in}(t)\cdot \Delta t - q(t)\cdot C_0(t)\cdot \Delta t,\nonumber\\ 
 C_1(t+\Delta t)\cdot V - C_1(t)\cdot V &= q(t)\cdot C_0(t)\cdot \Delta t - q(t)\cdot C_1(t)\cdot \Delta t,\nonumber\\ 
-C_2(t+\Delta t)\cdot V - C_2(t)\cdot V &= q(t)\cdot C_1(t)\cdot \Delta t - q(t)\cdot C_2(t)\cdot \Delta t.\tag{6.37}
+C_2(t+\Delta t)\cdot V - C_2(t)\cdot V &= q(t)\cdot C_1(t)\cdot \Delta t - q(t)\cdot C_2(t)\cdot \Delta t.\tag{8.37}
 \end{align}
 $$
 
-Taking the limit \( \Delta t\to 0 \), we can write equation <a href="#mjx-eqn-6.37">(6.37)</a> as:
+<p>Taking the limit \( \Delta t\to 0 \), we can write equation <a href="#mjx-eqn-8.37">(8.37)</a> as:</p>
 $$
 \begin{align}
-V\frac{dC_0(t)}{dt} &= q(t)\left[C_\text{in}(t) - C_0(t)\right],\tag{6.38}\\ 
-V\frac{dC_1(t)}{dt} &= q(t)\left[C_0(t) - C_1(t)\right],\tag{6.39}\\ 
-V\frac{dC_2(t)}{dt} &= q(t)\left[C_1(t) - C_2(t)\right].\tag{6.40}
+V\frac{dC_0(t)}{dt} &= q(t)\left[C_\text{in}(t) - C_0(t)\right],\tag{8.38}\\ 
+V\frac{dC_1(t)}{dt} &= q(t)\left[C_0(t) - C_1(t)\right],\tag{8.39}\\ 
+V\frac{dC_2(t)}{dt} &= q(t)\left[C_1(t) - C_2(t)\right].\tag{8.40}
 \end{align}
 $$
 
-Let us first derive the analytical solution: Only the first tank is filled with salt water \( C_0(0)=C_{0,0} \), \( C_1(0)=C_2(0)=0 \), and \( C_\text{in}=0 \). 
-The solution to equation <a href="#mjx-eqn-6.38">(6.38)</a> is, as before \( C_0(t)=C_{0,0}e^{-t/\tau} \), inserting this equation into equation <a href="#mjx-eqn-6.39">(6.39)</a> we find:
+<p>Let us first derive the analytical solution: Only the first tank is filled with salt water \( C_0(0)=C_{0,0} \), \( C_1(0)=C_2(0)=0 \), and \( C_\text{in}=0 \). 
+The solution to equation <a href="#mjx-eqn-8.38">(8.38)</a> is, as before \( C_0(t)=C_{0,0}e^{-t/\tau} \), inserting this equation into equation <a href="#mjx-eqn-8.39">(8.39)</a> we find:
+</p>
 $$
 \begin{align}
-V\frac{dC_1(t)}{dt} &= q(t)\left[C_{0,0}e^{-t/\tau} - C_1(t)\right]\tag{6.41},\\ 
-\frac{d}{dt}\left[e^{t/\tau}C_1\right]&= \frac{C_{0,0}}{\tau}\tag{6.42},\\ 
-C_1(t)&=\frac{C_{0,0}t}{\tau}e^{-t/\tau}\tag{6.43}.
+V\frac{dC_1(t)}{dt} &= q(t)\left[C_{0,0}e^{-t/\tau} - C_1(t)\right]\tag{8.41},\\ 
+\frac{d}{dt}\left[e^{t/\tau}C_1\right]&= \frac{C_{0,0}}{\tau}\tag{8.42},\\ 
+C_1(t)&=\frac{C_{0,0}t}{\tau}e^{-t/\tau}\tag{8.43}.
 \end{align}
 $$
 
-where we have use the technique of <a href="https://en.wikipedia.org/wiki/Integrating_factor" target="_self">integrating factors</a> when going from equation <a href="#mjx-eqn-6.41">(6.41)</a> to <a href="#mjx-eqn-6.42">(6.42)</a>. 
-Inserting equation <a href="#mjx-eqn-6.43">(6.43)</a> into equation <a href="#mjx-eqn-6.40">(6.40)</a>, solving the equation in a similar way as for \( C_1 \) we find:
+<p>where we have use the technique of <a href="https://en.wikipedia.org/wiki/Integrating_factor" target="_self">integrating factors</a> when going from equation <a href="#mjx-eqn-8.41">(8.41)</a> to <a href="#mjx-eqn-8.42">(8.42)</a>. 
+Inserting equation <a href="#mjx-eqn-8.43">(8.43)</a> into equation <a href="#mjx-eqn-8.40">(8.40)</a>, solving the equation in a similar way as for \( C_1 \) we find:
+</p>
 $$
 \begin{align}
-V\frac{dC_2(t)}{dt} &= q(t)\left[\frac{C_{0,0}t}{\tau}e^{-t/\tau} - C_2(t)\right],\tag{6.44}\\ 
-\frac{d}{dt}\left[e^{t/\tau}C_2\right]&= \frac{C_{0,0}t}{\tau},\tag{6.45}\\ 
-C_2(t)&=\frac{C_{0,0}t^2}{2\tau^2}e^{-t/\tau}.\tag{6.46}
+V\frac{dC_2(t)}{dt} &= q(t)\left[\frac{C_{0,0}t}{\tau}e^{-t/\tau} - C_2(t)\right],\tag{8.44}\\ 
+\frac{d}{dt}\left[e^{t/\tau}C_2\right]&= \frac{C_{0,0}t}{\tau},\tag{8.45}\\ 
+C_2(t)&=\frac{C_{0,0}t^2}{2\tau^2}e^{-t/\tau}.\tag{8.46}
 \end{align}
 $$
 
-The numerical solution follows the exact same pattern as before if we introduce a vector notation. Before doing that, we rescale the time \( t\to t/\tau \) and the concentrations,
+<p>The numerical solution follows the exact same pattern as before if we introduce a vector notation. Before doing that, we rescale the time \( t\to t/\tau \) and the concentrations,
  \( \hat{C_i}=C_i/C_{0,0} \) for \( i=0,1,2 \), hence:
+</p>
 $$
 \begin{align}
 \frac{d}{dt}
@@ -1233,14 +1474,14 @@ $$
  \hat{C_1}(t) - \hat{C_2}(t)
  \end{array}
  \right),\nonumber
-\tag{6.47}
+\tag{8.47}
 \\ 
  \frac{d\mathbf{\hat{C}}(t)}{dt}&=\mathbf{f}(\mathbf{\hat{C}},t).
-\tag{6.48}
+\tag{8.48}
 \end{align}
 $$
 
-In figure <a href="#fig:ode:rk4_2">33</a> results of an implementation using Runge-Kutta 4. order is shown (see exercises for more details).
+<p>In figure <a href="#fig:ode:rk4_2">40</a> results of an implementation using Runge-Kutta 4. order is shown (see exercises for more details).</p>
 <!-- Below is an implementation using the Runge Kutta 4. order method: -->
 <!-- % if FORMAT == 'ipynb': -->
 <!-- Run the script below and inspect the results. -->
@@ -1249,82 +1490,83 @@ In figure <a href="#fig:ode:rk4_2">33</a> results of an implementation using Run
 <!-- % if FORMAT != 'ipynb': -->
 <!-- @@@CODE src-ode/rk4_2.py  fromto: def fm@# rest -->
 
-<p>
 <center> <!-- figure label: --> <div id="fig:ode:rk4_2"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 33:  The concentration in the tanks.  <!-- caption label: fig:ode:rk4_2 --> </p></center>
+<center>
+<p class="caption">Figure 40:  The concentration in the tanks.  <!-- caption label: fig:ode:rk4_2 --> </p>
+</center>
 <p><img src="fig-ode/rk4_2.png" align="bottom" width=800></p>
 </center>
 
-<p>
 <!-- % endif -->
+<h1 id="stiff-sets-of-ode-and-implicit-methods" class="anchor">Stiff sets of ODE  and implicit methods </h1>
+<p>As already mentioned a couple of times, our system could be part of a much larger system. To illustrate this, let us now assume that we have two 
+tanks in series. The first tank is similar to our original tank, but the second tank is a sampling tank, 1000 times smaller.   
+</p>
 
-<h1 id="___sec97" class="anchor">Stiff sets of ODE  and implicit methods </h1>
-As already mentioned a couple of times, our system could be part of a much larger system. To illustrate this, let us now assume that we have two 
-tanks in series. The first tank is similar to our original tank, but the second tank is a sampling tank, 1000 times smaller.
-
-<p>
 <center> <!-- figure label: --> <div id="fig:ode:cstr2"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 34:  A continuous stirred tank model with a sampling vessel.  <!-- caption label: fig:ode:cstr2 --> </p></center>
+<center>
+<p class="caption">Figure 41:  A continuous stirred tank model with a sampling vessel.  <!-- caption label: fig:ode:cstr2 --> </p>
+</center>
 <p><img src="fig-ode/cstr2.png" align="bottom" width=800></p>
 </center>
 
-<p>
-The governing equations can be found by requiring mass balance for each of the tanks (see equation <a href="#mjx-eqn-6.1">(6.1)</a>:
+<p>The governing equations can be found by requiring mass balance for each of the tanks (see equation <a href="#mjx-eqn-8.1">(8.1)</a>:</p>
 $$
 \begin{align}
 C_0(t+\Delta t)\cdot V_0 - C_0(t)\cdot V_0 &= q(t)\cdot C_\text{in}(t)\cdot \Delta t - q(t)\cdot C_0(t)\cdot \Delta t.\nonumber\\ 
 C_1(t+\Delta t)\cdot V_1 - C_1(t)\cdot V_1 &= q(t)\cdot C_0(t)\cdot \Delta t - q(t)\cdot C_1(t)\cdot \Delta t.
-\tag{6.49}
+\tag{8.49}
 \end{align}
 $$
 
-Taking the limit \( \Delta t\to 0 \), we can write equation <a href="#mjx-eqn-6.49">(6.49)</a> as:
+<p>Taking the limit \( \Delta t\to 0 \), we can write equation <a href="#mjx-eqn-8.49">(8.49)</a> as:</p>
 $$
 \begin{align}
-V_0\frac{dC_0(t)}{dt} &= q(t)\left[C_\text{in}(t) - C_0(t)\right].\tag{6.50}\\ 
-V_1\frac{dC_1(t)}{dt} &= q(t)\left[C_0(t) - C_1(t)\right].\tag{6.51}
+V_0\frac{dC_0(t)}{dt} &= q(t)\left[C_\text{in}(t) - C_0(t)\right].\tag{8.50}\\ 
+V_1\frac{dC_1(t)}{dt} &= q(t)\left[C_0(t) - C_1(t)\right].\tag{8.51}
 \end{align}
 $$
 
-Assume that the first tank is filled with seawater, \( C_0(0)=C_{0,0} \), and fresh water is flooded into the tank, i.e. \( C_\text{in}=0 \). Before we start to consider a numerical
-solution, let us first find the analytical solution: As before the solution for the first tank (equation <a href="#mjx-eqn-6.50">(6.50)</a>) is:
+<p>Assume that the first tank is filled with seawater, \( C_0(0)=C_{0,0} \), and fresh water is flooded into the tank, i.e. \( C_\text{in}=0 \). Before we start to consider a numerical
+solution, let us first find the analytical solution: As before the solution for the first tank (equation <a href="#mjx-eqn-8.50">(8.50)</a>) is:
+</p>
 $$
 \begin{equation}
 C_0(t)=C_{0,0}e^{-t/\tau_0},
-\tag{6.52}
+\tag{8.52}
 \end{equation}
 $$
 
-where \( \tau_0\equiv V_0/q \). Inserting this equation into equation <a href="#mjx-eqn-6.51">(6.51)</a>, we get:
+<p>where \( \tau_0\equiv V_0/q \). Inserting this equation into equation <a href="#mjx-eqn-8.51">(8.51)</a>, we get:</p>
 $$
 \begin{align}
 \frac{dC_1(t)}{dt} &= \frac{1}{\tau_1}\left[C_{0,0}e^{-t/\tau_0} - C_1(t)\right],\nonumber\\ 
-\frac{d}{dt}\left[e^{t/\tau_2}C_1\right]&= \frac{C_{0,0}}{\tau_1}e^{-t(1/\tau_0-1/\tau_1)}\tag{6.53},\\ 
-C_1(t)&=\frac{C_{0,0}}{1-\frac{\tau_1}{\tau_0}}\left[e^{-t/\tau_0}-e^{-t/\tau_1}\right],\tag{6.54}
+\frac{d}{dt}\left[e^{t/\tau_2}C_1\right]&= \frac{C_{0,0}}{\tau_1}e^{-t(1/\tau_0-1/\tau_1)}\tag{8.53},\\ 
+C_1(t)&=\frac{C_{0,0}}{1-\frac{\tau_1}{\tau_0}}\left[e^{-t/\tau_0}-e^{-t/\tau_1}\right],\tag{8.54}
 \end{align}
 $$
 
-where \( \tau_1\equiv V_1/q \).
+<p>where \( \tau_1\equiv V_1/q \).</p>
 
-<p>
-Next, we will consider the numerical solution. You might think that these equations are more simple to solve numerically than the equations with three tanks
+<p>Next, we will consider the numerical solution. You might think that these equations are more simple to solve numerically than the equations with three tanks
 in series discussed in the previous section. Actually, this system is much harder to solve with the methods we have discussed so far.
 The reason is that there are now <em>two time scales</em> in the system, \( \tau_1 \) and \( \tau_2 \). The smaller tank sets a strong limitation on the step size
 we can use, because we should never use step sizes larger than a tank volume. Thus if you use the code in the previous section to solve equation
-<a href="#mjx-eqn-6.50">(6.50)</a> and <a href="#mjx-eqn-6.51">(6.51)</a>, it will not find the correct solution, unless the step size is lower than \( 10^{-3} \). Equations of this type
+<a href="#mjx-eqn-8.50">(8.50)</a> and <a href="#mjx-eqn-8.51">(8.51)</a>, it will not find the correct solution, unless the step size is lower than \( 10^{-3} \). Equations of this type
 are known as <em>stiff</em>. 
-<div class="alert alert-block alert-success alert-text-normal"><b>Stiff equations.</b>
-There is no precise definition of ''stiff'', but it is used to describe a system of differential equations, where the numerical solution becomes unstable unless
+</p>
+<div class="alert alert-block alert-success alert-text-normal"><b>Stiff equations</b>
+<p>There is no precise definition of ''stiff'', but it is used to describe a system of differential equations, where the numerical solution becomes unstable unless
 a very small step size is chosen. Such systems occurs because there are several (length, time) scales in the system, and the numerical solution is constrained
 by the shortest length scale. You should always be careful on how you scale your variables in order to make the system dimensionless, which is of 
-particular importance when you use adaptive methods.
+particular importance when you use adaptive methods. 
+</p>
 </div>
 
 
-<p>
-These types of equations are often encountered in practical applications. If our sampling tank was extremely small, maybe \( 10^6 \) smaller than the chemical
+<p>These types of equations are often encountered in practical applications. If our sampling tank was extremely small, maybe \( 10^6 \) smaller than the chemical
 reactor, then we would need a step size of the order of \( 10^{-8} \) or lower to solve the system. This step size is so low that we easily run into trouble
 with round off errors in the computer. In addition the simulation time is extremely long.  How do we deal with this problem? The solution is actually
 quite simple. The reason we run into trouble is that we require that the concentration leaving the tank must be a small perturbation of the old one.
@@ -1333,43 +1575,45 @@ first we inject a volume (and remove an equal amount: \( qC(t)\Delta t \)), and 
 trouble. What we want to do is to remove or flood much more than one tank volume through the tank during one time step, this can be achieved by
 \( q(t)C(t)\Delta t\to q(t+\Delta t)C(t+\Delta t)\Delta t \). The term \( q(t+\Delta t)C(t+\Delta t)\Delta t \) now represents
 <em>the mass out of the system during the time step \( \Delta t \)</em>.
+</p>
 
-<p>
-The methods we have considered so far are known as <em>explicit</em>, whenever we replace the solution in the right hand side of our algorithm with \( y(t+\Delta t) \)
+<p>The methods we have considered so far are known as <em>explicit</em>, whenever we replace the solution in the right hand side of our algorithm with \( y(t+\Delta t) \)
 or (\( y_{n+1} \)),
 the method is known as <em>implicit</em>. Implicit methods are always stable, meaning that we can take as large a time step that we would like, without
 getting oscillating solution. It does not mean that we will get a more accurate solution, actually explicit methods are usually more accurate.
+</p>
 
-<p>
-<div class="alert alert-block alert-success alert-text-normal"><b>Explicit and Implicit methods.</b>
-Explicit methods are often called <em>forward</em> methods, as they use only information from the previous step to estimate the next value. The explicit
+<div class="alert alert-block alert-success alert-text-normal"><b>Explicit and Implicit methods</b>
+<p>Explicit methods are often called <em>forward</em> methods, as they use only information from the previous step to estimate the next value. The explicit
 methods are easy to implement, but get into trouble if the step size is too large. Implicit methods are often called <em>backward</em> methods as the next 
 step cannot be calculated directly from the previous solution, usually a non-linear equation has to be solved. Implicit methods are generally much
 more stable, but the price is often lower accuracy. Many commercial simulators uses implicit methods extensively because they are stable, and stability is often viewed
-as a much more important criterion than numerical accuracy.
+as a much more important criterion than numerical accuracy.   
+</p>
 </div>
 
-Let us consider our example further, and for simplicity use the implicit Eulers method:
+<p>Let us consider our example further, and for simplicity use the implicit Eulers method:</p>
 $$
 \begin{align}
 {C_0}_{n+1}V_0 - {C_0}_nV_0 &= q(t+\Delta t){C_\text{in}}_{n+1}\Delta t -
 q(t+\Delta t){C_0}_{n+1}\Delta t.\nonumber\\ 
 {C_1}_{n+1}V_1 - {C_1}_nV_1 &= q(t+\Delta t){C_0}_{n+1}\Delta t - q(t+\Delta t){C_1}_{n+1}\Delta t.
-\tag{6.55}
+\tag{8.55}
 \end{align}
 $$
 
-This equation is equal to equation <a href="#mjx-eqn-6.49">(6.49)</a>, but the concentrations on the right hand side are now evaluated at the next time step.
+<p>This equation is equal to equation <a href="#mjx-eqn-8.49">(8.49)</a>, but the concentrations on the right hand side are now evaluated at the next time step.
 The immediate problem is now that we have to find an expression for \( C_{n+1} \) that is given in terms of known variables. In most cases one needs
-to use a root finding method, like Newtons method, in order to solve equation <a href="#mjx-eqn-6.55">(6.55)</a>. In this case it is straight forward to show:
+to use a root finding method, like Newtons method, in order to solve equation <a href="#mjx-eqn-8.55">(8.55)</a>. In this case it is straight forward to show:
+</p>
 $$
 \begin{align}
 {C_0}_{n+1}&=\frac{{C_0}_n + \frac{\Delta t}{\tau_0}{C_\text{in}}_{n+1}}{1+\frac{\Delta t}{\tau_0}},\nonumber\\ 
-{C_2}_{n+1}&=\frac{{C_1}_n + \frac{\Delta t}{\tau_1}{C_0}_{n+1}}{1+\frac{\Delta t}{\tau_1}}.\tag{6.56}
+{C_2}_{n+1}&=\frac{{C_1}_n + \frac{\Delta t}{\tau_1}{C_0}_{n+1}}{1+\frac{\Delta t}{\tau_1}}.\tag{8.56}
 \end{align}
 $$
 
-In figure <a href="#fig:ode:euler_imp">35</a> the result of the implementation is shown, note that quite large step sizes can be used without inducing non physical results.
+<p>In figure <a href="#fig:ode:euler_imp">42</a> the result of the implementation is shown, note that quite large step sizes can be used without inducing non physical results.</p>
 <!-- Below is an implementation -->
 <!-- % if FORMAT == 'ipynb': -->
 <!-- Run the script below and inspect the results. -->
@@ -1378,138 +1622,233 @@ In figure <a href="#fig:ode:euler_imp">35</a> the result of the implementation i
 <!-- % if FORMAT != 'ipynb': -->
 <!-- @@@CODE src-ode/euler_imp_2.py  fromto: def fm@# rest -->
 
-<p>
 <center> <!-- figure label: --> <div id="fig:ode:euler_imp"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 35:  The concentration in the tanks for \( h=0.01 \). <!-- caption label: fig:ode:euler_imp --> </p></center>
+<center>
+<p class="caption">Figure 42:  The concentration in the tanks for \( h=0.01 \). <!-- caption label: fig:ode:euler_imp --> </p>
+</center>
 <p><img src="fig-ode/euler_imp.png" align="bottom" width=800></p>
 </center>
 
-<p>
 <!-- % endif -->
 
-<p>
 <!-- --- begin exercise --- -->
+<h2 id="exercise-7-1-truncation-error-in-eulers-method" class="anchor">Exercise 7.1: Truncation Error in Eulers Method </h2>
 
-<h2 id="___sec98" class="anchor">Exercise 6.1: Truncation Error in Eulers Method </h2>
-
-<p>
-In the following we will take a closer look at the adaptive Eulers algorithm and show that the 
-constant \( c \) is indeed the same in equation <a href="#mjx-eqn-6.19">(6.19)</a> and <a href="#mjx-eqn-6.20">(6.20)</a>. 
+<p>In the following we will take a closer look at the adaptive Eulers algorithm and show that the 
+constant \( c \) is indeed the same in equation <a href="#mjx-eqn-8.19">(8.19)</a> and <a href="#mjx-eqn-8.20">(8.20)</a>. 
 The true solution \( y(t) \), obeys the following equation:
+</p>
 $$
 \begin{align}
-\frac{dy}{dt}&=f(y,t),\tag{6.57}
+\frac{dy}{dt}&=f(y,t),\tag{8.57}
 \end{align}
 $$
 
-and Eulers method to get from \( y_0 \) to \( y_1 \) by taking one (large) step, \( h \) is:
+<p>and Eulers method to get from \( y_0 \) to \( y_1 \) by taking one (large) step, \( h \) is:</p>
 $$
 \begin{align}
-y^*_1&=y_0+hf(y_0,t_0),\tag{6.58}
+y^*_1&=y_0+hf(y_0,t_0),\tag{8.58}
 \end{align}
 $$
 
-We will also assume (for simplicity) that in our starting point \( t=t_0 \), the numerical solution, \( y_0 \), is equal to the true solution, \( y(t_0) \), hence \( y(t_0)=y_0 \).
+<p>We will also assume (for simplicity) that in our starting point \( t=t_0 \), the numerical solution, \( y_0 \), is equal to the true solution, \( y(t_0) \), hence \( y(t_0)=y_0 \).</p>
+
+<!-- --- begin solution of exercise --- -->
 
 <p>
-<b>a)</b>
-Show that when we take one step of size \( h \) from \( t_0 \) to \( t_1=t_0+h \), \( c=y^{\prime\prime}(t_0)/2 \) in equation <a href="#mjx-eqn-6.19">(6.19)</a>.
-
+<p><a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_12_4" style="font-size: 80%;"></a>
+</p>
+<a href="#exer_12_4" data-toggle="collapse">
 <p>
-<!-- --- begin answer of exercise --- -->
-
-<p>
-<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
- data-target="#exer_12_1" style="font-size: 80%;"></a>
-<a href="#exer_12_1" data-toggle="collapse">
-<b>Answer.</b>
+<b>Solution.</b>
+</p>
 </a>
 <div class="collapse-group">
-<p><div class="collapse" id="exer_12_1">
+<p><div class="collapse" id="exer_12_4">
 
-<p>
-The local error, is the difference between the numerical solution and the true solution:
+<p>The local error, is the difference between the numerical solution and the true solution:</p>
 $$
 \begin{align}
 \epsilon^*&=y(t_0+h)-y_{1}^*=y(t_0)+y^{\prime}(t_0)h+\frac{1}{2}y^{\prime\prime}(t_0)h^2+\mathcal{O}(h^3)\nonumber\\ 
 &-\left[y_0+hf(y_0,t_0+h)\right],
-\tag{6.59}
+\tag{8.59}
 \end{align}
 $$
 
-where we have used Taylor expansion to expand the true solution around \( t_0 \), and equation <a href="#mjx-eqn-6.58">(6.58)</a>.
-Using equation <a href="#mjx-eqn-6.57">(6.57)</a> to replace \( y^\prime(t_0) \) with \( f(y_0,t_0) \), we find:
+<p>where we have used Taylor expansion to expand the true solution around \( t_0 \), and equation <a href="#mjx-eqn-8.58">(8.58)</a>.
+Using equation <a href="#mjx-eqn-8.57">(8.57)</a> to replace \( y^\prime(t_0) \) with \( f(y_0,t_0) \), we find:
+</p>
 $$
 \begin{align}
 \epsilon^*=&y(t_0+h)-y_{1}^*=\frac{1}{2}y^{\prime\prime}(t_0)h^2\equiv ch^2,
-\tag{6.60}
+\tag{8.60}
 \end{align}
 $$
 
-hence \( c=y^{\prime\prime}(t_0)/2 \).
+<p>where we have ignored terms of higher order than \( h^2 \), and defined \( c \) as \( c=y^{\prime\prime}(t_0)/2 \). Next we take two steps of size \( h/2 \) to
+reach \( y_1 \):  
+</p>
+$$
+\begin{align}
+y_{1/2}&=y_0+\frac{h}{2}f(y_0,t_0),\tag{8.61}\\ 
+y_{1}&=y_{1/2}+\frac{h}{2}f(y_{1/2},t_0+h/2),\tag{8.62}\\ 
+y_{1}&=y_{0}+\frac{h}{2}f(y_0,t_0)+\frac{h}{2}f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2).\tag{8.63}
+\end{align}
+$$
 
-<p>
+<p>Note that we have inserted
+equation <a href="#mjx-eqn-8.61">(8.61)</a> into equation <a href="#mjx-eqn-8.62">(8.62)</a> to arrive at equation <a href="#mjx-eqn-8.63">(8.63)</a>. The truncation error in this case is, as before:
+</p>
+$$
+\begin{align}
+\epsilon&=y(t_0+h)-y_{1}=y(t_0)+y^{\prime}(t_0)h+\frac{1}{2}y^{\prime\prime}(t_0)h^2+\mathcal{O}(h^3)\nonumber\\ 
+&-\left[y_{0}+\frac{h}{2}f(y_0,t_0)+\frac{h}{2}f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2)\right].\tag{8.64}
+\end{align}
+$$
+
+<p>This equation is slightly more complicated, due to the term involving \( f \) inside the last parenthesis, we can use Taylor expansion to expand it about \( (y_0,t_0) \):</p>
+$$
+\begin{align}
+&f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2)=f(y_0,t_0)\nonumber\\ 
+&+\frac{h}{2}\left[f(y_0,t_0)\left.\frac{\partial f}{\partial y}\right|_{y=y_0,t=t_0}
++\left.\frac{\partial f}{\partial t}\right|_{y=y_0,t=t_0}\right]+\mathcal{O}(h^2).\tag{8.65}
+\end{align}
+$$
+
+<p>It turns out that this equation is related to \( y^{\prime\prime}(t_0,y_0) \), which can be seen by differentiating equation <a href="#mjx-eqn-8.57">(8.57)</a>:</p>
+$$
+\begin{align}
+\frac{d^2y}{dt^2}&=\frac{df(y,t)}{dt}=\frac{\partial f(y,t)}{\partial y}\frac{dy}{dt}+\frac{\partial f(y,t)}{\partial t}
+=\frac{\partial f(y,t)}{\partial y}f(y,t)+\frac{\partial f(y,t)}{\partial t}.\tag{8.66}
+\end{align}
+$$
+
+<p>Hence, equation <a href="#mjx-eqn-8.65">(8.65)</a> can be written:</p>
+$$
+\begin{align}
+f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2)=f(y_0,t_0)+\frac{h}{2}y^{\prime\prime}(t_0,y_0),\tag{8.67}
+\end{align}
+$$
+
+<p>hence the truncation error in equation <a href="#mjx-eqn-8.64">(8.64)</a> can finally be written:</p>
+$$
+\begin{align}
+\epsilon=&y(t_1)-y_{1}=\frac{h^2}{4} y^{\prime\prime}(y_0,t_0)=\frac{1}{2}ch^2,\tag{8.68}
+\end{align}
+$$
+
+
 </div></p>
 </div>
 </p>
 
+<!-- --- end solution of exercise --- -->
+
 <p>
+<b>a)</b>
+Show that when we take one step of size \( h \) from \( t_0 \) to \( t_1=t_0+h \), \( c=y^{\prime\prime}(t_0)/2 \) in equation <a href="#mjx-eqn-8.19">(8.19)</a>.
+</p>
+
+<!-- --- begin answer of exercise --- -->
+
+<p>
+<p><a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_12_1" style="font-size: 80%;"></a>
+</p>
+<a href="#exer_12_1" data-toggle="collapse">
+<p>
+<b>Answer.</b>
+</p>
+</a>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_12_1">
+
+<p>The local error, is the difference between the numerical solution and the true solution:</p>
+$$
+\begin{align}
+\epsilon^*&=y(t_0+h)-y_{1}^*=y(t_0)+y^{\prime}(t_0)h+\frac{1}{2}y^{\prime\prime}(t_0)h^2+\mathcal{O}(h^3)\nonumber\\ 
+&-\left[y_0+hf(y_0,t_0+h)\right],
+\tag{8.69}
+\end{align}
+$$
+
+<p>where we have used Taylor expansion to expand the true solution around \( t_0 \), and equation <a href="#mjx-eqn-8.58">(8.58)</a>.
+Using equation <a href="#mjx-eqn-8.57">(8.57)</a> to replace \( y^\prime(t_0) \) with \( f(y_0,t_0) \), we find:
+</p>
+$$
+\begin{align}
+\epsilon^*=&y(t_0+h)-y_{1}^*=\frac{1}{2}y^{\prime\prime}(t_0)h^2\equiv ch^2,
+\tag{8.70}
+\end{align}
+$$
+
+<p>hence \( c=y^{\prime\prime}(t_0)/2 \).</p>
+</div></p>
+</div>
+</p>
+
 <!-- --- end answer of exercise --- -->
 
 <p>
 <b>b)</b>
 Show that when we take two steps of size \( h/2 \) from \( t_0 \) to \( t_1=t_0+h \), Eulers algorithm is:
+</p>
 $$
 \begin{align}
 y_{1}&=y_{0}+\frac{h}{2}f(y_0,t_0)+\frac{h}{2}f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2).
-\tag{6.61}
+\tag{8.71}
 \end{align}
 $$
 
-<p>
+
 <!-- --- begin answer of exercise --- -->
 
 <p>
-<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+<p><a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
  data-target="#exer_12_2" style="font-size: 80%;"></a>
+</p>
 <a href="#exer_12_2" data-toggle="collapse">
+<p>
 <b>Answer.</b>
+</p>
 </a>
 <div class="collapse-group">
 <p><div class="collapse" id="exer_12_2">
 
 $$
 \begin{align}
-y_{1/2}&=y_0+\frac{h}{2}f(y_0,t_0),\tag{6.62}\\ 
-y_{1}&=y_{1/2}+\frac{h}{2}f(y_{1/2},t_0+h/2),\tag{6.63}\\ 
-y_{1}&=y_{0}+\frac{h}{2}f(y_0,t_0)+\frac{h}{2}f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2).\tag{6.64}
+y_{1/2}&=y_0+\frac{h}{2}f(y_0,t_0),\tag{8.72}\\ 
+y_{1}&=y_{1/2}+\frac{h}{2}f(y_{1/2},t_0+h/2),\tag{8.73}\\ 
+y_{1}&=y_{0}+\frac{h}{2}f(y_0,t_0)+\frac{h}{2}f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2).\tag{8.74}
 \end{align}
 $$
 
-Note that we have inserted
-equation <a href="#mjx-eqn-6.62">(6.62)</a> into equation <a href="#mjx-eqn-6.63">(6.63)</a> to arrive at equation <a href="#mjx-eqn-6.64">(6.64)</a>.
-
-<p>
+<p>Note that we have inserted
+equation <a href="#mjx-eqn-8.72">(8.72)</a> into equation <a href="#mjx-eqn-8.73">(8.73)</a> to arrive at equation <a href="#mjx-eqn-8.74">(8.74)</a>.
+</p>
 </div></p>
 </div>
 </p>
 
-<p>
 <!-- --- end answer of exercise --- -->
 
 <p>
 <b>c)</b>
 Find an expression for the local error when using two steps of size \( h/2 \), and show that the local error is: \( \frac{1}{2}ch^2 \)
+</p>
 
-<p>
 <!-- --- begin answer of exercise --- -->
 
 <p>
-<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+<p><a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
  data-target="#exer_12_3" style="font-size: 80%;"></a>
+</p>
 <a href="#exer_12_3" data-toggle="collapse">
+<p>
 <b>Answer.</b>
+</p>
 </a>
 <div class="collapse-group">
 <p><div class="collapse" id="exer_12_3">
@@ -1517,142 +1856,49 @@ Find an expression for the local error when using two steps of size \( h/2 \), a
 $$
 \begin{align}
 \epsilon&=y(t_0+h)-y_{1}=y(t_0)+y^{\prime}(t_0)h+\frac{1}{2}y^{\prime\prime}(t_0)h^2+\mathcal{O}(h^3)\nonumber\\ 
-&-\left[y_{0}+\frac{h}{2}f(y_0,t_0)+\frac{h}{2}f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2)\right].\tag{6.65}
+&-\left[y_{0}+\frac{h}{2}f(y_0,t_0)+\frac{h}{2}f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2)\right].\tag{8.75}
 \end{align}
 $$
 
-This equation is slightly more complicated, due to the term involving \( f \) inside the last parenthesis, we can use Taylor expansion to expand it about \( (y_0,t_0) \):
+<p>This equation is slightly more complicated, due to the term involving \( f \) inside the last parenthesis, we can use Taylor expansion to expand it about \( (y_0,t_0) \):</p>
 $$
 \begin{align}
 &f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2)=f(y_0,t_0)\nonumber\\ 
 &+\frac{h}{2}\left[f(y_0,t_0)\left.\frac{\partial f}{\partial y}\right|_{y=y_0,t=t_0}
-+\frac{h}{2}\left.\frac{\partial f}{\partial t}\right|_{y=y_0,t=t_0}\right]+\mathcal{O}(h^2).\tag{6.66}
++\frac{h}{2}\left.\frac{\partial f}{\partial t}\right|_{y=y_0,t=t_0}\right]+\mathcal{O}(h^2).\tag{8.76}
 \end{align}
 $$
 
-It turns out that this equation is related to \( y^{\prime\prime}(t_0,y_0) \), which can be seen by differentiating equation <a href="#mjx-eqn-6.57">(6.57)</a>:
+<p>It turns out that this equation is related to \( y^{\prime\prime}(t_0,y_0) \), which can be seen by differentiating equation <a href="#mjx-eqn-8.57">(8.57)</a>:</p>
 $$
 \begin{align}
 \frac{d^2y}{dt^2}&=\frac{df(y,t)}{dt}=\frac{\partial f(y,t)}{\partial y}\frac{dy}{dt}+\frac{\partial f(y,t)}{\partial t}
-=\frac{\partial f(y,t)}{\partial y}f(y,t)+\frac{\partial f(y,t)}{\partial t}.\tag{6.67}
+=\frac{\partial f(y,t)}{\partial y}f(y,t)+\frac{\partial f(y,t)}{\partial t}.\tag{8.77}
 \end{align}
 $$
 
-Hence, equation <a href="#mjx-eqn-6.66">(6.66)</a> can be written:
+<p>Hence, equation <a href="#mjx-eqn-8.76">(8.76)</a> can be written:</p>
 $$
 \begin{align}
-f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2)=f(y_0,t_0)+\frac{h}{2}y^{\prime\prime}(t_0,y_0),\tag{6.68}
+f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2)=f(y_0,t_0)+\frac{h}{2}y^{\prime\prime}(t_0,y_0),\tag{8.78}
 \end{align}
 $$
 
-hence the truncation error in equation <a href="#mjx-eqn-6.65">(6.65)</a> can finally be written:
+<p>hence the truncation error in equation <a href="#mjx-eqn-8.75">(8.75)</a> can finally be written:</p>
 $$
 \begin{align}
-\epsilon=&y(t_1)-y_{1}=\frac{h^2}{4} y^{\prime\prime}(y_0,t_0)=\frac{1}{2}ch^2,\tag{6.69}
+\epsilon=&y(t_1)-y_{1}=\frac{h^2}{4} y^{\prime\prime}(y_0,t_0)=\frac{1}{2}ch^2,\tag{8.79}
 \end{align}
 $$
 
-<p>
 </div></p>
 </div>
 </p>
 
-<p>
 <!-- --- end answer of exercise --- -->
 
-<p>
-<!-- --- begin solution of exercise --- -->
-
-<p>
-<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
- data-target="#exer_12_7" style="font-size: 80%;"></a>
-<a href="#exer_12_7" data-toggle="collapse">
-<b>Solution.</b>
-</a>
-<div class="collapse-group">
-<p><div class="collapse" id="exer_12_7">
-
-<p>
-The local error, is the difference between the numerical solution and the true solution:
-$$
-\begin{align}
-\epsilon^*&=y(t_0+h)-y_{1}^*=y(t_0)+y^{\prime}(t_0)h+\frac{1}{2}y^{\prime\prime}(t_0)h^2+\mathcal{O}(h^3)\nonumber\\ 
-&-\left[y_0+hf(y_0,t_0+h)\right],
-\tag{6.70}
-\end{align}
-$$
-
-where we have used Taylor expansion to expand the true solution around \( t_0 \), and equation <a href="#mjx-eqn-6.58">(6.58)</a>.
-Using equation <a href="#mjx-eqn-6.57">(6.57)</a> to replace \( y^\prime(t_0) \) with \( f(y_0,t_0) \), we find:
-$$
-\begin{align}
-\epsilon^*=&y(t_0+h)-y_{1}^*=\frac{1}{2}y^{\prime\prime}(t_0)h^2\equiv ch^2,
-\tag{6.71}
-\end{align}
-$$
-
-where we have ignored terms of higher order than \( h^2 \), and defined \( c \) as \( c=y^{\prime\prime}(t_0)/2 \). Next we take two steps of size \( h/2 \) to
-reach \( y_1 \):  
-$$
-\begin{align}
-y_{1/2}&=y_0+\frac{h}{2}f(y_0,t_0),\tag{6.72}\\ 
-y_{1}&=y_{1/2}+\frac{h}{2}f(y_{1/2},t_0+h/2),\tag{6.73}\\ 
-y_{1}&=y_{0}+\frac{h}{2}f(y_0,t_0)+\frac{h}{2}f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2).\tag{6.74}
-\end{align}
-$$
-
-Note that we have inserted
-equation <a href="#mjx-eqn-6.72">(6.72)</a> into equation <a href="#mjx-eqn-6.73">(6.73)</a> to arrive at equation <a href="#mjx-eqn-6.74">(6.74)</a>. The truncation error in this case is, as before:
-$$
-\begin{align}
-\epsilon&=y(t_0+h)-y_{1}=y(t_0)+y^{\prime}(t_0)h+\frac{1}{2}y^{\prime\prime}(t_0)h^2+\mathcal{O}(h^3)\nonumber\\ 
-&-\left[y_{0}+\frac{h}{2}f(y_0,t_0)+\frac{h}{2}f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2)\right].\tag{6.75}
-\end{align}
-$$
-
-This equation is slightly more complicated, due to the term involving \( f \) inside the last parenthesis, we can use Taylor expansion to expand it about \( (y_0,t_0) \):
-$$
-\begin{align}
-&f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2)=f(y_0,t_0)\nonumber\\ 
-&+\frac{h}{2}\left[f(y_0,t_0)\left.\frac{\partial f}{\partial y}\right|_{y=y_0,t=t_0}
-+\left.\frac{\partial f}{\partial t}\right|_{y=y_0,t=t_0}\right]+\mathcal{O}(h^2).\tag{6.76}
-\end{align}
-$$
-
-It turns out that this equation is related to \( y^{\prime\prime}(t_0,y_0) \), which can be seen by differentiating equation <a href="#mjx-eqn-6.57">(6.57)</a>:
-$$
-\begin{align}
-\frac{d^2y}{dt^2}&=\frac{df(y,t)}{dt}=\frac{\partial f(y,t)}{\partial y}\frac{dy}{dt}+\frac{\partial f(y,t)}{\partial t}
-=\frac{\partial f(y,t)}{\partial y}f(y,t)+\frac{\partial f(y,t)}{\partial t}.\tag{6.77}
-\end{align}
-$$
-
-Hence, equation <a href="#mjx-eqn-6.76">(6.76)</a> can be written:
-$$
-\begin{align}
-f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2)=f(y_0,t_0)+\frac{h}{2}y^{\prime\prime}(t_0,y_0),\tag{6.78}
-\end{align}
-$$
-
-hence the truncation error in equation <a href="#mjx-eqn-6.75">(6.75)</a> can finally be written:
-$$
-\begin{align}
-\epsilon=&y(t_1)-y_{1}=\frac{h^2}{4} y^{\prime\prime}(y_0,t_0)=\frac{1}{2}ch^2,\tag{6.79}
-\end{align}
-$$
-
-<p>
-</div></p>
-</div>
-</p>
-
-<p>
-<!-- --- end solution of exercise --- -->
-
-<p>
 <!-- --- end exercise --- -->
 
-<p>
 <p>
 <!-- navigation buttons at the bottom of the page -->
 <ul class="pager">
@@ -1666,19 +1912,15 @@ $$
   </li>
 </ul>
 <!-- ------------------- end of main content --------------- -->
-
 </div>  <!-- end container -->
 <!-- include javascript, jQuery *first* -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-
 <!-- Bootstrap footer
 <footer>
-<a href="http://..."><img width="250" align=right src="http://..."></a>
+<a href="https://..."><img width="250" align=right src="https://..."></a>
 </footer>
 -->
-
-
 </body>
 </html>
     

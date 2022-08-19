@@ -1,34 +1,31 @@
 <!--
-Automatically generated HTML file from DocOnce source
-(https://github.com/hplgit/doconce/)
+HTML file automatically generated from DocOnce source
+(https://github.com/doconce/doconce/)
+doconce format html book.do.txt CHAPTER=chapter BOOK=book APPENDIX=appendix --exercise_numbering=chapter --html_style=bootswatch_journal --html_code_style=inherit --html_output=book
 -->
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="generator" content="DocOnce: https://github.com/doconce/doconce/" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="Modeling and Computational Engineering">
 <meta name="keywords" content="types,basic types,lists,list comprehension,numerical error,Taylor polynomial,truncation error,Taylor polynomial, error term,Maclaurin series,forward difference,backward difference,central difference,central difference,roundoff erros,machine precision,IEEE 754-1985 standard,roundoff errors,continuity equation,Gauss-Jordan elimination,pivoting,LU decomposition,Jacobi method,Gauss-Seidel method,linear regression,sparse matrix,Thomas algorithm,fixed-point iteration,rate of convergence,bisection method,rate of convergence,Newtons method,Newtons method, rate of convergence,secant method,secant method, rate of convergence,Newton Rapson method,gradient descent,midpoint method,trapezoidal method,numerical integrals, error,Richardson extrapolation,Romberg integration,Gaussian quadrature,Gaussian quadrature, error term,numerical integral, infinite,continuous stirred tank reactor (CSTR),Eulers method,Eulers method, error analysis,Eulers method, adaptive step size,Runge-Kutta,Runge-Kutta, adaptive step size,adaptive step size,stiff equations,implicit method,Monte Carlo integration,random number generators,Mersenne Twister,encryption,Monte Carlo Integration, error,binomial distribution,mean,variance,Monte Carlo integration, mean value,recursive functions,central limit theorem,birthday paradox">
-
 <title>Modeling and Computational Engineering</title>
-
 <!-- Bootstrap style: bootswatch_journal -->
+<!-- doconce format html book.do.txt CHAPTER=chapter BOOK=book APPENDIX=appendix --exercise_numbering=chapter --html_style=bootswatch_journal --html_code_style=inherit --html_output=book -->
 <link href="https://netdna.bootstrapcdn.com/bootswatch/3.1.1/journal/bootstrap.min.css" rel="stylesheet">
 <!-- not necessary
 <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 -->
-
 <style type="text/css">
 /* Let inline verbatim have the same color as the surroundings */
 code { color: inherit; background-color: transparent; }
-
 /* Add scrollbar to dropdown menus in bootstrap navigation bar */
 .dropdown-menu {
    height: auto;
    max-height: 400px;
    overflow-x: hidden;
 }
-
 /* Adds an invisible element before each target to offset for the navigation
    bar */
 .anchor::before {
@@ -38,8 +35,6 @@ code { color: inherit; background-color: transparent; }
   margin:-60px 0 0; /* negative fixed header height */
 }
 </style>
-
-
 </head>
 
 <!-- tocinfo
@@ -49,102 +44,169 @@ code { color: inherit; background-color: transparent; }
                'table_of_contents',
                'table_of_contents'),
               ('Preface', 0, 'ch:preface', 'ch:preface'),
-              ('Writing Python code', 0, 'ch:pyt', 'ch:pyt'),
-              ('Personal Guidelines', 1, None, '___sec2'),
-              ('Code editor', 2, None, '___sec3'),
-              ('Types in Python', 1, None, '___sec4'),
-              ('Basic types', 2, None, '___sec5'),
-              ('Lists', 2, None, '___sec6'),
-              ('List arithmetic', 3, None, '___sec7'),
-              ('List slicing', 3, None, '___sec8'),
-              ('Numpy arrays', 2, None, '___sec9'),
-              ('Array slicing', 3, None, '___sec10'),
-              ('Looping', 1, None, '___sec11'),
-              ('For loops', 2, None, '___sec12'),
-              ('While loops', 2, None, '___sec13'),
-              ('Functions in Python', 2, None, '___sec14'),
-              ('Defining a mathematical function', 2, None, '___sec15'),
-              ('Scope of variables', 2, None, '___sec16'),
+              ('Introduction to Python', 0, 'ch:pyt', 'ch:pyt'),
+              ('Personal Guidelines', 1, None, 'personal-guidelines'),
+              ('Code editor', 2, None, 'code-editor'),
+              ('Types in Python', 1, None, 'types-in-python'),
+              ('Basic types', 2, None, 'basic-types'),
+              ('Lists', 2, None, 'lists'),
+              ('List arithmetic', 3, None, 'list-arithmetic'),
+              ('List slicing', 3, None, 'list-slicing'),
+              ('Numpy arrays', 2, None, 'numpy-arrays'),
+              ('Array slicing', 3, None, 'array-slicing'),
+              ('Dictionaries', 2, None, 'dictionaries'),
+              ('Looping', 1, None, 'looping'),
+              ('For loops', 2, None, 'for-loops'),
+              ('While loops', 2, None, 'while-loops'),
+              ('Functions in Python', 2, None, 'functions-in-python'),
+              ('Defining a mathematical function',
+               2,
+               None,
+               'defining-a-mathematical-function'),
+              ('Scope of variables', 2, None, 'scope-of-variables'),
+              ('Passing arrays and lists to functions',
+               2,
+               None,
+               'passing-arrays-and-lists-to-functions'),
+              ('Call by value or call by reference',
+               2,
+               None,
+               'call-by-value-or-call-by-reference'),
+              ('Floats and integers', 3, None, 'floats-and-integers'),
+              ('Lists and arrays', 3, None, 'lists-and-arrays'),
+              ('Mutable and immutable objects',
+               2,
+               None,
+               'mutable-and-immutable-objects'),
+              ('Introduction to Pandas', 0, 'ch:pan', 'ch:pan'),
+              ('What is Pandas?', 1, None, 'what-is-pandas'),
+              ('Creating a data frame', 1, None, 'creating-a-data-frame'),
+              ('From empty DataFrame', 2, None, 'from-empty-dataframe'),
+              ('From file', 2, None, 'from-file'),
+              ('Create DataFrame from dictionary',
+               2,
+               None,
+               'create-dataframe-from-dictionary'),
+              ('Manipulating DataFrames', 2, None, 'manipulating-dataframes'),
+              ('Selecting columns', 2, None, 'selecting-columns'),
+              ('Selecting rows', 2, None, 'selecting-rows'),
+              ('Performing mathematical operations on DataFrames',
+               2,
+               None,
+               'performing-mathematical-operations-on-dataframes'),
+              ('Example: mathematical operations on DataFrames',
+               3,
+               None,
+               'example-mathematical-operations-on-dataframes'),
+              ('Solution', 3, None, 'solution'),
+              ('Joining two DataFrames', 2, None, 'joining-two-dataframes'),
+              ('Appending DataFrames', 3, None, 'appending-dataframes'),
+              ('Merging DataFrames', 3, None, 'merging-dataframes'),
+              ('Grouping and summing', 2, None, 'grouping-and-summing'),
+              ('Simple statistics in Pandas',
+               2,
+               None,
+               'simple-statistics-in-pandas'),
               ('Finite differences', 0, 'ch:taylor', 'ch:taylor'),
-              ('Numerical Errors', 1, None, '___sec18'),
-              ('Taylor Polynomial Approximation', 1, None, '___sec19'),
-              ('Evaluation of polynomials', 2, None, '___sec20'),
+              ('Numerical Errors', 1, None, 'numerical-errors'),
+              ('Taylor Polynomial Approximation',
+               1,
+               None,
+               'taylor-polynomial-approximation'),
               ('Calculating Numerical Derivatives of Functions',
                1,
                None,
-               '___sec21'),
-              ('Higher order derivative', 3, None, '___sec22'),
-              ('Roundoff Errors', 2, None, '___sec23'),
-              ('Binary numbers', 3, None, '___sec24'),
+               'calculating-numerical-derivatives-of-functions'),
+              ('Higher order derivative', 3, None, 'higher-order-derivative'),
+              ('Roundoff Errors', 2, None, 'roundoff-errors'),
+              ('Binary numbers', 3, None, 'binary-numbers'),
               ('Floating point numbers and the IEEE 754-1985 standard',
                3,
                None,
-               '___sec25'),
+               'floating-point-numbers-and-the-ieee-754-1985-standard'),
               ('Roundoff error and truncation error in numerical derivatives',
                3,
                None,
-               '___sec26'),
+               'roundoff-error-and-truncation-error-in-numerical-derivatives'),
               ('Solving linear systems', 0, 'ch:lin', 'ch:lin'),
-              ('The Continuity Equation', 1, None, '___sec28'),
+              ('The Continuity Equation', 1, None, 'the-continuity-equation'),
               ('Continuity Equation as a linear problem (in progress)',
                1,
                None,
-               '___sec29'),
-              ('Solving linear equations', 1, None, '___sec30'),
-              ('Gauss-Jordan elimination', 2, None, '___sec31'),
-              ('Pivoting', 2, None, '___sec32'),
-              ('LU decomposition', 2, None, '___sec33'),
-              ('Iterative methods', 1, None, '___sec34'),
-              ('Iterative improvement', 2, None, '___sec35'),
-              ('The Jacobi method', 2, None, '___sec36'),
-              ('The Gauss-Seidel method', 2, None, '___sec37'),
-              ('Example: Linear regression', 1, None, '___sec38'),
+               'continuity-equation-as-a-linear-problem-in-progress'),
+              ('Solving linear equations', 1, None, 'solving-linear-equations'),
+              ('Gauss-Jordan elimination', 2, None, 'gauss-jordan-elimination'),
+              ('Pivoting', 2, None, 'pivoting'),
+              ('LU decomposition', 2, None, 'lu-decomposition'),
+              ('Iterative methods', 1, None, 'iterative-methods'),
+              ('Iterative improvement', 2, None, 'iterative-improvement'),
+              ('The Jacobi method', 2, None, 'the-jacobi-method'),
+              ('The Gauss-Seidel method', 2, None, 'the-gauss-seidel-method'),
+              ('Example: Linear regression',
+               1,
+               None,
+               'example-linear-regression'),
               ('Solving least square, using algebraic equations',
                2,
                None,
-               '___sec39'),
-              ('Least square as a linear algebra problem', 2, None, '___sec40'),
-              ('Working with matrices on component form', 2, None, '___sec41'),
-              ('Sparse matrices and Thomas algorithm', 1, None, '___sec42'),
+               'solving-least-square-using-algebraic-equations'),
+              ('Least square as a linear algebra problem',
+               2,
+               None,
+               'least-square-as-a-linear-algebra-problem'),
+              ('Working with matrices on component form',
+               2,
+               None,
+               'working-with-matrices-on-component-form'),
+              ('Sparse matrices and Thomas algorithm',
+               1,
+               None,
+               'sparse-matrices-and-thomas-algorithm'),
               ('Example: Solving the heat equation using linear algebra',
                1,
                None,
-               '___sec43'),
-              ('Exercise 3.1: Conservation Equation or the Continuity Equation',
+               'example-solving-the-heat-equation-using-linear-algebra'),
+              ('Exercise 4.1: Conservation Equation or the Continuity Equation',
                2,
                None,
-               '___sec44'),
-              ('Heat equation for solids', 3, None, '___sec45'),
-              ('Exercise 3.2: Curing of Concrete and Matrix Formulation',
+               'exercise-4-1-conservation-equation-or-the-continuity-equation'),
+              ('Heat equation for solids', 3, None, 'heat-equation-for-solids'),
+              ('Exercise 4.2: Curing of Concrete and Matrix Formulation',
                2,
                None,
-               '___sec46'),
-              ('Exercise 3.3: Solve the full heat equation',
+               'exercise-4-2-curing-of-concrete-and-matrix-formulation'),
+              ('Exercise 4.3: Solve the full heat equation',
                2,
                None,
-               '___sec47'),
-              ('Exercise 3.4: Using sparse matrices in python',
+               'exercise-4-3-solve-the-full-heat-equation'),
+              ('Exercise 4.4: Using sparse matrices in python',
                2,
                None,
-               '___sec48'),
-              ('CO$_2$ diffusion into aquifers', 1, None, '___sec49'),
+               'exercise-4-4-using-sparse-matrices-in-python'),
+              ('CO$_2$ diffusion into aquifers',
+               1,
+               None,
+               'co-_2-diffusion-into-aquifers'),
               ('Solving nonlinear equations', 0, 'ch:nlin', 'ch:nlin'),
-              ('Nonlinear equations', 1, None, '___sec51'),
-              ('Example: van der Waals equation of state', 1, None, '___sec52'),
-              ('Exercise 4.1: van der Waal EOS and CO$_2$',
+              ('Nonlinear equations', 1, None, 'nonlinear-equations'),
+              ('Example: van der Waals equation of state',
+               1,
+               None,
+               'example-van-der-waals-equation-of-state'),
+              ('Exercise 5.1: van der Waal EOS and CO$_2$',
                2,
                None,
-               '___sec53'),
-              ('Fixed-point iteration', 1, None, '___sec54'),
-              ('Exercise 4.2: Implement the fixed point iteration',
+               'exercise-5-1-van-der-waal-eos-and-co-_2'),
+              ('Fixed-point iteration', 1, None, 'fixed-point-iteration'),
+              ('Exercise 5.2: Implement the fixed point iteration',
                2,
                None,
-               '___sec55'),
-              ('Exercise 4.3: Finding the molar volume from the van der Waal '
+               'exercise-5-2-implement-the-fixed-point-iteration'),
+              ('Exercise 5.3: Finding the molar volume from the van der Waal '
                'EOS by fixed point iteration',
                2,
                None,
-               '___sec56'),
+               'exercise-5-3-finding-the-molar-volume-from-the-van-der-waal-eos-by-fixed-point-iteration'),
               ('When do the fixed point method fail?',
                2,
                'sec:nlin:fp',
@@ -152,105 +214,135 @@ code { color: inherit; background-color: transparent; }
               ('What to do when the fixed point method fail',
                2,
                None,
-               '___sec58'),
-              ('Exercise 4.4: Solve $x=e^{1-x^2}$ using fixed point iteration',
+               'what-to-do-when-the-fixed-point-method-fail'),
+              ('Exercise 5.4: Solve $x=e^{1-x^2}$ using fixed point iteration',
                2,
                None,
-               '___sec59'),
-              ('Rate of convergence', 1, None, '___sec60'),
-              ('The bisection method', 1, None, '___sec61'),
-              ('Rate of convergence', 2, None, '___sec62'),
-              ('Newtons method', 1, None, '___sec63'),
-              ('Rate of convergence', 2, None, '___sec64'),
-              ('Exercise 4.5: Compare Newtons, Bisection and the Fixed Point '
+               'exercise-5-4-solve-x-e-1-x-2-using-fixed-point-iteration'),
+              ('Rate of convergence', 1, None, 'rate-of-convergence'),
+              ('The bisection method', 1, None, 'the-bisection-method'),
+              ('Rate of convergence', 2, None, 'rate-of-convergence'),
+              ('Newtons method', 1, None, 'newtons-method'),
+              ('Rate of convergence', 2, None, 'rate-of-convergence'),
+              ('Exercise 5.5: Compare Newtons, Bisection and the Fixed Point '
                'method',
                2,
                None,
-               '___sec65'),
-              ('Secant method', 1, None, '___sec66'),
-              ('Rate of convergence', 2, None, '___sec67'),
-              ('Newton Rapson method', 1, None, '___sec68'),
-              ('Gradient Descent', 1, None, '___sec69'),
-              ('Exercise 4.6: Gradient descent solution of linear regression',
+               'exercise-5-5-compare-newtons-bisection-and-the-fixed-point-method'),
+              ('Secant method', 1, None, 'secant-method'),
+              ('Rate of convergence', 2, None, 'rate-of-convergence'),
+              ('Newton Rapson method', 1, None, 'newton-rapson-method'),
+              ('Gradient Descent', 1, None, 'gradient-descent'),
+              ('Exercise 5.6: Gradient descent solution of linear regression',
                2,
                None,
-               '___sec70'),
-              ('Other Useful Methods', 1, None, '___sec71'),
+               'exercise-5-6-gradient-descent-solution-of-linear-regression'),
+              ('Other Useful Methods', 1, None, 'other-useful-methods'),
               ('Numerical integration', 0, 'ch:numint', 'ch:numint'),
-              ('Numerical Integration', 1, None, '___sec73'),
-              ('The Midpoint Rule', 2, None, '___sec74'),
-              ('The Trapezoidal Rule', 2, None, '___sec75'),
-              ('Numerical Errors on Integrals', 2, None, '___sec76'),
+              ('Numerical Integration', 1, None, 'numerical-integration'),
+              ('The Midpoint Rule', 2, None, 'the-midpoint-rule'),
+              ('The Trapezoidal Rule', 2, None, 'the-trapezoidal-rule'),
+              ('Numerical Errors on Integrals',
+               2,
+               None,
+               'numerical-errors-on-integrals'),
               ('Practical Estimation of Errors on Integrals (Richardson '
                'Extrapolation)',
                2,
                None,
-               '___sec77'),
-              ('Romberg Integration', 1, None, '___sec78'),
+               'practical-estimation-of-errors-on-integrals-richardson-extrapolation'),
+              ('Romberg Integration', 1, None, 'romberg-integration'),
               ('Alternative implementation of adaptive integration',
                2,
                None,
-               '___sec79'),
-              ('Gaussian Quadrature', 1, None, '___sec80'),
-              ('The case N=3', 3, None, '___sec81'),
-              ('Error term on Gaussian Integration', 2, None, '___sec82'),
+               'alternative-implementation-of-adaptive-integration'),
+              ('Gaussian Quadrature', 1, None, 'gaussian-quadrature'),
+              ('The case N=3', 3, None, 'the-case-n-3'),
+              ('Error term on Gaussian Integration',
+               2,
+               None,
+               'error-term-on-gaussian-integration'),
               ('Common Weight functions for Classical Gaussian Quadratures',
                2,
                None,
-               '___sec83'),
+               'common-weight-functions-for-classical-gaussian-quadratures'),
               ('Integrating functions over an infinite range',
                1,
                None,
-               '___sec84'),
+               'integrating-functions-over-an-infinite-range'),
               ('Which method to use in a specific case? (NOT COMPLETED)',
                2,
                None,
-               '___sec85'),
-              ('Exercise 5.1: Numerical Integration', 2, None, '___sec86'),
-              ('Ordinary differential equations', 0, 'ch:ode', 'ch:ode'),
-              ('Ordinary Differential Equations', 1, None, '___sec88'),
-              ('A Simple Model for Fluid Flow', 1, None, '___sec89'),
-              ('Eulers Method', 1, None, '___sec90'),
-              ('Error Analysis - Eulers Method', 2, None, '___sec91'),
-              ('Adaptive step size - Eulers Method', 2, None, '___sec92'),
-              ('Runge-Kutta Methods', 1, None, '___sec93'),
-              ('Adaptive step size - Runge-Kutta Method', 2, None, '___sec94'),
-              ('Conservation of Mass', 2, None, '___sec95'),
-              ('Solving a set of ODE equations', 1, None, '___sec96'),
-              ('Stiff sets of ODE  and implicit methods', 1, None, '___sec97'),
-              ('Exercise 6.1: Truncation Error in Eulers Method',
+               'which-method-to-use-in-a-specific-case-not-completed'),
+              ('Exercise 6.1: Numerical Integration',
                2,
                None,
-               '___sec98'),
+               'exercise-6-1-numerical-integration'),
+              ('Ordinary differential equations', 0, 'ch:ode', 'ch:ode'),
+              ('Ordinary Differential Equations',
+               1,
+               None,
+               'ordinary-differential-equations'),
+              ('A Simple Model for Fluid Flow',
+               1,
+               None,
+               'a-simple-model-for-fluid-flow'),
+              ('Eulers Method', 1, None, 'eulers-method'),
+              ('Error Analysis - Eulers Method',
+               2,
+               None,
+               'error-analysis-eulers-method'),
+              ('Adaptive step size - Eulers Method',
+               2,
+               None,
+               'adaptive-step-size-eulers-method'),
+              ('Runge-Kutta Methods', 1, None, 'runge-kutta-methods'),
+              ('Adaptive step size - Runge-Kutta Method',
+               2,
+               None,
+               'adaptive-step-size-runge-kutta-method'),
+              ('Conservation of Mass', 2, None, 'conservation-of-mass'),
+              ('Solving a set of ODE equations',
+               1,
+               None,
+               'solving-a-set-of-ode-equations'),
+              ('Stiff sets of ODE  and implicit methods',
+               1,
+               None,
+               'stiff-sets-of-ode-and-implicit-methods'),
+              ('Exercise 7.1: Truncation Error in Eulers Method',
+               2,
+               None,
+               'exercise-7-1-truncation-error-in-eulers-method'),
               ('Monte Carlo Methods', 0, 'ch:mc', 'ch:mc'),
-              ('Monte Carlo Methods', 1, None, '___sec100'),
+              ('Monte Carlo Methods', 1, None, 'monte-carlo-methods'),
               ("Monte Carlo Integration  ''Hit and Miss''",
                1,
                None,
-               '___sec101'),
-              ('Random number generators', 2, None, '___sec102'),
-              ('Encryption', 2, None, '___sec103'),
+               'monte-carlo-integration-hit-and-miss'),
+              ('Random number generators', 2, None, 'random-number-generators'),
+              ('Encryption', 2, None, 'encryption'),
               ('Errors on Monte Carlo Integration and the Binomial '
                'Distribution',
                2,
                None,
-               '___sec104'),
-              ('The mean value method', 2, None, '___sec105'),
+               'errors-on-monte-carlo-integration-and-the-binomial-distribution'),
+              ('The mean value method', 2, None, 'the-mean-value-method'),
               ('Basic Properties of Probability Distributions',
                2,
                None,
-               '___sec106'),
+               'basic-properties-of-probability-distributions'),
               ('Example: Monte Carlo Integration of a Hyper Sphere',
                2,
                None,
-               '___sec107'),
-              ('Exercise 7.1: The central limit theorem',
+               'example-monte-carlo-integration-of-a-hyper-sphere'),
+              ('Exercise 8.1: The central limit theorem',
                2,
                'ex:mc:norm',
                'ex:mc:norm'),
-              ('Remarks', 3, None, '___sec109'),
-              ('Exercise 7.2: Birthday Paradox', 2, 'ex:mc:BP', 'ex:mc:BP'),
-              ('References', 1, None, '___sec111')]}
+              ('Remarks', 3, None, 'remarks'),
+              ('Exercise 8.2: Birthday Paradox', 2, 'ex:mc:BP', 'ex:mc:BP'),
+              ('References', 1, None, 'references')]}
 end of tocinfo -->
 
 <body>
@@ -277,8 +369,6 @@ $$
 
 
 
-
-    
 <!-- Bootstrap navigation bar -->
 <div class="navbar navbar-default navbar-fixed-top">
   <div class="navbar-header">
@@ -289,7 +379,6 @@ $$
     </button>
     <a class="navbar-brand" href="book.html">Modeling and Computational Engineering</a>
   </div>
-
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
@@ -297,117 +386,139 @@ $$
         <ul class="dropdown-menu">
      <!-- navigation toc: --> <li><a href="._book001.html#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
      <!-- navigation toc: --> <li><a href="._book001.html#ch:preface" style="font-size: 80%;"><b>Preface</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#ch:pyt" style="font-size: 80%;"><b>Writing Python code</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Personal Guidelines</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Code editor</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Types in Python</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Basic types</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lists</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List arithmetic</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List slicing</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Numpy arrays</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Array slicing</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Looping</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For loops</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;While loops</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Functions in Python</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Defining a mathematical function</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scope of variables</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#ch:pyt" style="font-size: 80%;"><b>Introduction to Python</b></a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#personal-guidelines" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Personal Guidelines</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#code-editor" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Code editor</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#types-in-python" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Types in Python</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#basic-types" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Basic types</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#lists" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lists</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#list-arithmetic" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List arithmetic</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#list-slicing" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List slicing</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#numpy-arrays" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Numpy arrays</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#array-slicing" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Array slicing</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#dictionaries" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dictionaries</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#looping" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Looping</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#for-loops" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For loops</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#while-loops" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;While loops</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#functions-in-python" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Functions in Python</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#defining-a-mathematical-function" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Defining a mathematical function</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#scope-of-variables" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scope of variables</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#passing-arrays-and-lists-to-functions" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Passing arrays and lists to functions</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#call-by-value-or-call-by-reference" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Call by value or call by reference</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#floats-and-integers" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Floats and integers</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#lists-and-arrays" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lists and arrays</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#mutable-and-immutable-objects" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mutable and immutable objects</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#ch:pan" style="font-size: 80%;"><b>Introduction to Pandas</b></a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#what-is-pandas" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;What is Pandas?</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#creating-a-data-frame" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Creating a data frame</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#from-empty-dataframe" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From empty DataFrame</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#from-file" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From file</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#create-dataframe-from-dictionary" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create DataFrame from dictionary</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#manipulating-dataframes" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Manipulating DataFrames</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#selecting-columns" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Selecting columns</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#selecting-rows" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Selecting rows</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#performing-mathematical-operations-on-dataframes" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Performing mathematical operations on DataFrames</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#example-mathematical-operations-on-dataframes" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example: mathematical operations on DataFrames</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#solution" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#joining-two-dataframes" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Joining two DataFrames</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#appending-dataframes" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Appending DataFrames</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#merging-dataframes" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Merging DataFrames</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#grouping-and-summing" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Grouping and summing</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#simple-statistics-in-pandas" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Simple statistics in Pandas</a></li>
      <!-- navigation toc: --> <li><a href="._book003.html#ch:taylor" style="font-size: 80%;"><b>Finite differences</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Numerical Errors</a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Taylor Polynomial Approximation</a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Evaluation of polynomials</a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec21" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Calculating Numerical Derivatives of Functions</a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Higher order derivative</a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Roundoff Errors</a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Binary numbers</a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Floating point numbers and the IEEE 754-1985 standard</a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec26" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Roundoff error and truncation error in numerical derivatives</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#numerical-errors" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Numerical Errors</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#taylor-polynomial-approximation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Taylor Polynomial Approximation</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#calculating-numerical-derivatives-of-functions" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Calculating Numerical Derivatives of Functions</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#higher-order-derivative" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Higher order derivative</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#roundoff-errors" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Roundoff Errors</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#binary-numbers" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Binary numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#floating-point-numbers-and-the-ieee-754-1985-standard" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Floating point numbers and the IEEE 754-1985 standard</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#roundoff-error-and-truncation-error-in-numerical-derivatives" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Roundoff error and truncation error in numerical derivatives</a></li>
      <!-- navigation toc: --> <li><a href="._book004.html#ch:lin" style="font-size: 80%;"><b>Solving linear systems</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec28" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The Continuity Equation</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec29" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Continuity Equation as a linear problem (in progress)</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec30" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Solving linear equations</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gauss-Jordan elimination</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pivoting</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec33" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LU decomposition</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec34" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Iterative methods</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec35" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iterative improvement</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Jacobi method</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec37" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Gauss-Seidel method</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec38" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Linear regression</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec39" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solving least square, using algebraic equations</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec40" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Least square as a linear algebra problem</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec41" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Working with matrices on component form</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec42" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Sparse matrices and Thomas algorithm</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec43" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Solving the heat equation using linear algebra</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec44" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 3.1: Conservation Equation or the Continuity Equation</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec45" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Heat equation for solids</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec46" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 3.2: Curing of Concrete and Matrix Formulation</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec47" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 3.3: Solve the full heat equation</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec48" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 3.4: Using sparse matrices in python</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec49" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;CO$_2$ diffusion into aquifers</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#the-continuity-equation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The Continuity Equation</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#continuity-equation-as-a-linear-problem-in-progress" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Continuity Equation as a linear problem (in progress)</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#solving-linear-equations" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Solving linear equations</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#gauss-jordan-elimination" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gauss-Jordan elimination</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#pivoting" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pivoting</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#lu-decomposition" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LU decomposition</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#iterative-methods" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Iterative methods</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#iterative-improvement" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iterative improvement</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#the-jacobi-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Jacobi method</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#the-gauss-seidel-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Gauss-Seidel method</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#example-linear-regression" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Linear regression</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#solving-least-square-using-algebraic-equations" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solving least square, using algebraic equations</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#least-square-as-a-linear-algebra-problem" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Least square as a linear algebra problem</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#working-with-matrices-on-component-form" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Working with matrices on component form</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#sparse-matrices-and-thomas-algorithm" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Sparse matrices and Thomas algorithm</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#example-solving-the-heat-equation-using-linear-algebra" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Solving the heat equation using linear algebra</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#exercise-4-1-conservation-equation-or-the-continuity-equation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.1: Conservation Equation or the Continuity Equation</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#heat-equation-for-solids" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Heat equation for solids</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#exercise-4-2-curing-of-concrete-and-matrix-formulation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.2: Curing of Concrete and Matrix Formulation</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#exercise-4-3-solve-the-full-heat-equation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.3: Solve the full heat equation</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#exercise-4-4-using-sparse-matrices-in-python" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.4: Using sparse matrices in python</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#co-_2-diffusion-into-aquifers" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;CO$_2$ diffusion into aquifers</a></li>
      <!-- navigation toc: --> <li><a href="._book005.html#ch:nlin" style="font-size: 80%;"><b>Solving nonlinear equations</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec51" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Nonlinear equations</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec52" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: van der Waals equation of state</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec53" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.1: van der Waal EOS and CO$_2$</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec54" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Fixed-point iteration</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec55" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.2: Implement the fixed point iteration</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec56" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.3: Finding the molar volume from the van der Waal EOS by fixed point iteration</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#nonlinear-equations" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Nonlinear equations</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#example-van-der-waals-equation-of-state" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: van der Waals equation of state</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#exercise-5-1-van-der-waal-eos-and-co-_2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.1: van der Waal EOS and CO$_2$</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#fixed-point-iteration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Fixed-point iteration</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#exercise-5-2-implement-the-fixed-point-iteration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.2: Implement the fixed point iteration</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#exercise-5-3-finding-the-molar-volume-from-the-van-der-waal-eos-by-fixed-point-iteration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.3: Finding the molar volume from the van der Waal EOS by fixed point iteration</a></li>
      <!-- navigation toc: --> <li><a href="._book005.html#sec:nlin:fp" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When do the fixed point method fail?</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec58" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;What to do when the fixed point method fail</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec59" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.4: Solve \( x=e^{1-x^2} \) using fixed point iteration</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec60" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec61" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The bisection method</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec62" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec63" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Newtons method</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec64" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec65" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.5: Compare Newtons, Bisection and the Fixed Point method</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec66" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Secant method</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec67" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec68" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Newton Rapson method</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec69" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Gradient Descent</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec70" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.6: Gradient descent solution of linear regression</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec71" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Other Useful Methods</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#what-to-do-when-the-fixed-point-method-fail" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;What to do when the fixed point method fail</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#exercise-5-4-solve-x-e-1-x-2-using-fixed-point-iteration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.4: Solve \( x=e^{1-x^2} \) using fixed point iteration</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#rate-of-convergence" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#the-bisection-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The bisection method</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#rate-of-convergence" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#newtons-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Newtons method</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#rate-of-convergence" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#exercise-5-5-compare-newtons-bisection-and-the-fixed-point-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.5: Compare Newtons, Bisection and the Fixed Point method</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#secant-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Secant method</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#rate-of-convergence" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#newton-rapson-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Newton Rapson method</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#gradient-descent" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Gradient Descent</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#exercise-5-6-gradient-descent-solution-of-linear-regression" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.6: Gradient descent solution of linear regression</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#other-useful-methods" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Other Useful Methods</a></li>
      <!-- navigation toc: --> <li><a href="._book006.html#ch:numint" style="font-size: 80%;"><b>Numerical integration</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec73" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Numerical Integration</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec74" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Midpoint Rule</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec75" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Trapezoidal Rule</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec76" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Numerical Errors on Integrals</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec77" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Practical Estimation of Errors on Integrals (Richardson Extrapolation)</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec78" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Romberg Integration</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec79" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alternative implementation of adaptive integration</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec80" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Gaussian Quadrature</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec81" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The case N=3</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec82" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Error term on Gaussian Integration</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec83" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Common Weight functions for Classical Gaussian Quadratures</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec84" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Integrating functions over an infinite range</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec85" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Which method to use in a specific case? (NOT COMPLETED)</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec86" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.1: Numerical Integration</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#numerical-integration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Numerical Integration</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#the-midpoint-rule" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Midpoint Rule</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#the-trapezoidal-rule" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Trapezoidal Rule</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#numerical-errors-on-integrals" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Numerical Errors on Integrals</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#practical-estimation-of-errors-on-integrals-richardson-extrapolation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Practical Estimation of Errors on Integrals (Richardson Extrapolation)</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#romberg-integration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Romberg Integration</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#alternative-implementation-of-adaptive-integration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alternative implementation of adaptive integration</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#gaussian-quadrature" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Gaussian Quadrature</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#the-case-n-3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The case N=3</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#error-term-on-gaussian-integration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Error term on Gaussian Integration</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#common-weight-functions-for-classical-gaussian-quadratures" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Common Weight functions for Classical Gaussian Quadratures</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#integrating-functions-over-an-infinite-range" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Integrating functions over an infinite range</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#which-method-to-use-in-a-specific-case-not-completed" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Which method to use in a specific case? (NOT COMPLETED)</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#exercise-6-1-numerical-integration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 6.1: Numerical Integration</a></li>
      <!-- navigation toc: --> <li><a href="._book007.html#ch:ode" style="font-size: 80%;"><b>Ordinary differential equations</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book007.html#___sec88" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ordinary Differential Equations</a></li>
-     <!-- navigation toc: --> <li><a href="._book007.html#___sec89" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;A Simple Model for Fluid Flow</a></li>
-     <!-- navigation toc: --> <li><a href="._book007.html#___sec90" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Eulers Method</a></li>
-     <!-- navigation toc: --> <li><a href="._book007.html#___sec91" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Error Analysis - Eulers Method</a></li>
-     <!-- navigation toc: --> <li><a href="._book007.html#___sec92" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adaptive step size - Eulers Method</a></li>
-     <!-- navigation toc: --> <li><a href="._book007.html#___sec93" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Runge-Kutta Methods</a></li>
-     <!-- navigation toc: --> <li><a href="._book007.html#___sec94" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adaptive step size - Runge-Kutta Method</a></li>
-     <!-- navigation toc: --> <li><a href="._book007.html#___sec95" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Conservation of Mass</a></li>
-     <!-- navigation toc: --> <li><a href="._book007.html#___sec96" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Solving a set of ODE equations</a></li>
-     <!-- navigation toc: --> <li><a href="._book007.html#___sec97" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Stiff sets of ODE  and implicit methods</a></li>
-     <!-- navigation toc: --> <li><a href="._book007.html#___sec98" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 6.1: Truncation Error in Eulers Method</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#ordinary-differential-equations" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ordinary Differential Equations</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#a-simple-model-for-fluid-flow" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;A Simple Model for Fluid Flow</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#eulers-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Eulers Method</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#error-analysis-eulers-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Error Analysis - Eulers Method</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#adaptive-step-size-eulers-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adaptive step size - Eulers Method</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#runge-kutta-methods" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Runge-Kutta Methods</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#adaptive-step-size-runge-kutta-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adaptive step size - Runge-Kutta Method</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#conservation-of-mass" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Conservation of Mass</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#solving-a-set-of-ode-equations" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Solving a set of ODE equations</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#stiff-sets-of-ode-and-implicit-methods" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Stiff sets of ODE  and implicit methods</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#exercise-7-1-truncation-error-in-eulers-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 7.1: Truncation Error in Eulers Method</a></li>
      <!-- navigation toc: --> <li><a href="._book008.html#ch:mc" style="font-size: 80%;"><b>Monte Carlo Methods</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book008.html#___sec100" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Monte Carlo Methods</a></li>
-     <!-- navigation toc: --> <li><a href="._book008.html#___sec101" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Monte Carlo Integration  ''Hit and Miss''</a></li>
-     <!-- navigation toc: --> <li><a href="._book008.html#___sec102" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Random number generators</a></li>
-     <!-- navigation toc: --> <li><a href="._book008.html#___sec103" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Encryption</a></li>
-     <!-- navigation toc: --> <li><a href="._book008.html#___sec104" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Errors on Monte Carlo Integration and the Binomial Distribution</a></li>
-     <!-- navigation toc: --> <li><a href="._book008.html#___sec105" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The mean value method</a></li>
-     <!-- navigation toc: --> <li><a href="._book008.html#___sec106" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Basic Properties of Probability Distributions</a></li>
-     <!-- navigation toc: --> <li><a href="._book008.html#___sec107" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example: Monte Carlo Integration of a Hyper Sphere</a></li>
-     <!-- navigation toc: --> <li><a href="._book008.html#ex:mc:norm" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 7.1: The central limit theorem</a></li>
-     <!-- navigation toc: --> <li><a href="._book008.html#___sec109" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
-     <!-- navigation toc: --> <li><a href="._book008.html#ex:mc:BP" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 7.2: Birthday Paradox</a></li>
-     <!-- navigation toc: --> <li><a href="._book009.html#___sec111" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;References</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#monte-carlo-methods" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Monte Carlo Methods</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#monte-carlo-integration-hit-and-miss" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Monte Carlo Integration  ''Hit and Miss''</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#random-number-generators" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Random number generators</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#encryption" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Encryption</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#errors-on-monte-carlo-integration-and-the-binomial-distribution" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Errors on Monte Carlo Integration and the Binomial Distribution</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#the-mean-value-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The mean value method</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#basic-properties-of-probability-distributions" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Basic Properties of Probability Distributions</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#example-monte-carlo-integration-of-a-hyper-sphere" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example: Monte Carlo Integration of a Hyper Sphere</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#ex:mc:norm" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 8.1: The central limit theorem</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#remarks" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#ex:mc:BP" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 8.2: Birthday Paradox</a></li>
+     <!-- navigation toc: --> <li><a href="._book009.html#references" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;References</a></li>
 
         </ul>
       </li>
@@ -415,45 +526,37 @@ $$
   </div>
 </div>
 </div> <!-- end of navigation bar -->
-
 <div class="container">
-
 <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
-
 <a name="part0000"></a>
 <!-- ------------------- main content ---------------------- -->
-
 <!-- Note on the Springer T4 style: here we use the modifications -->
 <!-- introduced in t4do.sty and svmonodo.sty (both are bundled with DocOnce). -->
 
-<p>
-
-
 <div class="jumbotron">
-<center><h1>Modeling and Computational Engineering </h1></center>  <!-- document title -->
-
-<p>
-<!-- author(s): Aksel Hiorth, the National IOR Centre &amp; Institute for Energy Resources, University of Stavanger -->
-
 <center>
-<b>Aksel Hiorth, the National IOR Centre &amp; Institute for Energy Resources, University of Stavanger</b> 
+<h1>Modeling and Computational Engineering </h1>
+</center>  <!-- document title -->
+
+<!-- author(s): Aksel Hiorth, University of Stavanger -->
+<center>
+<b>Aksel Hiorth, University of Stavanger</b> 
 </center>
-
-<p>
 <!-- institution(s) -->
+<br>
+<center>
+<h4>Aug 19, 2022</h4>
+</center> <!-- date -->
+<br>
 
-<br>
-<p>
-<center><h4>Feb 10, 2022</h4></center> <!-- date -->
-<br>
 <p>
 <b>Summary.</b> (Work in Progress) The purpose of this document is to explain how computers solve mathematical models.
 Many of the most common numerical methods is presented, we show how to implement them in Python, and discuss the limitations.
 The mathematical formalism is kept to a minimum. All the material is available at
 <a href="https://github.com/ahiorth/CompEngineering" target="_self">github</a>. For each of the chapter there is a Jupyter <a href="https://github.com/ahiorth/CompEngineering/tree/master/pub/chapters" target="_self">notebook</a>. This makes it possible to run all the codes in this document.
 We strongly recommend to install Python from <a href="https://www.anaconda.com/" target="_self">Anaconda</a>. All documents have been prepared using <a href="https://github.com/ahiorth/CompEngineering/tree/master/pub/chapters" target="_self">doconce</a>.
+</p>
 
-<p>
 
 
 <p><a href="._book001.html" class="btn btn-primary btn-lg">Read &raquo;</a></p>
@@ -470,19 +573,15 @@ We strongly recommend to install Python from <a href="https://www.anaconda.com/"
   </li>
 </ul>
 <!-- ------------------- end of main content --------------- -->
-
 </div>  <!-- end container -->
 <!-- include javascript, jQuery *first* -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-
 <!-- Bootstrap footer
 <footer>
-<a href="http://..."><img width="250" align=right src="http://..."></a>
+<a href="https://..."><img width="250" align=right src="https://..."></a>
 </footer>
 -->
-
-
 </body>
 </html>
     
