@@ -506,58 +506,27 @@ $$
 
 
 <center><h1 id="ch:preface" class="anchor">Preface</h1></center> <!-- chapter heading -->
-What does computers do better than humans? What is it possible to
-compute? These questions have not been fully answered yet, and in the
-coming years we will most likely see that the boundaries for what
-computers can do will expand significantly. Many of the  fundamental laws in
-nature have been known for quite some time, but still it is almost
-impossible to predict the behavior of water (H$_2$O) from quantum
-mechanics. The most sophisticated super computers runs for days and are
-only able to simulate  the behavior of molecules in a couple of
-seconds, almost too short to extract meaningful thermodynamic
-properties. This leads to another interesting question: What does humans do better
-than machines? A large part of
-the answer to this question is <em>modeling</em>. Modeling is the ability to 
-break a complicated, unstructured problem into smaller pieces that can
-be solved by computers or by other means. Modeling requires <em>domain knowledge</em>, one need to
-understand the system well enough to make the correct or the most efficient simplifications. The process usually starts
-with some experimental data that one would like to understand, it could be the increasing temperature in the atmosphere or sea, it could 
-be changes in the chemical composition of a fluid passing through a rock. The modeler then makes a mental image, which includes a set of 
-mechanisms that could be the cause of the observed data. These mechanisms then needs to be formulated mathematically.   
-How can we know if a model of a system is good? First of all, a good model is a model that do not break 
-any of the fundamental laws of nature, such as mass (assuming non relativistic effects) and energy conservation. Even if you are searching 
-for new laws of nature, you have to make sure that your model respect the existing laws, because then a deviation from your model and
-the observations could be a hint of the new physics you are searching for.  
-Secondly, the model must be able to match the observable data, with a limited set of variables. The variables should 
-be determined from data, and then the model should be able to make some predictions that can be tested. Thus, the true
-purpose of the model is not only to match experimental data, but serve as a framework where the underlying
-mechanisms of the process can be understood. This is done by making model predictions, test them, and improve the model.
+This book is a work in progress. It started out as a traditional book on numerical methods and numerical analyses, but I am currently working on bringing the modeling aspects more into focus.
 
 <p>
-In this course our main focus will be on how to use computers to solve models. We will show you through numerical projects how a mathematical model of
-a physical system can be made, and you will have the possibility to explore the model. Computers are extremely useful, they can solve problems that
-would be impossible to solve by hand. However, it is extremely important to know about the limitations and strength of various algorithms. One need
-to have a toolbox of various algorithms that can be employed depending on the problem one are studying. Sometimes speed is not an issue, and one can use
-simpler algorithms, but in many cases <em>speed is an issue</em>. Thus it is important to not waste computational time when it is not needed, we will encounter 
-examples of this many times in this course.
+The book is divided into chapters where I cover numerical methods. A numerical algorithm is a set of instructions executed in a specific order to find the solution to a mathematical or a physical problem. In each chapter I try to explain and derive many of the standard numerical methods from first principles in a way that require little mathematical knowledge. It is important to understand the origin of numerical algorithms, because a numerical algorithm will only in a special case solve the underlying mathematical problem exact. We usually compare a computer generated solution of a model to data, you need to be able to tell if the mismatch is due to numerical errors introduced by the specific algorithm used or missing physical effects in the original mathematical model. Sometimes the numerical algorithm is unstable, i.e. it converges to the wrong solution, thus you need to understand the limitations of the algorithm. Another motivation to learn about numerical algorithms, is that they are <em>not that difficult</em> to implement, they usually follow a very similar pattern, but there are some ''tricks''. It is extremely useful to learn these tricks, it will put you into a position where you can combine different methods and optimize them for your specific problem.
 
 <p>
-Why should you spend time learning about algorithms that have been implemented already in a software that 
-most likely can be downloaded for free? There are many answers to this question, some more practical and some that goes deeper. Lets start with the
-practical considerations: Often you encounter a problem that needs to be solved by a computer, it could be to fit an analytical model to data. Once you have this problem, one could ask Mr. Google for a solution, after a web search you will quickly realize that there are numerous ways of achieving what you want. By educating yourself 
-within the most basic numerical methods, presented in this course, you will be able to judge for yourself which method to use in a specific case. If you choose a method suggested on the web, and try it out, it might happen that it works quite fine in many cases. But sooner or later you will encounter a problem that the computer struggles with, and it is very useful to have some skills within numerical analysis which can be helpful in identifying why the numerical method does not find a solution in some cases. If you know the why, it is much easier to find a cure.
-Another motivation is that development of most of the different numerical methods are <em>not that difficult</em>, they usually follow a very similar pattern, but
-there are some ''tricks''. It is extremely useful to learn these tricks, they can be adopted to a range of different problems, many are easily implemented
-in a spreadsheet. There are some more deeper arguments, and that is that the numerical methods are developed to solve a <em>general</em> problem. Most of the 
-time we work with <em>specific</em> problems, and we would like to have an algorithm that is optimal for our problem that goes beyond only choosing the right one. 
-Having understood and learned all the cool tricks that was used in the development of the algorithm in the general case, it
-is an excellent starting point for adopting the algorithm to your specific situation. Secondly development of an algorithm is a concrete case of <em>Computational Thinking</em>.
-Computational thinking is not necessarily related to computers and programming, but it is a way of structuring your work 
-into precise statements that are being executed one at a time in a specific order. By learning about algorithmic development, you 
-will train yourself in the art of computational thinking, which is a useful skill in all kind of problem solving.
+In the course I teach, the theory is combined with modeling projects. I am currently working on making the modeling part more explicit in this book. Modeling is an art, and there are many models that can be used to model a phenomena. In my experience, people use models that are too complicated compared to what they want to model. By complicated, I mean models that require a lot (sometimes too much) information about a system compared to the actual measuring data available. I believe that simplified models should be used in an exploratory manner to understand a certain phenomena, before applying more complicated models. What many people realize is that a simple model that does not match data, can in many cases be more valuable than a complicated model that match data. If a simple model does not match data, it means that we have ignored important effect(s). This in turn mean that the effects or the physic we thought where important might not be the most important effects after all, we have actually learned that our understanding is incomplete and we should search for the missing effects (or take another look at the quality of the data). The key point is that we should always ask ourselves ''What have we learned?''.
 
 <p>
-*Aksel Hiorth, July 2020
+However, it is not easy to learn modeling and it is even harder if one use models developed by other people. The only way to learn it is to do it yourself, test out different mathematical models of a phenomena, and compare to data. In this process you will also be able to understand the strength and limitations of models, or to use the famous quote by G. E. Box ''All models are wrong, but some are useful''.
+
+<p>
+Modeling can be broken down into several parts 
+
+<ol>
+<li> Identify important physical phenomena. This involves abstraction, formulate they key physical mechanisms as mathematical equations. In this process it is important to interact with people that have domain knowledge.</li>
+<li> Implement model, solve it and validate against known analytical solutions. Analytical solutions exists when one simplify the system</li>
+<li> Calibrate model parameters against data. A simple model would have much less parameters than a complicated model, hence it is much harder to match data. After this step one usually need to identify effects missing or remove effects that might not be important.</li>
+</ol>
+
+*Aksel Hiorth, September 2022
 
 <h1 id="table_of_contents">Table of contents</h2>
 
