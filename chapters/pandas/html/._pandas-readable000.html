@@ -1,33 +1,30 @@
 <!--
-Automatically generated HTML file from DocOnce source
-(https://github.com/hplgit/doconce/)
+HTML file automatically generated from DocOnce source
+(https://github.com/doconce/doconce/)
+doconce format html main_pandas.do.txt CHAPTER=document BOOK=document APPENDIX=document --html_style=bootswatch_readable --html_output=pandas-readable --html_code_style=inherit
 -->
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="generator" content="DocOnce: https://github.com/doconce/doconce/" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="Organizing data: pandas">
-
 <title>Organizing data: pandas</title>
-
 <!-- Bootstrap style: bootswatch_readable -->
+<!-- doconce format html main_pandas.do.txt CHAPTER=document BOOK=document APPENDIX=document --html_style=bootswatch_readable --html_output=pandas-readable --html_code_style=inherit -->
 <link href="https://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
 <!-- not necessary
 <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 -->
-
 <style type="text/css">
 /* Let inline verbatim have the same color as the surroundings */
 code { color: inherit; background-color: transparent; }
-
 /* Add scrollbar to dropdown menus in bootstrap navigation bar */
 .dropdown-menu {
    height: auto;
    max-height: 400px;
    overflow-x: hidden;
 }
-
 /* Adds an invisible element before each target to offset for the navigation
    bar */
 .anchor::before {
@@ -37,8 +34,6 @@ code { color: inherit; background-color: transparent; }
   margin:-64px 0 0; /* negative fixed header height */
 }
 </style>
-
-
 </head>
 
 <!-- tocinfo
@@ -47,47 +42,69 @@ code { color: inherit; background-color: transparent; }
                1,
                'table_of_contents',
                'table_of_contents'),
-              ('What is Pandas?', 1, None, '___sec0'),
-              ('Creating a data frame', 1, None, '___sec1'),
-              ('From empty DataFrame', 2, None, '___sec2'),
-              ('Create DataFrame from dictionary', 2, None, '___sec3'),
-              ('From file', 2, None, '___sec4'),
-              ('Accessing data in  DataFrames', 2, None, '___sec5'),
-              ('Selecting columns', 3, None, '___sec6'),
-              ('Selecting rows', 3, None, '___sec7'),
-              ('Challenges when accessing columns or rows', 3, None, '___sec8'),
-              ('Time columns not parsed properly', 3, None, '___sec9'),
-              ('Filtering and visualizing data', 2, None, '___sec10'),
-              ('Boolean masking', 3, None, '___sec11'),
-              ('Plotting a DataFrame', 3, None, '___sec12'),
+              ('What is Pandas?', 1, None, 'what-is-pandas'),
+              ('Creating a data frame', 1, None, 'creating-a-data-frame'),
+              ('From empty DataFrame', 2, None, 'from-empty-dataframe'),
+              ('Create DataFrame from dictionary',
+               2,
+               None,
+               'create-dataframe-from-dictionary'),
+              ('From file', 2, None, 'from-file'),
+              ('Accessing data in  DataFrames',
+               2,
+               None,
+               'accessing-data-in-dataframes'),
+              ('Selecting columns', 3, None, 'selecting-columns'),
+              ('Selecting rows', 3, None, 'selecting-rows'),
+              ('Challenges when accessing columns or rows',
+               3,
+               None,
+               'challenges-when-accessing-columns-or-rows'),
+              ('Time columns not parsed properly',
+               3,
+               None,
+               'time-columns-not-parsed-properly'),
+              ('Filtering and visualizing data',
+               2,
+               None,
+               'filtering-and-visualizing-data'),
+              ('Boolean masking', 3, None, 'boolean-masking'),
+              ('Plotting a DataFrame', 3, None, 'plotting-a-dataframe'),
               ('Performing mathematical operations on DataFrames',
                2,
                None,
-               '___sec13'),
+               'performing-mathematical-operations-on-dataframes'),
               ('Example: mathematical operations on DataFrames',
                3,
                None,
-               '___sec14'),
-              ('Solution', 3, None, '___sec15'),
-              ('Grouping, filtering and aggregating data', 2, None, '___sec16'),
-              ('Simple statistics in Pandas', 2, None, '___sec17'),
-              ('Joining two DataFrames', 2, None, '___sec18'),
-              ('Appending DataFrames', 3, None, '___sec19'),
-              ('Merging DataFrames', 3, None, '___sec20'),
-              ('Working with folders and files', 2, None, '___sec21'),
-              ('Basic use of Pathlib', 3, None, '___sec22'),
-              ('Basic use of `os`', 3, None, '___sec23'),
+               'example-mathematical-operations-on-dataframes'),
+              ('Solution', 3, None, 'solution'),
+              ('Grouping, filtering and aggregating data',
+               2,
+               None,
+               'grouping-filtering-and-aggregating-data'),
+              ('Simple statistics in Pandas',
+               2,
+               None,
+               'simple-statistics-in-pandas'),
+              ('Joining two DataFrames', 2, None, 'joining-two-dataframes'),
+              ('Appending DataFrames', 3, None, 'appending-dataframes'),
+              ('Merging DataFrames', 3, None, 'merging-dataframes'),
+              ('Working with folders and files',
+               2,
+               None,
+               'working-with-folders-and-files'),
+              ('Basic use of Pathlib', 3, None, 'basic-use-of-pathlib'),
+              ('Basic use of `os`', 3, None, 'basic-use-of-os'),
               ('Splitting data into different folders and files',
                3,
                None,
-               '___sec24'),
-              ('Writing more robust code', 2, None, '___sec25'),
-              ('Bibliography', 1, None, '___sec26')]}
+               'splitting-data-into-different-folders-and-files'),
+              ('Writing more robust code', 2, None, 'writing-more-robust-code'),
+              ('Bibliography', 1, None, 'bibliography')]}
 end of tocinfo -->
 
 <body>
-
-    
 <!-- Bootstrap navigation bar -->
 <div class="navbar navbar-default navbar-fixed-top">
   <div class="navbar-header">
@@ -98,40 +115,39 @@ end of tocinfo -->
     </button>
     <a class="navbar-brand" href="pandas-readable.html">Organizing data: pandas</a>
   </div>
-
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
      <!-- navigation toc: --> <li><a href="#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
-     <!-- navigation toc: --> <li><a href="#___sec0" style="font-size: 80%;"><b>What is Pandas?</b></a></li>
-     <!-- navigation toc: --> <li><a href="#___sec1" style="font-size: 80%;"><b>Creating a data frame</b></a></li>
-     <!-- navigation toc: --> <li><a href="#___sec2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;From empty DataFrame</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Create DataFrame from dictionary</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;From file</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Accessing data in  DataFrames</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Selecting columns</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Selecting rows</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Challenges when accessing columns or rows</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time columns not parsed properly</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Filtering and visualizing data</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Boolean masking</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Plotting a DataFrame</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Performing mathematical operations on DataFrames</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example: mathematical operations on DataFrames</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Grouping, filtering and aggregating data</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Simple statistics in Pandas</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Joining two DataFrames</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Appending DataFrames</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Merging DataFrames</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec21" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Working with folders and files</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Basic use of Pathlib</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Basic use of <code>os</code></a></li>
-     <!-- navigation toc: --> <li><a href="#___sec24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Splitting data into different folders and files</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Writing more robust code</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec26" style="font-size: 80%;"><b>Bibliography</b></a></li>
+     <!-- navigation toc: --> <li><a href="#what-is-pandas" style="font-size: 80%;"><b>What is Pandas?</b></a></li>
+     <!-- navigation toc: --> <li><a href="#creating-a-data-frame" style="font-size: 80%;"><b>Creating a data frame</b></a></li>
+     <!-- navigation toc: --> <li><a href="#from-empty-dataframe" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;From empty DataFrame</a></li>
+     <!-- navigation toc: --> <li><a href="#create-dataframe-from-dictionary" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Create DataFrame from dictionary</a></li>
+     <!-- navigation toc: --> <li><a href="#from-file" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;From file</a></li>
+     <!-- navigation toc: --> <li><a href="#accessing-data-in-dataframes" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Accessing data in  DataFrames</a></li>
+     <!-- navigation toc: --> <li><a href="#selecting-columns" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Selecting columns</a></li>
+     <!-- navigation toc: --> <li><a href="#selecting-rows" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Selecting rows</a></li>
+     <!-- navigation toc: --> <li><a href="#challenges-when-accessing-columns-or-rows" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Challenges when accessing columns or rows</a></li>
+     <!-- navigation toc: --> <li><a href="#time-columns-not-parsed-properly" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time columns not parsed properly</a></li>
+     <!-- navigation toc: --> <li><a href="#filtering-and-visualizing-data" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Filtering and visualizing data</a></li>
+     <!-- navigation toc: --> <li><a href="#boolean-masking" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Boolean masking</a></li>
+     <!-- navigation toc: --> <li><a href="#plotting-a-dataframe" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Plotting a DataFrame</a></li>
+     <!-- navigation toc: --> <li><a href="#performing-mathematical-operations-on-dataframes" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Performing mathematical operations on DataFrames</a></li>
+     <!-- navigation toc: --> <li><a href="#example-mathematical-operations-on-dataframes" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example: mathematical operations on DataFrames</a></li>
+     <!-- navigation toc: --> <li><a href="#solution" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="#grouping-filtering-and-aggregating-data" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Grouping, filtering and aggregating data</a></li>
+     <!-- navigation toc: --> <li><a href="#simple-statistics-in-pandas" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Simple statistics in Pandas</a></li>
+     <!-- navigation toc: --> <li><a href="#joining-two-dataframes" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Joining two DataFrames</a></li>
+     <!-- navigation toc: --> <li><a href="#appending-dataframes" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Appending DataFrames</a></li>
+     <!-- navigation toc: --> <li><a href="#merging-dataframes" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Merging DataFrames</a></li>
+     <!-- navigation toc: --> <li><a href="#working-with-folders-and-files" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Working with folders and files</a></li>
+     <!-- navigation toc: --> <li><a href="#basic-use-of-pathlib" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Basic use of Pathlib</a></li>
+     <!-- navigation toc: --> <li><a href="#basic-use-of-os" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Basic use of <code>os</code></a></li>
+     <!-- navigation toc: --> <li><a href="#splitting-data-into-different-folders-and-files" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Splitting data into different folders and files</a></li>
+     <!-- navigation toc: --> <li><a href="#writing-more-robust-code" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Writing more robust code</a></li>
+     <!-- navigation toc: --> <li><a href="#bibliography" style="font-size: 80%;"><b>Bibliography</b></a></li>
 
         </ul>
       </li>
@@ -139,483 +155,980 @@ end of tocinfo -->
   </div>
 </div>
 </div> <!-- end of navigation bar -->
-
 <div class="container">
-
 <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
-
 <a name="part0000"></a>
 <!-- ------------------- main content ---------------------- -->
-
-
-
 <div class="jumbotron">
-<center><h1>Organizing data: pandas</h1></center>  <!-- document title -->
+<center>
+<h1>Organizing data: pandas</h1>
+</center>  <!-- document title -->
 
-<p>
 <!-- author(s): Aksel Hiorth -->
-
 <center>
 <b>Aksel Hiorth</b> 
 </center>
-
-<p>
 <!-- institution(s) -->
-
 <br>
-University of Stavanger
-<p>
-<center><h4>Sep 12, 2022</h4></center> <!-- date -->
+<p>University of Stavanger
+<center>
+<h4>Sep 25, 2022</h4>
+</center> <!-- date -->
 <br>
-<p>
-</div> <!-- end jumbotron -->
-
-<h1 id="table_of_contents">Table of contents</h2>
-
-<p>
-<a href="#___sec0"> What is Pandas? </a><br>
-<a href="#___sec1"> Creating a data frame </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec2"> From empty DataFrame </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec3"> Create DataFrame from dictionary </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec4"> From file </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec5"> Accessing data in  DataFrames </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec10"> Filtering and visualizing data </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec13"> Performing mathematical operations on DataFrames </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec16"> Grouping, filtering and aggregating data </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec17"> Simple statistics in Pandas </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec18"> Joining two DataFrames </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec21"> Working with folders and files </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec25"> Writing more robust code </a><br>
-<a href="#___sec26"> Bibliography </a><br>
 </p>
-<p>
+
+
+</div> <!-- end jumbotron -->
+<h1 id="table_of_contents">Table of contents</h1>
+
+<div class='toc'>
+<p><a href="#what-is-pandas"> What is Pandas? </a></p>
+<p><a href="#creating-a-data-frame"> Creating a data frame </a></p>
+<p><span class="tab"> <a href="#from-empty-dataframe"> From empty DataFrame </a></p>
+<p><span class="tab"> <a href="#create-dataframe-from-dictionary"> Create DataFrame from dictionary </a></p>
+<p><span class="tab"> <a href="#from-file"> From file </a></p>
+<p><span class="tab"> <a href="#accessing-data-in-dataframes"> Accessing data in  DataFrames </a></p>
+<p><span class="tab"> <a href="#filtering-and-visualizing-data"> Filtering and visualizing data </a></p>
+<p><span class="tab"> <a href="#performing-mathematical-operations-on-dataframes"> Performing mathematical operations on DataFrames </a></p>
+<p><span class="tab"> <a href="#grouping-filtering-and-aggregating-data"> Grouping, filtering and aggregating data </a></p>
+<p><span class="tab"> <a href="#simple-statistics-in-pandas"> Simple statistics in Pandas </a></p>
+<p><span class="tab"> <a href="#joining-two-dataframes"> Joining two DataFrames </a></p>
+<p><span class="tab"> <a href="#working-with-folders-and-files"> Working with folders and files </a></p>
+<p><span class="tab"> <a href="#writing-more-robust-code"> Writing more robust code </a></p>
+<p><a href="#bibliography"> Bibliography </a></p>
+</div>
+<br>
+
 <!-- Common Mako variables and functions -->
-
-<h1 id="___sec0" class="anchor">What is Pandas? </h1>
-Pandas is a Python package that among many things are used to handle data, and perform operations on groups of data. It is built on top of Numpy, which makes it easy to perform vectorized operations. Pandas is written by Wes McKinney, and one of it objectives is according to the official website <a href="https://pandas.pydata.org/" target="_self"> '' providing fast, flexible, and expressive data structures designed to make working with ''relational'' or ''labeled'' data both easy and intuitive. It aims to be the fundamental high-level building block for doing practical, real-world data analysis in Python''</a>. Pandas also has excellent functions for reading and writing excel and csv files.  An excel file is read directly into memory in what is called a <code>DataFrame</code> in Pandas. A DataFrame is a two dimensional object where data are typically stored in column or row format. Pandas has a lot of functions that can be used to calculate statistical properties of the data frame as a whole. In this chapter we will focus on basic data manipulation, stuff you might do in excel, but can be done much faster in Python and Pandas.
-
-<h1 id="___sec1" class="anchor">Creating a data frame </h1>
-In the following we will assume that you have imported pandas, like this
-<p>
+<h1 id="what-is-pandas" class="anchor">What is Pandas? </h1>
+<p>Pandas is a Python package that among many things are used to handle data, and perform operations on groups of data. It is built on top of Numpy, which makes it easy to perform vectorized operations. Pandas is written by Wes McKinney, and one of it objectives is according to the official website <a href="https://pandas.pydata.org/" target="_self"> '' providing fast, flexible, and expressive data structures designed to make working with ''relational'' or ''labeled'' data both easy and intuitive. It aims to be the fundamental high-level building block for doing practical, real-world data analysis in Python''</a>. Pandas also has excellent functions for reading and writing excel and csv files.  An excel file is read directly into memory in what is called a <code>DataFrame</code> in Pandas. A DataFrame is a two dimensional object where data are typically stored in column or row format. Pandas has a lot of functions that can be used to calculate statistical properties of the data frame as a whole. In this chapter we will focus on basic data manipulation, stuff you might do in excel, but can be done much faster in Python and Pandas.</p>
+<h1 id="creating-a-data-frame" class="anchor">Creating a data frame </h1>
+<p>In the following we will assume that you have imported pandas, like this</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">pandas</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">pd</span>
-</pre></div>
-
-<h2 id="___sec2" class="anchor">From empty DataFrame </h2>
-This is perhaps the most basic way of creating a DataFrame, first we create an empty DataFrame
-<p>
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">pandas</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">pd</span>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<h2 id="from-empty-dataframe" class="anchor">From empty DataFrame </h2>
+<p>This is perhaps the most basic way of creating a DataFrame, first we create an empty DataFrame</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>df <span style="color: #666666">=</span> pd<span style="color: #666666">.</span>DataFrame()
-</pre></div>
-<p>
-<div class="alert alert-block alert-success alert-text-normal"><b>Variable name.</b>
-Note that we often use <code>df</code> as a variable name for a DataFrame, this is a choice, but it is a usually a good choice as someone else reading the code could infer from a name that <code>df</code> is a DataFrame. If you need more than one DataFrame variable you could use <code>df1</code>, <code>df2</code>, etc. or even better to use a descriptive name, <code>df_sales_data</code>.
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">df <span style="color: #666666">=</span> pd<span style="color: #666666">.</span>DataFrame()
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-Next, we can add columns to the DataFrame
-<p>
+<div class="alert alert-block alert-success alert-text-normal"><b>Variable name</b>
+<p>Note that we often use <code>df</code> as a variable name for a DataFrame, this is a choice, but it is a usually a good choice as someone else reading the code could infer from a name that <code>df</code> is a DataFrame. If you need more than one DataFrame variable you could use <code>df1</code>, <code>df2</code>, etc. or even better to use a descriptive name, <code>df_sales_data</code>.</p>
+</div>
+
+<p>Next, we can add columns to the DataFrame</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>df<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>DataFrame()
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">df<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>DataFrame()
 df[<span style="color: #BA2121">&#39;ints&#39;</span>]<span style="color: #666666">=</span>[<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">2</span>,<span style="color: #666666">3</span>]
 df[<span style="color: #BA2121">&#39;floats&#39;</span>]<span style="color: #666666">=</span>[<span style="color: #666666">4.</span>,<span style="color: #666666">5.</span>,<span style="color: #666666">6.</span>,<span style="color: #666666">7.</span>]
 df[<span style="color: #BA2121">&#39;tools&#39;</span>]<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;hammer&#39;</span>,<span style="color: #BA2121">&#39;saw&#39;</span>,<span style="color: #BA2121">&#39;rock&#39;</span>,<span style="color: #BA2121">&#39;nail&#39;</span>]
 <span style="color: #008000">print</span>(df) <span style="color: #408080; font-style: italic"># to view data frame</span>
-</pre></div>
-<p>
-Note that all columns needs to have the same size.
-
-<p>
-<div class="alert alert-block alert-success alert-text-normal"><b><code>pd.Series()</code>.</b>
-Even if we initialize the DataFrame column with a list, the command <code>type(df['a'])</code> will tell you that the column in the DataFrame are of type <code>pd.Series()</code>. Thus the fundamental objects in Pandas are of type <code>Series</code>. Series are more flexible, and it is possible to calculate <code>df['a']/df['b']</code>, whereas <code>[0,1,2,3]/[4,5,6,7]</code> is not possible.
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
+<p>Note that all columns needs to have the same size.</p>
 
-<h2 id="___sec3" class="anchor">Create DataFrame from dictionary </h2>
-A DataFrame can be quite easily be generated from a dictionary. A dictionary is a special data structure, where an unique key is associated with a data type (key:value pair). In this case, the key would be the title of the column, and the value would be the data in the columns.
+<div class="alert alert-block alert-success alert-text-normal"><b><code>pd.Series()</code></b>
+<p>Even if we initialize the DataFrame column with a list, the command <code>type(df['a'])</code> will tell you that the column in the DataFrame are of type <code>pd.Series()</code>. Thus the fundamental objects in Pandas are of type <code>Series</code>. Series are more flexible, and it is possible to calculate <code>df['a']/df['b']</code>, whereas <code>[0,1,2,3]/[4,5,6,7]</code> is not possible.  </p>
+</div>
 
-<p>
+<h2 id="create-dataframe-from-dictionary" class="anchor">Create DataFrame from dictionary </h2>
+<p>A DataFrame can be quite easily be generated from a dictionary. A dictionary is a special data structure, where an unique key is associated with a data type (key:value pair). In this case, the key would be the title of the column, and the value would be the data in the columns.</p>
+
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>my_dict<span style="color: #666666">=</span>{<span style="color: #BA2121">&#39;ints&#39;</span>:[<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">2</span>,<span style="color: #666666">3</span>], <span style="color: #BA2121">&#39;floats&#39;</span>:[<span style="color: #666666">4.</span>,<span style="color: #666666">5.</span>,<span style="color: #666666">6.</span>,<span style="color: #666666">7.</span>],
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">my_dict<span style="color: #666666">=</span>{<span style="color: #BA2121">&#39;ints&#39;</span>:[<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">2</span>,<span style="color: #666666">3</span>], <span style="color: #BA2121">&#39;floats&#39;</span>:[<span style="color: #666666">4.</span>,<span style="color: #666666">5.</span>,<span style="color: #666666">6.</span>,<span style="color: #666666">7.</span>],
 <span style="color: #BA2121">&#39;tools&#39;</span>:[<span style="color: #BA2121">&#39;hammer&#39;</span>,<span style="color: #BA2121">&#39;saw&#39;</span>,<span style="color: #BA2121">&#39;rock&#39;</span>,<span style="color: #BA2121">&#39;nail&#39;</span>]
 }
 df<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>DataFrame(my_dict)
 <span style="color: #008000">print</span>(df) <span style="color: #408080; font-style: italic"># to view</span>
-</pre></div>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<h2 id="from-file" class="anchor">From file </h2>
+<p>Assume you have some data organized in excel or in a csv file. The csv file could just be a file with column data, they could be separated by a comma or tab</p>
 
-<h2 id="___sec4" class="anchor">From file </h2>
-Assume you have some data organized in excel or in a csv file. The csv file could just be a file with column data, they could be separated by a comma or tab
-
-<p>
 <center> <!-- figure label: --> <div id="fig:file"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 1:  Official Covid-19 data, and example of files (left) tab separated (right) excel file.  <!-- caption label: fig:file --> </p></center>
+<center>
+<p class="caption">Figure 1:  Official Covid-19 data, and example of files (left) tab separated (right) excel file.  <!-- caption label: fig:file --> </p>
+</center>
 <p><img src="fig-pandas/covid_comb.png" align="bottom" width=800></p>
 </center>
 
-<p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>df<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>read_excel(<span style="color: #BA2121">&#39;../data/corona_data.xlsx&#39;</span>) <span style="color: #408080; font-style: italic"># excel file</span>
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">df<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>read_excel(<span style="color: #BA2121">&#39;../data/corona_data.xlsx&#39;</span>) <span style="color: #408080; font-style: italic"># excel file</span>
 df2<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>read_csv(<span style="color: #BA2121">&#39;../data/corona_data.dat&#39;</span>,sep<span style="color: #666666">=</span><span style="color: #BA2121">&#39;</span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121">&#39;</span>) <span style="color: #408080; font-style: italic"># csv tab separated file</span>
-</pre></div>
-<p>
-If the excel file has several sheets, you can give the sheet name directly, e.g. <code>df=pd.read_excel('file.xlsx',sheet_name=&quot;Sheet1&quot;)</code>, for more information see the <a href="https://pandas.pydata.org/docs/reference/api/pandas.read_excel.html" target="_self">documentation</a>.
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<p>
-<div class="alert alert-block alert-success alert-text-normal"><b>Accessing files.</b>
-Accessing files from python can be painful. If excel files are open in excel, Windows will not allow a different program to access it - always remember to close the file before opening it. Sometimes we are not in the right directory, to check which directory you are in, you can always do the following
-<p>
+<p>If the excel file has several sheets, you can give the sheet name directly, e.g. <code>df=pd.read_excel('file.xlsx',sheet_name=&quot;Sheet1&quot;)</code>, for more information see the <a href="https://pandas.pydata.org/docs/reference/api/pandas.read_excel.html" target="_self">documentation</a>. </p>
+
+<div class="alert alert-block alert-success alert-text-normal"><b>Accessing files</b>
+<p>Accessing files from python can be painful. If excel files are open in excel, Windows will not allow a different program to access it - always remember to close the file before opening it. Sometimes we are not in the right directory, to check which directory you are in, you can always do the following</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">os</span>
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #ffffff">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">os</span>
 <span style="color: #008000">print</span>(os<span style="color: #666666">.</span>getcwd()) <span style="color: #408080; font-style: italic"># prints current working directory</span>
-</pre></div>
-<p>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 </div>
 
 
-<p>
-We can easily save the data frame to excel format and open it in excel
-<p>
+<p>We can easily save the data frame to excel format and open it in excel</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>df<span style="color: #666666">.</span>to_excel(<span style="color: #BA2121">&#39;covid19.xlsx&#39;</span>, index<span style="color: #666666">=</span><span style="color: #008000; font-weight: bold">False</span>) <span style="color: #408080; font-style: italic"># what happens if you put index=True?</span>
-</pre></div>
-<p>
-<div class="alert alert-block alert-success alert-text-normal"><b>Index column.</b>
-Whenever you create a DataFrame Pandas by default create an index column, it contains an integer for each row starting at zero. It can be accessed by <code>df.index</code>, and it is also possible to define another column as index column.
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">df<span style="color: #666666">.</span>to_excel(<span style="color: #BA2121">&#39;covid19.xlsx&#39;</span>, index<span style="color: #666666">=</span><span style="color: #008000; font-weight: bold">False</span>) <span style="color: #408080; font-style: italic"># what happens if you put index=True?</span>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 
-<h2 id="___sec5" class="anchor">Accessing data in  DataFrames </h2>
+<div class="alert alert-block alert-success alert-text-normal"><b>Index column</b>
+<p>Whenever you create a DataFrame Pandas by default create an index column, it contains an integer for each row starting at zero. It can be accessed by <code>df.index</code>, and it is also possible to define another column as index column. </p>
+</div>
 
-<h3 id="___sec6" class="anchor">Selecting columns  </h3>
+<h2 id="accessing-data-in-dataframes" class="anchor">Accessing data in  DataFrames </h2>
+<h3 id="selecting-columns" class="anchor">Selecting columns  </h3>
 
-<p>
-If we want to pick out a specific column we can access it in the following ways
-<p>
+<p>If we want to pick out a specific column we can access it in the following ways</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #408080; font-style: italic"># following two are equivalent</span>
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #408080; font-style: italic"># following two are equivalent</span>
 time<span style="color: #666666">=</span>df[<span style="color: #BA2121">&#39;TIME&#39;</span>] <span style="color: #408080; font-style: italic"># by the name, alternatively</span>
 time<span style="color: #666666">=</span>df[df<span style="color: #666666">.</span>columns[<span style="color: #666666">1</span>]]
 <span style="color: #408080; font-style: italic"># following two are equivalent</span>
 time<span style="color: #666666">=</span>df<span style="color: #666666">.</span>loc[:,[<span style="color: #BA2121">&#39;TIME&#39;</span>]] <span style="color: #408080; font-style: italic"># by loc[] if we use name</span>
 time<span style="color: #666666">=</span>df<span style="color: #666666">.</span>iloc[:,<span style="color: #666666">1</span>] <span style="color: #408080; font-style: italic"># by iloc, pick column number 1</span>
-</pre></div>
-<p>
-The <code>loc[]</code> and <code>iloc[]</code> functions also allows for list slicing, one can then pick e.g. every second element in the column by <code>time=df.iloc[::2,1]</code> etc. The difference is that <code>loc[]</code> uses the name, and <code>iloc[]</code> the index (usually an integer).
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<p>
-Why several ways of doing the same operation? It turns out that although we are able to extract what we want with these operations, they are of different type
-<p>
+<p>The <code>loc[]</code> and <code>iloc[]</code> functions also allows for list slicing, one can then pick e.g. every second element in the column by <code>time=df.iloc[::2,1]</code> etc. The difference is that <code>loc[]</code> uses the name, and <code>iloc[]</code> the index (usually an integer). </p>
+
+<p>Why several ways of doing the same operation? It turns out that although we are able to extract what we want with these operations, they are of different type</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000">print</span>(<span style="color: #008000">type</span>(df[<span style="color: #BA2121">&#39;TIME&#39;</span>]))
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000">print</span>(<span style="color: #008000">type</span>(df[<span style="color: #BA2121">&#39;TIME&#39;</span>]))
 <span style="color: #008000">print</span>(<span style="color: #008000">type</span>(df<span style="color: #666666">.</span>loc[:,[<span style="color: #BA2121">&#39;TIME&#39;</span>]]))
-</pre></div>
-
-<h3 id="___sec7" class="anchor">Selecting rows  </h3>
-
-When selecting rows in a DataFrame, we can use the <code>loc[]</code> and <code>iloc[]</code> functions
-<p>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<h3 id="selecting-rows" class="anchor">Selecting rows  </h3>
+<p>When selecting rows in a DataFrame, we can use the <code>loc[]</code> and <code>iloc[]</code> functions</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #408080; font-style: italic"># pick column number 0 and 1</span>
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #408080; font-style: italic"># pick column number 0 and 1</span>
 time<span style="color: #666666">=</span>df<span style="color: #666666">.</span>loc[<span style="color: #666666">0</span>:<span style="color: #666666">1</span>,:] <span style="color: #408080; font-style: italic"># by loc[] </span>
 time<span style="color: #666666">=</span>df<span style="color: #666666">.</span>iloc[<span style="color: #666666">0</span>:<span style="color: #666666">2</span>,:] <span style="color: #408080; font-style: italic"># by iloc</span>
-</pre></div>
-<p>
-<div class="alert alert-block alert-success alert-text-normal"><b><code>pandas.DataFrame.loc</code> vs <code>pandas.DataFrame.iloc</code>.</b>
-When selecting rows <code>loc</code> and <code>iloc</code> they behave differently, <code>loc</code> includes the endpoints (in the example above both row 0 and 1), whereas <code>iloc</code> includes the starting point and up to 1 minus the endpoint.
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 
-<h3 id="___sec8" class="anchor">Challenges when accessing columns or rows </h3>
+<div class="alert alert-block alert-success alert-text-normal"><b><code>pandas.DataFrame.loc</code> vs <code>pandas.DataFrame.iloc</code></b>
+<p>When selecting rows <code>loc</code> and <code>iloc</code> they behave differently, <code>loc</code> includes the endpoints (in the example above both row 0 and 1), whereas <code>iloc</code> includes the starting point and up to 1 minus the endpoint. </p>
+</div>
 
-<p>
-<div class="alert alert-block alert-success alert-text-normal"><b>Special characters.</b>
-Sometimes when reading files from excel, headers may contains invisible characters like newline <code>\n</code> or tab <code>\t</code> or maybe Norwegian special letters that have not been read in properly. If you have problem accessing a column by name do <code>print(df.columns)</code> and check if the name matches what you would expect.
+<h3 id="challenges-when-accessing-columns-or-rows" class="anchor">Challenges when accessing columns or rows </h3>
+
+<div class="alert alert-block alert-success alert-text-normal"><b>Special characters</b>
+<p>Sometimes when reading files from excel, headers may contains invisible characters like newline <code>\n</code> or tab <code>\t</code> or maybe Norwegian special letters that have not been read in properly. If you have problem accessing a column by name do <code>print(df.columns)</code> and check if the name matches what you would expect.  </p>
 </div>
 
 
-<p>
-If the header names has unwanted white space, one can do
-<p>
+<p>If the header names has unwanted white space, one can do</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>df<span style="color: #666666">.</span>columns <span style="color: #666666">=</span> df<span style="color: #666666">.</span>columns<span style="color: #666666">.</span>str<span style="color: #666666">.</span>replace(<span style="color: #BA2121">&#39; &#39;</span>, <span style="color: #BA2121">&#39;&#39;</span>) <span style="color: #408080; font-style: italic"># all white spaces</span>
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">df<span style="color: #666666">.</span>columns <span style="color: #666666">=</span> df<span style="color: #666666">.</span>columns<span style="color: #666666">.</span>str<span style="color: #666666">.</span>replace(<span style="color: #BA2121">&#39; &#39;</span>, <span style="color: #BA2121">&#39;&#39;</span>) <span style="color: #408080; font-style: italic"># all white spaces</span>
 df<span style="color: #666666">.</span>columns <span style="color: #666666">=</span> df<span style="color: #666666">.</span>columns<span style="color: #666666">.</span>str<span style="color: #666666">.</span>lstrip() <span style="color: #408080; font-style: italic"># the beginning of string</span>
 df<span style="color: #666666">.</span>columns <span style="color: #666666">=</span> df<span style="color: #666666">.</span>columns<span style="color: #666666">.</span>str<span style="color: #666666">.</span>rstrip() <span style="color: #408080; font-style: italic"># end of string</span>
 df<span style="color: #666666">.</span>columns <span style="color: #666666">=</span> df<span style="color: #666666">.</span>columns<span style="color: #666666">.</span>str<span style="color: #666666">.</span>strip()  <span style="color: #408080; font-style: italic"># both ends</span>
-</pre></div>
-<p>
-Similarly for unwanted tabs
-<p>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>Similarly for unwanted tabs</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>df<span style="color: #666666">.</span>columns <span style="color: #666666">=</span> df<span style="color: #666666">.</span>columns<span style="color: #666666">.</span>str<span style="color: #666666">.</span>replace(<span style="color: #BA2121">&#39;</span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121">&#39;</span>, <span style="color: #BA2121">&#39;&#39;</span>) <span style="color: #408080; font-style: italic"># remove tab</span>
-</pre></div>
-<p>
-If you want to make sure that the columns does not contain any white spaces, one can use <a href="https://pandas.pydata.org/pandas-docs/version/1.2.4/reference/api/pandas.Series.str.strip.html" target="_self"><tt>pandas.Series.str.strip()</tt></a>
-<p>
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">df<span style="color: #666666">.</span>columns <span style="color: #666666">=</span> df<span style="color: #666666">.</span>columns<span style="color: #666666">.</span>str<span style="color: #666666">.</span>replace(<span style="color: #BA2121">&#39;</span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121">&#39;</span>, <span style="color: #BA2121">&#39;&#39;</span>) <span style="color: #408080; font-style: italic"># remove tab</span>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>If you want to make sure that the columns does not contain any white spaces, one can use <a href="https://pandas.pydata.org/pandas-docs/version/1.2.4/reference/api/pandas.Series.str.strip.html" target="_self"><tt>pandas.Series.str.strip()</tt></a></p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>df[<span style="color: #BA2121">&#39;LOCATION&#39;</span>]<span style="color: #666666">=</span>df[<span style="color: #BA2121">&#39;LOCATION&#39;</span>]<span style="color: #666666">.</span>str<span style="color: #666666">.</span>strip()
-</pre></div>
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">df[<span style="color: #BA2121">&#39;LOCATION&#39;</span>]<span style="color: #666666">=</span>df[<span style="color: #BA2121">&#39;LOCATION&#39;</span>]<span style="color: #666666">.</span>str<span style="color: #666666">.</span>strip()
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<h3 id="time-columns-not-parsed-properly" class="anchor">Time columns not parsed properly </h3>
+<p>If you have dates in the file (as in our case for the <code>TIME</code> column), you should check if they are in the <code>datetime</code> format and not read as <code>str</code>.</p>
 
-<h3 id="___sec9" class="anchor">Time columns not parsed properly </h3>
-
-If you have dates in the file (as in our case for the <code>TIME</code> column), you should check if they are in the <code>datetime</code> format and not read as <code>str</code>.
-
-<p>
-<div class="alert alert-block alert-success alert-text-normal"><b><code>datetime</code>.</b>
-The <code>datetime</code> library is very useful for working with dates. Data types of the type <code>datetime</code> (or equivalently <code>timestamp</code> used by Pandas) contains both date and time in the format <code>YYYY-MM-DD hh:mm:ss</code>. We can initialize a variable, <code>a</code>, by <code>a=datetime.datetime(2022,8,30,10,14,1)</code>, to access the hour we do <code>a.hour</code>, the year by <code>a.year</code> etc. It also easy to increase e.g. the day by one by doing <code>a+datetime.timedelta(days=1)</code>.
+<div class="alert alert-block alert-success alert-text-normal"><b><code>datetime</code></b>
+<p>The <code>datetime</code> library is very useful for working with dates. Data types of the type <code>datetime</code> (or equivalently <code>timestamp</code> used by Pandas) contains both date and time in the format <code>YYYY-MM-DD hh:mm:ss</code>. We can initialize a variable, <code>a</code>, by <code>a=datetime.datetime(2022,8,30,10,14,1)</code>, to access the hour we do <code>a.hour</code>, the year by <code>a.year</code> etc. It also easy to increase e.g. the day by one by doing <code>a+datetime.timedelta(days=1)</code>. </p>
 </div>
 
 
-<p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">datetime</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">dt</span>
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">datetime</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">dt</span>
 time<span style="color: #666666">=</span>df[<span style="color: #BA2121">&#39;TIME&#39;</span>]
 <span style="color: #408080; font-style: italic"># what happens if you set</span>
 <span style="color: #408080; font-style: italic"># time=df2[&#39;TIME&#39;] #i.e df2 is from pd.read_csv ?</span>
 <span style="color: #008000">print</span>(time[<span style="color: #666666">0</span>])
 <span style="color: #008000">print</span>(time[<span style="color: #666666">0</span>]<span style="color: #666666">+</span>dt<span style="color: #666666">.</span>timedelta(days<span style="color: #666666">=1</span>))
-</pre></div>
-<p>
-The code above might work fine or in some cases a date is parsed as a string by Pandas, then we need to convert that column to the correct format. If not, we get into problems if you want to plot data vs the time column.
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<p>
-Below are two ways of converting the <code>TIME</code> column
-<p>
+<p>The code above might work fine or in some cases a date is parsed as a string by Pandas, then we need to convert that column to the correct format. If not, we get into problems if you want to plot data vs the time column.</p>
+
+<p>Below are two ways of converting the <code>TIME</code> column</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>df2[<span style="color: #BA2121">&#39;TIME&#39;</span>]<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>to_datetime(df2[<span style="color: #BA2121">&#39;TIME&#39;</span>])
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">df2[<span style="color: #BA2121">&#39;TIME&#39;</span>]<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>to_datetime(df2[<span style="color: #BA2121">&#39;TIME&#39;</span>])
 <span style="color: #408080; font-style: italic"># just for testing that everything went ok</span>
 time<span style="color: #666666">=</span>df2[<span style="color: #BA2121">&#39;TIME&#39;</span>]
 <span style="color: #008000">print</span>(time[<span style="color: #666666">0</span>])
 <span style="color: #008000">print</span>(time[<span style="color: #666666">0</span>]<span style="color: #666666">+</span>dt<span style="color: #666666">.</span>timedelta(days<span style="color: #666666">=1</span>))
-</pre></div>
-<p>
-Another possibility is to do the conversion when reading the data:
-<p>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>Another possibility is to do the conversion when reading the data:</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>df2<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>read_csv(<span style="color: #BA2121">&#39;../data/corona_data.dat&#39;</span>,sep<span style="color: #666666">=</span><span style="color: #BA2121">&#39;</span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121">&#39;</span>,parse_dates<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;TIME&#39;</span>]) 
-</pre></div>
-<p>
-If you have a need to specify all data types, to avoid potential problems down the line this can also be done. First create a dictionary, with column names and data types
-<p>
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">df2<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>read_csv(<span style="color: #BA2121">&#39;../data/corona_data.dat&#39;</span>,sep<span style="color: #666666">=</span><span style="color: #BA2121">&#39;</span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121">&#39;</span>,parse_dates<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;TIME&#39;</span>]) 
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>If you have a need to specify all data types, to avoid potential problems down the line this can also be done. First create a dictionary, with column names and data types</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>types_dict<span style="color: #666666">=</span>{<span style="color: #BA2121">&quot;LOCATION&quot;</span>:<span style="color: #008000">str</span>,<span style="color: #BA2121">&quot;TIME&quot;</span>:<span style="color: #008000">str</span>,<span style="color: #BA2121">&quot;ELAPSED_TIME_SINCE_OUTBREAK&quot;</span>:<span style="color: #008000">int</span>,<span style="color: #BA2121">&quot;CONFIRMED&quot;</span>:<span style="color: #008000">int</span>,<span style="color: #BA2121">&quot;DEATHS&quot;</span>:<span style="color: #008000">int</span>,<span style="color: #BA2121">&quot;RECOVERED&quot;</span>:<span style="color: #008000">int</span>}
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">types_dict<span style="color: #666666">=</span>{<span style="color: #BA2121">&quot;LOCATION&quot;</span>:<span style="color: #008000">str</span>,<span style="color: #BA2121">&quot;TIME&quot;</span>:<span style="color: #008000">str</span>,<span style="color: #BA2121">&quot;ELAPSED_TIME_SINCE_OUTBREAK&quot;</span>:<span style="color: #008000">int</span>,<span style="color: #BA2121">&quot;CONFIRMED&quot;</span>:<span style="color: #008000">int</span>,<span style="color: #BA2121">&quot;DEATHS&quot;</span>:<span style="color: #008000">int</span>,<span style="color: #BA2121">&quot;RECOVERED&quot;</span>:<span style="color: #008000">int</span>}
 df2<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>read_csv(<span style="color: #BA2121">&#39;../data/corona_data.dat&#39;</span>,sep<span style="color: #666666">=</span><span style="color: #BA2121">&#39;</span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121">&#39;</span>,dtype<span style="color: #666666">=</span>types_dict,parse_dates<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;TIME&#39;</span>]) <span style="color: #408080; font-style: italic"># set data types explicit</span>
-</pre></div>
-<p>
-Note that the time data type is <code>str</code>, but we explicitly tell Pandas to convert those to <code>datetime</code>.
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<h2 id="___sec10" class="anchor">Filtering and visualizing data </h2>
-
-<h3 id="___sec11" class="anchor">Boolean masking </h3>
-
-Typically you would select rows based on a criterion, the syntax in Pandas is that you enter a series containing <code>True</code> and <code>False</code> for the rows you want to pick out, e.g. to pick out all entries with Afghanistan we can do
-<p>
-
-<!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>df[df[<span style="color: #BA2121">&#39;LOCATION&#39;</span>] <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;Afghanistan&#39;</span>]
-</pre></div>
-<p>
-The innermost statement <code>df['LOCATION'] == 'Afghanistan'</code> gives a logical vector with the value <code>True</code> for the five last elements and <code>False</code> for the rest. Then we pass this to the DataFrame, and in one go the unwanted elements are removed. It is also possible to use several criteria, e.g. only extracting data after a specific time
-<p>
-
-<!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>df[(df[<span style="color: #BA2121">&#39;LOCATION&#39;</span>] <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;Afghanistan&#39;</span>) <span style="color: #666666">&amp;</span> (df[<span style="color: #BA2121">&#39;ELAPSED_TIME_SINCE_OUTBREAK&#39;</span>] <span style="color: #666666">&gt;</span> <span style="color: #666666">2</span>)]
-</pre></div>
-<p>
-Note that the parenthesis are necessary, otherwise the logical operation would fail.
-
-<h3 id="___sec12" class="anchor">Plotting a DataFrame </h3>
-
-Pandas has built in plotting, by calling <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.plot.html" target="_self"><tt>pandas.DataFrame.plot</tt></a>.
-<p>
+<p>Note that the time data type is <code>str</code>, but we explicitly tell Pandas to convert those to <code>datetime</code>.</p>
+<h2 id="filtering-and-visualizing-data" class="anchor">Filtering and visualizing data </h2>
+<h3 id="boolean-masking" class="anchor">Boolean masking </h3>
+<p>Typically you would select rows based on a criterion, the syntax in Pandas is that you enter a series containing <code>True</code> and <code>False</code> for the rows you want to pick out, e.g. to pick out all entries with Afghanistan we can do</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>df2<span style="color: #666666">=</span>df[(df[<span style="color: #BA2121">&#39;LOCATION&#39;</span>] <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;Afghanistan&#39;</span>)]
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">df[df[<span style="color: #BA2121">&#39;LOCATION&#39;</span>] <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;Afghanistan&#39;</span>]
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>The innermost statement <code>df['LOCATION'] == 'Afghanistan'</code> gives a logical vector with the value <code>True</code> for the five last elements and <code>False</code> for the rest. Then we pass this to the DataFrame, and in one go the unwanted elements are removed. It is also possible to use several criteria, e.g. only extracting data after a specific time</p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">df[(df[<span style="color: #BA2121">&#39;LOCATION&#39;</span>] <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;Afghanistan&#39;</span>) <span style="color: #666666">&amp;</span> (df[<span style="color: #BA2121">&#39;ELAPSED_TIME_SINCE_OUTBREAK&#39;</span>] <span style="color: #666666">&gt;</span> <span style="color: #666666">2</span>)]
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>Note that the parenthesis are necessary, otherwise the logical operation would fail.</p>
+<h3 id="plotting-a-dataframe" class="anchor">Plotting a DataFrame </h3>
+<p>Pandas has built in plotting, by calling <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.plot.html" target="_self"><tt>pandas.DataFrame.plot</tt></a>.</p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">df2<span style="color: #666666">=</span>df[(df[<span style="color: #BA2121">&#39;LOCATION&#39;</span>] <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;Afghanistan&#39;</span>)]
 df2<span style="color: #666666">.</span>plot()
 <span style="color: #408080; font-style: italic">#try </span>
 <span style="color: #408080; font-style: italic">#df2=df2.set_index(&#39;TIME&#39;)</span>
 <span style="color: #408080; font-style: italic">#df2.plot() # what is the difference?</span>
 <span style="color: #408080; font-style: italic">#df2.plot(y=[&#39;CONFIRMED&#39;,&#39;DEATHS&#39;])</span>
-</pre></div>
-
-<h2 id="___sec13" class="anchor">Performing mathematical operations on DataFrames </h2>
-When performing mathematical operations on DataFrames there are at least two strategies
-
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<h2 id="performing-mathematical-operations-on-dataframes" class="anchor">Performing mathematical operations on DataFrames </h2>
+<p>When performing mathematical operations on DataFrames there are at least two strategies</p>
 <ul>
 <li> Extract columns from the DataFrame and perform mathematical operations on the columns using Numpy, leaving the original DataFrame intact</li>
 <li> To operate directly on the data in the DataFrame using the Pandas library</li>
 </ul>
-
-<div class="alert alert-block alert-success alert-text-normal"><b>Speed and performance.</b>
-Using Pandas or Numpy should in principle be equally fast. The advice is to not worry about performance before it is necessary. Use the methods you are confident with, and try to be consistent. By consistent, we mean that if you have found one way of doing a certain operation stick to that one and try not to implement many different ways of doing the same thing.
+<div class="alert alert-block alert-success alert-text-normal"><b>Speed and performance</b>
+<p>Using Pandas or Numpy should in principle be equally fast. The advice is to not worry about performance before it is necessary. Use the methods you are confident with, and try to be consistent. By consistent, we mean that if you have found one way of doing a certain operation stick to that one and try not to implement many different ways of doing the same thing. </p>
 </div>
 
 
-<p>
-We can always access the individual columns in a DataFrame by the syntax <code>df['column_name']</code>.
-
-<h3 id="___sec14" class="anchor">Example: mathematical operations on DataFrames </h3>
-
+<p>We can always access the individual columns in a DataFrame by the syntax <code>df['column_name']</code>.
+<h3 id="example-mathematical-operations-on-dataframes" class="anchor">Example: mathematical operations on DataFrames </h3>
+</p>
 <ol>
 <li> Create a DataFrame with one column (<code>a</code>) containing ten thousand random uniformly distributed numbers between 0 and 1 (checkout <a href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.uniform.html" target="_self"><tt>np.random.uniform</tt></a>)</li>
 <li> Add two new columns: one which all elements of <code>a</code> is squared and one where the sine function is applied to column <code>a</code></li>
 <li> Calculate the inverse of all the numbers in the DataFrame</li>
 <li> Make a plot of the results (i.e. <code>a</code> vs <code>a*a</code>, and <code>a</code> vs <code>sin(a)</code>)</li>
 </ol>
-
-<h3 id="___sec15" class="anchor">Solution </h3>
-
+<h3 id="solution" class="anchor">Solution </h3>
 <ol>
 <li> First we make the DataFrame</li>
 </ol>
 
-<p>
-
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
 <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">pandas</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">pd</span>
 N<span style="color: #666666">=10000</span>
 a<span style="color: #666666">=</span>np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>uniform(<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,size<span style="color: #666666">=</span>N)
 df<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>DataFrame() <span style="color: #408080; font-style: italic"># empty DataFrame</span>
 df[<span style="color: #BA2121">&#39;a&#39;</span>]<span style="color: #666666">=</span>a
-</pre></div>
-<p>
-If you like you could also try to use a dictionary. Next, we add the new columns
-<p>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>If you like you could also try to use a dictionary. Next, we add the new columns</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>df[<span style="color: #BA2121">&#39;b&#39;</span>]<span style="color: #666666">=</span>df[<span style="color: #BA2121">&#39;a&#39;</span>]<span style="color: #666666">*</span>df[<span style="color: #BA2121">&#39;a&#39;</span>] <span style="color: #408080; font-style: italic"># alternatively np.square(df[&#39;a&#39;])</span>
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">df[<span style="color: #BA2121">&#39;b&#39;</span>]<span style="color: #666666">=</span>df[<span style="color: #BA2121">&#39;a&#39;</span>]<span style="color: #666666">*</span>df[<span style="color: #BA2121">&#39;a&#39;</span>] <span style="color: #408080; font-style: italic"># alternatively np.square(df[&#39;a&#39;])</span>
 df[<span style="color: #BA2121">&#39;c&#39;</span>]<span style="color: #666666">=</span>np<span style="color: #666666">.</span>sin(df[<span style="color: #BA2121">&#39;a&#39;</span>])
-</pre></div>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <ol>
 <li> The inverse of all the numbers in the DataFrame can be calculated by simply doing</li>
 </ol>
 
-<p>
-
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #666666">1/</span>df
-</pre></div>
-<p>
-Note: you can also do <code>df+df</code> and many other operations on the whole DataFrame.
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #666666">1/</span>df
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>Note: you can also do <code>df+df</code> and many other operations on the whole DataFrame.</p>
 
 <ol>
 <li> To make plots there are several possibilities. Personally, I tend most of the time to use the  <a href="https://matplotlib.org/" target="_self"><tt>matplotlib</tt></a> library, simply because I know it quite well, but Pandas has a great deal of very simple methods you can use to generate nice plots with very few commands.</li>
 </ol>
-
-<b>Matplotlib:</b>
 <p>
+<b>Matplotlib:</b>
+</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
 plt<span style="color: #666666">.</span>plot(df[<span style="color: #BA2121">&#39;a&#39;</span>],df[<span style="color: #BA2121">&#39;b&#39;</span>], <span style="color: #BA2121">&#39;*&#39;</span>, label<span style="color: #666666">=</span><span style="color: #BA2121">&#39;$a^2$&#39;</span>)
 plt<span style="color: #666666">.</span>plot(df[<span style="color: #BA2121">&#39;a&#39;</span>],df[<span style="color: #BA2121">&#39;c&#39;</span>], <span style="color: #BA2121">&#39;^&#39;</span>, label<span style="color: #666666">=</span><span style="color: #BA2121">&#39;$\sin(a)$&#39;</span>)
 plt<span style="color: #666666">.</span>legend() 
 plt<span style="color: #666666">.</span>grid() <span style="color: #408080; font-style: italic"># make small grid lines</span>
 plt<span style="color: #666666">.</span>show()
-</pre></div>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <p>
 <b>Pandas plotting:</b>
 First, let us try the built in plot command in Pandas
-<p>
+</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>df<span style="color: #666666">.</span>plot()
-</pre></div>
-<p>
-If you compare this plot with the previous plot, you will see that Pandas plots all columns versus the index columns, which is not what we want. But, we can set <code>a</code> to be the index column
-<p>
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">df<span style="color: #666666">.</span>plot()
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>If you compare this plot with the previous plot, you will see that Pandas plots all columns versus the index columns, which is not what we want. But, we can set <code>a</code> to be the index column</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>df<span style="color: #666666">=</span>df<span style="color: #666666">.</span>set_index(<span style="color: #BA2121">&#39;a&#39;</span>)
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">df<span style="color: #666666">=</span>df<span style="color: #666666">.</span>set_index(<span style="color: #BA2121">&#39;a&#39;</span>)
 df<span style="color: #666666">.</span>plot()
-</pre></div>
-<p>
-We can also make separate plots
-<p>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>We can also make separate plots</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>df<span style="color: #666666">.</span>plot(subplots<span style="color: #666666">=</span><span style="color: #008000; font-weight: bold">True</span>)
-</pre></div>
-<p>
-or scatter plots
-<p>
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">df<span style="color: #666666">.</span>plot(subplots<span style="color: #666666">=</span><span style="color: #008000; font-weight: bold">True</span>)
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>or scatter plots</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>df<span style="color: #666666">=</span>df<span style="color: #666666">.</span>reset_index()
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">df<span style="color: #666666">=</span>df<span style="color: #666666">.</span>reset_index()
 df<span style="color: #666666">.</span>plot<span style="color: #666666">.</span>scatter(x<span style="color: #666666">=</span><span style="color: #BA2121">&#39;a&#39;</span>,y<span style="color: #666666">=</span><span style="color: #BA2121">&#39;b&#39;</span>)
 df<span style="color: #666666">.</span>plot<span style="color: #666666">.</span>scatter(x<span style="color: #666666">=</span><span style="color: #BA2121">&#39;a&#39;</span>,y<span style="color: #666666">=</span><span style="color: #BA2121">&#39;c&#39;</span>)
-</pre></div>
-<p>
-Note that we have to reset the index, otherwise there are no column named <code>a</code>.
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<h2 id="___sec16" class="anchor">Grouping, filtering and aggregating data </h2>
-Whenever you have a data set, you would like to do some exploratory analysis. That typically means that you would like to group, filter or aggregate data. Perhaps, we would like to plot the covid data not per country, but the data as a function of dates. Then you first must sort the data according to date, and then sum all the occurrences on that particular date. For all of these purposes we can use the <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.groupby.html " target="_self"><tt>pd.DataFrame.groupby()</tt></a> function. To sort our DataFrame on dates and sum the occurrences we can do
-<p>
+<p>Note that we have to reset the index, otherwise there are no column named <code>a</code>. </p>
+<h2 id="grouping-filtering-and-aggregating-data" class="anchor">Grouping, filtering and aggregating data </h2>
+<p>Whenever you have a data set, you would like to do some exploratory analysis. That typically means that you would like to group, filter or aggregate data. Perhaps, we would like to plot the covid data not per country, but the data as a function of dates. Then you first must sort the data according to date, and then sum all the occurrences on that particular date. For all of these purposes we can use the <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.groupby.html " target="_self"><tt>pd.DataFrame.groupby()</tt></a> function. To sort our DataFrame on dates and sum the occurrences we can do</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>df<span style="color: #666666">.</span>groupby(<span style="color: #BA2121">&#39;TIME&#39;</span>)<span style="color: #666666">.</span>sum()
-</pre></div>
-<p>
-Another case could be that we wanted to find the total number of confirmed, deaths and recovered cases in the full database. As always in Python it can be done in different ways, by e.g. splitting the database into individual countries and do  <code>df[['CONFIRMED','DEATHS','RECOVERED']].sum()</code> or accessing each column individually and sum each of them e.g. <code>np.sum(df['CONFIRMED'])</code>.  However, with the <code>groupby()</code> function
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">df<span style="color: #666666">.</span>groupby(<span style="color: #BA2121">&#39;TIME&#39;</span>)<span style="color: #666666">.</span>sum()
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>Another case could be that we wanted to find the total number of confirmed, deaths and recovered cases in the full database. As always in Python it can be done in different ways, by e.g. splitting the database into individual countries and do  <code>df[['CONFIRMED','DEATHS','RECOVERED']].sum()</code> or accessing each column individually and sum each of them e.g. <code>np.sum(df['CONFIRMED'])</code>.  However, with the <code>groupby()</code> function
 (see figure <a href="#fig:pandas:group">2</a> for final result)
-<p>
+</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>df<span style="color: #666666">.</span>groupby(<span style="color: #BA2121">&#39;LOCATION&#39;</span>)<span style="color: #666666">.</span>sum()
-</pre></div>
-<p>
-Here Pandas sum all columns with the same location, and drop columns that cannot be summed. By doing <code>df.groupby('LOCATION').mean()</code> or <code>df.groupby('LOCATION').std()</code> we can find the mean or standard deviation (per day).
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">df<span style="color: #666666">.</span>groupby(<span style="color: #BA2121">&#39;LOCATION&#39;</span>)<span style="color: #666666">.</span>sum()
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<p>
+<p>Here Pandas sum all columns with the same location, and drop columns that cannot be summed. By doing <code>df.groupby('LOCATION').mean()</code> or <code>df.groupby('LOCATION').std()</code> we can find the mean or standard deviation (per day).</p>
+
 <center> <!-- figure label: --> <div id="fig:pandas:group"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 2:  The results of <code>df.groupby('LOCATION').sum()</code>.  <!-- caption label: fig:pandas:group --> </p></center>
+<center>
+<p class="caption">Figure 2:  The results of <code>df.groupby('LOCATION').sum()</code>.  <!-- caption label: fig:pandas:group --> </p>
+</center>
 <p><img src="fig-pandas/group.png" align="bottom" width=800></p>
 </center>
 
-<h2 id="___sec17" class="anchor">Simple statistics in Pandas </h2>
-At the end it is worth mentioning the built in methods <code>pd.DataFrame.mean</code>, <code>pd.DataFrame.median</code>, <code>pd.DataFrame.std</code> which calculates the mean, median and standard deviation on the columns in the DataFrame where it make sense (i.e. avoid strings and dates). To get all these values in one go (and a few more) on can also use <code>pd.DataFrame.describe()</code>
-<p>
+<h2 id="simple-statistics-in-pandas" class="anchor">Simple statistics in Pandas </h2>
+<p>At the end it is worth mentioning the built in methods <code>pd.DataFrame.mean</code>, <code>pd.DataFrame.median</code>, <code>pd.DataFrame.std</code> which calculates the mean, median and standard deviation on the columns in the DataFrame where it make sense (i.e. avoid strings and dates). To get all these values in one go (and a few more) on can also use <code>pd.DataFrame.describe()</code></p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>df<span style="color: #666666">.</span>describe()
-</pre></div>
-<p>
-The output is shown in figure <a href="#fig:pandas:desc">3</a>
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">df<span style="color: #666666">.</span>describe()
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<p>
+<p>The output is shown in figure <a href="#fig:pandas:desc">3</a></p>
+
 <center> <!-- figure label: --> <div id="fig:pandas:desc"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 3:  Output from the describe command.  <!-- caption label: fig:pandas:desc --> </p></center>
+<center>
+<p class="caption">Figure 3:  Output from the describe command.  <!-- caption label: fig:pandas:desc --> </p>
+</center>
 <p><img src="fig-pandas/describe.png" align="bottom" width=800></p>
 </center>
 
-<h2 id="___sec18" class="anchor">Joining two DataFrames </h2>
-
-<h3 id="___sec19" class="anchor">Appending DataFrames  </h3>
-
-The DataFrame with the Covid-19 data in the previous section could have been created from two separate DataFrames, using <a href="https://pandas.pydata.org/docs/reference/api/pandas.concat.html" target="_self"><tt>concat()</tt></a>. First, create two DataFrames 
-<p>
+<h2 id="joining-two-dataframes" class="anchor">Joining two DataFrames </h2>
+<h3 id="appending-dataframes" class="anchor">Appending DataFrames  </h3>
+<p>The DataFrame with the Covid-19 data in the previous section could have been created from two separate DataFrames, using <a href="https://pandas.pydata.org/docs/reference/api/pandas.concat.html" target="_self"><tt>concat()</tt></a>. First, create two DataFrames </p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">datetime</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">dt</span>
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">datetime</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">dt</span>
 a<span style="color: #666666">=</span>dt<span style="color: #666666">.</span>datetime(<span style="color: #666666">2020</span>,<span style="color: #666666">2</span>,<span style="color: #666666">24</span>,<span style="color: #666666">23</span>,<span style="color: #666666">59</span>)
 b<span style="color: #666666">=</span>dt<span style="color: #666666">.</span>datetime(<span style="color: #666666">2020</span>,<span style="color: #666666">2</span>,<span style="color: #666666">7</span>,<span style="color: #666666">23</span>,<span style="color: #666666">59</span>)
 my_dict1<span style="color: #666666">=</span>{<span style="color: #BA2121">&#39;LOCATION&#39;</span>:<span style="color: #666666">7*</span>[<span style="color: #BA2121">&#39;Afghanistan&#39;</span>], 
@@ -632,39 +1145,90 @@ my_dict2<span style="color: #666666">=</span>{<span style="color: #BA2121">&#39;
 <span style="color: #BA2121">&#39;RECOVERED&#39;</span>: <span style="color: #666666">6*</span>[<span style="color: #666666">0</span>]}
 df1<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>DataFrame(my_dict1)
 df2<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>DataFrame(my_dict2)
-</pre></div>
-<p>
-Next, add them row wise (see figure <a href="#fig:pandas:concat">4</a>)
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<p>
+<p>Next, add them row wise (see figure <a href="#fig:pandas:concat">4</a>)</p>
+
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>df<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>concat([df1,df2])
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">df<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>concat([df1,df2])
 <span style="color: #008000">print</span>(df) <span style="color: #408080; font-style: italic"># to view</span>
-</pre></div>
-<p>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <center> <!-- figure label: --> <div id="fig:pandas:concat"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 4:  The result of <code>concat()</code>.  <!-- caption label: fig:pandas:concat --> </p></center>
+<center>
+<p class="caption">Figure 4:  The result of <code>concat()</code>.  <!-- caption label: fig:pandas:concat --> </p>
+</center>
 <p><img src="fig-pandas/concat.png" align="bottom" width=800></p>
 </center>
 
-<p>
-If you compare this DataFrame with the previous one, you will see that the index column is different. This is because when joining two DataFrames Pandas does not reset the index by default, doing <code>df=pd.concat([df1,df2],ignore_index=True)</code> resets the index. It is also possible to join DataFrames column vise
-<p>
+<p>If you compare this DataFrame with the previous one, you will see that the index column is different. This is because when joining two DataFrames Pandas does not reset the index by default, doing <code>df=pd.concat([df1,df2],ignore_index=True)</code> resets the index. It is also possible to join DataFrames column vise</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>pd<span style="color: #666666">.</span>concat([df1,df2],axis<span style="color: #666666">=1</span>)
-</pre></div>
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">pd<span style="color: #666666">.</span>concat([df1,df2],axis<span style="color: #666666">=1</span>)
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<h3 id="merging-dataframes" class="anchor">Merging DataFrames </h3>
 
-<h3 id="___sec20" class="anchor">Merging DataFrames </h3>
-
-<p>
-In the previous example we had two non overlapping DataFrames (separate countries and times). It could also be the case that some of the data was overlapping e.g. continuing with the Covid-19 data, one could assume that there was one data set from one region and one from another region in the same country
-<p>
+<p>In the previous example we had two non overlapping DataFrames (separate countries and times). It could also be the case that some of the data was overlapping e.g. continuing with the Covid-19 data, one could assume that there was one data set from one region and one from another region in the same country</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>my_dict1<span style="color: #666666">=</span>{<span style="color: #BA2121">&#39;LOCATION&#39;</span>:<span style="color: #666666">7*</span>[<span style="color: #BA2121">&#39;Diamond Princess&#39;</span>], 
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">my_dict1<span style="color: #666666">=</span>{<span style="color: #BA2121">&#39;LOCATION&#39;</span>:<span style="color: #666666">7*</span>[<span style="color: #BA2121">&#39;Diamond Princess&#39;</span>], 
 <span style="color: #BA2121">&#39;TIME&#39;</span>:[b<span style="color: #666666">+</span>dt<span style="color: #666666">.</span>timedelta(days<span style="color: #666666">=</span>i) <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">7</span>)],
 <span style="color: #BA2121">&#39;ELAPSED_TIME_SINCE_OUTBREAK&#39;</span>:[<span style="color: #666666">0</span>, <span style="color: #666666">1</span>, <span style="color: #666666">2</span>, <span style="color: #666666">3</span>, <span style="color: #666666">4</span>, <span style="color: #666666">5</span>, <span style="color: #666666">6</span>],
 <span style="color: #BA2121">&#39;CONFIRMED&#39;</span>:<span style="color: #666666">7*</span>[<span style="color: #666666">1</span>],
@@ -678,43 +1242,78 @@ my_dict2<span style="color: #666666">=</span>{<span style="color: #BA2121">&#39;
 <span style="color: #BA2121">&#39;RECOVERED&#39;</span>: <span style="color: #666666">2*</span>[<span style="color: #666666">0</span>]}
 df1<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>DataFrame(my_dict1)
 df2<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>DataFrame(my_dict2)
-</pre></div>
-<p>
-If we do <code>pd.concat([df1,df2])</code> we will simply add all values after each other. What we want to do is to sum the number of confirmed, recovered and deaths for the same date. This can be done in several ways, but one way is to use <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.merge.html" target="_self"><tt>pd.DataFrame.merge()</tt></a>.You can specify the columns to merge on, and choose <code>outer</code> which is union (all data from both frames) or <code>inner</code> which means the intersect (only data which you merge on that exists in both frames), see figure <a href="#fig:pandas:join">5</a> for a visual image.
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<p>
+<p>If we do <code>pd.concat([df1,df2])</code> we will simply add all values after each other. What we want to do is to sum the number of confirmed, recovered and deaths for the same date. This can be done in several ways, but one way is to use <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.merge.html" target="_self"><tt>pd.DataFrame.merge()</tt></a>.You can specify the columns to merge on, and choose <code>outer</code> which is union (all data from both frames) or <code>inner</code> which means the intersect (only data which you merge on that exists in both frames), see figure <a href="#fig:pandas:join">5</a> for a visual image.</p>
+
 <center> <!-- figure label: --> <div id="fig:pandas:join"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 5:  The result of using <code>how=outer, inner, left</code>, or <code>right</code> in <code>pd.DataFrame.merge()</code>.  <!-- caption label: fig:pandas:join --> </p></center>
+<center>
+<p class="caption">Figure 5:  The result of using <code>how=outer, inner, left</code>, or <code>right</code> in <code>pd.DataFrame.merge()</code>.  <!-- caption label: fig:pandas:join --> </p>
+</center>
 <p><img src="fig-pandas/fig_join.png" align="bottom" width=800></p>
 </center>
 
-<p>
-To be even more specific, after performing the commands
-<p>
+<p>To be even more specific, after performing the commands</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>df1<span style="color: #666666">.</span>merge(df2,on<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;LOCATION&#39;</span>,<span style="color: #BA2121">&#39;TIME&#39;</span>],how<span style="color: #666666">=</span><span style="color: #BA2121">&#39;outer&#39;</span>)
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">df1<span style="color: #666666">.</span>merge(df2,on<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;LOCATION&#39;</span>,<span style="color: #BA2121">&#39;TIME&#39;</span>],how<span style="color: #666666">=</span><span style="color: #BA2121">&#39;outer&#39;</span>)
 df1<span style="color: #666666">.</span>merge(df2,on<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;LOCATION&#39;</span>,<span style="color: #BA2121">&#39;TIME&#39;</span>],how<span style="color: #666666">=</span><span style="color: #BA2121">&#39;inner&#39;</span>)
-</pre></div>
-<p>
-we get the results in figure <a href="#fig:pd:merge">6</a>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<p>
+<p>we get the results in figure <a href="#fig:pd:merge">6</a> </p>
+
 <center> <!-- figure label: --> <div id="fig:pd:merge"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 6:  Merging to dataframes using <code>outer</code> (top) and <code>inner</code> (bottom).  <!-- caption label: fig:pd:merge --> </p></center>
+<center>
+<p class="caption">Figure 6:  Merging to dataframes using <code>outer</code> (top) and <code>inner</code> (bottom).  <!-- caption label: fig:pd:merge --> </p>
+</center>
 <p><img src="fig-pandas/merge.png" align="bottom" width=800></p>
 </center>
 
-<p>
-Clearly in this case we need to choose <code>outer</code>. In the merge process pandas adds an extra subscript <code>_x</code> and <code>_y</code> on columns that contains the same header name. We also need to sum those, which can be done as follows
+<p>Clearly in this case we need to choose <code>outer</code>. In the merge process pandas adds an extra subscript <code>_x</code> and <code>_y</code> on columns that contains the same header name. We also need to sum those, which can be done as follows
 (see figure <a href="#fig:pandas:merge3">7</a> for the final result)
+</p>
 
-<p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>df<span style="color: #666666">=</span>df1<span style="color: #666666">.</span>merge(df2,on<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;LOCATION&#39;</span>,<span style="color: #BA2121">&#39;TIME&#39;</span>],how<span style="color: #666666">=</span><span style="color: #BA2121">&#39;outer&#39;</span>)
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">df<span style="color: #666666">=</span>df1<span style="color: #666666">.</span>merge(df2,on<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;LOCATION&#39;</span>,<span style="color: #BA2121">&#39;TIME&#39;</span>],how<span style="color: #666666">=</span><span style="color: #BA2121">&#39;outer&#39;</span>)
 cols<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;CONFIRMED&#39;</span>,<span style="color: #BA2121">&#39;DEATHS&#39;</span>, <span style="color: #BA2121">&#39;RECOVERED&#39;</span>]
 <span style="color: #008000; font-weight: bold">for</span> col <span style="color: #AA22FF; font-weight: bold">in</span> cols:
     df[col]<span style="color: #666666">=</span>df[[col<span style="color: #666666">+</span><span style="color: #BA2121">&#39;_x&#39;</span>,col<span style="color: #666666">+</span><span style="color: #BA2121">&#39;_y&#39;</span>]]<span style="color: #666666">.</span>sum(axis<span style="color: #666666">=1</span>) <span style="color: #408080; font-style: italic"># sum row elements</span>
@@ -722,104 +1321,250 @@ cols<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;CONF
 <span style="color: #408080; font-style: italic"># final clean up</span>
 df[<span style="color: #BA2121">&#39;ELAPSED_TIME_SINCE_OUTBREAK&#39;</span>]<span style="color: #666666">=</span>df[<span style="color: #BA2121">&#39;ELAPSED_TIME_SINCE_OUTBREAK_x&#39;</span>]		
 df<span style="color: #666666">=</span>df<span style="color: #666666">.</span>drop(columns<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;ELAPSED_TIME_SINCE_OUTBREAK_y&#39;</span>,<span style="color: #BA2121">&#39;ELAPSED_TIME_SINCE_OUTBREAK_x&#39;</span>])
-</pre></div>
-<p>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <center> <!-- figure label: --> <div id="fig:pandas:merge3"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 7:  Result of outer merging and summing.  <!-- caption label: fig:pandas:merge3 --> </p></center>
+<center>
+<p class="caption">Figure 7:  Result of outer merging and summing.  <!-- caption label: fig:pandas:merge3 --> </p>
+</center>
 <p><img src="fig-pandas/merge3.png" align="bottom" width=800></p>
 </center>
 
-<h2 id="___sec21" class="anchor">Working with folders and files </h2>
-When working with big data sets you might want to split data into smaller sets, and also write them to different folders (or files) to view each individually in excel. Working with files and folders in a way that will work on any kind of platform has always been a challenge, but it is greatly simplified by the <a href="https://docs.python.org/3/library/pathlib.html" target="_self">Pathlib library</a>.
-
-<h3 id="___sec22" class="anchor">Basic use of Pathlib </h3>
+<h2 id="working-with-folders-and-files" class="anchor">Working with folders and files </h2>
+<p>When working with big data sets you might want to split data into smaller sets, and also write them to different folders (or files) to view each individually in excel. Working with files and folders in a way that will work on any kind of platform has always been a challenge, but it is greatly simplified by the <a href="https://docs.python.org/3/library/pathlib.html" target="_self">Pathlib library</a>.</p>
+<h3 id="basic-use-of-pathlib" class="anchor">Basic use of Pathlib </h3>
 
 <p>
 <b>List all sub directories and files:</b>
+</p>
 
-<p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">pathlib</span> <span style="color: #008000; font-weight: bold">import</span> Path
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">pathlib</span> <span style="color: #008000; font-weight: bold">import</span> Path
 p<span style="color: #666666">=</span>Path(<span style="color: #BA2121">&#39;.&#39;</span>) <span style="color: #408080; font-style: italic"># the directory where your python file is located</span>
 <span style="color: #008000; font-weight: bold">for</span> x <span style="color: #AA22FF; font-weight: bold">in</span> p<span style="color: #666666">.</span>iterdir():
     <span style="color: #008000; font-weight: bold">if</span> x<span style="color: #666666">.</span>is_dir():
         <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Found dir: &#39;</span>, x)
     <span style="color: #008000; font-weight: bold">elif</span> x<span style="color: #666666">.</span>is_file():
         <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Found file: &#39;</span>, x)
-</pre></div>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <p>
 <b>List all files of a type:</b>
-<p>
+</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>p<span style="color: #666666">=</span>Path(<span style="color: #BA2121">&#39;.&#39;</span>)
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">p<span style="color: #666666">=</span>Path(<span style="color: #BA2121">&#39;.&#39;</span>)
 <span style="color: #008000; font-weight: bold">for</span> p <span style="color: #AA22FF; font-weight: bold">in</span> p<span style="color: #666666">.</span>rglob(<span style="color: #BA2121">&quot;*.png&quot;</span>):<span style="color: #408080; font-style: italic"># rglob means recursively, searches sub directories</span>
     <span style="color: #008000">print</span>(p<span style="color: #666666">.</span>name)
-</pre></div>
-<p>
-If you want to print the full path do <code>print(p.absolute())</code>.
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>If you want to print the full path do <code>print(p.absolute())</code>.</p>
 
 <p>
 <b>Create a directory:</b>
-<p>
+</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>Path(<span style="color: #BA2121">&#39;tmp_dir&#39;</span>)<span style="color: #666666">.</span>mkdir()
-</pre></div>
-<p>
-If you run the code twice it will produce an error, because the directory exists, then we can simply do <code>Path('tmp_dir').mkdir(exist_ok=True)</code>.
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">Path(<span style="color: #BA2121">&#39;tmp_dir&#39;</span>)<span style="color: #666666">.</span>mkdir()
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>If you run the code twice it will produce an error, because the directory exists, then we can simply do <code>Path('tmp_dir').mkdir(exist_ok=True)</code>.</p>
 
 <p>
 <b>Print current directory:</b>
-<p>
+</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>Path<span style="color: #666666">.</span>cwd()
-</pre></div>
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">Path<span style="color: #666666">.</span>cwd()
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <p>
 <b>Joining paths:</b>
-<p>
+</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>p<span style="color: #666666">=</span>Path(<span style="color: #BA2121">&#39;.&#39;</span>)
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">p<span style="color: #666666">=</span>Path(<span style="color: #BA2121">&#39;.&#39;</span>)
 new_path <span style="color: #666666">=</span> p <span style="color: #666666">/</span> <span style="color: #BA2121">&#39;tmp_dir&#39;</span> <span style="color: #666666">/</span> <span style="color: #BA2121">&#39;my_file.txt&#39;</span>
 <span style="color: #008000">print</span>(new_path<span style="color: #666666">.</span>absolute())
 new_path<span style="color: #666666">.</span>touch()
-</pre></div>
-
-<h3 id="___sec23" class="anchor">Basic use of <code>os</code> </h3>
-
-We have already encountered the use of <code>os</code> when printing the working directory, i.e. <code>print(os.getcwd())</code>. If you want to create a directory named <code>tmp</code>, one can do
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<h3 id="basic-use-of-os" class="anchor">Basic use of <code>os</code> </h3>
+<p>We have already encountered the use of <code>os</code> when printing the working directory, i.e. <code>print(os.getcwd())</code>. If you want to create a directory named <code>tmp</code>, one can do</p>
 
 <p>
 <b>Creating a directory:</b>
-<p>
+</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">os</span>
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">os</span>
 os<span style="color: #666666">.</span>mkdir(<span style="color: #BA2121">&#39;tmp&#39;</span>)
-</pre></div>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <p>
 <b>Moving into a directory:</b>
 To move into that directory do
-<p>
+</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>os<span style="color: #666666">.</span>chdir(<span style="color: #BA2121">&#39;tmp&#39;</span>)
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">os<span style="color: #666666">.</span>chdir(<span style="color: #BA2121">&#39;tmp&#39;</span>)
 os<span style="color: #666666">.</span>chdir(<span style="color: #BA2121">&#39;..&#39;</span>) <span style="color: #408080; font-style: italic"># move back up</span>
-</pre></div>
-
-<h3 id="___sec24" class="anchor">Splitting data into different folders and files </h3>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<h3 id="splitting-data-into-different-folders-and-files" class="anchor">Splitting data into different folders and files </h3>
 
 <p>
 <b>Using the Pathlib library:</b>
+</p>
 
-<p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>df<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>read_excel(<span style="color: #BA2121">&#39;../data/corona_data.xlsx&#39;</span>)
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">df<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>read_excel(<span style="color: #BA2121">&#39;../data/corona_data.xlsx&#39;</span>)
 countries <span style="color: #666666">=</span> df[<span style="color: #BA2121">&#39;LOCATION&#39;</span>]<span style="color: #666666">.</span>unique() <span style="color: #408080; font-style: italic">#skip duplicates</span>
 data_folder<span style="color: #666666">=</span>Path(<span style="color: #BA2121">&#39;../covid-data&#39;</span>)
 data_folder<span style="color: #666666">.</span>mkdir()
@@ -829,17 +1574,35 @@ data_folder<span style="color: #666666">.</span>mkdir()
     excel_file<span style="color: #666666">=</span>country<span style="color: #666666">+</span><span style="color: #BA2121">&#39;.xlsx&#39;</span>
     df2<span style="color: #666666">=</span>df[df[<span style="color: #BA2121">&#39;LOCATION&#39;</span>]<span style="color: #666666">==</span>country]
     df2<span style="color: #666666">.</span>to_excel(new_path<span style="color: #666666">/</span>excel_file,index<span style="color: #666666">=</span><span style="color: #008000; font-weight: bold">False</span>)
-</pre></div>
-<p>
-If you run the code twice, it will fail, but that can be resolved by e.g. <code>data_folder.mkdir(exist_ok=True)</code>.
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>If you run the code twice, it will fail, but that can be resolved by e.g. <code>data_folder.mkdir(exist_ok=True)</code>.  </p>
 
 <p>
 <b>Using the <code>os</code> library:</b>
+</p>
 
-<p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #408080; font-style: italic"># first get all the countries:</span>
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #408080; font-style: italic"># first get all the countries:</span>
 df<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>read_excel(<span style="color: #BA2121">&#39;../data/corona_data.xlsx&#39;</span>)
 countries <span style="color: #666666">=</span> df[<span style="color: #BA2121">&#39;LOCATION&#39;</span>]<span style="color: #666666">.</span>unique() <span style="color: #408080; font-style: italic">#skip duplicates</span>
 os<span style="color: #666666">.</span>mkdir(<span style="color: #BA2121">&#39;../covid-data&#39;</span>)
@@ -850,25 +1613,59 @@ os<span style="color: #666666">.</span>chdir(<span style="color: #BA2121">&#39;.
     df2<span style="color: #666666">=</span>df[df[<span style="color: #BA2121">&#39;LOCATION&#39;</span>]<span style="color: #666666">==</span>country]
     df2<span style="color: #666666">.</span>to_excel(country<span style="color: #666666">+</span><span style="color: #BA2121">&#39;.xlsx&#39;</span>,index<span style="color: #666666">=</span><span style="color: #008000; font-weight: bold">False</span>)
     os<span style="color: #666666">.</span>chdir(<span style="color: #BA2121">&#39;..&#39;</span>) <span style="color: #408080; font-style: italic"># move up</span>
-</pre></div>
-<p>
-More robust way of creating a directory
-<p>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>More robust way of creating a directory</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">my_mkdir</span>(name):
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">my_mkdir</span>(name):
     <span style="color: #008000; font-weight: bold">if</span> os<span style="color: #666666">.</span>path<span style="color: #666666">.</span>isdir(name):
         <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Directory &#39;</span>, name,<span style="color: #BA2121">&#39; already exists&#39;</span>)
     <span style="color: #008000; font-weight: bold">else</span>:
         os<span style="color: #666666">.</span>mkdir(name)
         <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;creating directory &#39;</span>,name)
-</pre></div>
-<p>
-If you want to collect all data, you can do as follows
-<p>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>If you want to collect all data, you can do as follows</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>df_new<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>DataFrame()
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">df_new<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>DataFrame()
 data_folder<span style="color: #666666">=</span>Path(<span style="color: #BA2121">&#39;../covid-data&#39;</span>)
 <span style="color: #008000; font-weight: bold">for</span> <span style="color: #008000">dir</span> <span style="color: #AA22FF; font-weight: bold">in</span> data_folder<span style="color: #666666">.</span>iterdir():
     <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">dir</span><span style="color: #666666">.</span>is_dir():      
@@ -876,36 +1673,67 @@ data_folder<span style="color: #666666">=</span>Path(<span style="color: #BA2121
         df<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>read_excel(<span style="color: #008000">dir</span><span style="color: #666666">/</span>file)
         <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Reading file &#39;</span>, file)
         df_new<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>concat([df_new,df],ignore_index<span style="color: #666666">=</span><span style="color: #008000; font-weight: bold">True</span>)
-</pre></div>
-
-<h2 id="___sec25" class="anchor">Writing more robust code </h2>
-Most likely in the last sections you have encountered quite long error messages from Python. Errors could be
-
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<h2 id="writing-more-robust-code" class="anchor">Writing more robust code </h2>
+<p>Most likely in the last sections you have encountered quite long error messages from Python. Errors could be</p>
 <ul>
 <li> syntax errors, grammatically incorrect code e.g. calling functions that does not exists, using variables that are not defined or writing lines of codes with missing instructions, indentation errors</li> 
 <li> exceptions e.g. open a file that does not exists, accessing a Pandas header with the wrong name, performing wrong mathematical operations (1/0)</li>
 <li> logical errors (bugs), code that runs but produces wrong results. These errors are of course some of the most difficult errors to fix and can only be discovered by comparing the output of the code to known answers. In many cases errors are introduced when extending the code, and unit tests can be extremely helpful.</li>
 </ul>
+<p>In the rest of this section we will discuss how to avoid or to handle exceptions. The goal is to write a code that catch all the exceptions before they happen, tries to do something with them, if not prints out a reasonable error message of what went wrong.</p>
 
-In the rest of this section we will discuss how to avoid or to handle exceptions. The goal is to write a code that catch all the exceptions before they happen, tries to do something with them, if not prints out a reasonable error message of what went wrong.
-
-<p>
-Let us look at the code that we have written so far, starting from the top of the notebook.
+<p>Let us look at the code that we have written so far, starting from the top of the notebook.</p>
 
 <p>
 <b>Accessing columns in Pandas:</b>
 So far we have just accessed the columns directly, but it is very quick to write a wrong name, thus instead of doing
-<p>
+</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>time<span style="color: #666666">=</span>df[<span style="color: #BA2121">&#39;TIME&#39;</span>]
-</pre></div>
-<p>
-we should try to check if the column exist before accessing it from the DataFrame. There are many ways of achieving this
-<p>
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">time<span style="color: #666666">=</span>df[<span style="color: #BA2121">&#39;TIME&#39;</span>]
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>we should try to check if the column exist before accessing it from the DataFrame. There are many ways of achieving this</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">get_column_from_dataframe</span>(name,df):
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">get_column_from_dataframe</span>(name,df):
     <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;</span>
 <span style="color: #BA2121; font-style: italic">    name: name of column</span>
 <span style="color: #BA2121; font-style: italic">    df: Pandas DataFrame</span>
@@ -920,23 +1748,57 @@ we should try to check if the column exist before accessing it from the DataFram
 <span style="color: #408080; font-style: italic"># run the following code with df containing covid data</span>
 get_column_from_dataframe(<span style="color: #BA2121">&#39;TIME2&#39;</span>,df)
 get_column_from_dataframe(<span style="color: #BA2121">&#39;TIME&#39;</span>,df)
-</pre></div>
-<p>
-Note the use of doc string in the beginning, the doc string will be printed in advanced editors once you write the name of the function. It also helps you to remember what the function does. It is a good practice to return something of the same type, because then the rest of the code can execute. If it is critical that you find the name of the column you can always test from the outside
-<p>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>Note the use of doc string in the beginning, the doc string will be printed in advanced editors once you write the name of the function. It also helps you to remember what the function does. It is a good practice to return something of the same type, because then the rest of the code can execute. If it is critical that you find the name of the column you can always test from the outside</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>s<span style="color: #666666">=</span>get_column_from_dataframe(<span style="color: #BA2121">&#39;TIME2&#39;</span>,df)
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">s<span style="color: #666666">=</span>get_column_from_dataframe(<span style="color: #BA2121">&#39;TIME2&#39;</span>,df)
 <span style="color: #008000; font-weight: bold">if</span> s<span style="color: #666666">.</span>empty:
     <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Exiting ...&#39;</span>)
     exit() <span style="color: #408080; font-style: italic"># note this shuts down the kernel</span>
-</pre></div>
-<p>
-In the function <code>get_column_from_dataframe</code> many more things could go wrong, the user could pass a variable that is not a DataFrame, to catch all exceptions one can do
-<p>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>In the function <code>get_column_from_dataframe</code> many more things could go wrong, the user could pass a variable that is not a DataFrame, to catch all exceptions one can do</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">get_column_from_dataframe_v2</span>(name,df):
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">get_column_from_dataframe_v2</span>(name,df):
     <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;</span>
 <span style="color: #BA2121; font-style: italic">    name: name of column</span>
 <span style="color: #BA2121; font-style: italic">    df: Pandas DataFrame</span>
@@ -950,16 +1812,32 @@ In the function <code>get_column_from_dataframe</code> many more things could go
         <span style="color: #008000; font-weight: bold">return</span> pd<span style="color: #666666">.</span>Series(dtype<span style="color: #666666">=</span><span style="color: #008000">object</span>)
 <span style="color: #408080; font-style: italic"># run the following code with df containing covid data</span>
 get_column_from_dataframe_v2(<span style="color: #BA2121">&#39;TIME2&#39;</span>,df)
-</pre></div>
-<p>
-The <code>try</code> and <code>except</code> handling is very elegant in Python, and a very easy way of making the code more robust. Python first tries <code>df[name]</code> if that is not successful (e.g. wrong column name, wrong DataFrame, maybe Pandas is not even imported) it jumps to the exception.
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<p>
-Another thing to consider is to use case insensitive search, we should be able to access a country or a header using e.g. <code>Afghanistan</code> or <code>afghanistan</code>. A possible solution could be to make sure that when you read in the 
-<p>
+<p>The <code>try</code> and <code>except</code> handling is very elegant in Python, and a very easy way of making the code more robust. Python first tries <code>df[name]</code> if that is not successful (e.g. wrong column name, wrong DataFrame, maybe Pandas is not even imported) it jumps to the exception.</p>
+
+<p>Another thing to consider is to use case insensitive search, we should be able to access a country or a header using e.g. <code>Afghanistan</code> or <code>afghanistan</code>. A possible solution could be to make sure that when you read in the </p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">get_column_from_dataframe_v3</span>(name,df):
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">get_column_from_dataframe_v3</span>(name,df):
     <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;</span>
 <span style="color: #BA2121; font-style: italic">    name: name of column (case insensitive)</span>
 <span style="color: #BA2121; font-style: italic">    df: Pandas DataFrame</span>
@@ -976,13 +1854,30 @@ Another thing to consider is to use case insensitive search, we should be able t
         <span style="color: #008000; font-weight: bold">return</span> pd<span style="color: #666666">.</span>Series(dtype<span style="color: #666666">=</span><span style="color: #008000">object</span>)
         
 get_column_from_dataframe_v3(<span style="color: #BA2121">&#39;time&#39;</span>,df)
-</pre></div>
-<p>
-Now, we might want to make our code more robust when collecting data for e.g. a specific country <code>df[df['LOCATION'] == 'Afghanistan']</code>. This operation assumes 1) that the column <code>LOCATION</code> exists and 2) that the country is spelled correctly. However, we have already written code to get a column and check that it exists, but it is written inside a function with a different purpose. Thus, it is better to split the code above in two parts
-<p>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>Now, we might want to make our code more robust when collecting data for e.g. a specific country <code>df[df['LOCATION'] == 'Afghanistan']</code>. This operation assumes 1) that the column <code>LOCATION</code> exists and 2) that the country is spelled correctly. However, we have already written code to get a column and check that it exists, but it is written inside a function with a different purpose. Thus, it is better to split the code above in two parts</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">get_col_index</span>(name,df):
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">get_col_index</span>(name,df):
     <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;</span>
 <span style="color: #BA2121; font-style: italic">    name: name of column (case insensitive)</span>
 <span style="color: #BA2121; font-style: italic">    df: Pandas DataFrame</span>
@@ -1023,9 +1918,24 @@ Now, we might want to make our code more robust when collecting data for e.g. a 
     <span style="color: #008000; font-weight: bold">else</span>:
         <span style="color: #008000; font-weight: bold">return</span> pd<span style="color: #666666">.</span>DataFrame()
 get_rows_from_dataframe(<span style="color: #BA2121">&#39;afGhaniStan&#39;</span>,df)
-</pre></div>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <p>
 <b>To summarize:</b>
+</p>
 
 <ol>
 <li> We want to catch errors before they occur, this is most efficiently done by wrapping simple operations in functions</li>
@@ -1034,33 +1944,25 @@ get_rows_from_dataframe(<span style="color: #BA2121">&#39;afGhaniStan&#39;</span
 <li> Write doc strings in functions to increase user friendliness</li>
 <li> Write meaningful error messages, if possible also print out some additional information to help the user</li> 
 </ol>
+<h1 id="bibliography" class="anchor">Bibliography </h1>
 
-<h1 id="___sec26" class="anchor">Bibliography </h1>
-
-<p>
 <!-- begin bibliography -->
 
-<p>
 <!-- end bibliography -->
-
 <p>
 <!-- navigation buttons at the bottom of the page -->
 <ul class="pager">
 </ul>
 <!-- ------------------- end of main content --------------- -->
-
 </div>  <!-- end container -->
 <!-- include javascript, jQuery *first* -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-
 <!-- Bootstrap footer
 <footer>
-<a href="http://..."><img width="250" align=right src="http://..."></a>
+<a href="https://..."><img width="250" align=right src="https://..."></a>
 </footer>
 -->
-
-
 </body>
 </html>
     

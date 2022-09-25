@@ -1,34 +1,31 @@
 <!--
-Automatically generated HTML file from DocOnce source
-(https://github.com/hplgit/doconce/)
+HTML file automatically generated from DocOnce source
+(https://github.com/doconce/doconce/)
+doconce format html book.do.txt CHAPTER=chapter BOOK=book APPENDIX=appendix --exercise_numbering=chapter --html_style=bootswatch_journal --html_code_style=inherit --html_output=book
 -->
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="generator" content="DocOnce: https://github.com/doconce/doconce/" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="Modeling and Computational Engineering">
 <meta name="keywords" content="types,basic types,lists,list comprehension,numerical error,Taylor polynomial,truncation error,Taylor polynomial, error term,Maclaurin series,forward difference,backward difference,central difference,central difference,roundoff erros,machine precision,IEEE 754-1985 standard,roundoff errors,continuity equation,finite volume,Gauss-Jordan elimination,pivoting,LU decomposition,Jacobi method,Gauss-Seidel method,linear regression,sparse matrix,Thomas algorithm,fixed-point iteration,rate of convergence,bisection method,rate of convergence,Newtons method,Newtons method, rate of convergence,secant method,secant method, rate of convergence,Newton Rapson method,gradient descent,midpoint method,trapezoidal method,numerical integrals, error,Richardson extrapolation,Romberg integration,Gaussian quadrature,Gaussian quadrature, error term,numerical integral, infinite,continuous stirred tank reactor (CSTR),Eulers method,Eulers method, error analysis,Eulers method, adaptive step size,Runge-Kutta,Runge-Kutta, adaptive step size,adaptive step size,stiff equations,implicit method,Monte Carlo integration,random number generators,Mersenne Twister,encryption,Monte Carlo Integration, error,binomial distribution,mean,variance,Monte Carlo integration, mean value,recursive functions,central limit theorem,birthday paradox">
-
 <title>Modeling and Computational Engineering</title>
-
 <!-- Bootstrap style: bootswatch_journal -->
+<!-- doconce format html book.do.txt CHAPTER=chapter BOOK=book APPENDIX=appendix --exercise_numbering=chapter --html_style=bootswatch_journal --html_code_style=inherit --html_output=book -->
 <link href="https://netdna.bootstrapcdn.com/bootswatch/3.1.1/journal/bootstrap.min.css" rel="stylesheet">
 <!-- not necessary
 <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 -->
-
 <style type="text/css">
 /* Let inline verbatim have the same color as the surroundings */
 code { color: inherit; background-color: transparent; }
-
 /* Add scrollbar to dropdown menus in bootstrap navigation bar */
 .dropdown-menu {
    height: auto;
    max-height: 400px;
    overflow-x: hidden;
 }
-
 /* Adds an invisible element before each target to offset for the navigation
    bar */
 .anchor::before {
@@ -38,8 +35,6 @@ code { color: inherit; background-color: transparent; }
   margin:-60px 0 0; /* negative fixed header height */
 }
 </style>
-
-
 </head>
 
 <!-- tocinfo
@@ -50,148 +45,205 @@ code { color: inherit; background-color: transparent; }
                'table_of_contents'),
               ('Preface', 0, 'ch:preface', 'ch:preface'),
               ('Introduction to Python', 0, 'ch:pyt', 'ch:pyt'),
-              ('Personal Guidelines', 1, None, '___sec2'),
-              ('Code editor', 2, None, '___sec3'),
-              ('Types in Python', 1, None, '___sec4'),
-              ('Basic types', 2, None, '___sec5'),
-              ('Lists', 2, None, '___sec6'),
-              ('List arithmetic', 3, None, '___sec7'),
-              ('List slicing', 3, None, '___sec8'),
-              ('Numpy arrays', 2, None, '___sec9'),
-              ('Array slicing', 3, None, '___sec10'),
-              ('Dictionaries', 2, None, '___sec11'),
-              ('Looping', 1, None, '___sec12'),
-              ('For loops', 2, None, '___sec13'),
-              ('While loops', 2, None, '___sec14'),
-              ('Functions in Python', 2, None, '___sec15'),
-              ('Defining a mathematical function', 2, None, '___sec16'),
-              ('Scope of variables', 2, None, '___sec17'),
-              ('Passing arrays and lists to functions', 2, None, '___sec18'),
-              ('Call by value or call by reference', 2, None, '___sec19'),
-              ('Floats and integers', 3, None, '___sec20'),
-              ('Lists and arrays', 3, None, '___sec21'),
-              ('Mutable and immutable objects', 2, None, '___sec22'),
+              ('Personal Guidelines', 1, None, 'personal-guidelines'),
+              ('Code editor', 2, None, 'code-editor'),
+              ('Types in Python', 1, None, 'types-in-python'),
+              ('Basic types', 2, None, 'basic-types'),
+              ('Lists', 2, None, 'lists'),
+              ('List arithmetic', 3, None, 'list-arithmetic'),
+              ('List slicing', 3, None, 'list-slicing'),
+              ('Numpy arrays', 2, None, 'numpy-arrays'),
+              ('Array slicing', 3, None, 'array-slicing'),
+              ('Dictionaries', 2, None, 'dictionaries'),
+              ('Looping', 1, None, 'looping'),
+              ('For loops', 2, None, 'for-loops'),
+              ('While loops', 2, None, 'while-loops'),
+              ('Functions in Python', 2, None, 'functions-in-python'),
+              ('Defining a mathematical function',
+               2,
+               None,
+               'defining-a-mathematical-function'),
+              ('Scope of variables', 2, None, 'scope-of-variables'),
+              ('Passing arrays and lists to functions',
+               2,
+               None,
+               'passing-arrays-and-lists-to-functions'),
+              ('Call by value or call by reference',
+               2,
+               None,
+               'call-by-value-or-call-by-reference'),
+              ('Floats and integers', 3, None, 'floats-and-integers'),
+              ('Lists and arrays', 3, None, 'lists-and-arrays'),
+              ('Mutable and immutable objects',
+               2,
+               None,
+               'mutable-and-immutable-objects'),
               ('Exercise 1.1: Explain why only one of the codes below gives '
                'the correct answer',
                2,
                None,
-               '___sec23'),
+               'exercise-1-1-explain-why-only-one-of-the-codes-below-gives-the-correct-answer'),
               ('Introduction to Pandas', 0, 'ch:pan', 'ch:pan'),
-              ('What is Pandas?', 1, None, '___sec25'),
-              ('Creating a data frame', 1, None, '___sec26'),
-              ('From empty DataFrame', 2, None, '___sec27'),
-              ('Create DataFrame from dictionary', 2, None, '___sec28'),
-              ('From file', 2, None, '___sec29'),
-              ('Accessing data in  DataFrames', 2, None, '___sec30'),
-              ('Selecting columns', 3, None, '___sec31'),
-              ('Selecting rows', 3, None, '___sec32'),
+              ('What is Pandas?', 1, None, 'what-is-pandas'),
+              ('Creating a data frame', 1, None, 'creating-a-data-frame'),
+              ('From empty DataFrame', 2, None, 'from-empty-dataframe'),
+              ('Create DataFrame from dictionary',
+               2,
+               None,
+               'create-dataframe-from-dictionary'),
+              ('From file', 2, None, 'from-file'),
+              ('Accessing data in  DataFrames',
+               2,
+               None,
+               'accessing-data-in-dataframes'),
+              ('Selecting columns', 3, None, 'selecting-columns'),
+              ('Selecting rows', 3, None, 'selecting-rows'),
               ('Challenges when accessing columns or rows',
                3,
                None,
-               '___sec33'),
-              ('Time columns not parsed properly', 3, None, '___sec34'),
-              ('Filtering and visualizing data', 2, None, '___sec35'),
-              ('Boolean masking', 3, None, '___sec36'),
-              ('Plotting a DataFrame', 3, None, '___sec37'),
+               'challenges-when-accessing-columns-or-rows'),
+              ('Time columns not parsed properly',
+               3,
+               None,
+               'time-columns-not-parsed-properly'),
+              ('Filtering and visualizing data',
+               2,
+               None,
+               'filtering-and-visualizing-data'),
+              ('Boolean masking', 3, None, 'boolean-masking'),
+              ('Plotting a DataFrame', 3, None, 'plotting-a-dataframe'),
               ('Performing mathematical operations on DataFrames',
                2,
                None,
-               '___sec38'),
+               'performing-mathematical-operations-on-dataframes'),
               ('Example: mathematical operations on DataFrames',
                3,
                None,
-               '___sec39'),
-              ('Solution', 3, None, '___sec40'),
-              ('Grouping, filtering and aggregating data', 2, None, '___sec41'),
-              ('Simple statistics in Pandas', 2, None, '___sec42'),
-              ('Joining two DataFrames', 2, None, '___sec43'),
-              ('Appending DataFrames', 3, None, '___sec44'),
-              ('Merging DataFrames', 3, None, '___sec45'),
-              ('Working with folders and files', 2, None, '___sec46'),
-              ('Basic use of Pathlib', 3, None, '___sec47'),
-              ('Basic use of `os`', 3, None, '___sec48'),
+               'example-mathematical-operations-on-dataframes'),
+              ('Solution', 3, None, 'solution'),
+              ('Grouping, filtering and aggregating data',
+               2,
+               None,
+               'grouping-filtering-and-aggregating-data'),
+              ('Simple statistics in Pandas',
+               2,
+               None,
+               'simple-statistics-in-pandas'),
+              ('Joining two DataFrames', 2, None, 'joining-two-dataframes'),
+              ('Appending DataFrames', 3, None, 'appending-dataframes'),
+              ('Merging DataFrames', 3, None, 'merging-dataframes'),
+              ('Working with folders and files',
+               2,
+               None,
+               'working-with-folders-and-files'),
+              ('Basic use of Pathlib', 3, None, 'basic-use-of-pathlib'),
+              ('Basic use of `os`', 3, None, 'basic-use-of-os'),
               ('Splitting data into different folders and files',
                3,
                None,
-               '___sec49'),
-              ('Writing more robust code', 2, None, '___sec50'),
+               'splitting-data-into-different-folders-and-files'),
+              ('Writing more robust code', 2, None, 'writing-more-robust-code'),
               ('Finite differences', 0, 'ch:taylor', 'ch:taylor'),
-              ('Numerical Errors', 1, None, '___sec52'),
-              ('Taylor Polynomial Approximation', 1, None, '___sec53'),
+              ('Numerical Errors', 1, None, 'numerical-errors'),
+              ('Taylor Polynomial Approximation',
+               1,
+               None,
+               'taylor-polynomial-approximation'),
               ('Calculating Numerical Derivatives of Functions',
                1,
                None,
-               '___sec54'),
-              ('Higher order derivative', 3, None, '___sec55'),
-              ('Roundoff Errors', 2, None, '___sec56'),
-              ('Binary numbers', 3, None, '___sec57'),
+               'calculating-numerical-derivatives-of-functions'),
+              ('Higher order derivative', 3, None, 'higher-order-derivative'),
+              ('Roundoff Errors', 2, None, 'roundoff-errors'),
+              ('Binary numbers', 3, None, 'binary-numbers'),
               ('Floating point numbers and the IEEE 754-1985 standard',
                3,
                None,
-               '___sec58'),
+               'floating-point-numbers-and-the-ieee-754-1985-standard'),
               ('Roundoff error and truncation error in numerical derivatives',
                3,
                None,
-               '___sec59'),
+               'roundoff-error-and-truncation-error-in-numerical-derivatives'),
               ('Solving linear systems', 0, 'ch:lin', 'ch:lin'),
-              ('The Continuity Equation', 1, None, '___sec61'),
-              ('Continuity Equation as a linear problem', 1, None, '___sec62'),
-              ('Boundary conditions', 3, None, '___sec63'),
-              ('Solving linear equations', 1, None, '___sec64'),
-              ('Gauss-Jordan elimination', 2, None, '___sec65'),
-              ('Pivoting', 2, None, '___sec66'),
-              ('LU decomposition', 2, None, '___sec67'),
-              ('Iterative methods', 1, None, '___sec68'),
-              ('Iterative improvement', 2, None, '___sec69'),
-              ('The Jacobi method', 2, None, '___sec70'),
-              ('The Gauss-Seidel method', 2, None, '___sec71'),
-              ('Example: Linear regression', 1, None, '___sec72'),
+              ('The Continuity Equation', 1, None, 'the-continuity-equation'),
+              ('Continuity Equation as a linear problem',
+               1,
+               None,
+               'continuity-equation-as-a-linear-problem'),
+              ('Boundary conditions', 3, None, 'boundary-conditions'),
+              ('Solving linear equations', 1, None, 'solving-linear-equations'),
+              ('Gauss-Jordan elimination', 2, None, 'gauss-jordan-elimination'),
+              ('Pivoting', 2, None, 'pivoting'),
+              ('LU decomposition', 2, None, 'lu-decomposition'),
+              ('Iterative methods', 1, None, 'iterative-methods'),
+              ('Iterative improvement', 2, None, 'iterative-improvement'),
+              ('The Jacobi method', 2, None, 'the-jacobi-method'),
+              ('The Gauss-Seidel method', 2, None, 'the-gauss-seidel-method'),
+              ('Example: Linear regression',
+               1,
+               None,
+               'example-linear-regression'),
               ('Solving least square, using algebraic equations',
                2,
                None,
-               '___sec73'),
-              ('Least square as a linear algebra problem', 2, None, '___sec74'),
-              ('Working with matrices on component form', 2, None, '___sec75'),
-              ('Sparse matrices and Thomas algorithm', 1, None, '___sec76'),
+               'solving-least-square-using-algebraic-equations'),
+              ('Least square as a linear algebra problem',
+               2,
+               None,
+               'least-square-as-a-linear-algebra-problem'),
+              ('Working with matrices on component form',
+               2,
+               None,
+               'working-with-matrices-on-component-form'),
+              ('Sparse matrices and Thomas algorithm',
+               1,
+               None,
+               'sparse-matrices-and-thomas-algorithm'),
               ('Example: Solving the heat equation using linear algebra',
                1,
                None,
-               '___sec77'),
+               'example-solving-the-heat-equation-using-linear-algebra'),
               ('Exercise 4.1: Conservation Equation or the Continuity Equation',
                2,
                None,
-               '___sec78'),
-              ('Heat equation for solids', 3, None, '___sec79'),
+               'exercise-4-1-conservation-equation-or-the-continuity-equation'),
+              ('Heat equation for solids', 3, None, 'heat-equation-for-solids'),
               ('Exercise 4.2: Curing of Concrete and Matrix Formulation',
                2,
                None,
-               '___sec80'),
+               'exercise-4-2-curing-of-concrete-and-matrix-formulation'),
               ('Exercise 4.3: Solve the full heat equation',
                2,
                None,
-               '___sec81'),
+               'exercise-4-3-solve-the-full-heat-equation'),
               ('Exercise 4.4: Using sparse matrices in python',
                2,
                None,
-               '___sec82'),
-              ('CO$_2$ diffusion into aquifers', 1, None, '___sec83'),
+               'exercise-4-4-using-sparse-matrices-in-python'),
+              ('CO$_2$ diffusion into aquifers',
+               1,
+               None,
+               'co-_2-diffusion-into-aquifers'),
               ('Solving nonlinear equations', 0, 'ch:nlin', 'ch:nlin'),
-              ('Nonlinear equations', 1, None, '___sec85'),
-              ('Example: van der Waals equation of state', 1, None, '___sec86'),
+              ('Nonlinear equations', 1, None, 'nonlinear-equations'),
+              ('Example: van der Waals equation of state',
+               1,
+               None,
+               'example-van-der-waals-equation-of-state'),
               ('Exercise 5.1: van der Waal EOS and CO$_2$',
                2,
                None,
-               '___sec87'),
-              ('Fixed-point iteration', 1, None, '___sec88'),
+               'exercise-5-1-van-der-waal-eos-and-co-_2'),
+              ('Fixed-point iteration', 1, None, 'fixed-point-iteration'),
               ('Exercise 5.2: Implement the fixed point iteration',
                2,
                None,
-               '___sec89'),
+               'exercise-5-2-implement-the-fixed-point-iteration'),
               ('Exercise 5.3: Finding the molar volume from the van der Waal '
                'EOS by fixed point iteration',
                2,
                None,
-               '___sec90'),
+               'exercise-5-3-finding-the-molar-volume-from-the-van-der-waal-eos-by-fixed-point-iteration'),
               ('When do the fixed point method fail?',
                2,
                'sec:nlin:fp',
@@ -199,105 +251,135 @@ code { color: inherit; background-color: transparent; }
               ('What to do when the fixed point method fail',
                2,
                None,
-               '___sec92'),
+               'what-to-do-when-the-fixed-point-method-fail'),
               ('Exercise 5.4: Solve $x=e^{1-x^2}$ using fixed point iteration',
                2,
                None,
-               '___sec93'),
-              ('Rate of convergence', 1, None, '___sec94'),
-              ('The bisection method', 1, None, '___sec95'),
-              ('Rate of convergence', 2, None, '___sec96'),
-              ('Newtons method', 1, None, '___sec97'),
-              ('Rate of convergence', 2, None, '___sec98'),
+               'exercise-5-4-solve-x-e-1-x-2-using-fixed-point-iteration'),
+              ('Rate of convergence', 1, None, 'rate-of-convergence'),
+              ('The bisection method', 1, None, 'the-bisection-method'),
+              ('Rate of convergence', 2, None, 'rate-of-convergence'),
+              ('Newtons method', 1, None, 'newtons-method'),
+              ('Rate of convergence', 2, None, 'rate-of-convergence'),
               ('Exercise 5.5: Compare Newtons, Bisection and the Fixed Point '
                'method',
                2,
                None,
-               '___sec99'),
-              ('Secant method', 1, None, '___sec100'),
-              ('Rate of convergence', 2, None, '___sec101'),
-              ('Newton Rapson method', 1, None, '___sec102'),
-              ('Gradient Descent', 1, None, '___sec103'),
+               'exercise-5-5-compare-newtons-bisection-and-the-fixed-point-method'),
+              ('Secant method', 1, None, 'secant-method'),
+              ('Rate of convergence', 2, None, 'rate-of-convergence'),
+              ('Newton Rapson method', 1, None, 'newton-rapson-method'),
+              ('Gradient Descent', 1, None, 'gradient-descent'),
               ('Exercise 5.6: Gradient descent solution of linear regression',
                2,
                None,
-               '___sec104'),
-              ('Other Useful Methods', 1, None, '___sec105'),
+               'exercise-5-6-gradient-descent-solution-of-linear-regression'),
+              ('Other Useful Methods', 1, None, 'other-useful-methods'),
               ('Numerical integration', 0, 'ch:numint', 'ch:numint'),
-              ('Numerical Integration', 1, None, '___sec107'),
-              ('The Midpoint Rule', 2, None, '___sec108'),
-              ('The Trapezoidal Rule', 2, None, '___sec109'),
-              ('Numerical Errors on Integrals', 2, None, '___sec110'),
+              ('Numerical Integration', 1, None, 'numerical-integration'),
+              ('The Midpoint Rule', 2, None, 'the-midpoint-rule'),
+              ('The Trapezoidal Rule', 2, None, 'the-trapezoidal-rule'),
+              ('Numerical Errors on Integrals',
+               2,
+               None,
+               'numerical-errors-on-integrals'),
               ('Practical Estimation of Errors on Integrals (Richardson '
                'Extrapolation)',
                2,
                None,
-               '___sec111'),
-              ('Romberg Integration', 1, None, '___sec112'),
+               'practical-estimation-of-errors-on-integrals-richardson-extrapolation'),
+              ('Romberg Integration', 1, None, 'romberg-integration'),
               ('Alternative implementation of adaptive integration',
                2,
                None,
-               '___sec113'),
-              ('Gaussian Quadrature', 1, None, '___sec114'),
-              ('The case N=3', 3, None, '___sec115'),
-              ('Error term on Gaussian Integration', 2, None, '___sec116'),
+               'alternative-implementation-of-adaptive-integration'),
+              ('Gaussian Quadrature', 1, None, 'gaussian-quadrature'),
+              ('The case N=3', 3, None, 'the-case-n-3'),
+              ('Error term on Gaussian Integration',
+               2,
+               None,
+               'error-term-on-gaussian-integration'),
               ('Common Weight functions for Classical Gaussian Quadratures',
                2,
                None,
-               '___sec117'),
+               'common-weight-functions-for-classical-gaussian-quadratures'),
               ('Integrating functions over an infinite range',
                1,
                None,
-               '___sec118'),
+               'integrating-functions-over-an-infinite-range'),
               ('Which method to use in a specific case? (NOT COMPLETED)',
                2,
                None,
-               '___sec119'),
-              ('Exercise 6.1: Numerical Integration', 2, None, '___sec120'),
+               'which-method-to-use-in-a-specific-case-not-completed'),
+              ('Exercise 6.1: Numerical Integration',
+               2,
+               None,
+               'exercise-6-1-numerical-integration'),
               ('Ordinary differential equations', 0, 'ch:ode', 'ch:ode'),
-              ('Ordinary Differential Equations', 1, None, '___sec122'),
-              ('A Simple Model for Fluid Flow', 1, None, '___sec123'),
-              ('Eulers Method', 1, None, '___sec124'),
-              ('Error Analysis - Eulers Method', 2, None, '___sec125'),
-              ('Adaptive step size - Eulers Method', 2, None, '___sec126'),
-              ('Runge-Kutta Methods', 1, None, '___sec127'),
-              ('Adaptive step size - Runge-Kutta Method', 2, None, '___sec128'),
-              ('Conservation of Mass', 2, None, '___sec129'),
-              ('Solving a set of ODE equations', 1, None, '___sec130'),
-              ('Stiff sets of ODE  and implicit methods', 1, None, '___sec131'),
+              ('Ordinary Differential Equations',
+               1,
+               None,
+               'ordinary-differential-equations'),
+              ('A Simple Model for Fluid Flow',
+               1,
+               None,
+               'a-simple-model-for-fluid-flow'),
+              ('Eulers Method', 1, None, 'eulers-method'),
+              ('Error Analysis - Eulers Method',
+               2,
+               None,
+               'error-analysis-eulers-method'),
+              ('Adaptive step size - Eulers Method',
+               2,
+               None,
+               'adaptive-step-size-eulers-method'),
+              ('Runge-Kutta Methods', 1, None, 'runge-kutta-methods'),
+              ('Adaptive step size - Runge-Kutta Method',
+               2,
+               None,
+               'adaptive-step-size-runge-kutta-method'),
+              ('Conservation of Mass', 2, None, 'conservation-of-mass'),
+              ('Solving a set of ODE equations',
+               1,
+               None,
+               'solving-a-set-of-ode-equations'),
+              ('Stiff sets of ODE  and implicit methods',
+               1,
+               None,
+               'stiff-sets-of-ode-and-implicit-methods'),
               ('Exercise 7.1: Truncation Error in Eulers Method',
                2,
                None,
-               '___sec132'),
+               'exercise-7-1-truncation-error-in-eulers-method'),
               ('Monte Carlo Methods', 0, 'ch:mc', 'ch:mc'),
-              ('Monte Carlo Methods', 1, None, '___sec134'),
+              ('Monte Carlo Methods', 1, None, 'monte-carlo-methods'),
               ("Monte Carlo Integration  ''Hit and Miss''",
                1,
                None,
-               '___sec135'),
-              ('Random number generators', 2, None, '___sec136'),
-              ('Encryption', 2, None, '___sec137'),
+               'monte-carlo-integration-hit-and-miss'),
+              ('Random number generators', 2, None, 'random-number-generators'),
+              ('Encryption', 2, None, 'encryption'),
               ('Errors on Monte Carlo Integration and the Binomial '
                'Distribution',
                2,
                None,
-               '___sec138'),
-              ('The mean value method', 2, None, '___sec139'),
+               'errors-on-monte-carlo-integration-and-the-binomial-distribution'),
+              ('The mean value method', 2, None, 'the-mean-value-method'),
               ('Basic Properties of Probability Distributions',
                2,
                None,
-               '___sec140'),
+               'basic-properties-of-probability-distributions'),
               ('Example: Monte Carlo Integration of a Hyper Sphere',
                2,
                None,
-               '___sec141'),
+               'example-monte-carlo-integration-of-a-hyper-sphere'),
               ('Exercise 8.1: The central limit theorem',
                2,
                'ex:mc:norm',
                'ex:mc:norm'),
-              ('Remarks', 3, None, '___sec143'),
+              ('Remarks', 3, None, 'remarks'),
               ('Exercise 8.2: Birthday Paradox', 2, 'ex:mc:BP', 'ex:mc:BP'),
-              ('References', 1, None, '___sec145')]}
+              ('References', 1, None, 'references')]}
 end of tocinfo -->
 
 <body>
@@ -319,13 +401,11 @@ MathJax.Hub.Config({
 <!-- newcommands_keep.tex -->
 $$
 \newcommand{\no}{\nonumber}
-\newcommand{\co}{\text{CO$_{2}$}}
+\newcommand{\co}{CO$_2$}
 $$
 
 
 
-
-    
 <!-- Bootstrap navigation bar -->
 <div class="navbar navbar-default navbar-fixed-top">
   <div class="navbar-header">
@@ -336,7 +416,6 @@ $$
     </button>
     <a class="navbar-brand" href="book.html">Modeling and Computational Engineering</a>
   </div>
-
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
@@ -345,150 +424,150 @@ $$
      <!-- navigation toc: --> <li><a href="._book001.html#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
      <!-- navigation toc: --> <li><a href="._book001.html#ch:preface" style="font-size: 80%;"><b>Preface</b></a></li>
      <!-- navigation toc: --> <li><a href="._book002.html#ch:pyt" style="font-size: 80%;"><b>Introduction to Python</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Personal Guidelines</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Code editor</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Types in Python</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Basic types</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lists</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List arithmetic</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List slicing</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Numpy arrays</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Array slicing</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dictionaries</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Looping</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For loops</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;While loops</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Functions in Python</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Defining a mathematical function</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scope of variables</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Passing arrays and lists to functions</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Call by value or call by reference</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Floats and integers</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec21" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lists and arrays</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mutable and immutable objects</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 1.1: Explain why only one of the codes below gives the correct answer</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#personal-guidelines" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Personal Guidelines</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#code-editor" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Code editor</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#types-in-python" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Types in Python</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#basic-types" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Basic types</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#lists" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lists</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#list-arithmetic" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List arithmetic</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#list-slicing" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List slicing</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#numpy-arrays" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Numpy arrays</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#array-slicing" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Array slicing</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#dictionaries" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dictionaries</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#looping" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Looping</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#for-loops" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For loops</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#while-loops" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;While loops</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#functions-in-python" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Functions in Python</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#defining-a-mathematical-function" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Defining a mathematical function</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#scope-of-variables" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scope of variables</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#passing-arrays-and-lists-to-functions" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Passing arrays and lists to functions</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#call-by-value-or-call-by-reference" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Call by value or call by reference</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#floats-and-integers" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Floats and integers</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#lists-and-arrays" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lists and arrays</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#mutable-and-immutable-objects" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mutable and immutable objects</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#exercise-1-1-explain-why-only-one-of-the-codes-below-gives-the-correct-answer" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 1.1: Explain why only one of the codes below gives the correct answer</a></li>
      <!-- navigation toc: --> <li><a href="._book002.html#ch:pan" style="font-size: 80%;"><b>Introduction to Pandas</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;What is Pandas?</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec26" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Creating a data frame</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec27" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From empty DataFrame</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec28" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create DataFrame from dictionary</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec29" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From file</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec30" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Accessing data in  DataFrames</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Selecting columns</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Selecting rows</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec33" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Challenges when accessing columns or rows</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec34" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time columns not parsed properly</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec35" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Filtering and visualizing data</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Boolean masking</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec37" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Plotting a DataFrame</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec38" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Performing mathematical operations on DataFrames</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec39" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example: mathematical operations on DataFrames</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec40" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec41" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Grouping, filtering and aggregating data</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec42" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Simple statistics in Pandas</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec43" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Joining two DataFrames</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec44" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Appending DataFrames</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec45" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Merging DataFrames</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec46" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Working with folders and files</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec47" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Basic use of Pathlib</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec48" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Basic use of <code>os</code></a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec49" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Splitting data into different folders and files</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec50" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Writing more robust code</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#what-is-pandas" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;What is Pandas?</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#creating-a-data-frame" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Creating a data frame</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#from-empty-dataframe" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From empty DataFrame</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#create-dataframe-from-dictionary" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create DataFrame from dictionary</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#from-file" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From file</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#accessing-data-in-dataframes" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Accessing data in  DataFrames</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#selecting-columns" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Selecting columns</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#selecting-rows" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Selecting rows</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#challenges-when-accessing-columns-or-rows" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Challenges when accessing columns or rows</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#time-columns-not-parsed-properly" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time columns not parsed properly</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#filtering-and-visualizing-data" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Filtering and visualizing data</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#boolean-masking" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Boolean masking</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#plotting-a-dataframe" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Plotting a DataFrame</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#performing-mathematical-operations-on-dataframes" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Performing mathematical operations on DataFrames</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#example-mathematical-operations-on-dataframes" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example: mathematical operations on DataFrames</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#solution" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#grouping-filtering-and-aggregating-data" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Grouping, filtering and aggregating data</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#simple-statistics-in-pandas" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Simple statistics in Pandas</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#joining-two-dataframes" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Joining two DataFrames</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#appending-dataframes" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Appending DataFrames</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#merging-dataframes" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Merging DataFrames</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#working-with-folders-and-files" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Working with folders and files</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#basic-use-of-pathlib" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Basic use of Pathlib</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#basic-use-of-os" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Basic use of <code>os</code></a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#splitting-data-into-different-folders-and-files" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Splitting data into different folders and files</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#writing-more-robust-code" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Writing more robust code</a></li>
      <!-- navigation toc: --> <li><a href="._book003.html#ch:taylor" style="font-size: 80%;"><b>Finite differences</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec52" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Numerical Errors</a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec53" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Taylor Polynomial Approximation</a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec54" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Calculating Numerical Derivatives of Functions</a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec55" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Higher order derivative</a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec56" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Roundoff Errors</a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec57" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Binary numbers</a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec58" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Floating point numbers and the IEEE 754-1985 standard</a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#___sec59" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Roundoff error and truncation error in numerical derivatives</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#numerical-errors" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Numerical Errors</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#taylor-polynomial-approximation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Taylor Polynomial Approximation</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#calculating-numerical-derivatives-of-functions" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Calculating Numerical Derivatives of Functions</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#higher-order-derivative" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Higher order derivative</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#roundoff-errors" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Roundoff Errors</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#binary-numbers" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Binary numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#floating-point-numbers-and-the-ieee-754-1985-standard" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Floating point numbers and the IEEE 754-1985 standard</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#roundoff-error-and-truncation-error-in-numerical-derivatives" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Roundoff error and truncation error in numerical derivatives</a></li>
      <!-- navigation toc: --> <li><a href="#ch:lin" style="font-size: 80%;"><b>Solving linear systems</b></a></li>
-     <!-- navigation toc: --> <li><a href="#___sec61" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The Continuity Equation</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec62" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Continuity Equation as a linear problem</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec63" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Boundary conditions</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec64" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Solving linear equations</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec65" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gauss-Jordan elimination</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec66" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pivoting</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec67" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LU decomposition</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec68" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Iterative methods</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec69" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iterative improvement</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec70" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Jacobi method</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec71" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Gauss-Seidel method</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec72" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Linear regression</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec73" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solving least square, using algebraic equations</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec74" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Least square as a linear algebra problem</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec75" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Working with matrices on component form</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec76" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Sparse matrices and Thomas algorithm</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec77" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Solving the heat equation using linear algebra</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec78" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.1: Conservation Equation or the Continuity Equation</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec79" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Heat equation for solids</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec80" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.2: Curing of Concrete and Matrix Formulation</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec81" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.3: Solve the full heat equation</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec82" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.4: Using sparse matrices in python</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec83" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;CO$_2$ diffusion into aquifers</a></li>
+     <!-- navigation toc: --> <li><a href="#the-continuity-equation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The Continuity Equation</a></li>
+     <!-- navigation toc: --> <li><a href="#continuity-equation-as-a-linear-problem" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Continuity Equation as a linear problem</a></li>
+     <!-- navigation toc: --> <li><a href="#boundary-conditions" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Boundary conditions</a></li>
+     <!-- navigation toc: --> <li><a href="#solving-linear-equations" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Solving linear equations</a></li>
+     <!-- navigation toc: --> <li><a href="#gauss-jordan-elimination" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gauss-Jordan elimination</a></li>
+     <!-- navigation toc: --> <li><a href="#pivoting" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pivoting</a></li>
+     <!-- navigation toc: --> <li><a href="#lu-decomposition" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LU decomposition</a></li>
+     <!-- navigation toc: --> <li><a href="#iterative-methods" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Iterative methods</a></li>
+     <!-- navigation toc: --> <li><a href="#iterative-improvement" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iterative improvement</a></li>
+     <!-- navigation toc: --> <li><a href="#the-jacobi-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Jacobi method</a></li>
+     <!-- navigation toc: --> <li><a href="#the-gauss-seidel-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Gauss-Seidel method</a></li>
+     <!-- navigation toc: --> <li><a href="#example-linear-regression" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Linear regression</a></li>
+     <!-- navigation toc: --> <li><a href="#solving-least-square-using-algebraic-equations" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solving least square, using algebraic equations</a></li>
+     <!-- navigation toc: --> <li><a href="#least-square-as-a-linear-algebra-problem" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Least square as a linear algebra problem</a></li>
+     <!-- navigation toc: --> <li><a href="#working-with-matrices-on-component-form" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Working with matrices on component form</a></li>
+     <!-- navigation toc: --> <li><a href="#sparse-matrices-and-thomas-algorithm" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Sparse matrices and Thomas algorithm</a></li>
+     <!-- navigation toc: --> <li><a href="#example-solving-the-heat-equation-using-linear-algebra" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Solving the heat equation using linear algebra</a></li>
+     <!-- navigation toc: --> <li><a href="#exercise-4-1-conservation-equation-or-the-continuity-equation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.1: Conservation Equation or the Continuity Equation</a></li>
+     <!-- navigation toc: --> <li><a href="#heat-equation-for-solids" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Heat equation for solids</a></li>
+     <!-- navigation toc: --> <li><a href="#exercise-4-2-curing-of-concrete-and-matrix-formulation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.2: Curing of Concrete and Matrix Formulation</a></li>
+     <!-- navigation toc: --> <li><a href="#exercise-4-3-solve-the-full-heat-equation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.3: Solve the full heat equation</a></li>
+     <!-- navigation toc: --> <li><a href="#exercise-4-4-using-sparse-matrices-in-python" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.4: Using sparse matrices in python</a></li>
+     <!-- navigation toc: --> <li><a href="#co-_2-diffusion-into-aquifers" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;CO$_2$ diffusion into aquifers</a></li>
      <!-- navigation toc: --> <li><a href="._book005.html#ch:nlin" style="font-size: 80%;"><b>Solving nonlinear equations</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec85" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Nonlinear equations</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec86" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: van der Waals equation of state</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec87" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.1: van der Waal EOS and CO$_2$</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec88" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Fixed-point iteration</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec89" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.2: Implement the fixed point iteration</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec90" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.3: Finding the molar volume from the van der Waal EOS by fixed point iteration</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#nonlinear-equations" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Nonlinear equations</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#example-van-der-waals-equation-of-state" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: van der Waals equation of state</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#exercise-5-1-van-der-waal-eos-and-co-_2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.1: van der Waal EOS and CO$_2$</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#fixed-point-iteration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Fixed-point iteration</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#exercise-5-2-implement-the-fixed-point-iteration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.2: Implement the fixed point iteration</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#exercise-5-3-finding-the-molar-volume-from-the-van-der-waal-eos-by-fixed-point-iteration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.3: Finding the molar volume from the van der Waal EOS by fixed point iteration</a></li>
      <!-- navigation toc: --> <li><a href="._book005.html#sec:nlin:fp" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When do the fixed point method fail?</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec92" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;What to do when the fixed point method fail</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec93" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.4: Solve \( x=e^{1-x^2} \) using fixed point iteration</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec94" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec95" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The bisection method</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec96" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec97" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Newtons method</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec98" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec99" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.5: Compare Newtons, Bisection and the Fixed Point method</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec100" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Secant method</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec101" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec102" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Newton Rapson method</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec103" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Gradient Descent</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec104" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.6: Gradient descent solution of linear regression</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec105" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Other Useful Methods</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#what-to-do-when-the-fixed-point-method-fail" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;What to do when the fixed point method fail</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#exercise-5-4-solve-x-e-1-x-2-using-fixed-point-iteration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.4: Solve \( x=e^{1-x^2} \) using fixed point iteration</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#rate-of-convergence" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#the-bisection-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The bisection method</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#rate-of-convergence" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#newtons-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Newtons method</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#rate-of-convergence" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#exercise-5-5-compare-newtons-bisection-and-the-fixed-point-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.5: Compare Newtons, Bisection and the Fixed Point method</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#secant-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Secant method</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#rate-of-convergence" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#newton-rapson-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Newton Rapson method</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#gradient-descent" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Gradient Descent</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#exercise-5-6-gradient-descent-solution-of-linear-regression" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.6: Gradient descent solution of linear regression</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#other-useful-methods" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Other Useful Methods</a></li>
      <!-- navigation toc: --> <li><a href="._book006.html#ch:numint" style="font-size: 80%;"><b>Numerical integration</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec107" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Numerical Integration</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec108" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Midpoint Rule</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec109" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Trapezoidal Rule</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec110" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Numerical Errors on Integrals</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec111" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Practical Estimation of Errors on Integrals (Richardson Extrapolation)</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec112" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Romberg Integration</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec113" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alternative implementation of adaptive integration</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec114" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Gaussian Quadrature</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec115" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The case N=3</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec116" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Error term on Gaussian Integration</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec117" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Common Weight functions for Classical Gaussian Quadratures</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec118" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Integrating functions over an infinite range</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec119" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Which method to use in a specific case? (NOT COMPLETED)</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec120" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 6.1: Numerical Integration</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#numerical-integration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Numerical Integration</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#the-midpoint-rule" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Midpoint Rule</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#the-trapezoidal-rule" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Trapezoidal Rule</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#numerical-errors-on-integrals" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Numerical Errors on Integrals</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#practical-estimation-of-errors-on-integrals-richardson-extrapolation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Practical Estimation of Errors on Integrals (Richardson Extrapolation)</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#romberg-integration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Romberg Integration</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#alternative-implementation-of-adaptive-integration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alternative implementation of adaptive integration</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#gaussian-quadrature" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Gaussian Quadrature</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#the-case-n-3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The case N=3</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#error-term-on-gaussian-integration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Error term on Gaussian Integration</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#common-weight-functions-for-classical-gaussian-quadratures" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Common Weight functions for Classical Gaussian Quadratures</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#integrating-functions-over-an-infinite-range" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Integrating functions over an infinite range</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#which-method-to-use-in-a-specific-case-not-completed" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Which method to use in a specific case? (NOT COMPLETED)</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#exercise-6-1-numerical-integration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 6.1: Numerical Integration</a></li>
      <!-- navigation toc: --> <li><a href="._book007.html#ch:ode" style="font-size: 80%;"><b>Ordinary differential equations</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book007.html#___sec122" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ordinary Differential Equations</a></li>
-     <!-- navigation toc: --> <li><a href="._book007.html#___sec123" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;A Simple Model for Fluid Flow</a></li>
-     <!-- navigation toc: --> <li><a href="._book007.html#___sec124" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Eulers Method</a></li>
-     <!-- navigation toc: --> <li><a href="._book007.html#___sec125" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Error Analysis - Eulers Method</a></li>
-     <!-- navigation toc: --> <li><a href="._book007.html#___sec126" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adaptive step size - Eulers Method</a></li>
-     <!-- navigation toc: --> <li><a href="._book007.html#___sec127" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Runge-Kutta Methods</a></li>
-     <!-- navigation toc: --> <li><a href="._book007.html#___sec128" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adaptive step size - Runge-Kutta Method</a></li>
-     <!-- navigation toc: --> <li><a href="._book007.html#___sec129" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Conservation of Mass</a></li>
-     <!-- navigation toc: --> <li><a href="._book007.html#___sec130" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Solving a set of ODE equations</a></li>
-     <!-- navigation toc: --> <li><a href="._book007.html#___sec131" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Stiff sets of ODE  and implicit methods</a></li>
-     <!-- navigation toc: --> <li><a href="._book007.html#___sec132" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 7.1: Truncation Error in Eulers Method</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#ordinary-differential-equations" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ordinary Differential Equations</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#a-simple-model-for-fluid-flow" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;A Simple Model for Fluid Flow</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#eulers-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Eulers Method</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#error-analysis-eulers-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Error Analysis - Eulers Method</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#adaptive-step-size-eulers-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adaptive step size - Eulers Method</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#runge-kutta-methods" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Runge-Kutta Methods</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#adaptive-step-size-runge-kutta-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adaptive step size - Runge-Kutta Method</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#conservation-of-mass" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Conservation of Mass</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#solving-a-set-of-ode-equations" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Solving a set of ODE equations</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#stiff-sets-of-ode-and-implicit-methods" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Stiff sets of ODE  and implicit methods</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#exercise-7-1-truncation-error-in-eulers-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 7.1: Truncation Error in Eulers Method</a></li>
      <!-- navigation toc: --> <li><a href="._book008.html#ch:mc" style="font-size: 80%;"><b>Monte Carlo Methods</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book008.html#___sec134" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Monte Carlo Methods</a></li>
-     <!-- navigation toc: --> <li><a href="._book008.html#___sec135" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Monte Carlo Integration  ''Hit and Miss''</a></li>
-     <!-- navigation toc: --> <li><a href="._book008.html#___sec136" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Random number generators</a></li>
-     <!-- navigation toc: --> <li><a href="._book008.html#___sec137" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Encryption</a></li>
-     <!-- navigation toc: --> <li><a href="._book008.html#___sec138" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Errors on Monte Carlo Integration and the Binomial Distribution</a></li>
-     <!-- navigation toc: --> <li><a href="._book008.html#___sec139" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The mean value method</a></li>
-     <!-- navigation toc: --> <li><a href="._book008.html#___sec140" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Basic Properties of Probability Distributions</a></li>
-     <!-- navigation toc: --> <li><a href="._book008.html#___sec141" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example: Monte Carlo Integration of a Hyper Sphere</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#monte-carlo-methods" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Monte Carlo Methods</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#monte-carlo-integration-hit-and-miss" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Monte Carlo Integration  ''Hit and Miss''</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#random-number-generators" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Random number generators</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#encryption" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Encryption</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#errors-on-monte-carlo-integration-and-the-binomial-distribution" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Errors on Monte Carlo Integration and the Binomial Distribution</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#the-mean-value-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The mean value method</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#basic-properties-of-probability-distributions" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Basic Properties of Probability Distributions</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#example-monte-carlo-integration-of-a-hyper-sphere" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example: Monte Carlo Integration of a Hyper Sphere</a></li>
      <!-- navigation toc: --> <li><a href="._book008.html#ex:mc:norm" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 8.1: The central limit theorem</a></li>
-     <!-- navigation toc: --> <li><a href="._book008.html#___sec143" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#remarks" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
      <!-- navigation toc: --> <li><a href="._book008.html#ex:mc:BP" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 8.2: Birthday Paradox</a></li>
-     <!-- navigation toc: --> <li><a href="._book009.html#___sec145" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;References</a></li>
+     <!-- navigation toc: --> <li><a href="._book009.html#references" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;References</a></li>
 
         </ul>
       </li>
@@ -496,29 +575,25 @@ $$
   </div>
 </div>
 </div> <!-- end of navigation bar -->
-
 <div class="container">
-
 <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
-
 <a name="part0004"></a>
 <!-- !split -->
 
-<p>
+<center>
+<h1 id="ch:lin" class="anchor">Solving linear systems</h1>
+</center> <!-- chapter heading -->
+<p>Most problems in nature are nonlinear. That means that the system response is not proportional to the system variables, e.g. doubling the CO$_2$ concentration in the atmosphere does not lead to a doubling of the earth surface temperature. Still, linear solvers lies at the heart of all grid based models describing e.g. the earths climate. The reason is that although the <em>global</em> model is nonlinear, the model can be formulated <em>locally</em> as a linear model. Typically the simulation code solves the nonlinear problem through a series of steps where each step is a solution of a linear problem. The topic of solving linear systems of equations have been extensively studied, and sophisticated linear equation solving packages have been developed. Python uses functions from the <a href="https://en.wikipedia.org/wiki/LAPACK" target="_self">LAPACK</a> library.</p>
 
-<center><h1 id="ch:lin" class="anchor">Solving linear systems</h1></center> <!-- chapter heading -->
-Most problems in nature are nonlinear. That means that the system response is not proportional to the system variables, e.g. doubling the CO$_2$ concentration in the atmosphere does not lead to a doubling of the earth surface temperature. Still, linear solvers lies at the heart of all grid based models describing e.g. the earths climate. The reason is that although the <em>global</em> model is nonlinear, the model can be formulated <em>locally</em> as a linear model. Typically the simulation code solves the nonlinear problem through a series of steps where each step is a solution of a linear problem. The topic of solving linear systems of equations have been extensively studied, and sophisticated linear equation solving packages have been developed. Python uses functions from the <a href="https://en.wikipedia.org/wiki/LAPACK" target="_self">LAPACK</a> library.
+<p>In the next sections we will show in detail how differential equations can be solved as a linear problem. We will first start off by deriving one of the most useful differential equations describing conservation of a quantity, e.g. mass, energy, momentum, charge.</p>
+<h1 id="the-continuity-equation" class="anchor">The Continuity Equation </h1>
+<p>The continuity equation is fundamental to all mathematical models describing a physical phenomenon. To gain more understanding of its origin we will take the time to derive it from first principles. We will do so in one dimension, consider a volume in space between \( A(x) \) and \( A(x+dx) \) in figure <a href="#fig:lin:flux">14</a>. To be concrete we will assume that the green arrows represents the flow of heat. Thus there are heat flowing into and out of the system, and also heat that can be generated within the system by e.g. chemical reactions. The conservation equation can be formulated with words</p>
 
-<p>
-In the next sections we will show in detail how differential equations can be solved as a linear problem. We will first start off by deriving one of the most useful differential equations describing conservation of a quantity, e.g. mass, energy, momentum, charge.
-
-<h1 id="___sec61" class="anchor">The Continuity Equation </h1>
-The continuity equation is fundamental to all mathematical models describing a physical phenomenon. To gain more understanding of its origin we will take the time to derive it from first principles. We will do so in one dimension, consider a volume in space between \( A(x) \) and \( A(x+dx) \) in figure <a href="#fig:lin:flux">14</a>. To be concrete we will assume that the green arrows represents the flow of heat. Thus there are heat flowing into and out of the system, and also heat that can be generated within the system by e.g. chemical reactions. The conservation equation can be formulated with words
-
-<p>
 <center> <!-- figure label: --> <div id="fig:lin:flux"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 14:  A closed volume, \( V(x)=A(x)dx \), where a quantity flows in and out (illustrated by the green lines), there is also a possibility for generation or loss of the same quantity inside the volume.  <!-- caption label: fig:lin:flux --> </p></center>
+<center>
+<p class="caption">Figure 14:  A closed volume, \( V(x)=A(x)dx \), where a quantity flows in and out (illustrated by the green lines), there is also a possibility for generation or loss of the same quantity inside the volume.  <!-- caption label: fig:lin:flux --> </p>
+</center>
 <p><img src="fig-lin/flux.png" align="bottom" width=800></p>
 </center>
 
@@ -526,13 +601,13 @@ $$
 \begin{align}
 \frac{\text{heat into V(x)}}{\text{time}}-\frac{\text{heat out of V(x)}}{\text{time}}
 &+\frac{\text{heat generated in V(x)}}{\text{time}} \no
-\tag{4.1}\\ 
+\tag{5.1}\\ 
 &= \frac{\text{change of heat in V(x)}}{\text{time}}.
-\tag{4.2}
+\tag{5.2}
 \end{align}
 $$
 
-We formulate the conservation equation per time, because we would like to investigate the time dependency of heat flow. The next step is to replace the terms ''heat into/out of'' with a useful mathematical quantity. It turns out that the term <em>flux</em> is particularly useful, because it is an <em>intensive</em> quantity. An intensive quantity is a quantity that is <em>independent of the system size</em>, like density. The flux is denoted by the symbol \( J \)
+<p>We formulate the conservation equation per time, because we would like to investigate the time dependency of heat flow. The next step is to replace the terms ''heat into/out of'' with a useful mathematical quantity. It turns out that the term <em>flux</em> is particularly useful, because it is an <em>intensive</em> quantity. An intensive quantity is a quantity that is <em>independent of the system size</em>, like density. The flux is denoted by the symbol \( J \)</p>
 $$
 \begin{equation}
 J(x)=\frac{\text{quantity (heat)}}{\text{area}\cdot\text{time}},
@@ -540,148 +615,142 @@ J(x)=\frac{\text{quantity (heat)}}{\text{area}\cdot\text{time}},
 \end{equation}
 $$
 
-and was first introduced by Isaac Newton. Thus to find the amount of heat transported through a surface per time we simply multiply the flux with the surface area. Next, we define the heat per volume as \( q(x) \), and the heat produced per volume as \( \sigma \). Then equation <a href="#mjx-eqn-4.2">(4.2)</a> can be written
+<p>and was first introduced by Isaac Newton. Thus to find the amount of heat transported through a surface per time we simply multiply the flux with the surface area. Next, we define the heat per volume as \( q(x) \), and the heat produced per volume as \( \sigma \). Then equation <a href="#mjx-eqn-5.2">(5.2)</a> can be written</p>
 $$
 \begin{align}
 \frac{J(x)A(x)}{dt}-\frac{J(x+dx)A(x+dx)}{dt}&+
 \frac{\sigma(t+dt)V(x)-\sigma(t)V(x)}{dt}\no
-\tag{4.3}\\=
+\tag{5.3}\\=
 &\frac{q(t+dt)V(x)-q(t)V(x)}{dt}.
-\tag{4.4}
+\tag{5.4}
 \end{align}
 $$
 
-Using Taylor expansion we can write
+<p>Using Taylor expansion we can write</p>
 $$
 \begin{align}
 J(x+dx)A(x+dx) &=J(x)A(x)+\frac{d(J(x)A(x)}{dx}dx+{\cal O}(dx^2),
-\tag{4.5} \\ 
+\tag{5.5} \\ 
 \sigma(t+dt) &=\sigma(t)+\frac{d\sigma}{dt}dt+{\cal O}(dt^2),\no
-\tag{4.6}\\ 
+\tag{5.6}\\ 
 q(t+dt) &=q(t)+\frac{dq}{dt}dt+{\cal O}(dt^2),
-\tag{4.7}
+\tag{5.7}
 \end{align}
 $$
 
-Inserting these equations into equation<a href="#mjx-eqn-4.4">(4.4)</a>, using \( V(x)=A(x)dx \), and taking the limit \( dx,dt\to0 \) we arrive at
-<div class="alert alert-block alert-success alert-text-normal"><b>The continuity equation in 1 dimension.</b>
+<p>Inserting these equations into equation<a href="#mjx-eqn-5.4">(5.4)</a>, using \( V(x)=A(x)dx \), and taking the limit \( dx,dt\to0 \) we arrive at</p>
+<div class="alert alert-block alert-success alert-text-normal"><b>The continuity equation in 1 dimension</b>
 $$
 \begin{equation}
 -\frac{d(J(x)A(x))}{dx}+\frac{d\sigma(t)}{dt}A(x)=\frac{dq(t)}{dt}A(x).
-\tag{4.8}
+\tag{5.8}
 \end{equation}
 $$
 </div>
 
-We have kept the area in equation <a href="#mjx-eqn-4.8">(4.8)</a>, because we are only considering flow of heat in one dimension and then we can allow for the area to change in the \( y \) and \( z \) dimension. When the continuity equation is derived in three dimensions, one consider a volume \( V(x,y,z)=dxdydz \), then the area in equation <a href="#mjx-eqn-4.8">(4.8)</a> will drop out and \( d/dx\to\nabla=[\partial/\partial x, \partial/\partial y, \partial/\partial z] \) 
-<div class="alert alert-block alert-success alert-text-normal"><b>The continuity equation in 3 dimensions.</b>
+<p>We have kept the area in equation <a href="#mjx-eqn-5.8">(5.8)</a>, because we are only considering flow of heat in one dimension and then we can allow for the area to change in the \( y \) and \( z \) dimension. When the continuity equation is derived in three dimensions, one consider a volume \( V(x,y,z)=dxdydz \), then the area in equation <a href="#mjx-eqn-5.8">(5.8)</a> will drop out and \( d/dx\to\nabla=[\partial/\partial x, \partial/\partial y, \partial/\partial z] \) </p>
+<div class="alert alert-block alert-success alert-text-normal"><b>The continuity equation in 3 dimensions</b>
 $$
 \begin{equation}
 -\nabla\cdot\mathbf{J}+\frac{d\sigma(t)}{dt}=\frac{dq(t)}{dt}.
-\tag{4.9}
+\tag{5.9}
 \end{equation}
 $$
 </div>
 
+<h1 id="continuity-equation-as-a-linear-problem" class="anchor">Continuity Equation as a linear problem  </h1>
 
-<h1 id="___sec62" class="anchor">Continuity Equation as a linear problem  </h1>
+<p>How can a differential equation be formulated as a matrix problem? To see this we need to discretize equation <a href="#mjx-eqn-5.8">(5.8)</a>. We will discretize the equation in one dimension, and we will use a regular grid, where we keep the same distance, \( h \), between the points. Assume our system has dimension \( L \), in figure <a href="#fig:lin:grid">15</a>, there are two examples of discretization.  </p>
 
-<p>
-How can a differential equation be formulated as a matrix problem? To see this we need to discretize equation <a href="#mjx-eqn-4.8">(4.8)</a>. We will discretize the equation in one dimension, and we will use a regular grid, where we keep the same distance, \( h \), between the points. Assume our system has dimension \( L \), in figure <a href="#fig:lin:grid">15</a>, there are two examples of discretization.
-
-<p>
 <center> <!-- figure label: --> <div id="fig:lin:grid"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 15:  Examples of discretization of a system with length \( L \) (left) the  boundaries lies exactly at the boundary nodes, (right) boundary nodes lies half-way between the grid nodes.  <!-- caption label: fig:lin:grid --> </p></center>
+<center>
+<p class="caption">Figure 15:  Examples of discretization of a system with length \( L \) (left) the  boundaries lies exactly at the boundary nodes, (right) boundary nodes lies half-way between the grid nodes.  <!-- caption label: fig:lin:grid --> </p>
+</center>
 <p><img src="fig-lin/grid.png" align="bottom" width=800></p>
 </center>
 
-<p>
-There are many things to consider when discretizing equations, but perhaps the most important are
-
+<p>There are many things to consider when discretizing equations, but perhaps the most important are</p>
 <ol>
 <li> Treat the boundary nodes correctly. In most cases the dominating numerical errors are introduced through the boundaries. Always draw a picture of the system, if the boundaries lies exactly at the grid nodes it is usually easier to find a good numerical representation. If the boundaries lies a distance from the nodes, e.g. to the right in figure <a href="#fig:lin:grid">15</a>, then one usually need to do some interpolation.</li>
 <li> Should finite volume or finite difference approach be used? A finite volume approach is especially attractive for conservation equations.</li>
 </ol>
-
-<div class="alert alert-block alert-success alert-text-normal"><b>Finite difference and finite volume.</b>
-We have already encountered finite difference discretization in the last chapter where we used various approximations to calculate derivatives, i.e. we calculate derivatives by calculating the <em>difference</em> between \( f(x+h) \) and \( f(x) \) (or \( f(x+h) \) and \( f(x-h) \)). The finite volume formulation is also a finite difference scheme, but it is formulated such that we always ensure that the quantity we are simulating is conserved (regardless of numerical errors). Formally, one transforms the divergence term (the term that contains the flux \( \nabla \mathbf{J} \)) into a surface integral using the Gauss (divergence) theorem
+<div class="alert alert-block alert-success alert-text-normal"><b>Finite difference and finite volume</b>
+<p>We have already encountered finite difference discretization in the last chapter where we used various approximations to calculate derivatives, i.e. we calculate derivatives by calculating the <em>difference</em> between \( f(x+h) \) and \( f(x) \) (or \( f(x+h) \) and \( f(x-h) \)). The finite volume formulation is also a finite difference scheme, but it is formulated such that we always ensure that the quantity we are simulating is conserved (regardless of numerical errors). Formally, one transforms the divergence term (the term that contains the flux \( \nabla \mathbf{J} \)) into a surface integral using the Gauss (divergence) theorem</p>
 $$
 \begin{equation}
 \int_V\nabla\cdot \mathbf{J}=\int_S\mathbf{J}\cdot \hat{\mathbf{n}}
-\tag{4.10}
+\tag{5.10}
 \end{equation}
 $$
 </div>
 
-There are excellent books written on the finite volume method, see e.g. <a href="._book009.html#leveque2002finite">[4]</a>. Here we will mainly focus on the key idea, which is to formulate a scheme that conserves the flux.
+<p>There are excellent books written on the finite volume method, see e.g. <a href="._book009.html#leveque2002finite">[4]</a>. Here we will mainly focus on the key idea, which is to formulate a scheme that conserves the flux.
 The process of formulating a finite volume scheme is very close to the derivation of the continuum equation we did in the beginning of the chapter. We consider our numerical discretization as several boxes (exactly like the dotted lines in figure <a href="#fig:lin:grid">15</a>), the continuum equation is written down for each box an therefore we are ensured that the quantities are conserved <em>regardless of the size of the boxes</em>.
+</p>
 
-<p>
-<div class="alert alert-block alert-success alert-text-normal"><b>Example: Finite difference and volume discretization of the heat equation.</b>
-Let us consider the heat equation, where the heat flux is given as
+<div class="alert alert-block alert-success alert-text-normal"><b>Example: Finite difference and volume discretization of the heat equation</b>
+<p>Let us consider the heat equation, where the heat flux is given as</p>
 $$
 \begin{equation}
 J=-k\frac{dT}{dx},
-\tag{4.11}
+\tag{5.11}
 \end{equation}
 $$
 
-where \( k \) describes the thermal conductivity of the solid. We will further assume that there is a constant source term \( d\sigma/dt=\kappa=const \), and steady state \( dq/dt=0 \). Then equation <a href="#mjx-eqn-4.8">(4.8)</a> can be written
+<p>where \( k \) describes the thermal conductivity of the solid. We will further assume that there is a constant source term \( d\sigma/dt=\kappa=const \), and steady state \( dq/dt=0 \). Then equation <a href="#mjx-eqn-5.8">(5.8)</a> can be written</p>
 $$
 \begin{equation}
 k\frac{d^2T}{dx^2}+\kappa=0,
-\tag{4.12}
+\tag{5.12}
 \end{equation}
 $$
 
-The finite difference discretization is now straight forward, just replace the term \( d^2T/dx^2 \) with a suitable finite difference formula for the second derivative, e.g.
+<p>The finite difference discretization is now straight forward, just replace the term \( d^2T/dx^2 \) with a suitable finite difference formula for the second derivative, e.g.</p>
 $$
 \begin{align}
 k\frac{T(x+h)+T(x-h)-2T(x)}{h^2}+\kappa&=0,\no
-\tag{4.13}\\ 
+\tag{5.13}\\ 
 k\frac{T_{i+1}+T_{i-1}-2T_i}{h^2}+\kappa&=0.
-\tag{4.14}
+\tag{5.14}
 \end{align}
 $$
 
-Note that in the last equations we have introduced the short hand notation \( T(x)\equiv T_i \), and \( T(x\pm h)=T_{i\pm 1} \).
+<p>Note that in the last equations we have introduced the short hand notation \( T(x)\equiv T_i \), and \( T(x\pm h)=T_{i\pm 1} \). </p>
 
-<p>
-The finite volume discretization approach is slightly different, we then operate with <em>cell averaged values</em>. The heat in the box is the volume averaged heat. Since the divergence term is replaced with a surface integral, equation <a href="#mjx-eqn-4.10">(4.10)</a>, we calculate the flow of heat into the boundary \( x-h/2 \) and out of the boundary \( x+h/2 \) as
+<p>The finite volume discretization approach is slightly different, we then operate with <em>cell averaged values</em>. The heat in the box is the volume averaged heat. Since the divergence term is replaced with a surface integral, equation <a href="#mjx-eqn-5.10">(5.10)</a>, we calculate the flow of heat into the boundary \( x-h/2 \) and out of the boundary \( x+h/2 \) as</p>
 $$
 \begin{equation}
 \frac{J_{x+h/2}
 -J_{x-h/2}}{h}+\kappa=0.
-\tag{4.15}
+\tag{5.15}
 \end{equation}
 $$
 
-Note that this equation is exactly the same as equation <a href="#mjx-eqn-4.4">(4.4)</a>, with the only exception that the point \( x \) is placed in the center of the box.
+<p>Note that this equation is exactly the same as equation <a href="#mjx-eqn-5.4">(5.4)</a>, with the only exception that the point \( x \) is placed in the center of the box.
 The diffusive flux is \( -kdT/dx \), and in order to be consistent with this law we have to write the flux between two cells as proportional to the difference between the cell average values
+</p>
 $$
 \begin{align}
 -\frac{k}{h}\left(\frac{T_{i+1}-T_i}{h}-\frac{T_{i}-T_{i-1}}{h}\right)+\kappa&=0\nonumber,\\ 
 k\frac{T_{i+1}+T_{i-1}-2T_i}{h^2}+\kappa&=0.
-\tag{4.16}
+\tag{5.16}
 \end{align}
 $$
 
-In this case we actually recover the same equation as we did for the finite difference approach (equation <a href="#mjx-eqn-4.14">(4.14)</a>.
+<p>In this case we actually recover the same equation as we did for the finite difference approach (equation <a href="#mjx-eqn-5.14">(5.14)</a>. </p>
 </div>
 
-
-<h3 id="___sec63" class="anchor">Boundary conditions </h3>
-
-Basically there are two types of boundary conditions i) the flux is known at the edges of the computational domain and/or ii) the physical quantity we are solving for is known. To be more specific, and to see how all connects, we will continue with the example above on the heat equation. Consider the outline of nodes as in figure <a href="#fig:lin:grid">15</a>, we will consider two possibilities i) where the physical boundary lies exactly between nodes, and ii) where the physical boundary is exactly at the grid nodes. In the finite volume scheme, we need to make sure that the flux over the surface is calculated correctly, and then we have to use the formulas in figure <a href="#fig:lin:bbc">16</a>
+<h3 id="boundary-conditions" class="anchor">Boundary conditions </h3>
+<p>Basically there are two types of boundary conditions i) the flux is known at the edges of the computational domain and/or ii) the physical quantity we are solving for is known. To be more specific, and to see how all connects, we will continue with the example above on the heat equation. Consider the outline of nodes as in figure <a href="#fig:lin:grid">15</a>, we will consider two possibilities i) where the physical boundary lies exactly between nodes, and ii) where the physical boundary is exactly at the grid nodes. In the finite volume scheme, we need to make sure that the flux over the surface is calculated correctly, and then we have to use the formulas in figure <a href="#fig:lin:bbc">16</a></p>
 $$
 \begin{equation}
 \left.\frac{dT}{dx}\right|_{x=0}=\frac{T_{-1}-T_0}{h}+{\cal O}(h^2).
-\tag{4.17}
+\tag{5.17}
 \end{equation}
 $$
 
-Note that if the boundary node lies exactly at \( x=0 \), we have to replace \( T_0 \) with \( T_{1} \). A flux boundary condition is usually called Neumann boundary condition after Carl Neumann (1832&#8211;1925) a German mathematician, and the constant value boundary condition is called Dirichlet boundary condition after another German mathematician, Peter Gustav Lejeune Dirichlet (1805&#8211;1859). If the boundary nodes lies exactly at the physical boundary, it is trivial to implement, just replace \( T_N=T_b \) i.e. with the boundary value. On the other hand if the physical boundary lies a distance from the node, we have to interpolate the value from the physical coordinate to the simulation node.
+<p>Note that if the boundary node lies exactly at \( x=0 \), we have to replace \( T_0 \) with \( T_{1} \). A flux boundary condition is usually called Neumann boundary condition after Carl Neumann (1832&#8211;1925) a German mathematician, and the constant value boundary condition is called Dirichlet boundary condition after another German mathematician, Peter Gustav Lejeune Dirichlet (1805&#8211;1859). If the boundary nodes lies exactly at the physical boundary, it is trivial to implement, just replace \( T_N=T_b \) i.e. with the boundary value. On the other hand if the physical boundary lies a distance from the node, we have to interpolate the value from the physical coordinate to the simulation node.</p>
 $$
 \begin{align}
 T_N&=T_{N+1/2}-\left.\frac{dT}{dx}\right|_{x+h/2}+{\cal O}(h^2)=T_b-\frac{T_N-T_{N-1}}{h/2}\frac{h}{2}+{\cal O}(h^2),\text{ hence:}\nonumber\\ 
@@ -689,48 +758,50 @@ T_N&=\frac{T_b+T_{N-1}}{2}+{\cal O}(h^2).label{eq:lin:dd}
 \end{align}
 $$
 
-<p>
+
 <center> <!-- figure label: --> <div id="fig:lin:bbc"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 16:  Flux boundary condition (Neumann), and value boundary condition (Dirichlet). For the upper right boundary condition we use Taylors formula to interpolate, see equation \eqref{eq:lin:dd}.  <!-- caption label: fig:lin:bbc --> </p></center>
+<center>
+<p class="caption">Figure 16:  Flux boundary condition (Neumann), and value boundary condition (Dirichlet). For the upper right boundary condition we use Taylors formula to interpolate, see equation \eqref{eq:lin:dd}.  <!-- caption label: fig:lin:bbc --> </p>
+</center>
 <p><img src="fig-lin/bbc.png" align="bottom" width=800></p>
 </center>
 
-<p>
-<div class="alert alert-block alert-success alert-text-normal"><b>Example: Steady state heat equation as a linear problem.</b>
-Consider the case where we have 4 grid nodes and the outline of the simulation nodes are as in figure <a href="#fig:lin:grid">15</a> to the left, i.e. nodes at the physical  boundaries. Assume a zero flux boundary condition to the left, and a constant temperature,$T_b$, to the right. Write the heat equation
+<div class="alert alert-block alert-success alert-text-normal"><b>Example: Steady state heat equation as a linear problem</b>
+<p>Consider the case where we have 4 grid nodes and the outline of the simulation nodes are as in figure <a href="#fig:lin:grid">15</a> to the left, i.e. nodes at the physical  boundaries. Assume a zero flux boundary condition to the left, and a constant temperature,$T_b$, to the right. Write the heat equation</p>
 $$
 \begin{equation}
 k\frac{d^2T}{dx^2}+\kappa=0,
-\tag{4.18}
+\tag{5.18}
 \end{equation}
 $$
 
-as a matrix equation.
+<p>as a matrix equation.</p>
 
 <p>
 <b>Solution:</b>
-First, we use the discrete version of equation <a href="#mjx-eqn-4.18">(4.18)</a> in equation <a href="#mjx-eqn-4.14">(4.14)</a> for \( i=0, 1, 2, 3 \)
+First, we use the discrete version of equation <a href="#mjx-eqn-5.18">(5.18)</a> in equation <a href="#mjx-eqn-5.14">(5.14)</a> for \( i=0, 1, 2, 3 \)
+</p>
 $$
 \begin{align}
 T_{-1}+T_1-2T_0 &=-h^2\kappa/k,\nonumber \\ 
 T_{0}+T_2-2T_1 &=-h^2\kappa/k\nonumber \\ 
 T_{1}+T_3-2T_2 &=-h^2\kappa/k\nonumber \\ 
 T_{2}+T_4-2T_3 &=-h^2\kappa/k.
-\tag{4.19}
+\tag{5.19}
 \end{align}
 $$
 
-Now, we have four equations, but six unknowns (\( T_{-1}, T_0, T_1, T_2, T_3, T_4 \)). \( T_{-1} \), and \( T_4 \) can be found from the boundary conditions. Using the formulas in figure <a href="#fig:lin:bbc">16</a> at the lower left and lower right, we get \( dT/dx=0 \), and \( T_{-1}=T_1 \), and \( T_4=T_b \). Thus the first and last equation in equation <a href="#mjx-eqn-4.19">(4.19)</a>, can be written
+<p>Now, we have four equations, but six unknowns (\( T_{-1}, T_0, T_1, T_2, T_3, T_4 \)). \( T_{-1} \), and \( T_4 \) can be found from the boundary conditions. Using the formulas in figure <a href="#fig:lin:bbc">16</a> at the lower left and lower right, we get \( dT/dx=0 \), and \( T_{-1}=T_1 \), and \( T_4=T_b \). Thus the first and last equation in equation <a href="#mjx-eqn-5.19">(5.19)</a>, can be written</p>
 $$
 \begin{align}
 2T_1-2T_0 &=-h^2\kappa/k,\nonumber \\ 
 T_{2}-2T_3 &=-h^2\kappa/k-T_b.
-\tag{4.20}
+\tag{5.20}
 \end{align}
 $$
 
-Now, we can formulate equation <a href="#mjx-eqn-4.19">(4.19)</a> as a matrix problem, with the unknowns on the left side and the unknown on the right hand side.
+<p>Now, we can formulate equation <a href="#mjx-eqn-5.19">(5.19)</a> as a matrix problem, with the unknowns on the left side and the unknown on the right hand side.</p>
 $$
 \begin{align}
 \left(
@@ -758,42 +829,38 @@ T_3\\
 -h^2\kappa/k-T_b
 \end{array}
 \right).
-\tag{4.21}
+\tag{5.21}
 \end{align}
-\tag{4.22}$$
-
-<p>
+\tag{5.22}$$
 </div>
 
-In principle, to discretize an equation is straight forward, but there are some
+<p>In principle, to discretize an equation is straight forward, but there are some </p>
 
-<p>
-First, we are going to consider a <em>steady state</em> solution. Steady state means that the solution does no longer change as a function of time, i.e. \( dq/dt=0 \) in equation <a href="#mjx-eqn-4.8">(4.8)</a>. We are also going to assume that the area is constant \( A(x)=A \), thus the equation we want to solve is
-
-<h1 id="___sec64" class="anchor">Solving linear equations </h1>
-There are a number of excellent books covering this topic, see e.g. <a href="._book009.html#press2007">[5]</a> <a href="._book009.html#trefethen1997">[6]</a> <a href="._book009.html#stoer2013">[7]</a> <a href="._book009.html#strang2019">[8]</a>.
+<p>First, we are going to consider a <em>steady state</em> solution. Steady state means that the solution does no longer change as a function of time, i.e. \( dq/dt=0 \) in equation <a href="#mjx-eqn-5.8">(5.8)</a>. We are also going to assume that the area is constant \( A(x)=A \), thus the equation we want to solve is</p>
+<h1 id="solving-linear-equations" class="anchor">Solving linear equations </h1>
+<p>There are a number of excellent books covering this topic, see e.g. <a href="._book009.html#press2007">[5]</a> <a href="._book009.html#trefethen1997">[6]</a> <a href="._book009.html#stoer2013">[7]</a> <a href="._book009.html#strang2019">[8]</a>.
 In most of the examples covered in this course we will encounter problems where we have a set of <em>linearly independent</em> equations and one equation for each unknown. For these type of problems there are a number of methods that can be used, and they will find a solution in a finite number of steps. If a solution cannot be found it is usually because the equations are not linearly independent, and our formulation of the physical problem is wrong.
+</p>
 
-<p>
-Assume that we would like to solve the following set of equations:
+<p>Assume that we would like to solve the following set of equations:</p>
 $$
 \begin{align}
-2x_0+x_1+x_2+3x_3&=1, \tag{4.23} \\ 
-x_0+x_1+3x_2+x_3&=-3, \tag{4.24} \\ 
-x_0+4x_1+x_2+x_3&=2, \tag{4.25} \\ 
-x_0+x_1+x_2+x_3&=1. \tag{4.26} 
+2x_0+x_1+x_2+3x_3&=1, \tag{5.23} \\ 
+x_0+x_1+3x_2+x_3&=-3, \tag{5.24} \\ 
+x_0+4x_1+x_2+x_3&=2, \tag{5.25} \\ 
+x_0+x_1+2x_2+2x_3&=1. \tag{5.26} 
 \end{align}
 $$
 
-These equations can be written in matrix form as:
+<p>These equations can be written in matrix form as:</p>
 $$
 \begin{equation}
 \mathbf{A\cdot x}=\mathbf{b},
-\tag{4.27}
+\tag{5.27}
 \end{equation}
 $$
 
-where:
+<p>where:</p>
 $$
 \begin{equation}
 \mathbf{A}\equiv\begin{pmatrix}
@@ -812,21 +879,22 @@ $$
 \begin{pmatrix}
 x_0\\x_1\\x_2\\x_3
 \end{pmatrix}.
-\tag{4.28}
+\tag{5.28}
 \end{equation}
 $$
 
-You can easily verify that \( x_0=-4, x_1=1, x_2=-1, x_3= 3 \) is the
+<p>You can easily verify that \( x_0=-4, x_1=1, x_2=-1, x_3= 3 \) is the
 solution to the above equations by direct substitution. If we were to
 replace one of the above equations with a linear combination of any of
-the other equations, e.g. replace equation <a href="#mjx-eqn-4.26">(4.26)</a> with
+the other equations, e.g. replace equation <a href="#mjx-eqn-5.26">(5.26)</a> with
 \( 3x_0+2x_1+4x_2+4x_3=-2 \), there would be no unique solution (infinite
 number of solutions). This can be checked by calculating the determinant of the matrix \( \mathbf{A} \), if \( \det \mathbf{A}=0  \),  
 What is the difficulty in solving these equations? Clearly if none of the equations are linearly dependent, and we have \( N \) independent linear equations, it should be straight forward to solve them? Two major numerical problems are i) even if the equations are not exact linear combinations of each other, they could be very close, and as the numerical algorithm progresses they could at some stage become linearly dependent due to roundoff errors. ii) roundoff errors may accumulate if the number of equations are large <a href="._book009.html#press2007">[5]</a>.
-
-<h2 id="___sec65" class="anchor">Gauss-Jordan elimination </h2>
-Let us continue the discussion by consider Gauss-Jordan elimination, which is a <em>direct</em> method. A direct method uses a final set of operations to obtain a solution. According to <a href="._book009.html#press2007">[5]</a> Gauss-Jordan elimination is the method of choice if we want to find the inverse of \( \mathbf{A} \). However, it is slow when it comes to calculate the solution of equation
-<a href="#mjx-eqn-4.27">(4.27)</a>. Even if speed and memory use is not an issue, it is also not advised to first find the inverse, \( \mathbf{A}^{-1} \), of \( \mathbf{A} \), then multiply it with \( \mathbf{b} \) to obtain the solution, due to roundoff errors (Roundoff errors occur whenever we subtract to numbers that are very close to each other). To simplify our notation, we write equation <a href="#mjx-eqn-4.28">(4.28)</a> as:
+</p>
+<h2 id="gauss-jordan-elimination" class="anchor">Gauss-Jordan elimination </h2>
+<p>Let us continue the discussion by consider Gauss-Jordan elimination, which is a <em>direct</em> method. A direct method uses a final set of operations to obtain a solution. According to <a href="._book009.html#press2007">[5]</a> Gauss-Jordan elimination is the method of choice if we want to find the inverse of \( \mathbf{A} \). However, it is slow when it comes to calculate the solution of equation
+<a href="#mjx-eqn-5.27">(5.27)</a>. Even if speed and memory use is not an issue, it is also not advised to first find the inverse, \( \mathbf{A}^{-1} \), of \( \mathbf{A} \), then multiply it with \( \mathbf{b} \) to obtain the solution, due to roundoff errors (Roundoff errors occur whenever we subtract to numbers that are very close to each other). To simplify our notation, we write equation <a href="#mjx-eqn-5.28">(5.28)</a> as:
+</p>
 $$
 \begin{equation}
 \left(
@@ -837,11 +905,11 @@ $$
 1&1&2&2&1
 \end{array}
 \right).
-\tag{4.29}
+\tag{5.29}
 \end{equation}
 $$
 
-The numbers to the left of the vertical dash is the matrix \( \mathbf{A} \), and to the right is the vector \( \mathbf{b} \). The Gauss-Jordan elimination procedure proceeds by doing the same operation on the right and left side of the dash, and the goal is to get only zeros on the lower triangular part of the matrix. This is achieved by multiplying rows with the same (nonzero) number, swapping rows, adding a multiple of a row to another:
+<p>The numbers to the left of the vertical dash is the matrix \( \mathbf{A} \), and to the right is the vector \( \mathbf{b} \). The Gauss-Jordan elimination procedure proceeds by doing the same operation on the right and left side of the dash, and the goal is to get only zeros on the lower triangular part of the matrix. This is achieved by multiplying rows with the same (nonzero) number, swapping rows, adding a multiple of a row to another:</p>
 $$
 \begin{align}
 &\left(
@@ -859,7 +927,7 @@ $$
 0&7/2&1/2&-1/2&3/2\\ 
 0&1/2&3/2&1/2&1/2
 \end{array}
-\right)\to\tag{4.30}\\ 
+\right)\to\tag{5.30}\\ 
 &\left(
 \begin{array}{cccc|c}
 2&1&1&3&1\\ 
@@ -879,11 +947,15 @@ $$
 \right)\no
 \end{align}$$
 
-The operations done are: (\( 1\to2 \)) multiply first row with \( -1/2 \) and add to second, third and the fourth row, (\( 2\to 3 \)) multiply second row with \( -7 \), and add to third row, multiply second row with \( -1 \) and add to fourth row, (\( 3\to4 \)) multiply third row with \( -1/17 \) and add to fourth row. These operations can easily be coded into Python:
-<p>
+<p>The operations done are: (\( 1\to2 \)) multiply first row with \( -1/2 \) and add to second, third and the fourth row, (\( 2\to 3 \)) multiply second row with \( -7 \), and add to third row, multiply second row with \( -1 \) and add to fourth row, (\( 3\to4 \)) multiply third row with \( -1/17 \) and add to fourth row. These operations can easily be coded into Python:</p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>A <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([[<span style="color: #666666">2</span>, <span style="color: #666666">1</span>, <span style="color: #666666">1</span>, <span style="color: #666666">3</span>],[<span style="color: #666666">1</span>, <span style="color: #666666">1</span>, <span style="color: #666666">3</span>, <span style="color: #666666">1</span>],
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">A <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([[<span style="color: #666666">2</span>, <span style="color: #666666">1</span>, <span style="color: #666666">1</span>, <span style="color: #666666">3</span>],[<span style="color: #666666">1</span>, <span style="color: #666666">1</span>, <span style="color: #666666">3</span>, <span style="color: #666666">1</span>],
               [<span style="color: #666666">1</span>, <span style="color: #666666">4</span>, <span style="color: #666666">1</span>, <span style="color: #666666">1</span>],[<span style="color: #666666">1</span>, <span style="color: #666666">1</span>, <span style="color: #666666">2</span>, <span style="color: #666666">2</span> ]],<span style="color: #008000">float</span>)
 b <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([<span style="color: #666666">1</span>,<span style="color: #666666">-3</span>,<span style="color: #666666">2</span>,<span style="color: #666666">1</span>],<span style="color: #008000">float</span>)
 N<span style="color: #666666">=4</span>
@@ -892,9 +964,22 @@ N<span style="color: #666666">=4</span>
     fact    <span style="color: #666666">=</span> A[i:,i<span style="color: #666666">-1</span>]<span style="color: #666666">/</span>A[i<span style="color: #666666">-1</span>,i<span style="color: #666666">-1</span>]
     A[i:,] <span style="color: #666666">-=</span> np<span style="color: #666666">.</span>outer(fact,A[i<span style="color: #666666">-1</span>,])
     b[i:]  <span style="color: #666666">-=</span> b[i<span style="color: #666666">-1</span>]<span style="color: #666666">*</span>fact
-</pre></div>
-<p>
-Notice that the final matrix has only zeros beyond the diagonal, such a matrix is called <em>upper triangular</em>. We still have not found the final solution, but from an upper triangular (or lower triangular) matrix it is trivial to determine the solution. The last row immediately gives us \( 14/17z=42/17 \) or \( z=3 \), now we have the solution for z and the next row gives: \( -17y+3z=26 \) or \( y=(26-3\cdot3)/(-17)=-1 \), and so on. In a more general form, we can write our solution of the matrix \( \mathbf{A} \) after making it upper triangular as:
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>Notice that the final matrix has only zeros beyond the diagonal, such a matrix is called <em>upper triangular</em>. We still have not found the final solution, but from an upper triangular (or lower triangular) matrix it is trivial to determine the solution. The last row immediately gives us \( 14/17z=42/17 \) or \( z=3 \), now we have the solution for z and the next row gives: \( -17y+3z=26 \) or \( y=(26-3\cdot3)/(-17)=-1 \), and so on. In a more general form, we can write our solution of the matrix \( \mathbf{A} \) after making it upper triangular as:</p>
 $$
 \begin{equation}
 \begin{pmatrix}
@@ -917,61 +1002,91 @@ b^\prime_{1}\\
 b^\prime_{2}\\ 
 b^\prime_{3}
 \end{pmatrix}
-\tag{4.31}
+\tag{5.31}
 \end{equation}
 $$
 
-The back substitution can then be written formally as:
+<p>The back substitution can then be written formally as:</p>
 $$
 \begin{equation}
 x_i=\frac{1}{a^\prime_{ii}}\left[b_i^\prime-\sum_{j=i+1}^{N-1}a^\prime_{ij}x_j\right],\quad i=N-1,N-2,\ldots,0
-\tag{4.32}
+\tag{5.32}
 \end{equation}
 $$
 
-The back substitution can now easily be implemented in Python as:
-<p>
+<p>The back substitution can now easily be implemented in Python as:</p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #408080; font-style: italic"># Back substitution</span>
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #408080; font-style: italic"># Back substitution</span>
 sol <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros(N,<span style="color: #008000">float</span>)
 sol[N<span style="color: #666666">-1</span>]<span style="color: #666666">=</span>b[N<span style="color: #666666">-1</span>]<span style="color: #666666">/</span>A[N<span style="color: #666666">-1</span>,N<span style="color: #666666">-1</span>]
 <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">2</span>,N<span style="color: #666666">+1</span>):
     sol[N<span style="color: #666666">-</span>i]<span style="color: #666666">=</span>(b[N<span style="color: #666666">-</span>i]<span style="color: #666666">-</span>np<span style="color: #666666">.</span>dot(A[(N<span style="color: #666666">-</span>i),],sol))<span style="color: #666666">/</span>A[N<span style="color: #666666">-</span>i,N<span style="color: #666666">-</span>i]
-</pre></div>
-<p>
-Notice that in the Python implementation, we have used vector operations instead of for loops. This makes the code more efficient, but it could also be implemented with for loops: 
-<p>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>Notice that in the Python implementation, we have used vector operations instead of for loops. This makes the code more efficient, but it could also be implemented with for loops: </p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #408080; font-style: italic"># Back substitution - for loop</span>
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #408080; font-style: italic"># Back substitution - for loop</span>
 sol <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros(N,<span style="color: #008000">float</span>)
 <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(N<span style="color: #666666">-1</span>,<span style="color: #666666">-1</span>,<span style="color: #666666">-1</span>):
     sol[i]<span style="color: #666666">=</span> b[i]
     <span style="color: #008000; font-weight: bold">for</span> j <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(i<span style="color: #666666">+1</span>,N):
         sol[i] <span style="color: #666666">-=</span> A[i][j]<span style="color: #666666">*</span>sol[j]
     sol[i] <span style="color: #666666">/=</span> A[i][i]
-</pre></div>
-<p>
-There are at least two things to notice with our implementation:
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
+<p>There are at least two things to notice with our implementation:</p>
 <ul>
-<li> Matrix and vector notation makes the code more compact and efficient. In order to understand the implementation it is advised to put \( i=1, 2, 3, 4 \), and then execute the statements in the Gauss-Jordan elimination and compare with equation <a href="#mjx-eqn-4.30">(4.30)</a>.</li>
-<li> The implementation of the Gauss-Jordan elimination is not robust, in particular one could easily imagine cases where one of the leading coefficients turned out as zero, and the routine would fail when we divide by <code>A[i-1,i-1]</code>. By simply changing equation <a href="#mjx-eqn-4.24">(4.24)</a> to \( 2x_0+x_1+3x_2+x_3=-3 \), when doing the first Gauss-Jordan elimination, both \( x_0 \) and \( x_1 \) would be canceled. In the next iteration we try to divide next equation by the leading coefficient of \( x_1 \), which is zero, and the whole procedure fails.</li>
+<li> Matrix and vector notation makes the code more compact and efficient. In order to understand the implementation it is advised to put \( i=1, 2, 3, 4 \), and then execute the statements in the Gauss-Jordan elimination and compare with equation <a href="#mjx-eqn-5.30">(5.30)</a>.</li>
+<li> The implementation of the Gauss-Jordan elimination is not robust, in particular one could easily imagine cases where one of the leading coefficients turned out as zero, and the routine would fail when we divide by <code>A[i-1,i-1]</code>. By simply changing equation <a href="#mjx-eqn-5.24">(5.24)</a> to \( 2x_0+x_1+3x_2+x_3=-3 \), when doing the first Gauss-Jordan elimination, both \( x_0 \) and \( x_1 \) would be canceled. In the next iteration we try to divide next equation by the leading coefficient of \( x_1 \), which is zero, and the whole procedure fails.</li>
 </ul>
-
-<h2 id="___sec66" class="anchor">Pivoting </h2>
-The solution to the last problem is solved by what is called <em>pivoting</em>. The element that we divide on is called the <em>pivot element</em>. It actually turns out that even if we do Gauss-Jordan elimination <em>without</em> encountering a zero pivot element, the Gauss-Jordan procedure is numerically unstable in the presence of roundoff errors <a href="._book009.html#press2007">[5]</a>. There are two versions of pivoting, <em>full pivoting</em> and <em>partial pivoting</em>. In partial pivoting we only interchange rows, while in full pivoting we also interchange rows and columns. Partial pivoting is much easier to implement, and the algorithm is as follows:
-
+<h2 id="pivoting" class="anchor">Pivoting </h2>
+<p>The solution to the last problem is solved by what is called <em>pivoting</em>. The element that we divide on is called the <em>pivot element</em>. It actually turns out that even if we do Gauss-Jordan elimination <em>without</em> encountering a zero pivot element, the Gauss-Jordan procedure is numerically unstable in the presence of roundoff errors <a href="._book009.html#press2007">[5]</a>. There are two versions of pivoting, <em>full pivoting</em> and <em>partial pivoting</em>. In partial pivoting we only interchange rows, while in full pivoting we also interchange rows and columns. Partial pivoting is much easier to implement, and the algorithm is as follows:</p>
 <ol>
 <li> Find the row in \( \mathbf{A} \) with largest absolute value in front of \( x_0 \) and change with the first equation, switch corresponding elements in \( \mathbf{b} \)</li>
 <li> Do one Gauss-Jordan elimination, find the row in \( \mathbf{A} \) with the largest absolute value in front of \( x_1 \) and switch with the second (same for \( \mathbf{b} \)), and so on.</li>
 </ol>
-
-For a linear equation we can multiply with a number on each side and the equation would be unchanged, so if we where to multiply one of the equations with a large value, we are almost sure that this equation would be placed first by our algorithm. This seems a bit strange as our mathematical problem is the same. Sometimes the linear algebra routines tries to normalize the equations to find the pivot element that would have been the largest element if all equations were normalized according to some rule, this is called <em>implicit pivoting</em>.
-
-<h2 id="___sec67" class="anchor">LU decomposition </h2>
+<p>For a linear equation we can multiply with a number on each side and the equation would be unchanged, so if we where to multiply one of the equations with a large value, we are almost sure that this equation would be placed first by our algorithm. This seems a bit strange as our mathematical problem is the same. Sometimes the linear algebra routines tries to normalize the equations to find the pivot element that would have been the largest element if all equations were normalized according to some rule, this is called <em>implicit pivoting</em>.
+<h2 id="lu-decomposition" class="anchor">LU decomposition </h2>
 As we have already seen, if the matrix \( \mathbf{A} \) is reduced to a triangular form it is trivial to calculate the solution by using back substitution. Thus if it was possible to decompose the matrix \( \mathbf{A} \) as follows:
+</p>
 
 $$
 \begin{equation}
@@ -1002,95 +1117,109 @@ u_{0,0}&u_{0,1}&u_{0,2}&u_{0,3}\\
 0&0&u_{2,2}&u_{2,3}\\ 
 0&0&0&u_{3,3}
 \end{pmatrix}.
-\tag{4.33}
+\tag{5.33}
 \end{equation}
 $$
 
-The solution procedure would then be to rewrite equation <a href="#mjx-eqn-4.27">(4.27)</a> as:
+<p>The solution procedure would then be to rewrite equation <a href="#mjx-eqn-5.27">(5.27)</a> as:</p>
 $$
 \begin{align}
 \mathbf{A\cdot x}=\mathbf{L}\cdot\mathbf{U}\cdot\mathbf{x}=\mathbf{b},label{eq:lin:matb}
 \end{align}
 $$
 
-If we define a new vector \( \mathbf{y} \):
+<p>If we define a new vector \( \mathbf{y} \):</p>
 $$
 \begin{align}
 \mathbf{y}\equiv\mathbf{U}\cdot\mathbf{x},
-\tag{4.34}
+\tag{5.34}
 \end{align}
 $$
 
-we can first solve for the \( \mathbf{y} \) vector:
+<p>we can first solve for the \( \mathbf{y} \) vector:</p>
 $$
 \begin{align}
 \mathbf{L}\cdot\mathbf{y}=\mathbf{b},label{eq:lin:for}
 \end{align}
 $$
 
-and then for \( \mathbf{x} \):
+<p>and then for \( \mathbf{x} \):</p>
 $$
 \begin{align}
 \mathbf{U}\cdot\mathbf{x}=\mathbf{y}.
-\tag{4.35}
+\tag{5.35}
 \end{align}
 $$
 
-Note that the solution to equation \eqref{eq:lin:for} would be done by <em>forward substitution</em>:
+<p>Note that the solution to equation \eqref{eq:lin:for} would be done by <em>forward substitution</em>:</p>
 $$
 \begin{equation}
 y_i=\frac{1}{l_{ii}}\left[b_i-\sum_{j=0}^{i-1}l_{ij}x_j\right],\quad i=1,2,\ldots N-1.
-\tag{4.36}
+\tag{5.36}
 \end{equation}
 $$
 
-Why go to all this trouble? First of all it requires (slightly) less operations to calculate the LU decomposition and doing the forward and backward substitution than the Gauss-Jordan procedure discussed earlier. Secondly, and more importantly, is the fact that in many cases one would like to calculate the solution for different values of the \( \mathbf{b} \) vector in equation \eqref{eq:lin:matb}. If we do the LU decomposition first we can calculate the solution quite fast using backward and forward substitution for any value of the \( \mathbf{b} \) vector.
+<p>Why go to all this trouble? First of all it requires (slightly) less operations to calculate the LU decomposition and doing the forward and backward substitution than the Gauss-Jordan procedure discussed earlier. Secondly, and more importantly, is the fact that in many cases one would like to calculate the solution for different values of the \( \mathbf{b} \) vector in equation \eqref{eq:lin:matb}. If we do the LU decomposition first we can calculate the solution quite fast using backward and forward substitution for any value of the \( \mathbf{b} \) vector.</p>
 
-<p>
-The NumPy function <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.solve.html" target="_self"><tt>solve</tt></a>, uses LU decomposition and partial pivoting, and we can find the solution to our previous problem simply by the following code:
-<p>
+<p>The NumPy function <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.solve.html" target="_self"><tt>solve</tt></a>, uses LU decomposition and partial pivoting, and we can find the solution to our previous problem simply by the following code:</p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy.linalg</span> <span style="color: #008000; font-weight: bold">import</span> solve
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy.linalg</span> <span style="color: #008000; font-weight: bold">import</span> solve
 x<span style="color: #666666">=</span>solve(A,b)
-</pre></div>
-
-<h1 id="___sec68" class="anchor">Iterative methods  </h1>
-The methods described so far are what is called <em>direct</em> methods. The direct methods for very large systems might suffer from round off errors. That means that even if the computer has found a solution, the solution is "polluted" by round off errors, or stated more clearly: your solution for \( \mathbf{x} \), when entered into the original equation \( \mathbf{A}\mathbf{x}\neq\mathbf{b} \). Below we will describe one trick, and two alternative methods to the direct methods.
-
-<h2 id="___sec69" class="anchor">Iterative improvement </h2>
-The first method <a href="._book009.html#press2001">[9]</a> assumes that we already have solved the matrix equation <a href="#mjx-eqn-4.27">(4.27)</a>, and obtained an <em>estimate</em> \( \mathbf{\hat{x}} \) of the true solution \( \mathbf{x} \). Assume that \( \mathbf{\hat{x}}=\mathbf{x}+\delta\mathbf{x} \), and that
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<h1 id="iterative-methods" class="anchor">Iterative methods  </h1>
+<p>The methods described so far are what is called <em>direct</em> methods. The direct methods for very large systems might suffer from round off errors. That means that even if the computer has found a solution, the solution is "polluted" by round off errors, or stated more clearly: your solution for \( \mathbf{x} \), when entered into the original equation \( \mathbf{A}\mathbf{x}\neq\mathbf{b} \). Below we will describe one trick, and two alternative methods to the direct methods.
+<h2 id="iterative-improvement" class="anchor">Iterative improvement </h2>
+The first method <a href="._book009.html#press2001">[9]</a> assumes that we already have solved the matrix equation <a href="#mjx-eqn-5.27">(5.27)</a>, and obtained an <em>estimate</em> \( \mathbf{\hat{x}} \) of the true solution \( \mathbf{x} \). Assume that \( \mathbf{\hat{x}}=\mathbf{x}+\delta\mathbf{x} \), and that
+</p>
 $$
 \begin{equation}
 \mathbf{A}\cdot\mathbf{\hat{x}}=\mathbf{A}\cdot(\mathbf{x}+\delta\mathbf{x})=\mathbf{b}+\delta\mathbf{b},
-\tag{4.37}
+\tag{5.37}
 \end{equation}
 $$
 
-subtracting equation <a href="#mjx-eqn-4.27">(4.27)</a> we get
+<p>subtracting equation <a href="#mjx-eqn-5.27">(5.27)</a> we get</p>
 $$
 \begin{equation}
 \mathbf{A}\cdot\delta\mathbf{x}=\delta\mathbf{b}.
-\tag{4.38}
+\tag{5.38}
 \end{equation}
 $$
 
-Solving equation <a href="#mjx-eqn-4.37">(4.37)</a> for \( \delta\mathbf{b} \) an inserting in the equation above, we get
+<p>Solving equation <a href="#mjx-eqn-5.37">(5.37)</a> for \( \delta\mathbf{b} \) an inserting in the equation above, we get</p>
 $$
 \begin{equation}
 \mathbf{A}\cdot\delta\mathbf{x}=\mathbf{A}\cdot\mathbf{\hat{x}}-\mathbf{b}.
-\tag{4.39}
+\tag{5.39}
 \end{equation}
 $$
 
-The usefulness of this method assumes that we have already obtained the LU decomposition of \( \mathbf{A} \), and if possible one should use a higher precision to calculate the right hand side, since there will be a lot of cancellations. Then the whole computational process it is simply to calculate the right hand side and backsubstitute. The improved solution is then obtained by subtracting \( \delta\mathbf{x} \) from \( \mathbf{\hat{x}} \).
-
-<h2 id="___sec70" class="anchor">The Jacobi method </h2>
-A completely different approach is the Jacobian method, which is simply to decompose the \( \mathbf{A} \) matrix in the following way
+<p>The usefulness of this method assumes that we have already obtained the LU decomposition of \( \mathbf{A} \), and if possible one should use a higher precision to calculate the right hand side, since there will be a lot of cancellations. Then the whole computational process it is simply to calculate the right hand side and backsubstitute. The improved solution is then obtained by subtracting \( \delta\mathbf{x} \) from \( \mathbf{\hat{x}} \).</p>
+<h2 id="the-jacobi-method" class="anchor">The Jacobi method </h2>
+<p>A completely different approach is the Jacobian method, which is simply to decompose the \( \mathbf{A} \) matrix in the following way</p>
 $$
 \begin{equation}
 \mathbf{A}=\mathbf{D}+\mathbf{R}
-\tag{4.40}
+\tag{5.40}
 \end{equation}
 $$
 
@@ -1103,7 +1232,7 @@ a_{1,0}&a_{1,1}&a_{1,2}&a_{1,3}\\
 a_{2,0}&a_{2,1}&a_{2,2}&a_{2,3}\\ 
 a_{3,0}&a_{3,1}&a_{3,2}&a_{3,3}
 \end{pmatrix}
-\no \tag{4.41}
+\no \tag{5.41}
 \\ 
 &=
 \begin{pmatrix}
@@ -1119,44 +1248,48 @@ a_{1,0}&0&a_{1,2}&a_{1,3}\\
 a_{2,0}&a_{2,1}&0&a_{2,3}\\ 
 a_{3,0}&a_{3,1}&a_{3,2}&0
 \end{pmatrix}.
-\tag{4.42}
+\tag{5.42}
 \end{align}$$
 
-We can then write equation <a href="#mjx-eqn-4.27">(4.27)</a> as
+<p>We can then write equation <a href="#mjx-eqn-5.27">(5.27)</a> as</p>
 $$
 \begin{equation}
 \mathbf{D}\mathbf{x}=\mathbf{b}-\mathbf{R}\cdot\mathbf{x}.
-\tag{4.43}
+\tag{5.43}
 \end{equation}
 $$
 
-How does this help us? First of all, the matrix \( \mathbf{D} \) is easy to invert as it is diagonal, the inverse can be found by simply replace \( a_{ii}\to 1/a_{ii} \). But \( \mathbf{x} \) is still present on the right hand side? This is where the <em>iterations</em> comes into play, we simply guess at an initial solution \( \mathbf{x}^k \), and then we use equation <a href="#mjx-eqn-4.43">(4.43)</a> to calculate the next solution \( \mathbf{x}^{k+1} \), and so on
+<p>How does this help us? First of all, the matrix \( \mathbf{D} \) is easy to invert as it is diagonal, the inverse can be found by simply replace \( a_{ii}\to 1/a_{ii} \). But \( \mathbf{x} \) is still present on the right hand side? This is where the <em>iterations</em> comes into play, we simply guess at an initial solution \( \mathbf{x}^k \), and then we use equation <a href="#mjx-eqn-5.43">(5.43)</a> to calculate the next solution \( \mathbf{x}^{k+1} \), and so on</p>
 $$
 \begin{equation}
 \mathbf{x}^{k+1}=\mathbf{D}^{-1}(\mathbf{b}-\mathbf{R}\cdot\mathbf{x}^{k}).
-\tag{4.44}
+\tag{5.44}
 \end{equation}
 $$
 
-Lets write it out on component form for a \( 4\times4 \) matrix to see what is going on
+<p>Lets write it out on component form for a \( 4\times4 \) matrix to see what is going on</p>
 $$
 \begin{align}
 x_0^{k+1} &=\frac{1}{a_{00}}(b_0-a_{01}x_1^k-a_{02}x_2^k-a_{03}x_3^k),
-\tag{4.45}\\ 
+\tag{5.45}\\ 
 x_1^{k+1} &=\frac{1}{a_{11}}(b_1-a_{10}x_0^k-a_{12}x_2^k-a_{13}x_3^k),
-\tag{4.46}\\ 
+\tag{5.46}\\ 
 x_2^{k+1} &=\frac{1}{a_{22}}(b_2-a_{20}x_0^k-a_{21}x_1^k-a_{23}x_3^k),
-\tag{4.47}\\ 
+\tag{5.47}\\ 
 x_3^{k+1} &=\frac{1}{a_{33}}(b_3-a_{30}x_0^k-a_{31}x_1^k-a_{32}x_2^k).
-\tag{4.48}
+\tag{5.48}
 \end{align}
 $$
 
-Below is a Python implementation
-<p>
+<p>Below is a Python implementation</p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">solve_jacobi</span>(A,b,x<span style="color: #666666">=-1</span>,w<span style="color: #666666">=1</span>,max_iter<span style="color: #666666">=1000</span>,EPS<span style="color: #666666">=1e-6</span>):
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">solve_jacobi</span>(A,b,x<span style="color: #666666">=-1</span>,w<span style="color: #666666">=1</span>,max_iter<span style="color: #666666">=1000</span>,EPS<span style="color: #666666">=1e-6</span>):
     <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
 <span style="color: #BA2121; font-style: italic">    Solves the linear system Ax=b using the Jacobian method, stops if</span>
 <span style="color: #BA2121; font-style: italic">    solution is not found after max_iter or if solution changes less </span>
@@ -1177,24 +1310,39 @@ Below is a Python implementation
         x_old<span style="color: #666666">=</span>x
     <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;found solution after &#39;</span> <span style="color: #666666">+</span> <span style="color: #008000">str</span>(<span style="color: #008000">iter</span>) <span style="color: #666666">+</span><span style="color: #BA2121">&#39; iterations&#39;</span>)
     <span style="color: #008000; font-weight: bold">return</span> x
-</pre></div>
-<p>
-A sufficient criteria for the Jacobian method to converge is if the matrix \( A \) is diagonally dominant. In the implementation above we have included a weight, which sometimes can help in the convergence even if the matrix is not diagonally dominant.
-
-<p>
-The iterative method can be appealing if we do not need a high accuracy, we can choose to stop whenever \( |\mathbf{x}^{k+1}-\mathbf{x}^k| \) is small enough. For the direct method we have to follow through all the way.
-<div class="alert alert-block alert-success alert-text-normal"><b>Convergence.</b>
-The Jacobi method converges if the matrix \( \mathbf{A} \) is strictly diagonally dominant. Strictly diagonally dominant means that the absolute value of each entry on the diagonal is greater than the sum of the absolute values of the other entries in the same row, i.e if \( |a_{00}|>|a_{01}+a_{02}+\cdots| \). In general it can be shown that a iterative scheme \( \mathbf{x}^{k+1}=\mathbf{P}\cdot \mathbf{x}^k+\mathbf{q} \) is convergent <em>if and only if</em> every eigenvalue, \( \lambda \), of \( \mathbf{P} \) satisfies \( |\lambda| < 1 \), i.e. the <em>spectral radius</em> \( \rho(\mathbf{P}) < 1 \).
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
+<p>A sufficient criteria for the Jacobian method to converge is if the matrix \( A \) is diagonally dominant. In the implementation above we have included a weight, which sometimes can help in the convergence even if the matrix is not diagonally dominant. </p>
 
-<h2 id="___sec71" class="anchor">The Gauss-Seidel method </h2>
-It is tempting in equation <a href="#mjx-eqn-4.45">(4.45)</a> to use our estimate of \( x_0^{k+1} \) in the next equation, equation <a href="#mjx-eqn-4.46">(4.46)</a>, instead of \( x_0^k \). After all our estimate \( x_0^{k+1} \) is an <em>improved</em> estimate. This is actually the Gauss-Seidel method. This method also has the advantage that if there are memory issues, one can overwrite the old value of \( x_i^k \). Usually the Gauss-Seidel method converges faster, but not always. A plus for the Jacobi method is that is can be  parallelised, as the calculations is only dependent on the old values and do not require information about the new values as for the Gauss Seidel method. Below is a Python implementation of the Gauss-Seidel method
+<p>The iterative method can be appealing if we do not need a high accuracy, we can choose to stop whenever \( |\mathbf{x}^{k+1}-\mathbf{x}^k| \) is small enough. For the direct method we have to follow through all the way.</p>
+<div class="alert alert-block alert-success alert-text-normal"><b>Convergence</b>
+<p>The Jacobi method converges if the matrix \( \mathbf{A} \) is strictly diagonally dominant. Strictly diagonally dominant means that the absolute value of each entry on the diagonal is greater than the sum of the absolute values of the other entries in the same row, i.e if \( |a_{00}|>|a_{01}+a_{02}+\cdots| \). In general it can be shown that a iterative scheme \( \mathbf{x}^{k+1}=\mathbf{P}\cdot \mathbf{x}^k+\mathbf{q} \) is convergent <em>if and only if</em> every eigenvalue, \( \lambda \), of \( \mathbf{P} \) satisfies \( |\lambda| < 1 \), i.e. the <em>spectral radius</em> \( \rho(\mathbf{P}) < 1 \).</p>
+</div>
 
-<p>
+<h2 id="the-gauss-seidel-method" class="anchor">The Gauss-Seidel method </h2>
+<p>It is tempting in equation <a href="#mjx-eqn-5.45">(5.45)</a> to use our estimate of \( x_0^{k+1} \) in the next equation, equation <a href="#mjx-eqn-5.46">(5.46)</a>, instead of \( x_0^k \). After all our estimate \( x_0^{k+1} \) is an <em>improved</em> estimate. This is actually the Gauss-Seidel method. This method also has the advantage that if there are memory issues, one can overwrite the old value of \( x_i^k \). Usually the Gauss-Seidel method converges faster, but not always. A plus for the Jacobi method is that is can be  parallelised, as the calculations is only dependent on the old values and do not require information about the new values as for the Gauss Seidel method. Below is a Python implementation of the Gauss-Seidel method   </p>
+
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">solve_GS</span>(A,b,x<span style="color: #666666">=-1</span>,max_iter<span style="color: #666666">=1000</span>,EPS<span style="color: #666666">=1e-6</span>):
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">solve_GS</span>(A,b,x<span style="color: #666666">=-1</span>,max_iter<span style="color: #666666">=1000</span>,EPS<span style="color: #666666">=1e-6</span>):
     <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
 <span style="color: #BA2121; font-style: italic">    Solves the linear system Ax=b using the Gauss-Seidel method, stops if</span>
 <span style="color: #BA2121; font-style: italic">    solution is not found after max_iter or if solution changes less </span>
@@ -1215,70 +1363,81 @@ It is tempting in equation <a href="#mjx-eqn-4.45">(4.45)</a> to use our estimat
             eps<span style="color: #666666">+=</span>np<span style="color: #666666">.</span>abs(tmp<span style="color: #666666">-</span>x[i])
     <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;found solution after &#39;</span> <span style="color: #666666">+</span> <span style="color: #008000">str</span>(<span style="color: #008000">iter</span>) <span style="color: #666666">+</span><span style="color: #BA2121">&#39; iterations&#39;</span>)
     <span style="color: #008000; font-weight: bold">return</span> x
-</pre></div>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<h1 id="example-linear-regression" class="anchor">Example: Linear regression </h1>
+<p>In the previous section, we considered a system of \( N \) equations and \( N \) unknown (\( x_0, x_1,\ldots, x_N \)). In general we might have more equations than unknowns or more unknowns than equations. An example of the former is linear regression, we might have many data points and we would like to fit a line through the points. How do you fit a single lines to more than two points that does not line on the same line? One way to do it is to minimize the distance from the line to the points, as illustrated in figure <a href="#fig:lin:reg">17</a>.</p>
 
-<h1 id="___sec72" class="anchor">Example: Linear regression </h1>
-In the previous section, we considered a system of \( N \) equations and \( N \) unknown (\( x_0, x_1,\ldots, x_N \)). In general we might have more equations than unknowns or more unknowns than equations. An example of the former is linear regression, we might have many data points and we would like to fit a line through the points. How do you fit a single lines to more than two points that does not line on the same line? One way to do it is to minimize the distance from the line to the points, as illustrated in figure <a href="#fig:lin:reg">17</a>.
-
-<p>
 <center> <!-- figure label: --> <div id="fig:lin:reg"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 17:  Linear regression by minimizing the total distance to all the points.  <!-- caption label: fig:lin:reg --> </p></center>
+<center>
+<p class="caption">Figure 17:  Linear regression by minimizing the total distance to all the points.  <!-- caption label: fig:lin:reg --> </p>
+</center>
 <p><img src="fig-lin/reg.png" align="bottom" width=800></p>
 </center>
 
-<p>
-Mathematically we can express the distance between a data point \( (x_i,y_i) \) and the line \( f(x) \) as \( y_i-f(x_i) \). Note that this difference can be negative or positive depending if the data point lies below or above the line. We can then take the absolute value of all the distances, and try to minimize them. When we minimize something we take the derivative of the expression and put it equal to zero.  As you might remember from Calculus it is extremely hard to work with the derivative of the absolute value, because it is discontinuous. A much better approach is to square each distance and sum them:
+<p>Mathematically we can express the distance between a data point \( (x_i,y_i) \) and the line \( f(x) \) as \( y_i-f(x_i) \). Note that this difference can be negative or positive depending if the data point lies below or above the line. We can then take the absolute value of all the distances, and try to minimize them. When we minimize something we take the derivative of the expression and put it equal to zero.  As you might remember from Calculus it is extremely hard to work with the derivative of the absolute value, because it is discontinuous. A much better approach is to square each distance and sum them:</p>
 $$
 \begin{equation}
 S=\sum_{i=0}^{N-1}(y_i-f(x_i))^2=\sum_{i=0}^{N-1}(y_i-a_0-a_1x_i)^2.
-\tag{4.49}
+\tag{5.49}
 \end{equation}
 $$
 
-(For the example in figure <a href="#fig:lin:reg">17</a>, \( N=5 \).) This is the idea behind <em>least square</em>, and linear regression. One thing you should be aware of is that points lying far from the line will contribute more to equation <a href="#mjx-eqn-4.49">(4.49)</a>. The underlying assumption is that each data point provides equally precise information about the process, this is often not the case. When analyzing experimental data, there may be points deviating from the expected behaviour, it is then important to investigate if these points are more affected by measurements errors than the others. If that is the case one should give them less weight in the least square estimate, by extending the formula above:
+<p>(For the example in figure <a href="#fig:lin:reg">17</a>, \( N=5 \).) This is the idea behind <em>least square</em>, and linear regression. One thing you should be aware of is that points lying far from the line will contribute more to equation <a href="#mjx-eqn-5.49">(5.49)</a>. The underlying assumption is that each data point provides equally precise information about the process, this is often not the case. When analyzing experimental data, there may be points deviating from the expected behaviour, it is then important to investigate if these points are more affected by measurements errors than the others. If that is the case one should give them less weight in the least square estimate, by extending the formula above:</p>
 $$
 \begin{equation}
 S=\sum_{i=0}^{N-1}\omega_i(y_i-f(x_i))^2=\sum_{i=0}^3\omega_i(y_i-a_0-a_1x_i)^2,
-\tag{4.50}
+\tag{5.50}
 \end{equation}
 $$
 
-\( \omega_i \) is a weight factor.
-
-<h2 id="___sec73" class="anchor">Solving least square, using algebraic equations </h2>
-Let us continue with equation <a href="#mjx-eqn-4.49">(4.49)</a>, the algebraic solution is to simply find the value of \( a_0 \) and \( a_1 \) that minimizes \( S \):
+<p>\( \omega_i \) is a weight factor.</p>
+<h2 id="solving-least-square-using-algebraic-equations" class="anchor">Solving least square, using algebraic equations </h2>
+<p>Let us continue with equation <a href="#mjx-eqn-5.49">(5.49)</a>, the algebraic solution is to simply find the value of \( a_0 \) and \( a_1 \) that minimizes \( S \):</p>
 $$
 \begin{align}
 \frac{\partial S}{\partial a_0} &=-2\sum_{i=0}^{N-1}(y_i-a_0-a_1x_i)=0,
-\tag{4.51} \\ 
+\tag{5.51} \\ 
 \frac{\partial S}{\partial a_1} &=-2\sum_{i=0}^{N-1}(y_i-a_0-a_1x_i)x_i=0.
-\tag{4.52}
+\tag{5.52}
 \end{align}
 $$
 
-Defining the mean value as \( \overline{x}=\sum_ix_i/N \) and \( \overline{y}=\sum_iy_i/N \), we can write equation <a href="#mjx-eqn-4.51">(4.51)</a> and <a href="#mjx-eqn-4.52">(4.52)</a>  as:
+<p>Defining the mean value as \( \overline{x}=\sum_ix_i/N \) and \( \overline{y}=\sum_iy_i/N \), we can write equation <a href="#mjx-eqn-5.51">(5.51)</a> and <a href="#mjx-eqn-5.52">(5.52)</a>  as:</p>
 $$
 \begin{align}
 \sum_{i=0}^{N-1}(y_i-a_0-a_1x_i)&=N\overline{y}-a_0N-a_1N\overline{x}=0,
-\tag{4.53} \\ 
+\tag{5.53} \\ 
 \sum_{i=0}^{N-1}(y_i-a_0-a_1x_i)x_i&=\sum_iy_ix_i-a_0N\overline{x}-a_1\sum_ix_ix_i=0.
-\tag{4.54}
+\tag{5.54}
 \end{align}
 $$
 
-Solving equation <a href="#mjx-eqn-4.53">(4.53)</a> with respect to \( a_0 \), and inserting the expression into equation <a href="#mjx-eqn-4.54">(4.54)</a>, we find:
+<p>Solving equation <a href="#mjx-eqn-5.53">(5.53)</a> with respect to \( a_0 \), and inserting the expression into equation <a href="#mjx-eqn-5.54">(5.54)</a>, we find:</p>
 $$
 \begin{align}
 a_0&=\overline{y}-a_1\overline{x},label{eq:lin:ls1c} \\ 
 a_1&=\frac{\sum_iy_ix_i-N\overline{x}\overline{y}}{\sum_ix_i^2-N\overline{x}^2}
 =\frac{\sum_i(x_i-\overline{x})(y_i-\overline{y})}{\sum_i(x_i-\overline{x})^2}.
-\tag{4.55}
+\tag{5.55}
 \end{align}
 $$
 
-We leave it as an exercise to show the last expression for \( a_1 \).  
-Clearly the equation <a href="#mjx-eqn-4.55">(4.55)</a> above will in most cases have
+<p>We leave it as an exercise to show the last expression for \( a_1 \).  
+Clearly the equation <a href="#mjx-eqn-5.55">(5.55)</a> above will in most cases have
 a solution. But in addition to a solution, it would be good to have an
 idea of the goodness of the fit. Intuitively it make sense to add all
 the distances (residuals) \( d_i \) in figure <a href="#fig:lin:reg">17</a>. This is
@@ -1286,18 +1445,23 @@ basically what is done when calculating \( R^2 \) (R-squared). However, we
 would also like to compare the \( R^2 \) between different
 datasets. Therefor we need to normalize the sum of residuals, and
 therefore the following form of the \( R^2 \) is used:
+</p>
 $$
 \begin{equation}
 R^2=1-\frac{\sum_{i=0}^{N-1}(y_i-f(x_i))^2}{\sum_{i=0}^{N-1}(y_i-\overline{y})^2}.
-\tag{4.56}
+\tag{5.56}
 \end{equation}
 $$
 
-In python we can implement equation \eqref{eq:lin:ls1c}, <a href="#mjx-eqn-4.55">(4.55)</a> and <a href="#mjx-eqn-4.56">(4.56)</a> as:
-<p>
+<p>In python we can implement equation \eqref{eq:lin:ls1c}, <a href="#mjx-eqn-5.55">(5.55)</a> and <a href="#mjx-eqn-5.56">(5.56)</a> as:</p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">OLS</span>(x, y): 
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">OLS</span>(x, y): 
     <span style="color: #408080; font-style: italic"># returns regression coefficients</span>
     <span style="color: #408080; font-style: italic"># in ordinary least square</span>
     <span style="color: #408080; font-style: italic"># x: observations</span>
@@ -1323,16 +1487,29 @@ In python we can implement equation \eqref{eq:lin:ls1c}, <a href="#mjx-eqn-4.55"
     S_res  <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sum(y_res<span style="color: #666666">*</span>y_res)
   
     <span style="color: #008000; font-weight: bold">return</span>(b_0, b_1,<span style="color: #666666">1-</span>S_res<span style="color: #666666">/</span>S_yy)
-</pre></div>
-
-<h2 id="___sec74" class="anchor">Least square as a linear algebra problem </h2>
-It turns out that the least square problem can be formulated as a
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<h2 id="least-square-as-a-linear-algebra-problem" class="anchor">Least square as a linear algebra problem </h2>
+<p>It turns out that the least square problem can be formulated as a
 matrix problem. (Two great explanations see <a href="https://medium.com/@andrew.chamberlain/the-linear-algebra-view-of-least-squares-regression-f67044b7f39b" target="_self">linear regression by
 matrices</a>,
 and
 <a href="https://medium.com/@andrew.chamberlain/a-more-elegant-view-of-r-squared-a0a14c177dc3" target="_self">$R^2$-squared</a>.)
 If we define a matrix \( \mathbf{X} \) containing the observations \( x_i \)
 as:
+</p>
 $$
 \begin{align}
 \mathbf{X} &=
@@ -1342,35 +1519,41 @@ $$
 \vdots&\vdots\\ 
 1&x_{N-1}
 \end{pmatrix}.
-\tag{4.57}
+\tag{5.57}
 \end{align}$$
 
-We introduce a vector containing all the response \( \mathbf{y} \), and the
+<p>We introduce a vector containing all the response \( \mathbf{y} \), and the
 regression coefficients \( \mathbf{a}=(a_0,a_1) \). Then we can write
-equation <a href="#mjx-eqn-4.50">(4.50)</a> as a matrix equation:
+equation <a href="#mjx-eqn-5.50">(5.50)</a> as a matrix equation:
+</p>
 $$
 \begin{equation}
 S=(\mathbf{y}-\mathbf{X\cdot a})^T(\mathbf{y}-\mathbf{X\cdot a}).
-\tag{4.58}
+\tag{5.58}
 \end{equation}
 $$
 
-<em>Note that this equation can easily be extended to more than one
+<p><em>Note that this equation can easily be extended to more than one
 observation variable \( x_i \)</em>. By simply differentiating equation
-<a href="#mjx-eqn-4.58">(4.58)</a> with respect to \( \mathbf{a} \), we can show that
+<a href="#mjx-eqn-5.58">(5.58)</a> with respect to \( \mathbf{a} \), we can show that
 the derivative has a minimum when (see proof below):
+</p>
 $$
 \begin{equation}
 \mathbf{X}^T\mathbf{X a}=\mathbf{X}^T\mathbf{y}
-\tag{4.59}
+\tag{5.59}
 \end{equation}
 $$
 
-Below is a python implementation of equation <a href="#mjx-eqn-4.59">(4.59)</a>.
-<p>
+<p>Below is a python implementation of equation <a href="#mjx-eqn-5.59">(5.59)</a>.</p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">OLSM</span>(x, y): 
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">OLSM</span>(x, y): 
     <span style="color: #408080; font-style: italic"># returns regression coefficients</span>
     <span style="color: #408080; font-style: italic"># in ordinary least square using solve function</span>
     <span style="color: #408080; font-style: italic"># x: observations</span>
@@ -1381,56 +1564,68 @@ Below is a python implementation of equation <a href="#mjx-eqn-4.59">(4.59)</a>.
     B <span style="color: #666666">=</span> np<span style="color: #666666">.</span>dot(XT,X)
     C <span style="color: #666666">=</span> np<span style="color: #666666">.</span>dot(XT,y)
     <span style="color: #008000; font-weight: bold">return</span> solve(B,C)
-</pre></div>
-
-<h2 id="___sec75" class="anchor">Working with matrices on component form </h2>
-Whenever you want to do some manipulation with matrices, it is very useful to simply write them on component form. If we multiply two matrices \( \mathbf{A} \) and \( \mathbf{B} \) to form a new matrix \( \mathbf{C} \), the components of the new matrix is simply \( \mathbf{C}_{ij}=\sum_k\mathbf{A}_{ik}\mathbf{B}_{kj} \). The strength of doing this is that the elements of a matrix, e.g. \( \mathbf{A}_{ik} \) are <em>numbers</em>, and we can move them around. Proving that e.g. \( (\mathbf{A}\mathbf{B})^T=\mathbf{B}^T\mathbf{A}^T \) is straight forward using the component form. The transpose of a matrix is simply to exchange columns and rows, hence \( \mathbf{C}_{ij}^T=\mathbf{C}_{ji} \)
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<h2 id="working-with-matrices-on-component-form" class="anchor">Working with matrices on component form </h2>
+<p>Whenever you want to do some manipulation with matrices, it is very useful to simply write them on component form. If we multiply two matrices \( \mathbf{A} \) and \( \mathbf{B} \) to form a new matrix \( \mathbf{C} \), the components of the new matrix is simply \( \mathbf{C}_{ij}=\sum_k\mathbf{A}_{ik}\mathbf{B}_{kj} \). The strength of doing this is that the elements of a matrix, e.g. \( \mathbf{A}_{ik} \) are <em>numbers</em>, and we can move them around. Proving that e.g. \( (\mathbf{A}\mathbf{B})^T=\mathbf{B}^T\mathbf{A}^T \) is straight forward using the component form. The transpose of a matrix is simply to exchange columns and rows, hence \( \mathbf{C}_{ij}^T=\mathbf{C}_{ji} \)</p>
 $$
 \begin{equation}
 \mathbf{C}_{ij}^T=\mathbf{C}_{ji}=\sum_k\mathbf{A}_{jk}\mathbf{B}_{ki}=\sum_k\mathbf{B}^T_{ik}\mathbf{A}^T_{kj}
 =(\mathbf{B}^T\mathbf{A}^T)_{ij},
-\tag{4.60}
+\tag{5.60}
 \end{equation}
 $$
 
-thus \( \mathbf{C}^T=\mathbf{B}^T\mathbf{A}^T \). To derive equation <a href="#mjx-eqn-4.59">(4.59)</a>, we need to take the derivative of equation <a href="#mjx-eqn-4.59">(4.59)</a> with respect to \( \mathbf{a} \).
+<p>thus \( \mathbf{C}^T=\mathbf{B}^T\mathbf{A}^T \). To derive equation <a href="#mjx-eqn-5.59">(5.59)</a>, we need to take the derivative of equation <a href="#mjx-eqn-5.59">(5.59)</a> with respect to \( \mathbf{a} \).
 What we mean by this is that we want to evaluate \( \partial S/\partial a_k \) for all the components of \( \mathbf{a} \).
 A useful rule is \( \partial a_i/\partial a_k=\delta_{ik} \), where \( \delta_{ik} \) is the Kronecker delta, it takes the value of one if \( i=k \) and zero otherwise. We can write \( S=\mathbf{y}^T\mathbf{y}-\mathbf{y}\mathbf{X\cdot a}
 -(\mathbf{X\cdot a})^T\mathbf{y}-(\mathbf{X\cdot a})^T\mathbf{X\cdot a} \). All terms that do not contain \( \mathbf{a} \) are zero, thus we only need to evaluate the following terms
+</p>
 $$
 \begin{align}
 \frac{\partial}{a_k}(\mathbf{X\cdot a})^T\mathbf{y} &=\frac{\partial}{a_k}(\mathbf{a}^T\cdot \mathbf{X}^T\mathbf{y})=\frac{\partial}{a_k}\sum_{ij}\mathbf{a}^T_i\mathbf{X}^T_{ij}\mathbf{y}_j
 =\sum_{ij}\delta_{ik}\mathbf{X}^T_{ij}\mathbf{y}_j\no
-\tag{4.61}\\ 
+\tag{5.61}\\ 
 &=\sum_{j}\mathbf{X}^T_{kj}\mathbf{y}_j=\mathbf{X}^T\mathbf{y} 
-\tag{4.62}\\ 
+\tag{5.62}\\ 
 \frac{\partial}{a_k}\mathbf{y}^T\mathbf{X\cdot a}&=\frac{\partial}{a_k}\sum_{ij}\mathbf{y}^T_i\mathbf{X}_{ij}\mathbf{a}_j
 =\sum_{ij}\mathbf{y}^T_i\mathbf{X}_{ij}\delta_{jk}=\sum_{j}\mathbf{y}^T_{i}\mathbf{X}_{ik}\no
-\tag{4.63}\\ 
+\tag{5.63}\\ 
 &=\sum_{j}\mathbf{y}^T_{i}\mathbf{X}^T_{ki}=\mathbf{X}^T\mathbf{y} 
-\tag{4.64}\\ 
+\tag{5.64}\\ 
 \frac{\partial}{a_k} (\mathbf{X\cdot a})^T\mathbf{X\cdot a}&=
 \frac{\partial}{a_k}\sum_{ijl} \mathbf{a}^T_i\mathbf{X}^T_{ij}\mathbf{X}_{jl}\mathbf{a}_l=
 \sum_{ijl}(\delta_{ik}\mathbf{X}^T_{ij}\mathbf{X}_{jl}\mathbf{a}_l+\mathbf{a}^T_i\mathbf{X}^T_{ij}\mathbf{X}_{jl}\delta_{lk})\no
-\tag{4.65}\\&=\sum_{jl}\mathbf{X}^T_{kj}\mathbf{X}_{jl}
+\tag{5.65}\\&=\sum_{jl}\mathbf{X}^T_{kj}\mathbf{X}_{jl}
 \mathbf{a}_l+\sum_{ij}\mathbf{a}^T_i\mathbf{X}^T_{ij}\mathbf{X}_{jk}\no
-\tag{4.66}\\ 
+\tag{5.66}\\ 
 &=\mathbf{X}^T\mathbf{X}\mathbf{a}+\sum_{ij}\mathbf{X}^T_{kj}\mathbf{X}_{ji}\mathbf{a}_i
 = 2\mathbf{X}^T\mathbf{X}\mathbf{a}.
 \label{}
 \end{align}
 $$
 
-It then follows that \( \partial S/\partial \mathbf{a} = 0 \) when
+<p>It then follows that \( \partial S/\partial \mathbf{a} = 0 \) when</p>
 $$
 \begin{equation}
 \mathbf{X}^T\mathbf{X a}=\mathbf{X}^T\mathbf{y}.
-\tag{4.67}
+\tag{5.67}
 \end{equation}
 $$
-
-<h1 id="___sec76" class="anchor">Sparse matrices and Thomas algorithm </h1>
-In many practical examples, such as solving partial differential
+<h1 id="sparse-matrices-and-thomas-algorithm" class="anchor">Sparse matrices and Thomas algorithm </h1>
+<p>In many practical examples, such as solving partial differential
 equations the matrices could be quite large and also contain a lot of
 zeros. A very important class of such matrices are <em>banded matrices</em>
 this is a type of <em>sparse matrices</em> containing a lot of zero elements,
@@ -1440,6 +1635,7 @@ tridiagonal. In the next section we will show how it enters naturally
 in solving the heat equation. It turns out that solving banded
 matrices is quite simple, and can be coded quite efficiently. As with
 the Gauss-Jordan example, lets consider a concrete example:
+</p>
 $$
 \begin{align}
 &\left(
@@ -1451,12 +1647,13 @@ a_1&b_1&c_1&0&0&r_1\\
 0& 0& 0&a_4&b_4&r_4
 \end{array}
 \right)
-\tag{4.68}
+\tag{5.68}
 \end{align}$$
 
-The right hand side is represented with \( r_i \). The first Gauss-Jordan
+<p>The right hand side is represented with \( r_i \). The first Gauss-Jordan
 step is simply to divide by \( b_0 \), then we multiply with \( -a_1 \) and
 add to second row:
+</p>
 $$
 \begin{align}
 \to \left(
@@ -1468,12 +1665,13 @@ $$
 0& 0& 0&a_4&b_4&r_4
 \end{array}
 \right),
-\tag{4.69}
+\tag{5.69}
 \end{align}$$
 
-Note that we have introduced some new symbols to simplify the
+<p>Note that we have introduced some new symbols to simplify the
 notation: \( c_0^\prime=c_0/b_0 \) and \( r_0^\prime=r_0/b_0 \). Then we
 divide by \( b_1-a_1c_0^\prime \):
+</p>
 $$
 \begin{align}
 &\left(
@@ -1485,13 +1683,14 @@ $$
 0& 0& 0&a_4&b_4&r_4
 \end{array}
 \right),
-\tag{4.70}
+\tag{5.70}
 \end{align}$$
 
-where \( c_1^\prime=c_1/(b_1-a_1c_0^\prime) \) and
+<p>where \( c_1^\prime=c_1/(b_1-a_1c_0^\prime) \) and
 \( r_1^\prime=(r_1-a_0r_0^\prime)/(b_1-a_1c_0^\prime) \). If you continue
 in this manner, you can easily convince yourself that to transform a
 tridiagonal matrix to the following form:
+</p>
 $$
 \begin{align}
 \to \left(
@@ -1503,14 +1702,14 @@ $$
 0& 0& 0&0&1&r_4^\prime
 \end{array}
 \right),
-\tag{4.71}
+\tag{5.71}
 \end{align}$$
 
-where:
+<p>where:</p>
 $$
 \begin{align}
 c_0^\prime =\frac{c_0}{b_0} \qquad &r_0^\prime={r_0}{b_0}
-\tag{4.72} \\ 
+\tag{5.72} \\ 
 c_i^\prime
 =\frac{c_i}{b_i-a_ic_{i-1}^\prime}\qquad
 &r_i^\prime=\frac{r_i-a_ir_{i-1}^\prime}{b_i-a_ic_{i-1}^\prime}
@@ -1518,25 +1717,27 @@ c_i^\prime
 \end{align}
 $$
 
-Note that we where able to reduce the tridiagonal matrix to an <em>upper
+<p>Note that we where able to reduce the tridiagonal matrix to an <em>upper
 triangular</em> matrix in only <em>one</em> Gauss-Jordan step. This equation can
 readily be solved using back-substitution, which can also be
 simplified as there are a lot of zeros in the upper part. Let us
 denote the unknowns \( x_i \) as we did for the Gauss-Jordan case, now we
 can find the solution as follows:
+</p>
 $$
 \begin{align}
-x_{N-1} & = r_{N-1}^\prime \tag{4.73} \\ 
+x_{N-1} & = r_{N-1}^\prime \tag{5.73} \\ 
 x_i     & = r_i^\prime-x_{i+1}c_i^\prime\quad\text{, for } i=N-2,N-3,\ldots,0
-\tag{4.74}
+\tag{5.74}
 \end{align}
 $$
 
-Equation <a href="#mjx-eqn-4.72">(4.72)</a>, \eqref{eq:lin:thi}, <a href="#mjx-eqn-4.73">(4.73)</a>
-and <a href="#mjx-eqn-4.74">(4.74)</a> is known as the Thomas algorithm after
+<p>Equation <a href="#mjx-eqn-5.72">(5.72)</a>, \eqref{eq:lin:thi}, <a href="#mjx-eqn-5.73">(5.73)</a>
+and <a href="#mjx-eqn-5.74">(5.74)</a> is known as the Thomas algorithm after
 Llewellyn Thomas. 
-<div class="alert alert-block alert-success alert-text-normal"><b>Notice.</b>
-Clearly tridiagonal matrices can be solved much more efficiently with
+</p>
+<div class="alert alert-block alert-success alert-text-normal"><b>Notice</b>
+<p>Clearly tridiagonal matrices can be solved much more efficiently with
 the Thomas algorithm than
 using a standard library, such as LU-decomposition. This is
 because the solution method takes advantages of the <em>symmetry</em> of the
@@ -1544,70 +1745,65 @@ problem. We will not show it here, but it can be shown that the Thomas
 algorithm is stable whenever \( |b_i|\ge |a_i|+|c_i| \). If the algorithm
 fails, an advice is first to use the standard <code>solve</code> function in
 python. If this gives a solution, then <em>pivoting</em> combined with the
-Thomas algorithm might do the trick.
+Thomas algorithm might do the trick. 
+</p>
 </div>
 
+<h1 id="example-solving-the-heat-equation-using-linear-algebra" class="anchor">Example: Solving the heat equation using linear algebra </h1>
 
-<h1 id="___sec77" class="anchor">Example: Solving the heat equation using linear algebra </h1>
-
-<p>
 <!-- --- begin exercise --- -->
+<h2 id="exercise-4-1-conservation-equation-or-the-continuity-equation" class="anchor">Exercise 4.1: Conservation Equation or the Continuity Equation </h2>
 
-<h2 id="___sec78" class="anchor">Exercise 4.1: Conservation Equation or the Continuity Equation </h2>
-
-<p>
 <center> <!-- figure label: --> <div id="fig:nlin:heat"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 18:  Conservation of energy and the continuity equation.  <!-- caption label: fig:nlin:heat --> </p></center>
+<center>
+<p class="caption">Figure 18:  Conservation of energy and the continuity equation.  <!-- caption label: fig:nlin:heat --> </p>
+</center>
 <p><img src="fig-lin/heat.png" align="bottom" width=700></p>
 </center>
 
-<p>
-In figure <a href="#fig:nlin:heat">18</a>, the continuity equation is derived for
+<p>In figure <a href="#fig:nlin:heat">18</a>, the continuity equation is derived for
 heat flow.
-
-<h3 id="___sec79" class="anchor">Heat equation for solids </h3>
-
+<h3 id="heat-equation-for-solids" class="anchor">Heat equation for solids </h3>
 As derived in the beginning of this chapter the heat equation for a solid is
+</p>
 $$
 \begin{equation}
 \frac{d^2T}{dx^2}+\frac{\dot{\sigma}}{k}=\frac{\rho c_p}{k}\frac{dT}{dt},
-\tag{4.75}
+\tag{5.75}
 \end{equation}
 $$
 
-where \( \dot{\sigma} \) is the rate of heat generation in the solid. This
+<p>where \( \dot{\sigma} \) is the rate of heat generation in the solid. This
 equation can be used as a starting point for many interesting
 models. In this exercise we will investigate the <em>steady state</em>
 solution, <em>steady state</em> is just a fancy way of expressing that we
 want the solution that <em>does not change with time</em>. This is achieved
 by ignoring the derivative with respect to time in equation
-<a href="#mjx-eqn-4.75">(4.75)</a>. We want to study a system with size \( L \), and is
-it good practice to introduce a dimensionless variable: \( y=x/L \).
+<a href="#mjx-eqn-5.75">(5.75)</a>. We want to study a system with size \( L \), and is
+it good practice to introduce a dimensionless variable: \( y=x/L \). 
+</p>
 
 <p>
 <b>Part 1.</b>
+</p>
 
-<p>
-Show that equation <a href="#mjx-eqn-4.75">(4.75)</a> now takes the following form:
+<p>Show that equation <a href="#mjx-eqn-5.75">(5.75)</a> now takes the following form:</p>
 $$
 \begin{equation}
 \frac{d^2T }{dy^2}+\frac{\dot{\sigma}L^2}{k}=0
-\tag{4.76}
+\tag{5.76}
 \end{equation}
 $$
 
-<p>
+
 <!-- --- end exercise --- -->
 
-<p>
 <!-- --- begin exercise --- -->
+<h2 id="exercise-4-2-curing-of-concrete-and-matrix-formulation" class="anchor">Exercise 4.2: Curing of Concrete and Matrix Formulation </h2>
 
-<h2 id="___sec80" class="anchor">Exercise 4.2: Curing of Concrete and Matrix Formulation </h2>
-
-<p>
-Curing of concrete is one particular example that we can investigate
-with equation <a href="#mjx-eqn-4.76">(4.76)</a>. When concrete is curing, there are
+<p>Curing of concrete is one particular example that we can investigate
+with equation <a href="#mjx-eqn-5.76">(5.76)</a>. When concrete is curing, there are
 a lot of chemical reactions happening, these reactions generate
 heat. This is a known issue, and if the temperature rises too much 
 compared to the surroundings, the concrete may fracture.  In the
@@ -1618,49 +1814,52 @@ heat over that boundary, hence \( dT/dx=0 \) at \( x=0 \). On the right hand
 side the temperature is kept constant, \( x(L)=y(1)=T_1 \), assumed to be
 equal to the ambient temperature of $T_1=25^\circ$C.  The concrete
 thermal conductivity is assumed to be \( k=1.65 \) W/m$^\circ$C.
+</p>
 
 <p>
 <b>Part 1.</b>
+</p>
 
-<p>
-Show that the solution to equation <a href="#mjx-eqn-4.76">(4.76)</a> in this case is:
+<p>Show that the solution to equation <a href="#mjx-eqn-5.76">(5.76)</a> in this case is:</p>
 $$
 \begin{equation}
 T(y)=\frac{\dot{\sigma}L^2}{2k}(1-y^2)+T_1.
-\tag{4.77}
+\tag{5.77}
 \end{equation}
 $$
 
 <p>
 <b>Part 2.</b>
-In order to solve equation <a href="#mjx-eqn-4.76">(4.76)</a> numerically, we need to discretize
-it. Show that equation <a href="#mjx-eqn-4.76">(4.76)</a> now takes the following form:
+In order to solve equation <a href="#mjx-eqn-5.76">(5.76)</a> numerically, we need to discretize
+it. Show that equation <a href="#mjx-eqn-5.76">(5.76)</a> now takes the following form:
+</p>
 
 $$
 \begin{equation}
 T_{i+1}+T_{i-1}-2T_i=-h^2\beta,
-\tag{4.78}
+\tag{5.78}
 \end{equation}
 $$
 
-where \( \beta=\dot{\sigma}L^2/k \).
+<p>where \( \beta=\dot{\sigma}L^2/k \).</p>
 
-<p>
 <center> <!-- figure label: --> <div id="fig:nlin:hgrid"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 19:  Finite difference grid for \( N=4 \).  <!-- caption label: fig:nlin:hgrid --> </p></center>
+<center>
+<p class="caption">Figure 19:  Finite difference grid for \( N=4 \).  <!-- caption label: fig:nlin:hgrid --> </p>
+</center>
 <p><img src="fig-lin/heat_grid.png" align="bottom" width=200></p>
 </center>
 
-<p>
-In figure <a href="#fig:nlin:hgrid">19</a>, the finite difference grid is shown for
+<p>In figure <a href="#fig:nlin:hgrid">19</a>, the finite difference grid is shown for
 \( N=4 \).
+</p>
 
 <p>
 <b>Part 3.</b>
+</p>
 
-<p>
-Show that equation <a href="#mjx-eqn-4.78">(4.78)</a> including the boundary conditions for \( N=4 \) can be written as the following matrix equation
+<p>Show that equation <a href="#mjx-eqn-5.78">(5.78)</a> including the boundary conditions for \( N=4 \) can be written as the following matrix equation</p>
 $$
 \begin{align}
 \left(
@@ -1688,34 +1887,52 @@ T_3\\
 -h^2\beta-25
 \end{array}
 \right).
-\tag{4.79}
+\tag{5.79}
 \end{align}
-\tag{4.80}$$
+\tag{5.80}$$
 
-where \( \gamma=2 \) for the central difference scheme and 1 for the forward difference scheme.
+<p>where \( \gamma=2 \) for the central difference scheme and 1 for the forward difference scheme.</p>
 
 <p>
 <b>Part 4.</b>
-
+</p>
 <ul>
-<li> Solve the set of equations in equation <a href="#mjx-eqn-4.80">(4.80)</a> using <a href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.solve.html" target="_self"><tt>numpy.linalg.solve</tt></a>.</li>
+<li> Solve the set of equations in equation <a href="#mjx-eqn-5.80">(5.80)</a> using <a href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.solve.html" target="_self"><tt>numpy.linalg.solve</tt></a>.</li>
 <li> Write the code so that you can easily switch between the central difference scheme and forward difference</li>
 <li> Evaluate the numerical error as you change \( h \), how does it scale? Is it what you expect?</li>
 </ul>
 
-<p>
-
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
 <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">scipy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">sc</span>
 <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">scipy.sparse.linalg</span>
 <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy.linalg</span> <span style="color: #008000; font-weight: bold">import</span> solve
 <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
-</pre></div>
-<p>
-
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>central_difference<span style="color: #666666">=</span><span style="color: #008000; font-weight: bold">False</span>
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">central_difference<span style="color: #666666">=</span><span style="color: #008000; font-weight: bold">False</span>
 <span style="color: #408080; font-style: italic"># set simulation parameters</span>
 h<span style="color: #666666">=0.25</span>
 L<span style="color: #666666">=1.0</span>
@@ -1757,43 +1974,54 @@ d[<span style="color: #666666">-1</span>]<span style="color: #666666">=...</span
 
 Tn<span style="color: #666666">=</span>np<span style="color: #666666">.</span>linalg<span style="color: #666666">.</span>solve(A,d)
 <span style="color: #008000">print</span>(Tn)
-</pre></div>
-<p>
-The correct solution for \( L=1 \) m, and \( h=1/4 \), is: $[T_0,T_1.T_2,T_3]$=[55.3030303 , 53.40909091, 47.72727273, 38.25757576] (central difference) and $[T_0,T_1.T_2,T_3]$=[62.87878788, 59.09090909, 51.51515152, 40.15151515] (forward difference)
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<p>
+<p>The correct solution for \( L=1 \) m, and \( h=1/4 \), is: $[T_0,T_1.T_2,T_3]$=[55.3030303 , 53.40909091, 47.72727273, 38.25757576] (central difference) and $[T_0,T_1.T_2,T_3]$=[62.87878788, 59.09090909, 51.51515152, 40.15151515] (forward difference)</p>
+
 <!-- --- end exercise --- -->
 
-<p>
 <!-- --- begin exercise --- -->
-
-<h2 id="___sec81" class="anchor">Exercise 4.3: Solve the full heat equation </h2>
+<h2 id="exercise-4-3-solve-the-full-heat-equation" class="anchor">Exercise 4.3: Solve the full heat equation </h2>
 
 <p>
 <b>Part 1.</b>
-Replace the time derivative in equation <a href="#mjx-eqn-4.75">(4.75)</a> with
+Replace the time derivative in equation <a href="#mjx-eqn-5.75">(5.75)</a> with
+</p>
 $$
 \begin{equation}
 \frac{dT}{dt}\simeq\frac{T(t+\Delta t)-T(t)}{\Delta t}=\frac{T^{n+1}-T^n}{\Delta t}, 
-\tag{4.81}
+\tag{5.81}
 \end{equation}
 $$
 
-and show that by using an <em>implicit formulation</em> (i.e. that the second derivative with respect to \( x \) is to be evaluated at \( T(t+\Delta t)\equiv T^{n+1} \)) that equation <a href="#mjx-eqn-4.75">(4.75)</a> can be written
+<p>and show that by using an <em>implicit formulation</em> (i.e. that the second derivative with respect to \( x \) is to be evaluated at \( T(t+\Delta t)\equiv T^{n+1} \)) that equation <a href="#mjx-eqn-5.75">(5.75)</a> can be written</p>
 $$
 \begin{equation}
 T_{i+1}^{n+1}+T_{i-1}^{n+1}-(2+\frac{\alpha h^2}{\Delta t})T_i^{n+1}=-h^2\beta-\frac{\alpha h^2 }{\Delta t}T_i^n,
-\tag{4.82} 
+\tag{5.82} 
 \end{equation}
 $$
 
-where \( \alpha\equiv\rho c_p/k \).
+<p>where \( \alpha\equiv\rho c_p/k \).</p>
 
 <p>
 <b>Part 2.</b>
+</p>
 
-<p>
-Use the central difference formulation for the boundary condition and show that for four nodes we can formulate equation <a href="#mjx-eqn-4.82">(4.82)</a> as the following matrix equation
+<p>Use the central difference formulation for the boundary condition and show that for four nodes we can formulate equation <a href="#mjx-eqn-5.82">(5.82)</a> as the following matrix equation</p>
 $$
 \begin{align}
 &\left(
@@ -1811,7 +2039,7 @@ T_1^{n+1}\\
 T_2^{n+1}\\ 
 T_3^{n+1}\\ 
 \end{array}
-\right)\no \tag{4.83}
+\right)\no \tag{5.83}
 \\ 
 &=
 \left(
@@ -1831,32 +2059,34 @@ T_2^n\\
 T_3^n\\ 
 \end{array}
 \right)
-\tag{4.84}
+\tag{5.84}
 \end{align}
-\tag{4.85}$$
+\tag{5.85}$$
 
 <p>
 <b>Part 3.</b>
-Assume that the initial temperature in the concrete is $25^\circ$C, $\rho$=2400 kg/m$^3$, a specific heat capacity \( c_p= \) 1000 W/kg K, and a time step of \( \Delta t=86400 \) s (1 day). Solve equation <a href="#mjx-eqn-4.85">(4.85)</a>, plot the result each day and compare the result after 50 days with the steady state solution in equation <a href="#mjx-eqn-4.77">(4.77)</a>.
+Assume that the initial temperature in the concrete is $25^\circ$C, $\rho$=2400 kg/m$^3$, a specific heat capacity \( c_p= \) 1000 W/kg K, and a time step of \( \Delta t=86400 \) s (1 day). Solve equation <a href="#mjx-eqn-5.85">(5.85)</a>, plot the result each day and compare the result after 50 days with the steady state solution in equation <a href="#mjx-eqn-5.77">(5.77)</a>.
+</p>
 
-<p>
 <!-- --- end exercise --- -->
 
-<p>
 <!-- --- begin exercise --- -->
+<h2 id="exercise-4-4-using-sparse-matrices-in-python" class="anchor">Exercise 4.4: Using sparse matrices in python </h2>
 
-<h2 id="___sec82" class="anchor">Exercise 4.4: Using sparse matrices in python </h2>
-
-<p>
-In this part we are going to create a sparse matrix in python and use <code>scipy.sparse.linalg.spsolve</code> to solve it. The matrix is created using <code>scipy.sparse.spdiags</code>.
+<p>In this part we are going to create a sparse matrix in python and use <code>scipy.sparse.linalg.spsolve</code> to solve it. The matrix is created using <code>scipy.sparse.spdiags</code>.</p>
 
 <p>
 <b>Part 1.</b>
 Extend the code you developed in the last exercises to also be able to use sparse matrices, by e.g. a logical switch. Sparse matrices may be defined as follows
-<p>
+</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">scipy.sparse.linalg</span>
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">scipy.sparse.linalg</span>
 
 <span style="color: #408080; font-style: italic">#right hand side</span>
 <span style="color: #408080; font-style: italic"># rhs vector</span>
@@ -1879,107 +2109,119 @@ Tb <span style="color: #666666">=</span> sc<span style="color: #666666">.</span>
 
 <span style="color: #408080; font-style: italic"># if you like you can use timeit to check the efficiency</span>
 <span style="color: #408080; font-style: italic"># %timeit sc.sparse.linalg.spsolve( ... )</span>
-</pre></div>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <ul>
-<li> Compare the sparse solver with the standard Numpy solver using
-  <code>%timeit</code>, how large must the linear system be before an improvement
-  in speed is seen?</li>
+<li> Compare the sparse solver with the standard Numpy solver using <code>%timeit</code>, how large must the linear system be before an improvement in speed is seen?</li>
 </ul>
-
 <!-- --- end exercise --- -->
-
-<h1 id="___sec83" class="anchor">CO$_2$ diffusion into aquifers </h1>
-The transport of CO$_2$ into aquifers can be described according to the diffusion equation
+<h1 id="co-_2-diffusion-into-aquifers" class="anchor">CO$_2$ diffusion into aquifers </h1>
+<p>The transport of CO$_2$ into aquifers can be described according to the diffusion equation</p>
 $$
 \begin{equation}
 \frac{\partial C(z,t)}{\partial t}=\frac{\partial }{\partial z}\left(K(z)\frac{\partial C(z,t)}{\partial z}\right),
-\tag{4.86}
+\tag{5.86}
 \end{equation}
 $$
 
-where \( C(z,t) \) is the concentration of \co\ as a function of depth (\( z \)) and time \( t \), and \( K(z) \) is the diffusion constant of \co\ as a function of depth. This equation can be discretized using standard techniques, to help in that respect consider figure <a href="#fig:lin:co2_diff">20</a>.
+<p>where \( C(z,t) \) is the concentration of \co\ as a function of depth (\( z \)) and time \( t \), and \( K(z) \) is the diffusion constant of \co\ as a function of depth. This equation can be discretized using standard techniques, to help in that respect consider figure <a href="#fig:lin:co2_diff">20</a>.</p>
 
-<p>
 <center> <!-- figure label: --> <div id="fig:lin:co2_diff"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 20:  Discretization for diffusion of \co\ into an aquifer, including boundary conditions.  <!-- caption label: fig:lin:co2_diff --> </p></center>
+<center>
+<p class="caption">Figure 20:  Discretization for diffusion of \co\ into an aquifer, including boundary conditions.  <!-- caption label: fig:lin:co2_diff --> </p>
+</center>
 <p><img src="fig-lin/co2_diff.png" align="bottom" width=800></p>
 </center>
 
-<p>
-In the following we will assume that there are only four nodes (\( i=0\ldots 3 \)) in the physical domain, and two ghost nodes \( i=-1 \), and \( i=4 \). There are many ways to attack this problem, but in the following we will borrow ideas from Finite Volume. Finite volume methods is a way of discretizing equations such that we <em>conserve mass</em>. The diffusion equation as it is derived in figure <a href="#fig:nlin:heat">18</a>, express that the flux of something (heat, particles, etc) leaving the box surface minus the flux entering the surface of the box is equal to the rate of change of something inside the box. We can formulate this mathematically as:
+<p>In the following we will assume that there are only four nodes (\( i=0\ldots 3 \)) in the physical domain, and two ghost nodes \( i=-1 \), and \( i=4 \). There are many ways to attack this problem, but in the following we will borrow ideas from Finite Volume. Finite volume methods is a way of discretizing equations such that we <em>conserve mass</em>. The diffusion equation as it is derived in figure <a href="#fig:nlin:heat">18</a>, express that the flux of something (heat, particles, etc) leaving the box surface minus the flux entering the surface of the box is equal to the rate of change of something inside the box. We can formulate this mathematically as:</p>
 $$
 \begin{equation}
 \frac{\partial C(z,t)}{\partial t}\simeq\frac{1}{h}\left[\left.K(z)\frac{\partial C(z,t)}{\partial z}\right|_{i+1/2}
 -\left.K(z)\frac{\partial C(z,t)}{\partial z}\right|_{i-1/2}\right]
-\tag{4.87}
+\tag{5.87}
 \end{equation}
 $$
 
-The notation \( i\pm1/2 \), means that the flux is to be evaluated <em>at the surface</em> of the box (i.e. halfway between the red dots in figure <a href="#fig:lin:co2_diff">20</a>). \( K(z) \) is the diffusion constant, and it is known everywhere, so this is simple to evaluate at the surface. The concentrations are only known at the center of each box, the red dots in figure <a href="#fig:lin:co2_diff">20</a>. The derivative of the concentration can be evaluated using the central difference formula (remember that the distance between the red dot and edge of the box is \( h/2 \)), hence
+<p>The notation \( i\pm1/2 \), means that the flux is to be evaluated <em>at the surface</em> of the box (i.e. halfway between the red dots in figure <a href="#fig:lin:co2_diff">20</a>). \( K(z) \) is the diffusion constant, and it is known everywhere, so this is simple to evaluate at the surface. The concentrations are only known at the center of each box, the red dots in figure <a href="#fig:lin:co2_diff">20</a>. The derivative of the concentration can be evaluated using the central difference formula (remember that the distance between the red dot and edge of the box is \( h/2 \)), hence</p>
 $$
 \begin{equation}
 \frac{C_i^{n+1}-C_i^n}{\Delta t}=\frac{1}{h}\left[K_{i+1/2}\frac{ C_{i+1}-C_{i}}{h}-K_{i-1/2}\frac{ C_{i}-C_{i-1}}{h}\right],
-\tag{4.88}
+\tag{5.88}
 \end{equation}
 $$
 
-notice that we have discretized the time derivative, and that we have introduced \( n \) to indicate the time step. On the right hand side there are is no time indicated, it turns out that we have a choice to put time step \( n \) or \( n+1 \) on the concentrations on the right hand side. If we put \( n \) the scheme is said to be explicit, if we put \( n+1 \), the scheme is implicit. Implicit schemes are stable compared to explicit schemes, whereas explicit schemes has slightly higher numerical accuracy 
+<p>notice that we have discretized the time derivative, and that we have introduced \( n \) to indicate the time step. On the right hand side there are is no time indicated, it turns out that we have a choice to put time step \( n \) or \( n+1 \) on the concentrations on the right hand side. If we put \( n \) the scheme is said to be explicit, if we put \( n+1 \), the scheme is implicit. Implicit schemes are stable compared to explicit schemes, whereas explicit schemes has slightly higher numerical accuracy 
 <!-- begin inline comment -->
 <font color="red">(<b>TO DO 1</b>: show this!)</font>
 <!-- end inline comment -->
-. In general we can write
+. In general we can write</p>
 $$
 \begin{align}
 \frac{C_i^{n+1}-C_i^n}{\Delta t}&=\frac{\theta}{h}\left[K_{i+1/2}
 \frac{C^n_{i+1}-C^n_{i}}{h}-K_{i-1/2}\frac{C^n_{i}-C^n_{i-1}}{h}\right]
-\tag{4.89}\\ 
+\tag{5.89}\\ 
 &+\frac{1-\theta}{h}\left[K_{i+1/2}
 \frac{C_{i+1}^{n+1}-C_{i}^{n+1}}{h}-K_{i-1/2}\frac{ C_{i}^{n+1}-C_{i-1}^{n+1}}{h}\right],
-\tag{4.90}
+\tag{5.90}
 \end{align}
 $$
 
-hence if \( \theta=1 \) the scheme is explicit, if \( \theta=0 \) the scheme is implicit, and if \( \theta=1/2 \), the scheme is called the Crank-Nicolson method. The first and last boundary are special, let us first consider the \( i=0 \), this is where the sea is in contact with the \co\ in the atmosphere, and the flux is \( k_w(C_0-C_{eq}) \), hence
+<p>hence if \( \theta=1 \) the scheme is explicit, if \( \theta=0 \) the scheme is implicit, and if \( \theta=1/2 \), the scheme is called the Crank-Nicolson method. The first and last boundary are special, let us first consider the \( i=0 \), this is where the sea is in contact with the \co\ in the atmosphere, and the flux is \( k_w(C_0-C_{eq}) \), hence</p>
 $$
 \begin{align}
 \frac{C_0^{n+1}-C_0^n}{\Delta t}&=\frac{\theta}{h}\left[K_{i+1/2}
 \frac{C^n_{1}-C^n_{0}}{h}-k_w(C_0^n-C_{eq}^n)\right]
-\tag{4.91}\\ 
+\tag{5.91}\\ 
 &+\frac{1-\theta}{h}\left[K_{i+1/2}
 \frac{C_{1}^{n+1}-C_{0}^{n+1}}{h}-k_w(C_0^{n+1}-C_{eq}^{n+1})\right].
-\tag{4.92}
+\tag{5.92}
 \end{align}
 $$
 
-For the last block the flux is zero towards the seafloor, and equation <a href="#mjx-eqn-4.90">(4.90)</a> can be written
+<p>For the last block the flux is zero towards the seafloor, and equation <a href="#mjx-eqn-5.90">(5.90)</a> can be written</p>
 $$
 \begin{align}
 \frac{C_3^{n+1}-C_3^n}{\Delta t} & =\frac{\theta}{h}\left[-K_{5/2}\frac{C^n_{3}-C^n_{2}}{h}\right]
-\tag{4.93}\\ 
+\tag{5.93}\\ 
 &+\frac{1-\theta}{h}\left[-K_{5/2}\frac{ C_{3}^{n+1}-C_{2}^{n+1}}{h}\right].
-\tag{4.94}
+\tag{5.94}
 \end{align}
 $$
 
-For the blocks \( i=1\ldots2 \), we can collect all terms with \( n+1 \) on one side and terms with \( n \) on the other side and rewrite equation <a href="#mjx-eqn-4.90">(4.90)</a>
+<p>For the blocks \( i=1\ldots2 \), we can collect all terms with \( n+1 \) on one side and terms with \( n \) on the other side and rewrite equation <a href="#mjx-eqn-5.90">(5.90)</a></p>
 $$
 \begin{align}
 \left[1+(1-\theta)\right. &\left.\alpha(K_{i+1/2}+K_{i-1/2})\right]C_i^{n+1}\no
-\tag{4.95}\\ 
+\tag{5.95}\\ 
 &-(1-\theta)\alpha K_{i+1/2}C_{i+1}^{n+1}
 -(1-\theta)\alpha K_{i-1/2}C_{i-1}^{n+1} \no
-\tag{4.96}\\ 
+\tag{5.96}\\ 
 =\left[1-\theta\right. &\left.\alpha(K_{i+1/2}+K_{i-1/2})\right]C_i^{n}\no
-\tag{4.97}\\ 
+\tag{5.97}\\ 
 &+\theta\alpha K_{i+1/2}C_{i+1}^{n}
 +\theta\alpha K_{i-1/2}C_{i-1}^{n}, 
-\tag{4.98}
+\tag{5.98}
 \end{align}
 $$
 
-where \( \alpha\equiv\Delta t/h^2 \).
+<p>where \( \alpha\equiv\Delta t/h^2 \).
 Next, we want to write down the corresponding matrix equations for four grid nodes as indicated in figure <a href="#fig:lin:co2_diff">20</a>. Notice that we need to use the equations in figure <a href="#fig:lin:co2_diff">20</a>, for \( C_{-1} \), and \( C_4 \). The left and right hand coefficient matrix \( \mathbf{L} \), and \( \mathbf{R} \) are given as
+</p>
 $$
 {\tiny
 \begin{align}
@@ -1989,7 +2231,7 @@ $$
 0&-(1-\theta)\alpha K_{3/2}&1+(1-\theta)\alpha(K_{5/2}+K_{3/2})&-(1-\theta)\alpha K_{5/2} \\ 
 0&0&-(1-\theta)\alpha K_{5/2}&1+(1-\theta)\alpha K_{5/2}\no
 \end{pmatrix},
-\tag{4.99}
+\tag{5.99}
 \end{align}
 }$$
 
@@ -2002,27 +2244,24 @@ $$
 0&\theta\alpha K_{3/2}&1-\theta\alpha(K_{5/2}+K_{3/2})&\theta\alpha K_{5/2} \\ 
 0&0&\theta\alpha K_{5/2}&1-\theta\alpha K_{5/2}\no
 \end{pmatrix},
-\tag{4.100}
+\tag{5.100}
 \end{align}
 }$$
 
-respectively. Introducing \( \mathbf{S}=\left[k_wC_{eq}\Delta t/h,0,0,0\right]^T \), we can finally write the diffusion equation <a href="#mjx-eqn-4.86">(4.86)</a> as
+<p>respectively. Introducing \( \mathbf{S}=\left[k_wC_{eq}\Delta t/h,0,0,0\right]^T \), we can finally write the diffusion equation <a href="#mjx-eqn-5.86">(5.86)</a> as</p>
 $$
 \begin{equation}
 \mathbf{L}\mathbf{C}^{n+1}=\mathbf{R}\mathbf{C}^n+\theta\mathbf{S}^n+(1-\theta)\mathbf{S}^{n+1}
-\tag{4.101}
+\tag{5.101}
 \end{equation}
 $$
 
-<p>
-More stuff to do:
-
+<p>More stuff to do:</p>
 <ol>
 <li> Assume zero flux over the air water interface ($k_w$=0), show from the equations above that if we start with a uniform concentration in the sea ($\mathbf{C}^n$=constant) that \( \mathbf{C}^{n+1} \) does not change (as it should).</li>
 <li> Assume that if the concentration at a specific time \( n \) in the sea is equal to \( \mathbf{C}_{eq} \) then the concentration stays constant at all later times</li>
 <li> Add chemical reactions</li>
 </ol>
-
 <p>
 <!-- navigation buttons at the bottom of the page -->
 <ul class="pager">
@@ -2036,19 +2275,15 @@ More stuff to do:
   </li>
 </ul>
 <!-- ------------------- end of main content --------------- -->
-
 </div>  <!-- end container -->
 <!-- include javascript, jQuery *first* -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-
 <!-- Bootstrap footer
 <footer>
-<a href="http://..."><img width="250" align=right src="http://..."></a>
+<a href="https://..."><img width="250" align=right src="https://..."></a>
 </footer>
 -->
-
-
 </body>
 </html>
     

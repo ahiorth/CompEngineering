@@ -1,34 +1,31 @@
 <!--
-Automatically generated HTML file from DocOnce source
-(https://github.com/hplgit/doconce/)
+HTML file automatically generated from DocOnce source
+(https://github.com/doconce/doconce/)
+doconce format html book.do.txt CHAPTER=chapter BOOK=book APPENDIX=appendix --exercise_numbering=chapter --html_style=bootswatch_journal --html_code_style=inherit --html_output=book
 -->
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="generator" content="DocOnce: https://github.com/doconce/doconce/" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="Modeling and Computational Engineering">
 <meta name="keywords" content="types,basic types,lists,list comprehension,numerical error,Taylor polynomial,truncation error,Taylor polynomial, error term,Maclaurin series,forward difference,backward difference,central difference,central difference,roundoff erros,machine precision,IEEE 754-1985 standard,roundoff errors,continuity equation,finite volume,Gauss-Jordan elimination,pivoting,LU decomposition,Jacobi method,Gauss-Seidel method,linear regression,sparse matrix,Thomas algorithm,fixed-point iteration,rate of convergence,bisection method,rate of convergence,Newtons method,Newtons method, rate of convergence,secant method,secant method, rate of convergence,Newton Rapson method,gradient descent,midpoint method,trapezoidal method,numerical integrals, error,Richardson extrapolation,Romberg integration,Gaussian quadrature,Gaussian quadrature, error term,numerical integral, infinite,continuous stirred tank reactor (CSTR),Eulers method,Eulers method, error analysis,Eulers method, adaptive step size,Runge-Kutta,Runge-Kutta, adaptive step size,adaptive step size,stiff equations,implicit method,Monte Carlo integration,random number generators,Mersenne Twister,encryption,Monte Carlo Integration, error,binomial distribution,mean,variance,Monte Carlo integration, mean value,recursive functions,central limit theorem,birthday paradox">
-
 <title>Modeling and Computational Engineering</title>
-
 <!-- Bootstrap style: bootswatch_journal -->
+<!-- doconce format html book.do.txt CHAPTER=chapter BOOK=book APPENDIX=appendix --exercise_numbering=chapter --html_style=bootswatch_journal --html_code_style=inherit --html_output=book -->
 <link href="https://netdna.bootstrapcdn.com/bootswatch/3.1.1/journal/bootstrap.min.css" rel="stylesheet">
 <!-- not necessary
 <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 -->
-
 <style type="text/css">
 /* Let inline verbatim have the same color as the surroundings */
 code { color: inherit; background-color: transparent; }
-
 /* Add scrollbar to dropdown menus in bootstrap navigation bar */
 .dropdown-menu {
    height: auto;
    max-height: 400px;
    overflow-x: hidden;
 }
-
 /* Adds an invisible element before each target to offset for the navigation
    bar */
 .anchor::before {
@@ -38,8 +35,6 @@ code { color: inherit; background-color: transparent; }
   margin:-60px 0 0; /* negative fixed header height */
 }
 </style>
-
-
 </head>
 
 <!-- tocinfo
@@ -50,148 +45,205 @@ code { color: inherit; background-color: transparent; }
                'table_of_contents'),
               ('Preface', 0, 'ch:preface', 'ch:preface'),
               ('Introduction to Python', 0, 'ch:pyt', 'ch:pyt'),
-              ('Personal Guidelines', 1, None, '___sec2'),
-              ('Code editor', 2, None, '___sec3'),
-              ('Types in Python', 1, None, '___sec4'),
-              ('Basic types', 2, None, '___sec5'),
-              ('Lists', 2, None, '___sec6'),
-              ('List arithmetic', 3, None, '___sec7'),
-              ('List slicing', 3, None, '___sec8'),
-              ('Numpy arrays', 2, None, '___sec9'),
-              ('Array slicing', 3, None, '___sec10'),
-              ('Dictionaries', 2, None, '___sec11'),
-              ('Looping', 1, None, '___sec12'),
-              ('For loops', 2, None, '___sec13'),
-              ('While loops', 2, None, '___sec14'),
-              ('Functions in Python', 2, None, '___sec15'),
-              ('Defining a mathematical function', 2, None, '___sec16'),
-              ('Scope of variables', 2, None, '___sec17'),
-              ('Passing arrays and lists to functions', 2, None, '___sec18'),
-              ('Call by value or call by reference', 2, None, '___sec19'),
-              ('Floats and integers', 3, None, '___sec20'),
-              ('Lists and arrays', 3, None, '___sec21'),
-              ('Mutable and immutable objects', 2, None, '___sec22'),
+              ('Personal Guidelines', 1, None, 'personal-guidelines'),
+              ('Code editor', 2, None, 'code-editor'),
+              ('Types in Python', 1, None, 'types-in-python'),
+              ('Basic types', 2, None, 'basic-types'),
+              ('Lists', 2, None, 'lists'),
+              ('List arithmetic', 3, None, 'list-arithmetic'),
+              ('List slicing', 3, None, 'list-slicing'),
+              ('Numpy arrays', 2, None, 'numpy-arrays'),
+              ('Array slicing', 3, None, 'array-slicing'),
+              ('Dictionaries', 2, None, 'dictionaries'),
+              ('Looping', 1, None, 'looping'),
+              ('For loops', 2, None, 'for-loops'),
+              ('While loops', 2, None, 'while-loops'),
+              ('Functions in Python', 2, None, 'functions-in-python'),
+              ('Defining a mathematical function',
+               2,
+               None,
+               'defining-a-mathematical-function'),
+              ('Scope of variables', 2, None, 'scope-of-variables'),
+              ('Passing arrays and lists to functions',
+               2,
+               None,
+               'passing-arrays-and-lists-to-functions'),
+              ('Call by value or call by reference',
+               2,
+               None,
+               'call-by-value-or-call-by-reference'),
+              ('Floats and integers', 3, None, 'floats-and-integers'),
+              ('Lists and arrays', 3, None, 'lists-and-arrays'),
+              ('Mutable and immutable objects',
+               2,
+               None,
+               'mutable-and-immutable-objects'),
               ('Exercise 1.1: Explain why only one of the codes below gives '
                'the correct answer',
                2,
                None,
-               '___sec23'),
+               'exercise-1-1-explain-why-only-one-of-the-codes-below-gives-the-correct-answer'),
               ('Introduction to Pandas', 0, 'ch:pan', 'ch:pan'),
-              ('What is Pandas?', 1, None, '___sec25'),
-              ('Creating a data frame', 1, None, '___sec26'),
-              ('From empty DataFrame', 2, None, '___sec27'),
-              ('Create DataFrame from dictionary', 2, None, '___sec28'),
-              ('From file', 2, None, '___sec29'),
-              ('Accessing data in  DataFrames', 2, None, '___sec30'),
-              ('Selecting columns', 3, None, '___sec31'),
-              ('Selecting rows', 3, None, '___sec32'),
+              ('What is Pandas?', 1, None, 'what-is-pandas'),
+              ('Creating a data frame', 1, None, 'creating-a-data-frame'),
+              ('From empty DataFrame', 2, None, 'from-empty-dataframe'),
+              ('Create DataFrame from dictionary',
+               2,
+               None,
+               'create-dataframe-from-dictionary'),
+              ('From file', 2, None, 'from-file'),
+              ('Accessing data in  DataFrames',
+               2,
+               None,
+               'accessing-data-in-dataframes'),
+              ('Selecting columns', 3, None, 'selecting-columns'),
+              ('Selecting rows', 3, None, 'selecting-rows'),
               ('Challenges when accessing columns or rows',
                3,
                None,
-               '___sec33'),
-              ('Time columns not parsed properly', 3, None, '___sec34'),
-              ('Filtering and visualizing data', 2, None, '___sec35'),
-              ('Boolean masking', 3, None, '___sec36'),
-              ('Plotting a DataFrame', 3, None, '___sec37'),
+               'challenges-when-accessing-columns-or-rows'),
+              ('Time columns not parsed properly',
+               3,
+               None,
+               'time-columns-not-parsed-properly'),
+              ('Filtering and visualizing data',
+               2,
+               None,
+               'filtering-and-visualizing-data'),
+              ('Boolean masking', 3, None, 'boolean-masking'),
+              ('Plotting a DataFrame', 3, None, 'plotting-a-dataframe'),
               ('Performing mathematical operations on DataFrames',
                2,
                None,
-               '___sec38'),
+               'performing-mathematical-operations-on-dataframes'),
               ('Example: mathematical operations on DataFrames',
                3,
                None,
-               '___sec39'),
-              ('Solution', 3, None, '___sec40'),
-              ('Grouping, filtering and aggregating data', 2, None, '___sec41'),
-              ('Simple statistics in Pandas', 2, None, '___sec42'),
-              ('Joining two DataFrames', 2, None, '___sec43'),
-              ('Appending DataFrames', 3, None, '___sec44'),
-              ('Merging DataFrames', 3, None, '___sec45'),
-              ('Working with folders and files', 2, None, '___sec46'),
-              ('Basic use of Pathlib', 3, None, '___sec47'),
-              ('Basic use of `os`', 3, None, '___sec48'),
+               'example-mathematical-operations-on-dataframes'),
+              ('Solution', 3, None, 'solution'),
+              ('Grouping, filtering and aggregating data',
+               2,
+               None,
+               'grouping-filtering-and-aggregating-data'),
+              ('Simple statistics in Pandas',
+               2,
+               None,
+               'simple-statistics-in-pandas'),
+              ('Joining two DataFrames', 2, None, 'joining-two-dataframes'),
+              ('Appending DataFrames', 3, None, 'appending-dataframes'),
+              ('Merging DataFrames', 3, None, 'merging-dataframes'),
+              ('Working with folders and files',
+               2,
+               None,
+               'working-with-folders-and-files'),
+              ('Basic use of Pathlib', 3, None, 'basic-use-of-pathlib'),
+              ('Basic use of `os`', 3, None, 'basic-use-of-os'),
               ('Splitting data into different folders and files',
                3,
                None,
-               '___sec49'),
-              ('Writing more robust code', 2, None, '___sec50'),
+               'splitting-data-into-different-folders-and-files'),
+              ('Writing more robust code', 2, None, 'writing-more-robust-code'),
               ('Finite differences', 0, 'ch:taylor', 'ch:taylor'),
-              ('Numerical Errors', 1, None, '___sec52'),
-              ('Taylor Polynomial Approximation', 1, None, '___sec53'),
+              ('Numerical Errors', 1, None, 'numerical-errors'),
+              ('Taylor Polynomial Approximation',
+               1,
+               None,
+               'taylor-polynomial-approximation'),
               ('Calculating Numerical Derivatives of Functions',
                1,
                None,
-               '___sec54'),
-              ('Higher order derivative', 3, None, '___sec55'),
-              ('Roundoff Errors', 2, None, '___sec56'),
-              ('Binary numbers', 3, None, '___sec57'),
+               'calculating-numerical-derivatives-of-functions'),
+              ('Higher order derivative', 3, None, 'higher-order-derivative'),
+              ('Roundoff Errors', 2, None, 'roundoff-errors'),
+              ('Binary numbers', 3, None, 'binary-numbers'),
               ('Floating point numbers and the IEEE 754-1985 standard',
                3,
                None,
-               '___sec58'),
+               'floating-point-numbers-and-the-ieee-754-1985-standard'),
               ('Roundoff error and truncation error in numerical derivatives',
                3,
                None,
-               '___sec59'),
+               'roundoff-error-and-truncation-error-in-numerical-derivatives'),
               ('Solving linear systems', 0, 'ch:lin', 'ch:lin'),
-              ('The Continuity Equation', 1, None, '___sec61'),
-              ('Continuity Equation as a linear problem', 1, None, '___sec62'),
-              ('Boundary conditions', 3, None, '___sec63'),
-              ('Solving linear equations', 1, None, '___sec64'),
-              ('Gauss-Jordan elimination', 2, None, '___sec65'),
-              ('Pivoting', 2, None, '___sec66'),
-              ('LU decomposition', 2, None, '___sec67'),
-              ('Iterative methods', 1, None, '___sec68'),
-              ('Iterative improvement', 2, None, '___sec69'),
-              ('The Jacobi method', 2, None, '___sec70'),
-              ('The Gauss-Seidel method', 2, None, '___sec71'),
-              ('Example: Linear regression', 1, None, '___sec72'),
+              ('The Continuity Equation', 1, None, 'the-continuity-equation'),
+              ('Continuity Equation as a linear problem',
+               1,
+               None,
+               'continuity-equation-as-a-linear-problem'),
+              ('Boundary conditions', 3, None, 'boundary-conditions'),
+              ('Solving linear equations', 1, None, 'solving-linear-equations'),
+              ('Gauss-Jordan elimination', 2, None, 'gauss-jordan-elimination'),
+              ('Pivoting', 2, None, 'pivoting'),
+              ('LU decomposition', 2, None, 'lu-decomposition'),
+              ('Iterative methods', 1, None, 'iterative-methods'),
+              ('Iterative improvement', 2, None, 'iterative-improvement'),
+              ('The Jacobi method', 2, None, 'the-jacobi-method'),
+              ('The Gauss-Seidel method', 2, None, 'the-gauss-seidel-method'),
+              ('Example: Linear regression',
+               1,
+               None,
+               'example-linear-regression'),
               ('Solving least square, using algebraic equations',
                2,
                None,
-               '___sec73'),
-              ('Least square as a linear algebra problem', 2, None, '___sec74'),
-              ('Working with matrices on component form', 2, None, '___sec75'),
-              ('Sparse matrices and Thomas algorithm', 1, None, '___sec76'),
+               'solving-least-square-using-algebraic-equations'),
+              ('Least square as a linear algebra problem',
+               2,
+               None,
+               'least-square-as-a-linear-algebra-problem'),
+              ('Working with matrices on component form',
+               2,
+               None,
+               'working-with-matrices-on-component-form'),
+              ('Sparse matrices and Thomas algorithm',
+               1,
+               None,
+               'sparse-matrices-and-thomas-algorithm'),
               ('Example: Solving the heat equation using linear algebra',
                1,
                None,
-               '___sec77'),
+               'example-solving-the-heat-equation-using-linear-algebra'),
               ('Exercise 4.1: Conservation Equation or the Continuity Equation',
                2,
                None,
-               '___sec78'),
-              ('Heat equation for solids', 3, None, '___sec79'),
+               'exercise-4-1-conservation-equation-or-the-continuity-equation'),
+              ('Heat equation for solids', 3, None, 'heat-equation-for-solids'),
               ('Exercise 4.2: Curing of Concrete and Matrix Formulation',
                2,
                None,
-               '___sec80'),
+               'exercise-4-2-curing-of-concrete-and-matrix-formulation'),
               ('Exercise 4.3: Solve the full heat equation',
                2,
                None,
-               '___sec81'),
+               'exercise-4-3-solve-the-full-heat-equation'),
               ('Exercise 4.4: Using sparse matrices in python',
                2,
                None,
-               '___sec82'),
-              ('CO$_2$ diffusion into aquifers', 1, None, '___sec83'),
+               'exercise-4-4-using-sparse-matrices-in-python'),
+              ('CO$_2$ diffusion into aquifers',
+               1,
+               None,
+               'co-_2-diffusion-into-aquifers'),
               ('Solving nonlinear equations', 0, 'ch:nlin', 'ch:nlin'),
-              ('Nonlinear equations', 1, None, '___sec85'),
-              ('Example: van der Waals equation of state', 1, None, '___sec86'),
+              ('Nonlinear equations', 1, None, 'nonlinear-equations'),
+              ('Example: van der Waals equation of state',
+               1,
+               None,
+               'example-van-der-waals-equation-of-state'),
               ('Exercise 5.1: van der Waal EOS and CO$_2$',
                2,
                None,
-               '___sec87'),
-              ('Fixed-point iteration', 1, None, '___sec88'),
+               'exercise-5-1-van-der-waal-eos-and-co-_2'),
+              ('Fixed-point iteration', 1, None, 'fixed-point-iteration'),
               ('Exercise 5.2: Implement the fixed point iteration',
                2,
                None,
-               '___sec89'),
+               'exercise-5-2-implement-the-fixed-point-iteration'),
               ('Exercise 5.3: Finding the molar volume from the van der Waal '
                'EOS by fixed point iteration',
                2,
                None,
-               '___sec90'),
+               'exercise-5-3-finding-the-molar-volume-from-the-van-der-waal-eos-by-fixed-point-iteration'),
               ('When do the fixed point method fail?',
                2,
                'sec:nlin:fp',
@@ -199,105 +251,135 @@ code { color: inherit; background-color: transparent; }
               ('What to do when the fixed point method fail',
                2,
                None,
-               '___sec92'),
+               'what-to-do-when-the-fixed-point-method-fail'),
               ('Exercise 5.4: Solve $x=e^{1-x^2}$ using fixed point iteration',
                2,
                None,
-               '___sec93'),
-              ('Rate of convergence', 1, None, '___sec94'),
-              ('The bisection method', 1, None, '___sec95'),
-              ('Rate of convergence', 2, None, '___sec96'),
-              ('Newtons method', 1, None, '___sec97'),
-              ('Rate of convergence', 2, None, '___sec98'),
+               'exercise-5-4-solve-x-e-1-x-2-using-fixed-point-iteration'),
+              ('Rate of convergence', 1, None, 'rate-of-convergence'),
+              ('The bisection method', 1, None, 'the-bisection-method'),
+              ('Rate of convergence', 2, None, 'rate-of-convergence'),
+              ('Newtons method', 1, None, 'newtons-method'),
+              ('Rate of convergence', 2, None, 'rate-of-convergence'),
               ('Exercise 5.5: Compare Newtons, Bisection and the Fixed Point '
                'method',
                2,
                None,
-               '___sec99'),
-              ('Secant method', 1, None, '___sec100'),
-              ('Rate of convergence', 2, None, '___sec101'),
-              ('Newton Rapson method', 1, None, '___sec102'),
-              ('Gradient Descent', 1, None, '___sec103'),
+               'exercise-5-5-compare-newtons-bisection-and-the-fixed-point-method'),
+              ('Secant method', 1, None, 'secant-method'),
+              ('Rate of convergence', 2, None, 'rate-of-convergence'),
+              ('Newton Rapson method', 1, None, 'newton-rapson-method'),
+              ('Gradient Descent', 1, None, 'gradient-descent'),
               ('Exercise 5.6: Gradient descent solution of linear regression',
                2,
                None,
-               '___sec104'),
-              ('Other Useful Methods', 1, None, '___sec105'),
+               'exercise-5-6-gradient-descent-solution-of-linear-regression'),
+              ('Other Useful Methods', 1, None, 'other-useful-methods'),
               ('Numerical integration', 0, 'ch:numint', 'ch:numint'),
-              ('Numerical Integration', 1, None, '___sec107'),
-              ('The Midpoint Rule', 2, None, '___sec108'),
-              ('The Trapezoidal Rule', 2, None, '___sec109'),
-              ('Numerical Errors on Integrals', 2, None, '___sec110'),
+              ('Numerical Integration', 1, None, 'numerical-integration'),
+              ('The Midpoint Rule', 2, None, 'the-midpoint-rule'),
+              ('The Trapezoidal Rule', 2, None, 'the-trapezoidal-rule'),
+              ('Numerical Errors on Integrals',
+               2,
+               None,
+               'numerical-errors-on-integrals'),
               ('Practical Estimation of Errors on Integrals (Richardson '
                'Extrapolation)',
                2,
                None,
-               '___sec111'),
-              ('Romberg Integration', 1, None, '___sec112'),
+               'practical-estimation-of-errors-on-integrals-richardson-extrapolation'),
+              ('Romberg Integration', 1, None, 'romberg-integration'),
               ('Alternative implementation of adaptive integration',
                2,
                None,
-               '___sec113'),
-              ('Gaussian Quadrature', 1, None, '___sec114'),
-              ('The case N=3', 3, None, '___sec115'),
-              ('Error term on Gaussian Integration', 2, None, '___sec116'),
+               'alternative-implementation-of-adaptive-integration'),
+              ('Gaussian Quadrature', 1, None, 'gaussian-quadrature'),
+              ('The case N=3', 3, None, 'the-case-n-3'),
+              ('Error term on Gaussian Integration',
+               2,
+               None,
+               'error-term-on-gaussian-integration'),
               ('Common Weight functions for Classical Gaussian Quadratures',
                2,
                None,
-               '___sec117'),
+               'common-weight-functions-for-classical-gaussian-quadratures'),
               ('Integrating functions over an infinite range',
                1,
                None,
-               '___sec118'),
+               'integrating-functions-over-an-infinite-range'),
               ('Which method to use in a specific case? (NOT COMPLETED)',
                2,
                None,
-               '___sec119'),
-              ('Exercise 6.1: Numerical Integration', 2, None, '___sec120'),
+               'which-method-to-use-in-a-specific-case-not-completed'),
+              ('Exercise 6.1: Numerical Integration',
+               2,
+               None,
+               'exercise-6-1-numerical-integration'),
               ('Ordinary differential equations', 0, 'ch:ode', 'ch:ode'),
-              ('Ordinary Differential Equations', 1, None, '___sec122'),
-              ('A Simple Model for Fluid Flow', 1, None, '___sec123'),
-              ('Eulers Method', 1, None, '___sec124'),
-              ('Error Analysis - Eulers Method', 2, None, '___sec125'),
-              ('Adaptive step size - Eulers Method', 2, None, '___sec126'),
-              ('Runge-Kutta Methods', 1, None, '___sec127'),
-              ('Adaptive step size - Runge-Kutta Method', 2, None, '___sec128'),
-              ('Conservation of Mass', 2, None, '___sec129'),
-              ('Solving a set of ODE equations', 1, None, '___sec130'),
-              ('Stiff sets of ODE  and implicit methods', 1, None, '___sec131'),
+              ('Ordinary Differential Equations',
+               1,
+               None,
+               'ordinary-differential-equations'),
+              ('A Simple Model for Fluid Flow',
+               1,
+               None,
+               'a-simple-model-for-fluid-flow'),
+              ('Eulers Method', 1, None, 'eulers-method'),
+              ('Error Analysis - Eulers Method',
+               2,
+               None,
+               'error-analysis-eulers-method'),
+              ('Adaptive step size - Eulers Method',
+               2,
+               None,
+               'adaptive-step-size-eulers-method'),
+              ('Runge-Kutta Methods', 1, None, 'runge-kutta-methods'),
+              ('Adaptive step size - Runge-Kutta Method',
+               2,
+               None,
+               'adaptive-step-size-runge-kutta-method'),
+              ('Conservation of Mass', 2, None, 'conservation-of-mass'),
+              ('Solving a set of ODE equations',
+               1,
+               None,
+               'solving-a-set-of-ode-equations'),
+              ('Stiff sets of ODE  and implicit methods',
+               1,
+               None,
+               'stiff-sets-of-ode-and-implicit-methods'),
               ('Exercise 7.1: Truncation Error in Eulers Method',
                2,
                None,
-               '___sec132'),
+               'exercise-7-1-truncation-error-in-eulers-method'),
               ('Monte Carlo Methods', 0, 'ch:mc', 'ch:mc'),
-              ('Monte Carlo Methods', 1, None, '___sec134'),
+              ('Monte Carlo Methods', 1, None, 'monte-carlo-methods'),
               ("Monte Carlo Integration  ''Hit and Miss''",
                1,
                None,
-               '___sec135'),
-              ('Random number generators', 2, None, '___sec136'),
-              ('Encryption', 2, None, '___sec137'),
+               'monte-carlo-integration-hit-and-miss'),
+              ('Random number generators', 2, None, 'random-number-generators'),
+              ('Encryption', 2, None, 'encryption'),
               ('Errors on Monte Carlo Integration and the Binomial '
                'Distribution',
                2,
                None,
-               '___sec138'),
-              ('The mean value method', 2, None, '___sec139'),
+               'errors-on-monte-carlo-integration-and-the-binomial-distribution'),
+              ('The mean value method', 2, None, 'the-mean-value-method'),
               ('Basic Properties of Probability Distributions',
                2,
                None,
-               '___sec140'),
+               'basic-properties-of-probability-distributions'),
               ('Example: Monte Carlo Integration of a Hyper Sphere',
                2,
                None,
-               '___sec141'),
+               'example-monte-carlo-integration-of-a-hyper-sphere'),
               ('Exercise 8.1: The central limit theorem',
                2,
                'ex:mc:norm',
                'ex:mc:norm'),
-              ('Remarks', 3, None, '___sec143'),
+              ('Remarks', 3, None, 'remarks'),
               ('Exercise 8.2: Birthday Paradox', 2, 'ex:mc:BP', 'ex:mc:BP'),
-              ('References', 1, None, '___sec145')]}
+              ('References', 1, None, 'references')]}
 end of tocinfo -->
 
 <body>
@@ -319,13 +401,11 @@ MathJax.Hub.Config({
 <!-- newcommands_keep.tex -->
 $$
 \newcommand{\no}{\nonumber}
-\newcommand{\co}{\text{CO$_{2}$}}
+\newcommand{\co}{CO$_2$}
 $$
 
 
 
-
-    
 <!-- Bootstrap navigation bar -->
 <div class="navbar navbar-default navbar-fixed-top">
   <div class="navbar-header">
@@ -336,7 +416,6 @@ $$
     </button>
     <a class="navbar-brand" href="book.html">Modeling and Computational Engineering</a>
   </div>
-
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
@@ -345,150 +424,150 @@ $$
      <!-- navigation toc: --> <li><a href="._book001.html#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
      <!-- navigation toc: --> <li><a href="._book001.html#ch:preface" style="font-size: 80%;"><b>Preface</b></a></li>
      <!-- navigation toc: --> <li><a href="._book002.html#ch:pyt" style="font-size: 80%;"><b>Introduction to Python</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Personal Guidelines</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Code editor</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Types in Python</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Basic types</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lists</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List arithmetic</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List slicing</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Numpy arrays</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Array slicing</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dictionaries</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Looping</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For loops</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;While loops</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Functions in Python</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Defining a mathematical function</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scope of variables</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Passing arrays and lists to functions</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Call by value or call by reference</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Floats and integers</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec21" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lists and arrays</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mutable and immutable objects</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 1.1: Explain why only one of the codes below gives the correct answer</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#personal-guidelines" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Personal Guidelines</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#code-editor" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Code editor</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#types-in-python" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Types in Python</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#basic-types" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Basic types</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#lists" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lists</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#list-arithmetic" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List arithmetic</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#list-slicing" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List slicing</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#numpy-arrays" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Numpy arrays</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#array-slicing" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Array slicing</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#dictionaries" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dictionaries</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#looping" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Looping</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#for-loops" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For loops</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#while-loops" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;While loops</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#functions-in-python" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Functions in Python</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#defining-a-mathematical-function" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Defining a mathematical function</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#scope-of-variables" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scope of variables</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#passing-arrays-and-lists-to-functions" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Passing arrays and lists to functions</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#call-by-value-or-call-by-reference" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Call by value or call by reference</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#floats-and-integers" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Floats and integers</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#lists-and-arrays" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lists and arrays</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#mutable-and-immutable-objects" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mutable and immutable objects</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#exercise-1-1-explain-why-only-one-of-the-codes-below-gives-the-correct-answer" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 1.1: Explain why only one of the codes below gives the correct answer</a></li>
      <!-- navigation toc: --> <li><a href="._book002.html#ch:pan" style="font-size: 80%;"><b>Introduction to Pandas</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;What is Pandas?</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec26" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Creating a data frame</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec27" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From empty DataFrame</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec28" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create DataFrame from dictionary</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec29" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From file</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec30" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Accessing data in  DataFrames</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Selecting columns</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Selecting rows</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec33" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Challenges when accessing columns or rows</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec34" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time columns not parsed properly</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec35" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Filtering and visualizing data</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Boolean masking</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec37" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Plotting a DataFrame</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec38" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Performing mathematical operations on DataFrames</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec39" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example: mathematical operations on DataFrames</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec40" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec41" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Grouping, filtering and aggregating data</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec42" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Simple statistics in Pandas</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec43" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Joining two DataFrames</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec44" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Appending DataFrames</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec45" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Merging DataFrames</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec46" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Working with folders and files</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec47" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Basic use of Pathlib</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec48" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Basic use of <code>os</code></a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec49" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Splitting data into different folders and files</a></li>
-     <!-- navigation toc: --> <li><a href="._book002.html#___sec50" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Writing more robust code</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#what-is-pandas" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;What is Pandas?</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#creating-a-data-frame" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Creating a data frame</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#from-empty-dataframe" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From empty DataFrame</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#create-dataframe-from-dictionary" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create DataFrame from dictionary</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#from-file" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From file</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#accessing-data-in-dataframes" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Accessing data in  DataFrames</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#selecting-columns" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Selecting columns</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#selecting-rows" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Selecting rows</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#challenges-when-accessing-columns-or-rows" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Challenges when accessing columns or rows</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#time-columns-not-parsed-properly" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time columns not parsed properly</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#filtering-and-visualizing-data" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Filtering and visualizing data</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#boolean-masking" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Boolean masking</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#plotting-a-dataframe" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Plotting a DataFrame</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#performing-mathematical-operations-on-dataframes" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Performing mathematical operations on DataFrames</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#example-mathematical-operations-on-dataframes" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example: mathematical operations on DataFrames</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#solution" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#grouping-filtering-and-aggregating-data" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Grouping, filtering and aggregating data</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#simple-statistics-in-pandas" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Simple statistics in Pandas</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#joining-two-dataframes" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Joining two DataFrames</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#appending-dataframes" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Appending DataFrames</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#merging-dataframes" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Merging DataFrames</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#working-with-folders-and-files" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Working with folders and files</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#basic-use-of-pathlib" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Basic use of Pathlib</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#basic-use-of-os" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Basic use of <code>os</code></a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#splitting-data-into-different-folders-and-files" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Splitting data into different folders and files</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#writing-more-robust-code" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Writing more robust code</a></li>
      <!-- navigation toc: --> <li><a href="#ch:taylor" style="font-size: 80%;"><b>Finite differences</b></a></li>
-     <!-- navigation toc: --> <li><a href="#___sec52" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Numerical Errors</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec53" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Taylor Polynomial Approximation</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec54" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Calculating Numerical Derivatives of Functions</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec55" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Higher order derivative</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec56" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Roundoff Errors</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec57" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Binary numbers</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec58" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Floating point numbers and the IEEE 754-1985 standard</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec59" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Roundoff error and truncation error in numerical derivatives</a></li>
+     <!-- navigation toc: --> <li><a href="#numerical-errors" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Numerical Errors</a></li>
+     <!-- navigation toc: --> <li><a href="#taylor-polynomial-approximation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Taylor Polynomial Approximation</a></li>
+     <!-- navigation toc: --> <li><a href="#calculating-numerical-derivatives-of-functions" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Calculating Numerical Derivatives of Functions</a></li>
+     <!-- navigation toc: --> <li><a href="#higher-order-derivative" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Higher order derivative</a></li>
+     <!-- navigation toc: --> <li><a href="#roundoff-errors" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Roundoff Errors</a></li>
+     <!-- navigation toc: --> <li><a href="#binary-numbers" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Binary numbers</a></li>
+     <!-- navigation toc: --> <li><a href="#floating-point-numbers-and-the-ieee-754-1985-standard" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Floating point numbers and the IEEE 754-1985 standard</a></li>
+     <!-- navigation toc: --> <li><a href="#roundoff-error-and-truncation-error-in-numerical-derivatives" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Roundoff error and truncation error in numerical derivatives</a></li>
      <!-- navigation toc: --> <li><a href="._book004.html#ch:lin" style="font-size: 80%;"><b>Solving linear systems</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec61" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The Continuity Equation</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec62" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Continuity Equation as a linear problem</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec63" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Boundary conditions</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec64" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Solving linear equations</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec65" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gauss-Jordan elimination</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec66" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pivoting</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec67" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LU decomposition</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec68" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Iterative methods</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec69" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iterative improvement</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec70" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Jacobi method</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec71" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Gauss-Seidel method</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec72" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Linear regression</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec73" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solving least square, using algebraic equations</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec74" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Least square as a linear algebra problem</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec75" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Working with matrices on component form</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec76" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Sparse matrices and Thomas algorithm</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec77" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Solving the heat equation using linear algebra</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec78" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.1: Conservation Equation or the Continuity Equation</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec79" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Heat equation for solids</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec80" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.2: Curing of Concrete and Matrix Formulation</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec81" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.3: Solve the full heat equation</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec82" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.4: Using sparse matrices in python</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#___sec83" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;CO$_2$ diffusion into aquifers</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#the-continuity-equation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The Continuity Equation</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#continuity-equation-as-a-linear-problem" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Continuity Equation as a linear problem</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#boundary-conditions" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Boundary conditions</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#solving-linear-equations" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Solving linear equations</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#gauss-jordan-elimination" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gauss-Jordan elimination</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#pivoting" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pivoting</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#lu-decomposition" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LU decomposition</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#iterative-methods" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Iterative methods</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#iterative-improvement" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iterative improvement</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#the-jacobi-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Jacobi method</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#the-gauss-seidel-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Gauss-Seidel method</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#example-linear-regression" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Linear regression</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#solving-least-square-using-algebraic-equations" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solving least square, using algebraic equations</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#least-square-as-a-linear-algebra-problem" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Least square as a linear algebra problem</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#working-with-matrices-on-component-form" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Working with matrices on component form</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#sparse-matrices-and-thomas-algorithm" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Sparse matrices and Thomas algorithm</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#example-solving-the-heat-equation-using-linear-algebra" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Solving the heat equation using linear algebra</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#exercise-4-1-conservation-equation-or-the-continuity-equation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.1: Conservation Equation or the Continuity Equation</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#heat-equation-for-solids" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Heat equation for solids</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#exercise-4-2-curing-of-concrete-and-matrix-formulation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.2: Curing of Concrete and Matrix Formulation</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#exercise-4-3-solve-the-full-heat-equation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.3: Solve the full heat equation</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#exercise-4-4-using-sparse-matrices-in-python" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.4: Using sparse matrices in python</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#co-_2-diffusion-into-aquifers" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;CO$_2$ diffusion into aquifers</a></li>
      <!-- navigation toc: --> <li><a href="._book005.html#ch:nlin" style="font-size: 80%;"><b>Solving nonlinear equations</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec85" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Nonlinear equations</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec86" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: van der Waals equation of state</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec87" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.1: van der Waal EOS and CO$_2$</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec88" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Fixed-point iteration</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec89" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.2: Implement the fixed point iteration</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec90" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.3: Finding the molar volume from the van der Waal EOS by fixed point iteration</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#nonlinear-equations" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Nonlinear equations</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#example-van-der-waals-equation-of-state" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: van der Waals equation of state</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#exercise-5-1-van-der-waal-eos-and-co-_2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.1: van der Waal EOS and CO$_2$</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#fixed-point-iteration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Fixed-point iteration</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#exercise-5-2-implement-the-fixed-point-iteration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.2: Implement the fixed point iteration</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#exercise-5-3-finding-the-molar-volume-from-the-van-der-waal-eos-by-fixed-point-iteration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.3: Finding the molar volume from the van der Waal EOS by fixed point iteration</a></li>
      <!-- navigation toc: --> <li><a href="._book005.html#sec:nlin:fp" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When do the fixed point method fail?</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec92" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;What to do when the fixed point method fail</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec93" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.4: Solve \( x=e^{1-x^2} \) using fixed point iteration</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec94" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec95" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The bisection method</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec96" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec97" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Newtons method</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec98" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec99" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.5: Compare Newtons, Bisection and the Fixed Point method</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec100" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Secant method</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec101" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec102" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Newton Rapson method</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec103" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Gradient Descent</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec104" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.6: Gradient descent solution of linear regression</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#___sec105" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Other Useful Methods</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#what-to-do-when-the-fixed-point-method-fail" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;What to do when the fixed point method fail</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#exercise-5-4-solve-x-e-1-x-2-using-fixed-point-iteration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.4: Solve \( x=e^{1-x^2} \) using fixed point iteration</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#rate-of-convergence" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#the-bisection-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The bisection method</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#rate-of-convergence" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#newtons-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Newtons method</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#rate-of-convergence" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#exercise-5-5-compare-newtons-bisection-and-the-fixed-point-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.5: Compare Newtons, Bisection and the Fixed Point method</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#secant-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Secant method</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#rate-of-convergence" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#newton-rapson-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Newton Rapson method</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#gradient-descent" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Gradient Descent</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#exercise-5-6-gradient-descent-solution-of-linear-regression" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.6: Gradient descent solution of linear regression</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#other-useful-methods" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Other Useful Methods</a></li>
      <!-- navigation toc: --> <li><a href="._book006.html#ch:numint" style="font-size: 80%;"><b>Numerical integration</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec107" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Numerical Integration</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec108" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Midpoint Rule</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec109" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Trapezoidal Rule</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec110" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Numerical Errors on Integrals</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec111" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Practical Estimation of Errors on Integrals (Richardson Extrapolation)</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec112" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Romberg Integration</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec113" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alternative implementation of adaptive integration</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec114" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Gaussian Quadrature</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec115" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The case N=3</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec116" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Error term on Gaussian Integration</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec117" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Common Weight functions for Classical Gaussian Quadratures</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec118" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Integrating functions over an infinite range</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec119" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Which method to use in a specific case? (NOT COMPLETED)</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#___sec120" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 6.1: Numerical Integration</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#numerical-integration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Numerical Integration</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#the-midpoint-rule" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Midpoint Rule</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#the-trapezoidal-rule" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Trapezoidal Rule</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#numerical-errors-on-integrals" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Numerical Errors on Integrals</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#practical-estimation-of-errors-on-integrals-richardson-extrapolation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Practical Estimation of Errors on Integrals (Richardson Extrapolation)</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#romberg-integration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Romberg Integration</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#alternative-implementation-of-adaptive-integration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alternative implementation of adaptive integration</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#gaussian-quadrature" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Gaussian Quadrature</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#the-case-n-3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The case N=3</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#error-term-on-gaussian-integration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Error term on Gaussian Integration</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#common-weight-functions-for-classical-gaussian-quadratures" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Common Weight functions for Classical Gaussian Quadratures</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#integrating-functions-over-an-infinite-range" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Integrating functions over an infinite range</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#which-method-to-use-in-a-specific-case-not-completed" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Which method to use in a specific case? (NOT COMPLETED)</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#exercise-6-1-numerical-integration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 6.1: Numerical Integration</a></li>
      <!-- navigation toc: --> <li><a href="._book007.html#ch:ode" style="font-size: 80%;"><b>Ordinary differential equations</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book007.html#___sec122" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ordinary Differential Equations</a></li>
-     <!-- navigation toc: --> <li><a href="._book007.html#___sec123" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;A Simple Model for Fluid Flow</a></li>
-     <!-- navigation toc: --> <li><a href="._book007.html#___sec124" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Eulers Method</a></li>
-     <!-- navigation toc: --> <li><a href="._book007.html#___sec125" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Error Analysis - Eulers Method</a></li>
-     <!-- navigation toc: --> <li><a href="._book007.html#___sec126" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adaptive step size - Eulers Method</a></li>
-     <!-- navigation toc: --> <li><a href="._book007.html#___sec127" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Runge-Kutta Methods</a></li>
-     <!-- navigation toc: --> <li><a href="._book007.html#___sec128" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adaptive step size - Runge-Kutta Method</a></li>
-     <!-- navigation toc: --> <li><a href="._book007.html#___sec129" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Conservation of Mass</a></li>
-     <!-- navigation toc: --> <li><a href="._book007.html#___sec130" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Solving a set of ODE equations</a></li>
-     <!-- navigation toc: --> <li><a href="._book007.html#___sec131" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Stiff sets of ODE  and implicit methods</a></li>
-     <!-- navigation toc: --> <li><a href="._book007.html#___sec132" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 7.1: Truncation Error in Eulers Method</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#ordinary-differential-equations" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ordinary Differential Equations</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#a-simple-model-for-fluid-flow" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;A Simple Model for Fluid Flow</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#eulers-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Eulers Method</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#error-analysis-eulers-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Error Analysis - Eulers Method</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#adaptive-step-size-eulers-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adaptive step size - Eulers Method</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#runge-kutta-methods" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Runge-Kutta Methods</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#adaptive-step-size-runge-kutta-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adaptive step size - Runge-Kutta Method</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#conservation-of-mass" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Conservation of Mass</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#solving-a-set-of-ode-equations" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Solving a set of ODE equations</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#stiff-sets-of-ode-and-implicit-methods" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Stiff sets of ODE  and implicit methods</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#exercise-7-1-truncation-error-in-eulers-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 7.1: Truncation Error in Eulers Method</a></li>
      <!-- navigation toc: --> <li><a href="._book008.html#ch:mc" style="font-size: 80%;"><b>Monte Carlo Methods</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book008.html#___sec134" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Monte Carlo Methods</a></li>
-     <!-- navigation toc: --> <li><a href="._book008.html#___sec135" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Monte Carlo Integration  ''Hit and Miss''</a></li>
-     <!-- navigation toc: --> <li><a href="._book008.html#___sec136" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Random number generators</a></li>
-     <!-- navigation toc: --> <li><a href="._book008.html#___sec137" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Encryption</a></li>
-     <!-- navigation toc: --> <li><a href="._book008.html#___sec138" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Errors on Monte Carlo Integration and the Binomial Distribution</a></li>
-     <!-- navigation toc: --> <li><a href="._book008.html#___sec139" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The mean value method</a></li>
-     <!-- navigation toc: --> <li><a href="._book008.html#___sec140" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Basic Properties of Probability Distributions</a></li>
-     <!-- navigation toc: --> <li><a href="._book008.html#___sec141" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example: Monte Carlo Integration of a Hyper Sphere</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#monte-carlo-methods" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Monte Carlo Methods</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#monte-carlo-integration-hit-and-miss" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Monte Carlo Integration  ''Hit and Miss''</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#random-number-generators" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Random number generators</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#encryption" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Encryption</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#errors-on-monte-carlo-integration-and-the-binomial-distribution" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Errors on Monte Carlo Integration and the Binomial Distribution</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#the-mean-value-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The mean value method</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#basic-properties-of-probability-distributions" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Basic Properties of Probability Distributions</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#example-monte-carlo-integration-of-a-hyper-sphere" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example: Monte Carlo Integration of a Hyper Sphere</a></li>
      <!-- navigation toc: --> <li><a href="._book008.html#ex:mc:norm" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 8.1: The central limit theorem</a></li>
-     <!-- navigation toc: --> <li><a href="._book008.html#___sec143" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#remarks" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
      <!-- navigation toc: --> <li><a href="._book008.html#ex:mc:BP" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 8.2: Birthday Paradox</a></li>
-     <!-- navigation toc: --> <li><a href="._book009.html#___sec145" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;References</a></li>
+     <!-- navigation toc: --> <li><a href="._book009.html#references" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;References</a></li>
 
         </ul>
       </li>
@@ -496,122 +575,121 @@ $$
   </div>
 </div>
 </div> <!-- end of navigation bar -->
-
 <div class="container">
-
 <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
-
 <a name="part0003"></a>
 <!-- !split -->
+<center>
+<h1 id="ch:taylor" class="anchor">Finite differences</h1>
+</center> <!-- chapter heading -->
 
-<center><h1 id="ch:taylor" class="anchor">Finite differences</h1></center> <!-- chapter heading -->
+<p>The mathematics introduced in this chapter is absolutely essential in order to understand the development of numerical algorithms. We strongly advice you to study it carefully, implement python scripts and investigate the results, reproduce the analytical derivations and compare with the numerical solutions.</p>
+<h1 id="numerical-errors" class="anchor">Numerical Errors </h1>
+<p>To simulate a physical system in a computer model, we usually have to make space and time discrete. In order to simulate e.g. a rocket flying into space we typically find the position of the rocket at a specific time \( t \), and the computer model calculates the new position at a later time \( t+h \). \( h \) is a step size, and if we assume it is one minute, then we have discretized one hour into 60 discrete chunks of time. The challenge for any modeler is to know if 1 minute is too short or too long? If \( h \) was one second instead of one minute, one hour would be split into 3600 pieces. The simulation time would go up, but would the <em>accuracy</em> of our calculation be any better? The goal of any numerical simulation is to keep the numerical error to an acceptable level. We will never get rid of it as you will see in this chapter. </p>
 
-<p>
-The mathematics introduced in this chapter is absolutely essential in order to understand the development of numerical algorithms. We strongly advice you to study it carefully, implement python scripts and investigate the results, reproduce the analytical derivations and compare with the numerical solutions.
-
-<h1 id="___sec52" class="anchor">Numerical Errors </h1>
-To simulate a physical system in a computer model, we usually have to make space and time discrete. In order to simulate e.g. a rocket flying into space we typically find the position of the rocket at a specific time \( t \), and the computer model calculates the new position at a later time \( t+h \). \( h \) is a step size, and if we assume it is one minute, then we have discretized one hour into 60 discrete chunks of time. The challenge for any modeler is to know if 1 minute is too short or too long? If \( h \) was one second instead of one minute, one hour would be split into 3600 pieces. The simulation time would go up, but would the <em>accuracy</em> of our calculation be any better? The goal of any numerical simulation is to keep the numerical error to an acceptable level. We will never get rid of it as you will see in this chapter.
-
-<p>
-Most physical systems are described in terms of <em>differential equations</em>. A differential equation describe how a physical phenomenon evolves in space and time. The solution to a differential equation is a function of space and/or time. The function could describe the temperature evolution of the earth, it could be growth of cancer cells, the water pressure in an oil reservoir, the list is endless. If we can solve the model analytically, the answer is given in terms of a known function. Most of the models cannot be solved analytically, then we have to rely on computers to help us. The computer does not have any concept of continuous functions, a function is always evaluated at some specific points in space and/or time. 
-<div class="alert alert-block alert-success alert-text-normal"><b>Numerical errors.</b>
-To represent a function of space and/or time in a computer, the function needs to be discretized. When a function is discretized it leads to discretization errors. The difference between the "true" answer and the answer obtained from a practical (numerical) calculation is called the <em>numerical error</em>.
+<p>Most physical systems are described in terms of <em>differential equations</em>. A differential equation describe how a physical phenomenon evolves in space and time. The solution to a differential equation is a function of space and/or time. The function could describe the temperature evolution of the earth, it could be growth of cancer cells, the water pressure in an oil reservoir, the list is endless. If we can solve the model analytically, the answer is given in terms of a known function. Most of the models cannot be solved analytically, then we have to rely on computers to help us. The computer does not have any concept of continuous functions, a function is always evaluated at some specific points in space and/or time. </p>
+<div class="alert alert-block alert-success alert-text-normal"><b>Numerical errors</b>
+<p>To represent a function of space and/or time in a computer, the function needs to be discretized. When a function is discretized it leads to discretization errors. The difference between the "true" answer and the answer obtained from a practical (numerical) calculation is called the <em>numerical error</em>.</p>
 </div>
 
 
-<p>
-When we divide space and time into finite pieces to represent them in a computer, a natural question to ask is how many pieces do we need. Consider an almost trivial example, let say you want visualize the function \( f(x)=\sin x \). To do this we need to choose where, which values of \( x \), we want to evaluate our function. Clearly, we want to use as few points as possible but still capture shape of the true function.  
+<p>When we divide space and time into finite pieces to represent them in a computer, a natural question to ask is how many pieces do we need. Consider an almost trivial example, let say you want visualize the function \( f(x)=\sin x \). To do this we need to choose where, which values of \( x \), we want to evaluate our function. Clearly, we want to use as few points as possible but still capture shape of the true function.  
 In figure <a href="#fig:taylor:sinx">9</a>, we have plotted \( \sin x \) for various discretization (spacing between the points) in the interval \( [-\pi,\pi] \).
+</p>
 
-<p>
 <center> <!-- figure label: --> <div id="fig:taylor:sinx"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 9:  A plot of \( \sin x \) for different spacing of the \( x \)-values.  <!-- caption label: fig:taylor:sinx --> </p></center>
+<center>
+<p class="caption">Figure 9:  A plot of \( \sin x \) for different spacing of the \( x \)-values.  <!-- caption label: fig:taylor:sinx --> </p>
+</center>
 <p><img src="fig-taylor/func_plot.png" align="bottom" width=600></p>
 </center>
 
-<p>
-From the figure we see that in some areas only a couple of points are needed in order to
+<p>From the figure we see that in some areas only a couple of points are needed in order to
 represent the function well, and in some areas more points are needed. To state it more clearly; between \( [-1,1] \) a linear function (few points) approximate \( \sin x \) well, 
 whereas in the area where the derivative of the function changes more rapidly e.g. in \( [-2,-1] \), we need the points to be more closely spaced to capture the behavior of the true function.
+</p>
 
-<p>
-What is a <em>good representation</em> representation of the true function? We cannot rely on visual inspection every time, and most of the time we do not know the true answer so we would not know what to compare it with. In the next section we will show how Taylor polynomial representation of a function is a natural starting point to answer this question.
-
-<h1 id="___sec53" class="anchor">Taylor Polynomial Approximation </h1>
-How can we evaluate numerical errors if we do not know the true answer? There are at least two answers to this
+<p>What is a <em>good representation</em> representation of the true function? We cannot rely on visual inspection every time, and most of the time we do not know the true answer so we would not know what to compare it with. In the next section we will show how Taylor polynomial representation of a function is a natural starting point to answer this question.</p>
+<h1 id="taylor-polynomial-approximation" class="anchor">Taylor Polynomial Approximation </h1>
+<p>How can we evaluate numerical errors if we do not know the true answer? There are at least two answers to this</p>
 
 <ol>
 <li> The pragmatic engineering approach is to do a simulation with a coarse grid, then refine the grid until the solution does not change very much. This is perfectly fine <em>if you know that your numerical code is bug free</em>, because even if the simulation converges to a solution we do not know if it is the <em>true solution</em>. In too many cases this is not so. Therefore even in well tested industrial codes, it is always good to test them on a simple test case where you know the exact solution.</li>
 <li> Taylors formula can be used to represent any continuous function with continuous derivatives or most solutions to a mathematical model. Taylors formula gives us an estimate of the numerical error introduced when we divide space and time into finite pieces.</li>
 </ol>
-
-There are many ways of representing a function, \( f(x) \), like Fourier series, Legendre polynomials, but perhaps one of the most widely used is Taylor polynomials.   
+<p>There are many ways of representing a function, \( f(x) \), like Fourier series, Legendre polynomials, but perhaps one of the most widely used is Taylor polynomials.   
 Taylor series are perfect for computers, simply because it makes it possible to evaluate any function with a set of limited operations: <em>addition, subtraction, and multiplication</em>. Let us start off with the formal definition: 
+</p>
 <div class="alert alert-block alert-success alert-text-normal"><b>Taylor polynomial:</b>
-The Taylor polynomial, \( P_n(x) \) of degree \( n \) of a function \( f(x) \) at the point \( c \) is defined as:
+<p>The Taylor polynomial, \( P_n(x) \) of degree \( n \) of a function \( f(x) \) at the point \( c \) is defined as:</p>
 $$
 \begin{align}
  P_n(x) &= f(c)+f^\prime(c)(x-c)+\frac{f^{\prime\prime}(c)}{2!}(x-c)^2+\cdots+\frac{f^{(n)}(c)}{n!}(x-c)^n\nonumber\\ 
-&=\sum_{k=0}^n\frac{f^{(k)}(c)}{k!}(x-c)^k.\tag{3.1}
+&=\sum_{k=0}^n\frac{f^{(k)}(c)}{k!}(x-c)^k.\tag{4.1}
 \end{align}
 $$
 </div>
 
-Note that \( x \) can be anything, space, time, temperature etc. If the series is around the point \( c=0 \), the Taylor polynomial \( P_n(x) \) is often called a Maclaurin polynomial. If the series converge (i.e. that the higher order terms approach zero), then we can represent the function \( f(x) \) with its corresponding Taylor series around the point \( x=c \):
+<p>Note that \( x \) can be anything, space, time, temperature etc. If the series is around the point \( c=0 \), the Taylor polynomial \( P_n(x) \) is often called a Maclaurin polynomial. If the series converge (i.e. that the higher order terms approach zero), then we can represent the function \( f(x) \) with its corresponding Taylor series around the point \( x=c \):</p>
 $$
 \begin{align}
  f(x) &= f(c)+f^\prime(c)(x-c)+\frac{f^{\prime\prime}(c)}{2!}(x-c)^2+\cdots
-=\sum_{k=0}^\infty\frac{f^{(k)}}{k!}(x-c)^k.\tag{3.2}
+=\sum_{k=0}^\infty\frac{f^{(k)}}{k!}(x-c)^k.\tag{4.2}
 \end{align}
 $$
 
-<div class="alert alert-block alert-success alert-text-normal"><b>The magic of Taylors formula.</b>
-Taylors formula, equation <a href="#mjx-eqn-3.2">(3.2)</a>, states that if we know the function value and its derivative <em>in a single point \( c \)</em>, we can estimate the function everywhere <em>using only  information from the single point \( c \)</em>. How can this be, how can information in a single point be used to predict the behavior of the function everywhere? One way of thinking about it could be to imagine an object moving in a constant gravitational field without air resistance. Newtons laws then tells us that  if we know the starting point e.g. (\( x(0) \)), the velocity (\( v=dx/dt \)), and the acceleration (\( a=dv/dt=d^2x/dt^2 \)) in that point we can predict the trajectory of the object. This trajectory is exactly the first terms in Taylors formula, \( x(t)=x(0) + vt+at^2/2 \).
+<div class="alert alert-block alert-success alert-text-normal"><b>The magic of Taylors formula</b>
+<p>Taylors formula, equation <a href="#mjx-eqn-4.2">(4.2)</a>, states that if we know the function value and its derivative <em>in a single point \( c \)</em>, we can estimate the function everywhere <em>using only  information from the single point \( c \)</em>. How can this be, how can information in a single point be used to predict the behavior of the function everywhere? One way of thinking about it could be to imagine an object moving in a constant gravitational field without air resistance. Newtons laws then tells us that  if we know the starting point e.g. (\( x(0) \)), the velocity (\( v=dx/dt \)), and the acceleration (\( a=dv/dt=d^2x/dt^2 \)) in that point we can predict the trajectory of the object. This trajectory is exactly the first terms in Taylors formula, \( x(t)=x(0) + vt+at^2/2 \). </p>
 </div>
 
-An example of how Taylors formula works for a known function, can be seen in figure <a href="#fig:mac_sin">10</a>, where we show the first nine terms in the Maclaurin series for \( \sin x \) (all even terms are zero).
+<p>An example of how Taylors formula works for a known function, can be seen in figure <a href="#fig:mac_sin">10</a>, where we show the first nine terms in the Maclaurin series for \( \sin x \) (all even terms are zero). </p>
 
-<p>
 <center> <!-- figure label: --> <div id="fig:mac_sin"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 10:  Nine first terms of the Maclaurin series of \( \sin x \).  <!-- caption label: fig:mac_sin --> </p></center>
+<center>
+<p class="caption">Figure 10:  Nine first terms of the Maclaurin series of \( \sin x \).  <!-- caption label: fig:mac_sin --> </p>
+</center>
 <p><img src="fig-taylor/mac_sin.png" align="bottom" width=600></p>
 </center>
 
-<p>
-Notice that close to \( x=0 \) we only need one term, as we move further away from this point more and more term needs to be added. Thus, Taylors formula is only exact if we include an infinite number of terms. In practice we only include a limited number of terms and truncate the series up to a given order. Luckily, Taylors formula include an estimate of the error we do when we truncate the series. 
+<p>Notice that close to \( x=0 \) we only need one term, as we move further away from this point more and more term needs to be added. Thus, Taylors formula is only exact if we include an infinite number of terms. In practice we only include a limited number of terms and truncate the series up to a given order. Luckily, Taylors formula include an estimate of the error we do when we truncate the series. </p>
 <div class="alert alert-block alert-success alert-text-normal"><b>Truncation error in Taylors formula:</b>
 $$
 \begin{align}
 R_n(x)&=f(x)-P_n(x)=\frac{f^{(n+1)}(\eta)}{(n+1)!}(x-c)^{n+1}\nonumber\\ 
-      &=\frac{1}{n!}\int_c^x(x-\tau)^{n}f^{(n+1)}(\tau)d\tau,\tag{3.3}
+      &=\frac{1}{n!}\int_c^x(x-\tau)^{n}f^{(n+1)}(\tau)d\tau,\tag{4.3}
 \end{align}
 $$
 
-Notice that the mathematical formula is basically the next order term (\( n+1 \)) in the Taylor series, but with \( f^{(n+1)}(c)\to f^{(n+1)}(\eta) \). \( \eta \) is an (unknown) value in the domain \( [x,c] \).
+<p>Notice that the mathematical formula is basically the next order term (\( n+1 \)) in the Taylor series, but with \( f^{(n+1)}(c)\to f^{(n+1)}(\eta) \). \( \eta \) is an (unknown) value in the domain \( [x,c] \).</p>
 </div>
 
-Notice that if \( c \) is very far from \( x \) the truncation error increases. The fact that we do not know the value of \( \eta \) is usually not a problem, in many cases we just replace \( f(\eta) \) with the maximum value it can take on the domain. Equation <a href="#mjx-eqn-3.3">(3.3)</a> gives us an direct estimate of discretization error. 
-<div class="alert alert-block alert-success alert-text-normal"><b>Example: evaluate \( \sin x \).</b>
-Whenever you do e.g. <code>np.sin(1)</code> in Python or an equivalent statement in another language, Python has to tell the computer how to evaluate \( \sin x \) at \( x=1 \). Write a Python code that calculates \( \sin x \) up to a user specified accuracy.
+<p>Notice that if \( c \) is very far from \( x \) the truncation error increases. The fact that we do not know the value of \( \eta \) is usually not a problem, in many cases we just replace \( f(\eta) \) with the maximum value it can take on the domain. Equation <a href="#mjx-eqn-4.3">(4.3)</a> gives us an direct estimate of discretization error. </p>
+<div class="alert alert-block alert-success alert-text-normal"><b>Example: evaluate \( \sin x \)</b>
+<p>Whenever you do e.g. <code>np.sin(1)</code> in Python or an equivalent statement in another language, Python has to tell the computer how to evaluate \( \sin x \) at \( x=1 \). Write a Python code that calculates \( \sin x \) up to a user specified accuracy.</p>
 
 <p>
 <b>Solution</b>
 The Maclaurin series of \( \sin x \) is:
+</p>
 $$
 \begin{equation}
 \sin x = x-\frac{x^3}{3!}+\frac{x^5}{5!}-\frac{x^7}{7!}+\cdots=\sum_{k=0}^{\infty}\frac{(-1)^n}{(2n+1)!}x^{2n+1}.
-\tag{3.4}
+\tag{4.4}
 \end{equation}
 $$
 
-If we want to calculate \( \sin x \) to a precision lower than a specified value we can do it as follows:
+<p>If we want to calculate \( \sin x \) to a precision lower than a specified value we can do it as follows:</p>
 
-<p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #ffffff">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
 
 <span style="color: #408080; font-style: italic"># Sinus implementation using the Maclaurin Serie</span>
 <span style="color: #408080; font-style: italic"># By setting a value for eps this value will be used</span>
@@ -632,101 +710,116 @@ If we want to calculate \( \sin x \) to a precision lower than a specified value
 x<span style="color: #666666">=0.8</span>
 eps <span style="color: #666666">=</span> <span style="color: #666666">1e-9</span>
 <span style="color: #008000">print</span>(my_sin(x,eps), <span style="color: #BA2121">&#39;error = &#39;</span>, np<span style="color: #666666">.</span>sin(x)<span style="color: #666666">-</span>my_sin(x,eps))
-</pre></div>
-<p>
-This implementation needs some explanation:
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>This implementation needs some explanation:</p>
 
 <ul>
-<li> The error term is given in equation <a href="#mjx-eqn-3.3">(3.3)</a>, and it is an even power in \( x \). We do not which \( \eta \) to use in equation <a href="#mjx-eqn-3.3">(3.3)</a>, instead we simply say that the error in our estimate is smaller than the highest order term. Thus, we stop the evaluation if the highest order term in the series is lower than the uncertainty. Note that the final error has to be smaller as the higher order terms in any convergent series is smaller than the previous.  Our estimate should then always be better than the specified accuracy.</li>
+<li> The error term is given in equation <a href="#mjx-eqn-4.3">(4.3)</a>, and it is an even power in \( x \). We do not which \( \eta \) to use in equation <a href="#mjx-eqn-4.3">(4.3)</a>, instead we simply say that the error in our estimate is smaller than the highest order term. Thus, we stop the evaluation if the highest order term in the series is lower than the uncertainty. Note that the final error has to be smaller as the higher order terms in any convergent series is smaller than the previous.  Our estimate should then always be better than the specified accuracy.</li>
 <li> We evaluate the polynomials in the Taylor series by using the previous values too avoid too many multiplications within the loop, we do this by using the following identity:</li>
 </ul>
-
 $$
   \begin{align}
   \sin x&=\sum_{k=0}^{\infty} (-1)^nt_n, \text{ where: } t_n\equiv\frac{x^{2n+1}}{(2n+1)!}, \text{ hence :}\nonumber\\ 
   t_{n+1}&=\frac{x^{2(n+1)+1}}{(2(n+1)+1)!}=\frac{x^{2n+1}x^2}{(2n+1)! (2n+2)(2n+3)}\nonumber\\ 
   &=t_n\frac{x^2}{(2n+2)(2n+3)}
-\tag{3.5}
+\tag{4.5}
 \end{align}
 $$
 </div>
 
+<h1 id="calculating-numerical-derivatives-of-functions" class="anchor">Calculating Numerical Derivatives of Functions </h1>
 
-<h1 id="___sec54" class="anchor">Calculating Numerical Derivatives of Functions </h1>
-
-<p>
-As stated earlier many models are described by differential equations. Differential equations contains derivatives, and we need to tell the computer how to calculate those. By using a simple transformation, \( x\to x+h \) and \( c\to x \) (hence \( x-c\to h \)), Taylors formula in equation <a href="#mjx-eqn-3.2">(3.2)</a> can be written
+<p>As stated earlier many models are described by differential equations. Differential equations contains derivatives, and we need to tell the computer how to calculate those. By using a simple transformation, \( x\to x+h \) and \( c\to x \) (hence \( x-c\to h \)), Taylors formula in equation <a href="#mjx-eqn-4.2">(4.2)</a> can be written</p>
 $$
 \begin{equation}
 f(x+h)=f(x)+f^\prime(x)h+\frac{1}{2}f^{\prime\prime}(x)h^2+\cdots.
-\tag{3.6}
+\tag{4.6}
 \end{equation}
 $$
 
-This is useful because this equation contains the derivative of \( f(x) \) on the right hand side. To be even more explicit let us truncate the series to a certain power. Remember that you can always do this but we need to replace \( x \) with \( \eta \) in the last term we choose to keep
+<p>This is useful because this equation contains the derivative of \( f(x) \) on the right hand side. To be even more explicit let us truncate the series to a certain power. Remember that you can always do this but we need to replace \( x \) with \( \eta \) in the last term we choose to keep</p>
 $$
 \begin{equation}
 f(x+h)=f(x)+f^\prime(x)h+\frac{1}{2}f^{\prime\prime}(\eta)h^2
-\tag{3.7}
+\tag{4.7}
 \end{equation}
 $$
 
-where \( \eta\in[x,x+h] \). Solving this equation with respect to \( f^\prime(x) \) gives us
+<p>where \( \eta\in[x,x+h] \). Solving this equation with respect to \( f^\prime(x) \) gives us</p>
 $$
 \begin{equation}
 f^\prime(x)=\frac{f(x+h)-f(x)}{h}-\frac{1}{2}f^{\prime\prime}(\eta)h.
-\tag{3.8}
+\tag{4.8}
 \end{equation}
 $$
 
-Note that if \( h\to0 \), this expression is equal to the definition of the derivative. The beauty of equation <a href="#mjx-eqn-3.8">(3.8)</a> is that it contains an expression for the error we make <em>when \( h \) is not zero</em>. Equation <a href="#mjx-eqn-3.8">(3.8)</a> is usually called the <em>forward difference</em> . As you might guess, we can also choose to use the <em>backward difference</em>  by simply replacing \( h\to-h \). Is equation <a href="#mjx-eqn-3.8">(3.8)</a> the only formula for the derivative? The answer is no, and we are going to derive the formula for the <em>central difference</em> , by writing Taylors formula for \( x+h \) and \( x-h \) up to the third order
+<p>Note that if \( h\to0 \), this expression is equal to the definition of the derivative. The beauty of equation <a href="#mjx-eqn-4.8">(4.8)</a> is that it contains an expression for the error we make <em>when \( h \) is not zero</em>. Equation <a href="#mjx-eqn-4.8">(4.8)</a> is usually called the <em>forward difference</em> . As you might guess, we can also choose to use the <em>backward difference</em>  by simply replacing \( h\to-h \). Is equation <a href="#mjx-eqn-4.8">(4.8)</a> the only formula for the derivative? The answer is no, and we are going to derive the formula for the <em>central difference</em> , by writing Taylors formula for \( x+h \) and \( x-h \) up to the third order</p>
 
 $$
 \begin{align}
 f(x+h)&=f(x)+f^\prime(x)h+\frac{1}{2}f^{\prime\prime}(x)h^2+\frac{1}{3!}f^{(3)}(\eta_1)h^3,   
-\tag{3.9}\\ 
+\tag{4.9}\\ 
 f(x-h)&=f(x)-f^\prime(x)h+\frac{1}{2}f^{\prime\prime}(x)h^2-\frac{1}{3!}f^{(3)}(\eta_2)h^3.
-\tag{3.10}
+\tag{4.10}
 \end{align}
 $$
 
-where \( \eta_1\in[x,x+h] \), and \( \eta_2\in[x-h,x] \). Subtracting  equation <a href="#mjx-eqn-3.9">(3.9)</a> and <a href="#mjx-eqn-3.10">(3.10)</a>, we get the following expression for the central difference 
+<p>where \( \eta_1\in[x,x+h] \), and \( \eta_2\in[x-h,x] \). Subtracting  equation <a href="#mjx-eqn-4.9">(4.9)</a> and <a href="#mjx-eqn-4.10">(4.10)</a>, we get the following expression for the central difference </p>
 $$
 \begin{equation}
 f^\prime(x)=\frac{f(x+h)-f(x-h)}{2h} -\frac{h^2}{6}f^{(3)}(\eta),label{eq:taylor:cd}
 \end{equation}
 $$
 
-<p>
-where \( \eta\in[x-h,x+h] \). Note that the error term in this equation is <em>one order higher</em> than in equation <a href="#mjx-eqn-3.8">(3.8)</a>, meaning that it is expected to be more accurate. In figure <a href="#fig:taylor:fd">11</a> there is a graphical interpretation of the finite difference approximations to the derivative.
+<p>where \( \eta\in[x-h,x+h] \). Note that the error term in this equation is <em>one order higher</em> than in equation <a href="#mjx-eqn-4.8">(4.8)</a>, meaning that it is expected to be more accurate. In figure <a href="#fig:taylor:fd">11</a> there is a graphical interpretation of the finite difference approximations to the derivative. </p>
 
-<p>
 <center> <!-- figure label: --> <div id="fig:taylor:fd"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 11:  A graphical interpretation of the forward and central difference formula.  <!-- caption label: fig:taylor:fd --> </p></center>
+<center>
+<p class="caption">Figure 11:  A graphical interpretation of the forward and central difference formula.  <!-- caption label: fig:taylor:fd --> </p>
+</center>
 <p><img src="fig-taylor/fd.png" align="bottom" width=800></p>
 </center>
 
-<h3 id="___sec55" class="anchor">Higher order derivative </h3>
-
-We are also now in the position to derive a formula for the second order derivative. Instead of subtracting equation <a href="#mjx-eqn-3.9">(3.9)</a> and <a href="#mjx-eqn-3.10">(3.10)</a>, we can add them. Then the first order derivative disappear and we are left with an expression for the second derivative
+<h3 id="higher-order-derivative" class="anchor">Higher order derivative </h3>
+<p>We are also now in the position to derive a formula for the second order derivative. Instead of subtracting equation <a href="#mjx-eqn-4.9">(4.9)</a> and <a href="#mjx-eqn-4.10">(4.10)</a>, we can add them. Then the first order derivative disappear and we are left with an expression for the second derivative</p>
 $$
 \begin{equation}
 f^{\prime\prime}(x) = \frac{f(x+h)+f(x-h)-2f(x)}{h^2}- \frac{h^2}{12}f^{(4)}(\eta)
-\tag{3.11},
+\tag{4.11},
 \end{equation}
 $$
 
+
+<div class="alert alert-block alert-success alert-text-normal"><b>Example: calculate the numerical derivative and second derivative of \( \sin x \)</b>
+<p>Choose a specific point, e.g. \( x=1 \), and calculate the numerical error for various values of the step size \( h \).</p>
 <p>
-<div class="alert alert-block alert-success alert-text-normal"><b>Example: calculate the numerical derivative and second derivative of \( \sin x \).</b>
-Choose a specific point, e.g. \( x=1 \), and calculate the numerical error for various values of the step size \( h \).
 <b>Solution:</b>
 The derivative of \( \sin x \) is \( \cos x \), we can calculate the numerical derivatives using Python
+</p>
 
-<p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #ffffff">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
     <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>sin(x)
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">fd</span>(f,x,h):
  <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
@@ -757,115 +850,211 @@ plt<span style="color: #666666">.</span>grid()
 plt<span style="color: #666666">.</span>legend()
 plt<span style="color: #666666">.</span>xscale(<span style="color: #BA2121">&#39;log&#39;</span>)
 plt<span style="color: #666666">.</span>yscale(<span style="color: #BA2121">&#39;log&#39;</span>)
-</pre></div>
-<p>
-In figure <a href="#fig:taylor:df2">12</a> you can see the figure produced by the code above.
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>In figure <a href="#fig:taylor:df2">12</a> you can see the figure produced by the code above.</p>
 </div>
 
 
-<p>
 <center> <!-- figure label: --> <div id="fig:taylor:df2"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 12:  Numerical error of derivatives of \( \sin x \) for various step sizes.  <!-- caption label: fig:taylor:df2 --> </p></center>
+<center>
+<p class="caption">Figure 12:  Numerical error of derivatives of \( \sin x \) for various step sizes.  <!-- caption label: fig:taylor:df2 --> </p>
+</center>
 <p><img src="fig-taylor/df2_mod.png" align="bottom" width=800></p>
 </center>
 
-<p>
-There are several important lessons from figure <a href="#fig:taylor:df2">12</a>
-
+<p>There are several important lessons from figure <a href="#fig:taylor:df2">12</a></p>
 <ol>
 <li> When the step size is high and decreasing (from right to left in the figure), we clearly see that the numerical error <em>decreases</em>.</li>
 <li> The numerical error scales as expected from right to left. The forward difference formula scales as \( h \), i.e. decreasing the step size by 10 reduces the numerical error by 10. The central difference and second order derivative formula scales as \( h^2 \), reducing the step size by 10 reduces the numerical error by 100</li>
 <li> At a certain point the numerical error start to <em>increase</em>. For the forward difference formula this happens at \( ~10^{-8} \).</li>
 </ol>
-
-The numerical error has a minimum, <em>it does not continue to decrease when \( h \) decreases</em>. The explanation for this behavior is two competing effects: <em>truncation errors</em> and <em>roundoff errors</em>. The truncation errors have already been discussed in great detail, in the next section we will explain roundoff errors.
-
-<h2 id="___sec56" class="anchor">Roundoff Errors </h2>
-In a computer a floating point number,$x$, is represented as:
+<p>The numerical error has a minimum, <em>it does not continue to decrease when \( h \) decreases</em>. The explanation for this behavior is two competing effects: <em>truncation errors</em> and <em>roundoff errors</em>. The truncation errors have already been discussed in great detail, in the next section we will explain roundoff errors.</p>
+<h2 id="roundoff-errors" class="anchor">Roundoff Errors </h2>
+<p>In a computer a floating point number,$x$, is represented as:</p>
 $$
 \begin{align}
 x=\pm q2^m.
-\tag{3.12}
+\tag{4.12}
 \end{align}
 $$
 
-This is very similar to our usual scientific notation where we represents large (or small numbers) as \( \pm q E m=\pm q 10^{m} \). The processor in a computer handles a chunk of bits at one time, this chunk of bit is usually termed <em>word</em>. The number of bits (or byte which almost always means a group of eight bits) in a word is handled as a unit by a processor.   
+<p>This is very similar to our usual scientific notation where we represents large (or small numbers) as \( \pm q E m=\pm q 10^{m} \). The processor in a computer handles a chunk of bits at one time, this chunk of bit is usually termed <em>word</em>. The number of bits (or byte which almost always means a group of eight bits) in a word is handled as a unit by a processor.   
 Most modern computers uses 64-bits (8 bytes) processors. We are not going too much into all the details, the most important message is that the units handled by the processor are <em>finite</em>. Thus we cannot, in general, store numbers in a computer with infinite accuracy.
-<div class="alert alert-block alert-success alert-text-normal"><b>Machine Precision.</b>
-Machine precision, \( \epsilon_M \) is the smallest number we can add to one and get something different than one, i.e. \( 1+\epsilon_M>1 \). For a 64-bits computer this value is \( \epsilon_M=2^{-52}\simeq2.2210^{-16} \).
+</p>
+<div class="alert alert-block alert-success alert-text-normal"><b>Machine Precision</b>
+<p>Machine precision, \( \epsilon_M \) is the smallest number we can add to one and get something different than one, i.e. \( 1+\epsilon_M>1 \). For a 64-bits computer this value is \( \epsilon_M=2^{-52}\simeq2.2210^{-16} \).</p>
 </div>
 
-In the next section we explain exactly why the machine precision has this value, but if you just accept this for a moment we can demonstrate why the machine precision is important and why you need to care about it. First just to convince you that the machine precision has the value of \( 2^{-52} \) in your computer you can do the following in Python
-<p>
+<p>In the next section we explain exactly why the machine precision has this value, but if you just accept this for a moment we can demonstrate why the machine precision is important and why you need to care about it. First just to convince you that the machine precision has the value of \( 2^{-52} \) in your computer you can do the following in Python</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000">print</span>(<span style="color: #666666">1+2**-52</span>) <span style="color: #408080; font-style: italic"># prints a value larger than 1</span>
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000">print</span>(<span style="color: #666666">1+2**-52</span>) <span style="color: #408080; font-style: italic"># prints a value larger than 1</span>
 <span style="color: #008000">print</span>(<span style="color: #666666">1+2**-53</span>) <span style="color: #408080; font-style: italic"># prints 1.0</span>
-</pre></div>
-<p>
-Next, consider the simple calculation
-<p>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>Next, consider the simple calculation</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>a<span style="color: #666666">=0.1+0.2</span>
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">a<span style="color: #666666">=0.1+0.2</span>
 b<span style="color: #666666">=0.3</span>
 <span style="color: #008000">print</span>(a<span style="color: #666666">==</span>b) <span style="color: #408080; font-style: italic"># gives False</span>
-</pre></div>
-<p>
-Why is <code>a==b</code> false, the calculation involves only numbers with one decimal? The reason is that the computer uses the binary system, and in the binary system there is no way of representing 0.2 and 0.3 with a finite number of bits, as an example 0.2 in the binary system is
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>Why is <code>a==b</code> false, the calculation involves only numbers with one decimal? The reason is that the computer uses the binary system, and in the binary system there is no way of representing 0.2 and 0.3 with a finite number of bits, as an example 0.2 in the binary system is</p>
 $$
 \begin{equation}
 0.2_{10}=0.0011001100\ldots_2 (=2^{-3}+2^{-4}+2^{-7}+2^{-8}+2^{-11}+\cdots)
-\tag{3.13}
+\tag{4.13}
 \end{equation}
 $$
 
-Note that we use the subscript \( _{10} \) and \( _2 \) to represent the decimal and binary system respectively.
+<p>Note that we use the subscript \( _{10} \) and \( _2 \) to represent the decimal and binary system respectively.
 Thus in the computer 0.2 will be represented as \( 0.1999\ldots \) and when we add 0.1 we will get a number really close to 0.3 but not equal to 0.3. Some floats have an exact binary representation e.g. \( 0.125_{10}=2^{-8}_{10}=0.00000001_2 \). Thus the following code will produce the expected result
-<p>
+</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>a<span style="color: #666666">=0.125+0.25</span>
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">a<span style="color: #666666">=0.125+0.25</span>
 b<span style="color: #666666">=0.375</span>
 <span style="color: #008000">print</span>(a<span style="color: #666666">==</span>b) <span style="color: #408080; font-style: italic"># gives True</span>
-</pre></div>
-<p>
-<div class="alert alert-block alert-success alert-text-normal"><b>Comparing two floats.</b>
-Whenever you want to compare if two floats, \( a \) and \( b \), are equal in a computer program, you should never do \( a==b \) because of roundoff errors. Rather you should choose a variant of \( |a-b| < \epsilon \), where you check if the numbers are <em>close enough</em>. In practice you also might want to normalize the values and do \( |1-b/a| < \epsilon \).
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-The roundoff errors can also play a very big role in calculations, it is particularly apparent when subtracting two numbers of similar magnitude as illustrated in the following code
-<p>
+<div class="alert alert-block alert-success alert-text-normal"><b>Comparing two floats</b>
+<p>Whenever you want to compare if two floats, \( a \) and \( b \), are equal in a computer program, you should never do \( a==b \) because of roundoff errors. Rather you should choose a variant of \( |a-b| < \epsilon \), where you check if the numbers are <em>close enough</em>. In practice you also might want to normalize the values and do \( |1-b/a| < \epsilon \). </p>
+</div>
+
+<p>The roundoff errors can also play a very big role in calculations, it is particularly apparent when subtracting two numbers of similar magnitude as illustrated in the following code</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>h<span style="color: #666666">=2**-53</span>
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">h<span style="color: #666666">=2**-53</span>
 a<span style="color: #666666">=1+</span>h
 b<span style="color: #666666">=1-</span>h
 <span style="color: #008000">print</span>((a<span style="color: #666666">-</span>b)<span style="color: #666666">/</span>h) <span style="color: #408080; font-style: italic"># analytical result is 2</span>
-</pre></div>
-<p>
-The calculation above is very similar to the calculation done when evaluating derivatives, and if you run the code you will see that Python does not give the expected value of 2.
-<div class="alert alert-block alert-success alert-text-normal"><b>Choosing the right step size.</b>
-A step size that is too low will give higher numerical error because roundoff errors dominate the numerical error.
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-At the end we will mention a simple trick that you can use sometimes to avoid roundoff errors <a href="._book009.html#flannery1992numerical">[3]</a>. In practice we can never get rid of roundoff errors in the calculation \( f(x+h) \), but since we can choose the step size \( h \) we can choose to choose values such that \( x \) and \( x+h \) differ by an exact binary number
-<p>
+<p>The calculation above is very similar to the calculation done when evaluating derivatives, and if you run the code you will see that Python does not give the expected value of 2.</p>
+<div class="alert alert-block alert-success alert-text-normal"><b>Choosing the right step size</b>
+<p>A step size that is too low will give higher numerical error because roundoff errors dominate the numerical error. </p>
+</div>
+
+<p>At the end we will mention a simple trick that you can use sometimes to avoid roundoff errors <a href="._book009.html#flannery1992numerical">[3]</a>. In practice we can never get rid of roundoff errors in the calculation \( f(x+h) \), but since we can choose the step size \( h \) we can choose to choose values such that \( x \) and \( x+h \) differ by an exact binary number</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>x<span style="color: #666666">=1</span>
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">x<span style="color: #666666">=1</span>
 h<span style="color: #666666">=0.0002</span> 
 temp <span style="color: #666666">=</span> x<span style="color: #666666">+</span>h
 h<span style="color: #666666">=</span>temp<span style="color: #666666">-</span>x
 <span style="color: #008000">print</span>(h) <span style="color: #408080; font-style: italic"># improved value of h with exact binary representation</span>
-</pre></div>
-<p>
-In the next sections we will show why \( \epsilon_M=2^{-52} \), and why a finite word size leads necessary has to imply a maximum and minimum number.
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<h3 id="___sec57" class="anchor">Binary numbers </h3>
-
+<p>In the next sections we will show why \( \epsilon_M=2^{-52} \), and why a finite word size leads necessary has to imply a maximum and minimum number.
+<h3 id="binary-numbers" class="anchor">Binary numbers </h3>
 Binary numbers are used in computers because processors are made of billions of transistors, the end states of a transistor is off or on, representing a 0 or 1 in the binary system. Assume, for simplicity, that we have a processor that uses a word size of 4 bits (instead of 64 bits). How many <em>unsigned</em> (positive) integers can we represent in this processor? Lets write down all the possible combinations, of ones and zeros and also do the translation from base 2 numerical system to base 10 numerical system:
+</p>
 
 $$
 \begin{equation}
@@ -888,126 +1077,123 @@ $$
 1&1&1&1=1\cdot 2^3+1\cdot 2^2+1\cdot 2^1+1\cdot 2^0=15
 \end{matrix}
 .
-\tag{3.14}
+\tag{4.14}
 \end{equation}
 $$
 
-Hence, with a 4 bits word size, we can represent \( 2^4=16 \) integers. The largest number is \( 2^4-1=15 \), and the smallest is zero. What about negative numbers? If we still keep to a 4 bits word size, there are still \( 2^4=16 \) numbers, but we distribute them differently. The common way to do it is to reserve the first bit to be a <em>sign</em> bit, a "0" is positive and "1" is negative, i.e. \( (-1)^0 = 1 \), and \( (-1)^1=-1 \). Replacing the first bit with a sign bit in equation <a href="#mjx-eqn-3.14">(3.14)</a>, we get the following sequence of numbers 0,1,2,3,4,5,6,7,-0,-1,-2,-3,-4,-5,-6,-7. The "-0", might seem strange but is used in the computer to extend the real number line \( 1/0=\infty \), whereas \( 1/-0=-\infty \). In general when there are \( m \) bits, we have a total of \( 2^m \) numbers. If we include negative numbers, we can choose to have \( 2^{m-1}-1 \), negative, and \( 2^{m-1}-1 \) positive numbers, negative zero and positive zero, i.e. \( 2^{m-1}-1+2^{m-1}-1+1+1=2^m \).
+<p>Hence, with a 4 bits word size, we can represent \( 2^4=16 \) integers. The largest number is \( 2^4-1=15 \), and the smallest is zero. What about negative numbers? If we still keep to a 4 bits word size, there are still \( 2^4=16 \) numbers, but we distribute them differently. The common way to do it is to reserve the first bit to be a <em>sign</em> bit, a "0" is positive and "1" is negative, i.e. \( (-1)^0 = 1 \), and \( (-1)^1=-1 \). Replacing the first bit with a sign bit in equation <a href="#mjx-eqn-4.14">(4.14)</a>, we get the following sequence of numbers 0,1,2,3,4,5,6,7,-0,-1,-2,-3,-4,-5,-6,-7. The "-0", might seem strange but is used in the computer to extend the real number line \( 1/0=\infty \), whereas \( 1/-0=-\infty \). In general when there are \( m \) bits, we have a total of \( 2^m \) numbers. If we include negative numbers, we can choose to have \( 2^{m-1}-1 \), negative, and \( 2^{m-1}-1 \) positive numbers, negative zero and positive zero, i.e. \( 2^{m-1}-1+2^{m-1}-1+1+1=2^m \).</p>
 
-<p>
-What about real numbers? As stated earlier we use the scientific notation as in equation <a href="#mjx-eqn-3.12">(3.12)</a>, but still the scientific notation might have a real number in front, e.g. \( 1.25\cdot 10^{-3} \). To represent the number \( 1.25 \) in binary format we use a decimal separator, just as with base 10. In this case 1.25 is 1.01 in binary format
+<p>What about real numbers? As stated earlier we use the scientific notation as in equation <a href="#mjx-eqn-4.12">(4.12)</a>, but still the scientific notation might have a real number in front, e.g. \( 1.25\cdot 10^{-3} \). To represent the number \( 1.25 \) in binary format we use a decimal separator, just as with base 10. In this case 1.25 is 1.01 in binary format</p>
 $$
 \begin{equation}
 1.01=1\cdot 2^0 + 0\cdot 2^{-1}+1\cdot 2^{-2}=1 + 0 + 0.25=1.25.
-\tag{3.15}
+\tag{4.15}
 \end{equation}
 $$
 
-The scientific notation is commonly referred to as <em>floating point representation</em>. The term "floating point" is used because the decimal point is not in the same place, in contrast to fixed point where the decimal point is always in the same place. To store the number 1e-8=0.00000001 in floating point format, we only need to store 1 and -8 (and possibly the sign), whereas in fixed point format we need to store all 9 numbers.  In equation <a href="#mjx-eqn-3.14">(3.14)</a> we need to spend one bit to store the sign, leaving (in the case of 4 bits word size) three bits to be distributed among the <em>mantissa</em>, \( q \), and the exponent, \( m \). It is not given how many bits should be used for the mantissa and the exponent. Thus there are choices to be made, and all modern processors uses the same standard, the <a href="https://standards.ieee.org/standard/754-1985.html" target="_self">IEEE Standard 754-1985</a>.
+<p>The scientific notation is commonly referred to as <em>floating point representation</em>. The term "floating point" is used because the decimal point is not in the same place, in contrast to fixed point where the decimal point is always in the same place. To store the number 1e-8=0.00000001 in floating point format, we only need to store 1 and -8 (and possibly the sign), whereas in fixed point format we need to store all 9 numbers.  In equation <a href="#mjx-eqn-4.14">(4.14)</a> we need to spend one bit to store the sign, leaving (in the case of 4 bits word size) three bits to be distributed among the <em>mantissa</em>, \( q \), and the exponent, \( m \). It is not given how many bits should be used for the mantissa and the exponent. Thus there are choices to be made, and all modern processors uses the same standard, the <a href="https://standards.ieee.org/standard/754-1985.html" target="_self">IEEE Standard 754-1985</a>. </p>
+<h3 id="floating-point-numbers-and-the-ieee-754-1985-standard" class="anchor">Floating point numbers and the IEEE 754-1985 standard </h3>
+<p>A 64 bits word size is commonly referred to as <em>double precision</em>, whereas a 32 bits word size is termed <em>single precision</em>. In the following we will consider a 64 bits word size. We would like to know: what is the roundoff error, what is the largest number that can be represented in the computer, and what is the smallest number? Almost all floating point numbers are represented in <em>normalized</em> form. In normalized form the mantissa is written as \( M=1.F \), and it is only \( F \) that is stored,   \( F \) is termed the <em>fraction</em>. We will return to the special case of some of the unnormalized numbers later. In the IEEE standard one bit is reserved for the sign, 52 for the fraction (\( F \)) and 11 for the exponent (\( m \)), see figure <a href="#fig:taylor:64bit">13</a> for an illustration.</p>
 
-<h3 id="___sec58" class="anchor">Floating point numbers and the IEEE 754-1985 standard </h3>
-
-A 64 bits word size is commonly referred to as <em>double precision</em>, whereas a 32 bits word size is termed <em>single precision</em>. In the following we will consider a 64 bits word size. We would like to know: what is the roundoff error, what is the largest number that can be represented in the computer, and what is the smallest number? Almost all floating point numbers are represented in <em>normalized</em> form. In normalized form the mantissa is written as \( M=1.F \), and it is only \( F \) that is stored,   \( F \) is termed the <em>fraction</em>. We will return to the special case of some of the unnormalized numbers later. In the IEEE standard one bit is reserved for the sign, 52 for the fraction (\( F \)) and 11 for the exponent (\( m \)), see figure <a href="#fig:taylor:64bit">13</a> for an illustration.
-
-<p>
 <center> <!-- figure label: --> <div id="fig:taylor:64bit"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 13:  Representation of a 64 bits floating point number according to the IEEE 754-1985 standard. For a 32 bits floating point number, 8, is reserved for the exponent and 23 for the fraction.  <!-- caption label: fig:taylor:64bit --> </p></center>
+<center>
+<p class="caption">Figure 13:  Representation of a 64 bits floating point number according to the IEEE 754-1985 standard. For a 32 bits floating point number, 8, is reserved for the exponent and 23 for the fraction.  <!-- caption label: fig:taylor:64bit --> </p>
+</center>
 <p><img src="fig-taylor/64bit.png" align="bottom" width=800></p>
 </center>
 
-<p>
-The exponent must be positive to represent numbers with absolute value larger than one, and negative to represent numbers with absolute value less than one.  To make this more explicit the simple formula in equation <a href="#mjx-eqn-3.12">(3.12)</a> is rewritten:
+<p>The exponent must be positive to represent numbers with absolute value larger than one, and negative to represent numbers with absolute value less than one.  To make this more explicit the simple formula in equation <a href="#mjx-eqn-4.12">(4.12)</a> is rewritten:</p>
 $$
 \begin{equation}
 \pm q 2^{E-e}.
-\tag{3.16}
+\tag{4.16}
 \end{equation}
 $$
 
-The number \( e \) is called the <em>bias</em> and has a fixed value, for 64 bits it is \( 2^{11-1}-1=1023 \) (32-bits: \( e=2^{8-1}-1=127 \)). The number \( E \) is represented by 11 bits and can thus take on values from 0 to \( 2^11-1=2047 \). If we have an exponent of e.g. -3, the computer adds 1023 to that number and store the number 1020. Two numbers are special numbers and reserved to represent infinity and zero, \( E=0 \) and \( E=2047 \). Thus <em>the largest and smallest possible numerical value of the exponent is: 2046-1023=1023, and 1-1023=-1022, respectively</em>. The fraction of a normalized floating point number takes on values from \( 1.000\ldots 00 \) to \( 1.111\ldots 11 \). Thus the lowest normalized number is
+<p>The number \( e \) is called the <em>bias</em> and has a fixed value, for 64 bits it is \( 2^{11-1}-1=1023 \) (32-bits: \( e=2^{8-1}-1=127 \)). The number \( E \) is represented by 11 bits and can thus take on values from 0 to \( 2^11-1=2047 \). If we have an exponent of e.g. -3, the computer adds 1023 to that number and store the number 1020. Two numbers are special numbers and reserved to represent infinity and zero, \( E=0 \) and \( E=2047 \). Thus <em>the largest and smallest possible numerical value of the exponent is: 2046-1023=1023, and 1-1023=-1022, respectively</em>. The fraction of a normalized floating point number takes on values from \( 1.000\ldots 00 \) to \( 1.111\ldots 11 \). Thus the lowest normalized number is</p>
 $$
 \begin{align}
 1.000 + \text{ (49 more zeros)}\cdot 2^{-1022}&=2^0\cdot2^{-1022}\no
-\tag{3.17}\\ 
+\tag{4.17}\\ 
 &=2.2250738585072014\cdot 10^{-308}.
 \label{}
 \end{align}
 $$
 
-It is possible to represent smaller numbers than \( 2.22\cdot10^{-308} \), by allowing <em>unnormalized</em> values. If the exponent is -1022, then the mantissa can take on values from \( 1.000\ldots 00 \) to \( 0.000\ldots 01 \), but then accuracy is lost. So the smallest possible number is \( 2^{-52}\cdot{2^-1022}\simeq4.94\cdot10^{-324} \). 
+<p>It is possible to represent smaller numbers than \( 2.22\cdot10^{-308} \), by allowing <em>unnormalized</em> values. If the exponent is -1022, then the mantissa can take on values from \( 1.000\ldots 00 \) to \( 0.000\ldots 01 \), but then accuracy is lost. So the smallest possible number is \( 2^{-52}\cdot{2^-1022}\simeq4.94\cdot10^{-324} \). 
 The highest normalized number is
+</p>
 $$
 \begin{align}
 1.111 + &\text{ (49 more ones)}\cdot2^{1023}=(2^0+2^{-1}+2^{-2}+\cdots+2^{-52})\cdot2^{1023}\no
-\tag{3.18}\\=(2-2^{-52})\cdot2^{1023}
+\tag{4.18}\\=(2-2^{-52})\cdot2^{1023}
 &=1.7976931348623157\cdot 10^{308}.
 \label{}
 \end{align}
 $$
 
-<p>
-If you enter <code>print(1.8*10**(308))</code> in Python, the answer will be <code>Inf</code>. If you enter <code>print(2*10**(308))</code>, Python will (normally) give an answer. This is because 
+<p>If you enter <code>print(1.8*10**(308))</code> in Python, the answer will be <code>Inf</code>. If you enter <code>print(2*10**(308))</code>, Python will (normally) give an answer. This is because 
 the number \( 1.8\cdot10^{308} \) is floating point number, whereas \( 2\cdot 10^{308} \) is an <em>integer</em>, and Python does something clever when it comes to representing integers. 
 Python has a third numeric type called long int, which can use the available memory to represent an integer.
+</p>
 
-<p>
-What about the machine precision? The machine precision, \( \epsilon_M \), is the <em>smallest possible number that can be added to one, and get a number larger than one</em>, i.e. \( 1+\epsilon_M>1 \).  The smallest possible value of the mantissa is \( 0.000\ldots 01=2^{-52} \), thus the lowest number must be of the form \( 2^{-52}\cdot 2^{m} \). If the exponent , \( m \), is lower than 0 then when we add this number to 1, we will only get 1. Thus the machine precision is \( \epsilon_M=2^{-52}=2.22\cdot10^{-16} \) (for 32 bits \( 2^{-23}=1.19\cdot10^{-7} \)). In practical terms this means that e.g. the value of \( \pi \) is \( 3.14159265358979323846264338\ldots \), but in Python it can only be represented by 16 digits: \( 3.141592653589793 \).
-
-<h3 id="___sec59" class="anchor">Roundoff error and truncation error in numerical derivatives </h3>
-
-<div class="alert alert-block alert-success alert-text-normal"><b>Roundoff Errors.</b>
-All numerical floating point operations introduces roundoff errors at each step in the calculation due to finite word size, these errors accumulate in long simulations and introduce random errors in the final results. After \( N \) operations the error is at least \( \sqrt{N}\epsilon_M \) (the square root is a random walk estimate, and we assume that the errors are randomly distributed). The roundoff errors can be much, much higher when numbers of equal magnitude are subtracted. You might be so unlucky that after one operation the answer is completely dominated by roundoff errors.
+<p>What about the machine precision? The machine precision, \( \epsilon_M \), is the <em>smallest possible number that can be added to one, and get a number larger than one</em>, i.e. \( 1+\epsilon_M>1 \).  The smallest possible value of the mantissa is \( 0.000\ldots 01=2^{-52} \), thus the lowest number must be of the form \( 2^{-52}\cdot 2^{m} \). If the exponent , \( m \), is lower than 0 then when we add this number to 1, we will only get 1. Thus the machine precision is \( \epsilon_M=2^{-52}=2.22\cdot10^{-16} \) (for 32 bits \( 2^{-23}=1.19\cdot10^{-7} \)). In practical terms this means that e.g. the value of \( \pi \) is \( 3.14159265358979323846264338\ldots \), but in Python it can only be represented by 16 digits: \( 3.141592653589793 \).</p>
+<h3 id="roundoff-error-and-truncation-error-in-numerical-derivatives" class="anchor">Roundoff error and truncation error in numerical derivatives </h3>
+<div class="alert alert-block alert-success alert-text-normal"><b>Roundoff Errors</b>
+<p>All numerical floating point operations introduces roundoff errors at each step in the calculation due to finite word size, these errors accumulate in long simulations and introduce random errors in the final results. After \( N \) operations the error is at least \( \sqrt{N}\epsilon_M \) (the square root is a random walk estimate, and we assume that the errors are randomly distributed). The roundoff errors can be much, much higher when numbers of equal magnitude are subtracted. You might be so unlucky that after one operation the answer is completely dominated by roundoff errors.   </p>
 </div>
 
 
-<p>
-The roundoff error when we represent a floating point number \( x \) in the 
+<p>The roundoff error when we represent a floating point number \( x \) in the 
 machine will be of the order \( x/10^{16} \) (<em>not</em> \( 10^{-16} \)). In general, when we evaluate a function the error will be of the order 
-\( \epsilon|f(x)| \), where \( \epsilon\sim10^{-16} \). Thus equation <a href="#mjx-eqn-3.8">(3.8)</a> is modified in the following way when we take into account the roundoff errors:
+\( \epsilon|f(x)| \), where \( \epsilon\sim10^{-16} \). Thus equation <a href="#mjx-eqn-4.8">(4.8)</a> is modified in the following way when we take into account the roundoff errors:
+</p>
 $$
 \begin{align}
-f^\prime(x)=\frac{f(x+h)-f(x)}{h}\pm\frac{2\epsilon|f(x)|}{h}-\frac{h}{2}f^{\prime\prime}(\eta),\tag{3.19}
+f^\prime(x)=\frac{f(x+h)-f(x)}{h}\pm\frac{2\epsilon|f(x)|}{h}-\frac{h}{2}f^{\prime\prime}(\eta),\tag{4.19}
 \end{align}
 $$
 
-we do not know the sign of the roundoff error, so the total error \( R_2 \) is:
+<p>we do not know the sign of the roundoff error, so the total error \( R_2 \) is:</p>
 $$
 \begin{align}
-R_2=\frac{2\epsilon|f(x)|}{h}+\frac{h}{2}|f^{\prime\prime}(\eta)|.\tag{3.20}
+R_2=\frac{2\epsilon|f(x)|}{h}+\frac{h}{2}|f^{\prime\prime}(\eta)|.\tag{4.20}
 \end{align}
 $$
 
-We have put absolute values around the function and its derivative to get the maximal error, it might be the case that the roundoff error cancel part of the 
+<p>We have put absolute values around the function and its derivative to get the maximal error, it might be the case that the roundoff error cancel part of the 
 truncation error. However, the roundoff error is random in nature and will change from machine to machine, and each time we run the program. 
 Note that the roundoff error increases when \( h \) decreases, and the approximation error decreases when \( h \) decreases. This is exactly what we saw in figure <a href="#fig:taylor:df2">12</a>. We can find the 
 best step size, by differentiating \( R_2 \) and put it equal to zero:
+</p>
 $$
 \begin{align}
 \frac{dR_2}{dh}&=-\frac{2\epsilon|f(x)|}{h^2}+\frac{1}{2}f^{\prime\prime}(\eta)=0\nonumber\\ 
-h&=2\sqrt{\epsilon\left|\frac{f(x)}{f^{\prime\prime}(\eta)}\right|}\simeq 2\cdot10^{-8},\tag{3.21}
+h&=2\sqrt{\epsilon\left|\frac{f(x)}{f^{\prime\prime}(\eta)}\right|}\simeq 2\cdot10^{-8},\tag{4.21}
 \end{align}
 $$
 
-In the last equation we have assumed that \( f(x) \) and its derivative is \( ~1 \). This step size corresponds to an error of order \( R_2\sim10^{-8} \). 
-Inspecting figure <a href="#fig:taylor:df2">12</a> we see that the minimum is located at \( h\sim10^{-8} \).
+<p>In the last equation we have assumed that \( f(x) \) and its derivative is \( ~1 \). This step size corresponds to an error of order \( R_2\sim10^{-8} \). 
+Inspecting figure <a href="#fig:taylor:df2">12</a> we see that the minimum is located at \( h\sim10^{-8} \).      
+</p>
 
-<p>
-We can perform a similar error analysis as we did before, and then we find for equation \eqref{eq:taylor:cd} and <a href="#mjx-eqn-3.11">(3.11)</a> that the total
+<p>We can perform a similar error analysis as we did before, and then we find for equation \eqref{eq:taylor:cd} and <a href="#mjx-eqn-4.11">(4.11)</a> that the total
 numerical error is:
+</p>
 $$
 \begin{align}
-R_3&=\frac{\epsilon|f(x)|}{h}+\frac{h^2}{6}f^{(3)}(\eta),\tag{3.22}\\ 
-R_4&=\frac{4\epsilon|f(x)|}{h^2}+\frac{h^2}{12}f^{(4)}(\eta),\tag{3.23}
+R_3&=\frac{\epsilon|f(x)|}{h}+\frac{h^2}{6}f^{(3)}(\eta),\tag{4.22}\\ 
+R_4&=\frac{4\epsilon|f(x)|}{h^2}+\frac{h^2}{12}f^{(4)}(\eta),\tag{4.23}
 \end{align}
 $$
 
-respectively. Differentiating these two equations with respect to \( h \), and set the equations equal to zero, we find an optimal step size of
-\( h\sim10^{-5} \) for equation <a href="#mjx-eqn-3.22">(3.22)</a>, which gives an error of \( R_2\sim 10^{-16}/10^{-5}+(10^{-5})^2/6\simeq10^{-10} \), and \( h\sim10^{-4} \) for equation
-<a href="#mjx-eqn-3.23">(3.23)</a>, which gives an error of \( R_4\sim 4\cdot10^{-16}/(10^{-4})^2+(10^{-4})^2/12\simeq10^{-8} \). Note that we get the surprising result for the first order 
-derivative in equation \eqref{eq:taylor:cd}, that a higher step size gives a more accurate result.
+<p>respectively. Differentiating these two equations with respect to \( h \), and set the equations equal to zero, we find an optimal step size of
+\( h\sim10^{-5} \) for equation <a href="#mjx-eqn-4.22">(4.22)</a>, which gives an error of \( R_2\sim 10^{-16}/10^{-5}+(10^{-5})^2/6\simeq10^{-10} \), and \( h\sim10^{-4} \) for equation
+<a href="#mjx-eqn-4.23">(4.23)</a>, which gives an error of \( R_4\sim 4\cdot10^{-16}/(10^{-4})^2+(10^{-4})^2/12\simeq10^{-8} \). Note that we get the surprising result for the first order 
+derivative in equation \eqref{eq:taylor:cd}, that a higher step size gives a more accurate result. 
+</p>
 
-<p>
 <p>
 <!-- navigation buttons at the bottom of the page -->
 <ul class="pager">
@@ -1021,19 +1207,15 @@ derivative in equation \eqref{eq:taylor:cd}, that a higher step size gives a mor
   </li>
 </ul>
 <!-- ------------------- end of main content --------------- -->
-
 </div>  <!-- end container -->
 <!-- include javascript, jQuery *first* -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-
 <!-- Bootstrap footer
 <footer>
-<a href="http://..."><img width="250" align=right src="http://..."></a>
+<a href="https://..."><img width="250" align=right src="https://..."></a>
 </footer>
 -->
-
-
 </body>
 </html>
     
