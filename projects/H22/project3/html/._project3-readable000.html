@@ -458,12 +458,6 @@ and similarly for the other protocols you choose.
 <p>
 <b>Part 3.</b>
 
-<ol>
-<li> Use the ODE solver you developed in Exercise 1 to find the effluent concentration of the last mixing tank. All \( C_i(0)=0 \) , \( i=0,\ldots, N-1 \) and \( C_{inj} \) as shown in figure <a href="#fig:injection_protocols">5</a> (top left <code>rect_1s</code>).</li>
-</ol>
-
-<b>Part 4.</b>
-
 <ul>
 <li> For the 1s rectangular pulse injection protocol, tune \( \tau=V_{tot}/q \) and the number of compartments to match the data for the healthy patient (<code>Healthy_rect_1s.csv</code>) .</li>
 <li> Make a figure where you show your "best match". Use scatter points for the data, and solid lines for your simulation.</li>
@@ -489,11 +483,11 @@ and similarly for the other protocols you choose.
 <center> <!-- figure label: --> <div id="fig:injection_protocols"></div> <!-- FIGURE -->
 <hr class="figure">
 <center><p class="caption">Figure 5:  The different injection protocols used for the CFD simulations.  <!-- caption label: fig:injection_protocols --> </p></center>
-<p><img src="fig-project3/injection_protocols.svg" align="bottom" ></p>
+<p><img src="fig-project3/injection_protocols.png" align="bottom" ></p>
 </center>
 
 <p>
-<b>Part 5.</b>
+<b>Part 4.</b>
 
 <p>
 <div class="alert alert-block alert-success alert-text-normal"><b>Model prediction.</b>
@@ -502,7 +496,7 @@ It is important that you do <em>not</em> change \( n \) or \( V_{Tot} \) in this
 
 
 <ul>
-<li> Choose <em>at least</em> three other injection protocol than <code>rect_1s</code> from figure <a href="#fig:injection_protocols">5</a>, use the model you ended up with in part 4 to predict what will happen.</li>
+<li> Choose <em>at least</em> three other injection protocol than <code>rect_1s</code> from figure <a href="#fig:injection_protocols">5</a>, use the model you ended up with in part 3 to predict what will happen.</li>
 <li> Illustrate your forecasts with one or more figures where you compare model to data.</li>
 <li> Discuss your findings.</li>
 </ul>
@@ -513,7 +507,7 @@ It is important that you do <em>not</em> change \( n \) or \( V_{Tot} \) in this
 <b>Part 1.</b>
 
 <ul>
-<li> Repeat exercise 2, part 4 for the case of the unhealthy patient with an aneurysm. Note: you have to find new values for \( n \) and \( V_{Tot} \).</li>
+<li> Repeat exercise 2, part 3 for the case of the unhealthy patient with an aneurysm. Note: you have to find new values for \( n \) and \( V_{Tot} \).</li>
 </ul>
 
 The relevant data is found in the text file <code>Aneurysm_rect_1s.csv</code>.
@@ -522,13 +516,13 @@ The relevant data is found in the text file <code>Aneurysm_rect_1s.csv</code>.
 <b>Part 2.</b>
 
 <ul>
-<li> Similarly, repeat exercise 2, part 5 for the case with an aneurysm.</li>
+<li> Similarly, repeat exercise 2, part 4 for the case with an aneurysm.</li>
 </ul>
 
 <b>Part 3.</b>
 
 <ul>
-<li> Compare the number of compartments you ended up with in the two cases (healthy vs. aneurysm). Was it very different? Why / why not, do you think?</li>
+<li> Compare the number of compartments you ended up with in the two cases (healthy vs. aneurysm). Was it very different, why / why not?</li>
 </ul>
 
 <b>Part 4.</b>
