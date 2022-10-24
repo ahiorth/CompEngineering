@@ -1,0 +1,728 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Stirred (not shaken)">
+
+<title>Stirred (not shaken)</title>
+
+<!-- Bootstrap style: bootswatch_readable -->
+<link href="https://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:64px;      /* fixed header height for style bootswatch_readable */
+  margin:-64px 0 0; /* negative fixed header height */
+}
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Motivation', 1, None, '___sec0'),
+              ('Theory', 1, None, '___sec1'),
+              ('Exercise 1: Write your own ODE solver', 1, None, '___sec2'),
+              ('Exercise 2: Fit CSTR model to CFD model: Healthy aorta',
+               1,
+               None,
+               '___sec3'),
+              ('Exercise 3: Fit CSTR model to CFD model: Aorta with aneurysm',
+               1,
+               None,
+               '___sec4'),
+              ('Exercise 4 (OPTIONAL): Extend model', 1, None, '___sec5'),
+              ('Appendix: Least square optimization', 1, 'app:1', 'app:1'),
+              ('Guidelines for project submission', 1, None, '___sec7'),
+              ('Bibliography', 1, None, '___sec8')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript" async
+ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\no}{\nonumber}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="project3-readable.html">Stirred (not shaken)</a>
+  </div>
+
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="#___sec0" style="font-size: 80%;">Motivation</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec1" style="font-size: 80%;">Theory</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec2" style="font-size: 80%;">Exercise 1: Write your own ODE solver</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec3" style="font-size: 80%;">Exercise 2: Fit CSTR model to CFD model: Healthy aorta</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec4" style="font-size: 80%;">Exercise 3: Fit CSTR model to CFD model: Aorta with aneurysm</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec5" style="font-size: 80%;">Exercise 4 (OPTIONAL): Extend model</a></li>
+     <!-- navigation toc: --> <li><a href="#app:1" style="font-size: 80%;">Appendix: Least square optimization</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec7" style="font-size: 80%;">Guidelines for project submission</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec8" style="font-size: 80%;">Bibliography</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0000"></a>
+<!-- ------------------- main content ---------------------- -->
+
+
+
+<div class="jumbotron">
+<center><h1>Stirred (not shaken)</h1></center>  <!-- document title -->
+
+<p>
+<!-- author(s): MOD510: Mandatory project 3, and Deadline: 7. November (23:59) -->
+
+<center>
+<b>MOD510: Mandatory project 3</b> 
+</center>
+
+<center>
+<b>Deadline: 7. November (23:59)</b> 
+</center>
+
+<p>
+<!-- institution(s) -->
+
+<br>
+<p>
+<center><h4>Oct 24, 2022</h4></center> <!-- date -->
+<br>
+<p>
+<b>Learning objectives.</b>
+By completing this project, the student will:
+
+<ul>
+<li> Implement an ODE solver using the Euler, Runge-Kutta (second and fourth order) algorithm</li>
+<li> Use mixing tank models to model how the shape of a medical tracer changes after traveling in an aorta arch</li>
+<li> Compare the ODE model to CFD simulation results and extract information about the cardiac output (flooding rate) and volume of the aortic arch</li>
+<li> Investigate if one can use the tracer signal to identify if there is a an aneurysm in the aorta</li>  
+</ul>
+
+<b>Graphical Abstract.</b>
+
+<p>
+In this project we are investigating if we can replace a complicated 3D computational fluid dynamics simulation with a set of ordinary differential equations, as in figure <a href="#fig:p3:cfd_tanks">1</a>.
+
+<p>
+<center> <!-- figure label: --> <div id="fig:p3:cfd_tanks"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 1:  Top: A CFD simulation of an aorta arch. Bottom: A model with \( n \)-mixing tanks in a series.  <!-- caption label: fig:p3:cfd_tanks --> </p></center>
+<p><img src="fig-project3/cfd_tanks.png" align="bottom" width=800></p>
+</center>
+
+<p>
+</div> <!-- end jumbotron -->
+
+<h1 id="___sec0" class="anchor">Motivation  </h1>
+
+<p>
+It can be very difficult to model a real world system. First and foremost this
+is because crucial information about the system is missing, not because any
+fundamental physical laws are incomplete. We know the physical laws that
+govern each part of the system, but the system as a whole may be very
+complicated due to having many interacting parts.
+
+<p>
+As a concrete example, consider the circulatory system of the human body.
+If we want to model how blood flows inside a single blood vessel, it can be
+done reasonably well with the <a href="https://www.azimuthproject.org/azimuth/show/Navier-Stokes+equations" target="_self">Navier Stokes equations</a>,
+which arise from combining Newton's second law with conservation equations (i.e., continuity equations), for a derivation see e.g. <a href="https://www.feynmanlectures.caltech.edu/II_40.html" target="_self">the Feynman lectures</a>.  The Navier-Stokes equations
+are implemented in Computational Fluid Dynamics (CFD) solvers <a href="#anderson1995computational">[1]</a>.
+Several CFD solvers can be downloaded freely from the web and run on your personal computer, e.g., OpenFoam <a href="#greenshields2022">[2]</a>.
+However, if you try to simulate <em>all of the blood vessels in a human body</em>
+(a total length of about 100 000 km, the problem becomes overwhelming. 
+Furthermore, no human is alike, implying that even if we were able to map all
+the veins for a single person, the model would still not be directly applicable
+to others.
+
+<p>
+<!--  -->
+<!-- TODO: If we are to include this, must clean up so it is viewable in html..? -->
+<!--  -->
+<!-- Suppose we are given 1 ml of rock, and that the porosity (fluid fraction) is 50 \( \% \). -->
+<!-- Then, there will be approximately \( 0.5\cdot \) 1 cm$^3$/1 $\mu$m$^3\simeq 0.5\cdot10^{12}$. -->
+<!--  -->
+The same situation applies to subsurface flow. If we zoom in on the local flow
+between the mineral grains, we can solve the Navier-Stokes equations easily for
+a couple of hundred pores, as can be seen in figure <a href="#fig:p3:lb">2</a> <a href="#vinningland2017mineral">[3]</a>.
+
+<p>
+<center> <!-- figure label: --> <div id="fig:p3:lb"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 2:  (left) A FIB-SEM image of chalk, (right) simulated flow lines inside the rock.  <!-- caption label: fig:p3:lb --> </p></center>
+<p><img src="fig-project3/pore_scale.png" align="bottom" width=800></p>
+</center>
+
+<p>
+However, the length of one pore is typically only 1 \( \mu m=10^{-6} m \).
+Taking into account that an oil reservoir can be 100 m thick and extend for
+several km in each direction, it is simply impossible to simulate the fluid
+flow between all pores at this fine resolution. Even if we could, we lack
+crucial information about the geometric distribution of the grains.
+Since reservoirs are buried under ground, this information is practically
+impossible to get hold of.
+
+<p>
+The main point is that even if we know all the physical laws which are important
+for a problem, and we have written down a mathematical formulation of the
+problem, it can be impossible to solve them on the scale we are interested in.
+What to do then?
+We have to rely on <em>effective</em> models, that is, models which describe the
+relevant physics at a higher level, but which are still useful.
+By useful, we mean:
+
+<ul>
+<li> The model must be mathematical tractable: The formulation must be such that we can solve the model numerically in a realistic amount of time.</li>
+<li> The model must be able to describe experimental findings and predict the outcome of experiments which have not been conducted yet.</li>
+<li> The model should contain <em>few</em> parameters. Too many parameters can lead to overfitting, in the words of John von Neumann: &quot;with four parameters I can fit an elephant, and with five I can make him wiggle his trunk.&quot; <a href="#dyson2004meeting">[4]</a> (p.297)</li>
+</ul>
+
+<h1 id="___sec1" class="anchor">Theory </h1>
+
+<p>
+In this project, a CFD solver has been used to produce data for us:
+The CFD solver is our ''experimental lab''.
+To match results from the CFD simulations, we are going to implement a much simpler
+approach, namely a Continuous-Stirred-Tank-Reactor (CSTR) model with \( n \) tanks in series [ch.18]<a href="#foglerelements">[5]</a>.
+The key idea we are going explore is illustrated in figure <a href="#fig:p3:cfd_tanks">1</a>.
+
+<p>
+The top part of figure <a href="#fig:p3:cfd_tanks">1</a> illustrates what happens when a square pulse of contrast agent is injected into an aorta arch.
+The left plot shows a snapshot of the spatial distribution of contrast agent after 1 second, while the
+right plot shows the sampled effluent concentration (the concentration coming out) as a function of time.
+We want to investigate whether we can use a simple model with \( n \)-tanks in a series to predict the same <em>effluent</em> concentrations.
+Clearly, we will not be able to match the concentration <em>inside</em> the aorta arch.
+However, if we can reproduce the effluent concentration with the \( n \)-tank model (the value of \( n \) has to be determined from the data),
+we can use the simple model to determine important parameters of the system, such as the volume of the aorta arch.
+Subsequently, the model could become an important diagnostic tool.
+
+<p>
+The mathematical equations for \( n \)-tanks in a series follows from mass
+conservation (<code>[change of mass in the system]/time = [mass in]/time - [mass out]/time</code>)
+$$
+\begin{align}
+V_0\frac{dC_0}{dt} &=q\left(C_{in}-C_0\right)\,\no
+\tag{1}\\ 
+V_1\frac{dC_1}{dt} &=q\left(C_0-C_1\right)\,\no
+\tag{2}\\ 
+& \vdots \no
+\tag{3}\\ 
+V_{n-1}\frac{dC_{n-1}}{dt} &=q\left(C_{n-2}-C_{n-1}\right).
+\tag{4}
+\end{align}
+$$
+
+In the above set of ODEs, \( V_i \) is the volume of tank number \( i \), \( C_i=C_i(t) \)
+is the concentration in the tank at time \( t \) (unit mass/volume), \( q \) is a constant volumetric
+injection flow rate (cardiac output and unit volume/time), and \( C_{in}=C_{in}(t) \) is the injected concentration at time \( t \).
+
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b>Scaling of volumes.</b>
+In this project, we want to use \( n \) as a parameter <em>without changing the total volume of the system</em>, thus we want the \( n=1 \) system to have the same volume as, e.g., \( n=10 \).
+We therefore need to scale the volumes of the individual tanks.
+To simplify, we shall assume that each tank has the same volume \( V \), hence
+the total volume is \( V_{Tot}=V_0+V_1+\cdots+V_{n-1}=nV \) which leads to
+\( V=V_{Tot}/n \).
+</div>
+
+
+<p>
+We can now rewrite the mass conservation equations as
+$$
+\begin{align}
+\frac{dC_0}{dt} &=\frac{n}{\tau}\left(C_{in}-C_0\right)\,\no
+\tag{5}\\ 
+\frac{dC_1}{dt} &=\frac{n}{\tau}\left(C_0-C_1\right)\,\no
+\tag{6}\\ 
+& \vdots \no
+\tag{7}\\ 
+\frac{dC_{n-1}}{dt} &=\frac{n}{\tau}\left(C_{n-2}-C_{n-1}\right),
+\tag{8}
+\end{align}
+$$
+
+where \( \tau\equiv V_{Tot}/q \). Note that \( \tau \) has units of time. To help in later exercises, the analytical solution for \( n=1,2,3 \) in a special case is given below
+<div class="alert alert-block alert-success alert-text-normal"><b>Solution when \( C_0(0)=1 \) and \( C_i(0)=0 \) for \( i>1 \).</b>
+When only the first tank contains a tracer concentration and we do not inject a tracer \( C_{inj}(t)=0 \), the solutions to equation <a href="#mjx-eqn-8">(8)</a> for \( n=1,2,3 \) is (see e.g. section 7.5 of <a href="#hiorth22">[6]</a>)
+$$
+\begin{align}
+C_0(t) &= \exp{\left(-\frac{t}{\tau}\right)} \no \,. 
+\tag{9}\\ 
+C_1(t) &= \frac{2t}{\tau} \exp{\left(-\frac{2t}{\tau}\right)}\no \,.
+\tag{10}\\ 
+C_2(t) &= \frac{9t^2}{2\tau^2} \exp{\left(-\frac{3t}{\tau}\right)} \,.
+\tag{11}
+\end{align}
+$$
+
+<p>
+</div>
+
+
+<h1 id="___sec2" class="anchor">Exercise 1: Write your own ODE solver </h1>
+
+<p>
+<b>Part 1.</b>
+Implement an ODE solver, that solves  an <em>arbitrary</em> (initial value) system of ODEs of the form
+
+$$
+\begin{equation}
+\tag{12}
+\frac{d\vec{y}}{dt}=\vec{f}(\vec{y},t)\,,
+\end{equation}
+$$
+
+<p>
+where the solution \( \vec{y} \) may be a vector. Since the equation system is
+completely generic, the solver has to take in <em>as argument</em> the function that
+computes the right hand side-vector; that is, you are not allowed to hard-code
+in a specific model. In addition, the solver needs to know the starting time,
+\( t_0 \), the corresponding initial condition(s) \( \vec{f}(\vec{y},t) \), as well
+as the final simulation time, \( t_f \).
+
+<p>
+The user should be able to choose between the following methods:
+
+<ol>
+<li> Eulers method</li>
+<li> Runge-Kutta second order (RK2)</li>
+<li> Runge-Kutta fourth order (RK4)</li>
+</ol>
+
+Tip: It can be a good idea to encapsulate your solver inside a custom class, and to implement one class function for each method.
+
+<p>
+<b>Part 2.</b>
+
+<ol>
+<li> Test you implementation against the analytical solutions in equation <a href="#mjx-eqn-11">(11)</a> for \( n=1,2 \) <em>and</em> 3.</li>
+
+<ul>
+  <li> for \( n=1 \) use \( \tau=2 \), \( C_0(0)=1 \)</li>
+  <li> for \( n=2 \) use \( \tau=2 \), \( C_0(0)=1 \), \( C_1(0)=0 \)</li>
+  <li> for \( n=3 \) use \( \tau=2 \), \( C_0(0)=1 \), \( C_1(0)=C_2(0)=0 \)</li>
+</ul>
+
+</ol>
+
+<b>Part 3.</b>
+Pick $n=$1, 2, <em>or</em> 3
+
+<ol>
+<li> plot the numerical error at \( t=1 \), <em>for the last tank</em>, and for \( dt \) values in the range \( 0.1,\ldots 0.001 \). (You may try lower values if you have a very fast solver)</li>
+<li> does the numerical error scale as expected for Euler, RK2, and RK4?</li>
+</ol>
+
+<h1 id="___sec3" class="anchor">Exercise 2: Fit CSTR model to CFD model: Healthy aorta </h1>
+Since we do not have experimental data available, we will use CFD simulations of an aorta arch, see figure <a href="#fig:p3:aarch">3</a> for an illustration.
+
+<p>
+<center> <!-- figure label: --> <div id="fig:p3:aarch"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 3:  (Left) Illustration of an actual aorta arch, (Right) corresponding CFD model.  <!-- caption label: fig:p3:aarch --> </p></center>
+<p><img src="fig-project3/aorta_model.png" align="bottom" width=800></p>
+</center>
+
+<p>
+In figure <a href="#fig:CFD_Schematic">4</a> we have injected different concentration profiles, and in the <code>data</code> folder you will find the outlet concentration profiles (averaged over the outlet). The file <code>Healthy_rect_1s.csv</code> corresponds to injection protocol <code>rect_1s</code> etc. Similarly for the aorta with an aneurysm, shown to the bottom in figure <a href="#fig:CFD_Schematic">4</a>, the corresponding data files are <code>Aneurysm_rect_1s.csv</code> etc.
+
+<ul>
+<li> In all the simulations the same injection rate \( q \) is used</li>
+</ul>
+
+<div class="alert alert-block alert-success alert-text-normal"><b>Main research question.</b>
+Can we learn something about the aorta arch using only knowledge about the tracer signal? Is it possible to identify e.g if the aorta arch contain an aneurysm by only observing the tracer signal out of the aorta?
+</div>
+
+
+<p>
+In a typical medical application we would only know how much mass of a tracer we inject, and not the flow rate. For the <code>rect_1s</code> case, 83.33 grams of tracer is injected. The flow rate (cardiac output) can be found as follows. Firstly, we write down mass conservation <em>for the whole aorta arch</em>
+$$
+\begin{equation}
+V\frac{dC}{dt}=q\left[C_{in}(t)-C_{out}(t)\right]
+\tag{13}
+\end{equation}
+$$
+
+Note that we have <em>not</em> used the CSTR approximation and put \( C_{out}(t)=C(t) \). Multiplying the above equation with \( dt \) and integrating from zero to \( \infty \), we get
+$$
+\begin{equation}
+V\int_0^\infty dC=q\int_0^\infty\left[C_{in}(t)-C_{out}(t)\right]dt.
+\tag{14}
+\end{equation}
+$$
+
+The injected mass is \( M_{inj}=q\int_0^\infty C_{in}(t)dt \), \( C(0)=C(\infty)=0 \) (i.e. no tracer initially and no tracer when \( t=\infty \)), thus we arrive at the Steward-Hamilton equation <a href="#mahnken2003measurement">[7]</a>:
+$$
+\begin{equation}
+q=\frac{M_{inj}}{\int_0^\infty C_{out}(t)dt}.
+\tag{15}
+\end{equation}
+$$
+
+<p>
+<b>Part 1.</b>
+
+<ol>
+<li> Use \( M_{inj}=83.333 \) gram, equation <a href="#mjx-eqn-15">(15)</a> and the data in <code>Healthy_rect_1s.csv</code> to show that \( q= \) 5 L/min.</li>
+</ol>
+
+<b>Part 2.</b>
+
+<ol>
+<li> Make Python functions that reproduces <em>at least</em> three other injection protocol than <code>rect_1s</code> (i.e. minimum four in total) from figure <a href="#fig:injection_protocols">5</a>, as an inspiration you can use the code below for the <code>rect_1s</code></li>
+</ol>
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">c_inj</span>(t,ti<span style="color: #666666">=</span>np<span style="color: #666666">.</span>array([<span style="color: #666666">0</span>,<span style="color: #666666">1.</span>,<span style="color: #666666">1.</span>,<span style="color: #666666">2.</span>,<span style="color: #666666">2.</span>]),qi<span style="color: #666666">=</span>np<span style="color: #666666">.</span>array([<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>]),ci<span style="color: #666666">=</span>np<span style="color: #666666">.</span>array([<span style="color: #666666">1</span>,<span style="color: #666666">1</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>])):
+    <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>interp(t,ti,ci),np<span style="color: #666666">.</span>interp(t,ti,qi)
+</pre></div>
+<p>
+alternatively one can do
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">c_inj</span>(t):
+    <span style="color: #008000; font-weight: bold">if</span> t <span style="color: #666666">&lt;</span> <span style="color: #666666">1</span>:
+       <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">1.</span>
+    <span style="color: #008000; font-weight: bold">else</span>:
+       <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">0.</span>
+</pre></div>
+<p>
+and similarly for the other protocols you choose.
+
+<p>
+<b>Part 3.</b>
+
+<ol>
+<li> Use the ODE solver you developed in Exercise 1 to find the effluent concentration of the last mixing tank. All \( C_i(0)=0 \) , \( i=0,\ldots, N-1 \) and \( C_{inj} \) as shown in figure <a href="#fig:injection_protocols">5</a> (top left <code>rect_1s</code>).</li>
+</ol>
+
+<b>Part 4.</b>
+
+<ul>
+<li> For the 1s rectangular pulse injection protocol, tune \( \tau=V_{tot}/q \) and the number of compartments to match the data for the healthy patient (<code>Healthy_rect_1s.csv</code>) .</li>
+<li> Make a figure where you show your "best match". Use scatter points for the data, and solid lines for your simulation.</li>
+<li> "Best match" of \( V_{Tot} \) can be done by <em>one of the following methods</em>, there will be an increasing number of points given if you choose the most difficult method
+
+<ol type="a"></li>
+ <li> (easy) manually adjust \( V \) to match data</li>
+ <li> (moderate) use <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.curve_fit.html" target="_self"><tt>scipy.optimize.curve_fit</tt></a> to find \( V \)</li>
+ <li> (hard) In the course we have covered several algorithms that are useful for finding roots and/or minima of functions, e.g., fixed point iteration, Newton's Raphson's method, the bisection method, the secant method, and gradient descent.  Implement one of these methods, and use it to find the \( \tau \)-value that minimizes SSR (see  <a href="#app:1">Appendix: Least square optimization</a>). Hint: Depending on the method(s) you choose, you may have to implement a Python function to calculate the second derivative of \( C_2 \) with respect to \( \tau \).
+<!-- healthy aorta (total volume 198.8 ml) -->
+<!-- aorta with an aneurysm (303.0 ml) --></li>
+</ol>
+
+</ul>
+
+<center> <!-- figure label: --> <div id="fig:CFD_Schematic"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 4:  Schematic of the geometries used in the CFD simulations. Top: A healthy aorta. Bottom: An aorta with an aneurysm.  <!-- caption label: fig:CFD_Schematic --> </p></center>
+<p><img src="fig-project3/CFD_Schematic.jpg" align="bottom" width=581 height=600></p>
+</center>
+
+<p>
+<center> <!-- figure label: --> <div id="fig:injection_protocols"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 5:  The different injection protocols used for the CFD simulations.  <!-- caption label: fig:injection_protocols --> </p></center>
+<p><img src="fig-project3/injection_protocols.svg" align="bottom" ></p>
+</center>
+
+<p>
+<b>Part 5.</b>
+
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b>Model prediction.</b>
+It is important that you do <em>not</em> change \( n \) or \( V_{Tot} \) in this part. Here we have used the <code>rect_1s</code> to tune the model and now we test how good it is by predicting other injection protocols.
+</div>
+
+
+<ul>
+<li> Choose <em>at least</em> three other injection protocol than <code>rect_1s</code> from figure <a href="#fig:injection_protocols">5</a>, use the model you ended up with in part 4 to predict what will happen.</li>
+<li> Illustrate your forecasts with one or more figures where you compare model to data.</li>
+<li> Discuss your findings.</li>
+</ul>
+
+<h1 id="___sec4" class="anchor">Exercise 3: Fit CSTR model to CFD model: Aorta with aneurysm </h1>
+
+<p>
+<b>Part 1.</b>
+
+<ul>
+<li> Repeat exercise 2, part 4 for the case of the unhealthy patient with an aneurysm. Note: you have to find new values for \( n \) and \( V_{Tot} \).</li>
+</ul>
+
+The relevant data is found in the text file <code>Aneurysm_rect_1s.csv</code>.
+
+<p>
+<b>Part 2.</b>
+
+<ul>
+<li> Similarly, repeat exercise 2, part 5 for the case with an aneurysm.</li>
+</ul>
+
+<b>Part 3.</b>
+
+<ul>
+<li> Compare the number of compartments you ended up with in the two cases (healthy vs. aneurysm). Was it very different? Why / why not, do you think?</li>
+</ul>
+
+<b>Part 4.</b>
+
+<ul>
+<li> Discuss strengths and weaknesses of the CSTR approach. What have you learned from this exercise?</li>
+</ul>
+
+<h1 id="___sec5" class="anchor">Exercise 4 (OPTIONAL): Extend model </h1>
+Note: You can still get 100 \( \% \) on the project if you skip this exercise, but you will get additional points if you do it (or parts of it).
+
+<p>
+For the aorta with aneurysm there is a diffusive exchange with the aneurysm. Thus a model of the type in figure <a href="#fig:p3:alt_model">6</a>, might improve the match. \( V_A \) is the volume of the aneurysm, and \( D \) models the exchange rate between the main flow and the aneurysm.
+
+<p>
+<center> <!-- figure label: --> <div id="fig:p3:alt_model"></div> <!-- FIGURE -->
+<hr class="figure">
+<center><p class="caption">Figure 6:  Exchange between the (main) aorta arch and aneurysm.  <!-- caption label: fig:p3:alt_model --> </p></center>
+<p><img src="fig-project3/alt_model.png" align="bottom" width=800></p>
+</center>
+
+$$
+\begin{align}
+V\frac{dC_i}{dt} &=q\left(C_{i-1}-C_i\right)-D(C_i-C_A),\,\no
+\tag{16}\\ 
+V_A\frac{dC_A}{dt} &=D(C_i-C_A).
+\tag{17}
+\end{align}
+$$
+
+<p>
+Now, we have introduced two additional parameters \( V_A \) and \( D \). \( D \) acts as an effective diffusion constant, and it is reasonable to put it proportional to the flooding rate (higher flooding rate more convective mixing), as a first guess you might put it
+$$
+\begin{equation}
+D=10\cdot q.
+\tag{18}
+\end{equation}
+$$
+
+<p>
+<b>Part 1.</b>
+
+<p>
+Add equation <a href="#mjx-eqn-17">(17)</a> to your \( n \) compartment model, at a specific position towards the outlet.
+
+<ol>
+<li> Are you able to match the <code>Aneurysm</code> data better now?</li>
+<li> What is the optimal values for \( D \), and \( V_A \)?</li>
+</ol>
+
+<h1 id="app:1" class="anchor">Appendix: Least square optimization</h1>
+
+<p>
+Finding "optimal" parameter values will in the following be based on
+the <a href="https://en.wikipedia.org/wiki/Least_squares#Solving_the_least_squares_problem" target="_self">method of least squares</a>.
+Specifically, the objective function we want to minimize is the sum of squared
+residuals,
+$$
+\begin{align}
+\tag{19}
+\text{SSR} = \sum_{i=0}^{N_d-1}r_i^2=\sum_{i=0}^{N_d-1}(d_i-m_i)^2\,,
+\end{align}
+$$
+
+where \( N_d \) is the number of data points, \( d_i \) is the \( i \)-th data point,
+and \( m_i \) is the corresponding model prediction. In this specific case,
+we are interested in the concentration in the last tank and the unknown
+we wish to tune to the data is \( \tau=V_{tot}/q \), hence we have \( m_i=C_{N-1}(t_i;\tau) \),
+and thus the derivative of the objective function is
+$$
+\begin{align}
+\tag{20}
+\frac{d\text{SSR}}{d\tau}&=2\sum_{i=0}^{N-1}r_i\frac{dr_i}{d\tau}
+= -2\sum_{i=0}^{N-1}(d_i-C_{N-1}(t_i;\tau))\frac{dC_{N-1}(t_i;\tau)}{d\tau}\,.
+\end{align}
+$$
+
+<p>
+The optimal parameter value for \( \tau \) is the value for which the least square
+estimate (objective function) has a global minimum point, and at such a minimum,
+the derivative of the least square estimate is zero.
+
+<p>
+In the project it is helpful to
+
+<ul>
+<li> Write a Python function that calculates SSR as a function of \( \tau \).</li>
+<li> Write another Python function that calculates the derivative of SSR with respect to \( \tau \).</li>
+</ul>
+
+To do this, you  could implement a function that calculates equation <a href="#mjx-eqn-19">(19)</a> as a function of \( \tau \), then calculate the derivative of equation <a href="#mjx-eqn-19">(19)</a> numerically
+$$
+\begin{equation}
+\frac{dSSR}{d\tau}=\frac{SSR(\tau+\Delta \tau)-SSR(\tau)}{\Delta \tau}.
+\label{}
+\end{equation}
+$$
+
+<p>
+Alternatively, which is numerically faster, but (maybe) a little more work to implement: 
+Run the ODE solver for one value of \( \tau \) and one value of \( \tau + \Delta \tau \), and calculate the derivative numerically
+$$
+\begin{equation}
+\frac{dC_{N-1}}{d\tau}=\frac{C_{N-1}(t,\tau+\Delta \tau)-C_{N-1}(t,\tau)}{\Delta \tau},
+\label{}
+\end{equation}
+$$
+
+and insert into equation <a href="#mjx-eqn-20">(20)</a> to calculate the derivative SSR.
+
+<h1 id="___sec7" class="anchor">Guidelines for project submission </h1>
+
+<p>
+You should bear the following points in mind when working on the project:
+
+<ul>
+<li> Write the name of all persons working in the group at the top of the notebook.</li>
+<li> The final project report must start with an abstract, the abstract is a self contained summary of the project and should contain quantitative statements.</li>
+<li> Start your notebook by providing a short introduction in which you outline the nature of the problem(s) to be investigated.</li>
+<li> End your notebook with a brief summary of what you feel you learned from the project (if anything). Also, if you have any general comments or suggestions for what could be improved in future assignments, this is the place to do it.</li>
+<li> All code that you make use of should be present in the notebook, and it should ideally execute without any errors (especially run-time errors). If you are not able to fix everything before the deadline, you should give your best understanding of what is not working, and how you might go about fixing it.</li>
+<li> Avoid duplicating code! If you find yourself copying and pasting a lot of code, it is a strong indication that you should define reuseable functions and/or classes.</li>
+<li> If you use an algorithm that is not fully described in the assignment text, you should try to explain it in your own words. This also applies if the method is described elsewhere in the course material.</li>
+<li> In some cases it may suffice to explain your work via comments in the code itself, but other times you might want to include a more elaborate explanation in terms of, e.g., mathematics and/or pseudocode.</li>
+<li> In general, it is a good habit to comment your code (though it can be overdone).</li>
+<li> When working with approximate solutions to equations, it is very useful to check your results against known exact (analytical) solutions, should they be available.</li>
+<li> It is also a good test of a model implementation to study what happens at known 'edge cases'.</li>
+<li> Any figures you include should be easily understandable. You should label axes appropriately, and depending on the problem, include other legends etc. Also, you should discuss your figures in the main text.</li>
+<li> It is always good if you can reflect a little bit around <em>why</em> you see what you see.</li>
+</ul>
+
+<h1 id="___sec8" class="anchor">Bibliography </h1>
+
+<p>
+<!-- begin bibliography -->
+
+<ol>
+ <li> <div id="anderson1995computational"></div> <b>J. D. Anderson and J. Wendt</b>. 
+    <em>Computational Fluid Dynamics</em>,
+    Springer,
+    1995.</li>
+ <li> <div id="greenshields2022"></div> <b>C. Greenshields</b>. 
+    <em>OpenFOAM V10 User Guide</em>,
+    The OpenFOAM Foundation,
+    2022,
+    <a href="https://doc.cfd.direct/openfoam/user-guide-v10" target="_self"><tt>https://doc.cfd.direct/openfoam/user-guide-v10</tt></a>.</li>
+ <li> <div id="vinningland2017mineral"></div> <b>J. Vinningland, E. Jettestuen, O. Aursjo, M. Madland and A. Hiorth</b>. 
+    Mineral Dissolution and Precipitation Rate Laws Predicted From Reactive Pore Scale Simulations,
+    <em>IOR 2017-19th European Symposium on Improved Oil Recovery</em>,
+    2017.</li>
+ <li> <div id="dyson2004meeting"></div> <b>F. Dyson et al.</b>. 
+    A Meeting With Enrico Fermi,
+    <em>Nature</em>,
+    427(6972),
+    pp. 297-297,
+    2004.</li>
+ <li> <div id="foglerelements"></div> <b>H. S. Fogler and S. H. Fogler</b>. 
+    <em>Elements of Chemical Reaction Engineering</em>,
+    5 edition,
+    Pearson Educacion,
+    2020.</li>
+ <li> <div id="hiorth22"></div> <b>A. Hiorth</b>. 
+    <em>Modeling and Computational Engineering</em>,
+    https://github.com/ahiorth/CompEngineering,
+    2022.</li>
+ <li> <div id="mahnken2003measurement"></div> <b>A. H. Mahnken, E. Klotz, A. Hennemuth, B. Jung, R. Koos, J. E. Wildberger and R. W. G\"unther</b>. 
+    Measurement of Cardiac Output From a Test-Bolus Injection in Multislice Computed Tomography,
+    <em>European radiology</em>,
+    13(11),
+    pp. 2498-2504,
+    2003.</li>
+</ol>
+
+<!-- end bibliography -->
+
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+
