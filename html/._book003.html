@@ -153,7 +153,10 @@ code { color: inherit; background-color: transparent; }
                1,
                None,
                'calculating-numerical-derivatives-of-functions'),
-              ('Higher order derivative', 3, None, 'higher-order-derivative'),
+              ('Higher order derivative',
+               3,
+               'sec:taylor:hhd',
+               'sec:taylor:hhd'),
               ('Roundoff Errors', 2, None, 'roundoff-errors'),
               ('Binary numbers', 3, None, 'binary-numbers'),
               ('Floating point numbers and the IEEE 754-1985 standard',
@@ -164,7 +167,10 @@ code { color: inherit; background-color: transparent; }
                3,
                None,
                'roundoff-error-and-truncation-error-in-numerical-derivatives'),
-              ('Solving linear systems', 0, 'ch:lin', 'ch:lin'),
+              ('Partial differential equations and linear systems',
+               0,
+               'ch:lin',
+               'ch:lin'),
               ('The Continuity Equation', 1, None, 'the-continuity-equation'),
               ('Continuity Equation as a linear problem',
                1,
@@ -224,7 +230,7 @@ code { color: inherit; background-color: transparent; }
                1,
                None,
                'co-_2-diffusion-into-aquifers'),
-              ('Solving nonlinear equations', 0, 'ch:nlin', 'ch:nlin'),
+              ('Optimization and nonlinear systems', 0, 'ch:nlin', 'ch:nlin'),
               ('Nonlinear equations', 1, None, 'nonlinear-equations'),
               ('Example: van der Waals equation of state',
                1,
@@ -401,7 +407,7 @@ MathJax.Hub.Config({
 <!-- newcommands_keep.tex -->
 $$
 \newcommand{\no}{\nonumber}
-\newcommand{\co}{CO$_2$}
+\newcommand{\co}{\text{CO$_{2}$}}
 $$
 
 
@@ -477,12 +483,12 @@ $$
      <!-- navigation toc: --> <li><a href="#numerical-errors" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Numerical Errors</a></li>
      <!-- navigation toc: --> <li><a href="#taylor-polynomial-approximation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Taylor Polynomial Approximation</a></li>
      <!-- navigation toc: --> <li><a href="#calculating-numerical-derivatives-of-functions" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Calculating Numerical Derivatives of Functions</a></li>
-     <!-- navigation toc: --> <li><a href="#higher-order-derivative" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Higher order derivative</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:taylor:hhd" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Higher order derivative</a></li>
      <!-- navigation toc: --> <li><a href="#roundoff-errors" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Roundoff Errors</a></li>
      <!-- navigation toc: --> <li><a href="#binary-numbers" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Binary numbers</a></li>
      <!-- navigation toc: --> <li><a href="#floating-point-numbers-and-the-ieee-754-1985-standard" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Floating point numbers and the IEEE 754-1985 standard</a></li>
      <!-- navigation toc: --> <li><a href="#roundoff-error-and-truncation-error-in-numerical-derivatives" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Roundoff error and truncation error in numerical derivatives</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#ch:lin" style="font-size: 80%;"><b>Solving linear systems</b></a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#ch:lin" style="font-size: 80%;"><b>Partial differential equations and linear systems</b></a></li>
      <!-- navigation toc: --> <li><a href="._book004.html#the-continuity-equation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The Continuity Equation</a></li>
      <!-- navigation toc: --> <li><a href="._book004.html#continuity-equation-as-a-linear-problem" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Continuity Equation as a linear problem</a></li>
      <!-- navigation toc: --> <li><a href="._book004.html#boundary-conditions" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Boundary conditions</a></li>
@@ -506,7 +512,7 @@ $$
      <!-- navigation toc: --> <li><a href="._book004.html#exercise-4-3-solve-the-full-heat-equation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.3: Solve the full heat equation</a></li>
      <!-- navigation toc: --> <li><a href="._book004.html#exercise-4-4-using-sparse-matrices-in-python" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.4: Using sparse matrices in python</a></li>
      <!-- navigation toc: --> <li><a href="._book004.html#co-_2-diffusion-into-aquifers" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;CO$_2$ diffusion into aquifers</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#ch:nlin" style="font-size: 80%;"><b>Solving nonlinear equations</b></a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#ch:nlin" style="font-size: 80%;"><b>Optimization and nonlinear systems</b></a></li>
      <!-- navigation toc: --> <li><a href="._book005.html#nonlinear-equations" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Nonlinear equations</a></li>
      <!-- navigation toc: --> <li><a href="._book005.html#example-van-der-waals-equation-of-state" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: van der Waals equation of state</a></li>
      <!-- navigation toc: --> <li><a href="._book005.html#exercise-5-1-van-der-waal-eos-and-co-_2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.1: van der Waal EOS and CO$_2$</a></li>
@@ -691,9 +697,9 @@ $$
         <div class="highlight" style="background: #ffffff">
   <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
 
-<span style="color: #408080; font-style: italic"># Sinus implementation using the Maclaurin Serie</span>
-<span style="color: #408080; font-style: italic"># By setting a value for eps this value will be used</span>
-<span style="color: #408080; font-style: italic"># if not provided</span>
+<span style="color: #3D7B7B; font-style: italic"># Sinus implementation using the Maclaurin Serie</span>
+<span style="color: #3D7B7B; font-style: italic"># By setting a value for eps this value will be used</span>
+<span style="color: #3D7B7B; font-style: italic"># if not provided</span>
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">my_sin</span>(x,eps<span style="color: #666666">=1e-16</span>):
     f <span style="color: #666666">=</span> power <span style="color: #666666">=</span> x
     x2 <span style="color: #666666">=</span> x<span style="color: #666666">*</span>x
@@ -795,12 +801,38 @@ $$
 <p><img src="fig-taylor/fd.png" align="bottom" width=800></p>
 </center>
 
-<h3 id="higher-order-derivative" class="anchor">Higher order derivative </h3>
+<h3 id="sec:taylor:hhd" class="anchor">Higher order derivative</h3>
 <p>We are also now in the position to derive a formula for the second order derivative. Instead of subtracting equation <a href="#mjx-eqn-4.9">(4.9)</a> and <a href="#mjx-eqn-4.10">(4.10)</a>, we can add them. Then the first order derivative disappear and we are left with an expression for the second derivative</p>
 $$
 \begin{equation}
 f^{\prime\prime}(x) = \frac{f(x+h)+f(x-h)-2f(x)}{h^2}- \frac{h^2}{12}f^{(4)}(\eta)
 \tag{4.11},
+\end{equation}
+$$
+
+<p>We can also calculate higher order derivatives by expanding about \( x\pm h \) and \( x\pm 2h \), adding one more term it follows from equation \eqref{eq:taylor:cd}</p>
+$$
+\begin{align}
+f(x+h)-f(x-h)&=2hf^\prime(x)+\frac{2}{3!}h^3f^{(3)}(x)+\frac{2}{5!}h^5f^{(5)}(\eta),\no
+\tag{4.12}\\ 
+f(x+2h)-f(x-2h)&=2(2h)f^\prime(x)+\frac{2}{3!}(2h)^3f^{(3)}(x)+\frac{2}{5!}h^5f^{(5)}(\eta).
+\label{}
+\end{align}
+$$
+
+<p>It is now possible to find an expression for the third derivative</p>
+$$
+\begin{equation}
+f^{(3)}(x) = \frac{f(x-h)-f(x+h)-\frac{1}{2}f(x-2h)+\frac{1}{2}f(x+2h)}{h^3}+ \frac{h^2}{4}f^{(5)}(\eta)
+\tag{4.13},
+\end{equation}
+$$
+
+<p>or a higher order first derivative</p>
+$$
+\begin{equation}
+f^{\prime}(x) = \frac{2f(x+h)-2f(x-h)-\frac{1}{4}f(x+2h)+\frac{1}{4}f(x-2h)}{3h}+ \frac{h^4}{30}f^{(5)}(\eta)
+\tag{4.14}.
 \end{equation}
 $$
 
@@ -822,34 +854,39 @@ The derivative of \( \sin x \) is \( \cos x \), we can calculate the numerical d
   <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
     <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>sin(x)
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">fd</span>(f,x,h):
- <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
-<span style="color: #BA2121; font-style: italic"> calculates the forward difference approximation to </span>
-<span style="color: #BA2121; font-style: italic"> the numerical derivative of f in x</span>
-<span style="color: #BA2121; font-style: italic"> &quot;&quot;&quot;</span>
- <span style="color: #008000; font-weight: bold">return</span> (f(x<span style="color: #666666">+</span>h)<span style="color: #666666">-</span>f(x))<span style="color: #666666">/</span>h
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot; f&#39;(x) forward difference &quot;&quot;&quot;</span>
+    <span style="color: #008000; font-weight: bold">return</span> (f(x<span style="color: #666666">+</span>h)<span style="color: #666666">-</span>f(x))<span style="color: #666666">/</span>h
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">fc</span>(f,x,h):
- <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
-<span style="color: #BA2121; font-style: italic"> calculates the central difference approximation to </span>
-<span style="color: #BA2121; font-style: italic"> the numerical derivative of f in x</span>
-<span style="color: #BA2121; font-style: italic"> &quot;&quot;&quot;</span>
- <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">0.5*</span>(f(x<span style="color: #666666">+</span>h)<span style="color: #666666">-</span>f(x<span style="color: #666666">-</span>h))<span style="color: #666666">/</span>h
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot; f&#39;(x) central difference &quot;&quot;&quot;</span>
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">0.5*</span>(f(x<span style="color: #666666">+</span>h)<span style="color: #666666">-</span>f(x<span style="color: #666666">-</span>h))<span style="color: #666666">/</span>h
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">fdd</span>(f,x,h):
- <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
-<span style="color: #BA2121; font-style: italic"> calculates the numerical second order derivative </span>
-<span style="color: #BA2121; font-style: italic"> of f in x</span>
-<span style="color: #BA2121; font-style: italic"> &quot;&quot;&quot;</span>
- <span style="color: #008000; font-weight: bold">return</span> (f(x<span style="color: #666666">+</span>h)<span style="color: #666666">+</span>f(x<span style="color: #666666">-</span>h)<span style="color: #666666">-2*</span>f(x))<span style="color: #666666">/</span>(h<span style="color: #666666">*</span>h)
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot; f&#39;&#39;(x) second order derivative &quot;&quot;&quot;</span>
+    <span style="color: #008000; font-weight: bold">return</span> (f(x<span style="color: #666666">+</span>h)<span style="color: #666666">+</span>f(x<span style="color: #666666">-</span>h)<span style="color: #666666">-2*</span>f(x))<span style="color: #666666">/</span>(h<span style="color: #666666">*</span>h)
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">fd3</span>(f,x,h):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot; f&#39;&#39;&#39;(x) third order derivative &quot;&quot;&quot;</span>
+    <span style="color: #008000; font-weight: bold">return</span> (<span style="color: #666666">2*</span>f(x<span style="color: #666666">-</span>h)<span style="color: #666666">-2*</span>f(x<span style="color: #666666">+</span>h)<span style="color: #666666">-</span>f(x<span style="color: #666666">-2*</span>h)<span style="color: #666666">+</span>f(x<span style="color: #666666">+2*</span>h))<span style="color: #666666">/</span>(<span style="color: #666666">2*</span>h<span style="color: #666666">*</span>h<span style="color: #666666">*</span>h)
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">fd_4</span>(f,x,h):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot; f&#39;(x) fourth order &quot;&quot;&quot;</span>
+    <span style="color: #008000; font-weight: bold">return</span> (<span style="color: #666666">8*</span>f(x<span style="color: #666666">+</span>h)<span style="color: #666666">-8*</span>f(x<span style="color: #666666">-</span>h)<span style="color: #666666">-</span>f(x<span style="color: #666666">+2*</span>h)<span style="color: #666666">+</span>f(x<span style="color: #666666">-2*</span>h))<span style="color: #666666">/</span>(<span style="color: #666666">12*</span>h)
 x<span style="color: #666666">=1</span>
 h<span style="color: #666666">=</span>np<span style="color: #666666">.</span>logspace(<span style="color: #666666">-15</span>,<span style="color: #666666">0.1</span>,<span style="color: #666666">10</span>)
 plt<span style="color: #666666">.</span>plot(h,np<span style="color: #666666">.</span>abs(np<span style="color: #666666">.</span>cos(x)<span style="color: #666666">-</span>fd(f,x,h)), <span style="color: #BA2121">&#39;-o&#39;</span>,label<span style="color: #666666">=</span><span style="color: #BA2121">&#39;forward difference&#39;</span>)
 plt<span style="color: #666666">.</span>plot(h,np<span style="color: #666666">.</span>abs(np<span style="color: #666666">.</span>cos(x)<span style="color: #666666">-</span>fc(f,x,h)),<span style="color: #BA2121">&#39;-x&#39;</span>, label<span style="color: #666666">=</span><span style="color: #BA2121">&#39;central difference&#39;</span>)
+plt<span style="color: #666666">.</span>plot(h,np<span style="color: #666666">.</span>abs(np<span style="color: #666666">.</span>cos(x)<span style="color: #666666">-</span>fd_4(f,x,h)),<span style="color: #BA2121">&#39;-*&#39;</span>,label<span style="color: #666666">=</span><span style="color: #BA2121">&#39;derivative - fourth order&#39;</span>)
 plt<span style="color: #666666">.</span>plot(h,np<span style="color: #666666">.</span>abs(<span style="color: #666666">-</span>np<span style="color: #666666">.</span>sin(x)<span style="color: #666666">-</span>fdd(f,x,h)),<span style="color: #BA2121">&#39;-*&#39;</span>,label<span style="color: #666666">=</span><span style="color: #BA2121">&#39;second derivative&#39;</span>)
+h<span style="color: #666666">=</span>np<span style="color: #666666">.</span>logspace(<span style="color: #666666">-7</span>,<span style="color: #666666">0.1</span>,<span style="color: #666666">10</span>)
+plt<span style="color: #666666">.</span>plot(h,np<span style="color: #666666">.</span>abs(<span style="color: #666666">-</span>np<span style="color: #666666">.</span>cos(x)<span style="color: #666666">-</span>fd3(f,x,h)),<span style="color: #BA2121">&#39;-*&#39;</span>,label<span style="color: #666666">=</span><span style="color: #BA2121">&#39;third derivative&#39;</span>)
+
 plt<span style="color: #666666">.</span>grid()
 plt<span style="color: #666666">.</span>legend()
 plt<span style="color: #666666">.</span>xscale(<span style="color: #BA2121">&#39;log&#39;</span>)
 plt<span style="color: #666666">.</span>yscale(<span style="color: #BA2121">&#39;log&#39;</span>)
+plt<span style="color: #666666">.</span>xlabel(<span style="color: #BA2121">&#39;Step size $h$&#39;</span>)
+plt<span style="color: #666666">.</span>ylabel(<span style="color: #BA2121">&#39;Numerical error&#39;</span>)
 </pre>
 </div>
       </div>
@@ -889,7 +926,7 @@ plt<span style="color: #666666">.</span>yscale(<span style="color: #BA2121">&#39
 $$
 \begin{align}
 x=\pm q2^m.
-\tag{4.12}
+\tag{4.15}
 \end{align}
 $$
 
@@ -908,8 +945,8 @@ Most modern computers uses 64-bits (8 bytes) processors. We are not going too mu
     <div class="inner_cell">
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
-  <pre style="line-height: 125%;"><span style="color: #008000">print</span>(<span style="color: #666666">1+2**-52</span>) <span style="color: #408080; font-style: italic"># prints a value larger than 1</span>
-<span style="color: #008000">print</span>(<span style="color: #666666">1+2**-53</span>) <span style="color: #408080; font-style: italic"># prints 1.0</span>
+  <pre style="line-height: 125%;"><span style="color: #008000">print</span>(<span style="color: #666666">1+2**-52</span>) <span style="color: #3D7B7B; font-style: italic"># prints a value larger than 1</span>
+<span style="color: #008000">print</span>(<span style="color: #666666">1+2**-53</span>) <span style="color: #3D7B7B; font-style: italic"># prints 1.0</span>
 </pre>
 </div>
       </div>
@@ -935,7 +972,7 @@ Most modern computers uses 64-bits (8 bytes) processors. We are not going too mu
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">a<span style="color: #666666">=0.1+0.2</span>
 b<span style="color: #666666">=0.3</span>
-<span style="color: #008000">print</span>(a<span style="color: #666666">==</span>b) <span style="color: #408080; font-style: italic"># gives False</span>
+<span style="color: #008000">print</span>(a<span style="color: #666666">==</span>b) <span style="color: #3D7B7B; font-style: italic"># gives False</span>
 </pre>
 </div>
       </div>
@@ -955,7 +992,7 @@ b<span style="color: #666666">=0.3</span>
 $$
 \begin{equation}
 0.2_{10}=0.0011001100\ldots_2 (=2^{-3}+2^{-4}+2^{-7}+2^{-8}+2^{-11}+\cdots)
-\tag{4.13}
+\tag{4.16}
 \end{equation}
 $$
 
@@ -971,7 +1008,7 @@ Thus in the computer 0.2 will be represented as \( 0.1999\ldots \) and when we a
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">a<span style="color: #666666">=0.125+0.25</span>
 b<span style="color: #666666">=0.375</span>
-<span style="color: #008000">print</span>(a<span style="color: #666666">==</span>b) <span style="color: #408080; font-style: italic"># gives True</span>
+<span style="color: #008000">print</span>(a<span style="color: #666666">==</span>b) <span style="color: #3D7B7B; font-style: italic"># gives True</span>
 </pre>
 </div>
       </div>
@@ -1002,7 +1039,7 @@ b<span style="color: #666666">=0.375</span>
   <pre style="line-height: 125%;">h<span style="color: #666666">=2**-53</span>
 a<span style="color: #666666">=1+</span>h
 b<span style="color: #666666">=1-</span>h
-<span style="color: #008000">print</span>((a<span style="color: #666666">-</span>b)<span style="color: #666666">/</span>h) <span style="color: #408080; font-style: italic"># analytical result is 2</span>
+<span style="color: #008000">print</span>((a<span style="color: #666666">-</span>b)<span style="color: #666666">/</span>h) <span style="color: #3D7B7B; font-style: italic"># analytical result is 2</span>
 </pre>
 </div>
       </div>
@@ -1035,7 +1072,7 @@ b<span style="color: #666666">=1-</span>h
 h<span style="color: #666666">=0.0002</span> 
 temp <span style="color: #666666">=</span> x<span style="color: #666666">+</span>h
 h<span style="color: #666666">=</span>temp<span style="color: #666666">-</span>x
-<span style="color: #008000">print</span>(h) <span style="color: #408080; font-style: italic"># improved value of h with exact binary representation</span>
+<span style="color: #008000">print</span>(h) <span style="color: #3D7B7B; font-style: italic"># improved value of h with exact binary representation</span>
 </pre>
 </div>
       </div>
@@ -1077,21 +1114,21 @@ $$
 1&1&1&1=1\cdot 2^3+1\cdot 2^2+1\cdot 2^1+1\cdot 2^0=15
 \end{matrix}
 .
-\tag{4.14}
+\tag{4.17}
 \end{equation}
 $$
 
-<p>Hence, with a 4 bits word size, we can represent \( 2^4=16 \) integers. The largest number is \( 2^4-1=15 \), and the smallest is zero. What about negative numbers? If we still keep to a 4 bits word size, there are still \( 2^4=16 \) numbers, but we distribute them differently. The common way to do it is to reserve the first bit to be a <em>sign</em> bit, a "0" is positive and "1" is negative, i.e. \( (-1)^0 = 1 \), and \( (-1)^1=-1 \). Replacing the first bit with a sign bit in equation <a href="#mjx-eqn-4.14">(4.14)</a>, we get the following sequence of numbers 0,1,2,3,4,5,6,7,-0,-1,-2,-3,-4,-5,-6,-7. The "-0", might seem strange but is used in the computer to extend the real number line \( 1/0=\infty \), whereas \( 1/-0=-\infty \). In general when there are \( m \) bits, we have a total of \( 2^m \) numbers. If we include negative numbers, we can choose to have \( 2^{m-1}-1 \), negative, and \( 2^{m-1}-1 \) positive numbers, negative zero and positive zero, i.e. \( 2^{m-1}-1+2^{m-1}-1+1+1=2^m \).</p>
+<p>Hence, with a 4 bits word size, we can represent \( 2^4=16 \) integers. The largest number is \( 2^4-1=15 \), and the smallest is zero. What about negative numbers? If we still keep to a 4 bits word size, there are still \( 2^4=16 \) numbers, but we distribute them differently. The common way to do it is to reserve the first bit to be a <em>sign</em> bit, a "0" is positive and "1" is negative, i.e. \( (-1)^0 = 1 \), and \( (-1)^1=-1 \). Replacing the first bit with a sign bit in equation <a href="#mjx-eqn-4.17">(4.17)</a>, we get the following sequence of numbers 0,1,2,3,4,5,6,7,-0,-1,-2,-3,-4,-5,-6,-7. The "-0", might seem strange but is used in the computer to extend the real number line \( 1/0=\infty \), whereas \( 1/-0=-\infty \). In general when there are \( m \) bits, we have a total of \( 2^m \) numbers. If we include negative numbers, we can choose to have \( 2^{m-1}-1 \), negative, and \( 2^{m-1}-1 \) positive numbers, negative zero and positive zero, i.e. \( 2^{m-1}-1+2^{m-1}-1+1+1=2^m \).</p>
 
-<p>What about real numbers? As stated earlier we use the scientific notation as in equation <a href="#mjx-eqn-4.12">(4.12)</a>, but still the scientific notation might have a real number in front, e.g. \( 1.25\cdot 10^{-3} \). To represent the number \( 1.25 \) in binary format we use a decimal separator, just as with base 10. In this case 1.25 is 1.01 in binary format</p>
+<p>What about real numbers? As stated earlier we use the scientific notation as in equation <a href="#mjx-eqn-4.15">(4.15)</a>, but still the scientific notation might have a real number in front, e.g. \( 1.25\cdot 10^{-3} \). To represent the number \( 1.25 \) in binary format we use a decimal separator, just as with base 10. In this case 1.25 is 1.01 in binary format</p>
 $$
 \begin{equation}
 1.01=1\cdot 2^0 + 0\cdot 2^{-1}+1\cdot 2^{-2}=1 + 0 + 0.25=1.25.
-\tag{4.15}
+\tag{4.18}
 \end{equation}
 $$
 
-<p>The scientific notation is commonly referred to as <em>floating point representation</em>. The term "floating point" is used because the decimal point is not in the same place, in contrast to fixed point where the decimal point is always in the same place. To store the number 1e-8=0.00000001 in floating point format, we only need to store 1 and -8 (and possibly the sign), whereas in fixed point format we need to store all 9 numbers.  In equation <a href="#mjx-eqn-4.14">(4.14)</a> we need to spend one bit to store the sign, leaving (in the case of 4 bits word size) three bits to be distributed among the <em>mantissa</em>, \( q \), and the exponent, \( m \). It is not given how many bits should be used for the mantissa and the exponent. Thus there are choices to be made, and all modern processors uses the same standard, the <a href="https://standards.ieee.org/standard/754-1985.html" target="_self">IEEE Standard 754-1985</a>. </p>
+<p>The scientific notation is commonly referred to as <em>floating point representation</em>. The term "floating point" is used because the decimal point is not in the same place, in contrast to fixed point where the decimal point is always in the same place. To store the number 1e-8=0.00000001 in floating point format, we only need to store 1 and -8 (and possibly the sign), whereas in fixed point format we need to store all 9 numbers.  In equation <a href="#mjx-eqn-4.17">(4.17)</a> we need to spend one bit to store the sign, leaving (in the case of 4 bits word size) three bits to be distributed among the <em>mantissa</em>, \( q \), and the exponent, \( m \). It is not given how many bits should be used for the mantissa and the exponent. Thus there are choices to be made, and all modern processors uses the same standard, the <a href="https://standards.ieee.org/standard/754-1985.html" target="_self">IEEE Standard 754-1985</a>. </p>
 <h3 id="floating-point-numbers-and-the-ieee-754-1985-standard" class="anchor">Floating point numbers and the IEEE 754-1985 standard </h3>
 <p>A 64 bits word size is commonly referred to as <em>double precision</em>, whereas a 32 bits word size is termed <em>single precision</em>. In the following we will consider a 64 bits word size. We would like to know: what is the roundoff error, what is the largest number that can be represented in the computer, and what is the smallest number? Almost all floating point numbers are represented in <em>normalized</em> form. In normalized form the mantissa is written as \( M=1.F \), and it is only \( F \) that is stored,   \( F \) is termed the <em>fraction</em>. We will return to the special case of some of the unnormalized numbers later. In the IEEE standard one bit is reserved for the sign, 52 for the fraction (\( F \)) and 11 for the exponent (\( m \)), see figure <a href="#fig:taylor:64bit">13</a> for an illustration.</p>
 
@@ -1103,11 +1140,11 @@ $$
 <p><img src="fig-taylor/64bit.png" align="bottom" width=800></p>
 </center>
 
-<p>The exponent must be positive to represent numbers with absolute value larger than one, and negative to represent numbers with absolute value less than one.  To make this more explicit the simple formula in equation <a href="#mjx-eqn-4.12">(4.12)</a> is rewritten:</p>
+<p>The exponent must be positive to represent numbers with absolute value larger than one, and negative to represent numbers with absolute value less than one.  To make this more explicit the simple formula in equation <a href="#mjx-eqn-4.15">(4.15)</a> is rewritten:</p>
 $$
 \begin{equation}
 \pm q 2^{E-e}.
-\tag{4.16}
+\tag{4.19}
 \end{equation}
 $$
 
@@ -1115,7 +1152,7 @@ $$
 $$
 \begin{align}
 1.000 + \text{ (49 more zeros)}\cdot 2^{-1022}&=2^0\cdot2^{-1022}\no
-\tag{4.17}\\ 
+\tag{4.20}\\ 
 &=2.2250738585072014\cdot 10^{-308}.
 \label{}
 \end{align}
@@ -1127,7 +1164,7 @@ The highest normalized number is
 $$
 \begin{align}
 1.111 + &\text{ (49 more ones)}\cdot2^{1023}=(2^0+2^{-1}+2^{-2}+\cdots+2^{-52})\cdot2^{1023}\no
-\tag{4.18}\\=(2-2^{-52})\cdot2^{1023}
+\tag{4.21}\\=(2-2^{-52})\cdot2^{1023}
 &=1.7976931348623157\cdot 10^{308}.
 \label{}
 \end{align}
@@ -1151,14 +1188,14 @@ machine will be of the order \( x/10^{16} \) (<em>not</em> \( 10^{-16} \)). In g
 </p>
 $$
 \begin{align}
-f^\prime(x)=\frac{f(x+h)-f(x)}{h}\pm\frac{2\epsilon|f(x)|}{h}-\frac{h}{2}f^{\prime\prime}(\eta),\tag{4.19}
+f^\prime(x)=\frac{f(x+h)-f(x)}{h}\pm\frac{2\epsilon|f(x)|}{h}-\frac{h}{2}f^{\prime\prime}(\eta),\tag{4.22}
 \end{align}
 $$
 
 <p>we do not know the sign of the roundoff error, so the total error \( R_2 \) is:</p>
 $$
 \begin{align}
-R_2=\frac{2\epsilon|f(x)|}{h}+\frac{h}{2}|f^{\prime\prime}(\eta)|.\tag{4.20}
+R_2=\frac{2\epsilon|f(x)|}{h}+\frac{h}{2}|f^{\prime\prime}(\eta)|.\tag{4.23}
 \end{align}
 $$
 
@@ -1170,7 +1207,7 @@ best step size, by differentiating \( R_2 \) and put it equal to zero:
 $$
 \begin{align}
 \frac{dR_2}{dh}&=-\frac{2\epsilon|f(x)|}{h^2}+\frac{1}{2}f^{\prime\prime}(\eta)=0\nonumber\\ 
-h&=2\sqrt{\epsilon\left|\frac{f(x)}{f^{\prime\prime}(\eta)}\right|}\simeq 2\cdot10^{-8},\tag{4.21}
+h&=2\sqrt{\epsilon\left|\frac{f(x)}{f^{\prime\prime}(\eta)}\right|}\simeq 2\cdot10^{-8},\tag{4.24}
 \end{align}
 $$
 
@@ -1183,14 +1220,14 @@ numerical error is:
 </p>
 $$
 \begin{align}
-R_3&=\frac{\epsilon|f(x)|}{h}+\frac{h^2}{6}f^{(3)}(\eta),\tag{4.22}\\ 
-R_4&=\frac{4\epsilon|f(x)|}{h^2}+\frac{h^2}{12}f^{(4)}(\eta),\tag{4.23}
+R_3&=\frac{\epsilon|f(x)|}{h}+\frac{h^2}{6}f^{(3)}(\eta),\tag{4.25}\\ 
+R_4&=\frac{4\epsilon|f(x)|}{h^2}+\frac{h^2}{12}f^{(4)}(\eta),\tag{4.26}
 \end{align}
 $$
 
 <p>respectively. Differentiating these two equations with respect to \( h \), and set the equations equal to zero, we find an optimal step size of
-\( h\sim10^{-5} \) for equation <a href="#mjx-eqn-4.22">(4.22)</a>, which gives an error of \( R_2\sim 10^{-16}/10^{-5}+(10^{-5})^2/6\simeq10^{-10} \), and \( h\sim10^{-4} \) for equation
-<a href="#mjx-eqn-4.23">(4.23)</a>, which gives an error of \( R_4\sim 4\cdot10^{-16}/(10^{-4})^2+(10^{-4})^2/12\simeq10^{-8} \). Note that we get the surprising result for the first order 
+\( h\sim10^{-5} \) for equation <a href="#mjx-eqn-4.25">(4.25)</a>, which gives an error of \( R_2\sim 10^{-16}/10^{-5}+(10^{-5})^2/6\simeq10^{-10} \), and \( h\sim10^{-4} \) for equation
+<a href="#mjx-eqn-4.26">(4.26)</a>, which gives an error of \( R_4\sim 4\cdot10^{-16}/(10^{-4})^2+(10^{-4})^2/12\simeq10^{-8} \). Note that we get the surprising result for the first order 
 derivative in equation \eqref{eq:taylor:cd}, that a higher step size gives a more accurate result. 
 </p>
 

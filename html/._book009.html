@@ -153,7 +153,10 @@ code { color: inherit; background-color: transparent; }
                1,
                None,
                'calculating-numerical-derivatives-of-functions'),
-              ('Higher order derivative', 3, None, 'higher-order-derivative'),
+              ('Higher order derivative',
+               3,
+               'sec:taylor:hhd',
+               'sec:taylor:hhd'),
               ('Roundoff Errors', 2, None, 'roundoff-errors'),
               ('Binary numbers', 3, None, 'binary-numbers'),
               ('Floating point numbers and the IEEE 754-1985 standard',
@@ -164,7 +167,10 @@ code { color: inherit; background-color: transparent; }
                3,
                None,
                'roundoff-error-and-truncation-error-in-numerical-derivatives'),
-              ('Solving linear systems', 0, 'ch:lin', 'ch:lin'),
+              ('Partial differential equations and linear systems',
+               0,
+               'ch:lin',
+               'ch:lin'),
               ('The Continuity Equation', 1, None, 'the-continuity-equation'),
               ('Continuity Equation as a linear problem',
                1,
@@ -224,7 +230,7 @@ code { color: inherit; background-color: transparent; }
                1,
                None,
                'co-_2-diffusion-into-aquifers'),
-              ('Solving nonlinear equations', 0, 'ch:nlin', 'ch:nlin'),
+              ('Optimization and nonlinear systems', 0, 'ch:nlin', 'ch:nlin'),
               ('Nonlinear equations', 1, None, 'nonlinear-equations'),
               ('Example: van der Waals equation of state',
                1,
@@ -401,7 +407,7 @@ MathJax.Hub.Config({
 <!-- newcommands_keep.tex -->
 $$
 \newcommand{\no}{\nonumber}
-\newcommand{\co}{CO$_2$}
+\newcommand{\co}{\text{CO$_{2}$}}
 $$
 
 
@@ -477,12 +483,12 @@ $$
      <!-- navigation toc: --> <li><a href="._book003.html#numerical-errors" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Numerical Errors</a></li>
      <!-- navigation toc: --> <li><a href="._book003.html#taylor-polynomial-approximation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Taylor Polynomial Approximation</a></li>
      <!-- navigation toc: --> <li><a href="._book003.html#calculating-numerical-derivatives-of-functions" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Calculating Numerical Derivatives of Functions</a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#higher-order-derivative" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Higher order derivative</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#sec:taylor:hhd" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Higher order derivative</a></li>
      <!-- navigation toc: --> <li><a href="._book003.html#roundoff-errors" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Roundoff Errors</a></li>
      <!-- navigation toc: --> <li><a href="._book003.html#binary-numbers" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Binary numbers</a></li>
      <!-- navigation toc: --> <li><a href="._book003.html#floating-point-numbers-and-the-ieee-754-1985-standard" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Floating point numbers and the IEEE 754-1985 standard</a></li>
      <!-- navigation toc: --> <li><a href="._book003.html#roundoff-error-and-truncation-error-in-numerical-derivatives" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Roundoff error and truncation error in numerical derivatives</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#ch:lin" style="font-size: 80%;"><b>Solving linear systems</b></a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#ch:lin" style="font-size: 80%;"><b>Partial differential equations and linear systems</b></a></li>
      <!-- navigation toc: --> <li><a href="._book004.html#the-continuity-equation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The Continuity Equation</a></li>
      <!-- navigation toc: --> <li><a href="._book004.html#continuity-equation-as-a-linear-problem" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Continuity Equation as a linear problem</a></li>
      <!-- navigation toc: --> <li><a href="._book004.html#boundary-conditions" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Boundary conditions</a></li>
@@ -506,7 +512,7 @@ $$
      <!-- navigation toc: --> <li><a href="._book004.html#exercise-4-3-solve-the-full-heat-equation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.3: Solve the full heat equation</a></li>
      <!-- navigation toc: --> <li><a href="._book004.html#exercise-4-4-using-sparse-matrices-in-python" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.4: Using sparse matrices in python</a></li>
      <!-- navigation toc: --> <li><a href="._book004.html#co-_2-diffusion-into-aquifers" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;CO$_2$ diffusion into aquifers</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#ch:nlin" style="font-size: 80%;"><b>Solving nonlinear equations</b></a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#ch:nlin" style="font-size: 80%;"><b>Optimization and nonlinear systems</b></a></li>
      <!-- navigation toc: --> <li><a href="._book005.html#nonlinear-equations" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Nonlinear equations</a></li>
      <!-- navigation toc: --> <li><a href="._book005.html#example-van-der-waals-equation-of-state" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: van der Waals equation of state</a></li>
      <!-- navigation toc: --> <li><a href="._book005.html#exercise-5-1-van-der-waal-eos-and-co-_2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.1: van der Waal EOS and CO$_2$</a></li>

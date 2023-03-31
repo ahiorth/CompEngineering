@@ -9,3 +9,16 @@ It is hard to learn a programming language without a concrete problem to solve. 
 We strongly recommend to install Python from [Anaconda](https://www.anaconda.com/). 
 
 All documents have been prepared using [doconce](https://github.com/doconce/doconce).
+
+## Index
+
+1. [Preface]("https://github.com/ahiorth/CompEngineering/blob/master/chapters/preface/notebook/preface.ipynb")
+2. [Introduction to Python]("https://github.com/ahiorth/CompEngineering/blob/master/chapters/python/notebook/main_python.ipynb")
+3. [Organizing data: pandas]("https://github.com/ahiorth/CompEngineering/blob/master/chapters/pandas/notebook/main_pandas.ipynb")
+4. [Numerical Inegration]("https://github.com/ahiorth/CompEngineering/blob/master/chapters/numint/notebook/main_numint.ipynb")
+5. [Finite differences]("https://github.com/ahiorth/CompEngineering/blob/master/chapters/taylor/notebook/main_taylor.ipynb")
+6. [Solving linear systems]("https://github.com/ahiorth/CompEngineering/blob/master/chapters/lin/notebook/main_lin.ipynb")
+7. [Ordinary differential equations]("https://github.com/ahiorth/CompEngineering/tree/master/chapters/ode/main_ode.ipynb")
+8. [Solving non linear systems]("https://github.com/ahiorth/CompEngineering/blob/master/chapters/nlin/notebook/main_nlin.ipynb")
+9. [Mone Carlo Methods]("https://github.com/ahiorth/CompEngineering/blob/master/chapters/mc/notebook/main_mc.ipynb")
+
