@@ -8,9 +8,9 @@ doconce format html main_numint.do.txt CHAPTER=document BOOK=document APPENDIX=d
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/doconce/doconce/" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="description" content="Numerical Integration">
+<meta name="description" content="Examples of algorithmic thinking: Numerical Integration">
 <meta name="keywords" content="midpoint method,trapezoidal method,numerical integrals, error,Richardson extrapolation,Romberg integration,Gaussian quadrature,Gaussian quadrature, error term,numerical integral, infinite">
-<title>Numerical Integration</title>
+<title>Examples of algorithmic thinking: Numerical Integration</title>
 <!-- Bootstrap style: bootswatch_readable -->
 <!-- doconce format html main_numint.do.txt CHAPTER=document BOOK=document APPENDIX=document --html_style=bootswatch_readable --html_output=numint-readable --html_code_style=inherit -->
 <link href="https://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
@@ -43,7 +43,7 @@ code { color: inherit; background-color: transparent; }
                1,
                'table_of_contents',
                'table_of_contents'),
-              ('Numerical Integration', 1, None, 'numerical-integration'),
+              ('Algorithmic thinking', 1, None, 'algorithmic-thinking'),
               ('The Midpoint Rule', 2, None, 'the-midpoint-rule'),
               ('The Trapezoidal Rule', 2, None, 'the-trapezoidal-rule'),
               ('Numerical Errors on Integrals',
@@ -74,10 +74,6 @@ code { color: inherit; background-color: transparent; }
                1,
                None,
                'integrating-functions-over-an-infinite-range'),
-              ('Which method to use in a specific case? (NOT COMPLETED)',
-               2,
-               None,
-               'which-method-to-use-in-a-specific-case-not-completed'),
               ('Exercise 1: Numerical Integration',
                2,
                None,
@@ -110,7 +106,7 @@ MathJax.Hub.Config({
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="numint-readable.html">Numerical Integration</a>
+    <a class="navbar-brand" href="numint-readable.html">Examples of algorithmic thinking: Numerical Integration</a>
   </div>
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav navbar-right">
@@ -118,7 +114,7 @@ MathJax.Hub.Config({
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
      <!-- navigation toc: --> <li><a href="#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
-     <!-- navigation toc: --> <li><a href="#numerical-integration" style="font-size: 80%;"><b>Numerical Integration</b></a></li>
+     <!-- navigation toc: --> <li><a href="#algorithmic-thinking" style="font-size: 80%;"><b>Algorithmic thinking</b></a></li>
      <!-- navigation toc: --> <li><a href="#the-midpoint-rule" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The Midpoint Rule</a></li>
      <!-- navigation toc: --> <li><a href="#the-trapezoidal-rule" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The Trapezoidal Rule</a></li>
      <!-- navigation toc: --> <li><a href="#numerical-errors-on-integrals" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Numerical Errors on Integrals</a></li>
@@ -130,7 +126,6 @@ MathJax.Hub.Config({
      <!-- navigation toc: --> <li><a href="#error-term-on-gaussian-integration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Error term on Gaussian Integration</a></li>
      <!-- navigation toc: --> <li><a href="#common-weight-functions-for-classical-gaussian-quadratures" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Common Weight functions for Classical Gaussian Quadratures</a></li>
      <!-- navigation toc: --> <li><a href="#integrating-functions-over-an-infinite-range" style="font-size: 80%;"><b>Integrating functions over an infinite range</b></a></li>
-     <!-- navigation toc: --> <li><a href="#which-method-to-use-in-a-specific-case-not-completed" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Which method to use in a specific case? (NOT COMPLETED)</a></li>
      <!-- navigation toc: --> <li><a href="#exercise-1-numerical-integration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 1: Numerical Integration</a></li>
      <!-- navigation toc: --> <li><a href="#references" style="font-size: 80%;"><b>References</b></a></li>
 
@@ -146,7 +141,7 @@ MathJax.Hub.Config({
 <!-- ------------------- main content ---------------------- -->
 <div class="jumbotron">
 <center>
-<h1>Numerical Integration</h1>
+<h1>Examples of algorithmic thinking: Numerical Integration</h1>
 </center>  <!-- document title -->
 
 <!-- author(s): Aksel Hiorth -->
@@ -157,7 +152,7 @@ MathJax.Hub.Config({
 <br>
 <p>University of Stavanger
 <center>
-<h4>Mar 31, 2023</h4>
+<h4>Apr 4, 2023</h4>
 </center> <!-- date -->
 <br>
 </p>
@@ -167,7 +162,7 @@ MathJax.Hub.Config({
 <h1 id="table_of_contents">Table of contents</h1>
 
 <div class='toc'>
-<p><a href="#numerical-integration"> Numerical Integration </a></p>
+<p><a href="#algorithmic-thinking"> Algorithmic thinking </a></p>
 <p><span class="tab"> <a href="#the-midpoint-rule"> The Midpoint Rule </a></p>
 <p><span class="tab"> <a href="#the-trapezoidal-rule"> The Trapezoidal Rule </a></p>
 <p><span class="tab"> <a href="#numerical-errors-on-integrals"> Numerical Errors on Integrals </a></p>
@@ -178,15 +173,15 @@ MathJax.Hub.Config({
 <p><span class="tab"> <a href="#error-term-on-gaussian-integration"> Error term on Gaussian Integration </a></p>
 <p><span class="tab"> <a href="#common-weight-functions-for-classical-gaussian-quadratures"> Common Weight functions for Classical Gaussian Quadratures </a></p>
 <p><a href="#integrating-functions-over-an-infinite-range"> Integrating functions over an infinite range  </a></p>
-<p><span class="tab"> <a href="#which-method-to-use-in-a-specific-case-not-completed"> Which method to use in a specific case? (NOT COMPLETED) </a></p>
 <p><span class="tab"> <a href="#exercise-1-numerical-integration"> Exercise 1: Numerical Integration </a></p>
 <p><a href="#references"> References </a></p>
 </div>
 <br>
 
 <!-- Common Mako variables and functions -->
-<h1 id="numerical-integration" class="anchor">Numerical Integration </h1>
-<p>Before diving into the details of this section, it is worth pointing out that the derivation of the algorithms in this section follows a general pattern:</p>
+<h1 id="algorithmic-thinking" class="anchor">Algorithmic thinking </h1>
+
+<p>The only way to improve in coding and algorithmic thinking is practice. The concept of one dimensional numerical integration is easy to understand, i.e. to calculate the area under a curve. In this chapter we will implement several numerical methods, and it will serve as a very simple playground that illustrates the key aspects of numerical modeling</p>
 
 <ol>
 <li> We start with a mathematical model (in this case an integral)</li>
@@ -195,10 +190,7 @@ MathJax.Hub.Config({
 <li> The numerical solution for a test case is compared with the true solution (could be an analytical solution or data)</li>
 <li> Error analysis: we investigate the accuracy of the algorithm by changing the number of iterations and/or make changes to the implementation or algorithm</li>
 </ol>
-<p>In many cases you would not use your own implementation to calculate an integral, but in order to understand which method to use 
-in a specific case, it is important to understand the limitation and advantages of the different algorithms. The only way to achieve this is to 
-have a basic understanding of the development. There might also be some cases where you would like to adapt an integration scheme to your specific needs. 
-</p>
+<p>The main point of this chapter is not to develop your own integration methods, the built in methods in Scipy will work in most cases. However, the way to break down the main task of calculating an integral into smaller tasks that is understandable by a computer, may work as a template for many different problems you would typically solve using a computer. A second motivation is that by analyzing the origin of numerical errors gives ideas for improving the algorithm, which is transferable to other problems.      </p>
 <h2 id="the-midpoint-rule" class="anchor">The Midpoint Rule </h2>
 <p>Numerical integration is encountered in numerous applications in physics and engineering sciences. 
 Let us first consider the most simple case, a function \( f(x) \), which is a function of one variable, \( x \). The most straight forward way of calculating the area \( \int_a^bf(x)dx \) is 
@@ -1105,23 +1097,7 @@ $$
 \tag{56}
 \end{equation}
 $$
-<h2 id="which-method-to-use-in-a-specific-case-not-completed" class="anchor">Which method to use in a specific case? (NOT COMPLETED) </h2>
-<p>There are no general answers to this question, and one need to decide from case to case. If computational speed is not an issue, 
-and the function to be integrated can be evaluated at any points all the methods above can be used. If the function to be integrated 
-is a set of observations at different times, that might be unevenly spaced, I would use the midpoint rule:
-</p>
-$$
-\begin{equation}
-I(a,b)=\int_a^bf(x)dx\simeq\sum_{k=0}^{N-1}M(x_k,x_k+h)=\sum_{k=0}^{N-1}h_if(x_k+\frac{h_i}{2})
-\tag{57}
-\end{equation}
-$$
 
-<p>This is because we do not know anything about the function between the points, only when it is observed, and the formula uses only 
-the information at the observation points. There is a second more subtle reason, and that is the fact that in many cases the 
-observations a different times are the {\it average} value of the observable quantity and it those cases the midpoint 
-rule would be the exact answer. 
-</p>
 
 <!-- --- begin exercise --- -->
 <h2 id="exercise-1-numerical-integration" class="anchor">Exercise 1: Numerical Integration </h2>
@@ -1163,10 +1139,10 @@ and \( x_k+h \) and fairly constant we can assume that \( f^{\prime\prime}(\eta)
 $$
 \begin{align}
 I(x_k,x_k+h)&=M(x_k,x_k+h)+E_M\text{ (midpoint rule)}
-\tag{58}\\ 
+\tag{57}\\ 
 I(x_k,x_k+h)&=T(x_k,x_k+h)+E_T\nonumber\\ 
 &=T(x_k,x_k+h)-2E_M\text{ (trapezoidal rule)},
-\tag{59}
+\tag{58}
 \end{align}
 $$
 
@@ -1174,11 +1150,11 @@ $$
 $$
 \begin{align}
 3I(x_k,x_k+h)&=2M(x_k,x_k+h)+T(x_k,x_k+h)
-\tag{60}\\ 
+\tag{59}\\ 
 &=2f(x_k+\frac{h}{2}) h+\left[f(x_k+h)+f(x_k)\right] \frac{h}{2}
-\tag{61}\\ 
+\tag{60}\\ 
 I(x_k,x_k+h)&=\frac{h}{6}\left[f(x_k)+4f(x_k+\frac{h}{2})+f(x_k+h)\right].
-\tag{62}
+\tag{61}
 \end{align}
 $$
 
@@ -1188,9 +1164,9 @@ $$
 I(a,b)&=\sum_{k=0}^{N-1}I(x_k,x_k+h)\nonumber\\ 
 &=\frac{h}{6}\left[f(a)+ 4f(a+\frac{h}{2})+2f(a+h)+4f(a+3\frac{h}{2})\right.\nonumber\\ 
 &\left.\qquad+2f(a+2h)+\cdots+f(b)\right]
-\tag{63}\\ 
+\tag{62}\\ 
 &=\frac{h^\prime}{3}\left[f(a)+ f(b) + 4\sum_{k= \text{odd}}^{N-2}f(a+k h^\prime)+2\sum_{k= \text{even}}^{N-2}f(a+k h^\prime)\right],
-\tag{64}
+\tag{63}
 \end{align}
 $$
 

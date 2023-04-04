@@ -144,7 +144,15 @@ code { color: inherit; background-color: transparent; }
                'splitting-data-into-different-folders-and-files'),
               ('Writing more robust code', 2, None, 'writing-more-robust-code'),
               ('Finite differences', 0, 'ch:taylor', 'ch:taylor'),
-              ('Numerical Errors', 1, None, 'numerical-errors'),
+              ('Why are gradients important?',
+               1,
+               None,
+               'why-are-gradients-important'),
+              ('Continuous functions and finite representation: numerical '
+               'errors',
+               1,
+               None,
+               'continuous-functions-and-finite-representation-numerical-errors'),
               ('Taylor Polynomial Approximation',
                1,
                None,
@@ -282,7 +290,7 @@ code { color: inherit; background-color: transparent; }
                'exercise-5-6-gradient-descent-solution-of-linear-regression'),
               ('Other Useful Methods', 1, None, 'other-useful-methods'),
               ('Numerical integration', 0, 'ch:numint', 'ch:numint'),
-              ('Numerical Integration', 1, None, 'numerical-integration'),
+              ('Algorithmic thinking', 1, None, 'algorithmic-thinking'),
               ('The Midpoint Rule', 2, None, 'the-midpoint-rule'),
               ('The Trapezoidal Rule', 2, None, 'the-trapezoidal-rule'),
               ('Numerical Errors on Integrals',
@@ -313,15 +321,12 @@ code { color: inherit; background-color: transparent; }
                1,
                None,
                'integrating-functions-over-an-infinite-range'),
-              ('Which method to use in a specific case? (NOT COMPLETED)',
-               2,
-               None,
-               'which-method-to-use-in-a-specific-case-not-completed'),
               ('Exercise 6.1: Numerical Integration',
                2,
                None,
                'exercise-6-1-numerical-integration'),
               ('Ordinary differential equations', 0, 'ch:ode', 'ch:ode'),
+              ('0D models', 1, None, '0d-models'),
               ('Ordinary Differential Equations',
                1,
                None,
@@ -480,7 +485,8 @@ $$
      <!-- navigation toc: --> <li><a href="._book002.html#splitting-data-into-different-folders-and-files" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Splitting data into different folders and files</a></li>
      <!-- navigation toc: --> <li><a href="._book002.html#writing-more-robust-code" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Writing more robust code</a></li>
      <!-- navigation toc: --> <li><a href="._book003.html#ch:taylor" style="font-size: 80%;"><b>Finite differences</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#numerical-errors" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Numerical Errors</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#why-are-gradients-important" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Why are gradients important?</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#continuous-functions-and-finite-representation-numerical-errors" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Continuous functions and finite representation: numerical errors</a></li>
      <!-- navigation toc: --> <li><a href="._book003.html#taylor-polynomial-approximation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Taylor Polynomial Approximation</a></li>
      <!-- navigation toc: --> <li><a href="._book003.html#calculating-numerical-derivatives-of-functions" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Calculating Numerical Derivatives of Functions</a></li>
      <!-- navigation toc: --> <li><a href="._book003.html#sec:taylor:hhd" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Higher order derivative</a></li>
@@ -535,7 +541,7 @@ $$
      <!-- navigation toc: --> <li><a href="._book005.html#exercise-5-6-gradient-descent-solution-of-linear-regression" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.6: Gradient descent solution of linear regression</a></li>
      <!-- navigation toc: --> <li><a href="._book005.html#other-useful-methods" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Other Useful Methods</a></li>
      <!-- navigation toc: --> <li><a href="#ch:numint" style="font-size: 80%;"><b>Numerical integration</b></a></li>
-     <!-- navigation toc: --> <li><a href="#numerical-integration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Numerical Integration</a></li>
+     <!-- navigation toc: --> <li><a href="#algorithmic-thinking" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Algorithmic thinking</a></li>
      <!-- navigation toc: --> <li><a href="#the-midpoint-rule" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Midpoint Rule</a></li>
      <!-- navigation toc: --> <li><a href="#the-trapezoidal-rule" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Trapezoidal Rule</a></li>
      <!-- navigation toc: --> <li><a href="#numerical-errors-on-integrals" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Numerical Errors on Integrals</a></li>
@@ -547,9 +553,9 @@ $$
      <!-- navigation toc: --> <li><a href="#error-term-on-gaussian-integration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Error term on Gaussian Integration</a></li>
      <!-- navigation toc: --> <li><a href="#common-weight-functions-for-classical-gaussian-quadratures" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Common Weight functions for Classical Gaussian Quadratures</a></li>
      <!-- navigation toc: --> <li><a href="#integrating-functions-over-an-infinite-range" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Integrating functions over an infinite range</a></li>
-     <!-- navigation toc: --> <li><a href="#which-method-to-use-in-a-specific-case-not-completed" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Which method to use in a specific case? (NOT COMPLETED)</a></li>
      <!-- navigation toc: --> <li><a href="#exercise-6-1-numerical-integration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 6.1: Numerical Integration</a></li>
      <!-- navigation toc: --> <li><a href="._book007.html#ch:ode" style="font-size: 80%;"><b>Ordinary differential equations</b></a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#0d-models" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;0D models</a></li>
      <!-- navigation toc: --> <li><a href="._book007.html#ordinary-differential-equations" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ordinary Differential Equations</a></li>
      <!-- navigation toc: --> <li><a href="._book007.html#a-simple-model-for-fluid-flow" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;A Simple Model for Fluid Flow</a></li>
      <!-- navigation toc: --> <li><a href="._book007.html#eulers-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Eulers Method</a></li>
@@ -589,8 +595,9 @@ $$
 <center>
 <h1 id="ch:numint" class="anchor">Numerical integration</h1>
 </center> <!-- chapter heading -->
-<h1 id="numerical-integration" class="anchor">Numerical Integration </h1>
-<p>Before diving into the details of this section, it is worth pointing out that the derivation of the algorithms in this section follows a general pattern:</p>
+<h1 id="algorithmic-thinking" class="anchor">Algorithmic thinking </h1>
+
+<p>The only way to improve in coding and algorithmic thinking is practice. The concept of one dimensional numerical integration is easy to understand, i.e. to calculate the area under a curve. In this chapter we will implement several numerical methods, and it will serve as a very simple playground that illustrates the key aspects of numerical modeling</p>
 
 <ol>
 <li> We start with a mathematical model (in this case an integral)</li>
@@ -599,10 +606,7 @@ $$
 <li> The numerical solution for a test case is compared with the true solution (could be an analytical solution or data)</li>
 <li> Error analysis: we investigate the accuracy of the algorithm by changing the number of iterations and/or make changes to the implementation or algorithm</li>
 </ol>
-<p>In many cases you would not use your own implementation to calculate an integral, but in order to understand which method to use 
-in a specific case, it is important to understand the limitation and advantages of the different algorithms. The only way to achieve this is to 
-have a basic understanding of the development. There might also be some cases where you would like to adapt an integration scheme to your specific needs. 
-</p>
+<p>The main point of this chapter is not to develop your own integration methods, the built in methods in Scipy will work in most cases. However, the way to break down the main task of calculating an integral into smaller tasks that is understandable by a computer, may work as a template for many different problems you would typically solve using a computer. A second motivation is that by analyzing the origin of numerical errors gives ideas for improving the algorithm, which is transferable to other problems.      </p>
 <h2 id="the-midpoint-rule" class="anchor">The Midpoint Rule </h2>
 <p>Numerical integration is encountered in numerous applications in physics and engineering sciences. 
 Let us first consider the most simple case, a function \( f(x) \), which is a function of one variable, \( x \). The most straight forward way of calculating the area \( \int_a^bf(x)dx \) is 
@@ -1459,7 +1463,7 @@ increasing to \( N=11 \) will reduce the error by a factor of \( 11^2=121 \).
 </p>
 <h2 id="error-term-on-gaussian-integration" class="anchor">Error term on Gaussian Integration </h2>
 <p>The Gaussian integration rule of order \( N \) integrates exactly a polynomial of order \( 2N-1 \). 
-From Taylors error formula, see equation <a href="._book003.html#mjx-eqn-4.3">(4.3)</a> in the chapter <a href="._book003.html#ch:taylor">Finite differences</a>,
+From Taylors error formula, see equation <a href="._book003.html#mjx-eqn-4.4">(4.4)</a> in the chapter <a href="._book003.html#ch:taylor">Finite differences</a>,
 we can easily see that the error term must be of order \( 2N \), and be proportional to \( f^{(2N)}(\eta) \), see <a href="._book009.html#stoer2013">[7]</a> for more details on the derivation of error terms. The drawback with an analytical error term derived from series expansion is that it involves the derivative of the function. As we have already explained, this is very unpractical and it is much more practical to use the methods described in the section <a href="#sec:numint:parct">sec:numint:parct</a>. Let us consider this in more detail, assume that we evaluate the integral using first a Gaussian integration rule with \( N \) points, and then \( N+1 \) points. Our estimates of the "exact" integral, \( I \),  would then be:
 </p>
 $$
@@ -1509,23 +1513,7 @@ $$
 \tag{7.56}
 \end{equation}
 $$
-<h2 id="which-method-to-use-in-a-specific-case-not-completed" class="anchor">Which method to use in a specific case? (NOT COMPLETED) </h2>
-<p>There are no general answers to this question, and one need to decide from case to case. If computational speed is not an issue, 
-and the function to be integrated can be evaluated at any points all the methods above can be used. If the function to be integrated 
-is a set of observations at different times, that might be unevenly spaced, I would use the midpoint rule:
-</p>
-$$
-\begin{equation}
-I(a,b)=\int_a^bf(x)dx\simeq\sum_{k=0}^{N-1}M(x_k,x_k+h)=\sum_{k=0}^{N-1}h_if(x_k+\frac{h_i}{2})
-\tag{7.57}
-\end{equation}
-$$
 
-<p>This is because we do not know anything about the function between the points, only when it is observed, and the formula uses only 
-the information at the observation points. There is a second more subtle reason, and that is the fact that in many cases the 
-observations a different times are the {\it average} value of the observable quantity and it those cases the midpoint 
-rule would be the exact answer. 
-</p>
 
 <!-- --- begin exercise --- -->
 <h2 id="exercise-6-1-numerical-integration" class="anchor">Exercise 6.1: Numerical Integration </h2>
@@ -1567,10 +1555,10 @@ and \( x_k+h \) and fairly constant we can assume that \( f^{\prime\prime}(\eta)
 $$
 \begin{align}
 I(x_k,x_k+h)&=M(x_k,x_k+h)+E_M\text{ (midpoint rule)}
-\tag{7.58}\\ 
+\tag{7.57}\\ 
 I(x_k,x_k+h)&=T(x_k,x_k+h)+E_T\nonumber\\ 
 &=T(x_k,x_k+h)-2E_M\text{ (trapezoidal rule)},
-\tag{7.59}
+\tag{7.58}
 \end{align}
 $$
 
@@ -1578,11 +1566,11 @@ $$
 $$
 \begin{align}
 3I(x_k,x_k+h)&=2M(x_k,x_k+h)+T(x_k,x_k+h)
-\tag{7.60}\\ 
+\tag{7.59}\\ 
 &=2f(x_k+\frac{h}{2}) h+\left[f(x_k+h)+f(x_k)\right] \frac{h}{2}
-\tag{7.61}\\ 
+\tag{7.60}\\ 
 I(x_k,x_k+h)&=\frac{h}{6}\left[f(x_k)+4f(x_k+\frac{h}{2})+f(x_k+h)\right].
-\tag{7.62}
+\tag{7.61}
 \end{align}
 $$
 
@@ -1592,9 +1580,9 @@ $$
 I(a,b)&=\sum_{k=0}^{N-1}I(x_k,x_k+h)\nonumber\\ 
 &=\frac{h}{6}\left[f(a)+ 4f(a+\frac{h}{2})+2f(a+h)+4f(a+3\frac{h}{2})\right.\nonumber\\ 
 &\left.\qquad+2f(a+2h)+\cdots+f(b)\right]
-\tag{7.63}\\ 
+\tag{7.62}\\ 
 &=\frac{h^\prime}{3}\left[f(a)+ f(b) + 4\sum_{k= \text{odd}}^{N-2}f(a+k h^\prime)+2\sum_{k= \text{even}}^{N-2}f(a+k h^\prime)\right],
-\tag{7.64}
+\tag{7.63}
 \end{align}
 $$
 

@@ -144,7 +144,15 @@ code { color: inherit; background-color: transparent; }
                'splitting-data-into-different-folders-and-files'),
               ('Writing more robust code', 2, None, 'writing-more-robust-code'),
               ('Finite differences', 0, 'ch:taylor', 'ch:taylor'),
-              ('Numerical Errors', 1, None, 'numerical-errors'),
+              ('Why are gradients important?',
+               1,
+               None,
+               'why-are-gradients-important'),
+              ('Continuous functions and finite representation: numerical '
+               'errors',
+               1,
+               None,
+               'continuous-functions-and-finite-representation-numerical-errors'),
               ('Taylor Polynomial Approximation',
                1,
                None,
@@ -282,7 +290,7 @@ code { color: inherit; background-color: transparent; }
                'exercise-5-6-gradient-descent-solution-of-linear-regression'),
               ('Other Useful Methods', 1, None, 'other-useful-methods'),
               ('Numerical integration', 0, 'ch:numint', 'ch:numint'),
-              ('Numerical Integration', 1, None, 'numerical-integration'),
+              ('Algorithmic thinking', 1, None, 'algorithmic-thinking'),
               ('The Midpoint Rule', 2, None, 'the-midpoint-rule'),
               ('The Trapezoidal Rule', 2, None, 'the-trapezoidal-rule'),
               ('Numerical Errors on Integrals',
@@ -313,15 +321,12 @@ code { color: inherit; background-color: transparent; }
                1,
                None,
                'integrating-functions-over-an-infinite-range'),
-              ('Which method to use in a specific case? (NOT COMPLETED)',
-               2,
-               None,
-               'which-method-to-use-in-a-specific-case-not-completed'),
               ('Exercise 6.1: Numerical Integration',
                2,
                None,
                'exercise-6-1-numerical-integration'),
               ('Ordinary differential equations', 0, 'ch:ode', 'ch:ode'),
+              ('0D models', 1, None, '0d-models'),
               ('Ordinary Differential Equations',
                1,
                None,
@@ -480,7 +485,8 @@ $$
      <!-- navigation toc: --> <li><a href="._book002.html#splitting-data-into-different-folders-and-files" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Splitting data into different folders and files</a></li>
      <!-- navigation toc: --> <li><a href="._book002.html#writing-more-robust-code" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Writing more robust code</a></li>
      <!-- navigation toc: --> <li><a href="._book003.html#ch:taylor" style="font-size: 80%;"><b>Finite differences</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book003.html#numerical-errors" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Numerical Errors</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#why-are-gradients-important" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Why are gradients important?</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#continuous-functions-and-finite-representation-numerical-errors" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Continuous functions and finite representation: numerical errors</a></li>
      <!-- navigation toc: --> <li><a href="._book003.html#taylor-polynomial-approximation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Taylor Polynomial Approximation</a></li>
      <!-- navigation toc: --> <li><a href="._book003.html#calculating-numerical-derivatives-of-functions" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Calculating Numerical Derivatives of Functions</a></li>
      <!-- navigation toc: --> <li><a href="._book003.html#sec:taylor:hhd" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Higher order derivative</a></li>
@@ -535,7 +541,7 @@ $$
      <!-- navigation toc: --> <li><a href="._book005.html#exercise-5-6-gradient-descent-solution-of-linear-regression" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.6: Gradient descent solution of linear regression</a></li>
      <!-- navigation toc: --> <li><a href="._book005.html#other-useful-methods" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Other Useful Methods</a></li>
      <!-- navigation toc: --> <li><a href="._book006.html#ch:numint" style="font-size: 80%;"><b>Numerical integration</b></a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#numerical-integration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Numerical Integration</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#algorithmic-thinking" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Algorithmic thinking</a></li>
      <!-- navigation toc: --> <li><a href="._book006.html#the-midpoint-rule" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Midpoint Rule</a></li>
      <!-- navigation toc: --> <li><a href="._book006.html#the-trapezoidal-rule" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Trapezoidal Rule</a></li>
      <!-- navigation toc: --> <li><a href="._book006.html#numerical-errors-on-integrals" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Numerical Errors on Integrals</a></li>
@@ -547,9 +553,9 @@ $$
      <!-- navigation toc: --> <li><a href="._book006.html#error-term-on-gaussian-integration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Error term on Gaussian Integration</a></li>
      <!-- navigation toc: --> <li><a href="._book006.html#common-weight-functions-for-classical-gaussian-quadratures" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Common Weight functions for Classical Gaussian Quadratures</a></li>
      <!-- navigation toc: --> <li><a href="._book006.html#integrating-functions-over-an-infinite-range" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Integrating functions over an infinite range</a></li>
-     <!-- navigation toc: --> <li><a href="._book006.html#which-method-to-use-in-a-specific-case-not-completed" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Which method to use in a specific case? (NOT COMPLETED)</a></li>
      <!-- navigation toc: --> <li><a href="._book006.html#exercise-6-1-numerical-integration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 6.1: Numerical Integration</a></li>
      <!-- navigation toc: --> <li><a href="._book007.html#ch:ode" style="font-size: 80%;"><b>Ordinary differential equations</b></a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#0d-models" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;0D models</a></li>
      <!-- navigation toc: --> <li><a href="._book007.html#ordinary-differential-equations" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ordinary Differential Equations</a></li>
      <!-- navigation toc: --> <li><a href="._book007.html#a-simple-model-for-fluid-flow" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;A Simple Model for Fluid Flow</a></li>
      <!-- navigation toc: --> <li><a href="._book007.html#eulers-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Eulers Method</a></li>
@@ -640,7 +646,8 @@ $$
 <p><span class="tab"> <span class="tab"> <a href="._book002.html#working-with-folders-and-files"> Working with folders and files </a></p>
 <p><span class="tab"> <span class="tab"> <a href="._book002.html#writing-more-robust-code"> Writing more robust code </a></p>
 <p><a href="._book003.html#ch:taylor"> Finite differences </a></p>
-<p><span class="tab"> <a href="._book003.html#numerical-errors"> Numerical Errors </a></p>
+<p><span class="tab"> <a href="._book003.html#why-are-gradients-important"> Why are gradients important? </a></p>
+<p><span class="tab"> <a href="._book003.html#continuous-functions-and-finite-representation-numerical-errors"> Continuous functions and finite representation: numerical errors </a></p>
 <p><span class="tab"> <a href="._book003.html#taylor-polynomial-approximation"> Taylor Polynomial Approximation </a></p>
 <p><span class="tab"> <a href="._book003.html#calculating-numerical-derivatives-of-functions"> Calculating Numerical Derivatives of Functions </a></p>
 <p><span class="tab"> <span class="tab"> <a href="._book003.html#roundoff-errors"> Roundoff Errors </a></p>
@@ -689,7 +696,7 @@ $$
 <p><span class="tab"> <span class="tab"> <a href="._book005.html#exercise-5-6-gradient-descent-solution-of-linear-regression"> Exercise 5.6: Gradient descent solution of linear regression </a></p>
 <p><span class="tab"> <a href="._book005.html#other-useful-methods"> Other Useful Methods </a></p>
 <p><a href="._book006.html#ch:numint"> Numerical integration </a></p>
-<p><span class="tab"> <a href="._book006.html#numerical-integration"> Numerical Integration </a></p>
+<p><span class="tab"> <a href="._book006.html#algorithmic-thinking"> Algorithmic thinking </a></p>
 <p><span class="tab"> <span class="tab"> <a href="._book006.html#the-midpoint-rule"> The Midpoint Rule </a></p>
 <p><span class="tab"> <span class="tab"> <a href="._book006.html#the-trapezoidal-rule"> The Trapezoidal Rule </a></p>
 <p><span class="tab"> <span class="tab"> <a href="._book006.html#numerical-errors-on-integrals"> Numerical Errors on Integrals </a></p>
@@ -700,9 +707,9 @@ $$
 <p><span class="tab"> <span class="tab"> <a href="._book006.html#error-term-on-gaussian-integration"> Error term on Gaussian Integration </a></p>
 <p><span class="tab"> <span class="tab"> <a href="._book006.html#common-weight-functions-for-classical-gaussian-quadratures"> Common Weight functions for Classical Gaussian Quadratures </a></p>
 <p><span class="tab"> <a href="._book006.html#integrating-functions-over-an-infinite-range"> Integrating functions over an infinite range  </a></p>
-<p><span class="tab"> <span class="tab"> <a href="._book006.html#which-method-to-use-in-a-specific-case-not-completed"> Which method to use in a specific case? (NOT COMPLETED) </a></p>
 <p><span class="tab"> <span class="tab"> <a href="._book006.html#exercise-6-1-numerical-integration"> Exercise 6.1: Numerical Integration </a></p>
 <p><a href="._book007.html#ch:ode"> Ordinary differential equations </a></p>
+<p><span class="tab"> <a href="._book007.html#0d-models"> 0D models </a></p>
 <p><span class="tab"> <a href="._book007.html#ordinary-differential-equations"> Ordinary Differential Equations </a></p>
 <p><span class="tab"> <a href="._book007.html#a-simple-model-for-fluid-flow"> A Simple Model for Fluid Flow </a></p>
 <p><span class="tab"> <a href="._book007.html#eulers-method"> Eulers Method </a></p>

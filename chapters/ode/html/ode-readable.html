@@ -8,9 +8,9 @@ doconce format html main_ode.do.txt CHAPTER=document BOOK=document APPENDIX=docu
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/doconce/doconce/" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="description" content="Ordinary Differential Equations">
+<meta name="description" content="0D-systems and ordinary differential equations">
 <meta name="keywords" content="continuous stirred tank reactor (CSTR),Eulers method,Eulers method, error analysis,Eulers method, adaptive step size,Runge-Kutta,Runge-Kutta, adaptive step size,adaptive step size,stiff equations,implicit method">
-<title>Ordinary Differential Equations</title>
+<title>0D-systems and ordinary differential equations</title>
 <!-- Bootstrap style: bootswatch_readable -->
 <!-- doconce format html main_ode.do.txt CHAPTER=document BOOK=document APPENDIX=document --html_style=bootswatch_readable --html_output=ode-readable --html_code_style=inherit -->
 <link href="https://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
@@ -43,6 +43,7 @@ code { color: inherit; background-color: transparent; }
                1,
                'table_of_contents',
                'table_of_contents'),
+              ('0D models', 1, None, '0d-models'),
               ('Ordinary Differential Equations',
                1,
                None,
@@ -105,7 +106,7 @@ MathJax.Hub.Config({
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="ode-readable.html">Ordinary Differential Equations</a>
+    <a class="navbar-brand" href="ode-readable.html">0D-systems and ordinary differential equations</a>
   </div>
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav navbar-right">
@@ -113,6 +114,7 @@ MathJax.Hub.Config({
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
      <!-- navigation toc: --> <li><a href="#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
+     <!-- navigation toc: --> <li><a href="#0d-models" style="font-size: 80%;"><b>0D models</b></a></li>
      <!-- navigation toc: --> <li><a href="#ordinary-differential-equations" style="font-size: 80%;"><b>Ordinary Differential Equations</b></a></li>
      <!-- navigation toc: --> <li><a href="#a-simple-model-for-fluid-flow" style="font-size: 80%;"><b>A Simple Model for Fluid Flow</b></a></li>
      <!-- navigation toc: --> <li><a href="#eulers-method" style="font-size: 80%;"><b>Eulers Method</b></a></li>
@@ -137,7 +139,7 @@ MathJax.Hub.Config({
 <!-- ------------------- main content ---------------------- -->
 <div class="jumbotron">
 <center>
-<h1>Ordinary Differential Equations </h1>
+<h1>0D-systems and ordinary differential equations </h1>
 </center>  <!-- document title -->
 
 <!-- author(s): Aksel Hiorth -->
@@ -148,7 +150,7 @@ MathJax.Hub.Config({
 <br>
 <p>University of Stavanger
 <center>
-<h4>Mar 31, 2023</h4>
+<h4>Apr 4, 2023</h4>
 </center> <!-- date -->
 <br>
 </p>
@@ -158,6 +160,7 @@ MathJax.Hub.Config({
 <h1 id="table_of_contents">Table of contents</h1>
 
 <div class='toc'>
+<p><a href="#0d-models"> 0D models </a></p>
 <p><a href="#ordinary-differential-equations"> Ordinary Differential Equations </a></p>
 <p><a href="#a-simple-model-for-fluid-flow"> A Simple Model for Fluid Flow </a></p>
 <p><a href="#eulers-method"> Eulers Method </a></p>
@@ -173,6 +176,8 @@ MathJax.Hub.Config({
 <br>
 
 <!-- Common Mako variables and functions -->
+<h1 id="0d-models" class="anchor">0D models </h1>
+<p>By 0D models we mean models that are only dependent on one variable, usually time. These models are often called "lumped parameter models", because they ignore spatial dependency and the parameters in the model are adjusted to match experimental data. In many cases it is more important to predict how a system evolves in time, than the spatial dependency. A very recent example is the spread of infectious deceases, like Covid-19, where the evolution of total number of infected people might be the most important and not where the infection happens. </p>
 <h1 id="ordinary-differential-equations" class="anchor">Ordinary Differential Equations </h1>
 <p>Physical systems evolves in space and time, and very often they are described by a ordinary differential equations (ODE) and/or
 partial differential equations (PDE). The difference between an ODE and a PDE is that an ODE only describes 
