@@ -43,24 +43,24 @@ code { color: inherit; background-color: transparent; }
                1,
                'table_of_contents',
                'table_of_contents'),
-              ('Monte Carlo Methods', 1, None, 'monte-carlo-methods'),
-              ("Monte Carlo Integration  ''Hit and Miss''",
+              ('Monte Carlo methods', 1, None, 'monte-carlo-methods'),
+              ("Monte Carlo integration  ''hit and miss''",
                1,
                None,
                'monte-carlo-integration-hit-and-miss'),
               ('Random number generators', 2, None, 'random-number-generators'),
               ('Encryption', 2, None, 'encryption'),
-              ('Errors on Monte Carlo Integration and the Binomial '
-               'Distribution',
+              ('Errors on Monte Carlo integration and the binomial '
+               'distribution',
                2,
                None,
                'errors-on-monte-carlo-integration-and-the-binomial-distribution'),
               ('The mean value method', 2, None, 'the-mean-value-method'),
-              ('Basic Properties of Probability Distributions',
+              ('Basic properties of probability distributions',
                2,
                None,
                'basic-properties-of-probability-distributions'),
-              ('Example: Monte Carlo Integration of a Hyper Sphere',
+              ('Example: Monte Carlo integration of a hyper sphere',
                2,
                None,
                'example-monte-carlo-integration-of-a-hyper-sphere'),
@@ -105,14 +105,14 @@ MathJax.Hub.Config({
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
      <!-- navigation toc: --> <li><a href="#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
-     <!-- navigation toc: --> <li><a href="#monte-carlo-methods" style="font-size: 80%;"><b>Monte Carlo Methods</b></a></li>
-     <!-- navigation toc: --> <li><a href="#monte-carlo-integration-hit-and-miss" style="font-size: 80%;"><b>Monte Carlo Integration  ''Hit and Miss''</b></a></li>
+     <!-- navigation toc: --> <li><a href="#monte-carlo-methods" style="font-size: 80%;"><b>Monte Carlo methods</b></a></li>
+     <!-- navigation toc: --> <li><a href="#monte-carlo-integration-hit-and-miss" style="font-size: 80%;"><b>Monte Carlo integration  ''hit and miss''</b></a></li>
      <!-- navigation toc: --> <li><a href="#random-number-generators" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Random number generators</a></li>
      <!-- navigation toc: --> <li><a href="#encryption" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Encryption</a></li>
-     <!-- navigation toc: --> <li><a href="#errors-on-monte-carlo-integration-and-the-binomial-distribution" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Errors on Monte Carlo Integration and the Binomial Distribution</a></li>
+     <!-- navigation toc: --> <li><a href="#errors-on-monte-carlo-integration-and-the-binomial-distribution" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Errors on Monte Carlo integration and the binomial distribution</a></li>
      <!-- navigation toc: --> <li><a href="#the-mean-value-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The mean value method</a></li>
-     <!-- navigation toc: --> <li><a href="#basic-properties-of-probability-distributions" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Basic Properties of Probability Distributions</a></li>
-     <!-- navigation toc: --> <li><a href="#example-monte-carlo-integration-of-a-hyper-sphere" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Monte Carlo Integration of a Hyper Sphere</a></li>
+     <!-- navigation toc: --> <li><a href="#basic-properties-of-probability-distributions" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Basic properties of probability distributions</a></li>
+     <!-- navigation toc: --> <li><a href="#example-monte-carlo-integration-of-a-hyper-sphere" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Monte Carlo integration of a hyper sphere</a></li>
      <!-- navigation toc: --> <li><a href="#ex:mc:norm" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 1: The central limit theorem</a></li>
      <!-- navigation toc: --> <li><a href="#remarks" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
      <!-- navigation toc: --> <li><a href="#ex:mc:BP" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 2: Birthday Paradox</a></li>
@@ -140,7 +140,7 @@ MathJax.Hub.Config({
 <br>
 <p>University of Stavanger
 <center>
-<h4>Apr 4, 2023</h4>
+<h4>May 7, 2023</h4>
 </center> <!-- date -->
 <br>
 </p>
@@ -150,19 +150,19 @@ MathJax.Hub.Config({
 <h1 id="table_of_contents">Table of contents</h1>
 
 <div class='toc'>
-<p><a href="#monte-carlo-methods"> Monte Carlo Methods </a></p>
-<p><a href="#monte-carlo-integration-hit-and-miss"> Monte Carlo Integration  ''Hit and Miss'' </a></p>
+<p><a href="#monte-carlo-methods"> Monte Carlo methods </a></p>
+<p><a href="#monte-carlo-integration-hit-and-miss"> Monte Carlo integration  ''hit and miss'' </a></p>
 <p><span class="tab"> <a href="#random-number-generators"> Random number generators </a></p>
 <p><span class="tab"> <a href="#encryption"> Encryption  </a></p>
-<p><span class="tab"> <a href="#errors-on-monte-carlo-integration-and-the-binomial-distribution"> Errors on Monte Carlo Integration and the Binomial Distribution  </a></p>
+<p><span class="tab"> <a href="#errors-on-monte-carlo-integration-and-the-binomial-distribution"> Errors on Monte Carlo integration and the binomial distribution  </a></p>
 <p><span class="tab"> <a href="#the-mean-value-method"> The mean value method </a></p>
-<p><span class="tab"> <a href="#basic-properties-of-probability-distributions"> Basic Properties of Probability Distributions </a></p>
-<p><span class="tab"> <a href="#example-monte-carlo-integration-of-a-hyper-sphere"> Example: Monte Carlo Integration of a Hyper Sphere </a></p>
+<p><span class="tab"> <a href="#basic-properties-of-probability-distributions"> Basic properties of probability distributions </a></p>
+<p><span class="tab"> <a href="#example-monte-carlo-integration-of-a-hyper-sphere"> Example: Monte Carlo integration of a hyper sphere </a></p>
 <p><span class="tab"> <a href="#ex:mc:norm"> Exercise 1: The central limit theorem </a></p>
 <p><span class="tab"> <a href="#ex:mc:BP"> Exercise 2: Birthday Paradox </a></p>
 </div>
 <br>
-<h1 id="monte-carlo-methods" class="anchor">Monte Carlo Methods </h1>
+<h1 id="monte-carlo-methods" class="anchor">Monte Carlo methods </h1>
 <p>Monte Carlo methods are named after the Monte Carlo Casino in Monaco,
 this is because at its core it uses random numbers to solve problems.
 Monte Carlo methods are quite easy to program, and they are
@@ -183,7 +183,7 @@ usually much more intuitive than a theoretical approach.
 <!-- affect the behavior of our system. A -->
 
 <!-- o <a href="https://www.scratchapixel.com/lessons/mathematics-physics-for-computer-graphics/monte-carlo-methods-in-practice/monte-carlo-rendering-practical-example" target="_self">ray  tracing</a> -->
-<h1 id="monte-carlo-integration-hit-and-miss" class="anchor">Monte Carlo Integration  ''Hit and Miss'' </h1>
+<h1 id="monte-carlo-integration-hit-and-miss" class="anchor">Monte Carlo integration  ''hit and miss'' </h1>
 <p>Let us start with a simple illustration of the Monte Carlo Method (MCM), Monte Carlo integration. To the left
 in figure <a href="#fig:mc:mci">1</a> there is a shape of a pond. Imagine that we wanted to estimate the area of the pond, how could
 we do it? Assume further that you did not have your phone or any other electronic devices to help you. 
@@ -230,7 +230,7 @@ which is equivalent to pick random numbers from a <em>uniform</em> distribution.
   <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">estimate_pi</span>(N,d):
-<span style="color: #3D7B7B; font-style: italic">#   random.seed(2)</span>
+<span style="color: #408080; font-style: italic">#   random.seed(2)</span>
     D2<span style="color: #666666">=</span>d<span style="color: #666666">*</span>d<span style="color: #666666">/4</span>; dc<span style="color: #666666">=0.5*</span>d
     A<span style="color: #666666">=0</span>
     <span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>,N):
@@ -238,7 +238,7 @@ which is equivalent to pick random numbers from a <em>uniform</em> distribution.
         y<span style="color: #666666">=</span>np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>uniform(<span style="color: #666666">0</span>,d)
         <span style="color: #008000; font-weight: bold">if</span>((x<span style="color: #666666">-</span>dc)<span style="color: #666666">**2+</span>(y<span style="color: #666666">-</span>dc)<span style="color: #666666">**2</span> <span style="color: #666666">&lt;=</span> D2):
             A<span style="color: #666666">+=1</span>
-    <span style="color: #3D7B7B; font-style: italic"># estimate area of circle: d*d*A/N</span>
+    <span style="color: #408080; font-style: italic"># estimate area of circle: d*d*A/N</span>
     <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">4*</span>A<span style="color: #666666">/</span>N
 
 N<span style="color: #666666">=1000</span>;d<span style="color: #666666">=2</span>
@@ -418,7 +418,7 @@ unlock the box and read the message. The important point is that the
 box was never unlocked throughout the transaction, and Alice and Bob
 never had to share the key with anyone. 
 </p>
-<h2 id="errors-on-monte-carlo-integration-and-the-binomial-distribution" class="anchor">Errors on Monte Carlo Integration and the Binomial Distribution  </h2>
+<h2 id="errors-on-monte-carlo-integration-and-the-binomial-distribution" class="anchor">Errors on Monte Carlo integration and the binomial distribution  </h2>
 <p>How many rocks do we need to throw in order to reach a certain accuracy? To answer this question we need some results from statistics. Our problem of calculating the integral is closely related to the <em>binomial distribution</em>. When we throw a rock one of two things can happen i) the rock falls into the water, or ii) it falls outside the pond. If we denote the probability that the rock falls into the pond as \( p \), then the probability that it falls outside the pond, \( q \), has to be \( q=1-p \).
 This is simply because there are no other possibilities and the sum of the two probabilities has to be one: \( p+q=p+(1-p)=1 \). The binomial distribution is given by:
 </p>
@@ -614,7 +614,7 @@ we use the average value.
     D2<span style="color: #666666">=</span>d<span style="color: #666666">*</span>d<span style="color: #666666">/4</span>
     x<span style="color: #666666">=</span>np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>uniform(<span style="color: #666666">-</span>d<span style="color: #666666">/2</span>,d<span style="color: #666666">/2</span>,size<span style="color: #666666">=</span>N)
     A<span style="color: #666666">=</span>np<span style="color: #666666">.</span>sum(f(x,D2))
-    <span style="color: #3D7B7B; font-style: italic"># estimate for area: A/N</span>
+    <span style="color: #408080; font-style: italic"># estimate for area: A/N</span>
     <span style="color: #008000; font-weight: bold">return</span> d<span style="color: #666666">*</span>A<span style="color: #666666">/</span>N
 </pre>
 </div>
@@ -671,7 +671,7 @@ that our estimate approach the true value of the integral.
 </p>
 </div>
 
-<h2 id="basic-properties-of-probability-distributions" class="anchor">Basic Properties of Probability Distributions </h2>
+<h2 id="basic-properties-of-probability-distributions" class="anchor">Basic properties of probability distributions </h2>
 <p>The MCM is closely tied to statistics, and it is important to have a
 basic understanding of probability density functions (PDF). In
 the previous section, we used a random number generator to give us
@@ -763,7 +763,7 @@ number of dimensions, as we will see in the next section.
 </p>
 </div>
 
-<h2 id="example-monte-carlo-integration-of-a-hyper-sphere" class="anchor">Example: Monte Carlo Integration of a Hyper Sphere </h2>
+<h2 id="example-monte-carlo-integration-of-a-hyper-sphere" class="anchor">Example: Monte Carlo integration of a hyper sphere </h2>
 <p>The volume of a hyper sphere is known:</p>
 $$
 \begin{equation}
@@ -898,8 +898,8 @@ zero. Below is an implementation that uses recursive function calls
     area <span style="color: #666666">+=</span> funci(lower_limit, upper_limit,func,x,i<span style="color: #666666">+1</span>,N,D)
     area <span style="color: #666666">*=</span> <span style="color: #666666">0.5</span>
     x[i]  <span style="color: #666666">=</span> lower_limit
-    <span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>,N): <span style="color: #3D7B7B; font-style: italic"># loop over k=1,..,N-1</span>
-        x[i] <span style="color: #666666">+=</span> h <span style="color: #3D7B7B; font-style: italic"># midpoint value</span>
+    <span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>,N): <span style="color: #408080; font-style: italic"># loop over k=1,..,N-1</span>
+        x[i] <span style="color: #666666">+=</span> h <span style="color: #408080; font-style: italic"># midpoint value</span>
         area <span style="color: #666666">+=</span> funci(lower_limit, upper_limit,func,x,i<span style="color: #666666">+1</span>,N,D)
     <span style="color: #008000; font-weight: bold">return</span> area<span style="color: #666666">*</span>h
 </pre>
@@ -1011,7 +1011,7 @@ distribution</em>. Write a Python function that returns the average of
     x<span style="color: #666666">=</span>[np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>uniform() <span style="color: #008000; font-weight: bold">for</span> _ <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(N)]
     <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>mean(x)
 
-<span style="color: #3D7B7B; font-style: italic"># or alternatively, and equally fast</span>
+<span style="color: #408080; font-style: italic"># or alternatively, and equally fast</span>
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">average2</span>(N):
     x<span style="color: #666666">=0</span>
@@ -1019,7 +1019,7 @@ distribution</em>. Write a Python function that returns the average of
         x<span style="color: #666666">+=</span>np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>uniform()
     <span style="color: #008000; font-weight: bold">return</span> x<span style="color: #666666">/</span>N
 
-<span style="color: #3D7B7B; font-style: italic"># or much faster:</span>
+<span style="color: #408080; font-style: italic"># or much faster:</span>
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">average3</span>(N):
     x<span style="color: #666666">=</span>np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>uniform(size<span style="color: #666666">=</span>N)
     <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>mean(x)
@@ -1208,16 +1208,16 @@ one just picks a random day at year.
     <div class="inner_cell">
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
-  <pre style="line-height: 125%;"><span style="color: #3D7B7B; font-style: italic">#from datetime import date</span>
-<span style="color: #3D7B7B; font-style: italic">#%%</span>
+  <pre style="line-height: 125%;"><span style="color: #408080; font-style: italic">#from datetime import date</span>
+<span style="color: #408080; font-style: italic">#%%</span>
 <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
 
-<span style="color: #3D7B7B; font-style: italic">#def get_date():</span>
-<span style="color: #3D7B7B; font-style: italic">#    &quot;&quot;&quot; return a random date in the current year &quot;&quot;&quot;</span>
-<span style="color: #3D7B7B; font-style: italic">#    start_dt = date.today().replace(day=1, month=1).toordinal()</span>
-<span style="color: #3D7B7B; font-style: italic">#    end_dt = date.today().replace(day=31, month=12).toordinal()</span>
-<span style="color: #3D7B7B; font-style: italic">#    random_day = date.fromordinal(np.random.randint(start_dt, end_dt))</span>
-<span style="color: #3D7B7B; font-style: italic">#    return random_day</span>
+<span style="color: #408080; font-style: italic">#def get_date():</span>
+<span style="color: #408080; font-style: italic">#    &quot;&quot;&quot; return a random date in the current year &quot;&quot;&quot;</span>
+<span style="color: #408080; font-style: italic">#    start_dt = date.today().replace(day=1, month=1).toordinal()</span>
+<span style="color: #408080; font-style: italic">#    end_dt = date.today().replace(day=31, month=12).toordinal()</span>
+<span style="color: #408080; font-style: italic">#    random_day = date.fromordinal(np.random.randint(start_dt, end_dt))</span>
+<span style="color: #408080; font-style: italic">#    return random_day</span>
 
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">get_day</span>():

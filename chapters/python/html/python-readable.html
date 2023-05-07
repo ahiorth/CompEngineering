@@ -43,7 +43,7 @@ code { color: inherit; background-color: transparent; }
                1,
                'table_of_contents',
                'table_of_contents'),
-              ('Personal Guidelines', 1, None, 'personal-guidelines'),
+              ('Personal guidelines', 1, None, 'personal-guidelines'),
               ('Code editor', 2, None, 'code-editor'),
               ('Types in Python', 1, None, 'types-in-python'),
               ('Basic types', 2, None, 'basic-types'),
@@ -76,11 +76,6 @@ code { color: inherit; background-color: transparent; }
                2,
                None,
                'mutable-and-immutable-objects'),
-              ('Exercise 1: Explain why only one of the codes below gives the '
-               'correct answer',
-               2,
-               None,
-               'exercise-1-explain-why-only-one-of-the-codes-below-gives-the-correct-answer'),
               ('References', 1, None, 'references')]}
 end of tocinfo -->
 
@@ -117,7 +112,7 @@ MathJax.Hub.Config({
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
      <!-- navigation toc: --> <li><a href="#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
-     <!-- navigation toc: --> <li><a href="#personal-guidelines" style="font-size: 80%;"><b>Personal Guidelines</b></a></li>
+     <!-- navigation toc: --> <li><a href="#personal-guidelines" style="font-size: 80%;"><b>Personal guidelines</b></a></li>
      <!-- navigation toc: --> <li><a href="#code-editor" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Code editor</a></li>
      <!-- navigation toc: --> <li><a href="#types-in-python" style="font-size: 80%;"><b>Types in Python</b></a></li>
      <!-- navigation toc: --> <li><a href="#basic-types" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Basic types</a></li>
@@ -138,7 +133,6 @@ MathJax.Hub.Config({
      <!-- navigation toc: --> <li><a href="#floats-and-integers" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Floats and integers</a></li>
      <!-- navigation toc: --> <li><a href="#lists-and-arrays" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lists and arrays</a></li>
      <!-- navigation toc: --> <li><a href="#mutable-and-immutable-objects" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Mutable and immutable objects</a></li>
-     <!-- navigation toc: --> <li><a href="#exercise-1-explain-why-only-one-of-the-codes-below-gives-the-correct-answer" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 1: Explain why only one of the codes below gives the correct answer</a></li>
      <!-- navigation toc: --> <li><a href="#references" style="font-size: 80%;"><b>References</b></a></li>
 
         </ul>
@@ -164,7 +158,7 @@ MathJax.Hub.Config({
 <br>
 <p>University of Stavanger
 <center>
-<h4>Apr 4, 2023</h4>
+<h4>May 7, 2023</h4>
 </center> <!-- date -->
 <br>
 </p>
@@ -174,7 +168,7 @@ MathJax.Hub.Config({
 <h1 id="table_of_contents">Table of contents</h1>
 
 <div class='toc'>
-<p><a href="#personal-guidelines"> Personal Guidelines  </a></p>
+<p><a href="#personal-guidelines"> Personal guidelines  </a></p>
 <p><span class="tab"> <a href="#code-editor"> Code editor </a></p>
 <p><a href="#types-in-python"> Types in Python </a></p>
 <p><span class="tab"> <a href="#basic-types"> Basic types </a></p>
@@ -190,64 +184,63 @@ MathJax.Hub.Config({
 <p><span class="tab"> <a href="#passing-arrays-and-lists-to-functions"> Passing arrays and lists to functions </a></p>
 <p><span class="tab"> <a href="#call-by-value-or-call-by-reference"> Call by value or call by reference  </a></p>
 <p><span class="tab"> <a href="#mutable-and-immutable-objects"> Mutable and immutable objects </a></p>
-<p><span class="tab"> <a href="#exercise-1-explain-why-only-one-of-the-codes-below-gives-the-correct-answer"> Exercise 1: Explain why only one of the codes below gives the correct answer </a></p>
 <p><a href="#references"> References </a></p>
 </div>
 <br>
 
 <p>There are plenty of online resources if you want get an overview of Python syntax, such as <a href="#vanderplas2016whirlwind">[1]</a>, for which the full book is available on <a href="https://github.com/jakevdp/WhirlwindTourOfPython" target="_self">github</a>.</p>
 
-<p>In this chapter I will try to focus on the key part of Python that you will need in this book, and maybe more importantly give some advice on how to write good, reusable, Python code. As you might have discovered tasks can be solved in many different ways in Python. This is clearly a strength because you would most likely be able to solve any task thrown at you. On the other hand it is a weakness, because code can get messy and hard to follow, especially if you solve the same task in different part of your code using different libraries or syntax.</p>
+<p>In this chapter I will try to focus on the key part of Python that you will need in this book, and maybe more importantly, give some advice on how to write good, reusable, Python code. As you might have discovered tasks can be solved in many different ways in Python. This is clearly a strength because you would most likely be able to solve any task thrown at you. On the other hand it is a weakness, because code can get messy and hard to follow, especially if you solve the same task in different parts of your code using different libraries or syntax.</p>
 
-<p>In this chapter I will explain how I tend to solve some common tasks, in this process we will also cover some stuff that you should know. If you need more information on each topic below, there are plenty of online sources. </p>
+<p>In this chapter, I will explain how I tend to solve some common tasks, in the process we will also cover some stuff that you should know. If you need more information on each topic below, there are plenty of online sources. </p>
 
-<p>The code examples are meant as an inspiration, and maybe you do not agree and have solutions that you think are much better. If that is the case I would love to know, and I can update this chapter.</p>
+<p>The code examples are meant as an inspiration, and maybe you do not agree and have solutions that you think are much better. If that is the case, I would love to know, so that I can update this chapter.</p>
 
 <div class="alert alert-block alert-success alert-text-normal"><b>Speed and readability</b>
-<p>Many people are concerned about speed or execution time. My advice is to focus on readable code, and get the job done. When the code is working it is very easy to go back and change out parts that are slow. Remember that you should test the code on big problems, sometimes the advantage of Numpy or Scipy is not seen before the system is large. You can use the magic commands <code>%timeit</code> to check performance of different functions. There is also the option of using <a href="https://numba.pydata.org/" target="_self">Numba</a>, which translate python code into optimized machine code. </p>
+<p>Many people are concerned about speed or execution time. My advice is to focus on readable code, and get the job done. When the code is working, it is very easy to go back and change parts that are slow. Remember that you should test the code on big problems, sometimes the advantage of Numpy or Scipy is not seen before the system is large. You can use the magic commands <code>%timeit</code> to check performance of different functions. You can also use <a href="https://numba.pydata.org/" target="_self">Numba</a>, which translate python code into optimized machine code. </p>
 </div>
 
-<h1 id="personal-guidelines" class="anchor">Personal Guidelines  </h1>
-<p>It is important to have a some guidelines when coding, and for Python there are clear style guides <a href="https://www.python.org/dev/peps/pep-0008/" target="_self">PEP 8</a>. Take a look at the official guidelines, and  make some specific rules for yourself, and stick to them. The reason for this is that if you make a large code, people will recognize your style and it is easier to understand the code. If you are working in team, it is even more important - try to agree on some basic rules, e.g.</p>
+<h1 id="personal-guidelines" class="anchor">Personal guidelines  </h1>
+<p>It is important to have some guidelines when coding, and for Python there are clear style guides called <a href="https://www.python.org/dev/peps/pep-0008/" target="_self">PEP 8</a>. Take a look at the official guidelines, and  make some specific rules for yourself, and stick to them. The reason for this is that if you make a large program or library, people will recognize your style and it is easier to understand the code. If you are working in a team, it is even more important - try to agree on some basic rules, for example:</p>
 
 <p>
 <b>Code Guidelines:</b>
 </p>
 <ul>
-<li> Variable names should be meaningful</li>
-<li> Naming of variables and functions, should you write <code>def my_fynction(...):</code> or <code>def MyFunction(..)</code>, i.e are words separated by underscore or capital letter. Personally I use capital letters for class definition, and underscore for function definitions.</li>
-<li> (Almost) always use doc string, you would be amazed how easy it is to forget what a function does. Shorter (private) functions usually do not need comments or doc strings, if you use good variable names - it should then be easy to understand what is happening by just looking at the code.</li>
+<li> Variable names should be meaningful.</li>
+<li> Naming of variables and functions. Should you write <code>def my_function(...):</code> or <code>def MyFunction(..)</code>, i.e are words separated by an underscore or a capital letter? Personally I use capital letters for class definition, and underscore for function definitions.</li>
+<li> (Almost) always use doc strings, you would be amazed how easy it is to forget what a function does. Shorter (private) functions usually do not need comments or doc strings, if you use good variable names - it should be easy to understand what is happening by just looking at the code.</li>
 <li> Inline comments should be used sparingly, only where strictly necessary.</li>
 <li> Strive to make code general, in particular not type specific, e.g. in Python it is easy to make functions that will work if a list (array) or a single value is passed.</li>
 <li> Use exception handling, in particular for larger projects.</li>
-<li> DRY - Do not Repeat Yourself <a href="#thomas2019pragmatic">[2]</a>. If you need to change the code more than one place to extend it, you will forget to change everywhere and introduce bugs.</li>
-<li> The DRY principle also applies to <em>knowledge sharing</em>, it is not only about copy and paste line of code, but knowledge should only be represented in one place.</li> 
+<li> DRY - Do not Repeat Yourself <a href="#thomas2019pragmatic">[2]</a>. If you need to change the code in more than one place to extend it, you may forget to change everywhere and introduce bugs.</li>
+<li> The DRY principle also applies to <em>knowledge sharing</em>, it is not only about copy and paste code, but knowledge should only be represented in one place.</li> 
 <li> Import libraries using the syntax <code>import library as ..</code>, Numpy would typically be <code>import numpy as np</code>. The syntax <code>from numpy import *</code> could lead to conflicts between modules as functions could have the same name in two different modules.</li>
 </ul>
 <p>
 <b>Work Guidelines:</b>
 </p>
 <ul>
-<li> Do not copy and paste code without understanding it. It is OK to be inspired of others, be aware that in some cases the code example are unnecessary complicated. Too much copy and paste will result in a code with a mix of different styles.</li> 
-<li> Stick to a limited number of libraries, I try to do as much as possible with <a href="https://numpy.org/" target="_self">Numpy</a>, <a href="https://pandas.pydata.org/" target="_self">Pandas</a>, and  <a href="https://matplotlib.org/" target="_self">Matplotlib</a>.</li>
-<li> Unexpected behavior of functions, functions should be able to discover if something are wrong with arguments, and give warnings.</li>
+<li> Do not copy and paste code without understanding it. It is OK to be inspired by others, but be aware that in some cases code examples are unnecessary complicated. Too much copy and paste will result in a code with a mix of different styles.</li> 
+<li> Stick to a limited number of libraries. I try to do as much as possible with <a href="https://numpy.org/" target="_self">Numpy</a>, <a href="https://pandas.pydata.org/" target="_self">Pandas</a>, and  <a href="https://matplotlib.org/" target="_self">Matplotlib</a>.</li>
+<li> Unexpected behavior of functions. Functions should be able to discover if something is wrong with arguments, and give warnings.</li>
 </ul>
 <h2 id="code-editor" class="anchor">Code editor </h2>
-<p>You would like to use an editor that gives you some help. It is particularly useful when you do not remember a variable or function name, you can guess at the name and a drop down list will appear which will let you pick the name or function you want. If you enter  a function name, the editor will write some useful information about the function, some screenshots are shown in figure <a href="#fig:py:vscode">1</a>.</p>
+<p>You would like to use an editor that gives you some help. This is particularly useful when you do not remember a variable or function name, you can guess  the name and a drop down list will appear which will let you pick the name or function you want. If you enter  a function name, the editor will write some useful information about the function, some screenshots are shown in figure <a href="#fig:py:vscode">1</a>.</p>
 
 <center> <!-- figure label: --> <div id="fig:py:vscode"></div> <!-- FIGURE -->
 <hr class="figure">
 <center>
-<p class="caption">Figure 1:  A screenshot of vscode (left) the editor helps to identify which variable name you mean, (right) the editor show relevant of the function you would like to call.  <!-- caption label: fig:py:vscode --> </p>
+<p class="caption">Figure 1:  A screenshot of vscode (left) the editor helps to identify which variable name you want, (right) the editor shows relevant information about the function you would like to call.  <!-- caption label: fig:py:vscode --> </p>
 </center>
 <p><img src="fig-python/vscode.png" align="bottom" width=800></p>
 </center>
 
-<p>Currently my favorite editor is <a href="https://code.visualstudio.com/" target="_self">vscode</a>, it can be used for any language, and there are a lot of add ins that can be installed to make the coding experience more pleasant. Spyder is also a very good alternative, but this editor is mainly for Python. It takes some time to learn how an editor work, so it is good if it can be used for multiple purposes.  However, always be open to new ideas and products, it will only make you more efficient. As an example, in some cases you will have a particular difficult error in the code, and then it could help to open and run that code in a different editor, you might get a slightly different error messages, which could help you locate the error.</p>
+<p>Currently my favorite editor is <a href="https://code.visualstudio.com/" target="_self">vscode</a>, it can be used for any language, and there are a lot of add ins that can be installed to make the coding experience more pleasant. Spyder is also a very good alternative, but this editor is mainly for Python. It takes some time to learn how an editor works, so it is good if the editor can be used for multiple purposes.  However, always be open to new ideas and products, it will only make you more efficient. As an example, in some cases you will have a particular difficult error in the code, and then it could help to open and run that code in a different editor, you might get a slightly different error messages, which could help you locate the error.</p>
 <h1 id="types-in-python" class="anchor">Types in Python </h1>
-<p>In Python you do not need to define types as in a compiled language. In many ways one can say that Python only has <em>one</em> type.  To not define types is generally and advantage as it lets you write code with fewer lines, and it is easier to write functions that will work with any kind of type. As an example in the programming language C, if you want to write a function that lets you add two numbers, you have to write one version if the arguments are integers and one version if the arguments are floats.</p>
+<p>In Python you do not need to define types as in a compiled language. In many ways one can say that Python only has <em>one</em> type.  To not define types is generally an advantage as it lets you write code with fewer lines, and it is easier to write functions that will work with any kind of type. As an example, in the programming language C, if you want to write a function that lets you add two numbers, you have to write one version if the arguments are integers and one version if the arguments are floats.</p>
 
-<p>The way that Python store and organize data is called a data model, and it is very well described in the <a href="https://docs.python.org/3/reference/datamodel.html" target="_self">official documentation</a>. The important point is that all data in Python is an object or a relation between objects. The <code>is</code> operator can be used to check if two objects have the same identity, that means they are the same object. The <code>id</code> operator gives an unique integer value for the object and if two objects has the same number they are the same object, e.g.</p>
+<p>The way that Python store and organize data is called a data model, and it is well described in the <a href="https://docs.python.org/3/reference/datamodel.html" target="_self">official documentation</a>. The important point is that all data in Python is an object or a relation between objects. The <code>is</code> operator can be used to check if two objects have the same identity, that means they are the same object. The <code>id</code> operator gives an unique integer value for the object, and if two objects have the same id number they are the same object, e.g.</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -255,11 +248,11 @@ MathJax.Hub.Config({
     <div class="inner_cell">
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
-  <pre style="line-height: 125%;">x<span style="color: #666666">=10</span>
+  <pre style="line-height: 125%;">y<span style="color: #666666">=10</span>
 x<span style="color: #666666">=</span>y
-x <span style="color: #AA22FF; font-weight: bold">is</span> y <span style="color: #3D7B7B; font-style: italic"># gives true</span>
+x <span style="color: #AA22FF; font-weight: bold">is</span> y <span style="color: #408080; font-style: italic"># gives true</span>
 <span style="color: #008000">print</span>(<span style="color: #008000">id</span>(x))
-<span style="color: #008000">print</span>(<span style="color: #008000">id</span>(y)) <span style="color: #3D7B7B; font-style: italic"># prints the same integer as id(x)</span>
+<span style="color: #008000">print</span>(<span style="color: #008000">id</span>(y)) <span style="color: #408080; font-style: italic"># prints the same integer as id(x)</span>
 </pre>
 </div>
       </div>
@@ -275,9 +268,9 @@ x <span style="color: #AA22FF; font-weight: bold">is</span> y <span style="color
   </div>
 </div>
 
-<p>For those familiar with C or C++, one would first have to define <code>x</code> and <code>y</code> as the type <code>int</code> and then they would already have a different place in memory and they can <em>never</em> be the same (even if they can contain the same number). We will return to this point in more details when we discuss lists and arrays in Python, as it can lead to unexpected behavior.</p>
+<p>For those familiar with C or C++, one would first have to define <code>x</code> and <code>y</code> as the type <code>int</code> and then they would already have a different place in memory and they can <em>never</em> be the same (even if they contain the same number). We will return to this point in more detail discussing lists and arrays in Python, as it can lead to unexpected behavior.</p>
 
-<p>Another thing you might have experienced during Python coding is that you get error messages that refer to pieces of code that you have no knowledge of. This can happen when you pass in the wrong type (e.g. a string instead of a number). Since Python only has one type, the wrong type will not be discovered before it is actually used. This place could be deep into some other library that you have no knowledge of. </p>
+<p>Another thing you might have experienced during Python coding is that you get error messages that refer to pieces of code that you have no knowledge of. This can happen when you pass the wrong type (e.g. a string instead of a number). Since Python only has one type, the wrong type will not be discovered before it is actually used. This error could be deep into some other library that you have no knowledge of. </p>
 <h2 id="basic-types" class="anchor">Basic types </h2>
 <p>I will assume that you are familiar with the common types like floats (for real numbers), strings (text, lines, word, a character), integer (whole numbers), Boolean (True, False). What is sometimes useful is to be able to test what kind of type a variable is, this can be done with <code>type()</code></p>
 
@@ -308,7 +301,7 @@ my_bool  <span style="color: #666666">=</span> <span style="color: #008000; font
   </div>
 </div>
 
-<p>The output of the code above will be <code>float, int, bool</code>. If you want to test the value of a variable you can do</p>
+<p>The output of the code above will be <code>float, int, bool</code>. If you want to test the type  of a variable you can do</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -335,10 +328,10 @@ my_bool  <span style="color: #666666">=</span> <span style="color: #008000; font
   </div>
 </div>
 
-<p>Python also has build in support for complex number, they are written <code>1+2j</code>, <code>j</code> is used as the complex number. Note there is no multiplication sign between the number 2 and <code>j</code>.</p>
+<p>Python also has build in support for complex numbers. An example are <code>1+2j</code>, <code>j</code> is the imaginary part of the complex number. Note there is no multiplication sign between 2 and <code>j</code>.</p>
 <h2 id="lists" class="anchor">Lists </h2>
 
-<p> Lists are extremely useful, and they have some very nice syntax that in my mind is more elegant than Numpy arrays. Whenever you want to do more than one thing with only a slight change between the elements, you should think of lists. Lists are defined using the square bracket <code>[]</code> symbols</p>
+<p> Lists are extremely useful, and they have very nice syntax that in my opinion is more elegant than Numpy arrays. Whenever you want to do more than one thing with only a slight change between the elements, you should think of lists. Lists are defined using the square bracket <code>[]</code> symbol</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -346,11 +339,11 @@ my_bool  <span style="color: #666666">=</span> <span style="color: #008000; font
     <div class="inner_cell">
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
-  <pre style="line-height: 125%;">my_list <span style="color: #666666">=</span> []      <span style="color: #3D7B7B; font-style: italic"># an empty list</span>
-my_list <span style="color: #666666">=</span> []<span style="color: #666666">*10</span>   <span style="color: #3D7B7B; font-style: italic"># still an empty list ...</span>
-my_list <span style="color: #666666">=</span> [<span style="color: #666666">0</span>]<span style="color: #666666">*10</span>  <span style="color: #3D7B7B; font-style: italic"># a list with 10 zeros</span>
-my_list <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;one&#39;</span>, <span style="color: #BA2121">&#39;two&#39;</span>,<span style="color: #BA2121">&#39;three&#39;</span>] <span style="color: #3D7B7B; font-style: italic"># a list of strings</span>
-my_list <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;one&#39;</span>]<span style="color: #666666">*10</span> <span style="color: #3D7B7B; font-style: italic"># a list with 10 equal string elements </span>
+  <pre style="line-height: 125%;">my_list <span style="color: #666666">=</span> []      <span style="color: #408080; font-style: italic"># an empty list</span>
+my_list <span style="color: #666666">=</span> []<span style="color: #666666">*10</span>   <span style="color: #408080; font-style: italic"># still an empty list ...</span>
+my_list <span style="color: #666666">=</span> [<span style="color: #666666">0</span>]<span style="color: #666666">*10</span>  <span style="color: #408080; font-style: italic"># a list with 10 zeros</span>
+my_list <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;one&#39;</span>, <span style="color: #BA2121">&#39;two&#39;</span>,<span style="color: #BA2121">&#39;three&#39;</span>] <span style="color: #408080; font-style: italic"># a list of strings</span>
+my_list <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;one&#39;</span>]<span style="color: #666666">*10</span> <span style="color: #408080; font-style: italic"># a list with 10 equal string elements </span>
 </pre>
 </div>
       </div>
@@ -378,8 +371,8 @@ my_list <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39
     <div class="inner_cell">
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
-  <pre style="line-height: 125%;">my_list <span style="color: #666666">=</span> [i <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">10</span>)] <span style="color: #3D7B7B; font-style: italic"># a list from 0,1,..,9</span>
-my_list <span style="color: #666666">=</span> [i<span style="color: #666666">**3</span> <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">10</span>)] <span style="color: #3D7B7B; font-style: italic"># a list with elements 0,1,8, ..,729</span>
+  <pre style="line-height: 125%;">my_list <span style="color: #666666">=</span> [i <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">10</span>)] <span style="color: #408080; font-style: italic"># a list from 0,1,..,9</span>
+my_list <span style="color: #666666">=</span> [i<span style="color: #666666">**3</span> <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">10</span>)] <span style="color: #408080; font-style: italic"># a list with elements 0,1,8, ..,729</span>
 </pre>
 </div>
       </div>
@@ -395,7 +388,7 @@ my_list <span style="color: #666666">=</span> [i<span style="color: #666666">**3
   </div>
 </div>
 
-<p>We will cover for loop below, but basically what is done is that the statement <code>i in range(10)</code>, gives <code>i</code> the value 0, 1, \( \ldots \), 9 and the first <code>i</code> inside the list tells python to use that value as the element in the list. Using this syntax, there are plenty of opportunities to initialize. Maybe you want to pick from a list words that contain a particular subset of characters</p>
+<p>We will cover the for loop below, but basically what is done is that the statement <code>i in range(10)</code>, gives <code>i</code> the value 0, 1, \( \ldots \), 9 and the first <code>i</code> inside the list tells python to use that value as the element in the list. Using this syntax, there are plenty of opportunities to initialize. Maybe you want to pick from a list words that contain a particular subset of characters</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -459,13 +452,13 @@ new_list <span style="color: #666666">=</span> my_list <span style="color: #6666
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">my_list<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;hammer&#39;</span>, <span style="color: #BA2121">&#39;saw&#39;</span>, <span style="color: #BA2121">&#39;screw&#39;</span>, <span style="color: #BA2121">&#39;nail&#39;</span>, <span style="color: #BA2121">&#39;glue&#39;</span>]
-my_list[:]      <span style="color: #3D7B7B; font-style: italic"># [&#39;hammer&#39;, &#39;saw&#39;, &#39;screw&#39;, &#39;nail&#39;, &#39;glue&#39;]</span>
-my_list[<span style="color: #666666">1</span>:]     <span style="color: #3D7B7B; font-style: italic"># [&#39;saw&#39;, &#39;screw&#39;, &#39;nail&#39;, &#39;glue&#39;]</span>
-my_list[:<span style="color: #666666">-1</span>]    <span style="color: #3D7B7B; font-style: italic"># [&#39;hammer&#39;, &#39;saw&#39;, &#39;screw&#39;, &#39;nail&#39;]</span>
-my_list[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>]   <span style="color: #3D7B7B; font-style: italic"># [&#39;saw&#39;, &#39;screw&#39;, &#39;nail&#39;]</span>
-my_list[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>:<span style="color: #666666">2</span>] <span style="color: #3D7B7B; font-style: italic"># [&#39;saw&#39;,&#39;nail&#39;]</span>
-my_list[::<span style="color: #666666">1</span>]    <span style="color: #3D7B7B; font-style: italic"># [&#39;hammer&#39;, &#39;saw&#39;, &#39;screw&#39;, &#39;nail&#39;, &#39;glue&#39;]</span>
-my_list[::<span style="color: #666666">2</span>]    <span style="color: #3D7B7B; font-style: italic"># [&#39;hammer&#39;, &#39;screw&#39;, &#39;glue&#39;]</span>
+my_list[:]      <span style="color: #408080; font-style: italic"># [&#39;hammer&#39;, &#39;saw&#39;, &#39;screw&#39;, &#39;nail&#39;, &#39;glue&#39;]</span>
+my_list[<span style="color: #666666">1</span>:]     <span style="color: #408080; font-style: italic"># [&#39;saw&#39;, &#39;screw&#39;, &#39;nail&#39;, &#39;glue&#39;]</span>
+my_list[:<span style="color: #666666">-1</span>]    <span style="color: #408080; font-style: italic"># [&#39;hammer&#39;, &#39;saw&#39;, &#39;screw&#39;, &#39;nail&#39;]</span>
+my_list[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>]   <span style="color: #408080; font-style: italic"># [&#39;saw&#39;, &#39;screw&#39;, &#39;nail&#39;]</span>
+my_list[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>:<span style="color: #666666">2</span>] <span style="color: #408080; font-style: italic"># [&#39;saw&#39;,&#39;nail&#39;]</span>
+my_list[::<span style="color: #666666">1</span>]    <span style="color: #408080; font-style: italic"># [&#39;hammer&#39;, &#39;saw&#39;, &#39;screw&#39;, &#39;nail&#39;, &#39;glue&#39;]</span>
+my_list[::<span style="color: #666666">2</span>]    <span style="color: #408080; font-style: italic"># [&#39;hammer&#39;, &#39;screw&#39;, &#39;glue&#39;]</span>
 </pre>
 </div>
       </div>
@@ -492,7 +485,7 @@ my_list[::<span style="color: #666666">2</span>]    <span style="color: #3D7B7B;
   <pre style="line-height: 125%;">my_list  <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;hammer&#39;</span>,<span style="color: #BA2121">&#39;saw&#39;</span>]
 my_list2 <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;screw&#39;</span>,<span style="color: #BA2121">&#39;nail&#39;</span>,<span style="color: #BA2121">&#39;glue&#39;</span>]
 new_list<span style="color: #666666">=</span>[my_list,my_list2]
-<span style="color: #3D7B7B; font-style: italic"># extract the first element of each list</span>
+<span style="color: #408080; font-style: italic"># extract the first element of each list</span>
 new_list2 <span style="color: #666666">=</span> [ <span style="color: #008000">list</span>[<span style="color: #666666">0</span>] <span style="color: #008000; font-weight: bold">for</span> <span style="color: #008000">list</span> <span style="color: #AA22FF; font-weight: bold">in</span> new_list]
 </pre>
 </div>
@@ -512,11 +505,11 @@ new_list2 <span style="color: #666666">=</span> [ <span style="color: #008000">l
 <code>new_list2=['hammer','screw']</code>
 
 <div class="alert alert-block alert-success alert-text-normal"><b>When to use lists</b>
-<p>Use lists if you have mixed types, and as storage containers. Be careful when you do numerical computation to mix lists and Numpy arrays, adding two lists e.g. <code>[1,2]+[1,1]</code>, will give you <code>[1,2,1,1]</code>, whereas adding two Numpy arrays will give you <code>[2,3]</code>.</p>
+<p>Use lists if you have mixed types, and as storage containers. Be careful when you do numerical computation not to mix lists and Numpy arrays. Adding two lists e.g. <code>[1,2]+[1,1]</code>, will give you <code>[1,2,1,1]</code>, whereas adding two Numpy arrays will give you <code>[2,3]</code>.</p>
 </div>
 
 <h2 id="numpy-arrays" class="anchor">Numpy arrays  </h2>
-<p>Numpy arrays are awesome, and should be your preferred choice when doing numerical operations. We import Numpy as <code>import numpy as np</code>, some examples of initialization</p>
+<p>Numpy arrays are awesome, and they should be your preferred choice when doing numerical operations. We import Numpy as <code>import numpy as np</code>, some examples of initialization</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -524,9 +517,9 @@ new_list2 <span style="color: #666666">=</span> [ <span style="color: #008000">l
     <div class="inner_cell">
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
-  <pre style="line-height: 125%;">my_array<span style="color: #666666">=</span>np<span style="color: #666666">.</span>array([<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">2</span>,<span style="color: #666666">3</span>]) <span style="color: #3D7B7B; font-style: italic"># initialized from list</span>
-my_array<span style="color: #666666">=</span>np<span style="color: #666666">.</span>zeros(<span style="color: #666666">10</span>) <span style="color: #3D7B7B; font-style: italic"># array with 10 elements equal to zero</span>
-my_array<span style="color: #666666">=</span>np<span style="color: #666666">.</span>ones(<span style="color: #666666">10</span>)  <span style="color: #3D7B7B; font-style: italic"># array with 10 elements equal to one</span>
+  <pre style="line-height: 125%;">my_array<span style="color: #666666">=</span>np<span style="color: #666666">.</span>array([<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">2</span>,<span style="color: #666666">3</span>]) <span style="color: #408080; font-style: italic"># initialized from list</span>
+my_array<span style="color: #666666">=</span>np<span style="color: #666666">.</span>zeros(<span style="color: #666666">10</span>) <span style="color: #408080; font-style: italic"># array with 10 elements equal to zero</span>
+my_array<span style="color: #666666">=</span>np<span style="color: #666666">.</span>ones(<span style="color: #666666">10</span>)  <span style="color: #408080; font-style: italic"># array with 10 elements equal to one</span>
 </pre>
 </div>
       </div>
@@ -542,7 +535,7 @@ my_array<span style="color: #666666">=</span>np<span style="color: #666666">.</s
   </div>
 </div>
 
-<p>A typical use of Numpy arrays is when you want to create equal spaced numbers to evaluate a function, this can be done in (at least) two ways</p>
+<p>A typical use of Numpy arrays is when you want to create equally spaced numbers to evaluate a function, this can be done in (at least) two ways</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -550,8 +543,8 @@ my_array<span style="color: #666666">=</span>np<span style="color: #666666">.</s
     <div class="inner_cell">
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
-  <pre style="line-height: 125%;">my_array<span style="color: #666666">=</span>np<span style="color: #666666">.</span>arange(<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">0.2</span>) <span style="color: #3D7B7B; font-style: italic"># [0, 0.2, 0.4, 0.6, 0.8]</span>
-my_array<span style="color: #666666">=</span>np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">5</span>) <span style="color: #3D7B7B; font-style: italic"># [0., 0.25, 0.5, 0.75, 1.]</span>
+  <pre style="line-height: 125%;">my_array<span style="color: #666666">=</span>np<span style="color: #666666">.</span>arange(<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">0.2</span>) <span style="color: #408080; font-style: italic"># [0, 0.2, 0.4, 0.6, 0.8]</span>
+my_array<span style="color: #666666">=</span>np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">5</span>) <span style="color: #408080; font-style: italic"># [0., 0.25, 0.5, 0.75, 1.]</span>
 </pre>
 </div>
       </div>
@@ -567,14 +560,14 @@ my_array<span style="color: #666666">=</span>np<span style="color: #666666">.</s
   </div>
 </div>
 
-<p>Note that in the last case, the edges of the domain (0,1) are included, and is probably the outcome you want in most cases.</p>
+<p>Note that in the second case, the edges of the domain (0,1) are included while in the first case the upper edge is not. </p>
 
 <div class="alert alert-block alert-success alert-text-normal"><b>Do not mix Numpy arrays and lists in functions</b>
 <p>If a function is written to use  Numpy arrays as <em>arguments</em>, make sure that it <em>returns</em> Numpy arrays. If you have to use a list inside the function to e.g. store the results of a calculation, convert the list to a Numpy array before returning it by <code>np.array(my_list)</code>.  </p>
 </div>
 
 <h3 id="array-slicing" class="anchor">Array slicing </h3>
-<p>As with lists you can access elements in Numpy arrays in the same way as lists, the syntax is <code>my_array[start,stop,step]</code></p>
+<p>You can access elements in Numpy arrays in the same way as lists, the syntax is <code>my_array[start,stop,step]</code></p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -583,12 +576,12 @@ my_array<span style="color: #666666">=</span>np<span style="color: #666666">.</s
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">my_array<span style="color: #666666">=</span>np<span style="color: #666666">.</span>arange(<span style="color: #666666">0</span>,<span style="color: #666666">6</span>,<span style="color: #666666">1</span>)
-my_array[:]      <span style="color: #3D7B7B; font-style: italic"># [0,1,2,3,4,5]</span>
-my_array[<span style="color: #666666">1</span>:]     <span style="color: #3D7B7B; font-style: italic"># [1,2,3,4,5]</span>
-my_array[:<span style="color: #666666">-1</span>]    <span style="color: #3D7B7B; font-style: italic"># [0,1,2,3,4]</span>
-my_array[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>]   <span style="color: #3D7B7B; font-style: italic"># [1,2,3,4]</span>
-my_array[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>:<span style="color: #666666">2</span>] <span style="color: #3D7B7B; font-style: italic"># [1,3]</span>
-my_array[::<span style="color: #666666">2</span>]    <span style="color: #3D7B7B; font-style: italic"># [0,2,4]</span>
+my_array[:]      <span style="color: #408080; font-style: italic"># [0,1,2,3,4,5]</span>
+my_array[<span style="color: #666666">1</span>:]     <span style="color: #408080; font-style: italic"># [1,2,3,4,5]</span>
+my_array[:<span style="color: #666666">-1</span>]    <span style="color: #408080; font-style: italic"># [0,1,2,3,4]</span>
+my_array[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>]   <span style="color: #408080; font-style: italic"># [1,2,3,4]</span>
+my_array[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>:<span style="color: #666666">2</span>] <span style="color: #408080; font-style: italic"># [1,3]</span>
+my_array[::<span style="color: #666666">2</span>]    <span style="color: #408080; font-style: italic"># [0,2,4]</span>
 </pre>
 </div>
       </div>
@@ -633,7 +626,7 @@ my_array/my_array2 # [0,.25,.4]
   </div>
 </div>
 
-<p>Note that the operations does what you would expect them to do. If we have arrays of arrays, we can easily access elements in the arrays</p>
+<p>Note that these operations do what you would expect them to do. If you have arrays of arrays, you can easily access elements in the arrays</p>
 
 <!-- code=text (!bc ccq) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -642,11 +635,11 @@ my_array/my_array2 # [0,.25,.4]
       <div class="input_area">
         <blockquote>
 <div class="highlight" style="background: #f8f8f8">
-  <pre style="line-height: 125%;">my_array  = np.array([[0,1,2],[3,4,5]])
-my_array[0,:] # [0,1,2]
-my_array[1,:] # [3,4,5]
-my_array[:,0] # [0,3]
-my_array[:,1] # [1,4]
+  <pre style="line-height: 125%;">my_array  = np.array([[0,1,2],[3,4,5]]) # shape 2x3 matrix
+my_array[0,:] # [0,1,2] First row
+my_array[1,:] # [3,4,5] Second row
+my_array[:,0] # [0,3] First column
+my_array[:,1] # [1,4] Second column
 </pre>
 </div>
 </blockquote>      </div>
@@ -671,8 +664,8 @@ my_array[:,1] # [1,4]
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">my_array  <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">2</span>,<span style="color: #666666">3</span>,<span style="color: #666666">4</span>,<span style="color: #666666">5</span>])
-my_array<span style="color: #666666">.</span>shape <span style="color: #666666">=</span> (<span style="color: #666666">2</span>,<span style="color: #666666">3</span>) <span style="color: #3D7B7B; font-style: italic"># [[0,1,2],[3,4,5]]</span>
-my_array<span style="color: #666666">.</span>shape <span style="color: #666666">=</span> (<span style="color: #666666">3</span>,<span style="color: #666666">2</span>) <span style="color: #3D7B7B; font-style: italic"># [[0,1],[2,3],[4,5]]</span>
+my_array<span style="color: #666666">.</span>shape <span style="color: #666666">=</span> (<span style="color: #666666">2</span>,<span style="color: #666666">3</span>) <span style="color: #408080; font-style: italic"># [[0,1,2],[3,4,5]] 2 rows and 3 columns</span>
+my_array<span style="color: #666666">.</span>shape <span style="color: #666666">=</span> (<span style="color: #666666">3</span>,<span style="color: #666666">2</span>) <span style="color: #408080; font-style: italic"># [[0,1],[2,3],[4,5]] 3 rows and 2 columns</span>
 </pre>
 </div>
       </div>
@@ -688,7 +681,7 @@ my_array<span style="color: #666666">.</span>shape <span style="color: #666666">
   </div>
 </div>
 <h2 id="dictionaries" class="anchor">Dictionaries </h2>
-<p>If you have not used dictionaries before they might feel unnecessary, but if you get used to them and the syntax, they can make your code much more flexible and easier to expand. You should use dictionaries, when you have data that you want to access data sets fast. A very good mental image to have is an excel sheet where data are organized in columns. Each column has a header name, or a <em>key</em>. Assume we have the following table</p>
+<p>If you have not used dictionaries before they might feel unnecessary, but if you get used to them and their syntax, they can make your code much more flexible and easier to expand. You should use dictionaries, when you have data sets that you want to access fast. A very good mental image to have is an excel sheet where data are organized in columns. Each column has a header name, or a <em>key</em>. Assume we have the following table</p>
 
 <div class="row">
   <div class="col-xs-1">
@@ -729,7 +722,7 @@ my_array<span style="color: #666666">.</span>shape <span style="color: #666666">
   </div>
 </div>
 
-<p>The syntax is <code>{key1:values, key2:values2, ...}</code>. We access the values in the dictionary by the key i.e. <code>print(my_dict['A'])</code> would print <code>[1.0,4.0,6.0]</code>. If you want to print out all the elements in a dictionary, you can use a for loop (see next section for more details)</p>
+<p>The syntax is <code>{key1:values, key2:values2, ...}</code>. We access the values in the dictionary by the key i.e. <code>print(my_dict['A'])</code> would print <code>[1.0,4.0,6.0]</code>. If you want to print out all the elements in a dictionary, you can use a for loop (see next section for more details about for loops)</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -754,9 +747,9 @@ my_array<span style="color: #666666">.</span>shape <span style="color: #666666">
   </div>
 </div>
 <h1 id="looping" class="anchor">Looping </h1>
-<p>There are basically two ways of iterating through lists or to do a series of computations, using a for-loop or a while-loop. During a numerical computation we typically iterate through time, from time zero to the end time to calculate e.g. the position of an object.</p>
+<p>There are basically two ways of iterating through lists or to do a series of computations, using a for-loop or a while-loop. In most cases a for loop can also be written as a while loops and vice versa. You would typically use a for-loop when you are iterating over a fixed number of elements, very typical example is when we are iterating in a numerical computation from time zero to the end time. A while-loop is typically used when we do not know before the run time when to stop, this could be that we are waiting for user input or to reach a certain numerical accuracy in our calculation before proceeding.</p>
 <h2 id="for-loops" class="anchor">For loops </h2>
-<p>A typical example of a for loop is to loop over a list and do something, and maybe during the execution we would like to store the results in a list</p>
+<p>A typical example of a for loop is to loop over a list and do something, and maybe during the execution store the results in a list</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -765,7 +758,7 @@ my_array<span style="color: #666666">.</span>shape <span style="color: #666666">
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">numbers<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;one&#39;</span>,<span style="color: #BA2121">&#39;two&#39;</span>,<span style="color: #BA2121">&#39;three&#39;</span>,<span style="color: #BA2121">&#39;one&#39;</span>,<span style="color: #BA2121">&#39;two&#39;</span>]
-result<span style="color: #666666">=</span>[] <span style="color: #3D7B7B; font-style: italic"># has to be declared as empty</span>
+result<span style="color: #666666">=</span>[] <span style="color: #408080; font-style: italic"># has to be declared as empty</span>
 <span style="color: #008000; font-weight: bold">for</span> number <span style="color: #AA22FF; font-weight: bold">in</span> numbers:
     <span style="color: #008000; font-weight: bold">if</span> number <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;one&#39;</span>:
        result<span style="color: #666666">.</span>append(<span style="color: #666666">1</span>) 
@@ -784,7 +777,7 @@ result<span style="color: #666666">=</span>[] <span style="color: #3D7B7B; font-
   </div>
 </div>
 
-<p>After executing this code <code>result=[1, 1]</code>. The <code>number</code> variable changes during the iteration, and takes the value of each element in the list. Note that I use <code>numbers</code> for the list and <code>number</code> as the iterator, this makes it quite easy to read and understand the code. In many cases you want to have the index, not only the element in the list</p>
+<p>The result of this code is <code>result=[1, 1]</code>. The <code>number</code> variable changes during the iteration, and takes the value of each element in the list. Note that I use <code>numbers</code> for the list and <code>number</code> as the iterator, this makes it quite easy to read and understand the code. In many cases you want to have the index, not only the element in the list</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -794,7 +787,7 @@ result<span style="color: #666666">=</span>[] <span style="color: #3D7B7B; font-
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">numbers  <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;one&#39;</span>,<span style="color: #BA2121">&#39;two&#39;</span>,<span style="color: #BA2121">&#39;three&#39;</span>,<span style="color: #BA2121">&#39;one&#39;</span>,<span style="color: #BA2121">&#39;two&#39;</span>]
 numerics <span style="color: #666666">=</span> [  <span style="color: #666666">1</span>  ,  <span style="color: #666666">2</span>  ,   <span style="color: #666666">3</span>   , <span style="color: #666666">1</span>   , <span style="color: #666666">2</span>   ]
-result<span style="color: #666666">=</span>[] <span style="color: #3D7B7B; font-style: italic"># has to be declared as empty</span>
+result<span style="color: #666666">=</span>[] <span style="color: #408080; font-style: italic"># has to be declared as empty</span>
 <span style="color: #008000; font-weight: bold">for</span> idx,number <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">enumerate</span>(numbers):
     <span style="color: #008000; font-weight: bold">if</span> number <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;one&#39;</span>:
        result<span style="color: #666666">.</span>append(numerics[idx]) 
@@ -813,7 +806,7 @@ result<span style="color: #666666">=</span>[] <span style="color: #3D7B7B; font-
   </div>
 </div>
 
-<p>After executing this code <code>result=[1, 1]</code>. In this case the function <code>enumerate(numbers)</code> returns two values: the index, which is stored in <code>idx</code>, and the value of the list element, which is stored in <code>number</code>.</p>
+<p>The result of this code is <code>result=[1, 1]</code>. In this case the function <code>enumerate(numbers)</code> returns two values: the index, which is stored in <code>idx</code>, and the value of the list element, which is stored in <code>number</code>.</p>
 
 <p>A more elegant way to achieve the same results without using the <code>enumerate()</code> function is to use <code>zip</code></p>
 
@@ -825,7 +818,7 @@ result<span style="color: #666666">=</span>[] <span style="color: #3D7B7B; font-
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">numbers  <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;one&#39;</span>,<span style="color: #BA2121">&#39;two&#39;</span>,<span style="color: #BA2121">&#39;three&#39;</span>,<span style="color: #BA2121">&#39;one&#39;</span>,<span style="color: #BA2121">&#39;two&#39;</span>]
 numerics <span style="color: #666666">=</span> [  <span style="color: #666666">1</span>  ,  <span style="color: #666666">2</span>  ,   <span style="color: #666666">3</span>   , <span style="color: #666666">1</span>   , <span style="color: #666666">2</span>   ]
-result<span style="color: #666666">=</span>[] <span style="color: #3D7B7B; font-style: italic"># has to be declared as empty</span>
+result<span style="color: #666666">=</span>[] <span style="color: #408080; font-style: italic"># has to be declared as empty</span>
 <span style="color: #008000; font-weight: bold">for</span> numeric,number <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">zip</span>(numerics,numbers):
     <span style="color: #008000; font-weight: bold">if</span> number <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;one&#39;</span>:
        result<span style="color: #666666">.</span>append(numeric) 
@@ -844,7 +837,7 @@ result<span style="color: #666666">=</span>[] <span style="color: #3D7B7B; font-
   </div>
 </div>
 
-<p>The <code>zip</code> function can also be used with several lists of same length.</p>
+<p>The <code>zip</code> function can be used with several lists of same length.</p>
 
 <p>In many cases you might be in a situation that you want to plot more than one function in a plot. It is then very tempting to copy and paste the previous code, but it is more elegant to use a for loop and lists</p>
 
@@ -856,7 +849,7 @@ result<span style="color: #666666">=</span>[] <span style="color: #3D7B7B; font-
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
 <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
-x_val   <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">100</span>) <span style="color: #3D7B7B; font-style: italic"># 100 equal spaced points from 0 to 1</span>
+x_val   <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">100</span>) <span style="color: #408080; font-style: italic"># 100 equal spaced points from 0 to 1</span>
 y_vals  <span style="color: #666666">=</span> [x_val,x_val<span style="color: #666666">*</span>x_val]
 labels  <span style="color: #666666">=</span> [<span style="color: #BA2121">r&#39;x&#39;</span>, <span style="color: #BA2121">r&#39;$x^2$&#39;</span>]
 cols    <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;r&#39;</span>,<span style="color: #BA2121">&#39;g&#39;</span>]
@@ -880,8 +873,19 @@ plt<span style="color: #666666">.</span>show()
     </div>
   </div>
 </div>
+
+<p>Output of code is shown in figure <a href="#fig:python:loop">2</a>.</p>
+
+<center> <!-- figure label: --> <div id="fig:python:loop"></div> <!-- FIGURE -->
+<hr class="figure">
+<center>
+<p class="caption">Figure 2:  Output of code.  <!-- caption label: fig:python:loop --> </p>
+</center>
+<p><img src="fig-python/plt_loop.png" align="bottom" width=800></p>
+</center>
+
 <h2 id="while-loops" class="anchor">While loops </h2>
-<p>In most cases a for loop can also be written as a while loops and vice versa. In python you would prefer to use a for loop whenever you are iterating over a fixed number of elements. This makes the code easy to read. In cases where we are waiting for input or time is involved it may make more sense to use a while loop. Typically you would use a while loop when you do not know at the start when to stop iterating. The syntax of the while loop is to do something while a condition is true</p>
+<p>A while loop is used whenever you do not know before run time when to stop iterating. The syntax of the while loop is to do something while a condition is true</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -893,7 +897,7 @@ plt<span style="color: #666666">.</span>show()
 finished <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">False</span>
 <span style="color: #008000">sum</span> <span style="color: #666666">=0</span>
 <span style="color: #008000; font-weight: bold">while</span> <span style="color: #AA22FF; font-weight: bold">not</span> finished:
-      <span style="color: #008000">sum</span> <span style="color: #666666">+=</span> np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>random() <span style="color: #3D7B7B; font-style: italic">#returns a random number between 0,1</span>
+      <span style="color: #008000">sum</span> <span style="color: #666666">+=</span> np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>random() <span style="color: #408080; font-style: italic">#returns a random number between 0,1</span>
       <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">sum</span> <span style="color: #666666">&gt;=</span> <span style="color: #666666">10.</span>:
       	 finished <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">True</span>
 </pre>
@@ -911,7 +915,7 @@ finished <span style="color: #666666">=</span> <span style="color: #008000; font
   </div>
 </div>
 
-<p>In some cases we are iterating from \( t_0 \), \( t_1 \), etc. to a final time \( t_f \), if we use a fixed time step, \( \Delta t \), we can calculate the number of steps at the beginning i.e \( N= \text{int} ((t_f-t_0)/\Delta t) \), and use a for loop. On the other hand, in the more fancy algorithm we change the time step as the simulation proceeds and then we would choose a while loop, e.g. <code>while t0 &lt;= tf:</code>.
+<p>In some cases we are iterating from \( t_0 \), \( t_1 \), etc. to a final time \( t_f \), if we use a fixed time step, \( \Delta t \), we can calculate the number of steps i.e \( N= \text{int} ((t_f-t_0)/\Delta t) \), and use a for loop. On the other hand, in a more fancy algorithms we can change the time step as the simulation proceeds and then we need to choose a while loop, e.g. <code>while t0 &lt;= tf:</code>.
 <h2 id="functions-in-python" class="anchor">Functions in Python </h2>
 When to use functions? There is no particular rule, <em>but whenever you
 start to copy and paste code from one place to another, you should
@@ -922,11 +926,11 @@ end up changing the function definitions as your program develops.
 </p>
 
 <div class="alert alert-block alert-success alert-text-normal"><b>Use short functions</b>
-<p>Short functions makes the code easier to read. Each function has a particular task, and it does only one thing. If functions does too many tasks there is a chance that you will have several functions doing some of the same operations. Whenever you want to extend the program you might have to make changes several places in the code. The chance then is that you will forget to do the change in some of the functions and introduce a bug.</p>
+<p>Short functions makes the code easier to read. Each function has a particular task, and it does only one thing. If functions do too many tasks there is a chance that you will have several functions doing some of the same operations. Whenever you want to extend the program, you may have to make changes several places in the code. The chance then is that you will forget to do the change in some of the functions and introduce a bug.</p>
 </div>
 
 <h2 id="defining-a-mathematical-function" class="anchor">Defining a mathematical function </h2>
-<p>Throughout this course you will write many functions that does mathematical operations. In many cases you would also pass a function to another function to make your code more modular. Lets say we want to calculate the derivative of \( \sin x \), using the most basic definition of a derivative \( f^\prime(x) = f(x+\Delta x)-f(x)/\Delta x \), we could do it as</p>
+<p>Throughout this course you will write many functions that do mathematical operations. In many cases, you would also pass a function to another function to make your code more modular. Lets say we want to calculate the derivative of \( \sin x \), using the most basic definition of a derivative \( f^\prime(x) = f(x+\Delta x)-f(x)/\Delta x \), we could do it as</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -954,8 +958,8 @@ end up changing the function definitions as your program develops.
   </div>
 </div>
 
-<p>We will return in a later chapter why \( \Delta x=10^{-3} \) is a reasonable choice. 
-If we would like to calculate the derivative in multiple points, that is straight forward since we have used the Numpy version of \( \sin x \).
+<p>We will discuss in a later chapter why \( \Delta x=10^{-3} \) is a reasonable choice. 
+If we would like to calculate the derivative at multiple points, that is straightforward since we have used the Numpy version of \( \sin x \).
 </p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
@@ -965,7 +969,7 @@ If we would like to calculate the derivative in multiple points, that is straigh
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">x<span style="color: #666666">=</span>np<span style="color: #666666">.</span>array([<span style="color: #666666">0</span>,<span style="color: #666666">.5</span>,<span style="color: #666666">1</span>])
-<span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;The derivative of sinx at x=0,0.5,1 is :&#39;</span>, derivative_of_sine(x,<span style="color: #666666">1e-3</span>))
+<span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Derivative of sinx at x=0,0.5,1 is :&#39;</span>, derivative_of_sine(x,<span style="color: #666666">1e-3</span>))
 </pre>
 </div>
       </div>
@@ -995,7 +999,7 @@ If we would like to calculate the derivative in multiple points, that is straigh
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">df</span>(x,f,delta_x<span style="color: #666666">=1e-3</span>):
     <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39; returns the derivative of f &#39;&#39;&#39;</span>
     <span style="color: #008000; font-weight: bold">return</span> (f(x<span style="color: #666666">+</span>delta_x)<span style="color: #666666">-</span>f(x))<span style="color: #666666">/</span>delta_x
-<span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;The derivative of sinx at x=0 is :&#39;</span>, df(<span style="color: #666666">0</span>,f))
+<span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Derivative of sinx at x=0 is :&#39;</span>, df(<span style="color: #666666">0</span>,f))
 </pre>
 </div>
       </div>
@@ -1011,7 +1015,7 @@ If we would like to calculate the derivative in multiple points, that is straigh
   </div>
 </div>
 
-<p>Note also that we have put <code>delta_x=1e-3</code> as a <em>default argument</em>. Default arguments have to come at the end of the argument lists, <code>df(x,delta_x=1e-3,f)</code> is not allowed. All of this looks well and good, but what you would experience is that your functions would not be as simple as \( \sin x \). In many cases your functions need additional arguments to be evaluated e.g.:</p>
+<p>Note also that we have put <code>delta_x=1e-3</code> as a <em>default argument</em>. Default arguments have to come at the end of the argument lists, <code>df(x,delta_x=1e-3,f)</code> is not allowed. All of this looks well, but what you would experience is that your functions would not be as simple as \( \sin x \). In many cases your functions need additional arguments to be evaluated e.g.:</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -1021,13 +1025,14 @@ If we would like to calculate the derivative in multiple points, that is straigh
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">s</span>(t,s0,v0,a):
     <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;</span>
+<span style="color: #BA2121; font-style: italic">    t  : time</span>
 <span style="color: #BA2121; font-style: italic">    s0 : initial starting point</span>
 <span style="color: #BA2121; font-style: italic">    v0 : initial velocity</span>
 <span style="color: #BA2121; font-style: italic">    a  : acceleration</span>
 <span style="color: #BA2121; font-style: italic">    returns the distance traveled</span>
 <span style="color: #BA2121; font-style: italic">    &#39;&#39;&#39;</span>
-    <span style="color: #008000; font-weight: bold">return</span> s0<span style="color: #666666">+</span>v0<span style="color: #666666">*</span>t<span style="color: #666666">+</span>a<span style="color: #666666">*</span>t<span style="color: #666666">*</span>t<span style="color: #666666">*0.5</span> <span style="color: #3D7B7B; font-style: italic">#multiplication (0.5)is general faster</span>
-    	   		     <span style="color: #3D7B7B; font-style: italic">#then division (2)</span>
+    <span style="color: #008000; font-weight: bold">return</span> s0<span style="color: #666666">+</span>v0<span style="color: #666666">*</span>t<span style="color: #666666">+</span>a<span style="color: #666666">*</span>t<span style="color: #666666">*</span>t<span style="color: #666666">*0.5</span> <span style="color: #408080; font-style: italic">#multiplication (0.5)is general faster</span>
+    	   		     <span style="color: #408080; font-style: italic">#than division (2)</span>
 </pre>
 </div>
       </div>
@@ -1051,7 +1056,7 @@ If we would like to calculate the derivative in multiple points, that is straigh
     <div class="inner_cell">
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
-  <pre style="line-height: 125%;"><span style="color: #CB3F38; font-weight: bold">TypeError</span>: s() missing <span style="color: #666666">3</span> required positional
+  <pre style="line-height: 125%;"><span style="color: #D2413A; font-weight: bold">TypeError</span>: s() missing <span style="color: #666666">3</span> required positional
 	   arguments: <span style="color: #BA2121">&#39;s0&#39;</span>, <span style="color: #BA2121">&#39;v0&#39;</span>, <span style="color: #AA22FF; font-weight: bold">and</span> <span style="color: #BA2121">&#39;a&#39;</span>
 </pre>
 </div>
@@ -1068,7 +1073,7 @@ If we would like to calculate the derivative in multiple points, that is straigh
   </div>
 </div>
 
-<p>This happens because the <code>df</code> function expect that the function we send into the argument list has a call signature <code>f(x)</code>. What many people do is that they use global variable, that is to define <code>s0, v0, a</code> at the top of the code. This is not always the best solution. Python has a special variable <code>*args</code> which can be used to pass multiple arguments to your function, thus if we rewrite <code>df</code> like this</p>
+<p>This happens because the <code>df</code> function expect that the function we send into the argument list has a call signature <code>f(x)</code>. What many people do to avoid this error is to use global variable, that is to define <code>s0, v0</code>, and <code>a</code> at the top of the code. This is not always the best solution. Python has a special variable <code>*args</code> which can be used to pass multiple arguments to your function, thus if we rewrite <code>df</code> like this</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -1076,10 +1081,7 @@ If we would like to calculate the derivative in multiple points, that is straigh
     <div class="inner_cell">
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
-  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x,<span style="color: #666666">*</span>args):
-    <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>sin(x)
-   
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">df</span>(x,f,<span style="color: #666666">*</span>args,delta_x<span style="color: #666666">=1e-3</span>):
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">df</span>(x,f,<span style="color: #666666">*</span>args,delta_x<span style="color: #666666">=1e-3</span>):
     <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39; returns the derivative of f &#39;&#39;&#39;</span>
     <span style="color: #008000; font-weight: bold">return</span> (f(x<span style="color: #666666">+</span>delta_x,<span style="color: #666666">*</span>args)<span style="color: #666666">-</span>f(x,<span style="color: #666666">*</span>args))<span style="color: #666666">/</span>delta_x
 </pre>
@@ -1122,10 +1124,11 @@ If we would like to calculate the derivative in multiple points, that is straigh
   </div>
 </div>
 <h2 id="scope-of-variables" class="anchor">Scope of variables  </h2>
-<p>In small programs you would not care about scope, but once you have several functions, you will easily get into trouble if you do not consider the scope of a variable. By scope of a variable we mean where it is available, first some simple examples</p>
+<p>In small programs you would not care about scope, but once you have several functions, you will easily get into trouble if you do not consider the scope of a variable. By scope of a variable we mean where the variable is available, first some simple examples</p>
 
 <p>
 <b>A variable created inside a function is only available within the function:</b>
+``
 </p>
 
 
@@ -1154,7 +1157,7 @@ If we would like to calculate the derivative in multiple points, that is straigh
   </div>
 </div>
 
-<p>Doing <code>print(a)</code> outside the function would create an error: <code>name 'a' is not defined</code>. What happens if we defined a variable <code>a</code> outside the function</p>
+<p>Doing <code>print(a)</code> outside the function will throw an error: <code>name 'a' is not defined</code>. What happens if we define variable <code>a</code> outside the function?</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -1188,6 +1191,8 @@ If we would like to calculate the derivative in multiple points, that is straigh
 <b>The <code>global</code> keyword can be used to pass and access variables in functions:</b>
 </p>
 
+<p>&quot;</p>
+
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -1217,16 +1222,16 @@ a<span style="color: #666666">=2</span>
   </div>
 </div>
 
-<p>In this case <code>print(a)</code> <em>before</em> calling <code>f(x)</code> would give the answer <code>2</code> and <em>after</em> calling <code>f(x)</code> would give <code>10</code>.</p>
+<p>In this case <code>print(a)</code> <em>before</em> calling <code>f(x)</code> will give the answer <code>2</code> and <em>after</em> calling <code>f(x)</code> will give <code>10</code>.</p>
 
 <div class="alert alert-block alert-success alert-text-normal"><b>Use of global variables</b>
-<p>Sometimes global variables can be very useful, and help you to make the code simpler. But, make sure to use a <em>naming convention</em>  for them, e.g. end all the global variables with an underscore. In the example above we would write <code>global a_</code>. A person reading the code would then know that all variables ending with an underscore are global, and can potentially be modified by many functions.  </p>
+<p>Sometimes global variables can be very useful, and help you to make the code simpler. But make sure to use a <em>naming convention</em>  for them, e.g. end all the global variables with an underscore. In the example above we would write <code>global a_</code>. A person reading the code would then know that all variables ending with an underscore are global, and can potentially be modified by several functions.  </p>
 </div>
 
 <h2 id="passing-arrays-and-lists-to-functions" class="anchor">Passing arrays and lists to functions </h2>
-<p>In the previous section we looked at some simple examples regarding scope of variables, and what happened with that variable inside and outside a function. The examples used integer or floats, however in most applications you will pass an array or a list to a function, and then you need to be aware that the behavior is not always would you might expect.</p>
+<p>In the previous section, we looked at some simple examples regarding the scope of variables, and what happened with that variable inside and outside a function. The examples used integer or floats. However in most applications you will pass an array or a list to a function, and then you need to be aware that the behavior is not always would you might expect.</p>
 <div class="alert alert-block alert-success alert-text-normal"><b>Unexpected behavior</b>
-<p>Sometimes functions does not do what you expect to, this might be because the function does operates on the arguments as you might think. The best advice is to make a very simple version of your function and test for yourself. Is the behavior what you expect? Try to understand why or why not.</p>
+<p>Sometimes functions do not do what you expect, this might be because the function does not treat  the arguments as you might think. The best advice is to make a very simple version of your function and test it for yourself. Is the behavior what you expect? Try to understand why or why not.</p>
 </div>
 
 <p>Let us look at some examples, and try to understand what is going on and why.</p>
@@ -1288,7 +1293,7 @@ a<span style="color: #666666">=2</span>
   </div>
 </div>
 
-<p>Clearly this function will only work for lists, due to the append command, after execution, we get the result</p>
+<p>(Clearly this function will only work for lists, due to the append command.) After execution, we get the result</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -1297,8 +1302,7 @@ a<span style="color: #666666">=2</span>
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">x <span style="color: #666666">=</span> [<span style="color: #666666">3</span>]
-append_to_list(x) returns  [<span style="color: #666666">3</span>, <span style="color: #666666">1</span>]
-x <span style="color: #AA22FF; font-weight: bold">is</span> now  [<span style="color: #666666">3</span>, <span style="color: #666666">1</span>]
+append_to_list(x) <span style="color: #408080; font-style: italic">#returns  [3 1], x is now  [3, 1]</span>
 </pre>
 </div>
       </div>
@@ -1351,9 +1355,8 @@ x <span style="color: #AA22FF; font-weight: bold">is</span> now  [<span style="c
     <div class="inner_cell">
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
-  <pre style="line-height: 125%;">x <span style="color: #666666">=</span>  [<span style="color: #666666">3</span>]
-append_to_np(x) returns  [<span style="color: #666666">3</span> <span style="color: #666666">1</span>]
-x <span style="color: #AA22FF; font-weight: bold">is</span> now  [<span style="color: #666666">3</span>]
+  <pre style="line-height: 125%;">x <span style="color: #666666">=</span>  np<span style="color: #666666">.</span>array([<span style="color: #666666">3</span>])
+append_to_np(x) <span style="color: #408080; font-style: italic">#returns  [3 1], x is now  [3]</span>
 </pre>
 </div>
       </div>
@@ -1397,8 +1400,8 @@ x<span style="color: #666666">=</span>np<span style="color: #666666">.</span>arr
   </div>
 </div>
 
-<p>On my computer I found that <code>append_to_list</code> used 76 nano seconds, and <code>append_
-to_np</code> used 512 micro seconds, the Numpy function was about 6000 times slower! To add to the confusion consider the following functions
+<p>On my computer I found that <code>append_to_list</code> used 76 nano seconds, and <code>append_to_np</code>
+used 512 micro seconds, the Numpy function was about 6000 times slower! To add to the confusion consider the following functions
 </p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
@@ -1445,12 +1448,10 @@ to_np</code> used 512 micro seconds, the Numpy function was about 6000 times slo
     <div class="inner_cell">
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
-  <pre style="line-height: 125%;">x <span style="color: #666666">=</span>  [<span style="color: #666666">3</span>]
-add_to_np(x) returns  [<span style="color: #666666">6</span>]
-x <span style="color: #AA22FF; font-weight: bold">is</span> now  [<span style="color: #666666">3</span>]
-x <span style="color: #666666">=</span>  [<span style="color: #666666">3</span>]
-add_to_np2(x) returns  [<span style="color: #666666">6</span>]
-x <span style="color: #AA22FF; font-weight: bold">is</span> now  [<span style="color: #666666">6</span>]
+  <pre style="line-height: 125%;">x <span style="color: #666666">=</span>  np<span style="color: #666666">.</span>array([<span style="color: #666666">3</span>])
+add_to_np(x) <span style="color: #408080; font-style: italic">#returns [6], x is now [3] </span>
+x <span style="color: #666666">=</span>  np<span style="color: #666666">.</span>array([<span style="color: #666666">3</span>])
+add_to_np2(x) <span style="color: #408080; font-style: italic">#returns  [6], x is now  [6]</span>
 </pre>
 </div>
       </div>
@@ -1497,7 +1498,7 @@ x<span style="color: #666666">=</span>np<span style="color: #666666">.</span>arr
 <p><code>add_to_np</code> is about twice as slow as <code>add_to_np2</code>. In the next section we will try to explain the difference in behavior.</p>
 
 <div class="alert alert-block alert-success alert-text-normal"><b>Avoiding unwanted behavior of functions</b>
-<p>The examples in this section is meant to show you that if you pass an array to a function the array can be altered outside the scope of the function. If this is not what you want, it could lead to bugs that are hard to detect. Thus, if you experience unwanted behavior pick out the part of function involving list or array operations and test one by one in the editor.</p>
+<p>The examples in this section are meant to show you that if you pass an array to a function, the array can be altered outside the scope of the function. If this is not what you want, it could lead to bugs that are hard to detect. Thus, if you experience unwanted behavior pick out the part of function involving list or array operations and test one by one in the editor.</p>
 </div>
 
 <h2 id="call-by-value-or-call-by-reference" class="anchor">Call by value or call by reference  </h2>
@@ -1508,7 +1509,7 @@ x<span style="color: #666666">=</span>np<span style="color: #666666">.</span>arr
 
 <p>In C and C++ you always tell in the function definition if the variables are passed by value or reference. Thus if you would like a change in a variable outside the function definition, you pass the variable by reference, otherwise by value. In Python we always pass by (object) reference.</p>
 <h3 id="floats-and-integers" class="anchor">Floats and integers </h3>
-<p>To gain a deeper understanding we can use the <code>id</code> function, the <code>id</code> function gives the unique id to a variable, in C this would be the actual memory address, lets look at a couple of examples</p>
+<p>To gain a deeper understanding, we can use the <code>id</code> function, the <code>id</code> function gives the unique id to a variable. In C this would be the actual memory address, lets look at a couple of examples</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -1517,9 +1518,9 @@ x<span style="color: #666666">=</span>np<span style="color: #666666">.</span>arr
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">a<span style="color: #666666">=10.0</span>
-<span style="color: #008000">print</span>(<span style="color: #008000">id</span>(a)) <span style="color: #3D7B7B; font-style: italic">#gives on my computer 140587667748656</span>
+<span style="color: #008000">print</span>(<span style="color: #008000">id</span>(a)) <span style="color: #408080; font-style: italic">#gives on my computer 140587667748656</span>
 a <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
-<span style="color: #008000">print</span>(<span style="color: #008000">id</span>(a)) <span style="color: #3D7B7B; font-style: italic">#gives on my computer 140587667748400</span>
+<span style="color: #008000">print</span>(<span style="color: #008000">id</span>(a)) <span style="color: #408080; font-style: italic">#gives on my computer 140587667748400</span>
 </pre>
 </div>
       </div>
@@ -1535,7 +1536,7 @@ a <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
   </div>
 </div>
 
-<p>Thus, after adding 1 to <code>a</code>, <code>a</code> is assigned a new place in memory. This is very different from C or C++, in C or C++ the variable, once it is created, always has the same memory address. In Python this is not the case, it is works in the opposite way. The statement <code>a=10.0</code>, is executed so that <em>first</em> 10.0 is created in memory *then <code>x</code> is assigned the reference to 10.0 `x`*. The assignment operator <code>=</code> indicates that <code>a</code> should point to whatever is on the right hand side. Another example is     </p>
+<p>Thus, after adding 1 to <code>a</code>, <code>a</code> is assigned <em>a new place in memory</em>. This is very different from C or C++, in C or C++ the variable, once it is created, <em>always has the same memory address</em>. In Python this is not the case, it works in the opposite way. The statement <code>a=10.0</code>, is executed so that <em>first</em> 10.0 is created in memory, secondly <code>x</code> is assigned the reference to 10.0. The assignment operator <code>=</code> indicates that <code>a</code> should point to whatever is on the right hand side. Another example is     </p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -1545,9 +1546,9 @@ a <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">a<span style="color: #666666">=10.0</span>
 b<span style="color: #666666">=10.0</span>
-<span style="color: #008000">print</span>(a <span style="color: #AA22FF; font-weight: bold">is</span> b) <span style="color: #3D7B7B; font-style: italic"># prints False</span>
+<span style="color: #008000">print</span>(a <span style="color: #AA22FF; font-weight: bold">is</span> b) <span style="color: #408080; font-style: italic"># prints False</span>
 b<span style="color: #666666">=</span>a
-<span style="color: #008000">print</span>(a <span style="color: #AA22FF; font-weight: bold">is</span> b ) <span style="color: #3D7B7B; font-style: italic"># prints True</span>
+<span style="color: #008000">print</span>(a <span style="color: #AA22FF; font-weight: bold">is</span> b ) <span style="color: #408080; font-style: italic"># prints True</span>
 </pre>
 </div>
       </div>
@@ -1573,9 +1574,9 @@ b<span style="color: #666666">=</span>a
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">a<span style="color: #666666">=10</span>
 b<span style="color: #666666">=</span>a
-<span style="color: #008000">print</span>(a <span style="color: #AA22FF; font-weight: bold">is</span> b) <span style="color: #3D7B7B; font-style: italic"># True</span>
+<span style="color: #008000">print</span>(a <span style="color: #AA22FF; font-weight: bold">is</span> b) <span style="color: #408080; font-style: italic"># True</span>
 a<span style="color: #666666">+=2</span>
-<span style="color: #008000">print</span>(a <span style="color: #AA22FF; font-weight: bold">is</span> b) <span style="color: #3D7B7B; font-style: italic"># False</span>
+<span style="color: #008000">print</span>(a <span style="color: #AA22FF; font-weight: bold">is</span> b) <span style="color: #408080; font-style: italic"># False</span>
 </pre>
 </div>
       </div>
@@ -1604,7 +1605,7 @@ a<span style="color: #666666">+=2</span>
   <pre style="line-height: 125%;">x<span style="color: #666666">=</span>[<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">2</span>,<span style="color: #666666">3</span>,<span style="color: #666666">4</span>]
 <span style="color: #008000">print</span>(<span style="color: #008000">id</span>(x))
 x[<span style="color: #666666">0</span>]<span style="color: #666666">=10</span>
-<span style="color: #008000">print</span>(<span style="color: #008000">id</span>(x)) <span style="color: #3D7B7B; font-style: italic"># same id value as before and x=[10,1,2,3,4]</span>
+<span style="color: #008000">print</span>(<span style="color: #008000">id</span>(x)) <span style="color: #408080; font-style: italic"># same id value as before and x=[10,1,2,3,4]</span>
 </pre>
 </div>
       </div>
@@ -1620,7 +1621,7 @@ x[<span style="color: #666666">0</span>]<span style="color: #666666">=10</span>
   </div>
 </div>
 
-<p>First, we create a list, which is basically a box with the numbers 0, 1, 2, 3, 4. The variable <code>x</code> points to the box, and <code>x[0]</code> points to 0, and <code>x[1]</code> to 1 etc. Thus if we do <code>x[0]=10</code>, that would be the same as picking 0 out of the box and replacing it with 10, but <em>the box stays the same</em>. Thus when we do <code>print(x)</code>, we print the content of the box. If we do</p>
+<p>First, we create a list, which is basically a box with the numbers 0, 1, 2, 3, 4. The variable <code>x</code> points to <em>the box</em>, and <code>x[0]</code> points to 0, and <code>x[1]</code> to 1 etc. Thus if we do <code>x[0]=10</code>, that would be the same as picking 0 out of the box and replacing it with 10, but <em>the box stays the same</em>. Thus when we do <code>print(x)</code>, we print the content of the box. If we do</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -1630,10 +1631,10 @@ x[<span style="color: #666666">0</span>]<span style="color: #666666">=10</span>
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">x<span style="color: #666666">=</span>[<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">2</span>,<span style="color: #666666">3</span>,<span style="color: #666666">4</span>]
 y<span style="color: #666666">=</span>x
-<span style="color: #008000">print</span>(x <span style="color: #AA22FF; font-weight: bold">is</span> y) <span style="color: #3D7B7B; font-style: italic"># True</span>
-x<span style="color: #666666">.</span>append(<span style="color: #666666">10</span>)  <span style="color: #3D7B7B; font-style: italic"># x is now [0,1,2,3,4,10]</span>
-<span style="color: #008000">print</span>(y)      <span style="color: #3D7B7B; font-style: italic"># y=[0,1,2,3,4,10]</span>
-<span style="color: #008000">print</span>(x <span style="color: #AA22FF; font-weight: bold">is</span> y) <span style="color: #3D7B7B; font-style: italic"># True</span>
+<span style="color: #008000">print</span>(x <span style="color: #AA22FF; font-weight: bold">is</span> y) <span style="color: #408080; font-style: italic"># True</span>
+x<span style="color: #666666">.</span>append(<span style="color: #666666">10</span>)  <span style="color: #408080; font-style: italic"># x is now [0,1,2,3,4,10]</span>
+<span style="color: #008000">print</span>(y)      <span style="color: #408080; font-style: italic"># y=[0,1,2,3,4,10]</span>
+<span style="color: #008000">print</span>(x <span style="color: #AA22FF; font-weight: bold">is</span> y) <span style="color: #408080; font-style: italic"># True</span>
 </pre>
 </div>
       </div>
@@ -1651,7 +1652,7 @@ x<span style="color: #666666">.</span>append(<span style="color: #666666">10</sp
 
 <p>What happens here is that we create a box with the numbers 0, 1, 2, 3, 4, <code>x</code> is referenced that box. Next, we do <code>y=x</code> so that <code>y</code> is referenced the <em>same box</em> as <code>x</code>. Then, we add the number 10 to that box, and <code>x</code> and <code>y</code> still points to the same box.</p>
 
-<p>Numpy arrays behave differently, and that is basically because if we want to add a number to a Numpy array we have to do <code>x=np.array(x,10)</code>. Because of the assignment operator <code>=</code> , we take the content of the original box add 10 and put it into a new box</p>
+<p>Numpy arrays behave differently, and that is basically because if we want to add a number to a Numpy array we have to do <code>x=np.array(x,10)</code>. Because of the assignment operator <code>=</code> , we take the content of the original box add 10 and put it into a <em>new</em> box</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -1661,10 +1662,10 @@ x<span style="color: #666666">.</span>append(<span style="color: #666666">10</sp
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">x<span style="color: #666666">=</span>np<span style="color: #666666">.</span>array([<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">2</span>,<span style="color: #666666">3</span>,<span style="color: #666666">4</span>])
 y<span style="color: #666666">=</span>x
-<span style="color: #008000">print</span>(x <span style="color: #AA22FF; font-weight: bold">is</span> y)     <span style="color: #3D7B7B; font-style: italic"># True</span>
-x<span style="color: #666666">=</span>np<span style="color: #666666">.</span>append(x,<span style="color: #666666">10</span>) <span style="color: #3D7B7B; font-style: italic"># x is now [0,1,2,3,4,10]</span>
-<span style="color: #008000">print</span>(y)          <span style="color: #3D7B7B; font-style: italic"># y=[0,1,2,3,4]</span>
-<span style="color: #008000">print</span>(x <span style="color: #AA22FF; font-weight: bold">is</span> y)     <span style="color: #3D7B7B; font-style: italic"># False</span>
+<span style="color: #008000">print</span>(x <span style="color: #AA22FF; font-weight: bold">is</span> y)     <span style="color: #408080; font-style: italic"># True</span>
+x<span style="color: #666666">=</span>np<span style="color: #666666">.</span>append(x,<span style="color: #666666">10</span>) <span style="color: #408080; font-style: italic"># x is now [0,1,2,3,4,10]</span>
+<span style="color: #008000">print</span>(y)          <span style="color: #408080; font-style: italic"># y=[0,1,2,3,4]</span>
+<span style="color: #008000">print</span>(x <span style="color: #AA22FF; font-weight: bold">is</span> y)     <span style="color: #408080; font-style: italic"># False</span>
 </pre>
 </div>
       </div>
@@ -1682,15 +1683,15 @@ x<span style="color: #666666">=</span>np<span style="color: #666666">.</span>app
 
 <p>The reason for this behavior is that the elements in Numpy arrays (contrary to lists) have to be continuous in the memory, and the only way to achieve this is to create a new box that is large enough to also contain the new number. This also explains that if you use the <code>np.append(x,some_value)</code> inside a function where <code>x</code> is large it could slow down your code, because the program has to delete <code>x</code> and create a new very large box each time it would want to add a new element. A better way to do it is to create <code>x</code> <em>large enough</em> in the beginning, and then just assign values <code>x[i]=a</code>. </p>
 <h2 id="mutable-and-immutable-objects" class="anchor">Mutable and immutable objects </h2>
-<p>What we have explained in the previous section is related to what is known as mutable and immutable objects. These terms are used to describe objects that has an internal state that can be changed (mutable) and objects that has an internal state that cannot be changed after they have been created. Example of mutable objects are lists, dictionaries, and arrays, examples of immutable objects are floats, ints, tuples, and strings. Thus if we create the number 10 its value cannot be changed (and why would we do that?). Note that that is <em>not the same as saying that</em>  <code>x=10</code> and that the internal state of <code>x</code> cannot change, this is <em>not</em> true. We are allowed to make <code>x</code> reference another object. If we do <code>x=10</code>, then <code>x is 10</code> will give true and the will have the same value if we use the <code>id</code> operator on <code>x</code> and <code>10</code>. If we later say that <code>a=11</code> then <code>a is 10</code> will give false and <code>id(a)</code> and <code>id(10)</code> give different values, but *`id(10)` will have the same value as before*.</p>
+<p>What we have explained in the previous section is related to what is known as mutable and immutable objects. These terms are used to describe objects that have an internal state that can be changed (mutable), and objects that have an internal state that cannot be changed after they have been created. Example of mutable objects are lists, dictionaries, and arrays. Examples of immutable objects are floats, ints, tuples, and strings. Thus if we create the number 10 its value cannot be changed (and why would we do that?). Note that this is <em>not the same as saying that</em>  <code>x=10</code> and that the internal state of <code>x</code> cannot change, this is <em>not</em> true. We are allowed to make <code>x</code> reference another object. If we do <code>x=10</code>, then <code>x is 10</code> will give true and they will have the same value if we use the <code>id</code> operator on <code>x</code> and <code>10</code>. If we later say that <code>a=11</code> then <code>a is 10</code> will give false and <code>id(a)</code> and <code>id(10)</code> give different values, but * <code>id(10)</code> will have the same value as before*.</p>
 
-<p>Lists are mutable objects, and once a list is created we can change the content without changing the reference to that object. That is why the operations <code>x=[]</code> and <code>x.append(1)</code>, does not change the id of x, and also explain that if we put <code>y=x</code>, <code>y</code> would change if <code>x</code> is changed. Contrary to immutable objects if <code>x=[]</code>, and <code>y=[]</code> then <code>x is y</code> will give false. Thus, whenever you create a list it will be an unique object.    </p>
+<p>Lists are mutable objects, and once a list is created, we can change the content without changing the reference to that object. That is why the operations <code>x=[]</code> and <code>x.append(1)</code>, does not change the id of x, and also explain that if we put <code>y=x</code>, <code>y</code> would change if <code>x</code> is changed. Contrary to immutable objects if <code>x=[]</code>, and <code>y=[]</code> then <code>x is y</code> will give false. Thus, whenever you create a list it will be an unique object.    </p>
 
 <div class="alert alert-block alert-success alert-text-normal"><b>A final tip</b>
 <p>You are bound to get into strange, unwanted behavior when working with lists, arrays and dictionaries (mutable) objects in Python. Whenever, you are unsure, just make a simple version of your lists and perform some of the operations on them to investigate if the behavior is what you want.</p>
 </div>
 
-<p>At the end we list some &quot;unexpected&quot; behavior, just to demonstrate that it is easy to do mistakes and one should always test code on simple examples. </p>
+<p>Finally, we show some ``unexpected&quot; behavior, just to demonstrate that it is easy to do mistakes and one should always test code on simple examples. </p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -1698,10 +1699,11 @@ x<span style="color: #666666">=</span>np<span style="color: #666666">.</span>app
     <div class="inner_cell">
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
-  <pre style="line-height: 125%;">x  <span style="color: #666666">=</span> [<span style="color: #666666">1</span>, <span style="color: #666666">2</span>, <span style="color: #666666">3</span>]
-x_old[:] <span style="color: #666666">=</span> x[:] <span style="color: #3D7B7B; font-style: italic"># x_old = [1, 2, 3]</span>
+  <pre style="line-height: 125%;">x_old<span style="color: #666666">=</span>[]
+x  <span style="color: #666666">=</span> [<span style="color: #666666">1</span>, <span style="color: #666666">2</span>, <span style="color: #666666">3</span>]
+x_old[:] <span style="color: #666666">=</span> x[:] <span style="color: #408080; font-style: italic"># x_old = [1, 2, 3]</span>
 x[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> <span style="color: #666666">10</span>
-<span style="color: #008000">print</span>(x_old) <span style="color: #3D7B7B; font-style: italic"># &quot;expected&quot; x_old = [10, 2, 3], actual [1, 2, 3] </span>
+<span style="color: #008000">print</span>(x_old) <span style="color: #408080; font-style: italic"># &quot;expected&quot; x_old = [10, 2, 3], actual [1, 2, 3] </span>
 </pre>
 </div>
       </div>
@@ -1727,10 +1729,11 @@ x[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> <
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">add_to_list</span>(x,add_to<span style="color: #666666">=</span>[])
     add_to<span style="color: #666666">.</span>append(x)
+    <span style="color: #008000; font-weight: bold">return</span> add_to
 
-<span style="color: #008000">print</span>(add_to_list(<span style="color: #666666">1</span>)) <span style="color: #3D7B7B; font-style: italic"># &quot;expected&quot; [1] actual [1]</span>
-<span style="color: #008000">print</span>(add_to_list(<span style="color: #666666">2</span>)) <span style="color: #3D7B7B; font-style: italic"># &quot;expected&quot; [2] actual [1, 2]</span>
-<span style="color: #008000">print</span>(add_to_list(<span style="color: #666666">3</span>)) <span style="color: #3D7B7B; font-style: italic"># &quot;expected&quot; [3] actual [1, 2, 3]</span>
+<span style="color: #008000">print</span>(add_to_list(<span style="color: #666666">1</span>)) <span style="color: #408080; font-style: italic"># &quot;expected&quot; [1] actual [1]</span>
+<span style="color: #008000">print</span>(add_to_list(<span style="color: #666666">2</span>)) <span style="color: #408080; font-style: italic"># &quot;expected&quot; [2] actual [1, 2]</span>
+<span style="color: #008000">print</span>(add_to_list(<span style="color: #666666">3</span>)) <span style="color: #408080; font-style: italic"># &quot;expected&quot; [3] actual [1, 2, 3]</span>
 </pre>
 </div>
       </div>
@@ -1757,12 +1760,12 @@ x[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> <
   <pre style="line-height: 125%;">x <span style="color: #666666">=</span> [<span style="color: #666666">10</span>]
 y <span style="color: #666666">=</span> x
 y <span style="color: #666666">=</span> y <span style="color: #666666">+</span> [<span style="color: #666666">1</span>]
-<span style="color: #008000">print</span>(x, y) <span style="color: #3D7B7B; font-style: italic"># prints [10] [10, 1]</span>
+<span style="color: #008000">print</span>(x, y) <span style="color: #408080; font-style: italic"># prints [10] [10, 1]</span>
 
 x <span style="color: #666666">=</span> [<span style="color: #666666">10</span>]
 y <span style="color: #666666">=</span> x
 y <span style="color: #666666">+=</span> [<span style="color: #666666">1</span>] 
-<span style="color: #008000">print</span>(x, y) <span style="color: #3D7B7B; font-style: italic"># prints [10, 1] [10, 1]</span>
+<span style="color: #008000">print</span>(x, y) <span style="color: #408080; font-style: italic"># prints [10, 1] [10, 1]</span>
 </pre>
 </div>
       </div>
@@ -1779,77 +1782,6 @@ y <span style="color: #666666">+=</span> [<span style="color: #666666">1</span>]
 </div>
 
 <p>Comment: In the first case <code>y + [1]</code> creates a new object and the assignment operator <code>=</code> assign <code>y</code> to that object, thus <code>x</code> stays the same. In the second case the <code>+=</code> adds <code>[1]</code> to the <code>y</code> container without changing the container, and thus <code>x</code> also changes.</p>
-
-<!-- --- begin exercise --- -->
-<h2 id="exercise-1-explain-why-only-one-of-the-codes-below-gives-the-correct-answer" class="anchor">Exercise 1: Explain why only one of the codes below gives the correct answer </h2>
-
-<!-- label{} -->
-
-<!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="cell border-box-sizing code_cell rendered">
-  <div class="input">
-    <div class="inner_cell">
-      <div class="input_area">
-        <div class="highlight" style="background: #f8f8f8">
-  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">power</span>(x,n):
-    <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;</span>
-<span style="color: #BA2121; font-style: italic">    calculates the power of x up to order n</span>
-<span style="color: #BA2121; font-style: italic">    &#39;&#39;&#39;</span>
-    <span style="color: #008000; font-weight: bold">if</span> n<span style="color: #666666">==0</span>:
-        <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>ones(<span style="color: #008000">len</span>(x))
-    <span style="color: #008000; font-weight: bold">else</span>:
-        xn<span style="color: #666666">=</span>x
-        <span style="color: #008000; font-weight: bold">for</span> _ <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(n):
-            xn<span style="color: #666666">*=</span>x
-    <span style="color: #008000; font-weight: bold">return</span> xn
-
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">power2</span>(x,n):
-    <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;</span>
-<span style="color: #BA2121; font-style: italic">    calculates the power of x up to order n</span>
-<span style="color: #BA2121; font-style: italic">    &#39;&#39;&#39;</span>
-    <span style="color: #008000; font-weight: bold">if</span> n<span style="color: #666666">==0</span>:
-        <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>ones(<span style="color: #008000">len</span>(x))
-    <span style="color: #008000; font-weight: bold">else</span>:
-        xn<span style="color: #666666">=</span>x
-        <span style="color: #008000; font-weight: bold">for</span> _ <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(n):
-            xn <span style="color: #666666">=</span> xn<span style="color: #666666">*</span>x
-    <span style="color: #008000; font-weight: bold">return</span> xn
-
-x<span style="color: #666666">=</span>np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">10</span>)
-plt<span style="color: #666666">.</span>plot(x,power(x,<span style="color: #666666">2</span>),<span style="color: #BA2121">&#39;:&#39;</span>,label<span style="color: #666666">=</span><span style="color: #BA2121">&#39;power&#39;</span>)
-plt<span style="color: #666666">.</span>plot(x,power2(x,<span style="color: #666666">2</span>), <span style="color: #BA2121">&#39;*&#39;</span>,label<span style="color: #666666">=</span><span style="color: #BA2121">&#39;power2&#39;</span>)
-plt<span style="color: #666666">.</span>plot(x,x<span style="color: #666666">*</span>x,<span style="color: #BA2121">&#39;-&#39;</span>,label<span style="color: #666666">=</span><span style="color: #BA2121">&#39;True answer&#39;</span>)
-plt<span style="color: #666666">.</span>legend()
-plt<span style="color: #666666">.</span>grid()
-</pre>
-</div>
-      </div>
-    </div>
-  </div>
-  <div class="output_wrapper">
-    <div class="output">
-      <div class="output_area">
-        <div class="output_subarea output_stream output_stdout output_text">          
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<p>text...
-Filename: <code>solution.pdf</code>.
-</p>
-
-<!-- !bsol -->
-<!-- !esol -->
-
-<!-- !bsubex -->
-<!-- subexercise... -->
-
-<!-- !bsol -->
-<!-- !esol -->
-<!-- !esubex -->
-<!-- --- end exercise --- -->
 <h1 id="references" class="anchor">References </h1>
 
 <!-- begin bibliography -->

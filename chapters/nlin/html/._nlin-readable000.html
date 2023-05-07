@@ -8,9 +8,9 @@ doconce format html main_nlin.do.txt CHAPTER=document BOOK=document APPENDIX=doc
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/doconce/doconce/" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="description" content="Non linear systems">
+<meta name="description" content="Solving non linear systems">
 <meta name="keywords" content="fixed-point iteration,rate of convergence,bisection method,rate of convergence,Newtons method,Newtons method, rate of convergence,secant method,secant method, rate of convergence,Newton Rapson method,gradient descent">
-<title>Non linear systems</title>
+<title>Solving non linear systems</title>
 <!-- Bootstrap style: bootswatch_readable -->
 <!-- doconce format html main_nlin.do.txt CHAPTER=document BOOK=document APPENDIX=document --html_style=bootswatch_readable --html_output=nlin-readable --html_code_style=inherit -->
 <link href="https://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
@@ -62,14 +62,14 @@ code { color: inherit; background-color: transparent; }
                2,
                None,
                'exercise-3-finding-the-molar-volume-from-the-van-der-waal-eos-by-fixed-point-iteration'),
-              ('When do the fixed point method fail?',
+              ('When does the fixed point method fail?',
                2,
                'sec:nlin:fp',
                'sec:nlin:fp'),
-              ('What to do when the fixed point method fail',
+              ('What to do when the fixed point method fails',
                2,
                None,
-               'what-to-do-when-the-fixed-point-method-fail'),
+               'what-to-do-when-the-fixed-point-method-fails'),
               ('Exercise 4: Solve $x=e^{1-x^2}$ using fixed point iteration',
                2,
                None,
@@ -77,7 +77,7 @@ code { color: inherit; background-color: transparent; }
               ('Rate of convergence', 1, None, 'rate-of-convergence'),
               ('The bisection method', 1, None, 'the-bisection-method'),
               ('Rate of convergence', 2, None, 'rate-of-convergence'),
-              ('Newtons method', 1, None, 'newtons-method'),
+              ("Newton's method", 1, None, 'newton-s-method'),
               ('Rate of convergence', 2, None, 'rate-of-convergence'),
               ('Exercise 5: Compare Newtons, Bisection and the Fixed Point '
                'method',
@@ -87,12 +87,12 @@ code { color: inherit; background-color: transparent; }
               ('Secant method', 1, None, 'secant-method'),
               ('Rate of convergence', 2, None, 'rate-of-convergence'),
               ('Newton Rapson method', 1, None, 'newton-rapson-method'),
-              ('Gradient Descent', 1, None, 'gradient-descent'),
+              ('Gradient descent', 1, None, 'gradient-descent'),
               ('Exercise 6: Gradient descent solution of linear regression',
                2,
                None,
                'exercise-6-gradient-descent-solution-of-linear-regression'),
-              ('Other Useful Methods', 1, None, 'other-useful-methods'),
+              ('Other useful methods', 1, None, 'other-useful-methods'),
               ('References', 1, None, 'references')]}
 end of tocinfo -->
 
@@ -127,7 +127,7 @@ $$
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="nlin-readable.html">Non linear systems</a>
+    <a class="navbar-brand" href="nlin-readable.html">Solving non linear systems</a>
   </div>
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav navbar-right">
@@ -141,21 +141,21 @@ $$
      <!-- navigation toc: --> <li><a href="#fixed-point-iteration" style="font-size: 80%;"><b>Fixed-point iteration</b></a></li>
      <!-- navigation toc: --> <li><a href="#exercise-2-implement-the-fixed-point-iteration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 2: Implement the fixed point iteration</a></li>
      <!-- navigation toc: --> <li><a href="#exercise-3-finding-the-molar-volume-from-the-van-der-waal-eos-by-fixed-point-iteration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 3: Finding the molar volume from the van der Waal EOS by fixed point iteration</a></li>
-     <!-- navigation toc: --> <li><a href="#sec:nlin:fp" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;When do the fixed point method fail?</a></li>
-     <!-- navigation toc: --> <li><a href="#what-to-do-when-the-fixed-point-method-fail" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;What to do when the fixed point method fail</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:nlin:fp" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;When does the fixed point method fail?</a></li>
+     <!-- navigation toc: --> <li><a href="#what-to-do-when-the-fixed-point-method-fails" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;What to do when the fixed point method fails</a></li>
      <!-- navigation toc: --> <li><a href="#exercise-4-solve-x-e-1-x-2-using-fixed-point-iteration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 4: Solve \( x=e^{1-x^2} \) using fixed point iteration</a></li>
      <!-- navigation toc: --> <li><a href="#rate-of-convergence" style="font-size: 80%;"><b>Rate of convergence</b></a></li>
      <!-- navigation toc: --> <li><a href="#the-bisection-method" style="font-size: 80%;"><b>The bisection method</b></a></li>
      <!-- navigation toc: --> <li><a href="#rate-of-convergence" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
-     <!-- navigation toc: --> <li><a href="#newtons-method" style="font-size: 80%;"><b>Newtons method</b></a></li>
+     <!-- navigation toc: --> <li><a href="#newton-s-method" style="font-size: 80%;"><b>Newton's method</b></a></li>
      <!-- navigation toc: --> <li><a href="#rate-of-convergence" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
      <!-- navigation toc: --> <li><a href="#exercise-5-compare-newtons-bisection-and-the-fixed-point-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 5: Compare Newtons, Bisection and the Fixed Point method</a></li>
      <!-- navigation toc: --> <li><a href="#secant-method" style="font-size: 80%;"><b>Secant method</b></a></li>
      <!-- navigation toc: --> <li><a href="#rate-of-convergence" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
      <!-- navigation toc: --> <li><a href="#newton-rapson-method" style="font-size: 80%;"><b>Newton Rapson method</b></a></li>
-     <!-- navigation toc: --> <li><a href="#gradient-descent" style="font-size: 80%;"><b>Gradient Descent</b></a></li>
+     <!-- navigation toc: --> <li><a href="#gradient-descent" style="font-size: 80%;"><b>Gradient descent</b></a></li>
      <!-- navigation toc: --> <li><a href="#exercise-6-gradient-descent-solution-of-linear-regression" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 6: Gradient descent solution of linear regression</a></li>
-     <!-- navigation toc: --> <li><a href="#other-useful-methods" style="font-size: 80%;"><b>Other Useful Methods</b></a></li>
+     <!-- navigation toc: --> <li><a href="#other-useful-methods" style="font-size: 80%;"><b>Other useful methods</b></a></li>
      <!-- navigation toc: --> <li><a href="#references" style="font-size: 80%;"><b>References</b></a></li>
 
         </ul>
@@ -170,7 +170,7 @@ $$
 <!-- ------------------- main content ---------------------- -->
 <div class="jumbotron">
 <center>
-<h1>Non linear systems</h1>
+<h1>Solving non linear systems </h1>
 </center>  <!-- document title -->
 
 <!-- author(s): Aksel Hiorth -->
@@ -181,7 +181,7 @@ $$
 <br>
 <p>University of Stavanger
 <center>
-<h4>Apr 4, 2023</h4>
+<h4>May 7, 2023</h4>
 </center> <!-- date -->
 <br>
 </p>
@@ -197,21 +197,21 @@ $$
 <p><a href="#fixed-point-iteration"> Fixed-point iteration </a></p>
 <p><span class="tab"> <a href="#exercise-2-implement-the-fixed-point-iteration"> Exercise 2: Implement the fixed point iteration </a></p>
 <p><span class="tab"> <a href="#exercise-3-finding-the-molar-volume-from-the-van-der-waal-eos-by-fixed-point-iteration"> Exercise 3: Finding the molar volume from the van der Waal EOS by fixed point iteration </a></p>
-<p><span class="tab"> <a href="#sec:nlin:fp"> When do the fixed point method fail? </a></p>
-<p><span class="tab"> <a href="#what-to-do-when-the-fixed-point-method-fail"> What to do when the fixed point method fail  </a></p>
+<p><span class="tab"> <a href="#sec:nlin:fp"> When does the fixed point method fail? </a></p>
+<p><span class="tab"> <a href="#what-to-do-when-the-fixed-point-method-fails"> What to do when the fixed point method fails  </a></p>
 <p><span class="tab"> <a href="#exercise-4-solve-x-e-1-x-2-using-fixed-point-iteration"> Exercise 4: Solve \( x=e^{1-x^2} \) using fixed point iteration </a></p>
 <p><a href="#rate-of-convergence"> Rate of convergence </a></p>
 <p><a href="#the-bisection-method"> The bisection method </a></p>
 <p><span class="tab"> <a href="#rate-of-convergence"> Rate of convergence </a></p>
-<p><a href="#newtons-method"> Newtons method </a></p>
+<p><a href="#newton-s-method"> Newton's method </a></p>
 <p><span class="tab"> <a href="#rate-of-convergence"> Rate of convergence </a></p>
 <p><span class="tab"> <a href="#exercise-5-compare-newtons-bisection-and-the-fixed-point-method"> Exercise 5: Compare Newtons, Bisection and the Fixed Point method </a></p>
 <p><a href="#secant-method"> Secant method </a></p>
 <p><span class="tab"> <a href="#rate-of-convergence"> Rate of convergence </a></p>
 <p><a href="#newton-rapson-method"> Newton Rapson method </a></p>
-<p><a href="#gradient-descent"> Gradient Descent </a></p>
+<p><a href="#gradient-descent"> Gradient descent </a></p>
 <p><span class="tab"> <a href="#exercise-6-gradient-descent-solution-of-linear-regression"> Exercise 6: Gradient descent solution of linear regression </a></p>
-<p><a href="#other-useful-methods"> Other Useful Methods </a></p>
+<p><a href="#other-useful-methods"> Other useful methods </a></p>
 <p><a href="#references"> References </a></p>
 </div>
 <br>
@@ -588,7 +588,7 @@ $$
 <!-- --- end solution of exercise --- -->
 
 <!-- --- end exercise --- -->
-<h2 id="sec:nlin:fp" class="anchor">When do the fixed point method fail?</h2>
+<h2 id="sec:nlin:fp" class="anchor">When does the fixed point method fail?</h2>
 <p>If we replace \( e^{-x} \) with \( e^{1-x^2} \) in equation <a href="#mjx-eqn-12">(12)</a>, our method will not give a solution. You can easily verify that the \( x=1 \) is a solution, so why does our method fail? To investigate this in a bit more detail, we turn to Taylors formula (once again). Assume that the root is located at \( x^* \), and our guess is \( x_k \), then the next \( x \)-value will be</p>
 $$
 \begin{equation}
@@ -622,7 +622,7 @@ $$
 $$
 
 <p>We expect to use \( \log|h^\prime(x^*)|/\log|g^\prime(x^*)|\simeq10 \) more iterations using \( g(x) \) compared to \( h(x) \), which is close to the observed value of 172/19$\simeq 9$.
-<h2 id="what-to-do-when-the-fixed-point-method-fail" class="anchor">What to do when the fixed point method fail  </h2>
+<h2 id="what-to-do-when-the-fixed-point-method-fails" class="anchor">What to do when the fixed point method fails  </h2>
 As discussed in <a href="#newman2013">[3]</a>, there might be an elegant solution whenever \( |g^\prime(x^*)|>1 \). If it is possible to invert the \( g(x) \), we can show that the derivative of the inverse function
 $ { g^\prime }^{-1} (x^*)  = 1/g^\prime (x^*) $. Why is this useful? Because if \( x^*=g(x^*) \) is the solution we are searching for, then this is equivalent to \( x^*={g}^{-1}(x^*) \) <em>if and only if</em> we can invert \( g(x) \). Note that in many cases it is not possible to invert \( g(x) \). Let us first show that $ { g^\prime }^{-1} (x^*)  = 1/g^\prime (x^*) $. For simplicity write
 </p>
@@ -824,7 +824,7 @@ $$
 $$
 
 <p>hence the bisection method converges linearly.
-<h1 id="newtons-method" class="anchor">Newtons method </h1>
+<h1 id="newton-s-method" class="anchor">Newton's method </h1>
 Newtons method is one of the most used methods. If it converges, it converges quadratically to the correct solution. The drawback is that contrary to the bisection method it may fail if a bad starting point is given. Newtons method for finding the root of a function \( f(x)=0 \) is illustrated in figure <a href="#fig:nlin:newton">5</a>. The main idea is to use more information about the function in the search of the root. In this case we want to find the point where the tangent of the function in \( x_k \) intersect the $x-$axis, and take that as our next point, \( x_{k+1} \). 
 </p>
 
@@ -903,7 +903,7 @@ $$
 
 <p>Comparing figure <a href="#fig:nlin:bisection">4</a> and <a href="#fig:nlin:newton">5</a>, you immediately get the sense that Newtons method converges faster, and indeed it does. </p>
 <h2 id="rate-of-convergence" class="anchor">Rate of convergence </h2>
-<p> Newtons method is similar to the fixed point method, but where we do not use \( g(x)=x-f(x) \), but \( g(x)=x-\frac{f(x)}{f^\prime(x)} \). We will now analyze Newtons method, using the same approach as in the section <a href="#sec:nlin:fp">When do the fixed point method fail?</a>. First we expand \( g(x) \) around the root \( x^* \)</p>
+<p> Newtons method is similar to the fixed point method, but where we do not use \( g(x)=x-f(x) \), but \( g(x)=x-\frac{f(x)}{f^\prime(x)} \). We will now analyze Newtons method, using the same approach as in the section <a href="#sec:nlin:fp">When does the fixed point method fail?</a>. First we expand \( g(x) \) around the root \( x^* \)</p>
 $$
 \begin{equation}
 x_{k+1}=g(x_k)=g(x^*)+g^\prime(x^*)(x_k-x^*)+\frac{1}{2}g^{\prime\prime}(x^*)(x_k-x^*)^2,
@@ -1110,7 +1110,7 @@ $$
 \tag{49}
 \end{equation}
 $$
-<h1 id="gradient-descent" class="anchor">Gradient Descent </h1>
+<h1 id="gradient-descent" class="anchor">Gradient descent </h1>
 <p>This method used is to minimize functions (does not work for root finding). In many nonlinear problems, we would like to minimize (or maximize) a function. An ideal 2D example is shown in figure <a href="#fig:nlin:grad">9</a>. The algorithm moves in the direction of steepest descent. Note that the step size might change towards the search. </p>
 
 <center> <!-- figure label: --> <div id="fig:nlin:grad"></div> <!-- FIGURE -->
@@ -1246,29 +1246,29 @@ $$
 y_obs_ <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([<span style="color: #666666">1</span>, <span style="color: #666666">3</span>, <span style="color: #666666">2</span>, <span style="color: #666666">5</span>, <span style="color: #666666">7</span>, <span style="color: #666666">8</span>, <span style="color: #666666">8</span>, <span style="color: #666666">9</span>, <span style="color: #666666">10</span>, <span style="color: #666666">12</span>]) 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">plot_regression_line</span>(b,x<span style="color: #666666">=</span>x_obs_, y<span style="color: #666666">=</span>y_obs_): 
     <span style="color: #008000; font-weight: bold">global</span> N_
-    <span style="color: #3D7B7B; font-style: italic"># plotting the actual points as scatter plot </span>
+    <span style="color: #408080; font-style: italic"># plotting the actual points as scatter plot </span>
     plt<span style="color: #666666">.</span>scatter(x, y, color <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;m&quot;</span>, 
                marker <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;o&quot;</span>, s <span style="color: #666666">=</span> <span style="color: #666666">30</span>,label<span style="color: #666666">=</span><span style="color: #BA2121">&quot;data&quot;</span>) 
   
-    <span style="color: #3D7B7B; font-style: italic"># predicted response vector </span>
+    <span style="color: #408080; font-style: italic"># predicted response vector </span>
     y_pred <span style="color: #666666">=</span> b[<span style="color: #666666">0</span>] <span style="color: #666666">+</span> b[<span style="color: #666666">1</span>]<span style="color: #666666">*</span>x
   
-    <span style="color: #3D7B7B; font-style: italic"># plotting the regression line</span>
+    <span style="color: #408080; font-style: italic"># plotting the regression line</span>
     <span style="color: #008000; font-weight: bold">if</span>(<span style="color: #008000">len</span>(b)<span style="color: #666666">&gt;1</span>):
-<span style="color: #3D7B7B; font-style: italic">#        plt.plot(x, y_pred, color = &quot;g&quot;, label = &quot;R-squared = {0:.3f}&quot;.format(b[2]))</span>
-        plt<span style="color: #666666">.</span>plot(x, y_pred, color <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;g&quot;</span>, label <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;iteration:&quot;</span> <span style="color: #666666">+</span> <span style="color: #008000">str</span>(N_) <span style="color: #666666">+</span><span style="color: #BA2121">&quot;, (b[0],b[1])= (</span><span style="color: #A45A77; font-weight: bold">{0:.3f}</span><span style="color: #BA2121">&quot;</span><span style="color: #666666">.</span>format(b[<span style="color: #666666">0</span>]) <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;, </span><span style="color: #A45A77; font-weight: bold">{0:.3f}</span><span style="color: #BA2121">)&quot;</span><span style="color: #666666">.</span>format(b[<span style="color: #666666">1</span>]))
+<span style="color: #408080; font-style: italic">#        plt.plot(x, y_pred, color = &quot;g&quot;, label = &quot;R-squared = {0:.3f}&quot;.format(b[2]))</span>
+        plt<span style="color: #666666">.</span>plot(x, y_pred, color <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;g&quot;</span>, label <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;iteration:&quot;</span> <span style="color: #666666">+</span> <span style="color: #008000">str</span>(N_) <span style="color: #666666">+</span><span style="color: #BA2121">&quot;, (b[0],b[1])= (</span><span style="color: #BB6688; font-weight: bold">{0:.3f}</span><span style="color: #BA2121">&quot;</span><span style="color: #666666">.</span>format(b[<span style="color: #666666">0</span>]) <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;, </span><span style="color: #BB6688; font-weight: bold">{0:.3f}</span><span style="color: #BA2121">)&quot;</span><span style="color: #666666">.</span>format(b[<span style="color: #666666">1</span>]))
         plt<span style="color: #666666">.</span>legend()
     <span style="color: #008000; font-weight: bold">else</span>:
         plt<span style="color: #666666">.</span>plot(x, y_pred, color <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;g&quot;</span>)
   
-    <span style="color: #3D7B7B; font-style: italic"># putting labels </span>
+    <span style="color: #408080; font-style: italic"># putting labels </span>
     plt<span style="color: #666666">.</span>xlabel(<span style="color: #BA2121">&#39;x&#39;</span>) 
     plt<span style="color: #666666">.</span>ylabel(<span style="color: #BA2121">&#39;y&#39;</span>) 
     plt<span style="color: #666666">.</span>grid()
     plt<span style="color: #666666">.</span>legend()
-<span style="color: #3D7B7B; font-style: italic">#    plt.savefig(&#39;../fig-nlin/stdec&#39;+str(N_)+&#39;.png&#39;, bbox_inches=&#39;tight&#39;,transparent=True)</span>
+<span style="color: #408080; font-style: italic">#    plt.savefig(&#39;../fig-nlin/stdec&#39;+str(N_)+&#39;.png&#39;, bbox_inches=&#39;tight&#39;,transparent=True)</span>
     N_<span style="color: #666666">=</span>N_<span style="color: #666666">+1</span>  
-    <span style="color: #3D7B7B; font-style: italic"># function to show plot </span>
+    <span style="color: #408080; font-style: italic"># function to show plot </span>
     plt<span style="color: #666666">.</span>show() 
 
 
@@ -1343,7 +1343,7 @@ y_obs_ <span style="color: #666666">=</span> np<span style="color: #666666">.</s
     <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Try to increase MAXIT or decrease prec&#39;</span>)
     <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Returning best guess, value of function is: &#39;</span>, f(x_new))
     <span style="color: #008000; font-weight: bold">return</span> x_new
-<span style="color: #3D7B7B; font-style: italic">#end</span>
+<span style="color: #408080; font-style: italic">#end</span>
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">S</span>(b,x<span style="color: #666666">=</span>x_obs_,y<span style="color: #666666">=</span>y_obs_):
     <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>sum((y<span style="color: #666666">-</span>b[<span style="color: #666666">0</span>]<span style="color: #666666">-</span>b[<span style="color: #666666">1</span>]<span style="color: #666666">*</span>x)<span style="color: #666666">**2</span>)
@@ -1396,7 +1396,7 @@ b<span style="color: #666666">=</span>np<span style="color: #666666">.</span>arr
 <!-- --- end solution of exercise --- -->
 
 <!-- --- end exercise --- -->
-<h1 id="other-useful-methods" class="anchor">Other Useful Methods </h1>
+<h1 id="other-useful-methods" class="anchor">Other useful methods </h1>
 
 <p>In this chapter we have covered the <em>basic</em>, but you should now be well equipped to dive into other methods. We highly recommend <a href="#press2001">[1]</a> as a starting point, although the code examples are written in C++, the theory is presented in a very accurate, but informal way.</p>
 <ul>

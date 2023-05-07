@@ -8,9 +8,9 @@ doconce format html main_ode.do.txt CHAPTER=document BOOK=document APPENDIX=docu
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/doconce/doconce/" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="description" content="0D-systems and ordinary differential equations">
+<meta name="description" content="0D-systems and Ordinary Differential Equations">
 <meta name="keywords" content="continuous stirred tank reactor (CSTR),Eulers method,Eulers method, error analysis,Eulers method, adaptive step size,Runge-Kutta,Runge-Kutta, adaptive step size,adaptive step size,stiff equations,implicit method">
-<title>0D-systems and ordinary differential equations</title>
+<title>0D-systems and Ordinary Differential Equations</title>
 <!-- Bootstrap style: bootswatch_readable -->
 <!-- doconce format html main_ode.do.txt CHAPTER=document BOOK=document APPENDIX=document --html_style=bootswatch_readable --html_output=ode-readable --html_code_style=inherit -->
 <link href="https://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
@@ -43,30 +43,29 @@ code { color: inherit; background-color: transparent; }
                1,
                'table_of_contents',
                'table_of_contents'),
-              ('0D models', 1, None, '0d-models'),
-              ('Ordinary Differential Equations',
+              ('Ordinary differential equations',
                1,
                None,
                'ordinary-differential-equations'),
-              ('A Simple Model for Fluid Flow',
+              ('A simple model for fluid flow',
                1,
                None,
                'a-simple-model-for-fluid-flow'),
-              ('Eulers Method', 1, None, 'eulers-method'),
-              ('Error Analysis - Eulers Method',
+              ("Euler's method", 1, None, 'euler-s-method'),
+              ("Error analysis - Euler's method",
                2,
                None,
-               'error-analysis-eulers-method'),
-              ('Adaptive step size - Eulers Method',
+               'error-analysis-euler-s-method'),
+              ("Adaptive step size - Euler's method",
                2,
                None,
-               'adaptive-step-size-eulers-method'),
-              ('Runge-Kutta Methods', 1, None, 'runge-kutta-methods'),
-              ('Adaptive step size - Runge-Kutta Method',
+               'adaptive-step-size-euler-s-method'),
+              ('Runge-Kutta methods', 1, None, 'runge-kutta-methods'),
+              ('Adaptive step size - Runge-Kutta method',
                2,
                None,
                'adaptive-step-size-runge-kutta-method'),
-              ('Conservation of Mass', 2, None, 'conservation-of-mass'),
+              ('Conservation of mass', 2, None, 'conservation-of-mass'),
               ('Solving a set of ODE equations',
                1,
                None,
@@ -75,10 +74,10 @@ code { color: inherit; background-color: transparent; }
                1,
                None,
                'stiff-sets-of-ode-and-implicit-methods'),
-              ('Exercise 1: Truncation Error in Eulers Method',
+              ("Exercise 1: Truncation error in Euler's method",
                2,
                None,
-               'exercise-1-truncation-error-in-eulers-method')]}
+               'exercise-1-truncation-error-in-euler-s-method')]}
 end of tocinfo -->
 
 <body>
@@ -106,7 +105,7 @@ MathJax.Hub.Config({
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="ode-readable.html">0D-systems and ordinary differential equations</a>
+    <a class="navbar-brand" href="ode-readable.html">0D-systems and Ordinary Differential Equations</a>
   </div>
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav navbar-right">
@@ -114,18 +113,17 @@ MathJax.Hub.Config({
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
      <!-- navigation toc: --> <li><a href="#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
-     <!-- navigation toc: --> <li><a href="#0d-models" style="font-size: 80%;"><b>0D models</b></a></li>
-     <!-- navigation toc: --> <li><a href="#ordinary-differential-equations" style="font-size: 80%;"><b>Ordinary Differential Equations</b></a></li>
-     <!-- navigation toc: --> <li><a href="#a-simple-model-for-fluid-flow" style="font-size: 80%;"><b>A Simple Model for Fluid Flow</b></a></li>
-     <!-- navigation toc: --> <li><a href="#eulers-method" style="font-size: 80%;"><b>Eulers Method</b></a></li>
-     <!-- navigation toc: --> <li><a href="#error-analysis-eulers-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Error Analysis - Eulers Method</a></li>
-     <!-- navigation toc: --> <li><a href="#adaptive-step-size-eulers-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Adaptive step size - Eulers Method</a></li>
-     <!-- navigation toc: --> <li><a href="#runge-kutta-methods" style="font-size: 80%;"><b>Runge-Kutta Methods</b></a></li>
-     <!-- navigation toc: --> <li><a href="#adaptive-step-size-runge-kutta-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Adaptive step size - Runge-Kutta Method</a></li>
-     <!-- navigation toc: --> <li><a href="#conservation-of-mass" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Conservation of Mass</a></li>
+     <!-- navigation toc: --> <li><a href="#ordinary-differential-equations" style="font-size: 80%;"><b>Ordinary differential equations</b></a></li>
+     <!-- navigation toc: --> <li><a href="#a-simple-model-for-fluid-flow" style="font-size: 80%;"><b>A simple model for fluid flow</b></a></li>
+     <!-- navigation toc: --> <li><a href="#euler-s-method" style="font-size: 80%;"><b>Euler's method</b></a></li>
+     <!-- navigation toc: --> <li><a href="#error-analysis-euler-s-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Error analysis - Euler's method</a></li>
+     <!-- navigation toc: --> <li><a href="#adaptive-step-size-euler-s-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Adaptive step size - Euler's method</a></li>
+     <!-- navigation toc: --> <li><a href="#runge-kutta-methods" style="font-size: 80%;"><b>Runge-Kutta methods</b></a></li>
+     <!-- navigation toc: --> <li><a href="#adaptive-step-size-runge-kutta-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Adaptive step size - Runge-Kutta method</a></li>
+     <!-- navigation toc: --> <li><a href="#conservation-of-mass" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Conservation of mass</a></li>
      <!-- navigation toc: --> <li><a href="#solving-a-set-of-ode-equations" style="font-size: 80%;"><b>Solving a set of ODE equations</b></a></li>
      <!-- navigation toc: --> <li><a href="#stiff-sets-of-ode-and-implicit-methods" style="font-size: 80%;"><b>Stiff sets of ODE  and implicit methods</b></a></li>
-     <!-- navigation toc: --> <li><a href="#exercise-1-truncation-error-in-eulers-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 1: Truncation Error in Eulers Method</a></li>
+     <!-- navigation toc: --> <li><a href="#exercise-1-truncation-error-in-euler-s-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 1: Truncation error in Euler's method</a></li>
 
         </ul>
       </li>
@@ -139,7 +137,7 @@ MathJax.Hub.Config({
 <!-- ------------------- main content ---------------------- -->
 <div class="jumbotron">
 <center>
-<h1>0D-systems and ordinary differential equations </h1>
+<h1>0D-systems and Ordinary Differential Equations </h1>
 </center>  <!-- document title -->
 
 <!-- author(s): Aksel Hiorth -->
@@ -150,7 +148,7 @@ MathJax.Hub.Config({
 <br>
 <p>University of Stavanger
 <center>
-<h4>Apr 4, 2023</h4>
+<h4>May 7, 2023</h4>
 </center> <!-- date -->
 <br>
 </p>
@@ -160,25 +158,22 @@ MathJax.Hub.Config({
 <h1 id="table_of_contents">Table of contents</h1>
 
 <div class='toc'>
-<p><a href="#0d-models"> 0D models </a></p>
-<p><a href="#ordinary-differential-equations"> Ordinary Differential Equations </a></p>
-<p><a href="#a-simple-model-for-fluid-flow"> A Simple Model for Fluid Flow </a></p>
-<p><a href="#eulers-method"> Eulers Method </a></p>
-<p><span class="tab"> <a href="#error-analysis-eulers-method"> Error Analysis - Eulers Method </a></p>
-<p><span class="tab"> <a href="#adaptive-step-size-eulers-method"> Adaptive step size - Eulers Method </a></p>
-<p><a href="#runge-kutta-methods"> Runge-Kutta Methods </a></p>
-<p><span class="tab"> <a href="#adaptive-step-size-runge-kutta-method"> Adaptive step size - Runge-Kutta Method </a></p>
-<p><span class="tab"> <a href="#conservation-of-mass"> Conservation of Mass </a></p>
+<p><a href="#ordinary-differential-equations"> Ordinary differential equations </a></p>
+<p><a href="#a-simple-model-for-fluid-flow"> A simple model for fluid flow </a></p>
+<p><a href="#euler-s-method"> Euler's method </a></p>
+<p><span class="tab"> <a href="#error-analysis-euler-s-method"> Error analysis - Euler's method </a></p>
+<p><span class="tab"> <a href="#adaptive-step-size-euler-s-method"> Adaptive step size - Euler's method </a></p>
+<p><a href="#runge-kutta-methods"> Runge-Kutta methods </a></p>
+<p><span class="tab"> <a href="#adaptive-step-size-runge-kutta-method"> Adaptive step size - Runge-Kutta method </a></p>
+<p><span class="tab"> <a href="#conservation-of-mass"> Conservation of mass </a></p>
 <p><a href="#solving-a-set-of-ode-equations"> Solving a set of ODE equations </a></p>
 <p><a href="#stiff-sets-of-ode-and-implicit-methods"> Stiff sets of ODE  and implicit methods </a></p>
-<p><span class="tab"> <a href="#exercise-1-truncation-error-in-eulers-method"> Exercise 1: Truncation Error in Eulers Method </a></p>
+<p><span class="tab"> <a href="#exercise-1-truncation-error-in-euler-s-method"> Exercise 1: Truncation error in Euler's method </a></p>
 </div>
 <br>
 
 <!-- Common Mako variables and functions -->
-<h1 id="0d-models" class="anchor">0D models </h1>
-<p>By 0D models we mean models that are only dependent on one variable, usually time. These models are often called "lumped parameter models", because they ignore spatial dependency and the parameters in the model are adjusted to match experimental data. In many cases it is more important to predict how a system evolves in time, than the spatial dependency. A very recent example is the spread of infectious deceases, like Covid-19, where the evolution of total number of infected people might be the most important and not where the infection happens. </p>
-<h1 id="ordinary-differential-equations" class="anchor">Ordinary Differential Equations </h1>
+<h1 id="ordinary-differential-equations" class="anchor">Ordinary differential equations </h1>
 <p>Physical systems evolves in space and time, and very often they are described by a ordinary differential equations (ODE) and/or
 partial differential equations (PDE). The difference between an ODE and a PDE is that an ODE only describes 
 the changes in one spatial dimension <em>or</em> time, whereas a PDE describes a system that evolves in the \( x- \), \( y- \), \( z- \) dimension 
@@ -192,7 +187,7 @@ investigate when the algorithm run into trouble and
 suggests ways to fix it, these approaches can easily be extended to the higher order methods. Most of the other algorithms boils down to the same idea of extrapolating
 a function using derivatives multiplied with a small step size.  
 </p>
-<h1 id="a-simple-model-for-fluid-flow" class="anchor">A Simple Model for Fluid Flow </h1>
+<h1 id="a-simple-model-for-fluid-flow" class="anchor">A simple model for fluid flow </h1>
 <p>Let us consider a simple example from chemical engineering, a continuous stirred tank reactor (CSTR), see figure <a href="#fig:ode:cstr">1</a>. 
 The flow is incompressible (\( q_\text{out}=q_\text{in} \)), a fluid is entering
 on the top and exiting at the bottom, the tank has a fixed volume \( V \). Assume that the tank is filled with saltwater, and that freshwater is pumped into it, how much time does it 
@@ -269,7 +264,7 @@ uniformly.
 </p>
 </div>
 
-<h1 id="eulers-method" class="anchor">Eulers Method </h1>
+<h1 id="euler-s-method" class="anchor">Euler's method </h1>
 <p>If the system gets slightly more complicated, e.g several tanks in series with a varying flow rate or if salt was generated in the tank, there is a
 good chance that we have to solve the equations numerically to obtain a solution.
 Actually, we have already developed a numerical algorithm to solve equation <a href="#mjx-eqn-3">(3)</a>, 
@@ -309,8 +304,8 @@ $$
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">ode_solv</span>(c_into,c_init,t_final,vol,q,dt):
     f<span style="color: #666666">=</span>[];t<span style="color: #666666">=</span>[]
     tau_inv <span style="color: #666666">=</span> q<span style="color: #666666">/</span>vol
-    c_in    <span style="color: #666666">=</span> c_into <span style="color: #3D7B7B; font-style: italic">#freshwater into tank</span>
-    c_old   <span style="color: #666666">=</span> c_init <span style="color: #3D7B7B; font-style: italic">#seawater present </span>
+    c_in    <span style="color: #666666">=</span> c_into <span style="color: #408080; font-style: italic">#freshwater into tank</span>
+    c_old   <span style="color: #666666">=</span> c_init <span style="color: #408080; font-style: italic">#seawater present </span>
     ti<span style="color: #666666">=0.</span>
     <span style="color: #008000; font-weight: bold">while</span>(ti <span style="color: #666666">&lt;=</span> t_final):
         t<span style="color: #666666">.</span>append(ti); f<span style="color: #666666">.</span>append(c_old)
@@ -346,7 +341,7 @@ $$
 Clearly we see that the results are dependent on the step size, as the step increases the numerical solution deviates from the analytical solution. At some point the 
 numerical algorithm fails completely, and produces results that have no meaning. 
 </p>
-<h2 id="error-analysis-eulers-method" class="anchor">Error Analysis - Eulers Method </h2>
+<h2 id="error-analysis-euler-s-method" class="anchor">Error analysis - Euler's method </h2>
 <p>There are two obvious questions:</p>
 <ol>
 <li> When does the algorithm produce unphysical results?</li>  
@@ -551,7 +546,7 @@ In most practical situations you would
 specify a local error that is acceptable for the problem under investigation and then choose a step size where the local error always is lower than this value. In the 
 next subsection we will investigate how to achieve this in practice.
 </p>
-<h2 id="adaptive-step-size-eulers-method" class="anchor">Adaptive step size - Eulers Method </h2>
+<h2 id="adaptive-step-size-euler-s-method" class="anchor">Adaptive step size - Euler's method </h2>
 <p>We want to be sure that we use a step size that achieves a certain accuracy in our numerical solution, but at
 the same time that we do not waste simulation time using a too low step size. The following approach is similar to the one we derived for the Romberg integration, and
 a special case of what is known as Richardson Extrapolation. The method is easily extended to higher order methods. 
@@ -639,27 +634,27 @@ $$
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">adaptive_euler</span>(c_into,c_init,t_final,tol<span style="color: #666666">=1e-4</span>):
     f<span style="color: #666666">=</span>[];t<span style="color: #666666">=</span>[]
-    c_in    <span style="color: #666666">=</span> c_into <span style="color: #3D7B7B; font-style: italic">#freshwater into tank</span>
-    c_old   <span style="color: #666666">=</span> c_init <span style="color: #3D7B7B; font-style: italic">#seawater present </span>
+    c_in    <span style="color: #666666">=</span> c_into <span style="color: #408080; font-style: italic">#freshwater into tank</span>
+    c_old   <span style="color: #666666">=</span> c_init <span style="color: #408080; font-style: italic">#seawater present </span>
     ti<span style="color: #666666">=0.</span>; h_new<span style="color: #666666">=1e-3</span>;
     no_steps<span style="color: #666666">=0</span>
     global_err<span style="color: #666666">=0.</span>
     <span style="color: #008000; font-weight: bold">while</span>(ti <span style="color: #666666">&lt;=</span> t_final):
         t<span style="color: #666666">.</span>append(ti); f<span style="color: #666666">.</span>append(c_old)
-        toli<span style="color: #666666">=10.*</span>tol; <span style="color: #3D7B7B; font-style: italic"># a high init tolerance to enter while loop</span>
-        <span style="color: #008000; font-weight: bold">while</span>(toli<span style="color: #666666">&gt;</span>tol):<span style="color: #3D7B7B; font-style: italic"># first two small steps</span>
+        toli<span style="color: #666666">=10.*</span>tol; <span style="color: #408080; font-style: italic"># a high init tolerance to enter while loop</span>
+        <span style="color: #008000; font-weight: bold">while</span>(toli<span style="color: #666666">&gt;</span>tol):<span style="color: #408080; font-style: italic"># first two small steps</span>
             hi<span style="color: #666666">=</span>h_new
             k1 <span style="color: #666666">=</span> one_step(c_old,c_in,hi<span style="color: #666666">*.5</span>)
             k2 <span style="color: #666666">=</span> one_step(k1,c_in,hi<span style="color: #666666">*.5</span>)
-            <span style="color: #3D7B7B; font-style: italic"># ... and one large step</span>
+            <span style="color: #408080; font-style: italic"># ... and one large step</span>
             k3 <span style="color: #666666">=</span> one_step(c_old,c_in,hi)
             toli <span style="color: #666666">=</span> <span style="color: #008000">abs</span>(k3<span style="color: #666666">-</span>k2)
             h_new<span style="color: #666666">=</span>hi<span style="color: #666666">*</span>np<span style="color: #666666">.</span>sqrt(tol<span style="color: #666666">/</span>toli)
             no_steps<span style="color: #666666">+=3</span>
         toli<span style="color: #666666">=1.</span>
-        c_old<span style="color: #666666">=2*</span>k2<span style="color: #666666">-</span>k3 <span style="color: #3D7B7B; font-style: italic"># higher order correction</span>
- <span style="color: #3D7B7B; font-style: italic"># normal Euler, uncomment and inspect the global error</span>
- <span style="color: #3D7B7B; font-style: italic">#       c_old = k2 </span>
+        c_old<span style="color: #666666">=2*</span>k2<span style="color: #666666">-</span>k3 <span style="color: #408080; font-style: italic"># higher order correction</span>
+ <span style="color: #408080; font-style: italic"># normal Euler, uncomment and inspect the global error</span>
+ <span style="color: #408080; font-style: italic">#       c_old = k2 </span>
         ti   <span style="color: #666666">+=</span> hi
         global_err <span style="color: #666666">+=</span> <span style="color: #008000">abs</span>(np<span style="color: #666666">.</span>exp(<span style="color: #666666">-</span>ti)<span style="color: #666666">-</span>c_old)
     <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;No steps=&quot;</span>, no_steps, <span style="color: #BA2121">&quot;Global Error=&quot;</span>, global_err)
@@ -701,7 +696,7 @@ value, and then another possibility would be to have an \( \epsilon^\prime \) th
 </p>
 </div>
 
-<h1 id="runge-kutta-methods" class="anchor">Runge-Kutta Methods </h1>
+<h1 id="runge-kutta-methods" class="anchor">Runge-Kutta methods </h1>
 
 <center> <!-- figure label: --> <div id="fig:ode:rk"></div> <!-- FIGURE -->
 <hr class="figure">
@@ -773,8 +768,8 @@ $$
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">ode_solv</span>(c_into,c_init,t_final,h):
     f<span style="color: #666666">=</span>[];t<span style="color: #666666">=</span>[]
-    c_in  <span style="color: #666666">=</span> c_into <span style="color: #3D7B7B; font-style: italic">#freshwater into tank</span>
-    c_old <span style="color: #666666">=</span> c_init <span style="color: #3D7B7B; font-style: italic">#seawater present </span>
+    c_in  <span style="color: #666666">=</span> c_into <span style="color: #408080; font-style: italic">#freshwater into tank</span>
+    c_old <span style="color: #666666">=</span> c_init <span style="color: #408080; font-style: italic">#seawater present </span>
     ti<span style="color: #666666">=0.</span>
     <span style="color: #008000; font-weight: bold">while</span>(ti <span style="color: #666666">&lt;=</span> t_final):
         t<span style="color: #666666">.</span>append(ti); f<span style="color: #666666">.</span>append(c_old)
@@ -844,7 +839,7 @@ $$
 </center>
 
 <!-- % endif -->
-<h2 id="adaptive-step-size-runge-kutta-method" class="anchor">Adaptive step size - Runge-Kutta Method </h2>
+<h2 id="adaptive-step-size-runge-kutta-method" class="anchor">Adaptive step size - Runge-Kutta method </h2>
 <p>Just as we did with Eulers method, we can implement an adaptive method. The derivation is exactly the same, but this time our method is accurate to
 fourth order, hence the error term is of order \( h^5 \). We start by taking one large step of size \( h \), our estimate, \( y_1^* \) is related to the true 
 solution, \( y(t_1) \), in the following way:
@@ -926,7 +921,7 @@ the method breaks down. This can happens when \( \epsilon \) is very low, which 
 </p>
 </div>
 
-<h2 id="conservation-of-mass" class="anchor">Conservation of Mass </h2>
+<h2 id="conservation-of-mass" class="anchor">Conservation of mass </h2>
 <p>A mathematical model of a physical system should always be formulated in such a way that it is
 consistent with the laws of nature. In practical situations this statement is usually equivalent to state that
 the mathematical model should respect conservation laws. The conservation laws can be conservation of mass, energy, momentum, 
@@ -1276,7 +1271,7 @@ $$
 <!-- % endif -->
 
 <!-- --- begin exercise --- -->
-<h2 id="exercise-1-truncation-error-in-eulers-method" class="anchor">Exercise 1: Truncation Error in Eulers Method </h2>
+<h2 id="exercise-1-truncation-error-in-euler-s-method" class="anchor">Exercise 1: Truncation error in Euler's method </h2>
 
 <p>In the following we will take a closer look at the adaptive Eulers algorithm and show that the 
 constant \( c \) is indeed the same in equation <a href="#mjx-eqn-18">(18)</a> and <a href="#mjx-eqn-19">(19)</a>. 

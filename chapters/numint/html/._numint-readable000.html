@@ -44,29 +44,29 @@ code { color: inherit; background-color: transparent; }
                'table_of_contents',
                'table_of_contents'),
               ('Algorithmic thinking', 1, None, 'algorithmic-thinking'),
-              ('The Midpoint Rule', 2, None, 'the-midpoint-rule'),
-              ('The Trapezoidal Rule', 2, None, 'the-trapezoidal-rule'),
-              ('Numerical Errors on Integrals',
+              ('The midpoint rule', 2, None, 'the-midpoint-rule'),
+              ('The trapezoidal rule', 2, None, 'the-trapezoidal-rule'),
+              ('Numerical errors on integrals',
                2,
                None,
                'numerical-errors-on-integrals'),
-              ('Practical Estimation of Errors on Integrals (Richardson '
-               'Extrapolation)',
+              ('Practical estimation of errors on integrals (Richardson '
+               'extrapolation)',
                2,
                None,
                'practical-estimation-of-errors-on-integrals-richardson-extrapolation'),
-              ('Romberg Integration', 1, None, 'romberg-integration'),
+              ('Romberg integration', 1, None, 'romberg-integration'),
               ('Alternative implementation of adaptive integration',
                2,
                None,
                'alternative-implementation-of-adaptive-integration'),
-              ('Gaussian Quadrature', 1, None, 'gaussian-quadrature'),
+              ('Gaussian quadrature', 1, None, 'gaussian-quadrature'),
               ('The case N=3', 3, None, 'the-case-n-3'),
-              ('Error term on Gaussian Integration',
+              ('Error term on Gaussian integration',
                2,
                None,
                'error-term-on-gaussian-integration'),
-              ('Common Weight functions for Classical Gaussian Quadratures',
+              ('Common weight functions for classical Gaussian quadratures',
                2,
                None,
                'common-weight-functions-for-classical-gaussian-quadratures'),
@@ -115,16 +115,16 @@ MathJax.Hub.Config({
         <ul class="dropdown-menu">
      <!-- navigation toc: --> <li><a href="#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
      <!-- navigation toc: --> <li><a href="#algorithmic-thinking" style="font-size: 80%;"><b>Algorithmic thinking</b></a></li>
-     <!-- navigation toc: --> <li><a href="#the-midpoint-rule" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The Midpoint Rule</a></li>
-     <!-- navigation toc: --> <li><a href="#the-trapezoidal-rule" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The Trapezoidal Rule</a></li>
-     <!-- navigation toc: --> <li><a href="#numerical-errors-on-integrals" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Numerical Errors on Integrals</a></li>
-     <!-- navigation toc: --> <li><a href="#practical-estimation-of-errors-on-integrals-richardson-extrapolation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Practical Estimation of Errors on Integrals (Richardson Extrapolation)</a></li>
-     <!-- navigation toc: --> <li><a href="#romberg-integration" style="font-size: 80%;"><b>Romberg Integration</b></a></li>
+     <!-- navigation toc: --> <li><a href="#the-midpoint-rule" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The midpoint rule</a></li>
+     <!-- navigation toc: --> <li><a href="#the-trapezoidal-rule" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The trapezoidal rule</a></li>
+     <!-- navigation toc: --> <li><a href="#numerical-errors-on-integrals" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Numerical errors on integrals</a></li>
+     <!-- navigation toc: --> <li><a href="#practical-estimation-of-errors-on-integrals-richardson-extrapolation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Practical estimation of errors on integrals (Richardson extrapolation)</a></li>
+     <!-- navigation toc: --> <li><a href="#romberg-integration" style="font-size: 80%;"><b>Romberg integration</b></a></li>
      <!-- navigation toc: --> <li><a href="#alternative-implementation-of-adaptive-integration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Alternative implementation of adaptive integration</a></li>
-     <!-- navigation toc: --> <li><a href="#gaussian-quadrature" style="font-size: 80%;"><b>Gaussian Quadrature</b></a></li>
+     <!-- navigation toc: --> <li><a href="#gaussian-quadrature" style="font-size: 80%;"><b>Gaussian quadrature</b></a></li>
      <!-- navigation toc: --> <li><a href="#the-case-n-3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The case N=3</a></li>
-     <!-- navigation toc: --> <li><a href="#error-term-on-gaussian-integration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Error term on Gaussian Integration</a></li>
-     <!-- navigation toc: --> <li><a href="#common-weight-functions-for-classical-gaussian-quadratures" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Common Weight functions for Classical Gaussian Quadratures</a></li>
+     <!-- navigation toc: --> <li><a href="#error-term-on-gaussian-integration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Error term on Gaussian integration</a></li>
+     <!-- navigation toc: --> <li><a href="#common-weight-functions-for-classical-gaussian-quadratures" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Common weight functions for classical Gaussian quadratures</a></li>
      <!-- navigation toc: --> <li><a href="#integrating-functions-over-an-infinite-range" style="font-size: 80%;"><b>Integrating functions over an infinite range</b></a></li>
      <!-- navigation toc: --> <li><a href="#exercise-1-numerical-integration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 1: Numerical Integration</a></li>
      <!-- navigation toc: --> <li><a href="#references" style="font-size: 80%;"><b>References</b></a></li>
@@ -152,7 +152,7 @@ MathJax.Hub.Config({
 <br>
 <p>University of Stavanger
 <center>
-<h4>Apr 4, 2023</h4>
+<h4>May 7, 2023</h4>
 </center> <!-- date -->
 <br>
 </p>
@@ -163,15 +163,15 @@ MathJax.Hub.Config({
 
 <div class='toc'>
 <p><a href="#algorithmic-thinking"> Algorithmic thinking </a></p>
-<p><span class="tab"> <a href="#the-midpoint-rule"> The Midpoint Rule </a></p>
-<p><span class="tab"> <a href="#the-trapezoidal-rule"> The Trapezoidal Rule </a></p>
-<p><span class="tab"> <a href="#numerical-errors-on-integrals"> Numerical Errors on Integrals </a></p>
-<p><span class="tab"> <a href="#practical-estimation-of-errors-on-integrals-richardson-extrapolation"> Practical Estimation of Errors on Integrals (Richardson Extrapolation) </a></p>
-<p><a href="#romberg-integration"> Romberg Integration </a></p>
+<p><span class="tab"> <a href="#the-midpoint-rule"> The midpoint rule </a></p>
+<p><span class="tab"> <a href="#the-trapezoidal-rule"> The trapezoidal rule </a></p>
+<p><span class="tab"> <a href="#numerical-errors-on-integrals"> Numerical errors on integrals </a></p>
+<p><span class="tab"> <a href="#practical-estimation-of-errors-on-integrals-richardson-extrapolation"> Practical estimation of errors on integrals (Richardson extrapolation) </a></p>
+<p><a href="#romberg-integration"> Romberg integration </a></p>
 <p><span class="tab"> <a href="#alternative-implementation-of-adaptive-integration"> Alternative implementation of adaptive integration </a></p>
-<p><a href="#gaussian-quadrature"> Gaussian Quadrature </a></p>
-<p><span class="tab"> <a href="#error-term-on-gaussian-integration"> Error term on Gaussian Integration </a></p>
-<p><span class="tab"> <a href="#common-weight-functions-for-classical-gaussian-quadratures"> Common Weight functions for Classical Gaussian Quadratures </a></p>
+<p><a href="#gaussian-quadrature"> Gaussian quadrature </a></p>
+<p><span class="tab"> <a href="#error-term-on-gaussian-integration"> Error term on Gaussian integration </a></p>
+<p><span class="tab"> <a href="#common-weight-functions-for-classical-gaussian-quadratures"> Common weight functions for classical Gaussian quadratures </a></p>
 <p><a href="#integrating-functions-over-an-infinite-range"> Integrating functions over an infinite range  </a></p>
 <p><span class="tab"> <a href="#exercise-1-numerical-integration"> Exercise 1: Numerical Integration </a></p>
 <p><a href="#references"> References </a></p>
@@ -181,7 +181,9 @@ MathJax.Hub.Config({
 <!-- Common Mako variables and functions -->
 <h1 id="algorithmic-thinking" class="anchor">Algorithmic thinking </h1>
 
-<p>The only way to improve in coding and algorithmic thinking is practice. The concept of one dimensional numerical integration is easy to understand, i.e. to calculate the area under a curve. In this chapter we will implement several numerical methods, and it will serve as a very simple playground that illustrates the key aspects of numerical modeling</p>
+<p>The only way to improve in coding and algorithmic thinking is practice. The concept of numerical integration is easy to understand, i.e. to calculate the area under a curve. In practice numerical integration is often used to estimate expectation values. In this chapter we will implement several numerical methods, a
+Before diving into the details of this section, it is worth pointing out that the derivation of the algorithms in this section follows a general pattern:
+</p>
 
 <ol>
 <li> We start with a mathematical model (in this case an integral)</li>
@@ -190,8 +192,11 @@ MathJax.Hub.Config({
 <li> The numerical solution for a test case is compared with the true solution (could be an analytical solution or data)</li>
 <li> Error analysis: we investigate the accuracy of the algorithm by changing the number of iterations and/or make changes to the implementation or algorithm</li>
 </ol>
-<p>The main point of this chapter is not to develop your own integration methods, the built in methods in Scipy will work in most cases. However, the way to break down the main task of calculating an integral into smaller tasks that is understandable by a computer, may work as a template for many different problems you would typically solve using a computer. A second motivation is that by analyzing the origin of numerical errors gives ideas for improving the algorithm, which is transferable to other problems.      </p>
-<h2 id="the-midpoint-rule" class="anchor">The Midpoint Rule </h2>
+<p>In many cases you would not use your own implementation to calculate an integral, but in order to understand which method to use 
+in a specific case, it is important to understand the limitation and advantages of the different algorithms. The only way to achieve this is to 
+have a basic understanding of the development. There might also be some cases where you would like to adapt an integration scheme to your specific needs. 
+</p>
+<h2 id="the-midpoint-rule" class="anchor">The midpoint rule </h2>
 <p>Numerical integration is encountered in numerous applications in physics and engineering sciences. 
 Let us first consider the most simple case, a function \( f(x) \), which is a function of one variable, \( x \). The most straight forward way of calculating the area \( \int_a^bf(x)dx \) is 
 simply to divide the area under the function into \( N \) equal rectangular slices with size \( h=(b-a)/N \), as illustrated in figure <a href="#fig:numint:mid">1</a>. The area of one box is:
@@ -233,7 +238,7 @@ therefore we choose the convention of having the first element to start at \( k=
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
-<span style="color: #3D7B7B; font-style: italic"># Function to be integrated</span>
+<span style="color: #408080; font-style: italic"># Function to be integrated</span>
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
     <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>sin(x)
 
@@ -250,7 +255,7 @@ a<span style="color: #666666">=0</span>
 b<span style="color: #666666">=</span>np<span style="color: #666666">.</span>pi
 Area <span style="color: #666666">=</span> midpoint(f,a,b,N)
 <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Numerical value= &#39;</span>, Area)
-<span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Error= &#39;</span>, (<span style="color: #666666">2-</span>Area)) <span style="color: #3D7B7B; font-style: italic"># Analytical result is 2</span>
+<span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Error= &#39;</span>, (<span style="color: #666666">2-</span>Area)) <span style="color: #408080; font-style: italic"># Analytical result is 2</span>
 </pre>
 </div>
       </div>
@@ -276,8 +281,8 @@ Area <span style="color: #666666">=</span> midpoint(f,a,b,N)
     <div class="inner_cell">
       <div class="input_area">
         <div class="highlight" style="background: #ffffff">
-  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>,N): <span style="color: #3D7B7B; font-style: italic"># loop over k=0,1,..,N-1</span>
-    val <span style="color: #666666">=</span> lower_limit<span style="color: #666666">+</span>(k<span style="color: #666666">+0.5</span>)<span style="color: #666666">*</span>h <span style="color: #3D7B7B; font-style: italic"># midpoint value</span>
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>,N): <span style="color: #408080; font-style: italic"># loop over k=0,1,..,N-1</span>
+    val <span style="color: #666666">=</span> lower_limit<span style="color: #666666">+</span>(k<span style="color: #666666">+0.5</span>)<span style="color: #666666">*</span>h <span style="color: #408080; font-style: italic"># midpoint value</span>
     area <span style="color: #666666">+=</span> func(val)
 <span style="color: #008000; font-weight: bold">return</span> area<span style="color: #666666">*</span>h
 </pre>
@@ -296,7 +301,7 @@ Area <span style="color: #666666">=</span> midpoint(f,a,b,N)
 </div>
 </div>
 
-<h2 id="the-trapezoidal-rule" class="anchor">The Trapezoidal Rule </h2>
+<h2 id="the-trapezoidal-rule" class="anchor">The trapezoidal rule </h2>
 <p>The numerical error in the above example is quite low, only about 2$\%$ for \( N=5 \). 
 However, by just looking at the graph above it seems likely that we can develop a better algorithm by using trapezoids instead of rectangles, 
 see figure <a href="#fig:numint:trap">2</a>.
@@ -387,7 +392,7 @@ How can this be explained? By just looking at figure <a href="#fig:numint:mid">1
  and under predicts in the interval \( [x_k+h/2,x_{k+1}] \) or vice versa. The net effect is that for many cases the midpoint rule give a slightly better 
  performance than the trapezoidal rule. In the next section we will investigate this more formally.
 </p>
-<h2 id="numerical-errors-on-integrals" class="anchor">Numerical Errors on Integrals </h2>
+<h2 id="numerical-errors-on-integrals" class="anchor">Numerical errors on integrals </h2>
 <p>It is important to know the accuracy of the methods we are using, otherwise we do not know if the
 computer produce correct results. In the previous examples we were able to estimate the error because we knew the analytical result. However, if we know the 
 analytical result there is no reason to use the computer to calculate the result(!). Thus, we need a general method to estimate the error, and let the computer 
@@ -481,7 +486,7 @@ E_T\simeq \frac{h^2}{12}\left[f^\prime(b)-f^\prime(a)\right]=\frac{(b-a)^2}{12N^
 \tag{14}
 \end{equation}
 $$
-<h2 id="practical-estimation-of-errors-on-integrals-richardson-extrapolation" class="anchor">Practical Estimation of Errors on Integrals (Richardson Extrapolation) </h2>
+<h2 id="practical-estimation-of-errors-on-integrals-richardson-extrapolation" class="anchor">Practical estimation of errors on integrals (Richardson extrapolation) </h2>
 <div id="sec:numint:parct"></div>
 <p>From the example above we were able to estimate the number of steps needed to reach (at least) a certain precision. 
 In many practical cases we do not deal with functions, but with data and it can be difficult to evaluate the derivative. 
@@ -583,14 +588,14 @@ A possible algorithm is then:
     iterations<span style="color: #666666">=0</span>
     <span style="color: #008000; font-weight: bold">while</span> S:
         iterations <span style="color: #666666">+=1</span>
-        a,b<span style="color: #666666">=</span>S<span style="color: #666666">.</span>pop(<span style="color: #666666">-1</span>) <span style="color: #3D7B7B; font-style: italic"># last element</span>
-        m<span style="color: #666666">=</span>(b<span style="color: #666666">+</span>a)<span style="color: #666666">*0.5</span>   <span style="color: #3D7B7B; font-style: italic"># midpoint</span>
-        I1<span style="color: #666666">=0.5*</span>(b<span style="color: #666666">-</span>a)<span style="color: #666666">*</span>(func(a)<span style="color: #666666">+</span>func(b)) <span style="color: #3D7B7B; font-style: italic">#trapezoidal for 1 interval </span>
-        I2<span style="color: #666666">=0.25*</span>(b<span style="color: #666666">-</span>a)<span style="color: #666666">*</span>(func(a)<span style="color: #666666">+</span>func(b)<span style="color: #666666">+2*</span>func(m)) <span style="color: #3D7B7B; font-style: italic">#trapezoidal for 2 intervals</span>
+        a,b<span style="color: #666666">=</span>S<span style="color: #666666">.</span>pop(<span style="color: #666666">-1</span>) <span style="color: #408080; font-style: italic"># last element</span>
+        m<span style="color: #666666">=</span>(b<span style="color: #666666">+</span>a)<span style="color: #666666">*0.5</span>   <span style="color: #408080; font-style: italic"># midpoint</span>
+        I1<span style="color: #666666">=0.5*</span>(b<span style="color: #666666">-</span>a)<span style="color: #666666">*</span>(func(a)<span style="color: #666666">+</span>func(b)) <span style="color: #408080; font-style: italic">#trapezoidal for 1 interval </span>
+        I2<span style="color: #666666">=0.25*</span>(b<span style="color: #666666">-</span>a)<span style="color: #666666">*</span>(func(a)<span style="color: #666666">+</span>func(b)<span style="color: #666666">+2*</span>func(m)) <span style="color: #408080; font-style: italic">#trapezoidal for 2 intervals</span>
         <span style="color: #008000; font-weight: bold">if</span>(np<span style="color: #666666">.</span>abs(I1<span style="color: #666666">-</span>I2)<span style="color: #666666">&lt;3*</span>np<span style="color: #666666">.</span>abs((b<span style="color: #666666">-</span>a)<span style="color: #666666">*</span>tol)):
-            I<span style="color: #666666">+=</span>I2     <span style="color: #3D7B7B; font-style: italic"># accuarcy met</span>
+            I<span style="color: #666666">+=</span>I2     <span style="color: #408080; font-style: italic"># accuarcy met</span>
         <span style="color: #008000; font-weight: bold">else</span>:
-            S<span style="color: #666666">.</span>append([a,m]) <span style="color: #3D7B7B; font-style: italic"># half the interval </span>
+            S<span style="color: #666666">.</span>append([a,m]) <span style="color: #408080; font-style: italic"># half the interval </span>
             S<span style="color: #666666">.</span>append([m,b])
     <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;Number of iterations: &quot;</span>, iterations)
     <span style="color: #008000; font-weight: bold">return</span> I
@@ -610,7 +615,7 @@ A possible algorithm is then:
 </div>
 
 <p>If you compare the number of terms used in the adaptive trapezoidal rule, which was developed by halving the step size, and the adaptive midpoint rule that was derived on the basis of the theoretical error term, you will find the adaptive midpoint rule is more efficient. So why go through all this trouble? In the next section we will see that the development we did for the adaptive trapezoidal rule is closely related to Romberg integration, which is <em>much</em> more effective.</p>
-<h1 id="romberg-integration" class="anchor">Romberg Integration </h1>
+<h1 id="romberg-integration" class="anchor">Romberg integration </h1>
 <p>The adaptive algorithm for the trapezoidal rule in the previous section can be easily improved by remembering 
 that the true integral was given by <button type="button" class="btn btn-primary btn-xs" rel="tooltip" data-placement="top" title="Note that all odd powers of \( h \) is equal to zero, thus the corrections are always in even powers."><a href="#def_footnote_2" id="link_footnote_2" style="color: white">2</a></button> : \( I=I_i+ch_i^2+\mathcal{O}(h^4) \). The error term was in the previous example only used to 
 check if the desired tolerance was achieved, but we could also have added it to our estimate of the integral to reach an accuracy to fourth order:
@@ -717,26 +722,26 @@ Below is a Python implementation:
 <span style="color: #BA2121; font-style: italic">        for the given tol, if show=True the triangular</span>
 <span style="color: #BA2121; font-style: italic">        array of intermediate results are printed &quot;&quot;&quot;</span>
     Nmax <span style="color: #666666">=</span> <span style="color: #666666">100</span>
-    R <span style="color: #666666">=</span> np<span style="color: #666666">.</span>empty([Nmax,Nmax]) <span style="color: #3D7B7B; font-style: italic"># storage buffer</span>
-    h <span style="color: #666666">=</span> (b<span style="color: #666666">-</span>a) <span style="color: #3D7B7B; font-style: italic"># step size</span>
+    R <span style="color: #666666">=</span> np<span style="color: #666666">.</span>empty([Nmax,Nmax]) <span style="color: #408080; font-style: italic"># storage buffer</span>
+    h <span style="color: #666666">=</span> (b<span style="color: #666666">-</span>a) <span style="color: #408080; font-style: italic"># step size</span>
     R[<span style="color: #666666">0</span>,<span style="color: #666666">0</span>]    <span style="color: #666666">=.5*</span>(func(a)<span style="color: #666666">+</span>func(b))<span style="color: #666666">*</span>h
     N <span style="color: #666666">=</span> <span style="color: #666666">1</span>
     <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>,Nmax):
         h <span style="color: #666666">/=</span> <span style="color: #666666">2</span>
         N <span style="color: #666666">*=</span> <span style="color: #666666">2</span>
         odd_terms<span style="color: #666666">=0</span>
-        <span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span> (<span style="color: #666666">1</span>,N,<span style="color: #666666">2</span>): <span style="color: #3D7B7B; font-style: italic"># 1, 3, 5, ... , N-1</span>
+        <span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span> (<span style="color: #666666">1</span>,N,<span style="color: #666666">2</span>): <span style="color: #408080; font-style: italic"># 1, 3, 5, ... , N-1</span>
             val        <span style="color: #666666">=</span> a <span style="color: #666666">+</span> k<span style="color: #666666">*</span>h
             odd_terms <span style="color: #666666">+=</span> func(val)
-		<span style="color: #3D7B7B; font-style: italic"># add the odd terms to the previous estimate	</span>
+		<span style="color: #408080; font-style: italic"># add the odd terms to the previous estimate	</span>
         R[i,<span style="color: #666666">0</span>]   <span style="color: #666666">=</span> <span style="color: #666666">0.5*</span>R[i<span style="color: #666666">-1</span>,<span style="color: #666666">0</span>] <span style="color: #666666">+</span> h<span style="color: #666666">*</span>odd_terms 
         <span style="color: #008000; font-weight: bold">for</span> m <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(i): 
-			<span style="color: #3D7B7B; font-style: italic"># add all higher order terms in h</span>
+			<span style="color: #408080; font-style: italic"># add all higher order terms in h</span>
             R[i,m<span style="color: #666666">+1</span>]   <span style="color: #666666">=</span> R[i,m] <span style="color: #666666">+</span> (R[i,m]<span style="color: #666666">-</span>R[i<span style="color: #666666">-1</span>,m])<span style="color: #666666">/</span>(<span style="color: #666666">4**</span>(m<span style="color: #666666">+1</span>)<span style="color: #666666">-1</span>)                  
-		<span style="color: #3D7B7B; font-style: italic"># check tolerance, best guess			</span>
+		<span style="color: #408080; font-style: italic"># check tolerance, best guess			</span>
         calc_tol <span style="color: #666666">=</span> <span style="color: #008000">abs</span>(R[i,i]<span style="color: #666666">-</span>R[i<span style="color: #666666">-1</span>,i<span style="color: #666666">-1</span>])       
         <span style="color: #008000; font-weight: bold">if</span>(calc_tol<span style="color: #666666">&lt;</span>tol):
-            <span style="color: #008000; font-weight: bold">break</span>  <span style="color: #3D7B7B; font-style: italic"># estimated precision reached </span>
+            <span style="color: #008000; font-weight: bold">break</span>  <span style="color: #408080; font-style: italic"># estimated precision reached </span>
     <span style="color: #008000; font-weight: bold">if</span>(i <span style="color: #666666">==</span> Nmax<span style="color: #666666">-1</span>):
         <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Romberg routine did not converge after &#39;</span>,
               Nmax, <span style="color: #BA2121">&#39;iterations!&#39;</span>)
@@ -748,11 +753,11 @@ Below is a Python implementation:
         <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;Steps StepSize Results&quot;</span>)
         <span style="color: #008000; font-weight: bold">for</span> idx <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(i<span style="color: #666666">+1</span>):
             <span style="color: #008000">print</span>(elem[idx],<span style="color: #BA2121">&#39; &#39;</span>,
-                  <span style="color: #BA2121">&quot;</span><span style="color: #A45A77; font-weight: bold">{:.6f}</span><span style="color: #BA2121">&quot;</span><span style="color: #666666">.</span>format((b<span style="color: #666666">-</span>a)<span style="color: #666666">/2**</span>idx),end <span style="color: #666666">=</span> <span style="color: #BA2121">&#39; &#39;</span>)
+                  <span style="color: #BA2121">&quot;</span><span style="color: #BB6688; font-weight: bold">{:.6f}</span><span style="color: #BA2121">&quot;</span><span style="color: #666666">.</span>format((b<span style="color: #666666">-</span>a)<span style="color: #666666">/2**</span>idx),end <span style="color: #666666">=</span> <span style="color: #BA2121">&#39; &#39;</span>)
             <span style="color: #008000; font-weight: bold">for</span> l <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(idx<span style="color: #666666">+1</span>):
-                <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;</span><span style="color: #A45A77; font-weight: bold">{:.6f}</span><span style="color: #BA2121">&quot;</span><span style="color: #666666">.</span>format(R[idx,l]),end <span style="color: #666666">=</span> <span style="color: #BA2121">&#39; &#39;</span>)
+                <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;</span><span style="color: #BB6688; font-weight: bold">{:.6f}</span><span style="color: #BA2121">&quot;</span><span style="color: #666666">.</span>format(R[idx,l]),end <span style="color: #666666">=</span> <span style="color: #BA2121">&#39; &#39;</span>)
             <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;&#39;</span>)  
-    <span style="color: #008000; font-weight: bold">return</span> R[i,i] <span style="color: #3D7B7B; font-style: italic">#return the best estimate</span>
+    <span style="color: #008000; font-weight: bold">return</span> R[i,i] <span style="color: #408080; font-style: italic">#return the best estimate</span>
 </pre>
 </div>
       </div>
@@ -823,14 +828,14 @@ section uses 20480 and 9069 function evaluations, respectively.
     iterations<span style="color: #666666">=0</span>
     <span style="color: #008000; font-weight: bold">while</span> S:
         iterations <span style="color: #666666">+=1</span>
-        a,b<span style="color: #666666">=</span>S<span style="color: #666666">.</span>pop(<span style="color: #666666">-1</span>) <span style="color: #3D7B7B; font-style: italic"># last element</span>
-        m<span style="color: #666666">=</span>(b<span style="color: #666666">+</span>a)<span style="color: #666666">*0.5</span>   <span style="color: #3D7B7B; font-style: italic"># midpoint</span>
-        I1<span style="color: #666666">=</span>simpson_step(a,b,func) <span style="color: #3D7B7B; font-style: italic">#simpsons for 1 interval </span>
-        I2<span style="color: #666666">=</span>simpson_step(a,m,func)<span style="color: #666666">+</span>simpson_step(m,b,func) <span style="color: #3D7B7B; font-style: italic"># ...2 intervals</span>
+        a,b<span style="color: #666666">=</span>S<span style="color: #666666">.</span>pop(<span style="color: #666666">-1</span>) <span style="color: #408080; font-style: italic"># last element</span>
+        m<span style="color: #666666">=</span>(b<span style="color: #666666">+</span>a)<span style="color: #666666">*0.5</span>   <span style="color: #408080; font-style: italic"># midpoint</span>
+        I1<span style="color: #666666">=</span>simpson_step(a,b,func) <span style="color: #408080; font-style: italic">#simpsons for 1 interval </span>
+        I2<span style="color: #666666">=</span>simpson_step(a,m,func)<span style="color: #666666">+</span>simpson_step(m,b,func) <span style="color: #408080; font-style: italic"># ...2 intervals</span>
         <span style="color: #008000; font-weight: bold">if</span>(np<span style="color: #666666">.</span>abs(I1<span style="color: #666666">-</span>I2)<span style="color: #666666">&lt;15*</span>np<span style="color: #666666">.</span>abs((b<span style="color: #666666">-</span>a)<span style="color: #666666">*</span>tol)):
-            I<span style="color: #666666">+=</span>I2     <span style="color: #3D7B7B; font-style: italic"># accuarcy met</span>
+            I<span style="color: #666666">+=</span>I2     <span style="color: #408080; font-style: italic"># accuarcy met</span>
         <span style="color: #008000; font-weight: bold">else</span>:
-            S<span style="color: #666666">.</span>append([a,m]) <span style="color: #3D7B7B; font-style: italic"># half the interval </span>
+            S<span style="color: #666666">.</span>append([a,m]) <span style="color: #408080; font-style: italic"># half the interval </span>
             S<span style="color: #666666">.</span>append([m,b])
     <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;Number of iterations: &quot;</span>, iterations)
     <span style="color: #008000; font-weight: bold">return</span> I
@@ -848,7 +853,7 @@ section uses 20480 and 9069 function evaluations, respectively.
     </div>
   </div>
 </div>
-<h1 id="gaussian-quadrature" class="anchor">Gaussian Quadrature </h1>
+<h1 id="gaussian-quadrature" class="anchor">Gaussian quadrature </h1>
 <p>Many of the methods we have looked into are of the type:</p>
 $$
 \begin{align}
@@ -1045,7 +1050,7 @@ Following the same argument, we find for \( N=3 \) that the error term is \( h^6
 Each time we increase \( N \) by a factor of one, the error term reduces by \( N^2 \). Thus if we evaluate the integral for \( N=10 \), 
 increasing to \( N=11 \) will reduce the error by a factor of \( 11^2=121 \).
 </p>
-<h2 id="error-term-on-gaussian-integration" class="anchor">Error term on Gaussian Integration </h2>
+<h2 id="error-term-on-gaussian-integration" class="anchor">Error term on Gaussian integration </h2>
 <p>The Gaussian integration rule of order \( N \) integrates exactly a polynomial of order \( 2N-1 \). 
 From Taylors error formula, 
 we can easily see that the error term must be of order \( 2N \), and be proportional to \( f^{(2N)}(\eta) \), see <a href="#stoer2013">[1]</a> for more details on the derivation of error terms. The drawback with an analytical error term derived from series expansion is that it involves the derivative of the function. As we have already explained, this is very unpractical and it is much more practical to use the methods described in the section <a href="#sec:numint:parct">sec:numint:parct</a>. Let us consider this in more detail, assume that we evaluate the integral using first a Gaussian integration rule with \( N \) points, and then \( N+1 \) points. Our estimates of the "exact" integral, \( I \),  would then be:
@@ -1067,7 +1072,7 @@ ch^N= I_{N+1}-I_N.
 $$
 
 <p>If this estimate is lower than a given tolerance we can be quite confident that the higher order estimate \( I_{N+1} \) approximate the true integral within our error estimate. This is the method implemented in SciPy, <a href="https://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.integrate.quadrature.html" target="_self"><tt>integrate.quadrature</tt></a></p>
-<h2 id="common-weight-functions-for-classical-gaussian-quadratures" class="anchor">Common Weight functions for Classical Gaussian Quadratures </h2>
+<h2 id="common-weight-functions-for-classical-gaussian-quadratures" class="anchor">Common weight functions for classical Gaussian quadratures </h2>
 <h1 id="integrating-functions-over-an-infinite-range" class="anchor">Integrating functions over an infinite range  </h1>
 <p>Integrating a function over an infinite range can be done by the following trick. Assume that we would like to evaluate</p>
 $$
