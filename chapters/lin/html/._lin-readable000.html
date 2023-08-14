@@ -8,9 +8,9 @@ doconce format html main_lin.do.txt CHAPTER=document BOOK=document APPENDIX=docu
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/doconce/doconce/" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="description" content="1D models and linear systems">
+<meta name="description" content="1, 2, 3D models and linear systems">
 <meta name="keywords" content="continuity equation,finite volume,Gauss-Jordan elimination,pivoting,LU decomposition,Jacobi method,Gauss-Seidel method,linear regression,sparse matrix,Thomas algorithm">
-<title>1D models and linear systems</title>
+<title>1, 2, 3D models and linear systems</title>
 <!-- Bootstrap style: bootswatch_readable -->
 <!-- doconce format html main_lin.do.txt CHAPTER=document BOOK=document APPENDIX=document --html_style=bootswatch_readable --html_output=lin-readable --html_code_style=inherit -->
 <link href="https://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
@@ -124,7 +124,7 @@ MathJax.Hub.Config({
 <!-- newcommands_keep.tex -->
 $$
 \newcommand{\no}{\nonumber}
-\newcommand{\co}{CO$_2$}
+\newcommand{\co}{\text{CO$_{2}$}}
 $$
 
 
@@ -137,7 +137,7 @@ $$
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="in-readable.html">1D models and linear systems</a>
+    <a class="navbar-brand" href="in-readable.html">1, 2, 3D models and linear systems</a>
   </div>
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav navbar-right">
@@ -182,7 +182,7 @@ $$
 <!-- ------------------- main content ---------------------- -->
 <div class="jumbotron">
 <center>
-<h1>1D models and linear systems</h1>
+<h1>1, 2, 3D models and linear systems</h1>
 </center>  <!-- document title -->
 
 <!-- author(s): Aksel Hiorth -->
@@ -193,7 +193,7 @@ $$
 <br>
 <p>University of Stavanger
 <center>
-<h4>May 7, 2023</h4>
+<h4>Aug 14, 2023</h4>
 </center> <!-- date -->
 <br>
 </p>
@@ -609,7 +609,7 @@ $$
               [<span style="color: #666666">1</span>, <span style="color: #666666">4</span>, <span style="color: #666666">1</span>, <span style="color: #666666">1</span>],[<span style="color: #666666">1</span>, <span style="color: #666666">1</span>, <span style="color: #666666">2</span>, <span style="color: #666666">2</span> ]],<span style="color: #008000">float</span>)
 b <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([<span style="color: #666666">1</span>,<span style="color: #666666">-3</span>,<span style="color: #666666">2</span>,<span style="color: #666666">1</span>],<span style="color: #008000">float</span>)
 N<span style="color: #666666">=4</span>
-<span style="color: #408080; font-style: italic"># Gauss-Jordan Forward Elimination</span>
+<span style="color: #3D7B7B; font-style: italic"># Gauss-Jordan Forward Elimination</span>
 <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>,N):
     fact    <span style="color: #666666">=</span> A[i:,i<span style="color: #666666">-1</span>]<span style="color: #666666">/</span>A[i<span style="color: #666666">-1</span>,i<span style="color: #666666">-1</span>]
     A[i:,] <span style="color: #666666">-=</span> np<span style="color: #666666">.</span>outer(fact,A[i<span style="color: #666666">-1</span>,])
@@ -637,14 +637,14 @@ N<span style="color: #666666">=4</span>
     <div class="inner_cell">
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
-  <pre style="line-height: 125%;"><span style="color: #408080; font-style: italic"># Gauss-Jordan Forward Elimination - for loops</span>
+  <pre style="line-height: 125%;"><span style="color: #3D7B7B; font-style: italic"># Gauss-Jordan Forward Elimination - for loops</span>
 <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(N):
     <span style="color: #008000; font-weight: bold">for</span> j <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(i<span style="color: #666666">+1</span>,N):
         fact    <span style="color: #666666">=</span> A[j,i]<span style="color: #666666">/</span>A[i,i]
         <span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(i<span style="color: #666666">+1</span>,N):
             A[j,k] <span style="color: #666666">=</span> A[j,k]<span style="color: #666666">-</span> fact<span style="color: #666666">*</span>A[i,k]
         b[j]  <span style="color: #666666">=</span> b[j]<span style="color: #666666">-</span> b[j<span style="color: #666666">-1</span>]<span style="color: #666666">*</span>fact
-	A[j,i]<span style="color: #666666">=</span> <span style="color: #666666">0.</span> <span style="color: #408080; font-style: italic"># alternatively k=i,...,N</span>
+	A[j,i]<span style="color: #666666">=</span> <span style="color: #666666">0.</span> <span style="color: #3D7B7B; font-style: italic"># alternatively k=i,...,N</span>
 </pre>
 </div>
       </div>
@@ -716,7 +716,7 @@ $$
     <div class="inner_cell">
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
-  <pre style="line-height: 125%;"><span style="color: #408080; font-style: italic"># Back substitution</span>
+  <pre style="line-height: 125%;"><span style="color: #3D7B7B; font-style: italic"># Back substitution</span>
 sol <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros(N,<span style="color: #008000">float</span>)
 sol[N<span style="color: #666666">-1</span>]<span style="color: #666666">=</span>b[N<span style="color: #666666">-1</span>]<span style="color: #666666">/</span>A[N<span style="color: #666666">-1</span>,N<span style="color: #666666">-1</span>]
 <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">2</span>,N<span style="color: #666666">+1</span>):
@@ -744,7 +744,7 @@ sol[N<span style="color: #666666">-1</span>]<span style="color: #666666">=</span
     <div class="inner_cell">
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
-  <pre style="line-height: 125%;"><span style="color: #408080; font-style: italic"># Back substitution - for loop</span>
+  <pre style="line-height: 125%;"><span style="color: #3D7B7B; font-style: italic"># Back substitution - for loop</span>
 sol <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros(N,<span style="color: #008000">float</span>)
 <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(N<span style="color: #666666">-1</span>,<span style="color: #666666">-1</span>,<span style="color: #666666">-1</span>):
     sol[i]<span style="color: #666666">=</span> b[i]
@@ -1001,7 +1001,7 @@ $$
 <span style="color: #BA2121; font-style: italic">    solution is not found after max_iter or if solution changes less </span>
 <span style="color: #BA2121; font-style: italic">    than EPS</span>
 <span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
-    <span style="color: #008000; font-weight: bold">if</span>(x<span style="color: #666666">==-1</span>): <span style="color: #408080; font-style: italic">#default guess </span>
+    <span style="color: #008000; font-weight: bold">if</span>(x<span style="color: #666666">==-1</span>): <span style="color: #3D7B7B; font-style: italic">#default guess </span>
         x<span style="color: #666666">=</span>np<span style="color: #666666">.</span>zeros(<span style="color: #008000">len</span>(b))
     D<span style="color: #666666">=</span>np<span style="color: #666666">.</span>diag(A)
     R<span style="color: #666666">=</span>A<span style="color: #666666">-</span>np<span style="color: #666666">.</span>diag(D)
@@ -1168,25 +1168,25 @@ $$
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">OLS</span>(x, y): 
-    <span style="color: #408080; font-style: italic"># returns regression coefficients</span>
-    <span style="color: #408080; font-style: italic"># in ordinary least square</span>
-    <span style="color: #408080; font-style: italic"># x: observations</span>
-    <span style="color: #408080; font-style: italic"># y: response</span>
-    <span style="color: #408080; font-style: italic"># R^2: R-squared</span>
-    n <span style="color: #666666">=</span> np<span style="color: #666666">.</span>size(x) <span style="color: #408080; font-style: italic"># number of data points </span>
+    <span style="color: #3D7B7B; font-style: italic"># returns regression coefficients</span>
+    <span style="color: #3D7B7B; font-style: italic"># in ordinary least square</span>
+    <span style="color: #3D7B7B; font-style: italic"># x: observations</span>
+    <span style="color: #3D7B7B; font-style: italic"># y: response</span>
+    <span style="color: #3D7B7B; font-style: italic"># R^2: R-squared</span>
+    n <span style="color: #666666">=</span> np<span style="color: #666666">.</span>size(x) <span style="color: #3D7B7B; font-style: italic"># number of data points </span>
   
-    <span style="color: #408080; font-style: italic"># mean of x and y vector </span>
+    <span style="color: #3D7B7B; font-style: italic"># mean of x and y vector </span>
     m_x, m_y <span style="color: #666666">=</span> np<span style="color: #666666">.</span>mean(x), np<span style="color: #666666">.</span>mean(y) 
   
-    <span style="color: #408080; font-style: italic"># calculating cross-deviation and deviation about x </span>
+    <span style="color: #3D7B7B; font-style: italic"># calculating cross-deviation and deviation about x </span>
     SS_xy <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sum(y<span style="color: #666666">*</span>x) <span style="color: #666666">-</span> n<span style="color: #666666">*</span>m_y<span style="color: #666666">*</span>m_x 
     SS_xx <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sum(x<span style="color: #666666">*</span>x) <span style="color: #666666">-</span> n<span style="color: #666666">*</span>m_x<span style="color: #666666">*</span>m_x 
   
-    <span style="color: #408080; font-style: italic"># calculating regression coefficients </span>
+    <span style="color: #3D7B7B; font-style: italic"># calculating regression coefficients </span>
     b_1 <span style="color: #666666">=</span> SS_xy <span style="color: #666666">/</span> SS_xx 
     b_0 <span style="color: #666666">=</span> m_y <span style="color: #666666">-</span> b_1<span style="color: #666666">*</span>m_x
 
-    <span style="color: #408080; font-style: italic">#R^2</span>
+    <span style="color: #3D7B7B; font-style: italic">#R^2</span>
     y_pred <span style="color: #666666">=</span> b_0 <span style="color: #666666">+</span> b_1<span style="color: #666666">*</span>x
     S_yy   <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sum(y<span style="color: #666666">*</span>y) <span style="color: #666666">-</span> n<span style="color: #666666">*</span>m_y<span style="color: #666666">*</span>m_y
     y_res  <span style="color: #666666">=</span> y<span style="color: #666666">-</span>y_pred  
@@ -1260,10 +1260,10 @@ $$
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">OLSM</span>(x, y): 
-    <span style="color: #408080; font-style: italic"># returns regression coefficients</span>
-    <span style="color: #408080; font-style: italic"># in ordinary least square using solve function</span>
-    <span style="color: #408080; font-style: italic"># x: observations</span>
-    <span style="color: #408080; font-style: italic"># y: response</span>
+    <span style="color: #3D7B7B; font-style: italic"># returns regression coefficients</span>
+    <span style="color: #3D7B7B; font-style: italic"># in ordinary least square using solve function</span>
+    <span style="color: #3D7B7B; font-style: italic"># x: observations</span>
+    <span style="color: #3D7B7B; font-style: italic"># y: response</span>
 
     XT <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([np<span style="color: #666666">.</span>ones(<span style="color: #008000">len</span>(x)),x],<span style="color: #008000">float</span>)
     X  <span style="color: #666666">=</span> np<span style="color: #666666">.</span>transpose(XT)
@@ -1639,11 +1639,11 @@ T_3\\
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">central_difference<span style="color: #666666">=</span><span style="color: #008000; font-weight: bold">False</span>
-<span style="color: #408080; font-style: italic"># set simulation parameters</span>
+<span style="color: #3D7B7B; font-style: italic"># set simulation parameters</span>
 h<span style="color: #666666">=0.25</span>
 L<span style="color: #666666">=1.0</span>
 n <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">round</span>(L<span style="color: #666666">/</span>h))
-Tb<span style="color: #666666">=25</span> <span style="color: #408080; font-style: italic">#rhs</span>
+Tb<span style="color: #666666">=25</span> <span style="color: #3D7B7B; font-style: italic">#rhs</span>
 sigma<span style="color: #666666">=100</span>
 k<span style="color: #666666">=1.65</span> 
 beta <span style="color: #666666">=</span> sigma<span style="color: #666666">*</span>L<span style="color: #666666">**2/</span>k
@@ -1661,7 +1661,7 @@ y <span style="color: #666666">=</span> np<span style="color: #666666">.</span>a
 <span style="color: #BA2121; font-style: italic">        | 0  0  a2 b3|</span>
 <span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
     <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>diag(a, k1) <span style="color: #666666">+</span> np<span style="color: #666666">.</span>diag(b, k2) <span style="color: #666666">+</span> np<span style="color: #666666">.</span>diag(c, k3)
-<span style="color: #408080; font-style: italic"># defina a, b and c vector</span>
+<span style="color: #3D7B7B; font-style: italic"># defina a, b and c vector</span>
 a<span style="color: #666666">=</span>np<span style="color: #666666">.</span>ones(n<span style="color: #666666">-1</span>)
 b<span style="color: #666666">=..</span>
 c<span style="color: #666666">=..</span>
@@ -1672,10 +1672,10 @@ c<span style="color: #666666">=..</span>
     b[<span style="color: #666666">0</span>]<span style="color: #666666">=...</span>
 
 A<span style="color: #666666">=</span>tri_diag(a,b,c)
-<span style="color: #008000">print</span>(A) <span style="color: #408080; font-style: italic"># view matrix - compare with N=4 to make sure no bugs</span>
-<span style="color: #408080; font-style: italic"># define rhs vector</span>
+<span style="color: #008000">print</span>(A) <span style="color: #3D7B7B; font-style: italic"># view matrix - compare with N=4 to make sure no bugs</span>
+<span style="color: #3D7B7B; font-style: italic"># define rhs vector</span>
 d<span style="color: #666666">=...</span>
-<span style="color: #408080; font-style: italic">#rhs boundary condition</span>
+<span style="color: #3D7B7B; font-style: italic">#rhs boundary condition</span>
 d[<span style="color: #666666">-1</span>]<span style="color: #666666">=...</span>
 
 Tn<span style="color: #666666">=</span>np<span style="color: #666666">.</span>linalg<span style="color: #666666">.</span>solve(A,d)
@@ -1794,27 +1794,27 @@ Extend the code you developed in the last exercises to also be able to use spars
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">scipy.sparse.linalg</span>
 
-<span style="color: #408080; font-style: italic">#right hand side</span>
-<span style="color: #408080; font-style: italic"># rhs vector</span>
+<span style="color: #3D7B7B; font-style: italic">#right hand side</span>
+<span style="color: #3D7B7B; font-style: italic"># rhs vector</span>
 d<span style="color: #666666">=</span>np<span style="color: #666666">.</span>repeat(<span style="color: #666666">-</span>h<span style="color: #666666">*</span>h<span style="color: #666666">*</span>beta,n)
-<span style="color: #408080; font-style: italic">#rhs - constant temperature</span>
+<span style="color: #3D7B7B; font-style: italic">#rhs - constant temperature</span>
 Tb<span style="color: #666666">=25</span>
 d[<span style="color: #666666">-1</span>]<span style="color: #666666">=</span>d[<span style="color: #666666">-1</span>]<span style="color: #666666">-</span>Tb
-<span style="color: #408080; font-style: italic">#Set up sparse matrix</span>
+<span style="color: #3D7B7B; font-style: italic">#Set up sparse matrix</span>
 diagonals<span style="color: #666666">=</span>np<span style="color: #666666">.</span>zeros((<span style="color: #666666">3</span>,n))
 diagonals[<span style="color: #666666">0</span>,:]<span style="color: #666666">=</span> <span style="color: #666666">1</span>
 diagonals[<span style="color: #666666">1</span>,:]<span style="color: #666666">=</span> <span style="color: #666666">-2</span>  
 diagonals[<span style="color: #666666">2</span>,:]<span style="color: #666666">=</span> <span style="color: #666666">1</span>
-<span style="color: #408080; font-style: italic">#No flux boundary condition</span>
+<span style="color: #3D7B7B; font-style: italic">#No flux boundary condition</span>
 diagonals[<span style="color: #666666">2</span>,<span style="color: #666666">1</span>]<span style="color: #666666">=</span> <span style="color: #666666">2</span>
 A_sparse <span style="color: #666666">=</span> sc<span style="color: #666666">.</span>sparse<span style="color: #666666">.</span>spdiags(diagonals, [<span style="color: #666666">-1</span>,<span style="color: #666666">0</span>,<span style="color: #666666">1</span>], n, n,<span style="color: #008000">format</span><span style="color: #666666">=</span><span style="color: #BA2121">&#39;csc&#39;</span>)
-<span style="color: #408080; font-style: italic"># to view matrix - do this and check that it is correct!</span>
+<span style="color: #3D7B7B; font-style: italic"># to view matrix - do this and check that it is correct!</span>
 <span style="color: #008000">print</span>(A_sparse<span style="color: #666666">.</span>todense())
-<span style="color: #408080; font-style: italic"># solve matrix</span>
+<span style="color: #3D7B7B; font-style: italic"># solve matrix</span>
 Tb <span style="color: #666666">=</span> sc<span style="color: #666666">.</span>sparse<span style="color: #666666">.</span>linalg<span style="color: #666666">.</span>spsolve(A_sparse,d)
 
-<span style="color: #408080; font-style: italic"># if you like you can use timeit to check the efficiency</span>
-<span style="color: #408080; font-style: italic"># %timeit sc.sparse.linalg.spsolve( ... )</span>
+<span style="color: #3D7B7B; font-style: italic"># if you like you can use timeit to check the efficiency</span>
+<span style="color: #3D7B7B; font-style: italic"># %timeit sc.sparse.linalg.spsolve( ... )</span>
 </pre>
 </div>
       </div>

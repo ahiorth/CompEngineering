@@ -8,9 +8,9 @@ doconce format html main_nlin.do.txt CHAPTER=document BOOK=document APPENDIX=doc
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/doconce/doconce/" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="description" content="Solving non linear systems">
+<meta name="description" content="Non linear systems">
 <meta name="keywords" content="fixed-point iteration,rate of convergence,bisection method,rate of convergence,Newtons method,Newtons method, rate of convergence,secant method,secant method, rate of convergence,Newton Rapson method,gradient descent">
-<title>Solving non linear systems</title>
+<title>Non linear systems</title>
 <!-- Bootstrap style: bootswatch_readable -->
 <!-- doconce format html main_nlin.do.txt CHAPTER=document BOOK=document APPENDIX=document --html_style=bootswatch_readable --html_output=nlin-readable --html_code_style=inherit -->
 <link href="https://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
@@ -127,7 +127,7 @@ $$
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="nlin-readable.html">Solving non linear systems</a>
+    <a class="navbar-brand" href="nlin-readable.html">Non linear systems</a>
   </div>
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav navbar-right">
@@ -170,7 +170,7 @@ $$
 <!-- ------------------- main content ---------------------- -->
 <div class="jumbotron">
 <center>
-<h1>Solving non linear systems </h1>
+<h1>Non linear systems</h1>
 </center>  <!-- document title -->
 
 <!-- author(s): Aksel Hiorth -->
@@ -181,7 +181,7 @@ $$
 <br>
 <p>University of Stavanger
 <center>
-<h4>May 7, 2023</h4>
+<h4>Aug 14, 2023</h4>
 </center> <!-- date -->
 <br>
 </p>
@@ -1246,29 +1246,29 @@ $$
 y_obs_ <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([<span style="color: #666666">1</span>, <span style="color: #666666">3</span>, <span style="color: #666666">2</span>, <span style="color: #666666">5</span>, <span style="color: #666666">7</span>, <span style="color: #666666">8</span>, <span style="color: #666666">8</span>, <span style="color: #666666">9</span>, <span style="color: #666666">10</span>, <span style="color: #666666">12</span>]) 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">plot_regression_line</span>(b,x<span style="color: #666666">=</span>x_obs_, y<span style="color: #666666">=</span>y_obs_): 
     <span style="color: #008000; font-weight: bold">global</span> N_
-    <span style="color: #408080; font-style: italic"># plotting the actual points as scatter plot </span>
+    <span style="color: #3D7B7B; font-style: italic"># plotting the actual points as scatter plot </span>
     plt<span style="color: #666666">.</span>scatter(x, y, color <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;m&quot;</span>, 
                marker <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;o&quot;</span>, s <span style="color: #666666">=</span> <span style="color: #666666">30</span>,label<span style="color: #666666">=</span><span style="color: #BA2121">&quot;data&quot;</span>) 
   
-    <span style="color: #408080; font-style: italic"># predicted response vector </span>
+    <span style="color: #3D7B7B; font-style: italic"># predicted response vector </span>
     y_pred <span style="color: #666666">=</span> b[<span style="color: #666666">0</span>] <span style="color: #666666">+</span> b[<span style="color: #666666">1</span>]<span style="color: #666666">*</span>x
   
-    <span style="color: #408080; font-style: italic"># plotting the regression line</span>
+    <span style="color: #3D7B7B; font-style: italic"># plotting the regression line</span>
     <span style="color: #008000; font-weight: bold">if</span>(<span style="color: #008000">len</span>(b)<span style="color: #666666">&gt;1</span>):
-<span style="color: #408080; font-style: italic">#        plt.plot(x, y_pred, color = &quot;g&quot;, label = &quot;R-squared = {0:.3f}&quot;.format(b[2]))</span>
-        plt<span style="color: #666666">.</span>plot(x, y_pred, color <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;g&quot;</span>, label <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;iteration:&quot;</span> <span style="color: #666666">+</span> <span style="color: #008000">str</span>(N_) <span style="color: #666666">+</span><span style="color: #BA2121">&quot;, (b[0],b[1])= (</span><span style="color: #BB6688; font-weight: bold">{0:.3f}</span><span style="color: #BA2121">&quot;</span><span style="color: #666666">.</span>format(b[<span style="color: #666666">0</span>]) <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;, </span><span style="color: #BB6688; font-weight: bold">{0:.3f}</span><span style="color: #BA2121">)&quot;</span><span style="color: #666666">.</span>format(b[<span style="color: #666666">1</span>]))
+<span style="color: #3D7B7B; font-style: italic">#        plt.plot(x, y_pred, color = &quot;g&quot;, label = &quot;R-squared = {0:.3f}&quot;.format(b[2]))</span>
+        plt<span style="color: #666666">.</span>plot(x, y_pred, color <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;g&quot;</span>, label <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;iteration:&quot;</span> <span style="color: #666666">+</span> <span style="color: #008000">str</span>(N_) <span style="color: #666666">+</span><span style="color: #BA2121">&quot;, (b[0],b[1])= (</span><span style="color: #A45A77; font-weight: bold">{0:.3f}</span><span style="color: #BA2121">&quot;</span><span style="color: #666666">.</span>format(b[<span style="color: #666666">0</span>]) <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;, </span><span style="color: #A45A77; font-weight: bold">{0:.3f}</span><span style="color: #BA2121">)&quot;</span><span style="color: #666666">.</span>format(b[<span style="color: #666666">1</span>]))
         plt<span style="color: #666666">.</span>legend()
     <span style="color: #008000; font-weight: bold">else</span>:
         plt<span style="color: #666666">.</span>plot(x, y_pred, color <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;g&quot;</span>)
   
-    <span style="color: #408080; font-style: italic"># putting labels </span>
+    <span style="color: #3D7B7B; font-style: italic"># putting labels </span>
     plt<span style="color: #666666">.</span>xlabel(<span style="color: #BA2121">&#39;x&#39;</span>) 
     plt<span style="color: #666666">.</span>ylabel(<span style="color: #BA2121">&#39;y&#39;</span>) 
     plt<span style="color: #666666">.</span>grid()
     plt<span style="color: #666666">.</span>legend()
-<span style="color: #408080; font-style: italic">#    plt.savefig(&#39;../fig-nlin/stdec&#39;+str(N_)+&#39;.png&#39;, bbox_inches=&#39;tight&#39;,transparent=True)</span>
+<span style="color: #3D7B7B; font-style: italic">#    plt.savefig(&#39;../fig-nlin/stdec&#39;+str(N_)+&#39;.png&#39;, bbox_inches=&#39;tight&#39;,transparent=True)</span>
     N_<span style="color: #666666">=</span>N_<span style="color: #666666">+1</span>  
-    <span style="color: #408080; font-style: italic"># function to show plot </span>
+    <span style="color: #3D7B7B; font-style: italic"># function to show plot </span>
     plt<span style="color: #666666">.</span>show() 
 
 
@@ -1343,7 +1343,7 @@ y_obs_ <span style="color: #666666">=</span> np<span style="color: #666666">.</s
     <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Try to increase MAXIT or decrease prec&#39;</span>)
     <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Returning best guess, value of function is: &#39;</span>, f(x_new))
     <span style="color: #008000; font-weight: bold">return</span> x_new
-<span style="color: #408080; font-style: italic">#end</span>
+<span style="color: #3D7B7B; font-style: italic">#end</span>
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">S</span>(b,x<span style="color: #666666">=</span>x_obs_,y<span style="color: #666666">=</span>y_obs_):
     <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>sum((y<span style="color: #666666">-</span>b[<span style="color: #666666">0</span>]<span style="color: #666666">-</span>b[<span style="color: #666666">1</span>]<span style="color: #666666">*</span>x)<span style="color: #666666">**2</span>)

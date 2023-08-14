@@ -140,7 +140,7 @@ MathJax.Hub.Config({
 <br>
 <p>University of Stavanger
 <center>
-<h4>May 7, 2023</h4>
+<h4>Aug 14, 2023</h4>
 </center> <!-- date -->
 <br>
 </p>
@@ -230,7 +230,7 @@ which is equivalent to pick random numbers from a <em>uniform</em> distribution.
   <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">estimate_pi</span>(N,d):
-<span style="color: #408080; font-style: italic">#   random.seed(2)</span>
+<span style="color: #3D7B7B; font-style: italic">#   random.seed(2)</span>
     D2<span style="color: #666666">=</span>d<span style="color: #666666">*</span>d<span style="color: #666666">/4</span>; dc<span style="color: #666666">=0.5*</span>d
     A<span style="color: #666666">=0</span>
     <span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>,N):
@@ -238,7 +238,7 @@ which is equivalent to pick random numbers from a <em>uniform</em> distribution.
         y<span style="color: #666666">=</span>np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>uniform(<span style="color: #666666">0</span>,d)
         <span style="color: #008000; font-weight: bold">if</span>((x<span style="color: #666666">-</span>dc)<span style="color: #666666">**2+</span>(y<span style="color: #666666">-</span>dc)<span style="color: #666666">**2</span> <span style="color: #666666">&lt;=</span> D2):
             A<span style="color: #666666">+=1</span>
-    <span style="color: #408080; font-style: italic"># estimate area of circle: d*d*A/N</span>
+    <span style="color: #3D7B7B; font-style: italic"># estimate area of circle: d*d*A/N</span>
     <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">4*</span>A<span style="color: #666666">/</span>N
 
 N<span style="color: #666666">=1000</span>;d<span style="color: #666666">=2</span>
@@ -614,7 +614,7 @@ we use the average value.
     D2<span style="color: #666666">=</span>d<span style="color: #666666">*</span>d<span style="color: #666666">/4</span>
     x<span style="color: #666666">=</span>np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>uniform(<span style="color: #666666">-</span>d<span style="color: #666666">/2</span>,d<span style="color: #666666">/2</span>,size<span style="color: #666666">=</span>N)
     A<span style="color: #666666">=</span>np<span style="color: #666666">.</span>sum(f(x,D2))
-    <span style="color: #408080; font-style: italic"># estimate for area: A/N</span>
+    <span style="color: #3D7B7B; font-style: italic"># estimate for area: A/N</span>
     <span style="color: #008000; font-weight: bold">return</span> d<span style="color: #666666">*</span>A<span style="color: #666666">/</span>N
 </pre>
 </div>
@@ -898,8 +898,8 @@ zero. Below is an implementation that uses recursive function calls
     area <span style="color: #666666">+=</span> funci(lower_limit, upper_limit,func,x,i<span style="color: #666666">+1</span>,N,D)
     area <span style="color: #666666">*=</span> <span style="color: #666666">0.5</span>
     x[i]  <span style="color: #666666">=</span> lower_limit
-    <span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>,N): <span style="color: #408080; font-style: italic"># loop over k=1,..,N-1</span>
-        x[i] <span style="color: #666666">+=</span> h <span style="color: #408080; font-style: italic"># midpoint value</span>
+    <span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>,N): <span style="color: #3D7B7B; font-style: italic"># loop over k=1,..,N-1</span>
+        x[i] <span style="color: #666666">+=</span> h <span style="color: #3D7B7B; font-style: italic"># midpoint value</span>
         area <span style="color: #666666">+=</span> funci(lower_limit, upper_limit,func,x,i<span style="color: #666666">+1</span>,N,D)
     <span style="color: #008000; font-weight: bold">return</span> area<span style="color: #666666">*</span>h
 </pre>
@@ -1011,7 +1011,7 @@ distribution</em>. Write a Python function that returns the average of
     x<span style="color: #666666">=</span>[np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>uniform() <span style="color: #008000; font-weight: bold">for</span> _ <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(N)]
     <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>mean(x)
 
-<span style="color: #408080; font-style: italic"># or alternatively, and equally fast</span>
+<span style="color: #3D7B7B; font-style: italic"># or alternatively, and equally fast</span>
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">average2</span>(N):
     x<span style="color: #666666">=0</span>
@@ -1019,7 +1019,7 @@ distribution</em>. Write a Python function that returns the average of
         x<span style="color: #666666">+=</span>np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>uniform()
     <span style="color: #008000; font-weight: bold">return</span> x<span style="color: #666666">/</span>N
 
-<span style="color: #408080; font-style: italic"># or much faster:</span>
+<span style="color: #3D7B7B; font-style: italic"># or much faster:</span>
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">average3</span>(N):
     x<span style="color: #666666">=</span>np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>uniform(size<span style="color: #666666">=</span>N)
     <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>mean(x)
@@ -1208,16 +1208,16 @@ one just picks a random day at year.
     <div class="inner_cell">
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
-  <pre style="line-height: 125%;"><span style="color: #408080; font-style: italic">#from datetime import date</span>
-<span style="color: #408080; font-style: italic">#%%</span>
+  <pre style="line-height: 125%;"><span style="color: #3D7B7B; font-style: italic">#from datetime import date</span>
+<span style="color: #3D7B7B; font-style: italic">#%%</span>
 <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
 
-<span style="color: #408080; font-style: italic">#def get_date():</span>
-<span style="color: #408080; font-style: italic">#    &quot;&quot;&quot; return a random date in the current year &quot;&quot;&quot;</span>
-<span style="color: #408080; font-style: italic">#    start_dt = date.today().replace(day=1, month=1).toordinal()</span>
-<span style="color: #408080; font-style: italic">#    end_dt = date.today().replace(day=31, month=12).toordinal()</span>
-<span style="color: #408080; font-style: italic">#    random_day = date.fromordinal(np.random.randint(start_dt, end_dt))</span>
-<span style="color: #408080; font-style: italic">#    return random_day</span>
+<span style="color: #3D7B7B; font-style: italic">#def get_date():</span>
+<span style="color: #3D7B7B; font-style: italic">#    &quot;&quot;&quot; return a random date in the current year &quot;&quot;&quot;</span>
+<span style="color: #3D7B7B; font-style: italic">#    start_dt = date.today().replace(day=1, month=1).toordinal()</span>
+<span style="color: #3D7B7B; font-style: italic">#    end_dt = date.today().replace(day=31, month=12).toordinal()</span>
+<span style="color: #3D7B7B; font-style: italic">#    random_day = date.fromordinal(np.random.randint(start_dt, end_dt))</span>
+<span style="color: #3D7B7B; font-style: italic">#    return random_day</span>
 
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">get_day</span>():

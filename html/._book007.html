@@ -321,6 +321,7 @@ code { color: inherit; background-color: transparent; }
                None,
                'exercise-6-1-numerical-integration'),
               ('Ordinary differential equations', 0, 'ch:ode', 'ch:ode'),
+              ('0D models', 1, None, '0d-models'),
               ('Ordinary differential equations',
                1,
                None,
@@ -406,7 +407,7 @@ MathJax.Hub.Config({
 <!-- newcommands_keep.tex -->
 $$
 \newcommand{\no}{\nonumber}
-\newcommand{\co}{CO$_2$}
+\newcommand{\co}{\text{CO$_{2}$}}
 $$
 
 
@@ -548,6 +549,7 @@ $$
      <!-- navigation toc: --> <li><a href="._book006.html#integrating-functions-over-an-infinite-range" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Integrating functions over an infinite range</a></li>
      <!-- navigation toc: --> <li><a href="._book006.html#exercise-6-1-numerical-integration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 6.1: Numerical Integration</a></li>
      <!-- navigation toc: --> <li><a href="#ch:ode" style="font-size: 80%;"><b>Ordinary differential equations</b></a></li>
+     <!-- navigation toc: --> <li><a href="#0d-models" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;0D models</a></li>
      <!-- navigation toc: --> <li><a href="#ordinary-differential-equations" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ordinary differential equations</a></li>
      <!-- navigation toc: --> <li><a href="#a-simple-model-for-fluid-flow" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;A simple model for fluid flow</a></li>
      <!-- navigation toc: --> <li><a href="#euler-s-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Euler's method</a></li>
@@ -587,7 +589,10 @@ $$
 <center>
 <h1 id="ch:ode" class="anchor">Ordinary differential equations</h1>
 </center> <!-- chapter heading -->
+<h1 id="0d-models" class="anchor">0D models </h1>
+<p>By 0D models we mean models that are only dependent on one variable, usually time. These models are often called "lumped parameter models", because they ignore spatial dependency and the parameters in the model are adjusted to match experimental data. In many cases it is more important to predict how a system evolves in time, than the spatial dependency. A very recent example is the spread of infectious deceases, like Covid-19, where the evolution of total number of infected people might be the most important and not where the infection happens. </p>
 <h1 id="ordinary-differential-equations" class="anchor">Ordinary differential equations </h1>
+
 <p>Physical systems evolves in space and time, and very often they are described by a ordinary differential equations (ODE) and/or
 partial differential equations (PDE). The difference between an ODE and a PDE is that an ODE only describes 
 the changes in one spatial dimension <em>or</em> time, whereas a PDE describes a system that evolves in the \( x- \), \( y- \), \( z- \) dimension 
@@ -718,8 +723,8 @@ $$
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">ode_solv</span>(c_into,c_init,t_final,vol,q,dt):
     f<span style="color: #666666">=</span>[];t<span style="color: #666666">=</span>[]
     tau_inv <span style="color: #666666">=</span> q<span style="color: #666666">/</span>vol
-    c_in    <span style="color: #666666">=</span> c_into <span style="color: #408080; font-style: italic">#freshwater into tank</span>
-    c_old   <span style="color: #666666">=</span> c_init <span style="color: #408080; font-style: italic">#seawater present </span>
+    c_in    <span style="color: #666666">=</span> c_into <span style="color: #3D7B7B; font-style: italic">#freshwater into tank</span>
+    c_old   <span style="color: #666666">=</span> c_init <span style="color: #3D7B7B; font-style: italic">#seawater present </span>
     ti<span style="color: #666666">=0.</span>
     <span style="color: #008000; font-weight: bold">while</span>(ti <span style="color: #666666">&lt;=</span> t_final):
         t<span style="color: #666666">.</span>append(ti); f<span style="color: #666666">.</span>append(c_old)
@@ -1048,27 +1053,27 @@ $$
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">adaptive_euler</span>(c_into,c_init,t_final,tol<span style="color: #666666">=1e-4</span>):
     f<span style="color: #666666">=</span>[];t<span style="color: #666666">=</span>[]
-    c_in    <span style="color: #666666">=</span> c_into <span style="color: #408080; font-style: italic">#freshwater into tank</span>
-    c_old   <span style="color: #666666">=</span> c_init <span style="color: #408080; font-style: italic">#seawater present </span>
+    c_in    <span style="color: #666666">=</span> c_into <span style="color: #3D7B7B; font-style: italic">#freshwater into tank</span>
+    c_old   <span style="color: #666666">=</span> c_init <span style="color: #3D7B7B; font-style: italic">#seawater present </span>
     ti<span style="color: #666666">=0.</span>; h_new<span style="color: #666666">=1e-3</span>;
     no_steps<span style="color: #666666">=0</span>
     global_err<span style="color: #666666">=0.</span>
     <span style="color: #008000; font-weight: bold">while</span>(ti <span style="color: #666666">&lt;=</span> t_final):
         t<span style="color: #666666">.</span>append(ti); f<span style="color: #666666">.</span>append(c_old)
-        toli<span style="color: #666666">=10.*</span>tol; <span style="color: #408080; font-style: italic"># a high init tolerance to enter while loop</span>
-        <span style="color: #008000; font-weight: bold">while</span>(toli<span style="color: #666666">&gt;</span>tol):<span style="color: #408080; font-style: italic"># first two small steps</span>
+        toli<span style="color: #666666">=10.*</span>tol; <span style="color: #3D7B7B; font-style: italic"># a high init tolerance to enter while loop</span>
+        <span style="color: #008000; font-weight: bold">while</span>(toli<span style="color: #666666">&gt;</span>tol):<span style="color: #3D7B7B; font-style: italic"># first two small steps</span>
             hi<span style="color: #666666">=</span>h_new
             k1 <span style="color: #666666">=</span> one_step(c_old,c_in,hi<span style="color: #666666">*.5</span>)
             k2 <span style="color: #666666">=</span> one_step(k1,c_in,hi<span style="color: #666666">*.5</span>)
-            <span style="color: #408080; font-style: italic"># ... and one large step</span>
+            <span style="color: #3D7B7B; font-style: italic"># ... and one large step</span>
             k3 <span style="color: #666666">=</span> one_step(c_old,c_in,hi)
             toli <span style="color: #666666">=</span> <span style="color: #008000">abs</span>(k3<span style="color: #666666">-</span>k2)
             h_new<span style="color: #666666">=</span>hi<span style="color: #666666">*</span>np<span style="color: #666666">.</span>sqrt(tol<span style="color: #666666">/</span>toli)
             no_steps<span style="color: #666666">+=3</span>
         toli<span style="color: #666666">=1.</span>
-        c_old<span style="color: #666666">=2*</span>k2<span style="color: #666666">-</span>k3 <span style="color: #408080; font-style: italic"># higher order correction</span>
- <span style="color: #408080; font-style: italic"># normal Euler, uncomment and inspect the global error</span>
- <span style="color: #408080; font-style: italic">#       c_old = k2 </span>
+        c_old<span style="color: #666666">=2*</span>k2<span style="color: #666666">-</span>k3 <span style="color: #3D7B7B; font-style: italic"># higher order correction</span>
+ <span style="color: #3D7B7B; font-style: italic"># normal Euler, uncomment and inspect the global error</span>
+ <span style="color: #3D7B7B; font-style: italic">#       c_old = k2 </span>
         ti   <span style="color: #666666">+=</span> hi
         global_err <span style="color: #666666">+=</span> <span style="color: #008000">abs</span>(np<span style="color: #666666">.</span>exp(<span style="color: #666666">-</span>ti)<span style="color: #666666">-</span>c_old)
     <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;No steps=&quot;</span>, no_steps, <span style="color: #BA2121">&quot;Global Error=&quot;</span>, global_err)
@@ -1182,8 +1187,8 @@ $$
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">ode_solv</span>(c_into,c_init,t_final,h):
     f<span style="color: #666666">=</span>[];t<span style="color: #666666">=</span>[]
-    c_in  <span style="color: #666666">=</span> c_into <span style="color: #408080; font-style: italic">#freshwater into tank</span>
-    c_old <span style="color: #666666">=</span> c_init <span style="color: #408080; font-style: italic">#seawater present </span>
+    c_in  <span style="color: #666666">=</span> c_into <span style="color: #3D7B7B; font-style: italic">#freshwater into tank</span>
+    c_old <span style="color: #666666">=</span> c_init <span style="color: #3D7B7B; font-style: italic">#seawater present </span>
     ti<span style="color: #666666">=0.</span>
     <span style="color: #008000; font-weight: bold">while</span>(ti <span style="color: #666666">&lt;=</span> t_final):
         t<span style="color: #666666">.</span>append(ti); f<span style="color: #666666">.</span>append(c_old)

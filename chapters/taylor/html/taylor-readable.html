@@ -8,9 +8,9 @@ doconce format html main_taylor.do.txt CHAPTER=document BOOK=document APPENDIX=d
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/doconce/doconce/" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="description" content="Basic modeling: gradients">
+<meta name="description" content="A basic ingredient in modeling: gradients">
 <meta name="keywords" content="numerical error,Taylor polynomial,truncation error,Taylor polynomial, error term,Maclaurin series,forward difference,backward difference,central difference,central difference,roundoff erros,machine precision,IEEE 754-1985 standard,roundoff errors">
-<title>Basic modeling: gradients</title>
+<title>A basic ingredient in modeling: gradients</title>
 <!-- Bootstrap style: bootswatch_readable -->
 <!-- doconce format html main_taylor.do.txt CHAPTER=document BOOK=document APPENDIX=document --html_style=bootswatch_readable --html_output=taylor-readable --html_code_style=inherit -->
 <link href="https://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
@@ -108,7 +108,7 @@ $$
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="aylor-readable.html">Basic modeling: gradients</a>
+    <a class="navbar-brand" href="aylor-readable.html">A basic ingredient in modeling: gradients</a>
   </div>
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav navbar-right">
@@ -139,7 +139,7 @@ $$
 <!-- ------------------- main content ---------------------- -->
 <div class="jumbotron">
 <center>
-<h1>Basic modeling: gradients</h1>
+<h1>A basic ingredient in modeling: gradients</h1>
 </center>  <!-- document title -->
 
 <!-- author(s): Aksel Hiorth -->
@@ -150,7 +150,7 @@ $$
 <br>
 <p>University of Stavanger
 <center>
-<h4>May 7, 2023</h4>
+<h4>Aug 14, 2023</h4>
 </center> <!-- date -->
 <br>
 </p>
@@ -171,7 +171,7 @@ $$
 
 <!-- Common Mako variables and functions -->
 <h1 id="why-are-gradients-important" class="anchor">Why are gradients important? </h1>
-<p>If you are going to walk up a mountain, it is not enough to know the height of the mountain, you also want to know how steep the mountain is. Even if the mountain is very low, it can still be extremely difficult to reach the top if it is very steep. The steepness is how much the height is changing as a function of time (if we walk with the same pace) or much the height is changing compared to our horizontal movement. To be more precise lets say we move from \( x=a \) to \( x=b \), and the height increases from \( h_a \) to \( h_b \), the steepness is</p>
+<p>If you are going to walk up a mountain, it is not enough to know the height of the mountain, you also want to know how steep the mountain is. Even if the mountain is very low, it can still be extremely difficult to reach the top if it is very steep. The steepness is how much the height is changing as a function of time (if we walk with the same pace) or how much the height is changing compared to our horizontal movement. To be more precise lets say we move from \( x=a \) to \( x=b \), and the height increases from \( h_a \) to \( h_b \), the steepness is</p>
 $$
 \begin{equation}
 \frac{h_b-h_a}{x_b-x_a}.
@@ -179,18 +179,18 @@ $$
 \end{equation}
 $$
 
-<p>If we climb a ladder, the horizontal movement is small (\( x_b-x_a \) is small) and the increase in height is large, hence the steepness is large. If we walk a long a flat path we have no vertical movement and the steepness is zero (\( h_a=h_b \)). Mathematically, if we let \( x_b \) and \( x_a \) come infinitely close the steepness is called a <em>gradient</em>, and we denote it by \( \nabla h(x) \). Note also that the sign of the gradient tells something about the direction. If we climb up a ladder, the height is increasing (positive gradient), on the other hand if we are climbing down the height is decreasing (\( h_a>h_b \)) and the gradient is negative. </p>
+<p>If we climb a ladder, the horizontal movement is small (\( x_b-x_a \) is small) and the increase in height is large, hence the steepness is large. If we walk a long a flat path we have no vertical movement and the steepness is zero (\( h_a=h_b \)). Mathematically, if we let \( x_b \) and \( x_a \) come infinitely close, the steepness is called a <em>gradient</em>, and we denote it by \( \nabla h(x) \). Note also that the sign of the gradient tells something about the direction. If we climb up a ladder, the height is increasing (positive gradient), on the other hand if we are climbing down the height is decreasing (\( h_a>h_b \)) and the gradient is negative. </p>
 
-<p>If we consider the height of a mountain in two dimensions, \( h=h(x,y) \), this is basically the contour lines on a map. The spacing between the lines is the gradient. </p>
+<p>If we consider the height of a mountain in two dimensions, \( h=h(x,y) \), this is basically the contour lines on a map. The spacing between the contour lines is the gradient, if the spacing between contour lines are small the mountain side is steeper than if they are larger.  </p>
 
 <div class="alert alert-block alert-success alert-text-normal"><b>Gradients vs derivatives</b>
-<p>If we are only considering a single variable, height as a function of time or \( x \), we often denote the gradient, \( \nabla h \), \( h^\prime(x) \) and call it the derivative of \( h(x) \). In higher dimension, e.g. \( h(x,y) \), we use the term partial derivatives, because there are now different variables we can vary e.g. latitude and altitude. The gradient is now a <em>vector</em>, \( \nabla=[\partial h/\partial x, \partial h/\partial y] \).   </p>
+<p>If we are only considering a single variable, height as a function of time or position, \( x \), we often denote the gradient (\( \nabla h \)), \( h^\prime(x) \) and call it the derivative of \( h(x) \). In higher dimension, e.g. \( h(x,y) \), we use the term partial derivatives, because there are now different variables we can vary e.g. latitude and altitude. The gradient is now a <em>vector</em>, \( \nabla=[\partial h/\partial x, \partial h/\partial y] \). \( \partial h/\partial x \) is the partial derivative of \( h(x,y) \) with respect to \( x \), i.e. we keep \( y \) constant and only differentiate with respect to \( x \).   </p>
 </div>
 
 
 <p>Another example where gradients are important is the flow of heat. Heat flows from hot to cold places, the amount of heat is proportional to the temperature difference, i.e. a gradient in temperature. The flow of air is also from points of high pressure to low pressure, i.e. a gradient in pressure. </p>
 
-<p>A primary task of a modeler is to predict something. If there are no gradients in a system, nothing would happen and there is no reason to model anything. Hence, an extremely important task when we model something is to treat gradients carefully. If gradients are not represented correctly in a computer, we just put rubbish in and get rubbish out.</p>
+<p>A primary task of a modeler is to predict something. If there are no gradients in a system, nothing would happen and there is no reason to model anything. Hence, an extremely important task when we model something is to treat gradients carefully. If gradients are not represented correctly in a computer, the output of a simulation will introduce errors that sometimes can be so large that one cannot trust the simulation results.</p>
 <h1 id="continuous-functions-and-finite-representation-numerical-errors" class="anchor">Continuous functions and finite representation: numerical errors </h1>
 <p>A computer can only deal with numbers. To simulate a physical system in a computer we have to divide space and time into finite pieces, and assign numbers to different parts of time and/or space. </p>
 
@@ -297,9 +297,9 @@ $$
         <div class="highlight" style="background: #ffffff">
   <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
 
-<span style="color: #408080; font-style: italic"># Sinus implementation using the Maclaurin Serie</span>
-<span style="color: #408080; font-style: italic"># By setting a value for eps this value will be used</span>
-<span style="color: #408080; font-style: italic"># if not provided</span>
+<span style="color: #3D7B7B; font-style: italic"># Sinus implementation using the Maclaurin Serie</span>
+<span style="color: #3D7B7B; font-style: italic"># By setting a value for eps this value will be used</span>
+<span style="color: #3D7B7B; font-style: italic"># if not provided</span>
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">my_sin</span>(x,eps<span style="color: #666666">=1e-16</span>):
     f <span style="color: #666666">=</span> power <span style="color: #666666">=</span> x
     x2 <span style="color: #666666">=</span> x<span style="color: #666666">*</span>x
@@ -545,8 +545,8 @@ Most modern computers uses 64-bits (8 bytes) processors. We are not going too mu
     <div class="inner_cell">
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
-  <pre style="line-height: 125%;"><span style="color: #008000">print</span>(<span style="color: #666666">1+2**-52</span>) <span style="color: #408080; font-style: italic"># prints a value larger than 1</span>
-<span style="color: #008000">print</span>(<span style="color: #666666">1+2**-53</span>) <span style="color: #408080; font-style: italic"># prints 1.0</span>
+  <pre style="line-height: 125%;"><span style="color: #008000">print</span>(<span style="color: #666666">1+2**-52</span>) <span style="color: #3D7B7B; font-style: italic"># prints a value larger than 1</span>
+<span style="color: #008000">print</span>(<span style="color: #666666">1+2**-53</span>) <span style="color: #3D7B7B; font-style: italic"># prints 1.0</span>
 </pre>
 </div>
       </div>
@@ -572,7 +572,7 @@ Most modern computers uses 64-bits (8 bytes) processors. We are not going too mu
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">a<span style="color: #666666">=0.1+0.2</span>
 b<span style="color: #666666">=0.3</span>
-<span style="color: #008000">print</span>(a<span style="color: #666666">==</span>b) <span style="color: #408080; font-style: italic"># gives False</span>
+<span style="color: #008000">print</span>(a<span style="color: #666666">==</span>b) <span style="color: #3D7B7B; font-style: italic"># gives False</span>
 </pre>
 </div>
       </div>
@@ -608,7 +608,7 @@ Thus in the computer 0.2 will be represented as \( 0.1999\ldots \) and when we a
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">a<span style="color: #666666">=0.125+0.25</span>
 b<span style="color: #666666">=0.375</span>
-<span style="color: #008000">print</span>(a<span style="color: #666666">==</span>b) <span style="color: #408080; font-style: italic"># gives True</span>
+<span style="color: #008000">print</span>(a<span style="color: #666666">==</span>b) <span style="color: #3D7B7B; font-style: italic"># gives True</span>
 </pre>
 </div>
       </div>
@@ -639,7 +639,7 @@ b<span style="color: #666666">=0.375</span>
   <pre style="line-height: 125%;">h<span style="color: #666666">=2**-53</span>
 a<span style="color: #666666">=1+</span>h
 b<span style="color: #666666">=1-</span>h
-<span style="color: #008000">print</span>((a<span style="color: #666666">-</span>b)<span style="color: #666666">/</span>h) <span style="color: #408080; font-style: italic"># analytical result is 2</span>
+<span style="color: #008000">print</span>((a<span style="color: #666666">-</span>b)<span style="color: #666666">/</span>h) <span style="color: #3D7B7B; font-style: italic"># analytical result is 2</span>
 </pre>
 </div>
       </div>
@@ -672,7 +672,7 @@ b<span style="color: #666666">=1-</span>h
 h<span style="color: #666666">=0.0002</span> 
 temp <span style="color: #666666">=</span> x<span style="color: #666666">+</span>h
 h<span style="color: #666666">=</span>temp<span style="color: #666666">-</span>x
-<span style="color: #008000">print</span>(h) <span style="color: #408080; font-style: italic"># improved value of h with exact binary representation</span>
+<span style="color: #008000">print</span>(h) <span style="color: #3D7B7B; font-style: italic"># improved value of h with exact binary representation</span>
 </pre>
 </div>
       </div>

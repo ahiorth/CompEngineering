@@ -321,6 +321,7 @@ code { color: inherit; background-color: transparent; }
                None,
                'exercise-6-1-numerical-integration'),
               ('Ordinary differential equations', 0, 'ch:ode', 'ch:ode'),
+              ('0D models', 1, None, '0d-models'),
               ('Ordinary differential equations',
                1,
                None,
@@ -406,7 +407,7 @@ MathJax.Hub.Config({
 <!-- newcommands_keep.tex -->
 $$
 \newcommand{\no}{\nonumber}
-\newcommand{\co}{CO$_2$}
+\newcommand{\co}{\text{CO$_{2}$}}
 $$
 
 
@@ -548,6 +549,7 @@ $$
      <!-- navigation toc: --> <li><a href="._book006.html#integrating-functions-over-an-infinite-range" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Integrating functions over an infinite range</a></li>
      <!-- navigation toc: --> <li><a href="._book006.html#exercise-6-1-numerical-integration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 6.1: Numerical Integration</a></li>
      <!-- navigation toc: --> <li><a href="._book007.html#ch:ode" style="font-size: 80%;"><b>Ordinary differential equations</b></a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#0d-models" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;0D models</a></li>
      <!-- navigation toc: --> <li><a href="._book007.html#ordinary-differential-equations" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ordinary differential equations</a></li>
      <!-- navigation toc: --> <li><a href="._book007.html#a-simple-model-for-fluid-flow" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;A simple model for fluid flow</a></li>
      <!-- navigation toc: --> <li><a href="._book007.html#euler-s-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Euler's method</a></li>
@@ -649,9 +651,9 @@ $$
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">y<span style="color: #666666">=10</span>
 x<span style="color: #666666">=</span>y
-x <span style="color: #AA22FF; font-weight: bold">is</span> y <span style="color: #408080; font-style: italic"># gives true</span>
+x <span style="color: #AA22FF; font-weight: bold">is</span> y <span style="color: #3D7B7B; font-style: italic"># gives true</span>
 <span style="color: #008000">print</span>(<span style="color: #008000">id</span>(x))
-<span style="color: #008000">print</span>(<span style="color: #008000">id</span>(y)) <span style="color: #408080; font-style: italic"># prints the same integer as id(x)</span>
+<span style="color: #008000">print</span>(<span style="color: #008000">id</span>(y)) <span style="color: #3D7B7B; font-style: italic"># prints the same integer as id(x)</span>
 </pre>
 </div>
       </div>
@@ -738,11 +740,11 @@ my_bool  <span style="color: #666666">=</span> <span style="color: #008000; font
     <div class="inner_cell">
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
-  <pre style="line-height: 125%;">my_list <span style="color: #666666">=</span> []      <span style="color: #408080; font-style: italic"># an empty list</span>
-my_list <span style="color: #666666">=</span> []<span style="color: #666666">*10</span>   <span style="color: #408080; font-style: italic"># still an empty list ...</span>
-my_list <span style="color: #666666">=</span> [<span style="color: #666666">0</span>]<span style="color: #666666">*10</span>  <span style="color: #408080; font-style: italic"># a list with 10 zeros</span>
-my_list <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;one&#39;</span>, <span style="color: #BA2121">&#39;two&#39;</span>,<span style="color: #BA2121">&#39;three&#39;</span>] <span style="color: #408080; font-style: italic"># a list of strings</span>
-my_list <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;one&#39;</span>]<span style="color: #666666">*10</span> <span style="color: #408080; font-style: italic"># a list with 10 equal string elements </span>
+  <pre style="line-height: 125%;">my_list <span style="color: #666666">=</span> []      <span style="color: #3D7B7B; font-style: italic"># an empty list</span>
+my_list <span style="color: #666666">=</span> []<span style="color: #666666">*10</span>   <span style="color: #3D7B7B; font-style: italic"># still an empty list ...</span>
+my_list <span style="color: #666666">=</span> [<span style="color: #666666">0</span>]<span style="color: #666666">*10</span>  <span style="color: #3D7B7B; font-style: italic"># a list with 10 zeros</span>
+my_list <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;one&#39;</span>, <span style="color: #BA2121">&#39;two&#39;</span>,<span style="color: #BA2121">&#39;three&#39;</span>] <span style="color: #3D7B7B; font-style: italic"># a list of strings</span>
+my_list <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;one&#39;</span>]<span style="color: #666666">*10</span> <span style="color: #3D7B7B; font-style: italic"># a list with 10 equal string elements </span>
 </pre>
 </div>
       </div>
@@ -770,8 +772,8 @@ my_list <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39
     <div class="inner_cell">
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
-  <pre style="line-height: 125%;">my_list <span style="color: #666666">=</span> [i <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">10</span>)] <span style="color: #408080; font-style: italic"># a list from 0,1,..,9</span>
-my_list <span style="color: #666666">=</span> [i<span style="color: #666666">**3</span> <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">10</span>)] <span style="color: #408080; font-style: italic"># a list with elements 0,1,8, ..,729</span>
+  <pre style="line-height: 125%;">my_list <span style="color: #666666">=</span> [i <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">10</span>)] <span style="color: #3D7B7B; font-style: italic"># a list from 0,1,..,9</span>
+my_list <span style="color: #666666">=</span> [i<span style="color: #666666">**3</span> <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">10</span>)] <span style="color: #3D7B7B; font-style: italic"># a list with elements 0,1,8, ..,729</span>
 </pre>
 </div>
       </div>
@@ -851,13 +853,13 @@ new_list <span style="color: #666666">=</span> my_list <span style="color: #6666
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">my_list<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;hammer&#39;</span>, <span style="color: #BA2121">&#39;saw&#39;</span>, <span style="color: #BA2121">&#39;screw&#39;</span>, <span style="color: #BA2121">&#39;nail&#39;</span>, <span style="color: #BA2121">&#39;glue&#39;</span>]
-my_list[:]      <span style="color: #408080; font-style: italic"># [&#39;hammer&#39;, &#39;saw&#39;, &#39;screw&#39;, &#39;nail&#39;, &#39;glue&#39;]</span>
-my_list[<span style="color: #666666">1</span>:]     <span style="color: #408080; font-style: italic"># [&#39;saw&#39;, &#39;screw&#39;, &#39;nail&#39;, &#39;glue&#39;]</span>
-my_list[:<span style="color: #666666">-1</span>]    <span style="color: #408080; font-style: italic"># [&#39;hammer&#39;, &#39;saw&#39;, &#39;screw&#39;, &#39;nail&#39;]</span>
-my_list[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>]   <span style="color: #408080; font-style: italic"># [&#39;saw&#39;, &#39;screw&#39;, &#39;nail&#39;]</span>
-my_list[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>:<span style="color: #666666">2</span>] <span style="color: #408080; font-style: italic"># [&#39;saw&#39;,&#39;nail&#39;]</span>
-my_list[::<span style="color: #666666">1</span>]    <span style="color: #408080; font-style: italic"># [&#39;hammer&#39;, &#39;saw&#39;, &#39;screw&#39;, &#39;nail&#39;, &#39;glue&#39;]</span>
-my_list[::<span style="color: #666666">2</span>]    <span style="color: #408080; font-style: italic"># [&#39;hammer&#39;, &#39;screw&#39;, &#39;glue&#39;]</span>
+my_list[:]      <span style="color: #3D7B7B; font-style: italic"># [&#39;hammer&#39;, &#39;saw&#39;, &#39;screw&#39;, &#39;nail&#39;, &#39;glue&#39;]</span>
+my_list[<span style="color: #666666">1</span>:]     <span style="color: #3D7B7B; font-style: italic"># [&#39;saw&#39;, &#39;screw&#39;, &#39;nail&#39;, &#39;glue&#39;]</span>
+my_list[:<span style="color: #666666">-1</span>]    <span style="color: #3D7B7B; font-style: italic"># [&#39;hammer&#39;, &#39;saw&#39;, &#39;screw&#39;, &#39;nail&#39;]</span>
+my_list[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>]   <span style="color: #3D7B7B; font-style: italic"># [&#39;saw&#39;, &#39;screw&#39;, &#39;nail&#39;]</span>
+my_list[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>:<span style="color: #666666">2</span>] <span style="color: #3D7B7B; font-style: italic"># [&#39;saw&#39;,&#39;nail&#39;]</span>
+my_list[::<span style="color: #666666">1</span>]    <span style="color: #3D7B7B; font-style: italic"># [&#39;hammer&#39;, &#39;saw&#39;, &#39;screw&#39;, &#39;nail&#39;, &#39;glue&#39;]</span>
+my_list[::<span style="color: #666666">2</span>]    <span style="color: #3D7B7B; font-style: italic"># [&#39;hammer&#39;, &#39;screw&#39;, &#39;glue&#39;]</span>
 </pre>
 </div>
       </div>
@@ -884,7 +886,7 @@ my_list[::<span style="color: #666666">2</span>]    <span style="color: #408080;
   <pre style="line-height: 125%;">my_list  <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;hammer&#39;</span>,<span style="color: #BA2121">&#39;saw&#39;</span>]
 my_list2 <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;screw&#39;</span>,<span style="color: #BA2121">&#39;nail&#39;</span>,<span style="color: #BA2121">&#39;glue&#39;</span>]
 new_list<span style="color: #666666">=</span>[my_list,my_list2]
-<span style="color: #408080; font-style: italic"># extract the first element of each list</span>
+<span style="color: #3D7B7B; font-style: italic"># extract the first element of each list</span>
 new_list2 <span style="color: #666666">=</span> [ <span style="color: #008000">list</span>[<span style="color: #666666">0</span>] <span style="color: #008000; font-weight: bold">for</span> <span style="color: #008000">list</span> <span style="color: #AA22FF; font-weight: bold">in</span> new_list]
 </pre>
 </div>
@@ -916,9 +918,9 @@ new_list2 <span style="color: #666666">=</span> [ <span style="color: #008000">l
     <div class="inner_cell">
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
-  <pre style="line-height: 125%;">my_array<span style="color: #666666">=</span>np<span style="color: #666666">.</span>array([<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">2</span>,<span style="color: #666666">3</span>]) <span style="color: #408080; font-style: italic"># initialized from list</span>
-my_array<span style="color: #666666">=</span>np<span style="color: #666666">.</span>zeros(<span style="color: #666666">10</span>) <span style="color: #408080; font-style: italic"># array with 10 elements equal to zero</span>
-my_array<span style="color: #666666">=</span>np<span style="color: #666666">.</span>ones(<span style="color: #666666">10</span>)  <span style="color: #408080; font-style: italic"># array with 10 elements equal to one</span>
+  <pre style="line-height: 125%;">my_array<span style="color: #666666">=</span>np<span style="color: #666666">.</span>array([<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">2</span>,<span style="color: #666666">3</span>]) <span style="color: #3D7B7B; font-style: italic"># initialized from list</span>
+my_array<span style="color: #666666">=</span>np<span style="color: #666666">.</span>zeros(<span style="color: #666666">10</span>) <span style="color: #3D7B7B; font-style: italic"># array with 10 elements equal to zero</span>
+my_array<span style="color: #666666">=</span>np<span style="color: #666666">.</span>ones(<span style="color: #666666">10</span>)  <span style="color: #3D7B7B; font-style: italic"># array with 10 elements equal to one</span>
 </pre>
 </div>
       </div>
@@ -942,8 +944,8 @@ my_array<span style="color: #666666">=</span>np<span style="color: #666666">.</s
     <div class="inner_cell">
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
-  <pre style="line-height: 125%;">my_array<span style="color: #666666">=</span>np<span style="color: #666666">.</span>arange(<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">0.2</span>) <span style="color: #408080; font-style: italic"># [0, 0.2, 0.4, 0.6, 0.8]</span>
-my_array<span style="color: #666666">=</span>np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">5</span>) <span style="color: #408080; font-style: italic"># [0., 0.25, 0.5, 0.75, 1.]</span>
+  <pre style="line-height: 125%;">my_array<span style="color: #666666">=</span>np<span style="color: #666666">.</span>arange(<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">0.2</span>) <span style="color: #3D7B7B; font-style: italic"># [0, 0.2, 0.4, 0.6, 0.8]</span>
+my_array<span style="color: #666666">=</span>np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">5</span>) <span style="color: #3D7B7B; font-style: italic"># [0., 0.25, 0.5, 0.75, 1.]</span>
 </pre>
 </div>
       </div>
@@ -975,12 +977,12 @@ my_array<span style="color: #666666">=</span>np<span style="color: #666666">.</s
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">my_array<span style="color: #666666">=</span>np<span style="color: #666666">.</span>arange(<span style="color: #666666">0</span>,<span style="color: #666666">6</span>,<span style="color: #666666">1</span>)
-my_array[:]      <span style="color: #408080; font-style: italic"># [0,1,2,3,4,5]</span>
-my_array[<span style="color: #666666">1</span>:]     <span style="color: #408080; font-style: italic"># [1,2,3,4,5]</span>
-my_array[:<span style="color: #666666">-1</span>]    <span style="color: #408080; font-style: italic"># [0,1,2,3,4]</span>
-my_array[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>]   <span style="color: #408080; font-style: italic"># [1,2,3,4]</span>
-my_array[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>:<span style="color: #666666">2</span>] <span style="color: #408080; font-style: italic"># [1,3]</span>
-my_array[::<span style="color: #666666">2</span>]    <span style="color: #408080; font-style: italic"># [0,2,4]</span>
+my_array[:]      <span style="color: #3D7B7B; font-style: italic"># [0,1,2,3,4,5]</span>
+my_array[<span style="color: #666666">1</span>:]     <span style="color: #3D7B7B; font-style: italic"># [1,2,3,4,5]</span>
+my_array[:<span style="color: #666666">-1</span>]    <span style="color: #3D7B7B; font-style: italic"># [0,1,2,3,4]</span>
+my_array[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>]   <span style="color: #3D7B7B; font-style: italic"># [1,2,3,4]</span>
+my_array[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>:<span style="color: #666666">2</span>] <span style="color: #3D7B7B; font-style: italic"># [1,3]</span>
+my_array[::<span style="color: #666666">2</span>]    <span style="color: #3D7B7B; font-style: italic"># [0,2,4]</span>
 </pre>
 </div>
       </div>
@@ -1063,8 +1065,8 @@ my_array[:,1] # [1,4] Second column
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">my_array  <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">2</span>,<span style="color: #666666">3</span>,<span style="color: #666666">4</span>,<span style="color: #666666">5</span>])
-my_array<span style="color: #666666">.</span>shape <span style="color: #666666">=</span> (<span style="color: #666666">2</span>,<span style="color: #666666">3</span>) <span style="color: #408080; font-style: italic"># [[0,1,2],[3,4,5]] 2 rows and 3 columns</span>
-my_array<span style="color: #666666">.</span>shape <span style="color: #666666">=</span> (<span style="color: #666666">3</span>,<span style="color: #666666">2</span>) <span style="color: #408080; font-style: italic"># [[0,1],[2,3],[4,5]] 3 rows and 2 columns</span>
+my_array<span style="color: #666666">.</span>shape <span style="color: #666666">=</span> (<span style="color: #666666">2</span>,<span style="color: #666666">3</span>) <span style="color: #3D7B7B; font-style: italic"># [[0,1,2],[3,4,5]] 2 rows and 3 columns</span>
+my_array<span style="color: #666666">.</span>shape <span style="color: #666666">=</span> (<span style="color: #666666">3</span>,<span style="color: #666666">2</span>) <span style="color: #3D7B7B; font-style: italic"># [[0,1],[2,3],[4,5]] 3 rows and 2 columns</span>
 </pre>
 </div>
       </div>
@@ -1157,7 +1159,7 @@ my_array<span style="color: #666666">.</span>shape <span style="color: #666666">
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">numbers<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;one&#39;</span>,<span style="color: #BA2121">&#39;two&#39;</span>,<span style="color: #BA2121">&#39;three&#39;</span>,<span style="color: #BA2121">&#39;one&#39;</span>,<span style="color: #BA2121">&#39;two&#39;</span>]
-result<span style="color: #666666">=</span>[] <span style="color: #408080; font-style: italic"># has to be declared as empty</span>
+result<span style="color: #666666">=</span>[] <span style="color: #3D7B7B; font-style: italic"># has to be declared as empty</span>
 <span style="color: #008000; font-weight: bold">for</span> number <span style="color: #AA22FF; font-weight: bold">in</span> numbers:
     <span style="color: #008000; font-weight: bold">if</span> number <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;one&#39;</span>:
        result<span style="color: #666666">.</span>append(<span style="color: #666666">1</span>) 
@@ -1186,7 +1188,7 @@ result<span style="color: #666666">=</span>[] <span style="color: #408080; font-
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">numbers  <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;one&#39;</span>,<span style="color: #BA2121">&#39;two&#39;</span>,<span style="color: #BA2121">&#39;three&#39;</span>,<span style="color: #BA2121">&#39;one&#39;</span>,<span style="color: #BA2121">&#39;two&#39;</span>]
 numerics <span style="color: #666666">=</span> [  <span style="color: #666666">1</span>  ,  <span style="color: #666666">2</span>  ,   <span style="color: #666666">3</span>   , <span style="color: #666666">1</span>   , <span style="color: #666666">2</span>   ]
-result<span style="color: #666666">=</span>[] <span style="color: #408080; font-style: italic"># has to be declared as empty</span>
+result<span style="color: #666666">=</span>[] <span style="color: #3D7B7B; font-style: italic"># has to be declared as empty</span>
 <span style="color: #008000; font-weight: bold">for</span> idx,number <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">enumerate</span>(numbers):
     <span style="color: #008000; font-weight: bold">if</span> number <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;one&#39;</span>:
        result<span style="color: #666666">.</span>append(numerics[idx]) 
@@ -1217,7 +1219,7 @@ result<span style="color: #666666">=</span>[] <span style="color: #408080; font-
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">numbers  <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;one&#39;</span>,<span style="color: #BA2121">&#39;two&#39;</span>,<span style="color: #BA2121">&#39;three&#39;</span>,<span style="color: #BA2121">&#39;one&#39;</span>,<span style="color: #BA2121">&#39;two&#39;</span>]
 numerics <span style="color: #666666">=</span> [  <span style="color: #666666">1</span>  ,  <span style="color: #666666">2</span>  ,   <span style="color: #666666">3</span>   , <span style="color: #666666">1</span>   , <span style="color: #666666">2</span>   ]
-result<span style="color: #666666">=</span>[] <span style="color: #408080; font-style: italic"># has to be declared as empty</span>
+result<span style="color: #666666">=</span>[] <span style="color: #3D7B7B; font-style: italic"># has to be declared as empty</span>
 <span style="color: #008000; font-weight: bold">for</span> numeric,number <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">zip</span>(numerics,numbers):
     <span style="color: #008000; font-weight: bold">if</span> number <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;one&#39;</span>:
        result<span style="color: #666666">.</span>append(numeric) 
@@ -1248,7 +1250,7 @@ result<span style="color: #666666">=</span>[] <span style="color: #408080; font-
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
 <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
-x_val   <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">100</span>) <span style="color: #408080; font-style: italic"># 100 equal spaced points from 0 to 1</span>
+x_val   <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">100</span>) <span style="color: #3D7B7B; font-style: italic"># 100 equal spaced points from 0 to 1</span>
 y_vals  <span style="color: #666666">=</span> [x_val,x_val<span style="color: #666666">*</span>x_val]
 labels  <span style="color: #666666">=</span> [<span style="color: #BA2121">r&#39;x&#39;</span>, <span style="color: #BA2121">r&#39;$x^2$&#39;</span>]
 cols    <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;r&#39;</span>,<span style="color: #BA2121">&#39;g&#39;</span>]
@@ -1296,7 +1298,7 @@ plt<span style="color: #666666">.</span>show()
 finished <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">False</span>
 <span style="color: #008000">sum</span> <span style="color: #666666">=0</span>
 <span style="color: #008000; font-weight: bold">while</span> <span style="color: #AA22FF; font-weight: bold">not</span> finished:
-      <span style="color: #008000">sum</span> <span style="color: #666666">+=</span> np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>random() <span style="color: #408080; font-style: italic">#returns a random number between 0,1</span>
+      <span style="color: #008000">sum</span> <span style="color: #666666">+=</span> np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>random() <span style="color: #3D7B7B; font-style: italic">#returns a random number between 0,1</span>
       <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">sum</span> <span style="color: #666666">&gt;=</span> <span style="color: #666666">10.</span>:
       	 finished <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">True</span>
 </pre>
@@ -1430,8 +1432,8 @@ If we would like to calculate the derivative at multiple points, that is straigh
 <span style="color: #BA2121; font-style: italic">    a  : acceleration</span>
 <span style="color: #BA2121; font-style: italic">    returns the distance traveled</span>
 <span style="color: #BA2121; font-style: italic">    &#39;&#39;&#39;</span>
-    <span style="color: #008000; font-weight: bold">return</span> s0<span style="color: #666666">+</span>v0<span style="color: #666666">*</span>t<span style="color: #666666">+</span>a<span style="color: #666666">*</span>t<span style="color: #666666">*</span>t<span style="color: #666666">*0.5</span> <span style="color: #408080; font-style: italic">#multiplication (0.5)is general faster</span>
-    	   		     <span style="color: #408080; font-style: italic">#than division (2)</span>
+    <span style="color: #008000; font-weight: bold">return</span> s0<span style="color: #666666">+</span>v0<span style="color: #666666">*</span>t<span style="color: #666666">+</span>a<span style="color: #666666">*</span>t<span style="color: #666666">*</span>t<span style="color: #666666">*0.5</span> <span style="color: #3D7B7B; font-style: italic">#multiplication (0.5)is general faster</span>
+    	   		     <span style="color: #3D7B7B; font-style: italic">#than division (2)</span>
 </pre>
 </div>
       </div>
@@ -1455,7 +1457,7 @@ If we would like to calculate the derivative at multiple points, that is straigh
     <div class="inner_cell">
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
-  <pre style="line-height: 125%;"><span style="color: #D2413A; font-weight: bold">TypeError</span>: s() missing <span style="color: #666666">3</span> required positional
+  <pre style="line-height: 125%;"><span style="color: #CB3F38; font-weight: bold">TypeError</span>: s() missing <span style="color: #666666">3</span> required positional
 	   arguments: <span style="color: #BA2121">&#39;s0&#39;</span>, <span style="color: #BA2121">&#39;v0&#39;</span>, <span style="color: #AA22FF; font-weight: bold">and</span> <span style="color: #BA2121">&#39;a&#39;</span>
 </pre>
 </div>
@@ -1701,7 +1703,7 @@ a<span style="color: #666666">=2</span>
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">x <span style="color: #666666">=</span> [<span style="color: #666666">3</span>]
-append_to_list(x) <span style="color: #408080; font-style: italic">#returns  [3 1], x is now  [3, 1]</span>
+append_to_list(x) <span style="color: #3D7B7B; font-style: italic">#returns  [3 1], x is now  [3, 1]</span>
 </pre>
 </div>
       </div>
@@ -1755,7 +1757,7 @@ append_to_list(x) <span style="color: #408080; font-style: italic">#returns  [3 
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">x <span style="color: #666666">=</span>  np<span style="color: #666666">.</span>array([<span style="color: #666666">3</span>])
-append_to_np(x) <span style="color: #408080; font-style: italic">#returns  [3 1], x is now  [3]</span>
+append_to_np(x) <span style="color: #3D7B7B; font-style: italic">#returns  [3 1], x is now  [3]</span>
 </pre>
 </div>
       </div>
@@ -1848,9 +1850,9 @@ used 512 micro seconds, the Numpy function was about 6000 times slower! To add t
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">x <span style="color: #666666">=</span>  np<span style="color: #666666">.</span>array([<span style="color: #666666">3</span>])
-add_to_np(x) <span style="color: #408080; font-style: italic">#returns [6], x is now [3] </span>
+add_to_np(x) <span style="color: #3D7B7B; font-style: italic">#returns [6], x is now [3] </span>
 x <span style="color: #666666">=</span>  np<span style="color: #666666">.</span>array([<span style="color: #666666">3</span>])
-add_to_np2(x) <span style="color: #408080; font-style: italic">#returns  [6], x is now  [6]</span>
+add_to_np2(x) <span style="color: #3D7B7B; font-style: italic">#returns  [6], x is now  [6]</span>
 </pre>
 </div>
       </div>
@@ -1917,9 +1919,9 @@ x<span style="color: #666666">=</span>np<span style="color: #666666">.</span>arr
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">a<span style="color: #666666">=10.0</span>
-<span style="color: #008000">print</span>(<span style="color: #008000">id</span>(a)) <span style="color: #408080; font-style: italic">#gives on my computer 140587667748656</span>
+<span style="color: #008000">print</span>(<span style="color: #008000">id</span>(a)) <span style="color: #3D7B7B; font-style: italic">#gives on my computer 140587667748656</span>
 a <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
-<span style="color: #008000">print</span>(<span style="color: #008000">id</span>(a)) <span style="color: #408080; font-style: italic">#gives on my computer 140587667748400</span>
+<span style="color: #008000">print</span>(<span style="color: #008000">id</span>(a)) <span style="color: #3D7B7B; font-style: italic">#gives on my computer 140587667748400</span>
 </pre>
 </div>
       </div>
@@ -1945,9 +1947,9 @@ a <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">a<span style="color: #666666">=10.0</span>
 b<span style="color: #666666">=10.0</span>
-<span style="color: #008000">print</span>(a <span style="color: #AA22FF; font-weight: bold">is</span> b) <span style="color: #408080; font-style: italic"># prints False</span>
+<span style="color: #008000">print</span>(a <span style="color: #AA22FF; font-weight: bold">is</span> b) <span style="color: #3D7B7B; font-style: italic"># prints False</span>
 b<span style="color: #666666">=</span>a
-<span style="color: #008000">print</span>(a <span style="color: #AA22FF; font-weight: bold">is</span> b ) <span style="color: #408080; font-style: italic"># prints True</span>
+<span style="color: #008000">print</span>(a <span style="color: #AA22FF; font-weight: bold">is</span> b ) <span style="color: #3D7B7B; font-style: italic"># prints True</span>
 </pre>
 </div>
       </div>
@@ -1973,9 +1975,9 @@ b<span style="color: #666666">=</span>a
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">a<span style="color: #666666">=10</span>
 b<span style="color: #666666">=</span>a
-<span style="color: #008000">print</span>(a <span style="color: #AA22FF; font-weight: bold">is</span> b) <span style="color: #408080; font-style: italic"># True</span>
+<span style="color: #008000">print</span>(a <span style="color: #AA22FF; font-weight: bold">is</span> b) <span style="color: #3D7B7B; font-style: italic"># True</span>
 a<span style="color: #666666">+=2</span>
-<span style="color: #008000">print</span>(a <span style="color: #AA22FF; font-weight: bold">is</span> b) <span style="color: #408080; font-style: italic"># False</span>
+<span style="color: #008000">print</span>(a <span style="color: #AA22FF; font-weight: bold">is</span> b) <span style="color: #3D7B7B; font-style: italic"># False</span>
 </pre>
 </div>
       </div>
@@ -2004,7 +2006,7 @@ a<span style="color: #666666">+=2</span>
   <pre style="line-height: 125%;">x<span style="color: #666666">=</span>[<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">2</span>,<span style="color: #666666">3</span>,<span style="color: #666666">4</span>]
 <span style="color: #008000">print</span>(<span style="color: #008000">id</span>(x))
 x[<span style="color: #666666">0</span>]<span style="color: #666666">=10</span>
-<span style="color: #008000">print</span>(<span style="color: #008000">id</span>(x)) <span style="color: #408080; font-style: italic"># same id value as before and x=[10,1,2,3,4]</span>
+<span style="color: #008000">print</span>(<span style="color: #008000">id</span>(x)) <span style="color: #3D7B7B; font-style: italic"># same id value as before and x=[10,1,2,3,4]</span>
 </pre>
 </div>
       </div>
@@ -2030,10 +2032,10 @@ x[<span style="color: #666666">0</span>]<span style="color: #666666">=10</span>
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">x<span style="color: #666666">=</span>[<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">2</span>,<span style="color: #666666">3</span>,<span style="color: #666666">4</span>]
 y<span style="color: #666666">=</span>x
-<span style="color: #008000">print</span>(x <span style="color: #AA22FF; font-weight: bold">is</span> y) <span style="color: #408080; font-style: italic"># True</span>
-x<span style="color: #666666">.</span>append(<span style="color: #666666">10</span>)  <span style="color: #408080; font-style: italic"># x is now [0,1,2,3,4,10]</span>
-<span style="color: #008000">print</span>(y)      <span style="color: #408080; font-style: italic"># y=[0,1,2,3,4,10]</span>
-<span style="color: #008000">print</span>(x <span style="color: #AA22FF; font-weight: bold">is</span> y) <span style="color: #408080; font-style: italic"># True</span>
+<span style="color: #008000">print</span>(x <span style="color: #AA22FF; font-weight: bold">is</span> y) <span style="color: #3D7B7B; font-style: italic"># True</span>
+x<span style="color: #666666">.</span>append(<span style="color: #666666">10</span>)  <span style="color: #3D7B7B; font-style: italic"># x is now [0,1,2,3,4,10]</span>
+<span style="color: #008000">print</span>(y)      <span style="color: #3D7B7B; font-style: italic"># y=[0,1,2,3,4,10]</span>
+<span style="color: #008000">print</span>(x <span style="color: #AA22FF; font-weight: bold">is</span> y) <span style="color: #3D7B7B; font-style: italic"># True</span>
 </pre>
 </div>
       </div>
@@ -2061,10 +2063,10 @@ x<span style="color: #666666">.</span>append(<span style="color: #666666">10</sp
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">x<span style="color: #666666">=</span>np<span style="color: #666666">.</span>array([<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">2</span>,<span style="color: #666666">3</span>,<span style="color: #666666">4</span>])
 y<span style="color: #666666">=</span>x
-<span style="color: #008000">print</span>(x <span style="color: #AA22FF; font-weight: bold">is</span> y)     <span style="color: #408080; font-style: italic"># True</span>
-x<span style="color: #666666">=</span>np<span style="color: #666666">.</span>append(x,<span style="color: #666666">10</span>) <span style="color: #408080; font-style: italic"># x is now [0,1,2,3,4,10]</span>
-<span style="color: #008000">print</span>(y)          <span style="color: #408080; font-style: italic"># y=[0,1,2,3,4]</span>
-<span style="color: #008000">print</span>(x <span style="color: #AA22FF; font-weight: bold">is</span> y)     <span style="color: #408080; font-style: italic"># False</span>
+<span style="color: #008000">print</span>(x <span style="color: #AA22FF; font-weight: bold">is</span> y)     <span style="color: #3D7B7B; font-style: italic"># True</span>
+x<span style="color: #666666">=</span>np<span style="color: #666666">.</span>append(x,<span style="color: #666666">10</span>) <span style="color: #3D7B7B; font-style: italic"># x is now [0,1,2,3,4,10]</span>
+<span style="color: #008000">print</span>(y)          <span style="color: #3D7B7B; font-style: italic"># y=[0,1,2,3,4]</span>
+<span style="color: #008000">print</span>(x <span style="color: #AA22FF; font-weight: bold">is</span> y)     <span style="color: #3D7B7B; font-style: italic"># False</span>
 </pre>
 </div>
       </div>
@@ -2100,9 +2102,9 @@ x<span style="color: #666666">=</span>np<span style="color: #666666">.</span>app
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">x_old<span style="color: #666666">=</span>[]
 x  <span style="color: #666666">=</span> [<span style="color: #666666">1</span>, <span style="color: #666666">2</span>, <span style="color: #666666">3</span>]
-x_old[:] <span style="color: #666666">=</span> x[:] <span style="color: #408080; font-style: italic"># x_old = [1, 2, 3]</span>
+x_old[:] <span style="color: #666666">=</span> x[:] <span style="color: #3D7B7B; font-style: italic"># x_old = [1, 2, 3]</span>
 x[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> <span style="color: #666666">10</span>
-<span style="color: #008000">print</span>(x_old) <span style="color: #408080; font-style: italic"># &quot;expected&quot; x_old = [10, 2, 3], actual [1, 2, 3] </span>
+<span style="color: #008000">print</span>(x_old) <span style="color: #3D7B7B; font-style: italic"># &quot;expected&quot; x_old = [10, 2, 3], actual [1, 2, 3] </span>
 </pre>
 </div>
       </div>
@@ -2130,9 +2132,9 @@ x[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> <
     add_to<span style="color: #666666">.</span>append(x)
     <span style="color: #008000; font-weight: bold">return</span> add_to
 
-<span style="color: #008000">print</span>(add_to_list(<span style="color: #666666">1</span>)) <span style="color: #408080; font-style: italic"># &quot;expected&quot; [1] actual [1]</span>
-<span style="color: #008000">print</span>(add_to_list(<span style="color: #666666">2</span>)) <span style="color: #408080; font-style: italic"># &quot;expected&quot; [2] actual [1, 2]</span>
-<span style="color: #008000">print</span>(add_to_list(<span style="color: #666666">3</span>)) <span style="color: #408080; font-style: italic"># &quot;expected&quot; [3] actual [1, 2, 3]</span>
+<span style="color: #008000">print</span>(add_to_list(<span style="color: #666666">1</span>)) <span style="color: #3D7B7B; font-style: italic"># &quot;expected&quot; [1] actual [1]</span>
+<span style="color: #008000">print</span>(add_to_list(<span style="color: #666666">2</span>)) <span style="color: #3D7B7B; font-style: italic"># &quot;expected&quot; [2] actual [1, 2]</span>
+<span style="color: #008000">print</span>(add_to_list(<span style="color: #666666">3</span>)) <span style="color: #3D7B7B; font-style: italic"># &quot;expected&quot; [3] actual [1, 2, 3]</span>
 </pre>
 </div>
       </div>
@@ -2159,12 +2161,12 @@ x[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> <
   <pre style="line-height: 125%;">x <span style="color: #666666">=</span> [<span style="color: #666666">10</span>]
 y <span style="color: #666666">=</span> x
 y <span style="color: #666666">=</span> y <span style="color: #666666">+</span> [<span style="color: #666666">1</span>]
-<span style="color: #008000">print</span>(x, y) <span style="color: #408080; font-style: italic"># prints [10] [10, 1]</span>
+<span style="color: #008000">print</span>(x, y) <span style="color: #3D7B7B; font-style: italic"># prints [10] [10, 1]</span>
 
 x <span style="color: #666666">=</span> [<span style="color: #666666">10</span>]
 y <span style="color: #666666">=</span> x
 y <span style="color: #666666">+=</span> [<span style="color: #666666">1</span>] 
-<span style="color: #008000">print</span>(x, y) <span style="color: #408080; font-style: italic"># prints [10, 1] [10, 1]</span>
+<span style="color: #008000">print</span>(x, y) <span style="color: #3D7B7B; font-style: italic"># prints [10, 1] [10, 1]</span>
 </pre>
 </div>
       </div>
@@ -2252,7 +2254,7 @@ y <span style="color: #666666">+=</span> [<span style="color: #666666">1</span>]
 df[<span style="color: #BA2121">&#39;ints&#39;</span>]<span style="color: #666666">=</span>[<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">2</span>,<span style="color: #666666">3</span>]
 df[<span style="color: #BA2121">&#39;floats&#39;</span>]<span style="color: #666666">=</span>[<span style="color: #666666">4.</span>,<span style="color: #666666">5.</span>,<span style="color: #666666">6.</span>,<span style="color: #666666">7.</span>]
 df[<span style="color: #BA2121">&#39;tools&#39;</span>]<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;hammer&#39;</span>,<span style="color: #BA2121">&#39;saw&#39;</span>,<span style="color: #BA2121">&#39;rock&#39;</span>,<span style="color: #BA2121">&#39;nail&#39;</span>]
-<span style="color: #008000">print</span>(df) <span style="color: #408080; font-style: italic"># to view data frame</span>
+<span style="color: #008000">print</span>(df) <span style="color: #3D7B7B; font-style: italic"># to view data frame</span>
 </pre>
 </div>
       </div>
@@ -2288,7 +2290,7 @@ df[<span style="color: #BA2121">&#39;tools&#39;</span>]<span style="color: #6666
 <span style="color: #BA2121">&#39;tools&#39;</span>:[<span style="color: #BA2121">&#39;hammer&#39;</span>,<span style="color: #BA2121">&#39;saw&#39;</span>,<span style="color: #BA2121">&#39;rock&#39;</span>,<span style="color: #BA2121">&#39;nail&#39;</span>]
 }
 df<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>DataFrame(my_dict)
-<span style="color: #008000">print</span>(df) <span style="color: #408080; font-style: italic"># to view</span>
+<span style="color: #008000">print</span>(df) <span style="color: #3D7B7B; font-style: italic"># to view</span>
 </pre>
 </div>
       </div>
@@ -2321,8 +2323,8 @@ df<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>Da
     <div class="inner_cell">
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
-  <pre style="line-height: 125%;">df<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>read_excel(<span style="color: #BA2121">&#39;../data/corona_data.xlsx&#39;</span>) <span style="color: #408080; font-style: italic"># excel file</span>
-df2<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>read_csv(<span style="color: #BA2121">&#39;../data/corona_data.dat&#39;</span>,sep<span style="color: #666666">=</span><span style="color: #BA2121">&#39;</span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121">&#39;</span>) <span style="color: #408080; font-style: italic"># csv tab separated file</span>
+  <pre style="line-height: 125%;">df<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>read_excel(<span style="color: #BA2121">&#39;../data/corona_data.xlsx&#39;</span>) <span style="color: #3D7B7B; font-style: italic"># excel file</span>
+df2<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>read_csv(<span style="color: #BA2121">&#39;../data/corona_data.dat&#39;</span>,sep<span style="color: #666666">=</span><span style="color: #BA2121">&#39;</span><span style="color: #AA5D1F; font-weight: bold">\t</span><span style="color: #BA2121">&#39;</span>) <span style="color: #3D7B7B; font-style: italic"># csv tab separated file</span>
 </pre>
 </div>
       </div>
@@ -2350,7 +2352,7 @@ df2<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>r
       <div class="input_area">
         <div class="highlight" style="background: #ffffff">
   <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">os</span>
-<span style="color: #008000">print</span>(os<span style="color: #666666">.</span>getcwd()) <span style="color: #408080; font-style: italic"># prints current working directory</span>
+<span style="color: #008000">print</span>(os<span style="color: #666666">.</span>getcwd()) <span style="color: #3D7B7B; font-style: italic"># prints current working directory</span>
 </pre>
 </div>
       </div>
@@ -2376,7 +2378,7 @@ df2<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>r
     <div class="inner_cell">
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
-  <pre style="line-height: 125%;">df<span style="color: #666666">.</span>to_excel(<span style="color: #BA2121">&#39;covid19.xlsx&#39;</span>, index<span style="color: #666666">=</span><span style="color: #008000; font-weight: bold">False</span>) <span style="color: #408080; font-style: italic"># what happens if index=True?</span>
+  <pre style="line-height: 125%;">df<span style="color: #666666">.</span>to_excel(<span style="color: #BA2121">&#39;covid19.xlsx&#39;</span>, index<span style="color: #666666">=</span><span style="color: #008000; font-weight: bold">False</span>) <span style="color: #3D7B7B; font-style: italic"># what happens if index=True?</span>
 </pre>
 </div>
       </div>
@@ -2409,12 +2411,12 @@ df2<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>r
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">df<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>read_excel(<span style="color: #BA2121">&#39;../data/corona_data.xlsx&#39;</span>) 
-<span style="color: #408080; font-style: italic"># following two are equivalent</span>
-time<span style="color: #666666">=</span>df[<span style="color: #BA2121">&#39;TIME&#39;</span>] <span style="color: #408080; font-style: italic"># by the name, alternatively</span>
+<span style="color: #3D7B7B; font-style: italic"># following two are equivalent</span>
+time<span style="color: #666666">=</span>df[<span style="color: #BA2121">&#39;TIME&#39;</span>] <span style="color: #3D7B7B; font-style: italic"># by the name, alternatively</span>
 time<span style="color: #666666">=</span>df[df<span style="color: #666666">.</span>columns[<span style="color: #666666">1</span>]]
-<span style="color: #408080; font-style: italic"># following two are equivalent</span>
-time<span style="color: #666666">=</span>df<span style="color: #666666">.</span>loc[:,[<span style="color: #BA2121">&#39;TIME&#39;</span>]] <span style="color: #408080; font-style: italic"># by loc[] if we use name</span>
-time<span style="color: #666666">=</span>df<span style="color: #666666">.</span>iloc[:,<span style="color: #666666">1</span>] <span style="color: #408080; font-style: italic"># by iloc, pick column number 1</span>
+<span style="color: #3D7B7B; font-style: italic"># following two are equivalent</span>
+time<span style="color: #666666">=</span>df<span style="color: #666666">.</span>loc[:,[<span style="color: #BA2121">&#39;TIME&#39;</span>]] <span style="color: #3D7B7B; font-style: italic"># by loc[] if we use name</span>
+time<span style="color: #666666">=</span>df<span style="color: #666666">.</span>iloc[:,<span style="color: #666666">1</span>] <span style="color: #3D7B7B; font-style: italic"># by iloc, pick column number 1</span>
 </pre>
 </div>
       </div>
@@ -2465,9 +2467,9 @@ time<span style="color: #666666">=</span>df<span style="color: #666666">.</span>
     <div class="inner_cell">
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
-  <pre style="line-height: 125%;"><span style="color: #408080; font-style: italic"># pick rows number 0 and 1</span>
-time<span style="color: #666666">=</span>df<span style="color: #666666">.</span>loc[<span style="color: #666666">0</span>:<span style="color: #666666">1</span>,:] <span style="color: #408080; font-style: italic"># by loc[] </span>
-time<span style="color: #666666">=</span>df<span style="color: #666666">.</span>iloc[<span style="color: #666666">0</span>:<span style="color: #666666">2</span>,:] <span style="color: #408080; font-style: italic"># by iloc</span>
+  <pre style="line-height: 125%;"><span style="color: #3D7B7B; font-style: italic"># pick rows number 0 and 1</span>
+time<span style="color: #666666">=</span>df<span style="color: #666666">.</span>loc[<span style="color: #666666">0</span>:<span style="color: #666666">1</span>,:] <span style="color: #3D7B7B; font-style: italic"># by loc[] </span>
+time<span style="color: #666666">=</span>df<span style="color: #666666">.</span>iloc[<span style="color: #666666">0</span>:<span style="color: #666666">2</span>,:] <span style="color: #3D7B7B; font-style: italic"># by iloc</span>
 </pre>
 </div>
       </div>
@@ -2503,10 +2505,10 @@ time<span style="color: #666666">=</span>df<span style="color: #666666">.</span>
     <div class="inner_cell">
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
-  <pre style="line-height: 125%;">df<span style="color: #666666">.</span>columns <span style="color: #666666">=</span> df<span style="color: #666666">.</span>columns<span style="color: #666666">.</span>str<span style="color: #666666">.</span>replace(<span style="color: #BA2121">&#39; &#39;</span>, <span style="color: #BA2121">&#39;&#39;</span>) <span style="color: #408080; font-style: italic"># all white spaces</span>
-df<span style="color: #666666">.</span>columns <span style="color: #666666">=</span> df<span style="color: #666666">.</span>columns<span style="color: #666666">.</span>str<span style="color: #666666">.</span>lstrip() <span style="color: #408080; font-style: italic"># the beginning of string</span>
-df<span style="color: #666666">.</span>columns <span style="color: #666666">=</span> df<span style="color: #666666">.</span>columns<span style="color: #666666">.</span>str<span style="color: #666666">.</span>rstrip() <span style="color: #408080; font-style: italic"># end of string</span>
-df<span style="color: #666666">.</span>columns <span style="color: #666666">=</span> df<span style="color: #666666">.</span>columns<span style="color: #666666">.</span>str<span style="color: #666666">.</span>strip()  <span style="color: #408080; font-style: italic"># both ends</span>
+  <pre style="line-height: 125%;">df<span style="color: #666666">.</span>columns <span style="color: #666666">=</span> df<span style="color: #666666">.</span>columns<span style="color: #666666">.</span>str<span style="color: #666666">.</span>replace(<span style="color: #BA2121">&#39; &#39;</span>, <span style="color: #BA2121">&#39;&#39;</span>) <span style="color: #3D7B7B; font-style: italic"># all white spaces</span>
+df<span style="color: #666666">.</span>columns <span style="color: #666666">=</span> df<span style="color: #666666">.</span>columns<span style="color: #666666">.</span>str<span style="color: #666666">.</span>lstrip() <span style="color: #3D7B7B; font-style: italic"># the beginning of string</span>
+df<span style="color: #666666">.</span>columns <span style="color: #666666">=</span> df<span style="color: #666666">.</span>columns<span style="color: #666666">.</span>str<span style="color: #666666">.</span>rstrip() <span style="color: #3D7B7B; font-style: italic"># end of string</span>
+df<span style="color: #666666">.</span>columns <span style="color: #666666">=</span> df<span style="color: #666666">.</span>columns<span style="color: #666666">.</span>str<span style="color: #666666">.</span>strip()  <span style="color: #3D7B7B; font-style: italic"># both ends</span>
 </pre>
 </div>
       </div>
@@ -2530,7 +2532,7 @@ df<span style="color: #666666">.</span>columns <span style="color: #666666">=</s
     <div class="inner_cell">
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
-  <pre style="line-height: 125%;">df<span style="color: #666666">.</span>columns <span style="color: #666666">=</span> df<span style="color: #666666">.</span>columns<span style="color: #666666">.</span>str<span style="color: #666666">.</span>replace(<span style="color: #BA2121">&#39;</span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121">&#39;</span>, <span style="color: #BA2121">&#39;&#39;</span>) <span style="color: #408080; font-style: italic"># remove tab</span>
+  <pre style="line-height: 125%;">df<span style="color: #666666">.</span>columns <span style="color: #666666">=</span> df<span style="color: #666666">.</span>columns<span style="color: #666666">.</span>str<span style="color: #666666">.</span>replace(<span style="color: #BA2121">&#39;</span><span style="color: #AA5D1F; font-weight: bold">\t</span><span style="color: #BA2121">&#39;</span>, <span style="color: #BA2121">&#39;&#39;</span>) <span style="color: #3D7B7B; font-style: italic"># remove tab</span>
 </pre>
 </div>
       </div>
@@ -2586,8 +2588,8 @@ df<span style="color: #666666">.</span>columns <span style="color: #666666">=</s
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">datetime</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">dt</span>
 time<span style="color: #666666">=</span>df[<span style="color: #BA2121">&#39;TIME&#39;</span>]
-<span style="color: #408080; font-style: italic"># what happens if you set</span>
-<span style="color: #408080; font-style: italic"># time=df2[&#39;TIME&#39;] #i.e df2 is from pd.read_csv ?</span>
+<span style="color: #3D7B7B; font-style: italic"># what happens if you set</span>
+<span style="color: #3D7B7B; font-style: italic"># time=df2[&#39;TIME&#39;] #i.e df2 is from pd.read_csv ?</span>
 <span style="color: #008000">print</span>(time[<span style="color: #666666">0</span>])
 <span style="color: #008000">print</span>(time[<span style="color: #666666">0</span>]<span style="color: #666666">+</span>dt<span style="color: #666666">.</span>timedelta(days<span style="color: #666666">=1</span>))
 </pre>
@@ -2616,7 +2618,7 @@ time<span style="color: #666666">=</span>df[<span style="color: #BA2121">&#39;TI
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">df2[<span style="color: #BA2121">&#39;TIME&#39;</span>]<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>to_datetime(df2[<span style="color: #BA2121">&#39;TIME&#39;</span>])
-<span style="color: #408080; font-style: italic"># just for testing that everything went ok</span>
+<span style="color: #3D7B7B; font-style: italic"># just for testing that everything went ok</span>
 time<span style="color: #666666">=</span>df2[<span style="color: #BA2121">&#39;TIME&#39;</span>]
 <span style="color: #008000">print</span>(time[<span style="color: #666666">0</span>])
 <span style="color: #008000">print</span>(time[<span style="color: #666666">0</span>]<span style="color: #666666">+</span>dt<span style="color: #666666">.</span>timedelta(days<span style="color: #666666">=1</span>))
@@ -2643,7 +2645,7 @@ time<span style="color: #666666">=</span>df2[<span style="color: #BA2121">&#39;T
     <div class="inner_cell">
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
-  <pre style="line-height: 125%;">df2<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>read_csv(<span style="color: #BA2121">&#39;../data/corona_data.dat&#39;</span>,sep<span style="color: #666666">=</span><span style="color: #BA2121">&#39;</span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121">&#39;</span>,parse_dates<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;TIME&#39;</span>]) 
+  <pre style="line-height: 125%;">df2<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>read_csv(<span style="color: #BA2121">&#39;../data/corona_data.dat&#39;</span>,sep<span style="color: #666666">=</span><span style="color: #BA2121">&#39;</span><span style="color: #AA5D1F; font-weight: bold">\t</span><span style="color: #BA2121">&#39;</span>,parse_dates<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;TIME&#39;</span>]) 
 </pre>
 </div>
       </div>
@@ -2669,8 +2671,8 @@ time<span style="color: #666666">=</span>df2[<span style="color: #BA2121">&#39;T
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">types_dict<span style="color: #666666">=</span>{<span style="color: #BA2121">&quot;LOCATION&quot;</span>:<span style="color: #008000">str</span>,<span style="color: #BA2121">&quot;TIME&quot;</span>:<span style="color: #008000">str</span>,<span style="color: #BA2121">&quot;ELAPSED_TIME_SINCE_OUTBREAK&quot;</span>:<span style="color: #008000">int</span>,
 	<span style="color: #BA2121">&quot;CONFIRMED&quot;</span>:<span style="color: #008000">int</span>,<span style="color: #BA2121">&quot;DEATHS&quot;</span>:<span style="color: #008000">int</span>,<span style="color: #BA2121">&quot;RECOVERED&quot;</span>:<span style="color: #008000">int</span>}
-df2<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>read_csv(<span style="color: #BA2121">&#39;../data/corona_data.dat&#39;</span>,sep<span style="color: #666666">=</span><span style="color: #BA2121">&#39;</span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121">&#39;</span>,dtype<span style="color: #666666">=</span>types_dict,
-	parse_dates<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;TIME&#39;</span>]) <span style="color: #408080; font-style: italic"># set data types explicit</span>
+df2<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>read_csv(<span style="color: #BA2121">&#39;../data/corona_data.dat&#39;</span>,sep<span style="color: #666666">=</span><span style="color: #BA2121">&#39;</span><span style="color: #AA5D1F; font-weight: bold">\t</span><span style="color: #BA2121">&#39;</span>,dtype<span style="color: #666666">=</span>types_dict,
+	parse_dates<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;TIME&#39;</span>]) <span style="color: #3D7B7B; font-style: italic"># set data types explicit</span>
 </pre>
 </div>
       </div>
@@ -2750,10 +2752,10 @@ df2<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>r
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">df2<span style="color: #666666">=</span>df[(df[<span style="color: #BA2121">&#39;LOCATION&#39;</span>] <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;Afghanistan&#39;</span>)]
 df2<span style="color: #666666">.</span>plot()
-<span style="color: #408080; font-style: italic">#try </span>
-<span style="color: #408080; font-style: italic">#df2=df2.set_index(&#39;TIME&#39;)</span>
-<span style="color: #408080; font-style: italic">#df2.plot() # what is the difference?</span>
-<span style="color: #408080; font-style: italic">#df2.plot(y=[&#39;CONFIRMED&#39;,&#39;DEATHS&#39;])</span>
+<span style="color: #3D7B7B; font-style: italic">#try </span>
+<span style="color: #3D7B7B; font-style: italic">#df2=df2.set_index(&#39;TIME&#39;)</span>
+<span style="color: #3D7B7B; font-style: italic">#df2.plot() # what is the difference?</span>
+<span style="color: #3D7B7B; font-style: italic">#df2.plot(y=[&#39;CONFIRMED&#39;,&#39;DEATHS&#39;])</span>
 </pre>
 </div>
       </div>
@@ -2803,7 +2805,7 @@ df2<span style="color: #666666">.</span>plot()
 <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">pandas</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">pd</span>
 N<span style="color: #666666">=10000</span>
 a<span style="color: #666666">=</span>np<span style="color: #666666">.</span>random<span style="color: #666666">.</span>uniform(<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,size<span style="color: #666666">=</span>N)
-df<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>DataFrame() <span style="color: #408080; font-style: italic"># empty DataFrame</span>
+df<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>DataFrame() <span style="color: #3D7B7B; font-style: italic"># empty DataFrame</span>
 df[<span style="color: #BA2121">&#39;a&#39;</span>]<span style="color: #666666">=</span>a
 </pre>
 </div>
@@ -2828,7 +2830,7 @@ df[<span style="color: #BA2121">&#39;a&#39;</span>]<span style="color: #666666">
     <div class="inner_cell">
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
-  <pre style="line-height: 125%;">df[<span style="color: #BA2121">&#39;b&#39;</span>]<span style="color: #666666">=</span>df[<span style="color: #BA2121">&#39;a&#39;</span>]<span style="color: #666666">*</span>df[<span style="color: #BA2121">&#39;a&#39;</span>] <span style="color: #408080; font-style: italic"># alternatively np.square(df[&#39;a&#39;])</span>
+  <pre style="line-height: 125%;">df[<span style="color: #BA2121">&#39;b&#39;</span>]<span style="color: #666666">=</span>df[<span style="color: #BA2121">&#39;a&#39;</span>]<span style="color: #666666">*</span>df[<span style="color: #BA2121">&#39;a&#39;</span>] <span style="color: #3D7B7B; font-style: italic"># alternatively np.square(df[&#39;a&#39;])</span>
 df[<span style="color: #BA2121">&#39;c&#39;</span>]<span style="color: #666666">=</span>np<span style="color: #666666">.</span>sin(df[<span style="color: #BA2121">&#39;a&#39;</span>])
 </pre>
 </div>
@@ -2892,7 +2894,7 @@ df[<span style="color: #BA2121">&#39;c&#39;</span>]<span style="color: #666666">
 plt<span style="color: #666666">.</span>plot(df[<span style="color: #BA2121">&#39;a&#39;</span>],df[<span style="color: #BA2121">&#39;b&#39;</span>], <span style="color: #BA2121">&#39;*&#39;</span>, label<span style="color: #666666">=</span><span style="color: #BA2121">&#39;$a^2$&#39;</span>)
 plt<span style="color: #666666">.</span>plot(df[<span style="color: #BA2121">&#39;a&#39;</span>],df[<span style="color: #BA2121">&#39;c&#39;</span>], <span style="color: #BA2121">&#39;^&#39;</span>, label<span style="color: #666666">=</span><span style="color: #BA2121">&#39;$\sin(a)$&#39;</span>)
 plt<span style="color: #666666">.</span>legend() 
-plt<span style="color: #666666">.</span>grid() <span style="color: #408080; font-style: italic"># make small grid lines</span>
+plt<span style="color: #666666">.</span>grid() <span style="color: #3D7B7B; font-style: italic"># make small grid lines</span>
 plt<span style="color: #666666">.</span>show()
 </pre>
 </div>
@@ -3162,7 +3164,7 @@ df2<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>D
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">df<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>concat([df1,df2])
-<span style="color: #008000">print</span>(df) <span style="color: #408080; font-style: italic"># to view</span>
+<span style="color: #008000">print</span>(df) <span style="color: #3D7B7B; font-style: italic"># to view</span>
 </pre>
 </div>
       </div>
@@ -3308,9 +3310,9 @@ df1<span style="color: #666666">.</span>merge(df2,on<span style="color: #666666"
   <pre style="line-height: 125%;">df<span style="color: #666666">=</span>df1<span style="color: #666666">.</span>merge(df2,on<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;LOCATION&#39;</span>,<span style="color: #BA2121">&#39;TIME&#39;</span>],how<span style="color: #666666">=</span><span style="color: #BA2121">&#39;outer&#39;</span>)
 cols<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;CONFIRMED&#39;</span>,<span style="color: #BA2121">&#39;DEATHS&#39;</span>, <span style="color: #BA2121">&#39;RECOVERED&#39;</span>]
 <span style="color: #008000; font-weight: bold">for</span> col <span style="color: #AA22FF; font-weight: bold">in</span> cols:
-    df[col]<span style="color: #666666">=</span>df[[col<span style="color: #666666">+</span><span style="color: #BA2121">&#39;_x&#39;</span>,col<span style="color: #666666">+</span><span style="color: #BA2121">&#39;_y&#39;</span>]]<span style="color: #666666">.</span>sum(axis<span style="color: #666666">=1</span>) <span style="color: #408080; font-style: italic"># sum row elements</span>
-    df<span style="color: #666666">=</span>df<span style="color: #666666">.</span>drop(columns<span style="color: #666666">=</span>[col<span style="color: #666666">+</span><span style="color: #BA2121">&#39;_x&#39;</span>,col<span style="color: #666666">+</span><span style="color: #BA2121">&#39;_y&#39;</span>]) <span style="color: #408080; font-style: italic"># remove obsolete columns</span>
-<span style="color: #408080; font-style: italic"># final clean up</span>
+    df[col]<span style="color: #666666">=</span>df[[col<span style="color: #666666">+</span><span style="color: #BA2121">&#39;_x&#39;</span>,col<span style="color: #666666">+</span><span style="color: #BA2121">&#39;_y&#39;</span>]]<span style="color: #666666">.</span>sum(axis<span style="color: #666666">=1</span>) <span style="color: #3D7B7B; font-style: italic"># sum row elements</span>
+    df<span style="color: #666666">=</span>df<span style="color: #666666">.</span>drop(columns<span style="color: #666666">=</span>[col<span style="color: #666666">+</span><span style="color: #BA2121">&#39;_x&#39;</span>,col<span style="color: #666666">+</span><span style="color: #BA2121">&#39;_y&#39;</span>]) <span style="color: #3D7B7B; font-style: italic"># remove obsolete columns</span>
+<span style="color: #3D7B7B; font-style: italic"># final clean up</span>
 df[<span style="color: #BA2121">&#39;ELAPSED_TIME_SINCE_OUTBREAK&#39;</span>]<span style="color: #666666">=</span>df[<span style="color: #BA2121">&#39;ELAPSED_TIME_SINCE_OUTBREAK_x&#39;</span>]		
 df<span style="color: #666666">=</span>df<span style="color: #666666">.</span>drop(columns<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;ELAPSED_TIME_SINCE_OUTBREAK_y&#39;</span>,<span style="color: #BA2121">&#39;ELAPSED_TIME_SINCE_OUTBREAK_x&#39;</span>])
 </pre>
@@ -3353,7 +3355,7 @@ df<span style="color: #666666">=</span>df<span style="color: #666666">.</span>dr
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">pathlib</span> <span style="color: #008000; font-weight: bold">import</span> Path
-p<span style="color: #666666">=</span>Path(<span style="color: #BA2121">&#39;.&#39;</span>) <span style="color: #408080; font-style: italic"># the directory where your python file is located</span>
+p<span style="color: #666666">=</span>Path(<span style="color: #BA2121">&#39;.&#39;</span>) <span style="color: #3D7B7B; font-style: italic"># the directory where your python file is located</span>
 <span style="color: #008000; font-weight: bold">for</span> x <span style="color: #AA22FF; font-weight: bold">in</span> p<span style="color: #666666">.</span>iterdir():
     <span style="color: #008000; font-weight: bold">if</span> x<span style="color: #666666">.</span>is_dir():
         <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Found dir: &#39;</span>, x)
@@ -3386,7 +3388,7 @@ p<span style="color: #666666">=</span>Path(<span style="color: #BA2121">&#39;.&#
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">p<span style="color: #666666">=</span>Path(<span style="color: #BA2121">&#39;.&#39;</span>)
-<span style="color: #008000; font-weight: bold">for</span> p <span style="color: #AA22FF; font-weight: bold">in</span> p<span style="color: #666666">.</span>rglob(<span style="color: #BA2121">&quot;*.png&quot;</span>):<span style="color: #408080; font-style: italic"># rglob means recursively, searches sub directories</span>
+<span style="color: #008000; font-weight: bold">for</span> p <span style="color: #AA22FF; font-weight: bold">in</span> p<span style="color: #666666">.</span>rglob(<span style="color: #BA2121">&quot;*.png&quot;</span>):<span style="color: #3D7B7B; font-style: italic"># rglob means recursively, searches sub directories</span>
     <span style="color: #008000">print</span>(p<span style="color: #666666">.</span>name)
 </pre>
 </div>
@@ -3534,7 +3536,7 @@ os<span style="color: #666666">.</span>mkdir(<span style="color: #BA2121">&#39;t
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">os<span style="color: #666666">.</span>chdir(<span style="color: #BA2121">&#39;tmp&#39;</span>)
-os<span style="color: #666666">.</span>chdir(<span style="color: #BA2121">&#39;..&#39;</span>) <span style="color: #408080; font-style: italic"># move back up</span>
+os<span style="color: #666666">.</span>chdir(<span style="color: #BA2121">&#39;..&#39;</span>) <span style="color: #3D7B7B; font-style: italic"># move back up</span>
 </pre>
 </div>
       </div>
@@ -3563,7 +3565,7 @@ os<span style="color: #666666">.</span>chdir(<span style="color: #BA2121">&#39;.
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">df<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>read_excel(<span style="color: #BA2121">&#39;../data/corona_data.xlsx&#39;</span>)
-countries <span style="color: #666666">=</span> df[<span style="color: #BA2121">&#39;LOCATION&#39;</span>]<span style="color: #666666">.</span>unique() <span style="color: #408080; font-style: italic">#skip duplicates</span>
+countries <span style="color: #666666">=</span> df[<span style="color: #BA2121">&#39;LOCATION&#39;</span>]<span style="color: #666666">.</span>unique() <span style="color: #3D7B7B; font-style: italic">#skip duplicates</span>
 data_folder<span style="color: #666666">=</span>Path(<span style="color: #BA2121">&#39;../covid-data&#39;</span>)
 data_folder<span style="color: #666666">.</span>mkdir()
 <span style="color: #008000; font-weight: bold">for</span> country <span style="color: #AA22FF; font-weight: bold">in</span> countries:
@@ -3600,9 +3602,9 @@ data_folder<span style="color: #666666">.</span>mkdir()
     <div class="inner_cell">
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
-  <pre style="line-height: 125%;"><span style="color: #408080; font-style: italic"># first get all the countries:</span>
+  <pre style="line-height: 125%;"><span style="color: #3D7B7B; font-style: italic"># first get all the countries:</span>
 df<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>read_excel(<span style="color: #BA2121">&#39;../data/corona_data.xlsx&#39;</span>)
-countries <span style="color: #666666">=</span> df[<span style="color: #BA2121">&#39;LOCATION&#39;</span>]<span style="color: #666666">.</span>unique() <span style="color: #408080; font-style: italic">#skip duplicates</span>
+countries <span style="color: #666666">=</span> df[<span style="color: #BA2121">&#39;LOCATION&#39;</span>]<span style="color: #666666">.</span>unique() <span style="color: #3D7B7B; font-style: italic">#skip duplicates</span>
 os<span style="color: #666666">.</span>mkdir(<span style="color: #BA2121">&#39;../covid-data&#39;</span>)
 os<span style="color: #666666">.</span>chdir(<span style="color: #BA2121">&#39;../covid-data&#39;</span>)
 <span style="color: #008000; font-weight: bold">for</span> country <span style="color: #AA22FF; font-weight: bold">in</span> countries:
@@ -3610,7 +3612,7 @@ os<span style="color: #666666">.</span>chdir(<span style="color: #BA2121">&#39;.
     os<span style="color: #666666">.</span>chdir(country)
     df2<span style="color: #666666">=</span>df[df[<span style="color: #BA2121">&#39;LOCATION&#39;</span>]<span style="color: #666666">==</span>country]
     df2<span style="color: #666666">.</span>to_excel(country<span style="color: #666666">+</span><span style="color: #BA2121">&#39;.xlsx&#39;</span>,index<span style="color: #666666">=</span><span style="color: #008000; font-weight: bold">False</span>)
-    os<span style="color: #666666">.</span>chdir(<span style="color: #BA2121">&#39;..&#39;</span>) <span style="color: #408080; font-style: italic"># move up</span>
+    os<span style="color: #666666">.</span>chdir(<span style="color: #BA2121">&#39;..&#39;</span>) <span style="color: #3D7B7B; font-style: italic"># move up</span>
 </pre>
 </div>
       </div>
@@ -3743,7 +3745,7 @@ So far we have just accessed the columns directly, but it is very quick to write
         <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Column not found&#39;</span>)
         <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Possible column names are : &#39;</span>, df<span style="color: #666666">.</span>columns)
         <span style="color: #008000; font-weight: bold">return</span> pd<span style="color: #666666">.</span>Series(dtype<span style="color: #666666">=</span><span style="color: #008000">object</span>)
-<span style="color: #408080; font-style: italic"># run the following code with df containing covid data</span>
+<span style="color: #3D7B7B; font-style: italic"># run the following code with df containing covid data</span>
 get_column_from_dataframe(<span style="color: #BA2121">&#39;TIME2&#39;</span>,df)
 get_column_from_dataframe(<span style="color: #BA2121">&#39;TIME&#39;</span>,df)
 </pre>
@@ -3772,7 +3774,7 @@ get_column_from_dataframe(<span style="color: #BA2121">&#39;TIME&#39;</span>,df)
   <pre style="line-height: 125%;">s<span style="color: #666666">=</span>get_column_from_dataframe(<span style="color: #BA2121">&#39;TIME2&#39;</span>,df)
 <span style="color: #008000; font-weight: bold">if</span> s<span style="color: #666666">.</span>empty:
     <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Exiting ...&#39;</span>)
-    exit() <span style="color: #408080; font-style: italic"># note this shuts down the kernel</span>
+    exit() <span style="color: #3D7B7B; font-style: italic"># note this shuts down the kernel</span>
 </pre>
 </div>
       </div>
@@ -3808,7 +3810,7 @@ get_column_from_dataframe(<span style="color: #BA2121">&#39;TIME&#39;</span>,df)
         <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Something went wrong ...&#39;</span>)
         <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Maybe wrong column name?&#39;</span>)
         <span style="color: #008000; font-weight: bold">return</span> pd<span style="color: #666666">.</span>Series(dtype<span style="color: #666666">=</span><span style="color: #008000">object</span>)
-<span style="color: #408080; font-style: italic"># run the following code with df containing covid data</span>
+<span style="color: #3D7B7B; font-style: italic"># run the following code with df containing covid data</span>
 get_column_from_dataframe_v2(<span style="color: #BA2121">&#39;TIME2&#39;</span>,df)
 </pre>
 </div>

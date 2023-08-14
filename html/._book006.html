@@ -321,6 +321,7 @@ code { color: inherit; background-color: transparent; }
                None,
                'exercise-6-1-numerical-integration'),
               ('Ordinary differential equations', 0, 'ch:ode', 'ch:ode'),
+              ('0D models', 1, None, '0d-models'),
               ('Ordinary differential equations',
                1,
                None,
@@ -406,7 +407,7 @@ MathJax.Hub.Config({
 <!-- newcommands_keep.tex -->
 $$
 \newcommand{\no}{\nonumber}
-\newcommand{\co}{CO$_2$}
+\newcommand{\co}{\text{CO$_{2}$}}
 $$
 
 
@@ -548,6 +549,7 @@ $$
      <!-- navigation toc: --> <li><a href="#integrating-functions-over-an-infinite-range" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Integrating functions over an infinite range</a></li>
      <!-- navigation toc: --> <li><a href="#exercise-6-1-numerical-integration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 6.1: Numerical Integration</a></li>
      <!-- navigation toc: --> <li><a href="._book007.html#ch:ode" style="font-size: 80%;"><b>Ordinary differential equations</b></a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#0d-models" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;0D models</a></li>
      <!-- navigation toc: --> <li><a href="._book007.html#ordinary-differential-equations" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ordinary differential equations</a></li>
      <!-- navigation toc: --> <li><a href="._book007.html#a-simple-model-for-fluid-flow" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;A simple model for fluid flow</a></li>
      <!-- navigation toc: --> <li><a href="._book007.html#euler-s-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Euler's method</a></li>
@@ -589,9 +591,7 @@ $$
 </center> <!-- chapter heading -->
 <h1 id="algorithmic-thinking" class="anchor">Algorithmic thinking </h1>
 
-<p>The only way to improve in coding and algorithmic thinking is practice. The concept of numerical integration is easy to understand, i.e. to calculate the area under a curve. In practice numerical integration is often used to estimate expectation values. In this chapter we will implement several numerical methods, a
-Before diving into the details of this section, it is worth pointing out that the derivation of the algorithms in this section follows a general pattern:
-</p>
+<p>The only way to improve in coding and algorithmic thinking is practice. The concept of one dimensional numerical integration is easy to understand, i.e. to calculate the area under a curve. In this chapter we will implement several numerical methods, and it will serve as a very simple playground that illustrates the key aspects of numerical modeling</p>
 
 <ol>
 <li> We start with a mathematical model (in this case an integral)</li>
@@ -600,10 +600,7 @@ Before diving into the details of this section, it is worth pointing out that th
 <li> The numerical solution for a test case is compared with the true solution (could be an analytical solution or data)</li>
 <li> Error analysis: we investigate the accuracy of the algorithm by changing the number of iterations and/or make changes to the implementation or algorithm</li>
 </ol>
-<p>In many cases you would not use your own implementation to calculate an integral, but in order to understand which method to use 
-in a specific case, it is important to understand the limitation and advantages of the different algorithms. The only way to achieve this is to 
-have a basic understanding of the development. There might also be some cases where you would like to adapt an integration scheme to your specific needs. 
-</p>
+<p>The main point of this chapter is not to develop your own integration methods, the built in methods in Scipy will work in most cases. However, the way to break down the main task of calculating an integral into smaller tasks that is understandable by a computer, may work as a template for many different problems you would typically solve using a computer. A second motivation is that by analyzing the origin of numerical errors gives ideas for improving the algorithm, which is transferable to other problems.      </p>
 <h2 id="the-midpoint-rule" class="anchor">The midpoint rule </h2>
 <p>Numerical integration is encountered in numerous applications in physics and engineering sciences. 
 Let us first consider the most simple case, a function \( f(x) \), which is a function of one variable, \( x \). The most straight forward way of calculating the area \( \int_a^bf(x)dx \) is 
@@ -646,7 +643,7 @@ therefore we choose the convention of having the first element to start at \( k=
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
-<span style="color: #408080; font-style: italic"># Function to be integrated</span>
+<span style="color: #3D7B7B; font-style: italic"># Function to be integrated</span>
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
     <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>sin(x)
 
@@ -663,7 +660,7 @@ a<span style="color: #666666">=0</span>
 b<span style="color: #666666">=</span>np<span style="color: #666666">.</span>pi
 Area <span style="color: #666666">=</span> midpoint(f,a,b,N)
 <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Numerical value= &#39;</span>, Area)
-<span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Error= &#39;</span>, (<span style="color: #666666">2-</span>Area)) <span style="color: #408080; font-style: italic"># Analytical result is 2</span>
+<span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Error= &#39;</span>, (<span style="color: #666666">2-</span>Area)) <span style="color: #3D7B7B; font-style: italic"># Analytical result is 2</span>
 </pre>
 </div>
       </div>
@@ -689,8 +686,8 @@ Area <span style="color: #666666">=</span> midpoint(f,a,b,N)
     <div class="inner_cell">
       <div class="input_area">
         <div class="highlight" style="background: #ffffff">
-  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>,N): <span style="color: #408080; font-style: italic"># loop over k=0,1,..,N-1</span>
-    val <span style="color: #666666">=</span> lower_limit<span style="color: #666666">+</span>(k<span style="color: #666666">+0.5</span>)<span style="color: #666666">*</span>h <span style="color: #408080; font-style: italic"># midpoint value</span>
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>,N): <span style="color: #3D7B7B; font-style: italic"># loop over k=0,1,..,N-1</span>
+    val <span style="color: #666666">=</span> lower_limit<span style="color: #666666">+</span>(k<span style="color: #666666">+0.5</span>)<span style="color: #666666">*</span>h <span style="color: #3D7B7B; font-style: italic"># midpoint value</span>
     area <span style="color: #666666">+=</span> func(val)
 <span style="color: #008000; font-weight: bold">return</span> area<span style="color: #666666">*</span>h
 </pre>
@@ -996,14 +993,14 @@ A possible algorithm is then:
     iterations<span style="color: #666666">=0</span>
     <span style="color: #008000; font-weight: bold">while</span> S:
         iterations <span style="color: #666666">+=1</span>
-        a,b<span style="color: #666666">=</span>S<span style="color: #666666">.</span>pop(<span style="color: #666666">-1</span>) <span style="color: #408080; font-style: italic"># last element</span>
-        m<span style="color: #666666">=</span>(b<span style="color: #666666">+</span>a)<span style="color: #666666">*0.5</span>   <span style="color: #408080; font-style: italic"># midpoint</span>
-        I1<span style="color: #666666">=0.5*</span>(b<span style="color: #666666">-</span>a)<span style="color: #666666">*</span>(func(a)<span style="color: #666666">+</span>func(b)) <span style="color: #408080; font-style: italic">#trapezoidal for 1 interval </span>
-        I2<span style="color: #666666">=0.25*</span>(b<span style="color: #666666">-</span>a)<span style="color: #666666">*</span>(func(a)<span style="color: #666666">+</span>func(b)<span style="color: #666666">+2*</span>func(m)) <span style="color: #408080; font-style: italic">#trapezoidal for 2 intervals</span>
+        a,b<span style="color: #666666">=</span>S<span style="color: #666666">.</span>pop(<span style="color: #666666">-1</span>) <span style="color: #3D7B7B; font-style: italic"># last element</span>
+        m<span style="color: #666666">=</span>(b<span style="color: #666666">+</span>a)<span style="color: #666666">*0.5</span>   <span style="color: #3D7B7B; font-style: italic"># midpoint</span>
+        I1<span style="color: #666666">=0.5*</span>(b<span style="color: #666666">-</span>a)<span style="color: #666666">*</span>(func(a)<span style="color: #666666">+</span>func(b)) <span style="color: #3D7B7B; font-style: italic">#trapezoidal for 1 interval </span>
+        I2<span style="color: #666666">=0.25*</span>(b<span style="color: #666666">-</span>a)<span style="color: #666666">*</span>(func(a)<span style="color: #666666">+</span>func(b)<span style="color: #666666">+2*</span>func(m)) <span style="color: #3D7B7B; font-style: italic">#trapezoidal for 2 intervals</span>
         <span style="color: #008000; font-weight: bold">if</span>(np<span style="color: #666666">.</span>abs(I1<span style="color: #666666">-</span>I2)<span style="color: #666666">&lt;3*</span>np<span style="color: #666666">.</span>abs((b<span style="color: #666666">-</span>a)<span style="color: #666666">*</span>tol)):
-            I<span style="color: #666666">+=</span>I2     <span style="color: #408080; font-style: italic"># accuarcy met</span>
+            I<span style="color: #666666">+=</span>I2     <span style="color: #3D7B7B; font-style: italic"># accuarcy met</span>
         <span style="color: #008000; font-weight: bold">else</span>:
-            S<span style="color: #666666">.</span>append([a,m]) <span style="color: #408080; font-style: italic"># half the interval </span>
+            S<span style="color: #666666">.</span>append([a,m]) <span style="color: #3D7B7B; font-style: italic"># half the interval </span>
             S<span style="color: #666666">.</span>append([m,b])
     <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;Number of iterations: &quot;</span>, iterations)
     <span style="color: #008000; font-weight: bold">return</span> I
@@ -1130,26 +1127,26 @@ Below is a Python implementation:
 <span style="color: #BA2121; font-style: italic">        for the given tol, if show=True the triangular</span>
 <span style="color: #BA2121; font-style: italic">        array of intermediate results are printed &quot;&quot;&quot;</span>
     Nmax <span style="color: #666666">=</span> <span style="color: #666666">100</span>
-    R <span style="color: #666666">=</span> np<span style="color: #666666">.</span>empty([Nmax,Nmax]) <span style="color: #408080; font-style: italic"># storage buffer</span>
-    h <span style="color: #666666">=</span> (b<span style="color: #666666">-</span>a) <span style="color: #408080; font-style: italic"># step size</span>
+    R <span style="color: #666666">=</span> np<span style="color: #666666">.</span>empty([Nmax,Nmax]) <span style="color: #3D7B7B; font-style: italic"># storage buffer</span>
+    h <span style="color: #666666">=</span> (b<span style="color: #666666">-</span>a) <span style="color: #3D7B7B; font-style: italic"># step size</span>
     R[<span style="color: #666666">0</span>,<span style="color: #666666">0</span>]    <span style="color: #666666">=.5*</span>(func(a)<span style="color: #666666">+</span>func(b))<span style="color: #666666">*</span>h
     N <span style="color: #666666">=</span> <span style="color: #666666">1</span>
     <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>,Nmax):
         h <span style="color: #666666">/=</span> <span style="color: #666666">2</span>
         N <span style="color: #666666">*=</span> <span style="color: #666666">2</span>
         odd_terms<span style="color: #666666">=0</span>
-        <span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span> (<span style="color: #666666">1</span>,N,<span style="color: #666666">2</span>): <span style="color: #408080; font-style: italic"># 1, 3, 5, ... , N-1</span>
+        <span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span> (<span style="color: #666666">1</span>,N,<span style="color: #666666">2</span>): <span style="color: #3D7B7B; font-style: italic"># 1, 3, 5, ... , N-1</span>
             val        <span style="color: #666666">=</span> a <span style="color: #666666">+</span> k<span style="color: #666666">*</span>h
             odd_terms <span style="color: #666666">+=</span> func(val)
-		<span style="color: #408080; font-style: italic"># add the odd terms to the previous estimate	</span>
+		<span style="color: #3D7B7B; font-style: italic"># add the odd terms to the previous estimate	</span>
         R[i,<span style="color: #666666">0</span>]   <span style="color: #666666">=</span> <span style="color: #666666">0.5*</span>R[i<span style="color: #666666">-1</span>,<span style="color: #666666">0</span>] <span style="color: #666666">+</span> h<span style="color: #666666">*</span>odd_terms 
         <span style="color: #008000; font-weight: bold">for</span> m <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(i): 
-			<span style="color: #408080; font-style: italic"># add all higher order terms in h</span>
+			<span style="color: #3D7B7B; font-style: italic"># add all higher order terms in h</span>
             R[i,m<span style="color: #666666">+1</span>]   <span style="color: #666666">=</span> R[i,m] <span style="color: #666666">+</span> (R[i,m]<span style="color: #666666">-</span>R[i<span style="color: #666666">-1</span>,m])<span style="color: #666666">/</span>(<span style="color: #666666">4**</span>(m<span style="color: #666666">+1</span>)<span style="color: #666666">-1</span>)                  
-		<span style="color: #408080; font-style: italic"># check tolerance, best guess			</span>
+		<span style="color: #3D7B7B; font-style: italic"># check tolerance, best guess			</span>
         calc_tol <span style="color: #666666">=</span> <span style="color: #008000">abs</span>(R[i,i]<span style="color: #666666">-</span>R[i<span style="color: #666666">-1</span>,i<span style="color: #666666">-1</span>])       
         <span style="color: #008000; font-weight: bold">if</span>(calc_tol<span style="color: #666666">&lt;</span>tol):
-            <span style="color: #008000; font-weight: bold">break</span>  <span style="color: #408080; font-style: italic"># estimated precision reached </span>
+            <span style="color: #008000; font-weight: bold">break</span>  <span style="color: #3D7B7B; font-style: italic"># estimated precision reached </span>
     <span style="color: #008000; font-weight: bold">if</span>(i <span style="color: #666666">==</span> Nmax<span style="color: #666666">-1</span>):
         <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Romberg routine did not converge after &#39;</span>,
               Nmax, <span style="color: #BA2121">&#39;iterations!&#39;</span>)
@@ -1161,11 +1158,11 @@ Below is a Python implementation:
         <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;Steps StepSize Results&quot;</span>)
         <span style="color: #008000; font-weight: bold">for</span> idx <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(i<span style="color: #666666">+1</span>):
             <span style="color: #008000">print</span>(elem[idx],<span style="color: #BA2121">&#39; &#39;</span>,
-                  <span style="color: #BA2121">&quot;</span><span style="color: #BB6688; font-weight: bold">{:.6f}</span><span style="color: #BA2121">&quot;</span><span style="color: #666666">.</span>format((b<span style="color: #666666">-</span>a)<span style="color: #666666">/2**</span>idx),end <span style="color: #666666">=</span> <span style="color: #BA2121">&#39; &#39;</span>)
+                  <span style="color: #BA2121">&quot;</span><span style="color: #A45A77; font-weight: bold">{:.6f}</span><span style="color: #BA2121">&quot;</span><span style="color: #666666">.</span>format((b<span style="color: #666666">-</span>a)<span style="color: #666666">/2**</span>idx),end <span style="color: #666666">=</span> <span style="color: #BA2121">&#39; &#39;</span>)
             <span style="color: #008000; font-weight: bold">for</span> l <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(idx<span style="color: #666666">+1</span>):
-                <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;</span><span style="color: #BB6688; font-weight: bold">{:.6f}</span><span style="color: #BA2121">&quot;</span><span style="color: #666666">.</span>format(R[idx,l]),end <span style="color: #666666">=</span> <span style="color: #BA2121">&#39; &#39;</span>)
+                <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;</span><span style="color: #A45A77; font-weight: bold">{:.6f}</span><span style="color: #BA2121">&quot;</span><span style="color: #666666">.</span>format(R[idx,l]),end <span style="color: #666666">=</span> <span style="color: #BA2121">&#39; &#39;</span>)
             <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;&#39;</span>)  
-    <span style="color: #008000; font-weight: bold">return</span> R[i,i] <span style="color: #408080; font-style: italic">#return the best estimate</span>
+    <span style="color: #008000; font-weight: bold">return</span> R[i,i] <span style="color: #3D7B7B; font-style: italic">#return the best estimate</span>
 </pre>
 </div>
       </div>
@@ -1236,14 +1233,14 @@ section uses 20480 and 9069 function evaluations, respectively.
     iterations<span style="color: #666666">=0</span>
     <span style="color: #008000; font-weight: bold">while</span> S:
         iterations <span style="color: #666666">+=1</span>
-        a,b<span style="color: #666666">=</span>S<span style="color: #666666">.</span>pop(<span style="color: #666666">-1</span>) <span style="color: #408080; font-style: italic"># last element</span>
-        m<span style="color: #666666">=</span>(b<span style="color: #666666">+</span>a)<span style="color: #666666">*0.5</span>   <span style="color: #408080; font-style: italic"># midpoint</span>
-        I1<span style="color: #666666">=</span>simpson_step(a,b,func) <span style="color: #408080; font-style: italic">#simpsons for 1 interval </span>
-        I2<span style="color: #666666">=</span>simpson_step(a,m,func)<span style="color: #666666">+</span>simpson_step(m,b,func) <span style="color: #408080; font-style: italic"># ...2 intervals</span>
+        a,b<span style="color: #666666">=</span>S<span style="color: #666666">.</span>pop(<span style="color: #666666">-1</span>) <span style="color: #3D7B7B; font-style: italic"># last element</span>
+        m<span style="color: #666666">=</span>(b<span style="color: #666666">+</span>a)<span style="color: #666666">*0.5</span>   <span style="color: #3D7B7B; font-style: italic"># midpoint</span>
+        I1<span style="color: #666666">=</span>simpson_step(a,b,func) <span style="color: #3D7B7B; font-style: italic">#simpsons for 1 interval </span>
+        I2<span style="color: #666666">=</span>simpson_step(a,m,func)<span style="color: #666666">+</span>simpson_step(m,b,func) <span style="color: #3D7B7B; font-style: italic"># ...2 intervals</span>
         <span style="color: #008000; font-weight: bold">if</span>(np<span style="color: #666666">.</span>abs(I1<span style="color: #666666">-</span>I2)<span style="color: #666666">&lt;15*</span>np<span style="color: #666666">.</span>abs((b<span style="color: #666666">-</span>a)<span style="color: #666666">*</span>tol)):
-            I<span style="color: #666666">+=</span>I2     <span style="color: #408080; font-style: italic"># accuarcy met</span>
+            I<span style="color: #666666">+=</span>I2     <span style="color: #3D7B7B; font-style: italic"># accuarcy met</span>
         <span style="color: #008000; font-weight: bold">else</span>:
-            S<span style="color: #666666">.</span>append([a,m]) <span style="color: #408080; font-style: italic"># half the interval </span>
+            S<span style="color: #666666">.</span>append([a,m]) <span style="color: #3D7B7B; font-style: italic"># half the interval </span>
             S<span style="color: #666666">.</span>append([m,b])
     <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;Number of iterations: &quot;</span>, iterations)
     <span style="color: #008000; font-weight: bold">return</span> I

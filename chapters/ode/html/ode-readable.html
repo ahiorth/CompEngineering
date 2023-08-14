@@ -8,9 +8,9 @@ doconce format html main_ode.do.txt CHAPTER=document BOOK=document APPENDIX=docu
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/doconce/doconce/" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="description" content="0D-systems and Ordinary Differential Equations">
+<meta name="description" content="0D-systems and ordinary differential equations">
 <meta name="keywords" content="continuous stirred tank reactor (CSTR),Eulers method,Eulers method, error analysis,Eulers method, adaptive step size,Runge-Kutta,Runge-Kutta, adaptive step size,adaptive step size,stiff equations,implicit method">
-<title>0D-systems and Ordinary Differential Equations</title>
+<title>0D-systems and ordinary differential equations</title>
 <!-- Bootstrap style: bootswatch_readable -->
 <!-- doconce format html main_ode.do.txt CHAPTER=document BOOK=document APPENDIX=document --html_style=bootswatch_readable --html_output=ode-readable --html_code_style=inherit -->
 <link href="https://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
@@ -43,6 +43,7 @@ code { color: inherit; background-color: transparent; }
                1,
                'table_of_contents',
                'table_of_contents'),
+              ('0D models', 1, None, '0d-models'),
               ('Ordinary differential equations',
                1,
                None,
@@ -105,7 +106,7 @@ MathJax.Hub.Config({
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="ode-readable.html">0D-systems and Ordinary Differential Equations</a>
+    <a class="navbar-brand" href="ode-readable.html">0D-systems and ordinary differential equations</a>
   </div>
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav navbar-right">
@@ -113,6 +114,7 @@ MathJax.Hub.Config({
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
      <!-- navigation toc: --> <li><a href="#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
+     <!-- navigation toc: --> <li><a href="#0d-models" style="font-size: 80%;"><b>0D models</b></a></li>
      <!-- navigation toc: --> <li><a href="#ordinary-differential-equations" style="font-size: 80%;"><b>Ordinary differential equations</b></a></li>
      <!-- navigation toc: --> <li><a href="#a-simple-model-for-fluid-flow" style="font-size: 80%;"><b>A simple model for fluid flow</b></a></li>
      <!-- navigation toc: --> <li><a href="#euler-s-method" style="font-size: 80%;"><b>Euler's method</b></a></li>
@@ -137,7 +139,7 @@ MathJax.Hub.Config({
 <!-- ------------------- main content ---------------------- -->
 <div class="jumbotron">
 <center>
-<h1>0D-systems and Ordinary Differential Equations </h1>
+<h1>0D-systems and ordinary differential equations </h1>
 </center>  <!-- document title -->
 
 <!-- author(s): Aksel Hiorth -->
@@ -148,7 +150,7 @@ MathJax.Hub.Config({
 <br>
 <p>University of Stavanger
 <center>
-<h4>May 7, 2023</h4>
+<h4>Aug 14, 2023</h4>
 </center> <!-- date -->
 <br>
 </p>
@@ -158,6 +160,7 @@ MathJax.Hub.Config({
 <h1 id="table_of_contents">Table of contents</h1>
 
 <div class='toc'>
+<p><a href="#0d-models"> 0D models </a></p>
 <p><a href="#ordinary-differential-equations"> Ordinary differential equations </a></p>
 <p><a href="#a-simple-model-for-fluid-flow"> A simple model for fluid flow </a></p>
 <p><a href="#euler-s-method"> Euler's method </a></p>
@@ -173,7 +176,10 @@ MathJax.Hub.Config({
 <br>
 
 <!-- Common Mako variables and functions -->
+<h1 id="0d-models" class="anchor">0D models </h1>
+<p>By 0D models we mean models that are only dependent on one variable, usually time. These models are often called "lumped parameter models", because they ignore spatial dependency and the parameters in the model are adjusted to match experimental data. In many cases it is more important to predict how a system evolves in time, than the spatial dependency. A very recent example is the spread of infectious deceases, like Covid-19, where the evolution of total number of infected people might be the most important and not where the infection happens. </p>
 <h1 id="ordinary-differential-equations" class="anchor">Ordinary differential equations </h1>
+
 <p>Physical systems evolves in space and time, and very often they are described by a ordinary differential equations (ODE) and/or
 partial differential equations (PDE). The difference between an ODE and a PDE is that an ODE only describes 
 the changes in one spatial dimension <em>or</em> time, whereas a PDE describes a system that evolves in the \( x- \), \( y- \), \( z- \) dimension 
@@ -304,8 +310,8 @@ $$
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">ode_solv</span>(c_into,c_init,t_final,vol,q,dt):
     f<span style="color: #666666">=</span>[];t<span style="color: #666666">=</span>[]
     tau_inv <span style="color: #666666">=</span> q<span style="color: #666666">/</span>vol
-    c_in    <span style="color: #666666">=</span> c_into <span style="color: #408080; font-style: italic">#freshwater into tank</span>
-    c_old   <span style="color: #666666">=</span> c_init <span style="color: #408080; font-style: italic">#seawater present </span>
+    c_in    <span style="color: #666666">=</span> c_into <span style="color: #3D7B7B; font-style: italic">#freshwater into tank</span>
+    c_old   <span style="color: #666666">=</span> c_init <span style="color: #3D7B7B; font-style: italic">#seawater present </span>
     ti<span style="color: #666666">=0.</span>
     <span style="color: #008000; font-weight: bold">while</span>(ti <span style="color: #666666">&lt;=</span> t_final):
         t<span style="color: #666666">.</span>append(ti); f<span style="color: #666666">.</span>append(c_old)
@@ -634,27 +640,27 @@ $$
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">adaptive_euler</span>(c_into,c_init,t_final,tol<span style="color: #666666">=1e-4</span>):
     f<span style="color: #666666">=</span>[];t<span style="color: #666666">=</span>[]
-    c_in    <span style="color: #666666">=</span> c_into <span style="color: #408080; font-style: italic">#freshwater into tank</span>
-    c_old   <span style="color: #666666">=</span> c_init <span style="color: #408080; font-style: italic">#seawater present </span>
+    c_in    <span style="color: #666666">=</span> c_into <span style="color: #3D7B7B; font-style: italic">#freshwater into tank</span>
+    c_old   <span style="color: #666666">=</span> c_init <span style="color: #3D7B7B; font-style: italic">#seawater present </span>
     ti<span style="color: #666666">=0.</span>; h_new<span style="color: #666666">=1e-3</span>;
     no_steps<span style="color: #666666">=0</span>
     global_err<span style="color: #666666">=0.</span>
     <span style="color: #008000; font-weight: bold">while</span>(ti <span style="color: #666666">&lt;=</span> t_final):
         t<span style="color: #666666">.</span>append(ti); f<span style="color: #666666">.</span>append(c_old)
-        toli<span style="color: #666666">=10.*</span>tol; <span style="color: #408080; font-style: italic"># a high init tolerance to enter while loop</span>
-        <span style="color: #008000; font-weight: bold">while</span>(toli<span style="color: #666666">&gt;</span>tol):<span style="color: #408080; font-style: italic"># first two small steps</span>
+        toli<span style="color: #666666">=10.*</span>tol; <span style="color: #3D7B7B; font-style: italic"># a high init tolerance to enter while loop</span>
+        <span style="color: #008000; font-weight: bold">while</span>(toli<span style="color: #666666">&gt;</span>tol):<span style="color: #3D7B7B; font-style: italic"># first two small steps</span>
             hi<span style="color: #666666">=</span>h_new
             k1 <span style="color: #666666">=</span> one_step(c_old,c_in,hi<span style="color: #666666">*.5</span>)
             k2 <span style="color: #666666">=</span> one_step(k1,c_in,hi<span style="color: #666666">*.5</span>)
-            <span style="color: #408080; font-style: italic"># ... and one large step</span>
+            <span style="color: #3D7B7B; font-style: italic"># ... and one large step</span>
             k3 <span style="color: #666666">=</span> one_step(c_old,c_in,hi)
             toli <span style="color: #666666">=</span> <span style="color: #008000">abs</span>(k3<span style="color: #666666">-</span>k2)
             h_new<span style="color: #666666">=</span>hi<span style="color: #666666">*</span>np<span style="color: #666666">.</span>sqrt(tol<span style="color: #666666">/</span>toli)
             no_steps<span style="color: #666666">+=3</span>
         toli<span style="color: #666666">=1.</span>
-        c_old<span style="color: #666666">=2*</span>k2<span style="color: #666666">-</span>k3 <span style="color: #408080; font-style: italic"># higher order correction</span>
- <span style="color: #408080; font-style: italic"># normal Euler, uncomment and inspect the global error</span>
- <span style="color: #408080; font-style: italic">#       c_old = k2 </span>
+        c_old<span style="color: #666666">=2*</span>k2<span style="color: #666666">-</span>k3 <span style="color: #3D7B7B; font-style: italic"># higher order correction</span>
+ <span style="color: #3D7B7B; font-style: italic"># normal Euler, uncomment and inspect the global error</span>
+ <span style="color: #3D7B7B; font-style: italic">#       c_old = k2 </span>
         ti   <span style="color: #666666">+=</span> hi
         global_err <span style="color: #666666">+=</span> <span style="color: #008000">abs</span>(np<span style="color: #666666">.</span>exp(<span style="color: #666666">-</span>ti)<span style="color: #666666">-</span>c_old)
     <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;No steps=&quot;</span>, no_steps, <span style="color: #BA2121">&quot;Global Error=&quot;</span>, global_err)
@@ -768,8 +774,8 @@ $$
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">ode_solv</span>(c_into,c_init,t_final,h):
     f<span style="color: #666666">=</span>[];t<span style="color: #666666">=</span>[]
-    c_in  <span style="color: #666666">=</span> c_into <span style="color: #408080; font-style: italic">#freshwater into tank</span>
-    c_old <span style="color: #666666">=</span> c_init <span style="color: #408080; font-style: italic">#seawater present </span>
+    c_in  <span style="color: #666666">=</span> c_into <span style="color: #3D7B7B; font-style: italic">#freshwater into tank</span>
+    c_old <span style="color: #666666">=</span> c_init <span style="color: #3D7B7B; font-style: italic">#seawater present </span>
     ti<span style="color: #666666">=0.</span>
     <span style="color: #008000; font-weight: bold">while</span>(ti <span style="color: #666666">&lt;=</span> t_final):
         t<span style="color: #666666">.</span>append(ti); f<span style="color: #666666">.</span>append(c_old)
