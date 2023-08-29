@@ -1,0 +1,2209 @@
+<!--
+HTML file automatically generated from DocOnce source
+(https://github.com/doconce/doconce/)
+doconce format html project1.do.txt LANG=C.UTF-8 --html_style=bootswatch_readable --html_output=project1-readable --html_code_style=inherit
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/doconce/doconce/" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="The tip of the iceberg or Automatic for the people">
+<title>The tip of the iceberg or Automatic for the people</title>
+<!-- Bootstrap style: bootswatch_readable -->
+<!-- doconce format html project1.do.txt LANG=C.UTF-8 --html_style=bootswatch_readable --html_output=project1-readable --html_code_style=inherit -->
+<link href="https://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:64px;      /* fixed header height for style bootswatch_readable */
+  margin:-64px 0 0; /* negative fixed header height */
+}
+</style>
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Exercise 1: Finite-precision arithmetic',
+               1,
+               'ex:round_err',
+               'ex:round_err'),
+              ('Exercise 2: Get up to speed with NumPy',
+               1,
+               'exer:numpy',
+               'exer:numpy'),
+              ('Exercise 3, Part I: Finite Differences (FD) with Functions',
+               1,
+               None,
+               'exercise-3-part-i-finite-differences-fd-with-functions'),
+              ('Exercise 3, Part II: FD with Classes',
+               1,
+               'exer:fd_classes',
+               'exer:fd_classes'),
+              ('A Crash Course on Classes',
+               2,
+               'exer:crash_course',
+               'exer:crash_course'),
+              ('Exercise 4: A song of ice and fire?',
+               1,
+               'exer:isostasy',
+               'exer:isostasy'),
+              ('Theory', 2, None, 'theory'),
+              ('Melting of an iceberg', 3, None, 'melting-of-an-iceberg'),
+              ('Freeboard', 3, None, 'freeboard'),
+              ('Exercise 5: Automatic for the people?',
+               1,
+               'exer:autoder',
+               'exer:autoder'),
+              ('Introduction to automatic differentiation',
+               2,
+               None,
+               'introduction-to-automatic-differentiation'),
+              ('Addison and subtraction', 2, None, 'addison-and-subtraction'),
+              ('Multiplication and division',
+               2,
+               None,
+               'multiplication-and-division'),
+              ('Test of code', 3, None, 'test-of-code'),
+              ('Adding more functions', 2, None, 'adding-more-functions'),
+              ('Appendix A: Passing arguments to functions',
+               1,
+               None,
+               'appendix-a-passing-arguments-to-functions'),
+              ('Appendix B: Package management with `conda`',
+               1,
+               None,
+               'appendix-b-package-management-with-conda'),
+              ('Getting `conda` up and running',
+               2,
+               None,
+               'getting-conda-up-and-running'),
+              ('How to install rockhound and cmocean into a new environment',
+               2,
+               None,
+               'how-to-install-rockhound-and-cmocean-into-a-new-environment'),
+              ('Selecting the correct Python version',
+               2,
+               None,
+               'selecting-the-correct-python-version'),
+              ('Guidelines for project submission',
+               1,
+               None,
+               'guidelines-for-project-submission'),
+              ('Bibliography', 1, None, 'bibliography')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript" async
+ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="project1-readable.html">The tip of the iceberg or Automatic for the people</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="#ex:round_err" style="font-size: 80%;"><b>Exercise 1: Finite-precision arithmetic</b></a></li>
+     <!-- navigation toc: --> <li><a href="#exer:numpy" style="font-size: 80%;"><b>Exercise 2: Get up to speed with NumPy</b></a></li>
+     <!-- navigation toc: --> <li><a href="#exercise-3-part-i-finite-differences-fd-with-functions" style="font-size: 80%;"><b>Exercise 3, Part I: Finite Differences (FD) with Functions</b></a></li>
+     <!-- navigation toc: --> <li><a href="#exer:fd_classes" style="font-size: 80%;"><b>Exercise 3, Part II: FD with Classes</b></a></li>
+     <!-- navigation toc: --> <li><a href="#exer:crash_course" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;A Crash Course on Classes</a></li>
+     <!-- navigation toc: --> <li><a href="#exer:isostasy" style="font-size: 80%;"><b>Exercise 4: A song of ice and fire?</b></a></li>
+     <!-- navigation toc: --> <li><a href="#theory" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Theory</a></li>
+     <!-- navigation toc: --> <li><a href="#melting-of-an-iceberg" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Melting of an iceberg</a></li>
+     <!-- navigation toc: --> <li><a href="#freeboard" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Freeboard</a></li>
+     <!-- navigation toc: --> <li><a href="#exer:autoder" style="font-size: 80%;"><b>Exercise 5: Automatic for the people?</b></a></li>
+     <!-- navigation toc: --> <li><a href="#introduction-to-automatic-differentiation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Introduction to automatic differentiation</a></li>
+     <!-- navigation toc: --> <li><a href="#addison-and-subtraction" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Addison and subtraction</a></li>
+     <!-- navigation toc: --> <li><a href="#multiplication-and-division" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Multiplication and division</a></li>
+     <!-- navigation toc: --> <li><a href="#test-of-code" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Test of code</a></li>
+     <!-- navigation toc: --> <li><a href="#adding-more-functions" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Adding more functions</a></li>
+     <!-- navigation toc: --> <li><a href="#appendix-a-passing-arguments-to-functions" style="font-size: 80%;"><b>Appendix A: Passing arguments to functions</b></a></li>
+     <!-- navigation toc: --> <li><a href="#appendix-b-package-management-with-conda" style="font-size: 80%;"><b>Appendix B: Package management with <code>conda</code></b></a></li>
+     <!-- navigation toc: --> <li><a href="#getting-conda-up-and-running" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Getting <code>conda</code> up and running</a></li>
+     <!-- navigation toc: --> <li><a href="#how-to-install-rockhound-and-cmocean-into-a-new-environment" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;How to install rockhound and cmocean into a new environment</a></li>
+     <!-- navigation toc: --> <li><a href="#selecting-the-correct-python-version" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Selecting the correct Python version</a></li>
+     <!-- navigation toc: --> <li><a href="#guidelines-for-project-submission" style="font-size: 80%;"><b>Guidelines for project submission</b></a></li>
+     <!-- navigation toc: --> <li><a href="#bibliography" style="font-size: 80%;"><b>Bibliography</b></a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+<div class="container">
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+<a name="part0000"></a>
+<!-- ------------------- main content ---------------------- -->
+<div class="jumbotron">
+<center>
+<h1>The tip of the iceberg or Automatic for the people</h1>
+</center>  <!-- document title -->
+
+<!-- author(s): MOD300/MOD510: Mandatory project 1, and Deadline: 11. September 2022 (23:59) -->
+<center>
+<b>MOD300/MOD510: Mandatory project 1</b> 
+</center>
+<center>
+<b>Deadline: 11. September 2022 (23:59)</b> 
+</center>
+<!-- institution(s) -->
+<br>
+<center>
+<h4>Aug 29, 2023</h4>
+</center> <!-- date -->
+<br>
+
+<p>
+<b>Learning objectives.</b>
+By completing this project, the student will:
+</p>
+<ul>
+<li> Get experience in structuring and writing a report.</li>
+<li> Write new functions and classes in Python.</li>
+<li> Explore numerical round-off and truncation errors.</li>
+<li> Be introduced to useful Python libraries for scientific computing.</li>
+</ul>
+<p>
+<b>Abstract.</b> Because computers have finite memory, numerical errors must always
+be taken into account when doing calculations, especially when
+working with floating-point numbers <a href="#goldberg1991every">[1]</a>.
+In the first parts of this project we investigate round-off errors and
+truncation errors using the Python programming language, and we
+discuss how different implementation strategies affect code
+efficiency and code clarity. In particular, we show how coding with
+classes can simplify the implementation of numerical algorithms.
+Finally, you can choose <em>one</em> of the following two topics: i) use the power of available Python libraries to quickly visualize and manipulate large data sets. To this end, we
+look at how ice melting in Antarctica could affect
+sea level rise <a href="#fretwell2013bedmap2">[2]</a>, ii) automatic differentiation <a href="#wengert1964simple">[3]</a> to illustrate the power of object oriented programming. Automatic differentiation is a cornerstone in training neural networks and in many commercial simulation codes.
+</p>
+
+<p>Remember to take a look in the Appendix for some tips, and read the guidelines for project submission at the end!</p>
+
+<!-- ======= Introduction   ======= -->
+
+
+</div> <!-- end jumbotron -->
+<h1 id="ex:round_err" class="anchor">Exercise 1: Finite-precision arithmetic</h1>
+
+<p>
+<b>Part 1.</b>
+</p>
+
+<p>Run the following code snippet:</p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span>
+sys<span style="color: #666666">.</span>float_info
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ul>
+<li> Explain the meaning of the printed-out numbers.</li>
+</ul>
+<p>Hint: Read the lecture material on the IEEE Standard for floating-point arithmetic.</p>
+
+<p>
+<b>Part 2.</b>
+</p>
+
+<ul>
+<li> Show how you can calculate the printed-out values <code>max</code>, <code>min</code>, <code>epsilon</code> yourself (again, based on the IEEE standard).</li>
+</ul>
+<p>
+<b>Part 3.</b>
+</p>
+
+<p>In Python, typing <code>0.1+0.2</code> does not (typically) produce the same output as <code>0.3</code>.</p>
+
+<ul>
+<li> Why not?</li>
+</ul>
+<p>
+<b>Part 4.</b>
+</p>
+
+<ul>
+<li> Should you use the <code>==</code>-operator to test whether two floating-point numbers are equal?</li>
+<li> Why / why not? Can you think of alternative ways to do floating-point number comparison?</li>
+</ul>
+<h1 id="exer:numpy" class="anchor">Exercise 2: Get up to speed with NumPy</h1>
+
+<p>The purpose of this exercise is to learn a little bit about
+<a href="https://numpy.org/" target="_self">NumPy</a>, which is an incredibly useful Python library.
+A major reason for its popularity is efficiency: doing computations with NumPy
+arrays (objects of the type <code>ndarray</code>) instead of using native Python lists can,
+by itself, speed up a program by several orders of magnitude!
+The mechanism for speed-up is <a href="https://www.oreilly.com/library/view/python-for-data/9781449323592/ch04.html" target="_self">vectorized computation</a>.
+</p>
+
+<div class="alert alert-block alert-success alert-text-normal"><b>Vectorized functions</b>
+<p>Using NumPy arrays allows you to create vectorized functions; functions that
+operate on a whole array at once, rather than looping over the elements
+one-by-one inside a custom written loop.
+</p>
+
+<p>The way vectorization works behind the scenes is still via loops
+(optimized, pre-compiled C code), but as Python programmer you do not need
+to worry about the details.
+</p>
+</div>
+
+
+<p>
+<b>Part 1.</b>
+</p>
+
+<p>The following code block gives an example of a vectorized function:</p>
+
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">x <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, <span style="color: #666666">1</span>, <span style="color: #666666">10</span>)
+np<span style="color: #666666">.</span>exp(x)  <span style="color: #3D7B7B; font-style: italic"># Apply f(t)=exp(t) to each element in the array x.</span>
+np<span style="color: #666666">.</span>exp(<span style="color: #666666">-</span>x)  <span style="color: #3D7B7B; font-style: italic"># Apply the function f(t)=exp(-t) to each element of x.</span>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>Notice the usage of <code>np.exp</code> instead of using the exponential function provided
+in the built-in <a href="https://docs.python.org/3/library/math.html" target="_self">math</a>
+library; this is an example of a
+<a href="https://docs.scipy.org/doc/numpy/reference/ufuncs.html" target="_self">universal function</a>.
+</p>
+
+<ul>
+<li> Create a native Python list of the same size as <code>x</code> and holding the same values. Apply the same two function calls to the list. Explain what happens.</li>
+<li> How would you generally evaluate a function on all elements of a native Python list? (as opposed to a NumPy array)</li>
+</ul>
+<p>
+<b>Part 2.</b>
+</p>
+
+<p>As already hinted at, the NumPy library comes with a plethora of useful
+features and functions. The code snippets below show some examples:
+</p>
+
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">np<span style="color: #666666">.</span>zeros(<span style="color: #666666">20</span>)
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">np<span style="color: #666666">.</span>ones(<span style="color: #666666">20</span>)
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, <span style="color: #666666">10</span>, <span style="color: #666666">11</span>)
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, <span style="color: #666666">10</span>, <span style="color: #666666">11</span>, endpoint<span style="color: #666666">=</span><span style="color: #008000; font-weight: bold">False</span>)
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">vector <span style="color: #666666">=</span> np<span style="color: #666666">.</span>arange(<span style="color: #666666">5</span>) <span style="color: #666666">+</span> <span style="color: #666666">1</span>
+<span style="color: #666666">2*</span>vector
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ul>
+<li> Explain what each line of code does.</li>
+<li> How would you produce the same output using native Python lists?</li>
+</ul>
+<p>
+<b>Part 3.</b>
+</p>
+
+<p>Frequently you will want to extract a subset of values from an array based
+on some kind of criterion. For example, you might want to count the number
+of non-zero numbers, or identify all values exceeding a certain threshold.
+With NumPy, suchs tasks are easily achieved using
+<a href="https://jakevdp.github.io/PythonDataScienceHandbook/02.06-boolean-arrays-and-masks.html" target="_self">boolean masking</a>, e.g.:
+</p>
+
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">array_of_numbers <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([<span style="color: #666666">4</span>, <span style="color: #666666">8</span>, <span style="color: #666666">15</span>, <span style="color: #666666">16</span>, <span style="color: #666666">23</span>, <span style="color: #666666">42</span>,<span style="color: #666666">0</span>,<span style="color: #666666">5</span>])
+nnz <span style="color: #666666">=</span> np<span style="color: #666666">.</span>count_nonzero(array_of_numbers)
+<span style="color: #008000">print</span>(<span style="color: #BA2121">f&#39;There are </span><span style="color: #A45A77; font-weight: bold">{</span>nnz<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121"> non-zero numbers in the array.&#39;</span>)
+is_even <span style="color: #666666">=</span> (array_of_numbers <span style="color: #666666">%</span> <span style="color: #666666">2</span> <span style="color: #666666">==</span> <span style="color: #666666">0</span>)
+is_greater_than_17 <span style="color: #666666">=</span> (array_of_numbers <span style="color: #666666">&gt;</span> <span style="color: #666666">17</span>)
+is_even_and_greater_than_17 <span style="color: #666666">=</span> is_even <span style="color: #666666">&amp;</span> is_greater_than_17
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>However, neither of the following codes lines will execute:</p>
+
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">is_even_and_greater_than_17 <span style="color: #666666">=</span> is_even <span style="color: #AA22FF; font-weight: bold">and</span> is_greater_than_17
+<span style="color: #008000">print</span>(array_of_numbers <span style="color: #666666">%</span> <span style="color: #666666">2</span> <span style="color: #666666">==</span> <span style="color: #666666">0</span> <span style="color: #666666">&amp;</span> array_of_numbers <span style="color: #666666">&gt;</span> <span style="color: #666666">17</span>)
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ul>
+<li> Explain why this code fails.</li>
+<li> Use <a href="https://numpy.org/doc/stable/reference/generated/numpy.logical_and.html" target="_self"><tt>np.logical_and</tt></a> to make the code work</li> 
+</ul>
+<p>
+<b>Part 4.</b>
+</p>
+
+<p>The function <a href="https://numpy.org/doc/stable/reference/generated/numpy.where.html" target="_self">np.where</a>
+can also be used to select elements from an array.
+</p>
+
+<ul>
+<li> Explain the output of the following two lines of code:</li>
+</ul>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">np<span style="color: #666666">.</span>where(array_of_numbers <span style="color: #666666">&gt;</span> <span style="color: #666666">17</span>)[<span style="color: #666666">0</span>]
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">np<span style="color: #666666">.</span>where(array_of_numbers <span style="color: #666666">&gt;</span> <span style="color: #666666">17</span>, <span style="color: #666666">1</span>, <span style="color: #666666">0</span>)
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<h1 id="exercise-3-part-i-finite-differences-fd-with-functions" class="anchor">Exercise 3, Part I: Finite Differences (FD) with Functions </h1>
+
+<p>In scientific computing one often needs to calculate derivatives of functions.
+For problems encountered in practice, exact formulas may not be available,
+in which case numerical estimates are needed. However, to evaluate the
+correctness of our programmed numerical methods, it is still a very good idea
+to test the code on simple functions where the derivative is known.
+</p>
+
+<p>In this exercise, we consider a function that is relevant for describing wave
+phenomenona:
+</p>
+$$
+\begin{equation}
+f(x) = \sin(bx)\cdot e^{-ax^2}
+\tag{1}
+\end{equation}
+$$
+
+<p>One way to implement the <a href="https://realpython.com/defining-your-own-python-function/" target="_self">function in Python</a> is:</p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x, a<span style="color: #666666">=0.1</span>, b<span style="color: #666666">=10</span>):
+    <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>sin(b<span style="color: #666666">*</span>x)<span style="color: #666666">*</span>np<span style="color: #666666">.</span>exp(<span style="color: #666666">-</span>a<span style="color: #666666">*</span>x<span style="color: #666666">*</span>x)
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>We have chosen to define <code>a</code> and <code>b</code> as <em>default arguments</em>, which allows us to evaluate the function at \( x=1 \) by simply typing <code>f(1)</code>;
+this is equivalent to the command <code>f(1, 0.1, 10)</code>. If you want to change the <code>b</code> parameter, you can do, e.g., <code>f(1, b=2)</code>.
+Note also that the function works both when <code>x</code> is a single number <em>and</em> when it is a Numpy array. This is because we use the Numpy versions of the sine (<code>np.sin</code>) and exponential (<code>np.exp</code>) functions.
+</p>
+
+<div class="alert alert-block alert-success alert-text-normal"><b>Python functions are first-class!</b>
+<p>An important feature of Python is that functions are
+<a href="https://en.wikipedia.org/wiki/First-class_function" target="_self">first-class objects</a>,
+meaning that you can assign them to variables, you can store them inside
+various containers and data structures, they can be passed as input arguments
+to other functions, and they may be return values of other functions.
+</p>
+</div>
+
+
+<p>We will exploit this property of Python several times during this project.</p>
+
+<p>
+<b>Part 1.</b>
+</p>
+
+<p>It is always a good idea to start by visualizing the function in a plot.</p>
+
+<ul>
+<li> Make a Python function that plots \( f(x) \) from equation <a href="#mjx-eqn-1">(1)</a> over an arbitrary closed interval.</li>
+<li> Use the function to plot \( f(x) \) in the range \( [-10,10] \). Try to make your figure similar to the one shown in figure <a href="#fig:p1:wave">1</a></li>
+</ul>
+<center> <!-- figure label: --> <div id="fig:p1:wave"></div> <!-- FIGURE -->
+<hr class="figure">
+<center>
+<p class="caption">Figure 1:  A plot of \( f(x) \).  <!-- caption label: fig:p1:wave --> </p>
+</center>
+<p><img src="fig-project1/wave.png" align="bottom" ></p>
+</center>
+
+<p>
+<b>Part 2.</b>
+</p>
+
+<p>The analytical derivative of \( f(x) \) is</p>
+$$
+\begin{equation}
+f^\prime(x) =b \cos(bx)\cdot e^{-ax^2} - 2ax\sin(bx)\cdot e^{-ax^2}
+\tag{2}
+\end{equation}
+$$
+
+
+<ul>
+<li> Write a Python function that calculates the derivative defined in equation <a href="#mjx-eqn-2">(2)</a> (<em>not</em> the numerical derivative)</li>
+</ul>
+<p>
+<b>Part 3.</b>
+</p>
+
+<p>Next, you are going to write a Python function that calculates the numerical
+derivative of an <em>arbitrary</em> single-variable function <code>f</code> at a point \( x \)
+using finite differences.
+</p>
+
+<ul>
+<li> Write a Python function that calculates the derivative of an arbitrary function using the <em>forward difference</em> method (see section 3.3 in <a href="#hiorth">[4]</a> ).</li>
+<li> Apply your function to the particular case of equation <a href="#mjx-eqn-1">(1)</a> and \( x=1 \). Use a suitable value of \( h \), e.g. \( h=1e-2 \), and check that your estimate agrees reasonably well with the <em>analytical solution</em>.</li>
+</ul>
+<p>Hint: Check out some tips in Appendix A, we would recommend to use the <a href="https://realpython.com/python-kwargs-and-args/" target="_self">args</a> possibility in Python to write a numerical derivative function. See also section 1.3.4 in <a href="#hiorth">[4]</a>.</p>
+
+<p>
+<b>Part 4.</b>
+</p>
+
+<ul>
+<li> Write another Python function that calculates \( f^{\prime}(x) \) with the <em>central difference</em> method (see section 3.4 in <a href="#hiorth">[4]</a>).</li>
+</ul>
+<p>
+<b>Part 5.</b>
+</p>
+
+<p>Next, we wish to quantify the error in our numerical derivative approximations for the point \( x=1 \).</p>
+
+<ul>
+<li> For each of the two derivative approximations to \( f^{\prime}(1) \) (forward difference and central difference), make a scatter plot that shows the <em>absolute error</em> of the approximation on the \( y \)-axis versus the step size, \( h \), on the \( x \)-axis. Include both error curves in the same figure. The step sizes should be varied logarithmically between \( h=10^{-16} \) and \( h=10^0=1 \).</li>
+<li> Comment on what you observe in the figure you made. When is the numerical error smallest, and why? Is it what you expect from a theoretical analysis using Taylor's formula?</li>
+</ul>
+<h1 id="exer:fd_classes" class="anchor">Exercise 3, Part II: FD with Classes</h1>
+
+<p>Implementing numerical algorithms with free functions, as we did in the
+previous exercise, is perfectly fine, and you can complete the course by only
+coding in this way. However, experience has taught us that it is easy to
+introduce unnecessary errors when using this approach. In many cases you
+are better off by also using classes, and maybe <a href="https://realpython.com/python3-object-oriented-programming/" target="_self">object-oriented design</a>.
+In this exercise, you will get some practice in coding with classes.
+This knowledge will come in handy in later projects, and in any case
+it is a good tool to have in your programming toolkit.
+</p>
+
+<p>Previously, we worked with a function having two input parameters, \( a \) and \( b \).
+Implementing numerical algorithms using free functions was then simple.
+However, in a more complicated situation there
+could be dozens, or even hundreds, of parameters to keep track of.
+Most of these parameters might have fixed values, but frequently you will
+want to re-run a model with slightly different parameters than before.
+If you are not using classes, it is very easy to use the wrong parameters.
+This is especially true when working in a Jupyter notebook, because then it is
+possible to run code blocks in any order. If you forget to excute a cell that is
+responsible for updating one of your variables, your subsequent calculations
+might use incorrect input, and thus end up being wrong!
+</p>
+
+<div class="alert alert-block alert-success alert-text-normal"><b>Key take-away: Classes provide encapsulation</b>
+<p>By wrapping parts of your code into classes, and particular realizations of
+classes (objects), you facilitate code re-use, and it can make your code
+easier to understand and work with, thus reducing the probability of
+introducing bugs which may be hard to track down.
+</p>
+</div>
+
+<h2 id="exer:crash_course" class="anchor">A Crash Course on Classes</h2>
+
+<p>To get started, there are really only a couple of things you need to know.
+First, all of your classes should include a special function called <code>__init__</code>,
+in which you declare the variables (attributes) you wish an instance / object
+of the class to keep track of.
+</p>
+
+<p>Second, when setting, updating, or fetching attributes stored within the class,
+you should always use the prefix <code>self</code>, followed by a dot.
+Furthermore, the functions you define inside the class should have <code>self</code> as
+the first function argument (<a href="https://realpython.com/python3-object-oriented-programming/" target="_self">there are exceptions</a>,
+but we will not consider that in this project).
+All of this is best understood via an example:
+</p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">WavePacket</span>:
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    A class representation of a wave packet-function.</span>
+<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, a, b):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>a <span style="color: #666666">=</span> a
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>b <span style="color: #666666">=</span> b
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(<span style="color: #008000">self</span>, x):
+        <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>sin(<span style="color: #008000">self</span><span style="color: #666666">.</span>b<span style="color: #666666">*</span>x)<span style="color: #666666">*</span>np<span style="color: #666666">.</span>exp(<span style="color: #666666">-</span><span style="color: #008000">self</span><span style="color: #666666">.</span>a<span style="color: #666666">*</span>x<span style="color: #666666">*</span>x)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">plot</span>(<span style="color: #008000">self</span>, x_min<span style="color: #666666">=-10</span>, x_max<span style="color: #666666">=10</span>, dx<span style="color: #666666">=0.01</span>):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">        A simple plotting routine for plotting f(x) in some range.</span>
+<span style="color: #BA2121; font-style: italic">        &quot;&quot;&quot;</span>
+        x <span style="color: #666666">=</span> np<span style="color: #666666">.</span>arange(x_min, x_max, dx)
+        y <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>f(x)
+        fig <span style="color: #666666">=</span> plt<span style="color: #666666">.</span>figure()
+        plt<span style="color: #666666">.</span>plot(x, y)
+        plt<span style="color: #666666">.</span>grid()
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>Besides the initialization method and a function that calculates \( f(x) \) from
+equation <a href="#mjx-eqn-1">(1)</a>, the class includes a simple plotting routine.
+A major difference from before is the following: when our function \( f(x) \)
+is defined inside a class, we do not have to pass around \( a \) and \( b \) as
+arguments to the function <code>f</code>. Instead, we simply access \( a \) and \( b \) from
+inside the class itself (using the <code>self</code>-prefix).
+</p>
+<!--  -->
+<!-- both when referring to the variables / attributes, and as the first input -->
+<!-- argument to the function. -->
+
+<p>Below is an example of how to use the class:</p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #3D7B7B; font-style: italic"># Create two WavePacket objects, having their own parameter values</span>
+WP1 <span style="color: #666666">=</span> WavePacket(<span style="color: #666666">0.1</span>, <span style="color: #666666">2</span>)  <span style="color: #3D7B7B; font-style: italic"># a=0.1, b=2</span>
+WP2 <span style="color: #666666">=</span> WavePacket(<span style="color: #666666">0.1</span>, <span style="color: #666666">10</span>)  <span style="color: #3D7B7B; font-style: italic"># a = 0.1, b=10</span>
+
+<span style="color: #3D7B7B; font-style: italic"># Evaluate the two functions at a specific point</span>
+x <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+<span style="color: #008000">print</span>(WP1<span style="color: #666666">.</span>f(x))
+<span style="color: #008000">print</span>(WP2<span style="color: #666666">.</span>f(x))
+
+<span style="color: #3D7B7B; font-style: italic"># Plot the two functions</span>
+WP1<span style="color: #666666">.</span>plot()
+WP2<span style="color: #666666">.</span>plot()
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>Although we had to write slightly more code, we hope you appreciate
+how easy this makes running parallel simulations with different parameters.
+Actually, Python provides a way for us to simplify even further, by
+defining the special <a href="https://www.realpythonproject.com/python-magic-oop-dunder/" target="_self"><tt>__call__</tt></a>  method for the class:
+</p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">FancyWavePacket</span>:
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    A slightly more fancy class representation of a wave packet-function.</span>
+
+<span style="color: #BA2121; font-style: italic">    In this version, we define the dunder (double-underscore) method __call__,</span>
+<span style="color: #BA2121; font-style: italic">    which lets us treat objects of the class as if they were real functions!</span>
+<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, a, b):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>a <span style="color: #666666">=</span> a
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>b <span style="color: #666666">=</span> b
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__call__</span>(<span style="color: #008000">self</span>, x):
+        <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>sin(<span style="color: #008000">self</span><span style="color: #666666">.</span>b<span style="color: #666666">*</span>x)<span style="color: #666666">*</span>np<span style="color: #666666">.</span>exp(<span style="color: #666666">-</span><span style="color: #008000">self</span><span style="color: #666666">.</span>a<span style="color: #666666">*</span>x<span style="color: #666666">*</span>x)
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>Compared to the first example of the class, observe that we have replaced the
+function <code>f</code> by <code>__call__</code> (with two underscores on both sides of "call").
+This way, we we can write our code <em>as if FancyWavePacket was a function</em>:
+</p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">WP1 <span style="color: #666666">=</span> FancyWavePacket(<span style="color: #666666">0.1</span>, <span style="color: #666666">2</span>)  <span style="color: #3D7B7B; font-style: italic"># a=0.1, b=2</span>
+WP2 <span style="color: #666666">=</span> FancyWavePacket(<span style="color: #666666">0.1</span>, <span style="color: #666666">10</span>)  <span style="color: #3D7B7B; font-style: italic"># a = 0.1, b=10</span>
+
+<span style="color: #3D7B7B; font-style: italic"># Evaluate the two functions at a specific point</span>
+x <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+<span style="color: #008000">print</span>(WP1(x))  <span style="color: #3D7B7B; font-style: italic"># If WP1 had been a function, the syntax would be the same here!</span>
+<span style="color: #008000">print</span>(WP2(x))  <span style="color: #3D7B7B; font-style: italic"># Again, we no longer have to type &quot;WP2.f(x)&quot;, we can do &quot;WP2(x)&quot;.</span>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="alert alert-block alert-success alert-text-normal"><b>READ THIS BEFORE ANSWERING THE EXERCISES BELOW</b>
+<p>To avoid code duplication, you should only submit a single version of the
+WavePacket class. In other words, while different exercises will ask you to add
+a new function to the class, your final delivery should only include the full
+class which contains all of the functions.
+</p>
+</div>
+
+
+<p>
+<b>Part 1.</b>
+</p>
+
+<ul>
+<li> Add a function (<a href="https://realpython.com/instance-class-and-static-methods-demystified/" target="_self">instance method</a>) to the class that returns the forward difference approximation to the derivative of the function <code>f</code> at a point <code>x</code>. Include both <code>x</code> and the step-size <code>h</code> as input arguments to the function.</li>
+<li> Add another second function which calculates the central difference approximation.</li>
+</ul>
+<p>
+<b>Part 2.</b>
+</p>
+
+<ul>
+<li> Make a third class function that, for any input \( x \), creates scatter plots showing the absolute error of the two finite difference approximations of \( f^{\prime}(x) \) versus step size. As before, choose step sizes in the range from \( 10^{-16} \) to 1 (with logarithmic spacing).</li>
+</ul>
+<p>Hint: You should re-use the first two functions when making the third one.</p>
+<h1 id="exer:isostasy" class="anchor">Exercise 4: A song of ice and fire?</h1>
+<ul>
+<li> NB! Choose this Exercise <b>or</b> Exercise 5</li>
+</ul>
+<p>There is currently a great deal of concern about global warming.
+Some critical issues are whether we are more likely to observe
+extreme local temperatures, increased frequencies of natural
+disasters like forest fires and droughts, and if there are
+"tipping points" in the climate system that are, at least on the
+human timescale, irreversible <a href="#IPCC2021">[5]</a>.
+One particular question to ask is: How much ice is likely to melt?
+And, what would be the consequence of ice melting for sea level rise (SLR)?
+</p>
+
+<p>Since most of the ice on Planet Earth is located in Antarctica, substantial
+effort has been spent in mapping the ice and the bedrock of this continent.
+Most of the data is freely available, and we can use them to investigate
+different scenarios.
+</p>
+
+<div class="alert alert-block alert-success alert-text-normal"><b>READ THIS BEFORE YOU START THIS EXERCISE</b>
+
+<p>In the last part of this project you are going to work with ice data
+from the <em>bedmap2</em> dataset <a href="#fretwell2013bedmap2">[2]</a>
+The <a href="https://github.com/fatiando/rockhound" target="_self">rockhound</a>
+library can be used to load the data.
+As an aid to plotting, you might also want to use color maps from the
+<a href="https://pypi.org/project/cmocean/" target="_self">cmocean</a> package <a href="#thyng2016true">[6]</a>. To install bedmap2 data you have to create a new conda environment (called project1)
+</p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #ffffff">
+  <pre style="line-height: 125%;">conda config <span style="color: #666666">--</span>add channels conda<span style="color: #666666">-</span>forge
+conda create <span style="color: #666666">-</span>n project1 python matplotlib numpy scipy
+ xarray<span style="color: #666666">==0.19.0</span> pandas rockhound cmocean pip jupyter
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>See Appendix B for some additional information. After the new environment is created you may run</p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #ffffff">
+  <pre style="line-height: 125%;">conda activate project1
+jupyter notebook
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<h2 id="theory" class="anchor">Theory </h2>
+
+<p>To calculate SLR, we need to know not only how thick the ice is, but also
+its elevation above the bedrock. In this exercise you will see how we can
+use Python, together with available data and libraries, to do quite advanced
+calculations.
+</p>
+<h3 id="melting-of-an-iceberg" class="anchor">Melting of an iceberg </h3>
+
+<p>Let us start by deriving a result that you may have seen before.
+We shall consider an iceberg that is floating and which is not impacted
+by any other forces than gravity.
+The total volume of ice
+in figure <a href="#fig:iceberg">2</a> is \( V_f + V_\text{H2O}^\text{disp} \) ,
+where \( V_f \) is the ice volume floating above the sea,
+and \( V_\text{H2O}^\text{disp} \) is the
+volume of displaced sea water (submerged ice).
+According to Newton's 2nd law, the total weight of ice is therefore
+</p>
+$$
+\begin{equation}
+W=m_{ice}g = \rho_{ice}V_{ice}g
+= \rho_{ice}(V_f + V_{\text{H$_2$O}}^\text{disp})g\,,
+\tag{3}
+\end{equation}
+$$
+
+<p>where \( \rho_{ice} \) is the density (mass divided by volume),
+and \( g=9.81 \) $\mathrm{m/s^2}$ the gravitational constant.
+On the other hand, the Archimedean principle tells us that buoyancy
+is proportional to <em>the mass of displaced water</em>, hence another expression
+for the same weight is
+</p>
+$$
+\begin{equation}
+\tag{4}
+W = \rho_{w}V_{\text{H$_2$O}}^\text{disp}g\,,
+\end{equation}
+$$
+
+<p>where \( \rho_{w} \) is the density of the surrounding sea-water.
+As the ice melts, it must be turned into an equal mass of liquid ice-water:
+</p>
+$$
+\begin{align}
+m_\text{ice} &= m_\text{ice water} \nonumber \\ 
+\rho_\text{ice}V_\text{ice} &= \rho_\text{ice water}V_\text{ice water}\,.
+\tag{5}
+\end{align}
+$$
+
+<p>By combining the above equations, we therefore get:</p>
+
+$$
+\begin{equation}
+\tag{6}
+V_{\text{H$_2$O}}^\text{disp}=\frac{\rho_\text{ice water}}{\rho_{w}}V_\text{ice water}.
+\end{equation}
+$$
+
+<p>Therefore, the net contribution to SLR is captured by the volume change</p>
+$$
+\begin{equation}
+\Delta{V}\equiv V_\text{ice water}-V_{\text{H$_2$O}}^\text{disp}=
+\left(1-\frac{\rho_\text{ice water}}{\rho_{w}}\right)V_\text{ice water}.
+\tag{7}
+\end{equation}
+$$
+
+<p>If the melted ice has the same density as seawater, it follows that there
+is <em>no increase in sea level</em>. On the other hand, if the density is
+lower than that of seawater, there is a contribution.
+Typically, the melting of ice dilutes the salinity of the ocean, which
+leads to a small increase in sea level <a href="#noerdlinger2007melting">[7]</a>.
+</p>
+
+<center> <!-- figure label: --> <div id="fig:iceberg"></div> <!-- FIGURE -->
+<hr class="figure">
+<center>
+<p class="caption">Figure 2:  A schematic illustration of an iceberg. \( V_{\mathrm{H_{2}O}}^{\mathrm{disp}} \) is the volume of water displaced by the iceberg.  <!-- caption label: fig:iceberg --> </p>
+</center>
+<p><img src="fig-project1/iceberg.png" align="bottom" width=800></p>
+</center>
+
+<h3 id="freeboard" class="anchor">Freeboard </h3>
+
+<p>The vast majority of ice in Antarctica is not freely floating.
+In addition to the salinity effect described above, the main contribution
+to SLR is from ice located above <em>hydrostatic equilibrium</em>.
+It is useful to introduce the concept of the <em>freeboard</em>, which is the
+height above seawater of a floating iceberg.
+Again referring to figure <a href="#fig:iceberg">2</a>, the freeboard height, \( h \), is
+</p>
+$$
+\begin{equation}
+\tag{8}
+h=\left(\frac{\rho_w}{\rho_\text{ice}}-1\right)h_w\,.
+\end{equation}
+$$
+
+<p>For the <em>bedmap2</em> dataset, the freeboard level can be computed
+from (figure <a href="#fig:bedmap2_ice_thickness">3</a>)
+</p>
+$$
+\begin{align}
+\tag{9}
+h = -(\text{surface}-\text{thickness})\cdot\left(\frac{\rho_w}{\rho_{ice}}-1\right)
+\end{align}
+$$
+
+<p>Note that this formula assumes
+that the bedrock is below sea-level.
+</p>
+
+<p>
+<b>Part 1.</b>
+</p>
+
+<p>The code below is taken from the
+<a href="https://www.fatiando.org/rockhound/latest/api/generated/rockhound.fetch_bedmap2.html" target="_self">rockound library documentation</a>:
+</p>
+
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">bedmap <span style="color: #666666">=</span> rh<span style="color: #666666">.</span>fetch_bedmap2(datasets<span style="color: #666666">=</span>[<span style="color: #BA2121">&quot;thickness&quot;</span>,<span style="color: #BA2121">&quot;surface&quot;</span>,<span style="color: #BA2121">&quot;bed&quot;</span>])
+plt<span style="color: #666666">.</span>figure(figsize<span style="color: #666666">=</span>(<span style="color: #666666">8</span>, <span style="color: #666666">7</span>))
+ax <span style="color: #666666">=</span> plt<span style="color: #666666">.</span>subplot(<span style="color: #666666">111</span>)
+bedmap<span style="color: #666666">.</span>surface<span style="color: #666666">.</span>plot<span style="color: #666666">.</span>pcolormesh(ax<span style="color: #666666">=</span>ax,cmap<span style="color: #666666">=</span>cmocean<span style="color: #666666">.</span>cm<span style="color: #666666">.</span>ice,
+                       cbar_kwargs<span style="color: #666666">=</span><span style="color: #008000">dict</span>(pad<span style="color: #666666">=0.01</span>, aspect<span style="color: #666666">=30</span>))
+plt<span style="color: #666666">.</span>title(<span style="color: #BA2121">&quot;Bedmap2 Antarctica&quot;</span>)
+plt<span style="color: #666666">.</span>tight_layout()
+plt<span style="color: #666666">.</span>show()
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ul>
+<li> Run the code and reproduce figure <a href="#fig:bedmap2_ice_thickness">3</a>.</li>
+</ul>
+<center> <!-- figure label: --> <div id="fig:bedmap2_ice_thickness"></div> <!-- FIGURE -->
+<hr class="figure">
+<center>
+<p class="caption">Figure 3:  Visualization of the ice thickness in Antarctica.  <!-- caption label: fig:bedmap2_ice_thickness --> </p>
+</center>
+<p><img src="fig-project1/bedmap2_plot.png" align="bottom" width=800></p>
+</center>
+
+<p>This may take quite some time, so it is recommended that you do not execute
+the cell generating the plot more often than you have to.
+</p>
+
+<p>
+<b>Part 2.</b>
+</p>
+
+<p>The Thwaites glacier, named after Fredrik T. Thwaites, is of particular
+interest. Also referred to as the Doomsday glacier, it is a fast moving
+glacier (up to 4 km/year) at the coast of Antarctica, roughly 120 km wide.
+It is called the Doomsday glacier because it is believed that it may trigger
+a <a href="https://interactive.pri.org/2019/05/antarctica/doomed-glacier-race.html" target="_self">collapse of west Antarctica</a>.
+We can use the bedmap2 dataset to view a cross section of the glacier,
+\( y = -0.5\cdot10^{6} \) and \( x\in[-1.6\cdot10^6,-1.35\cdot 10^6] \):
+</p>
+
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #3D7B7B; font-style: italic"># Extract cross section using the original coordinates</span>
+bed1d <span style="color: #666666">=</span> bedmap<span style="color: #666666">.</span>sel(y<span style="color: #666666">=-0.5e6</span>, x<span style="color: #666666">=</span><span style="color: #008000">slice</span>(<span style="color: #666666">-1.6e6</span>,<span style="color: #666666">-1.35e6</span>))
+
+<span style="color: #3D7B7B; font-style: italic"># Add a second x-coordinate to make prettier plots</span>
+<span style="color: #3D7B7B; font-style: italic"># (shift x-axis to start at zero, and convert from m to km)</span>
+bed1d <span style="color: #666666">=</span> bed1d<span style="color: #666666">.</span>assign_coords({<span style="color: #BA2121">&quot;x2&quot;</span>:((bed1d<span style="color: #666666">.</span>x<span style="color: #666666">+1.6e6</span>)<span style="color: #666666">/1e3</span>)})
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>It is now possible to plot the values in the <code>bed1d</code> data array by simply
+typing
+</p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">bed1d<span style="color: #666666">.</span>surface<span style="color: #666666">.</span>plot(x<span style="color: #666666">=</span><span style="color: #BA2121">&#39;x2&#39;</span>)
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="alert alert-block alert-success alert-text-normal"><b>A note concerning the xarray library</b>
+<p>The <em>bedmap2</em> data is stored in data structures provided by the
+<a href="http://xarray.pydata.org/en/stable/" target="_self">xarray</a> package, which is built on
+top of <a href="https://numpy.org" target="_self">NumPy</a> and <a href="https://pandas.pydata.org" target="_self">pandas</a>.
+While xarray allows you to apply plot commands directly to
+<a href="http://xarray.pydata.org/en/stable/generated/xarray.Dataset.html#xarray.Dataset" target="_self">Datasets</a>
+and <a href="http://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray" target="_self">DataArrays</a>,
+it might be easier to use the <code>matplotlib.pyplot</code> module manually.
+To this end, you might also want to extract the underlying NumPy arrays
+containing the data you are interested in. This can easily be done as in
+the following example: <code>surface_elevation_values = bed1d['surface'].values</code>.
+</p>
+</div>
+
+
+<ul>
+<li> Use equation <a href="#mjx-eqn-9">(9)</a> to calculate the freeboard level.</li>
+<li> Make a cross section plot of the ice thickness, bed rock, and freeboard level, similar to (the right) figure (<a href="#fig:cross">4</a>)</li>
+<li> Explain what you see. Is the shape of the bedrock important for sea level rise?</li>
+</ul>
+<center> <!-- figure label: --> <div id="fig:cross"></div> <!-- FIGURE -->
+<hr class="figure">
+<center>
+<p class="caption">Figure 4:  (left) How to calculate the freeboard level. (right) Cross section plot of Thwaites glacier.  <!-- caption label: fig:cross --> </p>
+</center>
+<p><img src="fig-project1/free_cross.png" align="bottom" width=800></p>
+</center>
+
+<p>
+<b>Part 3.</b>
+</p>
+
+<ul>
+<li> Use the whole data set to estimate the total SLR if all the ice of Antarctica melts.</li>
+</ul>
+<p>Hints to get you started:</p>
+
+<ol>
+<li> Start by calculating, for each grid cell in the dataset, the height of ice that can contribute to SLR.</li>
+<li> Multiply the height with the area of each cell (\( 1000\times1000 \) meters) in order to estimate the volume of ice.</li>
+</ol>
+<p>
+<b>Part 4.</b>
+</p>
+
+<ul>
+<li> How can we use the bedmap data to improve decision making?</li>
+<li> What are some limitations in your estimated calculation of sea level rise?</li>
+</ul>
+<div class="alert alert-block alert-success alert-text-normal"><b>Self reflections</b>
+<p>At the end include self reflections. Who did wat, what did you learn etc. What will you do better next time. Any critique of the project, suggestions for improvements, and so on.</p>
+</div>
+
+<h1 id="exer:autoder" class="anchor">Exercise 5: Automatic for the people?</h1>
+<ul>
+<li> NB! Choose this Exercise <b>or</b> Exercise 4</li>
+</ul>
+<h2 id="introduction-to-automatic-differentiation" class="anchor">Introduction to automatic differentiation </h2>
+
+<p>At the core of computational models, the computer evaluates <em>gradients</em>. Gradients may be evaluated using numerical differentiation. Numerical differentiation is usually slow and could be influenced by round off errors. Humans can calculate derivatives of complicated functions using a set of rules. Why cannot the computer do the same, provided of course that we explain the rules? This idea was explored by Wengert in 1964 <a href="#wengert1964simple">[3]</a>. </p>
+
+<p>The core idea behind automatic differentiation is the fact that when we evaluate a function, it is done by using a set of fixed operations: addition, subtraction, multiplication, division and a set of elementary functions, \( \sin, \log, \exp \) etc <a href="#wengert1964simple">[3]</a>.</p>
+
+<p>So how can we tell the algebraic rules of differentiation to the computer? We will do this using Python and object oriented programming. We want to calculate both the function value <em>and</em> the derivative at the same time. To achieve this we implement these operations using a vector of size 2</p>
+$$
+\begin{equation}
+\begin{pmatrix}
+f(x) \\ f^\prime(x)
+\end{pmatrix}.
+\label{}
+\end{equation}
+$$
+
+<p>At the top we have the function and at the bottom we have the derivative of the function. First we start by constructing a class</p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">duple</span>:
+    <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;</span>
+<span style="color: #BA2121; font-style: italic">    Class for automatic differentiation</span>
+<span style="color: #BA2121; font-style: italic">    top: function value</span>
+<span style="color: #BA2121; font-style: italic">    bottom: derivative of function </span>
+<span style="color: #BA2121; font-style: italic">    &#39;&#39;&#39;</span>
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>,top, bottom<span style="color: #666666">=0</span>):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>top <span style="color: #666666">=</span> top
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>bottom <span style="color: #666666">=</span> bottom 
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<h2 id="addison-and-subtraction" class="anchor">Addison and subtraction  </h2>
+<p>Next, we want to implement some simple operations, lets say we want to do</p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">x<span style="color: #666666">=</span>duple(<span style="color: #666666">1</span>,<span style="color: #666666">2</span>) <span style="color: #3D7B7B; font-style: italic">#f(x)=1, f&#39;(x)=2</span>
+y<span style="color: #666666">=</span>duple(<span style="color: #666666">3</span>,<span style="color: #666666">4</span>) <span style="color: #3D7B7B; font-style: italic">#g(x)=3, g&#39;(x)=4</span>
+x<span style="color: #666666">+</span>y <span style="color: #3D7B7B; font-style: italic"># f(x)+g(x)=4, f&#39;(x)+g&#39;(x)=6         </span>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>clearly we want to have as output <code>[4,6]</code>. If you run the code, Python will give an error message <code>TypeError: unsupported operand type(s) for +: 'duple' and 'duple'</code>. This is because <code>duple</code> is a class we have defined,  and the <code>+</code> operator is not defined for this class. However, in Python you can implement these operations using <a href="https://www.geeksforgeeks.org/operator-overloading-in-python/" target="_self">*operator overloading*</a></p>
+
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">duple</span>:
+    <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;</span>
+<span style="color: #BA2121; font-style: italic">    Class for automatic differentiation</span>
+<span style="color: #BA2121; font-style: italic">    top: function value</span>
+<span style="color: #BA2121; font-style: italic">    bottom: derivative of function </span>
+<span style="color: #BA2121; font-style: italic">    &#39;&#39;&#39;</span>
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>,top, bottom<span style="color: #666666">=0</span>):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>top <span style="color: #666666">=</span> top
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>bottom <span style="color: #666666">=</span> bottom 
+    
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__add__</span>(<span style="color: #008000">self</span>, d): <span style="color: #3D7B7B; font-style: italic"># u+v, u&#39;+v&#39; </span>
+        <span style="color: #008000; font-weight: bold">return</span> duple(<span style="color: #008000">self</span><span style="color: #666666">.</span>top <span style="color: #666666">+</span> d<span style="color: #666666">.</span>top, <span style="color: #008000">self</span><span style="color: #666666">.</span>bottom <span style="color: #666666">+</span> d<span style="color: #666666">.</span>bottom )
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>it is now possible to run the following code</p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">x<span style="color: #666666">=</span>duple(<span style="color: #666666">1</span>,<span style="color: #666666">2</span>)
+y<span style="color: #666666">=</span>duple(<span style="color: #666666">3</span>,<span style="color: #666666">4</span>)
+z<span style="color: #666666">=</span>x<span style="color: #666666">+</span>y
+<span style="color: #008000">print</span>(z<span style="color: #666666">.</span>top, z<span style="color: #666666">.</span>bottom)
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>to get the expected result. It would also be nice to simply do <code>print(x+y)</code> or <code>x+y</code> and get the result <code>[4,6]</code>, instead of accessing variables by e.g. <code>z.top</code>. Fortunately Python has functionality for this, <code>__repr__</code> and <code>__str__</code>. The <code>__repr__</code> and <code>__str__</code> is what is produced if you simply write <code>x+y</code> or <code>print(x+y)</code> in the terminal respectively. </p>
+
+<p>
+<b>Part 1.</b>
+</p>
+<ul>
+<li> add the following functions to your class, what happens when you do <code>x+y</code>?</li> 
+</ul>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__repr__</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #BA2121">&quot;[&quot;</span><span style="color: #666666">+</span><span style="color: #008000">str</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>top)<span style="color: #666666">+</span><span style="color: #BA2121">&quot;,&quot;</span><span style="color: #666666">+</span><span style="color: #008000">str</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>bottom)<span style="color: #666666">+</span><span style="color: #BA2121">&quot;]&quot;</span>
+    
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__str__</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #BA2121">&quot;[&quot;</span><span style="color: #666666">+</span><span style="color: #008000">str</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>top)<span style="color: #666666">+</span><span style="color: #BA2121">&quot;,&quot;</span><span style="color: #666666">+</span><span style="color: #008000">str</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>bottom)<span style="color: #666666">+</span><span style="color: #BA2121">&quot;]&quot;</span>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>will allow you to get nice formatted output.</p>
+
+<p>
+<b>Part 2.</b>
+</p>
+
+<p>In the code above we have implemented <code>+</code> operator, however if you try to execute <code>+x</code> or <code>-x</code>, Python will give an error message <code>TypeError: bad operand type for unary -: 'duple'</code>.</p>
+
+<ul>
+<li> Extend your code to make it possible to perform those operations. (Hint: check out <code>__neg__</code> and <code>__pos__</code> in the <a href="https://docs.python.org/3/library/operator.html" target="_self">documentation</a>)</li>
+<li> Implement the <code>-</code> operator using <code>__sub__</code>, test that if you do <code>x-y</code> you get <code>[-2,-2]</code></li>
+</ul>
+<h2 id="multiplication-and-division" class="anchor">Multiplication and division  </h2>
+<p>So far we have treated the function (top) and derivative (bottom) equally in terms of addition and subtraction. That is because addition and subtraction is a linear operation, i.e. \( (f(x)+g(x))^\prime=f^\prime(x)+g^\prime(x) \). For multiplication and division we have different rules</p>
+$$
+
+\begin{align}
+(f(x)\cdot g(x))^\prime &=f^\prime(x)\cdot g(x)+f(x)\cdot g^\prime(x),
+\tag{10} \\ 
+\left(\frac{f(x)}{g(x)}\right)^\prime &=\frac{f^\prime(x)\cdot g(x)-f(x)\cdot g^\prime(x)}{g(x)^2}.
+\tag{11}
+\end{align}
+$$
+
+<p>Hence we need to implement a different rule for the multiplication operator</p>
+
+<p>
+<b>Part 3.</b>
+</p>
+<ol>
+<li> use the <code>__mul__</code> function to implement the <code>*</code> operator, use normal multiplication for the top, and equation <a href="#mjx-eqn-10">(10)</a> for the bottom.</li>
+<li> use the <code>__truediv__</code> function to implement the <code>/</code> operator, use normal division for the top, and equation <a href="#mjx-eqn-11">(11)</a> for the bottom.</li>
+</ol>
+<h3 id="test-of-code" class="anchor">Test of code </h3>
+<p>Before proceeding to more advanced functions, we can actually do quite a lot with our small code and calculate derivatives of simple functions</p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">x<span style="color: #666666">=1.2</span> <span style="color: #3D7B7B; font-style: italic"># just for making it easy to use other values</span>
+One<span style="color: #666666">=</span>duple(<span style="color: #666666">1.</span>,<span style="color: #666666">0.</span>) <span style="color: #3D7B7B; font-style: italic"># derivative of a constant is zero</span>
+X<span style="color: #666666">=</span>duple(x,<span style="color: #666666">1</span>) <span style="color: #3D7B7B; font-style: italic"># derivative of x with respect to x is 1</span>
+<span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;auto diff=&quot;</span>,X<span style="color: #666666">*</span>X<span style="color: #666666">*</span>X)
+<span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;analytical=&quot;</span>,x<span style="color: #666666">*</span>x<span style="color: #666666">*</span>x, <span style="color: #666666">3*</span>x<span style="color: #666666">*</span>x)
+
+<span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;auto diff=&quot;</span>, One<span style="color: #666666">/</span>(One<span style="color: #666666">+</span>X))
+<span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;analytical=&quot;</span>, <span style="color: #666666">1/</span>(<span style="color: #666666">1+</span>x),<span style="color: #666666">-1/</span>(<span style="color: #666666">1+</span>x)<span style="color: #666666">**2</span>)
+
+Exp<span style="color: #666666">=</span>duple(np<span style="color: #666666">.</span>exp(x),np<span style="color: #666666">.</span>exp(x)) <span style="color: #3D7B7B; font-style: italic"># derivative of exp(x) is exp(x)</span>
+Sin<span style="color: #666666">=</span>duple(np<span style="color: #666666">.</span>sin(x),np<span style="color: #666666">.</span>cos(x)) <span style="color: #3D7B7B; font-style: italic"># derivative of sin(x) is cos(x)</span>
+<span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;auto diff=&quot;</span>, Exp<span style="color: #666666">*</span>Sin)
+<span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;analytical=&quot;</span>, np<span style="color: #666666">.</span>exp(x)<span style="color: #666666">*</span>np<span style="color: #666666">.</span>sin(x), np<span style="color: #666666">.</span>exp(x)<span style="color: #666666">*</span>np<span style="color: #666666">.</span>sin(x)<span style="color: #666666">+</span>np<span style="color: #666666">.</span>exp(x)<span style="color: #666666">*</span>np<span style="color: #666666">.</span>cos(x))
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<h2 id="adding-more-functions" class="anchor">Adding more functions </h2>
+<p>So far we have only implemented functions where we explicitly know the derivative, but it would be more convenient if we could implement more complicated functions, such as \( \ln(1+e^x) \), without explicitly calculating the derivatives. Actually the only thing we need to do is to implement the kernel rule for the bottom part</p>
+$$
+\begin{equation}
+f(g(x))^\prime=f^\prime(g(x))\cdot g^\prime (x).
+\tag{12}
+\end{equation}
+$$
+
+<p>
+<b>Part 4.</b>
+Finnish the code below
+</p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">dfunction</span>:
+    
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, f, df):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>f <span style="color: #666666">=</span> f
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>df <span style="color: #666666">=</span> df
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__call__</span>(<span style="color: #008000">self</span>,d: duple): <span style="color: #3D7B7B; font-style: italic"># kernel rule sending in and returning duple</span>
+        <span style="color: #008000; font-weight: bold">return</span> duple(<span style="color: #008000">self</span><span style="color: #666666">.</span>f(d<span style="color: #666666">.</span>top), <span style="color: #3D7B7B; font-style: italic">#fill inn kernel rule here!)</span>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>If your code works you should be able to run the following code</p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
+    <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>log(x)
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">df</span>(x):
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">1/</span>x
+    
+Log<span style="color: #666666">=</span>dfunction(f,df) <span style="color: #3D7B7B; font-style: italic">#note no arguments to f - we are passing the function</span>
+Exp<span style="color: #666666">=</span>dfunction(np<span style="color: #666666">.</span>exp,np<span style="color: #666666">.</span>exp) <span style="color: #3D7B7B; font-style: italic"># same here</span>
+<span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;auto diff &quot;</span>, Log(One<span style="color: #666666">+</span>Exp(X)))
+<span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;analytical &quot;</span>, np<span style="color: #666666">.</span>log(<span style="color: #666666">1+</span>np<span style="color: #666666">.</span>exp(x)),np<span style="color: #666666">.</span>exp(x)<span style="color: #666666">/</span>(<span style="color: #666666">1+</span>np<span style="color: #666666">.</span>exp(x)))
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>Next, we can easily evaluate the function that we evaluated previously using finite differences</p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <blockquote>
+<div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">a=0.1
+b=10
+x=1
+A=duple(a) #second argument is default 0 i.e. a constant
+B=duple(b) #second argument is default 0 i.e. a constant
+X=duple(x,1)
+print(&quot;auto diff &quot;, Sin(B*X)*Exp(-A*X*X))
+print(&quot;analytical &quot;, np.sin(b*x)*np.exp(-a*x*x),b*np.cos(b*x)*np.exp(-a*x*x)
+-2*a*x*np.sin(b*x)*np.exp(-a*x*x))
+</pre>
+</div>
+</blockquote>      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>
+<b>Part 5.</b>
+</p>
+<ul>
+<li> Write a few sentences about the use of automatic differentiation in some areas</li>
+<li> Make some comments about the strength and weaknesses of automatic differentiation compared to numerical differentiation</li> 
+</ul>
+<h1 id="appendix-a-passing-arguments-to-functions" class="anchor">Appendix A: Passing arguments to functions  </h1>
+<p>In this project one of the tasks is to write a function that can calculate the numerical derivative of a function that needs two additional parameters (<code>a</code> and <code>b</code>) to be evaluated (see equation <a href="#mjx-eqn-1">(1)</a>). Let us first take a look on how the call signature would be i <code>f</code> only depends on \( x \) (i.e. if <code>a</code> and <code>b</code> was fixed), this is extremely easy:
+we can  simply take  <code>f</code>, <code>x</code>, and <code>h</code> (or \( \Delta x \)) (step-size) as input arguments
+to our derivative function. Assuming it is called <code>calc_derivative</code>,
+it could work something like this:
+</p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">df_x <span style="color: #666666">=</span> calc_derivative(f, x<span style="color: #666666">=1.0</span>, h<span style="color: #666666">=1.0e-3</span>)
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>However, the function in equation <a href="#mjx-eqn-1">(1)</a> depends on two additional
+input parameters, <code>a</code> and <code>b</code>. We can of course add these two as extra
+arguments to the derivative function, but then we would lose generality,
+for not every function has the same two parameters. One way out of this
+dilemma could be to create a new function for each combination of
+<code>a</code> and <code>b</code> that you use, for example:
+</p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">one_version_of_f</span>(x):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    The function f(x) = sin(10x) * exp(-0.1x^2).</span>
+<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+    <span style="color: #008000; font-weight: bold">return</span> f(x, <span style="color: #666666">0.1</span>, <span style="color: #666666">10.0</span>)
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">another_version_of_f</span>(x):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    The function f(x) = sin(3.14x) * exp(-0.5x^2).</span>
+<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+    <span style="color: #008000; font-weight: bold">return</span> f(x, <span style="color: #666666">0.5</span>, <span style="color: #666666">3.14</span>)
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>Since both of these example functions have their own values for <code>a</code> and <code>b</code> hard-coded
+inside them, we do not need to pass anything extra to <code>calc_derivative</code>, that is,
+we can do:
+</p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">df1_x <span style="color: #666666">=</span> calc_derivative(one_version_of_f, x<span style="color: #666666">=1.0</span>, h<span style="color: #666666">=1.0e-3</span>)
+df2_x <span style="color: #666666">=</span> calc_derivative(another_version_of_f, x<span style="color: #666666">=1.0</span>, h<span style="color: #666666">=1.0e-3</span>)
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>Another possibility is to use the the <a href="https://realpython.com/python-kwargs-and-args/" target="_self">args</a> mechanism,
+which lets you pass around a variable number of parameters to a function.
+An example of how this works is:
+</p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">calc_derivative</span>(f, x, h, <span style="color: #666666">*</span>args):
+    <span style="color: #008000; font-weight: bold">return</span> (f(x, <span style="color: #666666">*</span>args) <span style="color: #666666">-</span> f(x<span style="color: #666666">-</span>h, <span style="color: #666666">*</span>args))<span style="color: #666666">/</span>h
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>If you use this method, you need to pass the values of <code>a</code> and <code>b</code> to the
+function that calculates the derivative, e.g.:
+</p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">calc_derivative(f, x<span style="color: #666666">=1.0</span>, h<span style="color: #666666">=1.0e-3</span>, a<span style="color: #666666">=0.1</span>, b<span style="color: #666666">=10.0</span>)
+calc_derivative(another_version_of_f, x<span style="color: #666666">=1.0</span>, h<span style="color: #666666">=1.0e-3</span>, a<span style="color: #666666">=0.5</span>, b<span style="color: #666666">=3.14</span>)
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<h1 id="appendix-b-package-management-with-conda" class="anchor">Appendix B: Package management with <code>conda</code> </h1>
+
+<p>Package installation in Python can be quite tricky, and it is easy
+to make mistakes, especially if the packages you wish to use have
+many dependencies. A good way of avoiding unnecessary installation problems
+is to work with <em>virtual environments</em>; isolated installations of
+Python on your computer. This allows you to switch between different Python
+versions depending on the needs of a particular project.
+We prefer to use the <a href="https://docs.conda.io/en/latest/" target="_self"><tt>conda</tt></a>
+package manager that follows along with the
+ <a href="https://www.anaconda.com" target="_self">Anaconda</a> Python distribution.
+</p>
+<h2 id="getting-conda-up-and-running" class="anchor">Getting <code>conda</code> up and running </h2>
+
+<p>It is possible to use a graphical user interface (GUI) to work
+with <code>conda</code>, but we will work exclusively from the command line.
+On Windows, this will probably require some additional setup, to
+make the relevant file paths available to <code>cmd.exe</code>.
+Alternatively, you can use the Anaconda Prompt that comes with
+the Anaconda distribution.
+To get started, it is recommended to check out the official
+<a href="https://docs.anaconda.com/anaconda/user-guide/" target="_self">user guide</a>,
+as well as <a href="https://conda.io/projects/conda/en/latest/user-guide/cheatsheet.html" target="_self">cheat sheets</a>
+with an overview of the most frequently used commands.
+</p>
+
+<p>Assuming that you have <code>conda</code> installed and available to you from the
+terminal, typing the following command should report back the version
+number of <code>conda</code> on your system:
+</p>
+
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <blockquote>
+<div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">conda --version
+</pre>
+</div>
+</blockquote>      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>If everything works, you will get something like this as output:</p>
+
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <blockquote>
+<div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">conda 4.10.3
+</pre>
+</div>
+</blockquote>      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>You can list all of your available conda environments by typing:</p>
+
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <blockquote>
+<div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">conda info --envs
+</pre>
+</div>
+</blockquote>      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>A star asterisk points to the currently active environment.
+For a fresh Anaconda installation, you will only have one, the base
+environment.
+You can find out exactly which packages that belongs to this
+environment by writing
+</p>
+
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <blockquote>
+<div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">conda list
+</pre>
+</div>
+</blockquote>      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<h2 id="how-to-install-rockhound-and-cmocean-into-a-new-environment" class="anchor">How to install rockhound and cmocean into a new environment </h2>
+
+<p>If you are on Windows, we recommend you start by opening the Anaconda prompt.
+Next, it might be a good idea to update conda by typing this in the shell:
+</p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">conda update conda
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>(You can of course do this in another terminal as well, provided conda is available in your
+<a href="https://en.wikipedia.org/wiki/PATH_(variable)" target="_self">PATH environment variable</a>.)
+The <code>rockhound</code> library and <code>cmocean</code> libraries are not present in the default
+conda channel, hence you probably need to do:
+</p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">conda config <span style="color: #666666">--</span>add channels conda<span style="color: #666666">-</span>forge
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>Finally, we are ready to create a new conda environment. You can choose any
+name you want for the environment, here we use <code>project1</code>:
+</p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">conda create <span style="color: #666666">-</span>n project1 python matplotlib numpy scipy
+ xarray<span style="color: #666666">==0.19.0</span> pandas rockhound cmocean pip jupyter
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>Entering all the package names in one go when creating the environment forces conda
+to check for dependencies between the packages, and thus makes sure that there
+are no conflicts. After confirming that you want to install the packages,
+and waiting for some time, you can activate the new environment from the terminal
+like this:
+</p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">conda activate project1
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>Note that you can install additional packages later if you wish. Often, it
+is as simple as typing
+</p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">conda install <span style="color: #666666">&lt;</span>package<span style="color: #666666">-</span>name<span style="color: #666666">&gt;</span>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>Of course, you should always check the installation instructions for the
+package in question. If <code>conda install</code> fails it might be that
+you can install it via <code>pip</code> (<code>pip install &lt;package-name&gt;</code>), but sometimes
+mixing conda and pip can cause conflicts, so you should be a bit careful.
+</p>
+<h2 id="selecting-the-correct-python-version" class="anchor">Selecting the correct Python version </h2>
+
+<p>Each conda environment comes with its own installation directory,
+and with its own Python executable. As we have seen, on the command-line
+you can easily switch between different environments with the <code>conda activate</code>
+command.
+</p>
+
+<p>On the other hand, if you program in an integrated development environment (IDE),
+like <a href="https://www.spyder-ide.org" target="_self">Spyder</a>,
+<a href="https://www.jetbrains.com/pycharm/" target="_self">PyCharm</a>,
+or <a href="https://code.visualstudio.com" target="_self">Visual Studio Code</a> (VS Code),
+you will need to select which version of Python to use by changing the project
+settings in the IDE. For example, on VS Code, you can do this by opening
+the Command Palette, and then clicking on "Python: Select Interpreter".
+</p>
+
+<p>Similarly, if you are working with Jupyter notebooks in the web browser you
+will most likely have to do some extra work to be able to select your custom
+Python environments. <a href="https://stackoverflow.com/questions/39604271/conda-environments-not-showing-up-in-jupyter-notebook" target="_self">This link</a>
+might help you, e.g., you can try to type this in the terminal:
+</p>
+
+<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <blockquote>
+<div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">conda activate project1
+python -m ipykernel install --name project1
+</pre>
+</div>
+</blockquote>      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>If everything works, the new environent will now show up in the list of
+possible Python kernels for your Jupyter notebooks.
+</p>
+<h1 id="guidelines-for-project-submission" class="anchor">Guidelines for project submission </h1>
+
+<p>You should bear the following points in mind when working on the project:</p>
+<ul>
+<li> Write the name of all persons working in the group at the top of the notebook.</li>
+<li> The final project report must start with an abstract, the abstract is a self contained summary of the project and should contain quantitative statements.</li> 
+<li> Start your notebook by providing a short introduction in which you outline the nature of the problem(s) to be investigated.</li>
+<li> End your notebook with a brief summary of what you feel you learned from the project (if anything). Also, if you have any general comments or suggestions for what could be improved in future assignments, this is the place to do it.</li>
+<li> All code that you make use of should be present in the notebook, and it should ideally execute without any errors (especially run-time errors). If you are not able to fix everything before the deadline, you should give your best understanding of what is not working, and how you might go about fixing it.</li>
+<li> Avoid duplicating code! If you find yourself copying and pasting a lot of code, it is a strong indication that you should define reuseable functions and/or classes.</li>
+<li> If you use an algorithm that is not fully described in the assignment text, you should try to explain it in your own words. This also applies if the method is described elsewhere in the course material.</li>
+<li> In some cases it may suffice to explain your work via comments in the code itself, but other times you might want to include a more elaborate explanation in terms of, e.g., mathematics and/or pseudocode.</li>
+<li> In general, it is a good habit to comment your code (though it can be overdone).</li>
+<li> When working with approximate solutions to equations, it is very useful to check your results against known exact (analytical) solutions, should they be available.</li>
+<li> It is also a good test of a model implementation to study what happens at known 'edge cases'.</li>
+<li> Any figures you include should be easily understandable. You should label axes appropriately, and depending on the problem, include other legends etc. Also, you should discuss your figures in the main text.</li>
+<li> It is always good if you can reflect a little bit around <em>why</em> you see what you see.</li>
+</ul>
+<h1 id="bibliography" class="anchor">Bibliography </h1>
+
+<!-- begin bibliography -->
+<ol>
+ <li> <div id="goldberg1991every"></div> <b>D. Goldberg</b>.  What Every Computer Scientist Should Know About Floating-Point Arithmetic, <em>ACM computing surveys (CSUR)</em>, 23(1), pp. 5-48, 1991.</li>
+ <li> <div id="fretwell2013bedmap2"></div> <b>P. Fretwell, H. D. Pritchard, D. G. Vaughan, J. L. Bamber, N. E. Barrand, R. Bell, C. Bianchi, R. Bingham, D. D. Blankenship and G. Casassa</b>.  Bedmap2: Improved Ice Bed, Surface and Thickness Datasets for Antarctica, <em>The Cryosphere</em>, 7(1), pp. 375-393, 2013.</li>
+ <li> <div id="wengert1964simple"></div> <b>R. E. Wengert</b>.  A Simple Automatic Derivative Evaluation Program, <em>Communications of the ACM</em>, 7(8), pp. 463-464, 1964.</li>
+ <li> <div id="hiorth"></div> <b>A. Hiorth</b>.  <em>Computational Engineering and Modeling</em>, https://github.com/ahiorth/CompEngineering, 2021.</li>
+ <li> <div id="IPCC2021"></div> <b>V. Masson-Delmotte, P. Zhai, A. Pirani, S. L. Connors, C. Pean, S. Berger, N. Caud, Y. Chen, L. Goldfarb, M. I. Gomis, M. Huang, K. Leitzell, E. Lonnoy, J. B. R. Matthews, T. K. Maycock, T. Waterfield, O. Yelekci, R. Yu and B. Z. (eds.)</b>.  Climate Change 2021: the Physical Science Basis. Contribution of Working Group I to the Sixth Assessment Report of the Intergovernmental Panel on Climate Change, <em>Cambridge University Press. In Press.</em>, 2021.</li>
+ <li> <div id="thyng2016true"></div> <b>K. M. Thyng, C. A. Greene, R. D. Hetland, H. M. Zimmerle and S. F. DiMarco</b>.  True Colors of Oceanography: Guidelines for Effective and Accurate Colormap Selection, <em>Oceanography</em>, 29(3), pp. 9-13, 2016.</li>
+ <li> <div id="noerdlinger2007melting"></div> <b>P. D. Noerdlinger and K. R. Brower</b>.  The Melting of Floating Ice Raises the Ocean Level, <em>Geophysical Journal International</em>, 170(1), pp. 145-150, 2007.</li>
+</ol>
+<!-- end bibliography -->
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+</ul>
+<!-- ------------------- end of main content --------------- -->
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<!-- Bootstrap footer
+<footer>
+<a href="https://..."><img width="250" align=right src="https://..."></a>
+</footer>
+-->
+</body>
+</html>
+    
+
