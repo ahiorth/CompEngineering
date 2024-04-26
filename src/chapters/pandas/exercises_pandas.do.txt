@@ -1,0 +1,292 @@
+TITLE: Pandas gym
+AUTHOR: Prepared as part of Python for Subsurface Applications and Management
+AUTHOR: Aksel Hiorth University of Stavanger
+DATE: today
+
+__Learning objectives:__
+
+o how to create a DataFrame
+o plot data in DataFrame
+o write code that is robust, i.e. gives error messages when it fails
+o do simple statistics on data in a DataFrame
+o group and filter data
+o work with files and folders, split data into different files
+
+# #if FORMAT in ("ipynb")
+!bc pypro
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+!ec
+# #endif
+
+<% ex_id = 0 %>
+
+<% ex_id += 1 %>
+======= Exercise ${ex_id} Create a data frame =======
+In the folder `data` there is a file named `field_production_monthly.csv`.
+
+o Read this file into a Pandas DataFrame
+
+o Make a function that reads a file into a DataFrame, and returns an error message if it fails to open the file
+
+!bc pypro
+df = pd.read_csv(..)
+
+def read_data_frame(file_name,sep=','):
+ ... write function
+!ec
+
+# #ifdef SOLUTIONS
+__SOLUTION:__
+
+If the csv file is located in the same folder as your python program
+!bc pypro
+df=pd.read_csv('../data/field_production_monthly.csv', sep=',')
+!ec
+Next, we make a function
+
+!bc pypro
+def read_data_frame(file_name,sep=','):
+    try:
+        df=pd.read_csv(file_name,sep=sep)
+        return df
+    except:
+        print('Could not open file: ', file_name)
+        return pd.DataFrame()
+
+df=read_data_frame('../data/field_production_monthly.csv')
+!ec
+
+There are a couple of things to note here, first it is the try except statement. This basically tells Python to try to execute the `pd.read_csv()` command, if this fail it jumps to the except statement and execute that. This is an extremely elegant way to make your code able to run without stopping and also write out your own error messages instead of the usual error messages generated from Python. Next, it is a good practice to return an object of the same type, thus here we returns an empty DataFrame. Note that in the function we have also used `sep=','` as the default argument. 
+# #endif
+<% ex_id += 1 %>
+======= Exercise ${ex_id} Extract data for Snorre =======
+The file `field_production_gross_monthly.csv` contains production data from the Norwegian Petroleum Directorate "factpages":"https://factpages.npd.no/".
+
+o Extract a DataFrame for the Snorre field
+o Plot the production of oil equivalents as a function of time
+  * Use Matplotlib, and
+  * the built in plotting functionality of Pandas
+o Compare your plot with the one on the "factpages":"https://factpages.npd.no/en/field/PageView/All/43718". Use the "`pd.groupby()`":"https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.groupby.html" function to make a new data frame that contains the production per year and see if you can reproduce figure ref{fig:snorre} from the factpages.
+
+
+FIGURE: [fig-pandas/snorre.png, width=400 frac=1.0] Yearly production from the Snorre field. label{fig:snorre}
+
+!bc pypro
+# fill inn code
+!ec
+
+# #ifdef SOLUTION
+__SOLUTION:__
+
+!bc pypro
+df_snorre=df[df['prfInformationCarrier']=='SNORRE']
+x=df_snorre['prfYear']+df_snorre['prfMonth']/12
+y=df_snorre['prfPrdOeNetMillSm3']
+
+plt.plot(x,y)
+!ec
+To use the built in Pandas plotting, we have to make a new column that contains the $x$-values
+
+!bc pypro
+df_snorre['time']=df_snorre['prfYear']+df_snorre['prfMonth']/12 # make new column
+df_snorre.plot(x='time',y='prfPrdOeNetMillSm3')
+!ec
+
+Next, we want to make a plot similar as the one in the factpages (see figure ref{fig:snorre}). What we want to do is to sum the production of all the columns that has the same year, this can be done quite elegantly by the
+`pd.groupby.sum()` function
+!bc pypro
+df_snorre_year=df_snorre.groupby('prfYear').sum()
+print(df_snorre)
+!ec
+
+Note that the `prfYear` column is now missing, it has automatically been set by pandas as the index column, to plot it we need to add it
+!bc pypro
+df_snorre_year['prfYear']=df_snorre_year.index
+df_snorre_year.plot(x='prfYear',y='prfPrdOeNetMillSm3')
+# or a barplot
+df_snorre_year.plot.bar(x='prfYear',y='prfPrdOeNetMillSm3')
+!ec
+# #endif
+
+<% ex_id += 1 %>
+======= Exercise ${ex_id} Extract data for any field =======
+Now we want to write some functions that are more general, which can extract information from any field.
+o Make a general function that can extract a DataFrame given any name of a field in the database. If you want to be fancy you could also make the function case insensitive. The function should write a reasonable error message if something went wrong
+o Write a function that takes as argument a DataFrame for a given field and makes a plot of the monthly production of oil equivalents. Give the plot a reasonable title and axes labels
+!bc pypro
+df_full=pd.read_csv('../data/field_production_monthly.csv',sep=',')
+
+def get_field_data_frame(field_name,df=df_full):
+    '''
+    Returns a dataframe given a field name, 
+    returns empty dataframe if field does not exist 
+    '''
+    #... fill in code 
+    
+!ec
+# #ifdef SOLUTIONS
+__SOLUTION:__
+
+!bc pypro
+df_full=pd.read_csv('../data/field_production_monthly.csv',sep=',')
+
+def get_field_data_frame(field_name,df=df_full):
+    '''
+    Returns a dataframe given a field name, 
+    returns empty dataframe if field does not exist 
+    '''
+    FIELD_NAME=field_name.upper()
+    all_fields=df['prfInformationCarrier'].unique()
+    if FIELD_NAME in all_fields:
+        return df[df['prfInformationCarrier']==FIELD_NAME]
+    else:
+        print('Field name ', field_name, ' does not exists')
+        print('Available field names are: ')
+        print(all_fields)
+        return pd.DataFrame()
+df=get_field_data_frame('snore') # Wrong name
+df=get_field_data_frame('snorRe')
+
+def plot_field_prod_data(df,y='prfPrdOeNetMillSm3'):
+    name=df['prfInformationCarrier'].iloc[0] 
+    df['time']=df['prfYear']+df['prfMonth']/12
+    df.plot(x='time',y=y,title=name,grid=True,xlabel='Years',ylabel=r'Production per month [mill Sm$^3$]')
+
+plot_field_prod_data(df)
+!ec
+If you are having problem understanding the code above, you should set `df=df_full`, and `field_name='snorre`, and then execute each line in a jupyter notebook. Note that we send in the full DataFrame to the function, this is important if the database is large, you do not want read the excel or csv file over and over each time you call the function - this significantly slows down your code!
+# #endif
+<% ex_id += 1 %>
+======= Exercise ${ex_id} Plot the total production data for NCS =======
+o Use the "`pd.groupby()`":"https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.groupby.html"  functionality in Pandas to create a DataFrame containing production data for NCS as a whole
+o Make a plot of the production
+
+# #ifdef SOLUTIONS
+__SOLUTION:__
+
+!bc pypro
+# create data frame
+df_ncs=df_full.groupby('prfYear').sum()
+
+# plot the data
+df_ncs.plot(y=df_full.columns[3:9],grid=True)
+# alternatively
+df_ncs.plot(y=df_full.columns[3:9],grid=True,subplots=True)
+!ec
+# #endif
+
+<% ex_id += 1 %>
+======= Exercise ${ex_id} Split data into folders and files =======
+
+Create a new data directory in which you create one folder for each field that contains an excel sheet with production data for that field. Use the `Pathlib` library to create directories.
+
+!bnotice Special characters in names
+Here you will encounter names with special characters, it is usually a good idea to replace those characters with a suitable replacement, before creating names or directories. To help you, you can use the function `replace_chars` below.
+!enotice
+!bc pypro
+# fill in code
+from pathlib import Path
+def replace_chars(name, chars=["/"," ", "Å", "Ø", "Æ"], new_chars=["_","_","AA","O","AE"]):
+    ''' replace Norwegian characters, space and slash in names'''
+    new_name = name
+    for ch,nch in zip(chars,new_chars):
+        new_name = new_name.replace(ch, nch)
+    return new_name
+
+!ec
+
+# #ifdef SOLUTIONS
+__SOLUTION:__
+
+!bc pypro
+from pathlib import Path
+col='prfInformationCarrier'
+fields = df_full[col].unique() #skip duplicates
+data_folder=Path('../production-data')
+data_folder.mkdir(exist_ok=True)
+for field in fields:
+    new_name=replace_chars(field)
+    new_path=data_folder / new_name
+    new_path.mkdir(exist_ok=True)
+    excel_file=new_name+'.xlsx'
+    df2=df_full[df_full[col]==field]
+    df2.to_excel(new_path/excel_file,index=False)
+!ec
+# #endif
+
+<% ex_id += 1 %>
+======= Exercise ${ex_id} Combine DataFrames =======
+Write a code to collect all the excel files you stored in different folder into a single DataFrame (Hint: use "`concat()`":"https://pandas.pydata.org/docs/reference/api/pandas.concat.html" to combine data)
+
+!bc pypro
+df_new=pd.DataFrame()
+!ec
+
+# #ifdef SOLUTIONS
+__SOLUTION:__
+
+!bc pypro
+df_new=pd.DataFrame()
+data_folder=Path('../production-data')
+for dir in data_folder.iterdir():
+    if dir.is_dir():      
+        file=dir.name+'.xlsx'
+        try:
+            df=pd.read_excel(dir/file)
+            print('Reading file ', file)
+            df_new=pd.concat([df_new,df],ignore_index=True)
+        except:
+            print('No data in folder ', dir.name)
+!ec
+# #endif
+
+
+
+<% ex_id += 1 %>
+======= Exercise ${ex_id} Scrap data from the web =======
+In this exercise we will collect data from the web, note that this will require some additional checking if the data you have read is of the correct type. Note that you can always do `df.dtypes` to list the types in the DataFrame.
+
+o Use the function "`pandas.read_html()`":"https://pandas.pydata.org/docs/reference/api/pandas.read_html.html" to scrap production data from the Snorre field directly from "the NPD factpages":"https://factpages.npd.no/en/field/PageView/All/43718". (Hint: `pandas.read_html()` returns a list containing all tables in a website as DataFrames)
+
+o Make a plot of the production data and compare with the production data in figure ref{fig:snorre}. (Hint: you might need to sort values in the DataFrame and to convert some values to the correct type)
+
+
+
+!bc pypro
+# enter code here
+!ec
+
+# #ifdef SOLUTIONS
+__SOLUTION:__
+
+!bc pypro
+df_lists=pd.read_html('https://factpages.npd.no/en/field/PageView/All/43718')
+df_prod=df_lists[14] # production data are in table no 14
+!ec
+
+Next, we need to drop the first column
+!bc pypro
+df_prod2=df_prod.drop([0])
+print(df_prod2)
+print(df_prod2.dtypes)
+!ec
+
+There are two challenges (at least when I did this) 1) One column has been named `Unnamed: 0`, this is the column with the year data 2) the year data are read in as string (or `dtype: object`) and we need to convert to integer or float
+!bc pypro
+df_prod2=df_prod2.rename(columns={df_prod2.columns[0]:"Year"})
+df_prod2['Year']=pd.to_numeric(df_prod2['Year'])
+!ec
+Next, we need to sort the data if we want to plot them in historical correct order
+!bc pypro
+df_prod2=df_prod2.set_index("Year")
+df_prod2=df_prod2.sort_index()
+df_prod2
+!ec
+Finally, we can do the plotting
+!bc pypro
+df_prod2.plot(y=df_prod2.columns[1:],grid=True)
+df_prod2.plot.bar(y=df_prod2.columns[-1])
+!ec
+# #endif

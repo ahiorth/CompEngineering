@@ -1,0 +1,220 @@
+======= What is Pandas? =======
+Pandas is a Python package that among many things are used to handle data, and perform operations on groups of data. It is built on top of Numpy, which makes it easy to perform vectorized operations. Pandas is written by Wes McKinney, and one of it objectives is according to the official website " '' providing fast, flexible, and expressive data structures designed to make working with ''relational'' or ''labeled'' data both easy and intuitive. It aims to be the fundamental high-level building block for doing practical, real-world data analysis in Python''":"https://pandas.pydata.org/". Pandas also has excellent functions for reading and writing excel and csv files.  An excel file is read directly into memory in what is called a `DataFrame` in Pandas. A DataFrame is a two dimensional object where data are typically stored in column or row format. Pandas has a lot of functions that can be used to calculate statistical properties of the data frame as a whole. In this chapter we will focus on basic data manipulation, stuff you might do in excel, but can be done much faster in Python and Pandas.
+
+======= Creating a data frame =======
+In the following we will assume that you have imported pandas, like this
+!bc pypro
+import pandas as pd
+!ec
+
+===== From empty DataFrame =====
+This is perhaps the most basic way of creating a DataFrame, first we create an empty DataFrame
+!bc pypro
+df = pd.DataFrame()
+!ec
+!bnotice Variable name
+Note that we often use `df` as a variable name for a DataFrame, this is a choice, but it is a usually a good choice as someone else reading the code could infer from a name that `df` is a DataFrame. If you need more than one DataFrame variable you could use `df1`, `df2`, etc. or even better to use a descriptive name, `df_sales_data`.
+!enotice
+Next, we can add columns to the DataFrame
+!bc pypro
+df=pd.DataFrame()
+df['a']=[0,1,2,3]
+df['b']=[4,5,6,7]
+df['c']=['hammer','saw','rock','nail']
+print(df) # to view data frame
+!ec
+Note that all columns needs to have the same size.
+!bnotice `pd.Series()`
+Even if we initialize the DataFrame column with a list, the command `type(df['a'])` will tell you that the column in the DataFrame are of type `pd.Series()`. Thus the fundamental objects in Pandas are of type `Series`. Series are more flexible, and it is possible to calculate `df['a']/df['b']`, whereas `[0,1,2,3]/[4,5,6,7]` is not possible.  
+!enotice
+===== From file =====
+Assume you have some data organized in excel or in a csv file. The csv file could just be a file with column data, they could be separated by a comma or tab
+FIGURE: [fig-pandas/combined_file.png, width=400 frac=1.0] Example of files (left) comma separated (middle) tab separated (right) excel file. label{fig:file}
+!bc pypro
+df=pd.read_excel('file.xlsx') # excel file
+df=pd.read_csv('file.csv',sep=',') # csv comma separated file
+df=pd.read_csv('file.csv',sep='\t') # csv tab separated file
+!ec
+If the excel file has several sheets, you can give the sheet name directly, e.g. `df=pd.read_excel('file.xlsx',sheet_name="Sheet1")`, for more information see the "documentation":"https://pandas.pydata.org/docs/reference/api/pandas.read_excel.html". 
+
+!bnotice Accessing files
+Accessing files from python can be painful. If excel files are open in excel, Windows will not allow a different program to access it - always remember to close the file before opening it. Sometimes we are not in the right directory, to check which directory you are in, you can always do the following
+!bc pypro
+import os
+print(os.getcwd()) # prints current working directory
+!ec
+!enotice
+===== Create DataFrame from dictionary =====
+A DataFrame can be quite easily be generated from a dictionary. A dictionary is a special data structure, where an unique key is associated with a data type (key:value pair). In this case, the key would be the title of the column, and the value would be the data in the columns. To generate the excel file in figure ref{fig:file}, we can do
+!bc pypro
+my_dict={'Field name':5*['Glitne (Equinor energy as)']+5*['Ula (Aker bp asa)'], 
+'Year':[2010,2011,2012,2013,2014,1997,1998,1999,2000,2001],
+'Yearly emmision to air':[23.007249,33.175011,44.655462,12.728508,3.420579,120.965740,188.130557,173.742075,156.330527,170.557604],
+'Unit':10*['1000 tonn']}
+df=pd.DataFrame(my_dict)
+print(df) # to view
+!ec
+Note that all columns must have the same length to create the DataFrame. We can easily save the data frame to excel format and open it in excel
+!bc pypro
+df.to_excel('co2_emmision.xlsx', index=False) # what happens if you put index=True?
+!ec
+
+!bnotice Index column
+Whenever you create a DataFrame Pandas by default create an index column, it contains an integer for each row starting at zero. It can be accessed by `df.index`, and it is also possible to define another column as index column. 
+!enotice
+===== Manipulating DataFrames =====
+
+===== Selecting columns =====
+If we want to pick out a specific column we can access it in the following ways
+!bc pypro
+year=df['Year'] # by the name, alternatively
+year=df[df.columns[1]] 
+year=df.loc[:,['Year']] # by loc[] if we use name
+year=df.iloc[:,1] # by iloc, pick column number 1
+!ec
+The `loc[]` and `iloc[]` functions allows for list slicing, one can then pick e.g. every second element in the column by `year=df.iloc[::2,1]` etc. The difference is that `loc[]` uses the name, and `iloc[]` the index (usually an integer). 
+!bnotice Special characters 
+Sometimes when reading files from excel, headers may contains invisible characters like newline `\n` or tab `\t` or maybe Norwegian special letters that have not been read in properly. If you have problem accessing a column by name do `print(df.columns)` and check if the name matches what you would expect.  
+!enotice
+
+===== Selecting rows =====
+Typically you would select rows based on a criterion, the syntax in Pandas is that you enter a series containing `True` and `False` for the rows you want to pick out, e.g. to pick out all entries with Ula we can do
+!bc pypro
+df[df['Field name'] == 'Ula (Aker bp asa)']
+!ec
+The innermost statement `df['Field name'] == 'Ula (Aker bp asa)'` gives a logical vector with the value `True` for the five last elements and `False` for the rest. Then we pass this to the DataFrame, and in one go the unwanted elements are removed. It is also possible to use several criteria, e.g. only extracting data after a specific year
+!bc pypro
+df[(df['Field name'] == 'Ula (Aker bp asa)') & (df['Year'] > 1999)]
+!ec
+Note that the parenthesis are necessary, otherwise the logical operation would fail.
+===== Performing mathematical operations on DataFrames =====
+When performing mathematical operations on DataFrames there are at least two strategies
+* Extract columns from the DataFrame and perform mathematical operations on the columns using Numpy, leaving the original DataFrame intact
+* To operate directly on the data in the DataFrame using the Pandas library
+
+!bnotice Speed and performance
+Using Pandas or Numpy should in principle be equally fast. The advice is to not worry about performance before it is necessary. Use the methods you are confident with, and try to be consistent. By consistent, we mean that if you have found one way of doing a certain operation stick to that one and try not to implement many different ways of doing the same thing. 
+!enotice
+
+We can always access the individual columns in a DataFrame by the syntax `df['column_name']`. Thereafter we can perform mathematical operations on them
+=== Example: mathematical operations on DataFrames ===
+o Create a DataFrame with one column (`a`) containing ten thousand random uniformly distributed numbers between 0 and 1 (checkout "`np.random.uniform`":"https://numpy.org/doc/stable/reference/random/generated/numpy.random.uniform.html"
+o Add two new columns: one which all elements of `a` is squared and one where the sine function is applied to column `a`
+o Calculate the inverse of all the numbers in the DataFrame
+o Make a plot of the results (i.e. `a` vs `a*a`, and `a` vs `sin(a)`
+
+=== Solution ===
+o First we make the DataFrame
+!bc pypro
+import numpy as np
+import pandas as pd
+N=10000
+a=np.random.uniform(0,1,size=N)
+df=pd.DataFrame()
+df['a']=a
+!ec
+If you like you could also try to use a dictionary. Next, we add the new columns
+!bc pypro
+df['b']=df['a']*df['a'] # alternatively np.square(df['a'])
+df['c']=np.sin(df['a'])
+!ec
+
+o The inverse of all the numbers in the DataFrame can be calculated by simply doing
+!bc pypro
+1/df
+!ec
+Note: you can also do `df+df` and many other operations on the whole DataFrame.
+
+o To make plots there are several possibilities. Personally, I tend to just use the "`matplotlib`":"https://matplotlib.org/" library, simply because I know it quite well, but Pandas has a great deal of very simple methods you can use to generate nice plots with very few commands.
+
+__Matplotlib:__
+!bc pypro
+import matplotlib.pyplot as plt
+plt.plot(df['a'],df['b'], label='$a^2$')
+plt.plot(df['a'],df['c'], label='$\sin(a)$')
+plt.legend() 
+plt.grid() # make small grid lines
+plt.show()
+!ec
+
+__Pandas plotting:__
+First, let us try the built in plot command in Pandas
+!bc pypro
+df.plot()
+!ec
+If you compare this plot with the previous plot, you will see that Pandas plots all columns versus the index columns, which is not what we want. But, we can set `a` to be the index column
+!bc pypro
+df=df.set_index('a')
+df.plot()
+!ec
+We can also make separate plots
+!bc pypro
+df.plot(subplots=True)
+!ec
+or scatter plots
+!bc pypro
+df=df.reset_index()
+df.plot.scatter(x='a',y='b')
+df.plot.scatter(x='a',y='c')
+!ec
+Note that we have to reset the index, otherwise there are no column named `a`. 
+
+
+
+===== Joining two DataFrames =====
+The DataFrame in the previous section could have been created from two separate DataFrames, using "`concat()`":"https://pandas.pydata.org/docs/reference/api/pandas.concat.html". First, create two DataFrames 
+!bc pypro
+my_dict1={'Field name':5*['Glitne (Equinor energy as)'], 
+'Year':[2010,2011,2012,2013,2014],
+'Yearly emmision to air':[23.007249,33.175011,44.655462,12.728508,3.420579],
+'Unit':5*['1000 tonn']}
+my_dict2={'Field name':5*['Ula (Aker bp asa)'], 
+'Year':[1997,1998,1999,2000,2001],
+'Yearly emmision to air':[120.965740,188.130557,173.742075,156.330527,170.557604],
+'Unit':5*['1000 tonn']}
+df1=pd.DataFrame(my_dict1)
+df2=pd.DataFrame(my_dict2)
+!ec
+Next, add them row wise
+!bc pypro
+df=pd.concat([df1,df2])
+print(df) # to view
+!ec
+If you compare this DataFrame with the previous one, you will see that the index column is different. This is because when joining two DataFrames Pandas does not reset the index by default, doing `df=pd.concat([df1,df2],ignore_index=True)` resets the index. It is also possible to join DataFrames column vise
+!bc pypro
+pd.concat([df1,df2],axis=1)
+!ec
+
+The example above is not good, let say that we had overlapping data e.g.
+!bc pypro
+my_dict1={'Field name':4*['Ula (Aker bp asa)'], 
+'Year':[1997,1998,1999,2000],
+'Yearly emmision to air':[23.007249,33.175011,44.655462,12.728508],
+'Unit':4*['1000 tonn']}
+my_dict2={'Field name':5*['Ula (Aker bp asa)'], 
+'Year':[1997,1998,1999,2000,2001],
+'Yearly emmision to air2':[120.965740,188.130557,173.742075,156.330527,170.557604],
+'Unit':5*['1000 tonn']}
+df1=pd.DataFrame(my_dict1)
+df2=pd.DataFrame(my_dict2)
+##df1=df1.set_index('Year')
+##df2=df2.set_index('Year')
+
+df1.merge(df2,on=['Year','Field name','Unit'],how='outer')
+##pd.concat([df1,df2],axis=0)
+!ec
+Make drawing that shows inner and outer (cross section and union)
+
+======= Cleaning data =======
+When working with real data sets, a big problem can be that special characters exists in the excel sheet or that Norwegian characters are not read correctly. The advise is to
+o Avoid using white space in headers or entries in the DataFrame
+o Replace Norwegian characters with suitable replacements
+o Try to avoid case sensitive searches
+o Excel sheets may contain spelling mistakes, always try to make some checks
+o ...
+
+The list can be quite long, but the strategy is to read the original excel file and replace names, remove white spaces etc. Since you have to 
+
+The advice is to replace special characters. For the column headers, you can easily inspect them by doing `print(df.columns)`. 
+
+===== Subsection heading (h2) =====

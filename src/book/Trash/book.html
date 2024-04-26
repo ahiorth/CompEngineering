@@ -1,0 +1,643 @@
+<!--
+HTML file automatically generated from DocOnce source
+(https://github.com/doconce/doconce/)
+doconce format html book.do.txt CHAPTER=chapter BOOK=book APPENDIX=appendix --exercise_numbering=chapter --html_style=bootswatch_journal --html_code_style=inherit --html_output=book
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/doconce/doconce/" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Modeling and Computational Engineering">
+<meta name="keywords" content="types,basic types,lists,list comprehension,numerical error,Taylor polynomial,truncation error,Taylor polynomial, error term,Maclaurin series,forward difference,backward difference,central difference,central difference,roundoff erros,machine precision,IEEE 754-1985 standard,roundoff errors,continuity equation,finite volume,Gauss-Jordan elimination,pivoting,LU decomposition,Jacobi method,Gauss-Seidel method,linear regression,sparse matrix,Thomas algorithm,fixed-point iteration,rate of convergence,bisection method,rate of convergence,Newtons method,Newtons method, rate of convergence,secant method,secant method, rate of convergence,Newton Rapson method,gradient descent,midpoint method,trapezoidal method,numerical integrals, error,Richardson extrapolation,Romberg integration,Gaussian quadrature,Gaussian quadrature, error term,numerical integral, infinite,continuous stirred tank reactor (CSTR),Eulers method,Eulers method, error analysis,Eulers method, adaptive step size,Runge-Kutta,Runge-Kutta, adaptive step size,adaptive step size,stiff equations,implicit method,Monte Carlo integration,random number generators,Mersenne Twister,encryption,Monte Carlo Integration, error,binomial distribution,mean,variance,Monte Carlo integration, mean value,recursive functions,central limit theorem,birthday paradox">
+<title>Modeling and Computational Engineering</title>
+<!-- Bootstrap style: bootswatch_journal -->
+<!-- doconce format html book.do.txt CHAPTER=chapter BOOK=book APPENDIX=appendix --exercise_numbering=chapter --html_style=bootswatch_journal --html_code_style=inherit --html_output=book -->
+<link href="https://netdna.bootstrapcdn.com/bootswatch/3.1.1/journal/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:60px;      /* fixed header height for style bootswatch_journal */
+  margin:-60px 0 0; /* negative fixed header height */
+}
+</style>
+</head>
+
+<!-- tocinfo
+{'highest level': 0,
+ 'sections': [('Table of contents',
+               0,
+               'table_of_contents',
+               'table_of_contents'),
+              ('Preface', 0, 'ch:preface', 'ch:preface'),
+              ('Introduction to Python', 0, 'ch:pyt', 'ch:pyt'),
+              ('Personal guidelines', 1, None, 'personal-guidelines'),
+              ('Code editor', 2, None, 'code-editor'),
+              ('Types in Python', 1, None, 'types-in-python'),
+              ('Basic types', 2, None, 'basic-types'),
+              ('Lists', 2, None, 'lists'),
+              ('List arithmetic', 3, None, 'list-arithmetic'),
+              ('List slicing', 3, None, 'list-slicing'),
+              ('Numpy arrays', 2, None, 'numpy-arrays'),
+              ('Array slicing', 3, None, 'array-slicing'),
+              ('Dictionaries', 2, None, 'dictionaries'),
+              ('Looping', 1, None, 'looping'),
+              ('For loops', 2, None, 'for-loops'),
+              ('While loops', 2, None, 'while-loops'),
+              ('Functions in Python', 2, None, 'functions-in-python'),
+              ('Defining a mathematical function',
+               2,
+               None,
+               'defining-a-mathematical-function'),
+              ('Scope of variables', 2, None, 'scope-of-variables'),
+              ('Passing arrays and lists to functions',
+               2,
+               None,
+               'passing-arrays-and-lists-to-functions'),
+              ('Call by value or call by reference',
+               2,
+               None,
+               'call-by-value-or-call-by-reference'),
+              ('Floats and integers', 3, None, 'floats-and-integers'),
+              ('Lists and arrays', 3, None, 'lists-and-arrays'),
+              ('Mutable and immutable objects',
+               2,
+               None,
+               'mutable-and-immutable-objects'),
+              ('Introduction to Pandas', 0, 'ch:pan', 'ch:pan'),
+              ('What is Pandas?', 1, None, 'what-is-pandas'),
+              ('Creating a data frame', 1, None, 'creating-a-data-frame'),
+              ('From an empty DataFrame', 2, None, 'from-an-empty-dataframe'),
+              ('Create DataFrame from dictionary',
+               2,
+               None,
+               'create-dataframe-from-dictionary'),
+              ('From a file', 2, None, 'from-a-file'),
+              ('Accessing data in  DataFrames',
+               2,
+               None,
+               'accessing-data-in-dataframes'),
+              ('Selecting columns', 3, None, 'selecting-columns'),
+              ('Selecting rows', 3, None, 'selecting-rows'),
+              ('Challenges when accessing columns or rows',
+               3,
+               None,
+               'challenges-when-accessing-columns-or-rows'),
+              ('Time columns not parsed properly',
+               3,
+               None,
+               'time-columns-not-parsed-properly'),
+              ('Filtering and visualizing data',
+               2,
+               None,
+               'filtering-and-visualizing-data'),
+              ('Boolean masking', 3, None, 'boolean-masking'),
+              ('Plotting a DataFrame', 3, None, 'plotting-a-dataframe'),
+              ('Performing mathematical operations on DataFrames',
+               2,
+               None,
+               'performing-mathematical-operations-on-dataframes'),
+              ('Example: mathematical operations on DataFrames',
+               3,
+               None,
+               'example-mathematical-operations-on-dataframes'),
+              ('Solution', 3, None, 'solution'),
+              ('Grouping, filtering and aggregating data',
+               2,
+               None,
+               'grouping-filtering-and-aggregating-data'),
+              ('Simple statistics in Pandas',
+               2,
+               None,
+               'simple-statistics-in-pandas'),
+              ('Joining two DataFrames', 2, None, 'joining-two-dataframes'),
+              ('Appending DataFrames', 3, None, 'appending-dataframes'),
+              ('Merging DataFrames', 3, None, 'merging-dataframes'),
+              ('Working with folders and files',
+               2,
+               None,
+               'working-with-folders-and-files'),
+              ('Basic use of Pathlib', 3, None, 'basic-use-of-pathlib'),
+              ('Basic use of `os`', 3, None, 'basic-use-of-os'),
+              ('Splitting data into different folders and files',
+               3,
+               None,
+               'splitting-data-into-different-folders-and-files'),
+              ('Writing more robust code', 2, None, 'writing-more-robust-code'),
+              ('Finite differences', 0, 'ch:taylor', 'ch:taylor'),
+              ('Why are gradients important?',
+               1,
+               None,
+               'why-are-gradients-important'),
+              ('Continuous functions and finite representation: numerical '
+               'errors',
+               1,
+               None,
+               'continuous-functions-and-finite-representation-numerical-errors'),
+              ('Taylor polynomial approximation',
+               1,
+               None,
+               'taylor-polynomial-approximation'),
+              ('Calculating Numerical Derivatives of Functions',
+               1,
+               None,
+               'calculating-numerical-derivatives-of-functions'),
+              ('Higher order derivative',
+               3,
+               'sec:taylor:hhd',
+               'sec:taylor:hhd'),
+              ('Roundoff Errors', 2, None, 'roundoff-errors'),
+              ('Binary numbers', 3, None, 'binary-numbers'),
+              ('Floating point numbers and the IEEE 754-1985 standard',
+               3,
+               None,
+               'floating-point-numbers-and-the-ieee-754-1985-standard'),
+              ('Roundoff error and truncation error in numerical derivatives',
+               3,
+               None,
+               'roundoff-error-and-truncation-error-in-numerical-derivatives'),
+              ('Partial differential equations and linear systems',
+               0,
+               'ch:lin',
+               'ch:lin'),
+              ('The continuity equation', 1, None, 'the-continuity-equation'),
+              ('Continuity equation as a linear problem',
+               1,
+               None,
+               'continuity-equation-as-a-linear-problem'),
+              ('Boundary conditions', 3, None, 'boundary-conditions'),
+              ('Solving linear equations', 1, None, 'solving-linear-equations'),
+              ('Gauss-Jordan elimination', 2, None, 'gauss-jordan-elimination'),
+              ('Pivoting', 2, None, 'pivoting'),
+              ('LU decomposition', 2, None, 'lu-decomposition'),
+              ('Iterative methods', 1, None, 'iterative-methods'),
+              ('Iterative improvement', 2, None, 'iterative-improvement'),
+              ('The Jacobi method', 2, None, 'the-jacobi-method'),
+              ('The Gauss-Seidel method', 2, None, 'the-gauss-seidel-method'),
+              ('Example: Linear regression',
+               1,
+               None,
+               'example-linear-regression'),
+              ('Solving least square, using algebraic equations',
+               2,
+               None,
+               'solving-least-square-using-algebraic-equations'),
+              ('Least square as a linear algebra problem',
+               2,
+               None,
+               'least-square-as-a-linear-algebra-problem'),
+              ('Working with matrices on component form',
+               2,
+               None,
+               'working-with-matrices-on-component-form'),
+              ('Sparse matrices and Thomas algorithm',
+               1,
+               None,
+               'sparse-matrices-and-thomas-algorithm'),
+              ('Example: Solving the heat equation using linear algebra',
+               1,
+               None,
+               'example-solving-the-heat-equation-using-linear-algebra'),
+              ('Exercise 4.1: Conservation Equation or the Continuity Equation',
+               2,
+               None,
+               'exercise-4-1-conservation-equation-or-the-continuity-equation'),
+              ('Heat equation for solids', 3, None, 'heat-equation-for-solids'),
+              ('Exercise 4.2: Curing of Concrete and Matrix Formulation',
+               2,
+               None,
+               'exercise-4-2-curing-of-concrete-and-matrix-formulation'),
+              ('Exercise 4.3: Solve the full heat equation',
+               2,
+               None,
+               'exercise-4-3-solve-the-full-heat-equation'),
+              ('Exercise 4.4: Using sparse matrices in python',
+               2,
+               None,
+               'exercise-4-4-using-sparse-matrices-in-python'),
+              ('CO$_2$ diffusion into aquifers',
+               1,
+               None,
+               'co-_2-diffusion-into-aquifers'),
+              ('Optimization and nonlinear systems', 0, 'ch:nlin', 'ch:nlin'),
+              ('Nonlinear equations', 1, None, 'nonlinear-equations'),
+              ('Example: van der Waals equation of state',
+               1,
+               None,
+               'example-van-der-waals-equation-of-state'),
+              ('Exercise 5.1: van der Waal EOS and CO$_2$',
+               2,
+               None,
+               'exercise-5-1-van-der-waal-eos-and-co-_2'),
+              ('Fixed-point iteration', 1, None, 'fixed-point-iteration'),
+              ('Exercise 5.2: Implement the fixed point iteration',
+               2,
+               None,
+               'exercise-5-2-implement-the-fixed-point-iteration'),
+              ('Exercise 5.3: Finding the molar volume from the van der Waal '
+               'EOS by fixed point iteration',
+               2,
+               None,
+               'exercise-5-3-finding-the-molar-volume-from-the-van-der-waal-eos-by-fixed-point-iteration'),
+              ('When does the fixed point method fail?',
+               2,
+               'sec:nlin:fp',
+               'sec:nlin:fp'),
+              ('What to do when the fixed point method fails',
+               2,
+               None,
+               'what-to-do-when-the-fixed-point-method-fails'),
+              ('Exercise 5.4: Solve $x=e^{1-x^2}$ using fixed point iteration',
+               2,
+               None,
+               'exercise-5-4-solve-x-e-1-x-2-using-fixed-point-iteration'),
+              ('Rate of convergence', 1, None, 'rate-of-convergence'),
+              ('The bisection method', 1, None, 'the-bisection-method'),
+              ('Rate of convergence', 2, None, 'rate-of-convergence'),
+              ("Newton's method", 1, None, 'newton-s-method'),
+              ('Rate of convergence', 2, None, 'rate-of-convergence'),
+              ('Exercise 5.5: Compare Newtons, Bisection and the Fixed Point '
+               'method',
+               2,
+               None,
+               'exercise-5-5-compare-newtons-bisection-and-the-fixed-point-method'),
+              ('Secant method', 1, None, 'secant-method'),
+              ('Rate of convergence', 2, None, 'rate-of-convergence'),
+              ('Newton Rapson method', 1, None, 'newton-rapson-method'),
+              ('Gradient descent', 1, None, 'gradient-descent'),
+              ('Exercise 5.6: Gradient descent solution of linear regression',
+               2,
+               None,
+               'exercise-5-6-gradient-descent-solution-of-linear-regression'),
+              ('Other useful methods', 1, None, 'other-useful-methods'),
+              ('Numerical integration', 0, 'ch:numint', 'ch:numint'),
+              ('Algorithmic thinking', 1, None, 'algorithmic-thinking'),
+              ('The midpoint rule', 2, None, 'the-midpoint-rule'),
+              ('The trapezoidal rule', 2, None, 'the-trapezoidal-rule'),
+              ('Numerical errors on integrals',
+               2,
+               None,
+               'numerical-errors-on-integrals'),
+              ('Practical estimation of errors on integrals (Richardson '
+               'extrapolation)',
+               2,
+               None,
+               'practical-estimation-of-errors-on-integrals-richardson-extrapolation'),
+              ('Romberg integration', 1, None, 'romberg-integration'),
+              ('Alternative implementation of adaptive integration',
+               2,
+               None,
+               'alternative-implementation-of-adaptive-integration'),
+              ('Gaussian quadrature', 1, None, 'gaussian-quadrature'),
+              ('The case N=3', 3, None, 'the-case-n-3'),
+              ('Error term on Gaussian integration',
+               2,
+               None,
+               'error-term-on-gaussian-integration'),
+              ('Common weight functions for classical Gaussian quadratures',
+               2,
+               None,
+               'common-weight-functions-for-classical-gaussian-quadratures'),
+              ('Integrating functions over an infinite range',
+               1,
+               None,
+               'integrating-functions-over-an-infinite-range'),
+              ('Exercise 6.1: Numerical Integration',
+               2,
+               None,
+               'exercise-6-1-numerical-integration'),
+              ('Ordinary differential equations', 0, 'ch:ode', 'ch:ode'),
+              ('0D models', 1, None, '0d-models'),
+              ('Ordinary differential equations',
+               1,
+               None,
+               'ordinary-differential-equations'),
+              ('A simple model for fluid flow',
+               1,
+               None,
+               'a-simple-model-for-fluid-flow'),
+              ("Euler's method", 1, None, 'euler-s-method'),
+              ("Error analysis - Euler's method",
+               2,
+               None,
+               'error-analysis-euler-s-method'),
+              ("Adaptive step size - Euler's method",
+               2,
+               None,
+               'adaptive-step-size-euler-s-method'),
+              ('Runge-Kutta methods', 1, None, 'runge-kutta-methods'),
+              ('Adaptive step size - Runge-Kutta method',
+               2,
+               None,
+               'adaptive-step-size-runge-kutta-method'),
+              ('Conservation of mass', 2, None, 'conservation-of-mass'),
+              ('Solving a set of ODE equations',
+               1,
+               None,
+               'solving-a-set-of-ode-equations'),
+              ('Stiff sets of ODE  and implicit methods',
+               1,
+               None,
+               'stiff-sets-of-ode-and-implicit-methods'),
+              ("Exercise 7.1: Truncation error in Euler's method",
+               2,
+               None,
+               'exercise-7-1-truncation-error-in-euler-s-method'),
+              ('Monte Carlo Methods', 0, 'ch:mc', 'ch:mc'),
+              ('Monte Carlo methods', 1, None, 'monte-carlo-methods'),
+              ("Monte Carlo integration  ''hit and miss''",
+               1,
+               None,
+               'monte-carlo-integration-hit-and-miss'),
+              ('Random number generators', 2, None, 'random-number-generators'),
+              ('Encryption', 2, None, 'encryption'),
+              ('Errors on Monte Carlo integration and the binomial '
+               'distribution',
+               2,
+               None,
+               'errors-on-monte-carlo-integration-and-the-binomial-distribution'),
+              ('The mean value method', 2, None, 'the-mean-value-method'),
+              ('Basic properties of probability distributions',
+               2,
+               None,
+               'basic-properties-of-probability-distributions'),
+              ('Example: Monte Carlo integration of a hyper sphere',
+               2,
+               None,
+               'example-monte-carlo-integration-of-a-hyper-sphere'),
+              ('Exercise 8.1: The central limit theorem',
+               2,
+               'ex:mc:norm',
+               'ex:mc:norm'),
+              ('Remarks', 3, None, 'remarks'),
+              ('Exercise 8.2: Birthday Paradox', 2, 'ex:mc:BP', 'ex:mc:BP'),
+              ('References', 1, None, 'references')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript" async
+ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\no}{\nonumber}
+\newcommand{\co}{CO$_2$}
+$$
+
+
+
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="book.html">Modeling and Computational Engineering</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._book001.html#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
+     <!-- navigation toc: --> <li><a href="._book001.html#ch:preface" style="font-size: 80%;"><b>Preface</b></a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#ch:pyt" style="font-size: 80%;"><b>Introduction to Python</b></a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#personal-guidelines" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Personal guidelines</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#code-editor" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Code editor</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#types-in-python" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Types in Python</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#basic-types" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Basic types</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#lists" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lists</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#list-arithmetic" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List arithmetic</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#list-slicing" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List slicing</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#numpy-arrays" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Numpy arrays</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#array-slicing" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Array slicing</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#dictionaries" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dictionaries</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#looping" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Looping</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#for-loops" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For loops</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#while-loops" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;While loops</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#functions-in-python" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Functions in Python</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#defining-a-mathematical-function" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Defining a mathematical function</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#scope-of-variables" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scope of variables</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#passing-arrays-and-lists-to-functions" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Passing arrays and lists to functions</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#call-by-value-or-call-by-reference" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Call by value or call by reference</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#floats-and-integers" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Floats and integers</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#lists-and-arrays" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lists and arrays</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#mutable-and-immutable-objects" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mutable and immutable objects</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#ch:pan" style="font-size: 80%;"><b>Introduction to Pandas</b></a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#what-is-pandas" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;What is Pandas?</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#creating-a-data-frame" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Creating a data frame</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#from-an-empty-dataframe" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From an empty DataFrame</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#create-dataframe-from-dictionary" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create DataFrame from dictionary</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#from-a-file" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From a file</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#accessing-data-in-dataframes" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Accessing data in  DataFrames</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#selecting-columns" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Selecting columns</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#selecting-rows" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Selecting rows</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#challenges-when-accessing-columns-or-rows" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Challenges when accessing columns or rows</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#time-columns-not-parsed-properly" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time columns not parsed properly</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#filtering-and-visualizing-data" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Filtering and visualizing data</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#boolean-masking" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Boolean masking</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#plotting-a-dataframe" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Plotting a DataFrame</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#performing-mathematical-operations-on-dataframes" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Performing mathematical operations on DataFrames</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#example-mathematical-operations-on-dataframes" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example: mathematical operations on DataFrames</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#solution" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solution</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#grouping-filtering-and-aggregating-data" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Grouping, filtering and aggregating data</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#simple-statistics-in-pandas" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Simple statistics in Pandas</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#joining-two-dataframes" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Joining two DataFrames</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#appending-dataframes" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Appending DataFrames</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#merging-dataframes" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Merging DataFrames</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#working-with-folders-and-files" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Working with folders and files</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#basic-use-of-pathlib" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Basic use of Pathlib</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#basic-use-of-os" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Basic use of <code>os</code></a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#splitting-data-into-different-folders-and-files" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Splitting data into different folders and files</a></li>
+     <!-- navigation toc: --> <li><a href="._book002.html#writing-more-robust-code" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Writing more robust code</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#ch:taylor" style="font-size: 80%;"><b>Finite differences</b></a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#why-are-gradients-important" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Why are gradients important?</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#continuous-functions-and-finite-representation-numerical-errors" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Continuous functions and finite representation: numerical errors</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#taylor-polynomial-approximation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Taylor polynomial approximation</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#calculating-numerical-derivatives-of-functions" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Calculating Numerical Derivatives of Functions</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#sec:taylor:hhd" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Higher order derivative</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#roundoff-errors" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Roundoff Errors</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#binary-numbers" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Binary numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#floating-point-numbers-and-the-ieee-754-1985-standard" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Floating point numbers and the IEEE 754-1985 standard</a></li>
+     <!-- navigation toc: --> <li><a href="._book003.html#roundoff-error-and-truncation-error-in-numerical-derivatives" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Roundoff error and truncation error in numerical derivatives</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#ch:lin" style="font-size: 80%;"><b>Partial differential equations and linear systems</b></a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#the-continuity-equation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The continuity equation</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#continuity-equation-as-a-linear-problem" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Continuity equation as a linear problem</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#boundary-conditions" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Boundary conditions</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#solving-linear-equations" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Solving linear equations</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#gauss-jordan-elimination" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gauss-Jordan elimination</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#pivoting" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pivoting</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#lu-decomposition" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LU decomposition</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#iterative-methods" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Iterative methods</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#iterative-improvement" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iterative improvement</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#the-jacobi-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Jacobi method</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#the-gauss-seidel-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Gauss-Seidel method</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#example-linear-regression" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Linear regression</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#solving-least-square-using-algebraic-equations" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solving least square, using algebraic equations</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#least-square-as-a-linear-algebra-problem" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Least square as a linear algebra problem</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#working-with-matrices-on-component-form" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Working with matrices on component form</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#sparse-matrices-and-thomas-algorithm" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Sparse matrices and Thomas algorithm</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#example-solving-the-heat-equation-using-linear-algebra" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Solving the heat equation using linear algebra</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#exercise-4-1-conservation-equation-or-the-continuity-equation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.1: Conservation Equation or the Continuity Equation</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#heat-equation-for-solids" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Heat equation for solids</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#exercise-4-2-curing-of-concrete-and-matrix-formulation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.2: Curing of Concrete and Matrix Formulation</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#exercise-4-3-solve-the-full-heat-equation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.3: Solve the full heat equation</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#exercise-4-4-using-sparse-matrices-in-python" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.4: Using sparse matrices in python</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#co-_2-diffusion-into-aquifers" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;CO$_2$ diffusion into aquifers</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#ch:nlin" style="font-size: 80%;"><b>Optimization and nonlinear systems</b></a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#nonlinear-equations" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Nonlinear equations</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#example-van-der-waals-equation-of-state" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: van der Waals equation of state</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#exercise-5-1-van-der-waal-eos-and-co-_2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.1: van der Waal EOS and CO$_2$</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#fixed-point-iteration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Fixed-point iteration</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#exercise-5-2-implement-the-fixed-point-iteration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.2: Implement the fixed point iteration</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#exercise-5-3-finding-the-molar-volume-from-the-van-der-waal-eos-by-fixed-point-iteration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.3: Finding the molar volume from the van der Waal EOS by fixed point iteration</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#sec:nlin:fp" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When does the fixed point method fail?</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#what-to-do-when-the-fixed-point-method-fails" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;What to do when the fixed point method fails</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#exercise-5-4-solve-x-e-1-x-2-using-fixed-point-iteration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.4: Solve \( x=e^{1-x^2} \) using fixed point iteration</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#rate-of-convergence" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#the-bisection-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The bisection method</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#rate-of-convergence" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#newton-s-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Newton's method</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#rate-of-convergence" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#exercise-5-5-compare-newtons-bisection-and-the-fixed-point-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.5: Compare Newtons, Bisection and the Fixed Point method</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#secant-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Secant method</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#rate-of-convergence" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rate of convergence</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#newton-rapson-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Newton Rapson method</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#gradient-descent" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Gradient descent</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#exercise-5-6-gradient-descent-solution-of-linear-regression" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.6: Gradient descent solution of linear regression</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#other-useful-methods" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Other useful methods</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#ch:numint" style="font-size: 80%;"><b>Numerical integration</b></a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#algorithmic-thinking" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Algorithmic thinking</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#the-midpoint-rule" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The midpoint rule</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#the-trapezoidal-rule" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The trapezoidal rule</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#numerical-errors-on-integrals" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Numerical errors on integrals</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#practical-estimation-of-errors-on-integrals-richardson-extrapolation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Practical estimation of errors on integrals (Richardson extrapolation)</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#romberg-integration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Romberg integration</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#alternative-implementation-of-adaptive-integration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alternative implementation of adaptive integration</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#gaussian-quadrature" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Gaussian quadrature</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#the-case-n-3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The case N=3</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#error-term-on-gaussian-integration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Error term on Gaussian integration</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#common-weight-functions-for-classical-gaussian-quadratures" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Common weight functions for classical Gaussian quadratures</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#integrating-functions-over-an-infinite-range" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Integrating functions over an infinite range</a></li>
+     <!-- navigation toc: --> <li><a href="._book006.html#exercise-6-1-numerical-integration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 6.1: Numerical Integration</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#ch:ode" style="font-size: 80%;"><b>Ordinary differential equations</b></a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#0d-models" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;0D models</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#ordinary-differential-equations" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ordinary differential equations</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#a-simple-model-for-fluid-flow" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;A simple model for fluid flow</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#euler-s-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Euler's method</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#error-analysis-euler-s-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Error analysis - Euler's method</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#adaptive-step-size-euler-s-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adaptive step size - Euler's method</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#runge-kutta-methods" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Runge-Kutta methods</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#adaptive-step-size-runge-kutta-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adaptive step size - Runge-Kutta method</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#conservation-of-mass" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Conservation of mass</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#solving-a-set-of-ode-equations" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Solving a set of ODE equations</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#stiff-sets-of-ode-and-implicit-methods" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Stiff sets of ODE  and implicit methods</a></li>
+     <!-- navigation toc: --> <li><a href="._book007.html#exercise-7-1-truncation-error-in-euler-s-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 7.1: Truncation error in Euler's method</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#ch:mc" style="font-size: 80%;"><b>Monte Carlo Methods</b></a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#monte-carlo-methods" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Monte Carlo methods</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#monte-carlo-integration-hit-and-miss" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Monte Carlo integration  ''hit and miss''</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#random-number-generators" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Random number generators</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#encryption" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Encryption</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#errors-on-monte-carlo-integration-and-the-binomial-distribution" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Errors on Monte Carlo integration and the binomial distribution</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#the-mean-value-method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The mean value method</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#basic-properties-of-probability-distributions" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Basic properties of probability distributions</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#example-monte-carlo-integration-of-a-hyper-sphere" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example: Monte Carlo integration of a hyper sphere</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#ex:mc:norm" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 8.1: The central limit theorem</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#remarks" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._book008.html#ex:mc:BP" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 8.2: Birthday Paradox</a></li>
+     <!-- navigation toc: --> <li><a href="._book009.html#references" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;References</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+<div class="container">
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+<a name="part0000"></a>
+<!-- ------------------- main content ---------------------- -->
+<!-- Note on the Springer T4 style: here we use the modifications -->
+<!-- introduced in t4do.sty and svmonodo.sty (both are bundled with DocOnce). -->
+
+<div class="jumbotron">
+<center>
+<h1>Modeling and Computational Engineering </h1>
+</center>  <!-- document title -->
+
+<!-- author(s): Aksel Hiorth, University of Stavanger -->
+<center>
+<b>Aksel Hiorth, University of Stavanger</b> 
+</center>
+<!-- institution(s) -->
+<br>
+<center>
+<h4>Apr 23, 2024</h4>
+</center> <!-- date -->
+<br>
+
+<p>
+<b>Summary.</b> (Work in Progress) The purpose of this document is to explain how computers solve mathematical models.
+Many of the most common numerical methods are presented, we show how to implement them in Python, and discuss their limitations.
+The mathematical formalism is kept to a minimum. All the material is available at
+<a href="https://github.com/ahiorth/CompEngineering" target="_self">github</a>. For each of the chapters there is a Jupyter <a href="https://github.com/ahiorth/CompEngineering/tree/master/pub/chapters" target="_self">notebook</a>. This makes it possible to run all the codes in this document.
+We strongly recommend to install <a href="https://www.anaconda.com/" target="_self">the Anaconda Python distribution</a>. All documents have been prepared using <a href="https://github.com/ahiorth/CompEngineering/tree/master/pub/chapters" target="_self">doconce</a>.
+</p>
+
+
+
+<p><a href="._book001.html" class="btn btn-primary btn-lg">Read &raquo;</a></p>
+
+
+</div> <!-- end jumbotron -->
+
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+
+  <li class="next">
+    <a href="._book001.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<!-- Bootstrap footer
+<footer>
+<a href="https://..."><img width="250" align=right src="https://..."></a>
+</footer>
+-->
+</body>
+</html>
+    
+

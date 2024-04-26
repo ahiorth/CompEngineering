@@ -1,0 +1,105 @@
+======= CO$_2$ diffusion into aquifers =======
+The transport of CO$_2$ into aquifers can be described according to the diffusion equation
+!bt
+\begin{equation}
+\frac{\partial C(z,t)}{\partial t}=\frac{\partial }{\partial z}\left(K(z)\frac{\partial C(z,t)}{\partial z}\right),
+label{eq:lin:co2_diff}
+\end{equation}
+!et
+where $C(z,t)$ is the concentration of \co\ as a function of depth ($z$) and time $t$, and $K(z)$ is the diffusion constant of \co\ as a function of depth. This equation can be discretized using standard techniques, to help in that respect consider figure ref{fig:lin:co2_diff}.
+
+FIGURE: [fig-lin/co2_diff.png, width=400 frac=1.0] Discretization for diffusion of \co\ into an aquifer, including boundary conditions. label{fig:lin:co2_diff}
+
+In the following we will assume that there are only four nodes ($i=0\ldots 3$) in the physical domain, and two ghost nodes $i=-1$, and $i=4$. There are many ways to attack this problem, but in the following we will borrow ideas from Finite Volume. Finite volume methods is a way of discretizing equations such that we *conserve mass*. The diffusion equation as it is derived in figure ref{fig:nlin:heat}, express that the flux of something (heat, particles, etc) leaving the box surface minus the flux entering the surface of the box is equal to the rate of change of something inside the box. We can formulate this mathematically as:
+!bt
+\begin{equation}
+\frac{\partial C(z,t)}{\partial t}\simeq\frac{1}{h}\left[\left.K(z)\frac{\partial C(z,t)}{\partial z}\right|_{i+1/2}
+-\left.K(z)\frac{\partial C(z,t)}{\partial z}\right|_{i-1/2}\right]
+label{eq:lin:co2fv}
+\end{equation}
+!et
+The notation $i\pm1/2$, means that the flux is to be evaluated *at the surface* of the box (i.e. halfway between the red dots in figure ref{fig:lin:co2_diff}). $K(z)$ is the diffusion constant, and it is known everywhere, so this is simple to evaluate at the surface. The concentrations are only known at the center of each box, the red dots in figure ref{fig:lin:co2_diff}. The derivative of the concentration can be evaluated using the central difference formula (remember that the distance between the red dot and edge of the box is $h/2$), hence
+!bt
+\begin{equation}
+\frac{C_i^{n+1}-C_i^n}{\Delta t}=\frac{1}{h}\left[K_{i+1/2}\frac{ C_{i+1}-C_{i}}{h}-K_{i-1/2}\frac{ C_{i}-C_{i-1}}{h}\right],
+label{eq:lin:co2fv2}
+\end{equation}
+!et
+notice that we have discretized the time derivative, and that we have introduced $n$ to indicate the time step. On the right hand side there are is no time indicated, it turns out that we have a choice to put time step $n$ or $n+1$ on the concentrations on the right hand side. If we put $n$ the scheme is said to be explicit, if we put $n+1$, the scheme is implicit. Implicit schemes are stable compared to explicit schemes, whereas explicit schemes has slightly higher numerical accuracy [TO DO: show this!]. In general we can write
+!bt
+\begin{align}
+\frac{C_i^{n+1}-C_i^n}{\Delta t}&=\frac{\theta}{h}\left[K_{i+1/2}
+\frac{C^n_{i+1}-C^n_{i}}{h}-K_{i-1/2}\frac{C^n_{i}-C^n_{i-1}}{h}\right]\\
+&+\frac{1-\theta}{h}\left[K_{i+1/2}
+\frac{C_{i+1}^{n+1}-C_{i}^{n+1}}{h}-K_{i-1/2}\frac{ C_{i}^{n+1}-C_{i-1}^{n+1}}{h}\right],
+label{eq:lin:co2fv23}
+\end{align}
+!et
+hence if $\theta=1$ the scheme is explicit, if $\theta=0$ the scheme is implicit, and if $\theta=1/2$, the scheme is called the Crank-Nicolson method. The first and last boundary are special, let us first consider the $i=0$, this is where the sea is in contact with the \co\ in the atmosphere, and the flux is $k_w(C_0-C_{eq})$, hence
+!bt
+\begin{align}
+\frac{C_0^{n+1}-C_0^n}{\Delta t}&=\frac{\theta}{h}\left[K_{i+1/2}
+\frac{C^n_{1}-C^n_{0}}{h}-k_w(C_0^n-C_{eq}^n)\right]\\
+&+\frac{1-\theta}{h}\left[K_{i+1/2}
+\frac{C_{1}^{n+1}-C_{0}^{n+1}}{h}-k_w(C_0^{n+1}-C_{eq}^{n+1})\right].
+label{eq:lin:co2fv23b}
+\end{align}
+!et
+For the last block the flux is zero towards the seafloor, and equation (ref{eq:lin:co2fv23}) can be written
+!bt
+\begin{align}
+\frac{C_3^{n+1}-C_3^n}{\Delta t} & =\frac{\theta}{h}\left[-K_{5/2}\frac{C^n_{3}-C^n_{2}}{h}\right]\\
+&+\frac{1-\theta}{h}\left[-K_{5/2}\frac{ C_{3}^{n+1}-C_{2}^{n+1}}{h}\right].
+label{eq:lin:co2fv23c}
+\end{align}
+!et
+For the blocks $i=1\ldots2$, we can collect all terms with $n+1$ on one side and terms with $n$ on the other side and rewrite equation (ref{eq:lin:co2fv23})
+!bt
+\begin{align}
+\left[1+(1-\theta)\right. &\left.\alpha(K_{i+1/2}+K_{i-1/2})\right]C_i^{n+1}\no\\
+&-(1-\theta)\alpha K_{i+1/2}C_{i+1}^{n+1}
+-(1-\theta)\alpha K_{i-1/2}C_{i-1}^{n+1} \no\\
+=\left[1-\theta\right. &\left.\alpha(K_{i+1/2}+K_{i-1/2})\right]C_i^{n}\no\\
+&+\theta\alpha K_{i+1/2}C_{i+1}^{n}
++\theta\alpha K_{i-1/2}C_{i-1}^{n}, 
+label{eq:lin:co2fv4}
+\end{align}
+!et
+where $\alpha\equiv\Delta t/h^2$.
+Next, we want to write down the corresponding matrix equations for four grid nodes as indicated in figure ref{fig:lin:co2_diff}. Notice that we need to use the equations in figure ref{fig:lin:co2_diff}, for $C_{-1}$, and $C_4$. The left and right hand coefficient matrix $\mathbf{L}$, and $\mathbf{R}$ are given as
+!bt
+{\tiny
+\begin{align}
+\begin{pmatrix}
+1+(1-\theta)\alpha(K_{1/2}+hk_w)&-(1-\theta)\alpha K_{1/2}&0&0\\
+-(1-\theta)\alpha K_{1/2}&1+(1-\theta)\alpha(K_{3/2}+K_{1/2})&-(1-\theta)\alpha K_{3/2} &0\\
+0&-(1-\theta)\alpha K_{3/2}&1+(1-\theta)\alpha(K_{5/2}+K_{3/2})&-(1-\theta)\alpha K_{5/2} \\
+0&0&-(1-\theta)\alpha K_{5/2}&1+(1-\theta)\alpha K_{5/2}\no
+\end{pmatrix},
+\end{align}
+}
+!et
+!bt
+{\tiny
+\begin{align}
+\begin{pmatrix}
+1-\theta\alpha(K_{1/2}+hk_w)&+\theta\alpha K_{1/2}&0&0\\
+\theta\alpha K_{1/2}&1-\theta\alpha(K_{3/2}+K_{1/2})&\theta\alpha K_{3/2} &0\\
+0&\theta\alpha K_{3/2}&1-\theta\alpha(K_{5/2}+K_{3/2})&\theta\alpha K_{5/2} \\
+0&0&\theta\alpha K_{5/2}&1-\theta\alpha K_{5/2}\no
+\end{pmatrix},
+\end{align}
+}
+!et
+respectively. Introducing $\mathbf{S}=\left[k_wC_{eq}\Delta t/h,0,0,0\right]^T$, we can finally write the diffusion equation (ref{eq:lin:co2_diff}) as
+!bt
+\begin{equation}
+\mathbf{L}\mathbf{C}^{n+1}=\mathbf{R}\mathbf{C}^n+\theta\mathbf{S}^n+(1-\theta)\mathbf{S}^{n+1}
+label{eq:lin:discdif}
+\end{equation}
+!et
+
+More stuff to do:
+o Assume zero flux over the air water interface ($k_w$=0), show from the equations above that if we start with a uniform concentration in the sea ($\mathbf{C}^n$=constant) that $\mathbf{C}^{n+1}$ does not change (as it should).
+o Assume that if the concentration at a specific time $n$ in the sea is equal to $\mathbf{C}_{eq}$ then the concentration stays constant at all later times
+o Add chemical reactions

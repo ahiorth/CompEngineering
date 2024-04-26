@@ -1,0 +1,228 @@
+# Here goes the main text.
+# The text may be split into several files and included here
+# via preprocess: # #include "file1.do.txt" etc
+# #ifdef EXTRA_INCLUDES
+# #if FORMAT in ("ipynb")
+!bc pycod
+import scipy.optimize
+import scipy.special
+!ec
+# #endif
+# #endif
+
+# #if FORMAT in ("ipynb")
+!bc pypro
+import numpy as np
+import scipy as sp
+import pandas as pd
+import matplotlib.pyplot as plt
+import pathlib
+import statsmodels.api as sm
+from sklearn.linear_model import LinearRegression
+!ec
+# #endif
+## old:
+##from mpl_toolkits.mplot3d import axes3d
+##from matplotlib import cm
+
+##__Summary.__
+
+__Learning objectives.__
+* Combine and manipulate data from different input (Excel) files.
+* Visualize data using "`matplotlib`":"https://matplotlib.org".
+* Use "Taylor's theorem":"https://en.wikipedia.org/wiki/Taylor%27s_theorem" to approximate numerical derivatives.
+* Fit straight lines to data using the method of least squares.
+* Study the impact of numerical errors on computed derivatives.
+* Compare your own implementation of the least squares algorithm with functions in available Python libraries.
+* (Optional) Implement and use multiple linear regression to fit a linear model to a dataset in which the 'true model' is known to be non-linear.
+
+The work done to answer the exercises should be documented clearly in a
+handed-in Jupyter notebook.
+
+TOC: on
+
+!split
+<% ex_id = 0 %>
+<% ex_id += 1 %>
+======= Exercise ${ex_id}: Visualize oil production data =======
+<% exercise_plot_func = ex_id %>
+
+<% counter = 0 %>
+<% counter += 1 %>
+
+When analyzing data it is very advantageous to start by making a plot.
+The human mind is usually good at detecting patterns, and by looking at
+the data one can think of simple ideas to test out, before possibly
+doing a more comprehensive analysis.
+
+As part of this project we will look at some of the datasets that
+are available at the Norwegian Petroleum Directorate (NPD)
+"website":"http://factpages.npd.no/factpages/".
+These data are updated regularly, and if you are able to make a good model
+of, e.g., the historical oil production versus time, you could use it to
+forecast the production in the future as well.
+
+<% counter = 1 %>
+__Part ${counter}.__
+<% ex_df_field = counter %>
+
+A challenge when doing data analysis is that the data is usually not available
+in the format you would like it to be in. In Python there are many ways of
+preprocessing and manipulating data, but the
+"`Pandas`":"https://pandas.pydata.org" library is particularly well-suited
+for the purpose.
+Below is a code snippet to help you to get started with reading data from Excel
+into a `Pandas` "`DataFrame`":"https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html":
+
+!bc pypro
+import numpy as np
+import pandas as pd
+import pathlib
+import matplotlib.pyplot as plt
+
+def df_field(name, datafile='field_production_gross_monthly.xls', col=0):
+    ## to do: fix location of files.. (parent, data/Input etc...)
+    folder = pathlib.Path.cwd().parent.joinpath('data')
+    filename = folder.joinpath(datafile)
+    df = pd.read_excel(filename)
+    columns = df.columns
+    return df[df[df.columns[col]] == name]
+!ec
+
+Note that all data files needed for this project are located in the `data`
+folder.
+
+* Explain in your own words what the above Python function does.
+* Open the file `field_production_gross_monthly.xls`, and compare its contents with output from the command `print(df_field('OSEBERG'))`.
+##* Modify the code so that it also returns the columns names, `columns`.
+
+<% counter += 1 %>
+__Part ${counter}.__
+
+Next, we wish to look at the historical oil production versus time for a
+specific field. Such plots are already available at the
+"NPD website":"http://factpages.npd.no/factpages/", but here you are going to
+make your own by using the "`matplotlib`":"https://matplotlib.org" library.
+
+When we develop code, it is good practice to use functions to divide a
+problem into smaller pieces. We start by extracting oil production data
+for a specific field with the function already defined in
+Part ${ex_df_field}:
+
+!bc pypro
+def prod_data(name):
+    df = df_field(name)
+    columns = df.columns
+    Year    = df[ ... ]
+    Month   = df[ ... ]
+    OilProd = df[ ... ]
+    #Assume 30 days in each month and 365 in year
+    Year    = Year + Month*30/365
+    return Year, OilProd
+!ec
+
+* Complete writing the above function.
+
+<% counter += 1 %>
+__Part ${counter}.__
+* We also make a function that plots the oil production versus time:
+
+!bc pypro
+def plot_prod_data(name):
+    Year, OilProd=prod_data(name)
+    ...  # make plot here
+!ec
+* Finish implementing this Python function as well.
+
+Calling `plot_prod_data('OSEBERG')` should generate a figure that looks
+something like this:
+
+FIGURE: [fig-pandas/oseberg.png, width=400 frac=1.0]
+
+<% counter += 1 %>
+__Part ${counter} (Optional).__
+In the oil production plot for a given field, we additionally want to include
+information about the number of wells that have been drilled. Specifically,
+we wish to plot, on a separate $y$-axis, the cumulative number of wells present
+in the field at any given moment in time.
+
+Well data is stored in the file `wellbore_development_all.xls`.
+In this file, each row entry corresponds to a single well, and the
+field to which it belongs is stored in the column with index 14.
+Hence, we can start by writing:
+
+!bc pypro
+def plot_prod_and_well_data(name):
+    fn = 'wellbore_development_all.xls'
+    df = df_field(name, datafile=fn, col=14)
+    columns = df.columns
+    year = df['Completed year']  # alternatively: fetch by index (32)
+    ...
+!ec
+
+Note that the Excel file only tells you the year in which each well was
+completed; *there could be many wells drilled in a given year, and the list is
+not sorted*. This means that you need to a little more work to process the
+data:
+
+* Finish implementing the above Python function.
+* Calling it with a specific field as input should generate a plot that looks something like this:
+
+FIGURE: [fig-pandas/oseberg2.png, width=800 frac=1.0]
+
+If you want, you can also distinguish between different types of wells, i.e.,
+between injection/production/observation wells.
+
+# #ifdef SOLUTIONS
+
+_POSSIBLE SOLUTION_
+to do....
+# #endif
+## @@@CODE-4 src-project1/draugen_pandas.py fromto: import numpy@name = 'DRAUGEN'
+
+<% ex_id += 1 %>
+======= Exercise ${ex_id}: More wells, more oil? =======
+<% ex_more_wells_oil = ex_id %>
+
+A very common statement is "more wells - more oil". The fields on the Norwegian
+Continental Shelf (NCS) are in different stages of production, and they have
+varying reservoir properties, so a thorough analysis would take time.
+However, we would at least expect to see some correlation between the
+*total amount of oil produced* and *the number of wells drilled*, if the
+hypothesis is correct.
+
+<% counter = 0 %>
+<% counter += 1 %>
+__Part ${counter}.__
+The first task is to fetch the (final) number of wells drilled for each field,
+as well as the total (cumulative) oil production. The resulting values are
+to be stored in arrays:
+
+* The hard way is to do this yourself by extracting the data you need from a combination of the provided NPD `.xls` files.
+* Alternatively, you can 'cheat' and use the preprocessed data stored in `fields_oil_wells.xlsx`.
+## in the `data` folder.
+
+<% counter += 1 %>
+__Part ${counter}.__
+<% ex_plot_eo_wells = counter %>
+
+* Make a scatter plot showing the cumulative oil production of all the fields on the $y$-axis. On the $x$-axis, plot the number of wells for the fields (you might want to exclude observation wells).
+
+(We will return to this data set later in this project, after introducing linear regression.) 
+
+<% counter += 1 %>
+__Part ${counter}.__
+The Draugen field is very homogeneous, and it is therefore regarded as an ideal
+field on the NCS. It also has an active aquifer underlying the reservoir,
+meaning that when producing oil by water injection the aquifer provides
+additional pressure support.
+##The Draugen field has one of the highest recoveries on the NCS.
+
+* Does the plot you made in Part ${ex_plot_eo_wells} indicate that Draugen has been a successful field compared to the others? Why/why not?
+
+# #ifdef SOLUTIONS
+_POSSIBLE SOLUTION_
+to do....
+##@@@CODE src-project1/draugen_pandas.py
+# #endif
+

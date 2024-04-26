@@ -1,0 +1,66 @@
+% This file is to be run by preprocess to produce newcommands.tex
+% to be included in .tex files.
+% There are format-specific tests here for the newcommands (i.e.,
+% different definitions of the commands depending on latex or mathjax).
+
+% Newcommands for LaTeX math.
+\newcommand{\tp}{\thinspace .}
+\renewcommand{\Re}{\bbbr}
+\newcommand{\Oof}[1]{\mathcal{O}(#1)}
+\newcommand{\Prob}[1]{\hbox{P}(#1)}
+\newcommand{\Var}[1]{\hbox{Var}(#1)}
+\newcommand{\Cov}[2]{\hbox{Cov}(#1,#2)}
+\newcommand{\StDev}[1]{\hbox{StDev}(#1)}
+\newcommand{\no}{\nonumber}
+\newcommand{\COTH}{\text{CO$_3^{2-}$}}
+\newcommand{\COTW}{\text{CO$_2$(g)}}
+\newcommand{\HCOT}{\text{HCO$_3^-$}}
+\newcommand{\Ca}{\text{Ca$^{2+}$}}
+\newcommand{\GCa}{\text{$>$CaH$_2$O$^{+}$}}
+\newcommand{\GCO}{\text{$>$CO$_3^{-}$}}
+\newcommand{\HTCOT}{\text{H$_2$CO$_{3}^0$}}
+\newcommand{\HTO}{\text{H$_2$O}}
+\newcommand{\Mg}{\text{Mg$^{2+}$}}
+\newcommand{\SO}{\text{SO$_{4}^{2-}$}}
+\newcommand{\CaSO}{\text{Ca\,SO$_{4}^{0}$}}
+\newcommand{\MgSO}{\text{Ca\,SO$_{4}^{0}$}}
+\newcommand{\K}{\text{K$^{+}$}}
+\newcommand{\HP}{\text{H$^{+}$}}
+\newcommand{\Cl}{\text{Cl$^{-}$}}
+\newcommand{\Na}{\text{Na$^{+}$}}
+\newcommand{\CaCl}{\text{Ca\,Cl$^{+}$}}
+\newcommand{\CaOH}{\text{Ca\,OH$^{+}$}}
+\newcommand{\MgOH}{\text{Mg\,OH$^{+}$}}
+\newcommand{\CaClT}{\text{Ca\,Cl$_{2}^0$}}
+\newcommand{\CaClTT}{\text{Ca\,Cl$_{2}$}}
+\newcommand{\CaCO}{\text{Ca\,CO$_{3}^0$}}
+\newcommand{\CaCOs}{\text{Ca\,CO$_{3}$(s)}}
+\newcommand{\CaHCO}{\text{Ca\,HCO$_{3}^+$}}
+\newcommand{\MgCl}{\text{Mg\,Cl$^{+}$}}
+\newcommand{\MgClT}{\text{Mg\,Cl$_{2}^0$}}
+\newcommand{\MgClTT}{\text{Mg\,Cl$_{2}$}}
+\newcommand{\MgCO}{\text{Mg\,CO$_{3}^0$}}
+\newcommand{\MgHCO}{\text{Mg\,HCO$_{3}^+$}}
+\newcommand{\NaCOT}{\text{Na\,CO$_{3}^-$}}
+\newcommand{\NaOH}{\text{Na\,OH$^0$}}
+\newcommand{\NaHCOT}{\text{Na\,HCO$_{3}^0$}}
+\newcommand{\NaSO}{\text{Na\,SO$_{4}^-$}}
+\newcommand{\NaCl}{\text{Na\,Cl$^0$}}
+\newcommand{\NaCll}{\text{Na\,Cl}}
+\newcommand{\cc}{\text{Ca\,CO$_{3}$(s)}}
+\newcommand{\co}{\text{CO$_{2}$}}
+\newcommand{\an}{\text{Ca\,SO$_{4}$(s)}}
+\newcommand{\dol}{\text{Ca\,Mg\,(CO$_{3}$)$_2$(s)}}
+%\newcommand{\calcite}{\text{calcite}}
+%\newcommand{\dolomite}{\text{dolomite}}
+
+
+% #if FORMAT in ("latex", "pdflatex")
+% Use footnotesize in subscripts
+\newcommand{\subsc}[2]{#1_{\mbox{\footnotesize #2}}}
+% #else
+% In MathJax, a different construction is used
+\newcommand{\subsc}[2]{#1_{\small\mbox{#2}}}
+% #endif
+
+

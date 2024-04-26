@@ -1,0 +1,2 @@
+======= Quasi Newtons Methods =======
+Excellent introduction "here":"https://towardsdatascience.com/bfgs-in-a-nutshell-an-introduction-to-quasi-newton-methods-21b0e13ee504".  

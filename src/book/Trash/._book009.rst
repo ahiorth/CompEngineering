@@ -1,0 +1,65 @@
+.. !split
+
+References
+==========
+
+.. [Ref01]
+   **J. T. Vanderplas**. *A Whirlwind Tour of Python*,
+   O'Reilly Media,
+   2016.
+
+.. [Ref02]
+   **D. Thomas and A. Hunt**. *The Pragmatic Programmer: Your Journey to Mastery*,
+   Addison-Wesley Professional,
+   2019.
+
+.. [Ref03]
+   **B. P. Flannery, W. H. Press, S. A. Teukolsky and W. Vetterling**. Numerical Recipes in C,
+   *Press Syndicate of the University of Cambridge, New York*,
+   24(78),
+   pp. 36,
+   1992.
+
+.. [Ref04]
+   **R. J. LeVeque et al.**. *Finite Volume Methods for Hyperbolic Problems*,
+   Cambridge University Press,
+   2002.
+
+.. [Ref05]
+   **W. H. Press, S. A. Teukolsky, W. T. Vetterling and B. P. Flannery**. *Numerical Recipes 3rd Edition: the Art of Scientific Computing*,
+   3 edition,
+   Cambridge University Press,
+   2007.
+
+.. [Ref06]
+   **L. N. Trefethen and D. B. III**. *Numerical Linear Algebra*,
+   SIAM,
+   1997.
+
+.. [Ref07]
+   **J. Stoer and R. Bulirsch**. *Introduction to Numerical Analysis*,
+   Springer Science \& Business Media,
+   2013.
+
+.. [Ref08]
+   **G. Strang**. *Linear Algebra and Learning From Data*,
+   Wellesley-Cambridge Press,
+   2019.
+
+.. [Ref09]
+   **W. H. Press, W. T. Vetterling, S. A. Teukolsky and B. P. Flannery**. *Numerical Recipes in C++: the Art of Scientific Computing*,
+   2nd edition,
+   Cambridge University Press,
+   2002.
+
+.. [Ref10]
+   **D.-Y. Peng and D. B. Robinson**. A New Two-Constant Equation of State,
+   *Industrial \& Engineering Chemistry Fundamentals*,
+   15(1),
+   pp. 59-64,
+   1976.
+
+.. [Ref11]
+   **M. Newman**. *Computational Physics*,
+   CreateSpace Independent Publ.,
+   2013.

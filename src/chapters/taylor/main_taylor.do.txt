@@ -1,0 +1,20 @@
+TITLE: A basic ingredient in modeling: gradients
+AUTHOR: Aksel Hiorth
+University of Stavanger
+DATE: today
+
+TOC: on
+
+
+# Common Mako variables and functions
+# #include "../mako_code.txt"
+
+# #include "taylor.do.txt"
+
+======= Bibliography =======
+
+## Publish (https://bitbucket.org/logg/publish is used to
+## handle references. The line below specifies the name of
+## the Publish database file (see the doconce manual for details).
+
+BIBFILE: ../papers.pub

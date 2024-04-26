@@ -1,0 +1,782 @@
+% if FORMAT == 'ipynb':
+!bc pycod
+import matplotlib.pyplot as plt
+import numpy as np
+!ec
+% endif
+Most problems in nature are nonlinear. That means that the system response is not proportional to the system variables, e.g. doubling the CO$_2$ concentration in the atmosphere does not lead to a doubling of the earth surface temperature. Still, linear solvers lies at the heart of all grid based models describing e.g. the earths climate. The reason is that although the *global* model is nonlinear, the model can be formulated *locally* as a linear model. Typically the simulation code solves the nonlinear problem through a series of steps where each step is a solution of a linear problem. The topic of solving linear systems of equations have been extensively studied, and sophisticated linear equation solving packages have been developed. Python uses functions from the "LAPACK":"https://en.wikipedia.org/wiki/LAPACK" library.
+
+In the next sections we will show in detail how differential equations can be solved as a linear problem. We will first start off by deriving one of the most useful differential equations describing conservation of a quantity, e.g. mass, energy, momentum, charge.
+
+======= The continuity equation =======
+idx{continuity equation}
+The continuity equation is fundamental to all mathematical models describing a physical phenomenon. To gain more understanding of its origin we will take the time to derive it from first principles. We will do so in one dimension, consider a volume in space between $A(x)$ and $A(x+dx)$ in figure ref{fig:lin:flux}. To be concrete we will assume that the green arrows represents the flow of heat. Thus there are heat flowing into and out of the system, and also heat that can be generated within the system by e.g. chemical reactions. The conservation equation can be formulated with words
+
+FIGURE: [fig-lin/flux.png, width=400 frac=0.5] A closed volume, $V(x)=A(x)dx$, where a quantity flows in and out (illustrated by the green lines), there is also a possibility for generation or loss of the same quantity inside the volume. label{fig:lin:flux}
+
+!bt
+\begin{align}
+\frac{\text{heat into V(x)}}{\text{time}}-\frac{\text{heat out of V(x)}}{\text{time}}
+&+\frac{\text{heat generated in V(x)}}{\text{time}} \no\\
+&= \frac{\text{change of heat in V(x)}}{\text{time}}.
+label{eq:lin:flux}
+\end{align}
+!et
+We formulate the conservation equation per time, because we would like to investigate the time dependency of heat flow. The next step is to replace the terms ''heat into/out of'' with a useful mathematical quantity. It turns out that the term *flux* is particularly useful, because it is an *intensive* quantity. An intensive quantity is a quantity that is *independent of the system size*, like density. The flux is denoted by the symbol $J$
+!bt
+\begin{equation}
+J(x)=\frac{\text{quantity (heat)}}{\text{area}\cdot\text{time}},
+label{}
+\end{equation}
+!et
+and was first introduced by Isaac Newton. Thus to find the amount of heat transported through a surface per time we simply multiply the flux with the surface area. Next, we define the heat per volume as $q(x)$, and the heat produced per volume as $\sigma$. Then equation (ref{eq:lin:flux}) can be written
+!bt
+\begin{align}
+\frac{J(x)A(x)}{dt}-\frac{J(x+dx)A(x+dx)}{dt}&+
+\frac{\sigma(t+dt)V(x)-\sigma(t)V(x)}{dt}\no\\=
+&\frac{q(t+dt)V(x)-q(t)V(x)}{dt}.
+label{eq:lin:cont1}
+\end{align}
+!et
+Using Taylor expansion we can write
+!bt
+\begin{align}
+J(x+dx)A(x+dx) &=J(x)A(x)+\frac{d(J(x)A(x)}{dx}dx+{\cal O}(dx^2),
+label{eq:lin:cont2} \\
+\sigma(t+dt) &=\sigma(t)+\frac{d\sigma}{dt}dt+{\cal O}(dt^2),\no\\
+q(t+dt) &=q(t)+\frac{dq}{dt}dt+{\cal O}(dt^2),
+label{eq:lin:cont3}
+\end{align}
+!et
+Inserting these equations into equation(ref{eq:lin:cont1}), using $V(x)=A(x)dx$, and taking the limit $dx,dt\to0$ we arrive at
+!bnotice The continuity equation in 1 dimension
+!bt
+\begin{equation}
+-\frac{d(J(x)A(x))}{dx}+\frac{d\sigma(t)}{dt}A(x)=\frac{dq(t)}{dt}A(x).
+label{eq:lin:cont4}
+\end{equation}
+!et
+!enotice
+We have kept the area in equation (ref{eq:lin:cont4}), because we are only considering flow of heat in one dimension and then we can allow for the area to change in the $y$ and $z$ dimension. When the continuity equation is derived in three dimensions, one consider a volume $V(x,y,z)=dxdydz$, then the area in equation (ref{eq:lin:cont4}) will drop out and $d/dx\to\nabla=[\partial/\partial x, \partial/\partial y, \partial/\partial z]$ 
+!bnotice The continuity equation in 3 dimensions
+!bt
+\begin{equation}
+-\nabla\cdot\mathbf{J}+\frac{d\sigma(t)}{dt}=\frac{dq(t)}{dt}.
+label{eq:lin:cont5}
+\end{equation}
+!et
+!enotice
+
+======= Continuity equation as a linear problem  =======
+
+# #include "lin_progress.do.txt"
+
+
+======= Solving linear equations =======
+There are a number of excellent books covering this topic, see e.g. cite{press2007,trefethen1997,stoer2013,strang2019}.
+In most of the examples covered in this course we will encounter problems where we have a set of *linearly independent* equations and one equation for each unknown. For these type of problems there are a number of methods that can be used, and they will find a solution in a finite number of steps. If a solution cannot be found it is usually because the equations are not linearly independent, and our formulation of the physical problem is wrong.
+
+Assume that we would like to solve the following set of equations:
+!bt
+\begin{align}
+2x_0+x_1+x_2+3x_3&=1, label{eq:lin:la} \\
+x_0+x_1+3x_2+x_3&=-3, label{eq:lin:lb} \\
+x_0+4x_1+x_2+x_3&=2, label{eq:lin:lc} \\
+x_0+x_1+2x_2+2x_3&=1. label{eq:lin:ld} 
+\end{align}
+!et
+These equations can be written in matrix form as:
+!bt
+\begin{equation}
+\mathbf{A\cdot x}=\mathbf{b},
+label{eq:lin:mat}
+\end{equation}
+!et
+where:
+!bt
+\begin{equation}
+\mathbf{A}\equiv\begin{pmatrix}
+2&1&1&3\\
+1&1&3&1\\
+1&4&1&1\\
+1&1&2&2
+\end{pmatrix}
+\qquad
+\mathbf{b}\equiv
+\begin{pmatrix}
+1\\-3\\2\\1
+\end{pmatrix}
+\qquad
+\mathbf{x}\equiv
+\begin{pmatrix}
+x_0\\x_1\\x_2\\x_3
+\end{pmatrix}.
+label{eq:lin:matA}
+\end{equation}
+!et
+You can easily verify that $x_0=-4, x_1=1, x_2=-1, x_3= 3$ is the
+solution to the above equations by direct substitution. If we were to
+replace one of the above equations with a linear combination of any of
+the other equations, e.g. replace equation (ref{eq:lin:ld}) with
+$3x_0+2x_1+4x_2+4x_3=-2$, there would be no unique solution (infinite
+number of solutions). This can be checked by calculating the determinant of the matrix $\mathbf{A}$, if $\det \mathbf{A}=0 $,  
+What is the difficulty in solving these equations? Clearly if none of the equations are linearly dependent, and we have $N$ independent linear equations, it should be straight forward to solve them? Two major numerical problems are i) even if the equations are not exact linear combinations of each other, they could be very close, and as the numerical algorithm progresses they could at some stage become linearly dependent due to roundoff errors. ii) roundoff errors may accumulate if the number of equations are large cite{press2007}.
+
+===== Gauss-Jordan elimination =====
+idx{Gauss-Jordan elimination}
+Let us continue the discussion by consider Gauss-Jordan elimination, which is a *direct* method. A direct method uses a final set of operations to obtain a solution. According to cite{press2007} Gauss-Jordan elimination is the method of choice if we want to find the inverse of $\mathbf{A}$. However, it is slow when it comes to calculate the solution of equation
+(ref{eq:lin:mat}). Even if speed and memory use is not an issue, it is also not advised to first find the inverse, $\mathbf{A}^{-1}$, of $\mathbf{A}$, then multiply it with $\mathbf{b}$ to obtain the solution, due to roundoff errors (Roundoff errors occur whenever we subtract to numbers that are very close to each other). To simplify our notation, we write equation (ref{eq:lin:matA}) as:
+!bt
+\begin{equation}
+\left(
+\begin{array}{cccc|c}
+2&1&1&3&1\\
+1&1&3&1&-3\\
+1&4&1&1&2\\
+1&1&2&2&1
+\end{array}
+\right).
+\end{equation}
+!et
+The numbers to the left of the vertical dash is the matrix $\mathbf{A}$, and to the right is the vector $\mathbf{b}$. The Gauss-Jordan elimination procedure proceeds by doing the same operation on the right and left side of the dash, and the goal is to get only zeros on the lower triangular part of the matrix. This is achieved by multiplying rows with the same (nonzero) number, swapping rows, adding a multiple of a row to another:
+!bt
+\begin{align}
+&\left(
+\begin{array}{cccc|c}
+2&1&1&3&1\\
+1&1&3&1&-3\\
+1&4&1&1&2\\
+1&1&2&2&1
+\end{array}
+\right)\to
+\left(
+\begin{array}{cccc|c}
+2&1&1&3&1\\
+0&1/2&5/2&-1/2&-7/2\\
+0&7/2&1/2&-1/2&3/2\\
+0&1/2&3/2&1/2&1/2
+\end{array}
+\right)\to\label{eq:lin:gj1}\\
+&\left(
+\begin{array}{cccc|c}
+2&1&1&3&1\\
+0&1/2&5/2&-1/2&-7/2\\
+0&0&-17&3&26\\
+0&0&1&-1&4
+\end{array}
+\right)
+\to
+\left(
+\begin{array}{cccc|c}
+2&1&1&3&1\\
+0&1/2&5/2&-1/2&-7/2\\
+0&0&-17&3&26\\
+0&0&0&14/17&42/17
+\end{array}
+\right)\no
+\end{align}
+!et
+The operations done are: ($1\to2$) multiply first row with $-1/2$ and add to second, third and the fourth row, ($2\to 3$) multiply second row with $-7$, and add to third row, multiply second row with $-1$ and add to fourth row, ($3\to4$) multiply third row with $-1/17$ and add to fourth row. These operations can easily be coded into Python:
+@@@CODE src-lin/nlin_sym.py fromto: A = np.array@# Back
+The python code is a bit compact, below there is an implementation using for loops
+!bc pypro
+# Gauss-Jordan Forward Elimination - for loops
+for i in range(N):
+    for j in range(i+1,N):
+        fact    = A[j,i]/A[i,i]
+        for k in range(i+1,N):
+            A[j,k] = A[j,k]- fact*A[i,k]
+        b[j]  = b[j]- b[j-1]*fact
+	A[j,i]= 0. # alternatively k=i,...,N
+!ec
+
+!bnotice Number of (long) operations
+The code above reveals that that there are quite a few multiplications or divisions being performed in the forward elimination. Multiplications and divisions are more time consuming than addition and subtraction, and are usually termed *long* operations. Not all loops runs from zero to $N$, the innermost from $k=i+1\ldots N-1$, i.e. a total of $N-i-2$, the second contains $N-i-2$ and one multiplication for the `b` vector. Hence we have number of long operations
+!bt
+\begin{equation}
+\sum_{i=0}^{N-1}(N-i-2)^2+(N-i-2)=\frac{N}{3}(N^2-3N+2).
+label{}
+\end{equation}
+!et
+The important result is that when the system of equations becomes large $N^3\gg N^2$ and the algorithm scales as $N^3$.
+!enotice
+Notice that the final matrix has only zeros beyond the diagonal, such a matrix is called *upper triangular*. We still have not found the final solution, but from an upper triangular (or lower triangular) matrix it is trivial to determine the solution. The last row immediately gives us $14/17z=42/17$ or $z=3$, now we have the solution for z and the next row gives: $-17y+3z=26$ or $y=(26-3\cdot3)/(-17)=-1$, and so on. In a more general form, we can write our solution of the matrix $\mathbf{A}$ after making it upper triangular as:
+!bt
+\begin{equation}
+\begin{pmatrix}
+a^\prime_{0,0}&a^\prime_{0,1}&a^\prime_{0,2}&a^\prime_{0,3}\\
+0&a^\prime_{1,1}&a^\prime_{1,2}&a^\prime_{1,3}\\
+0&0&a^\prime_{2,2}&a^\prime_{2,3}\\
+0&0&0&a^\prime_{3,3}
+\end{pmatrix}
+\cdot
+\begin{pmatrix}
+x_0\\
+x_1\\
+x_2\\
+x_3
+\end{pmatrix}
+=
+\begin{pmatrix}
+b^\prime_{0}\\
+b^\prime_{1}\\
+b^\prime_{2}\\
+b^\prime_{3}
+\end{pmatrix}
+label{eq:lin:back}
+\end{equation}
+!et
+The back substitution can then be written formally as:
+!bt
+\begin{equation}
+x_i=\frac{1}{a^\prime_{ii}}\left[b_i^\prime-\sum_{j=i+1}^{N-1}a^\prime_{ij}x_j\right],\quad i=N-1,N-2,\ldots,0
+label{eq:lin:back2}
+\end{equation}
+!et
+The back substitution can now easily be implemented in Python as:
+@@@CODE src-lin/nlin_sym.py fromto: # Back@# Back substitution - for loop
+Notice that in the Python implementation, we have used vector operations instead of for loops. This makes the code more efficient, but it could also be implemented with for loops: 
+@@@CODE src-lin/nlin_sym.py fromto: # Back substitution - for loop@print
+!bnotice Number of (long) operations
+As for the forward elimination, we can find how the backward substitution scales. Notice that here there are only two loops, hence we have number of long operations
+!bt
+\begin{equation}
+\sum_{i=0}^{N-1}(N-i-1)=\frac{N}{2}(N-1).
+label{}
+\end{equation}
+!et
+Thus, the backward substitution scales as $N^2$. 
+!enotice
+There are at least two things to notice with our implementation:
+* Matrix and vector notation makes the code more compact and efficient. In order to understand the implementation it is advised to put $i=1, 2, 3, 4$, and then execute the statements in the Gauss-Jordan elimination and compare with equation (ref{eq:lin:gj1}).
+* The implementation of the Gauss-Jordan elimination is not robust, in particular one could easily imagine cases where one of the leading coefficients turned out as zero, and the routine would fail when we divide by `A[i-1,i-1]`. By simply changing equation (ref{eq:lin:lb}) to $2x_0+x_1+3x_2+x_3=-3$, when doing the first Gauss-Jordan elimination, both $x_0$ and $x_1$ would be canceled. In the next iteration we try to divide next equation by the leading coefficient of $x_1$, which is zero, and the whole procedure fails.
+===== Pivoting =====
+idx{pivoting}
+The solution to the last problem is solved by what is called *pivoting*. The element that we divide on is called the *pivot element*. It actually turns out that even if we do Gauss-Jordan elimination *without* encountering a zero pivot element, the Gauss-Jordan procedure is numerically unstable in the presence of roundoff errors cite{press2007}. There are two versions of pivoting, *full pivoting* and *partial pivoting*. In partial pivoting we only interchange rows, while in full pivoting we also interchange rows and columns. Partial pivoting is much easier to implement, and the algorithm is as follows:
+o Find the row in $\mathbf{A}$ with largest absolute value in front of $x_0$ and change with the first equation, switch corresponding elements in $\mathbf{b}$
+o Do one Gauss-Jordan elimination, find the row in $\mathbf{A}$ with the largest absolute value in front of $x_1$ and switch with the second (same for $\mathbf{b}$), and so on.
+For a linear equation we can multiply with a number on each side and the equation would be unchanged, so if we where to multiply one of the equations with a large value, we are almost sure that this equation would be placed first by our algorithm. This seems a bit strange as our mathematical problem is the same. Sometimes the linear algebra routines tries to normalize the equations to find the pivot element that would have been the largest element if all equations were normalized according to some rule, this is called *implicit pivoting*.  
+===== LU decomposition =====
+idx{LU decomposition}
+As we have already seen, if the matrix $\mathbf{A}$ is reduced to a triangular form it is trivial to calculate the solution by using back substitution. Thus if it was possible to decompose the matrix $\mathbf{A}$ as follows:
+
+!bt
+\begin{equation}
+\mathbf{A}=\mathbf{L}\cdot\mathbf{U}label{eq:lin:lu}
+\end{equation}
+!et
+
+!bt
+\begin{equation}
+\begin{pmatrix}
+a_{0,0}&a_{0,1}&a_{0,2}&a_{0,3}\\
+a_{1,0}&a_{1,1}&a_{1,2}&a_{1,3}\\
+a_{2,0}&a_{2,1}&a_{2,2}&a_{2,3}\\
+a_{3,0}&a_{3,1}&a_{3,2}&a_{3,3}
+\end{pmatrix}
+=
+\begin{pmatrix}
+l_{0,0}&0&0&0\\
+l_{1,0}&l_{1,1}&0&0\\
+l_{2,0}&l_{2,1}&l_{2,2}&0\\
+l_{3,0}&l_{3,1}&l_{3,2}&l_{3,3}
+\end{pmatrix}
+\cdot
+\begin{pmatrix}
+u_{0,0}&u_{0,1}&u_{0,2}&u_{0,3}\\
+0&u_{1,1}&u_{1,2}&u_{1,3}\\
+0&0&u_{2,2}&u_{2,3}\\
+0&0&0&u_{3,3}
+\end{pmatrix}.
+\end{equation}
+!et
+The solution procedure would then be to rewrite equation (ref{eq:lin:mat}) as:
+!bt
+\begin{align}
+\mathbf{A\cdot x}=\mathbf{L}\cdot\mathbf{U}\cdot\mathbf{x}=\mathbf{b},label{eq:lin:matb}
+\end{align}
+!et
+If we define a new vector $\mathbf{y}$:
+!bt
+\begin{align}
+\mathbf{y}\equiv\mathbf{U}\cdot\mathbf{x},
+\end{align}
+!et
+we can first solve for the $\mathbf{y}$ vector:
+!bt
+\begin{align}
+\mathbf{L}\cdot\mathbf{y}=\mathbf{b},label{eq:lin:for}
+\end{align}
+!et
+and then for $\mathbf{x}$:
+!bt
+\begin{align}
+\mathbf{U}\cdot\mathbf{x}=\mathbf{y}.
+\end{align}
+!et
+Note that the solution to equation (ref{eq:lin:for}) would be done by *forward substitution*:
+!bt
+\begin{equation}
+y_i=\frac{1}{l_{ii}}\left[b_i-\sum_{j=0}^{i-1}l_{ij}x_j\right],\quad i=1,2,\ldots N-1.
+label{eq:lin:back3}
+\end{equation}
+!et
+Why go to all this trouble? First of all it requires (slightly) less operations to calculate the LU decomposition and doing the forward and backward substitution than the Gauss-Jordan procedure discussed earlier. Secondly, and more importantly, is the fact that in many cases one would like to calculate the solution for different values of the $\mathbf{b}$ vector in equation (ref{eq:lin:matb}). If we do the LU decomposition first we can calculate the solution quite fast using backward and forward substitution for any value of the $\mathbf{b}$ vector.
+
+The NumPy function "`solve`":"https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.solve.html", uses LU decomposition and partial pivoting, and we can find the solution to our previous problem simply by the following code:
+@@@CODE src-lin/nlin_sym.py fromto: from numpy.linalg@#end
+
+======= Iterative methods  =======
+The methods described so far are what is called *direct* methods. The direct methods for very large systems might suffer from round off errors. That means that even if the computer has found a solution, the solution is "polluted" by round off errors, or stated more clearly: your solution for $\mathbf{x}$, when entered into the original equation $\mathbf{A}\mathbf{x}\neq\mathbf{b}$. Below we will describe one trick, and two alternative methods to the direct methods.
+===== Iterative improvement =====
+The first method cite{press2001} assumes that we already have solved the matrix equation (ref{eq:lin:mat}), and obtained an *estimate* $\mathbf{\hat{x}}$ of the true solution $\mathbf{x}$. Assume that $\mathbf{\hat{x}}=\mathbf{x}+\delta\mathbf{x}$, and that
+!bt
+\begin{equation}
+\mathbf{A}\cdot\mathbf{\hat{x}}=\mathbf{A}\cdot(\mathbf{x}+\delta\mathbf{x})=\mathbf{b}+\delta\mathbf{b},
+label{eq:lin:itb}
+\end{equation}
+!et
+subtracting equation (ref{eq:lin:mat}) we get
+!bt
+\begin{equation}
+\mathbf{A}\cdot\delta\mathbf{x}=\delta\mathbf{b}.
+label{eq:lin:itb2}
+\end{equation}
+!et
+Solving equation (ref{eq:lin:itb}) for $\delta\mathbf{b}$ an inserting in the equation above, we get
+!bt
+\begin{equation}
+\mathbf{A}\cdot\delta\mathbf{x}=\mathbf{A}\cdot\mathbf{\hat{x}}-\mathbf{b}.
+label{eq:lin:itb3}
+\end{equation}
+!et
+The usefulness of this method assumes that we have already obtained the LU decomposition of $\mathbf{A}$, and if possible one should use a higher precision to calculate the right hand side, since there will be a lot of cancellations. Then the whole computational process it is simply to calculate the right hand side and backsubstitute. The improved solution is then obtained by subtracting $\delta\mathbf{x}$ from $\mathbf{\hat{x}}$.
+
+===== The Jacobi method =====
+idx{Jacobi method}
+A completely different approach is the Jacobian method, which is simply to decompose the $\mathbf{A}$ matrix in the following way
+!bt
+\begin{equation}
+\mathbf{A}=\mathbf{D}+\mathbf{R}
+label{eq:lin:DR}
+\end{equation}
+!et
+
+!bt
+\begin{align}
+&\begin{pmatrix}
+a_{0,0}&a_{0,1}&a_{0,2}&a_{0,3}\\
+a_{1,0}&a_{1,1}&a_{1,2}&a_{1,3}\\
+a_{2,0}&a_{2,1}&a_{2,2}&a_{2,3}\\
+a_{3,0}&a_{3,1}&a_{3,2}&a_{3,3}
+\end{pmatrix}
+\no\\
+&=
+\begin{pmatrix}
+a_{0,0}&0&0&0\\
+0&a_{1,1}&0&0\\
+0&0&a_{2,2}&0\\
+0&0&0&a_{3,3}
+\end{pmatrix}
++
+\begin{pmatrix}
+0&a_{0,1}&a_{0,2}&a_{0,3}\\
+a_{1,0}&0&a_{1,2}&a_{1,3}\\
+a_{2,0}&a_{2,1}&0&a_{2,3}\\
+a_{3,0}&a_{3,1}&a_{3,2}&0
+\end{pmatrix}.
+label{eq:lin:DR2}
+\end{align}
+!et
+We can then write equation (ref{eq:lin:mat}) as
+!bt
+\begin{equation}
+\mathbf{D}\mathbf{x}=\mathbf{b}-\mathbf{R}\cdot\mathbf{x}.
+label{eq:lin:jc}
+\end{equation}
+!et
+How does this help us? First of all, the matrix $\mathbf{D}$ is easy to invert as it is diagonal, the inverse can be found by simply replace $a_{ii}\to 1/a_{ii}$. But $\mathbf{x}$ is still present on the right hand side? This is where the *iterations* comes into play, we simply guess at an initial solution $\mathbf{x}^k$, and then we use equation (ref{eq:lin:jc}) to calculate the next solution $\mathbf{x}^{k+1}$, and so on
+!bt
+\begin{equation}
+\mathbf{x}^{k+1}=\mathbf{D}^{-1}(\mathbf{b}-\mathbf{R}\cdot\mathbf{x}^{k}).
+label{eq:lin:jc2}
+\end{equation}
+!et
+Lets write it out on component form for a $4\times4$ matrix to see what is going on
+!bt
+\begin{align}
+x_0^{k+1} &=\frac{1}{a_{00}}(b_0-a_{01}x_1^k-a_{02}x_2^k-a_{03}x_3^k),
+label{eq:lin:jc3a}\\
+x_1^{k+1} &=\frac{1}{a_{11}}(b_1-a_{10}x_0^k-a_{12}x_2^k-a_{13}x_3^k),
+label{eq:lin:jc3b}\\
+x_2^{k+1} &=\frac{1}{a_{22}}(b_2-a_{20}x_0^k-a_{21}x_1^k-a_{23}x_3^k),
+label{eq:lin:jc3c}\\
+x_3^{k+1} &=\frac{1}{a_{33}}(b_3-a_{30}x_0^k-a_{31}x_1^k-a_{32}x_2^k).
+label{eq:lin:jc3d}
+\end{align}
+!et
+Below is a Python implementation
+!bc pycod
+def solve_jacobi(A,b,x=-1,w=1,max_iter=1000,EPS=1e-6):
+    """
+    Solves the linear system Ax=b using the Jacobian method, stops if
+    solution is not found after max_iter or if solution changes less 
+    than EPS
+    """
+    if(x==-1): #default guess 
+        x=np.zeros(len(b))
+    D=np.diag(A)
+    R=A-np.diag(D)
+    eps=1
+    x_old=x
+    iter=0
+    w=0.1
+    while(eps>EPS and iter<max_iter):
+        iter+=1
+        x=w*(b-np.dot(R,x_old))/D + (1-w)*x_old
+        eps=np.sum(np.abs(x-x_old))
+        x_old=x
+    print('found solution after ' + str(iter) +' iterations')
+    return x
+!ec
+A sufficient criteria for the Jacobian method to converge is if the matrix $A$ is diagonally dominant. In the implementation above we have included a weight, which sometimes can help in the convergence even if the matrix is not diagonally dominant. 
+% if FORMAT == 'ipynb':
+Test out the following examples, note that by rearranging the problem we can achieve convergence. 
+!bc pycod
+A = np.array([[10, -1, 2,0],[-1, 11, -1,3],
+               [2, -1, 10, -1],[0, 3, -1, 8 ]],float)
+b = np.array([6,25,-11,15],float)
+print(A)
+s1=solve_jacobi(A,b)
+print(s1)
+
+A = np.array([[2, 1, 1, 3],[1, 1, 3, 1],
+              [1, 4, 1, 1],[1, 1, 2, 2 ]],float)
+b = np.array([1,-3,2,1],float)
+#try w=1, and w=0.01
+s2=solve_jacobi(A,b,w=1)
+print(s2)
+
+#exchange row 3 and 4, and put w=0.1
+A = np.array([[2, 1, 1, 3,],[1, 4, 1, 1, ],
+              [1, 1, 3, 1],[1, 1, 2, 2 ]],float)
+b = np.array([1,2,-3,1],float)
+s3=solve_jacobi(A,b,w=0.1)
+print(s3)
+!ec
+% endif
+
+The iterative method can be appealing if we do not need a high accuracy, we can choose to stop whenever $|\mathbf{x}^{k+1}-\mathbf{x}^k|$ is small enough. For the direct method we have to follow through all the way.
+!bnotice Convergence
+The Jacobi method converges if the matrix $\mathbf{A}$ is strictly diagonally dominant. Strictly diagonally dominant means that the absolute value of each entry on the diagonal is greater than the sum of the absolute values of the other entries in the same row, i.e if $|a_{00}|>|a_{01}+a_{02}+\cdots|$. In general it can be shown that a iterative scheme $\mathbf{x}^{k+1}=\mathbf{P}\cdot \mathbf{x}^k+\mathbf{q}$ is convergent *if and only if* every eigenvalue, $\lambda$, of $\mathbf{P}$ satisfies $|\lambda|<1$, i.e. the *spectral radius* $\rho(\mathbf{P})<1$.
+!enotice
+
+===== The Gauss-Seidel method =====
+idx{Gauss-Seidel method}
+It is tempting in equation (ref{eq:lin:jc3a}) to use our estimate of $x_0^{k+1}$ in the next equation, equation (ref{eq:lin:jc3b}), instead of $x_0^k$. After all our estimate $x_0^{k+1}$ is an *improved* estimate. This is actually the Gauss-Seidel method. This method also has the advantage that if there are memory issues, one can overwrite the old value of $x_i^k$. Usually the Gauss-Seidel method converges faster, but not always. A plus for the Jacobi method is that is can be  parallelised, as the calculations is only dependent on the old values and do not require information about the new values as for the Gauss Seidel method. Below is a Python implementation of the Gauss-Seidel method   
+
+!bc pycod
+def solve_GS(A,b,x=-1,max_iter=1000,EPS=1e-6):
+    """
+    Solves the linear system Ax=b using the Gauss-Seidel method, stops if
+    solution is not found after max_iter or if solution changes less 
+    than EPS
+    """
+    if(x==-1):
+        x=np.zeros(len(b))
+    D=np.diag(A)
+    R=A-np.diag(D)
+    eps=1
+    iter=0
+    while(eps>EPS and iter<max_iter):
+        iter+=1
+        eps=0.
+        for i in range(len(x)):
+            tmp=x[i]
+            x[i]=(b[i]- np.dot(R[i,:],x))/D[i]
+            eps+=np.abs(tmp-x[i])
+    print('found solution after ' + str(iter) +' iterations')
+    return x
+!ec
+
+% if FORMAT == 'ipynb':
+Run the code below to test the Gauss-Seidel method 
+!bc pycod
+A = np.array([[2, 1, 1, 3,],[1, 4, 1, 1, ],
+              [1, 1, 3, 1],[1, 1, 2, 2 ]],float)
+b = np.array([1,2,-3,1],float)
+
+s3b=solve_GS(A,b)
+print(s3b)
+!ec
+% endif
+======= Example: Linear regression =======
+idx{linear regression}
+In the previous section, we considered a system of $N$ equations and $N$ unknown ($x_0, x_1,\ldots, x_N$). In general we might have more equations than unknowns or more unknowns than equations. An example of the former is linear regression, we might have many data points and we would like to fit a line through the points. How do you fit a single lines to more than two points that does not line on the same line? One way to do it is to minimize the distance from the line to the points, as illustrated in figure ref{fig:lin:reg}.
+FIGURE: [fig-lin/reg.png, width=800 frac=.9] Linear regression by minimizing the total distance to all the points. label{fig:lin:reg}
+Mathematically we can express the distance between a data point $(x_i,y_i)$ and the line $f(x)$ as $y_i-f(x_i)$. Note that this difference can be negative or positive depending if the data point lies below or above the line. We can then take the absolute value of all the distances, and try to minimize them. When we minimize something we take the derivative of the expression and put it equal to zero.  As you might remember from Calculus it is extremely hard to work with the derivative of the absolute value, because it is discontinuous. A much better approach is to square each distance and sum them:
+!bt
+\begin{equation}
+S=\sum_{i=0}^{N-1}(y_i-f(x_i))^2=\sum_{i=0}^{N-1}(y_i-a_0-a_1x_i)^2.
+label{eq:lin:lsq}
+\end{equation}
+!et
+(For the example in figure ref{fig:lin:reg}, $N=5$.) This is the idea behind *least square*, and linear regression. One thing you should be aware of is that points lying far from the line will contribute more to equation (ref{eq:lin:lsq}). The underlying assumption is that each data point provides equally precise information about the process, this is often not the case. When analyzing experimental data, there may be points deviating from the expected behaviour, it is then important to investigate if these points are more affected by measurements errors than the others. If that is the case one should give them less weight in the least square estimate, by extending the formula above:
+!bt
+\begin{equation}
+S=\sum_{i=0}^{N-1}\omega_i(y_i-f(x_i))^2=\sum_{i=0}^3\omega_i(y_i-a_0-a_1x_i)^2,
+label{eq:lin:lsqm}
+\end{equation}
+!et
+$\omega_i$ is a weight factor.
+
+===== Solving least square, using algebraic equations =====
+Let us continue with equation (ref{eq:lin:lsq}), the algebraic solution is to simply find the value of $a_0$ and $a_1$ that minimizes $S$:
+!bt
+\begin{align}
+\frac{\partial S}{\partial a_0} &=-2\sum_{i=0}^{N-1}(y_i-a_0-a_1x_i)=0,
+label{eq:lin:ls1} \\
+\frac{\partial S}{\partial a_1} &=-2\sum_{i=0}^{N-1}(y_i-a_0-a_1x_i)x_i=0.
+label{eq:lin:ls2}
+\end{align}
+!et
+Defining the mean value as $\overline{x}=\sum_ix_i/N$ and $\overline{y}=\sum_iy_i/N$, we can write equation (ref{eq:lin:ls1}) and (ref{eq:lin:ls2})  as:
+!bt
+\begin{align}
+\sum_{i=0}^{N-1}(y_i-a_0-a_1x_i)&=N\overline{y}-a_0N-a_1N\overline{x}=0,
+label{eq:lin:ls1a} \\
+\sum_{i=0}^{N-1}(y_i-a_0-a_1x_i)x_i&=\sum_iy_ix_i-a_0N\overline{x}-a_1\sum_ix_ix_i=0.
+label{eq:lin:ls2b}
+\end{align}
+!et
+Solving equation (ref{eq:lin:ls1a}) with respect to $a_0$, and inserting the expression into equation (ref{eq:lin:ls2b}), we find:
+!bt
+\begin{align}
+a_0&=\overline{y}-a_1\overline{x},label{eq:lin:ls1c} \\
+a_1&=\frac{\sum_iy_ix_i-N\overline{x}\overline{y}}{\sum_ix_i^2-N\overline{x}^2}
+=\frac{\sum_i(x_i-\overline{x})(y_i-\overline{y})}{\sum_i(x_i-\overline{x})^2}.
+label{eq:lin:ls2d}
+\end{align}
+!et
+We leave it as an exercise to show the last expression for $a_1$.  
+Clearly the equation (ref{eq:lin:ls2d}) above will in most cases have
+a solution. But in addition to a solution, it would be good to have an
+idea of the goodness of the fit. Intuitively it make sense to add all
+the distances (residuals) $d_i$ in figure ref{fig:lin:reg}. This is
+basically what is done when calculating $R^2$ (R-squared). However, we
+would also like to compare the $R^2$ between different
+datasets. Therefor we need to normalize the sum of residuals, and
+therefore the following form of the $R^2$ is used:
+!bt
+\begin{equation}
+R^2=1-\frac{\sum_{i=0}^{N-1}(y_i-f(x_i))^2}{\sum_{i=0}^{N-1}(y_i-\overline{y})^2}.
+label{eq:lin:r2}
+\end{equation}
+!et
+In python we can implement equation (ref{eq:lin:ls1c}), (ref{eq:lin:ls2d}) and (ref{eq:lin:r2}) as:
+@@@CODE src-lin/regr.py fromto: def OLS@def plot
+
+===== Least square as a linear algebra problem =====
+It turns out that the least square problem can be formulated as a
+matrix problem. (Two great explanations see "linear regression by
+matrices":"https://medium.com/@andrew.chamberlain/the-linear-algebra-view-of-least-squares-regression-f67044b7f39b",
+and
+"$R^2$-squared":"https://medium.com/@andrew.chamberlain/a-more-elegant-view-of-r-squared-a0a14c177dc3".)
+If we define a matrix $\mathbf{X}$ containing the observations $x_i$
+as:
+!bt
+\begin{align}
+\mathbf{X} &=
+\begin{pmatrix}
+1&x_0\\
+1&x_1\\
+\vdots&\vdots\\
+1&x_{N-1}
+\end{pmatrix}.
+label{eq:lin:mreg1}
+\end{align}
+!et
+We introduce a vector containing all the response $\mathbf{y}$, and the
+regression coefficients $\mathbf{a}=(a_0,a_1)$. Then we can write
+equation (ref{eq:lin:lsqm}) as a matrix equation:
+!bt
+\begin{equation}
+S=(\mathbf{y}-\mathbf{X\cdot a})^T(\mathbf{y}-\mathbf{X\cdot a}).
+label{eq:lin:mregS}
+\end{equation}
+!et
+*Note that this equation can easily be extended to more than one
+observation variable $x_i$*. By simply differentiating equation
+(ref{eq:lin:mregS}) with respect to $\mathbf{a}$, we can show that
+the derivative has a minimum when (see proof below):
+!bt
+\begin{equation}
+\mathbf{X}^T\mathbf{X a}=\mathbf{X}^T\mathbf{y}
+label{eq:lin:mregS2}
+\end{equation}
+!et
+Below is a python implementation of equation (ref{eq:lin:mregS2}).
+@@@CODE src-lin/regr.py fromto: def OLSM@def main
+
+===== Working with matrices on component form =====
+Whenever you want to do some manipulation with matrices, it is very useful to simply write them on component form. If we multiply two matrices $\mathbf{A}$ and $\mathbf{B}$ to form a new matrix $\mathbf{C}$, the components of the new matrix is simply $\mathbf{C}_{ij}=\sum_k\mathbf{A}_{ik}\mathbf{B}_{kj}$. The strength of doing this is that the elements of a matrix, e.g. $\mathbf{A}_{ik}$ are *numbers*, and we can move them around. Proving that e.g. $(\mathbf{A}\mathbf{B})^T=\mathbf{B}^T\mathbf{A}^T$ is straight forward using the component form. The transpose of a matrix is simply to exchange columns and rows, hence $\mathbf{C}_{ij}^T=\mathbf{C}_{ji}$
+!bt
+\begin{equation}
+\mathbf{C}_{ij}^T=\mathbf{C}_{ji}=\sum_k\mathbf{A}_{jk}\mathbf{B}_{ki}=\sum_k\mathbf{B}^T_{ik}\mathbf{A}^T_{kj}
+=(\mathbf{B}^T\mathbf{A}^T)_{ij},
+label{eq:lin:trans}
+\end{equation}
+!et
+thus $\mathbf{C}^T=\mathbf{B}^T\mathbf{A}^T$. To derive equation (ref{eq:lin:mregS2}), we need to take the derivative of equation (ref{eq:lin:mregS2}) with respect to $\mathbf{a}$.
+What we mean by this is that we want to evaluate $\partial S/\partial a_k$ for all the components of $\mathbf{a}$.
+A useful rule is $\partial a_i/\partial a_k=\delta_{ik}$, where $\delta_{ik}$ is the Kronecker delta, it takes the value of one if $i=k$ and zero otherwise. We can write $S=\mathbf{y}^T\mathbf{y}-\mathbf{y}\mathbf{X\cdot a}
+-(\mathbf{X\cdot a})^T\mathbf{y}-(\mathbf{X\cdot a})^T\mathbf{X\cdot a}$. All terms that do not contain $\mathbf{a}$ are zero, thus we only need to evaluate the following terms
+!bt
+\begin{align}
+\frac{\partial}{a_k}(\mathbf{X\cdot a})^T\mathbf{y} &=\frac{\partial}{a_k}(\mathbf{a}^T\cdot \mathbf{X}^T\mathbf{y})=\frac{\partial}{a_k}\sum_{ij}\mathbf{a}^T_i\mathbf{X}^T_{ij}\mathbf{y}_j
+=\sum_{ij}\delta_{ik}\mathbf{X}^T_{ij}\mathbf{y}_j\no\\
+&=\sum_{j}\mathbf{X}^T_{kj}\mathbf{y}_j=\mathbf{X}^T\mathbf{y} \\
+\frac{\partial}{a_k}\mathbf{y}^T\mathbf{X\cdot a}&=\frac{\partial}{a_k}\sum_{ij}\mathbf{y}^T_i\mathbf{X}_{ij}\mathbf{a}_j
+=\sum_{ij}\mathbf{y}^T_i\mathbf{X}_{ij}\delta_{jk}=\sum_{j}\mathbf{y}^T_{i}\mathbf{X}_{ik}\no\\
+&=\sum_{j}\mathbf{y}^T_{i}\mathbf{X}^T_{ki}=\mathbf{X}^T\mathbf{y} \\
+\frac{\partial}{a_k} (\mathbf{X\cdot a})^T\mathbf{X\cdot a}&=
+\frac{\partial}{a_k}\sum_{ijl} \mathbf{a}^T_i\mathbf{X}^T_{ij}\mathbf{X}_{jl}\mathbf{a}_l=
+\sum_{ijl}(\delta_{ik}\mathbf{X}^T_{ij}\mathbf{X}_{jl}\mathbf{a}_l+\mathbf{a}^T_i\mathbf{X}^T_{ij}\mathbf{X}_{jl}\delta_{lk})\no\\&=\sum_{jl}\mathbf{X}^T_{kj}\mathbf{X}_{jl}
+\mathbf{a}_l+\sum_{ij}\mathbf{a}^T_i\mathbf{X}^T_{ij}\mathbf{X}_{jk}\no\\
+&=\mathbf{X}^T\mathbf{X}\mathbf{a}+\sum_{ij}\mathbf{X}^T_{kj}\mathbf{X}_{ji}\mathbf{a}_i
+= 2\mathbf{X}^T\mathbf{X}\mathbf{a}.
+label{}
+\end{align}
+!et
+It then follows that $\partial S/\partial \mathbf{a} = 0$ when
+!bt
+\begin{equation}
+\mathbf{X}^T\mathbf{X a}=\mathbf{X}^T\mathbf{y}.
+label{eq:lin:matpr}
+\end{equation}
+!et
+
+======= Sparse matrices and Thomas algorithm =======
+idx{sparse matrix}
+idx{Thomas algorithm}
+In many practical examples, such as solving partial differential
+equations the matrices could be quite large and also contain a lot of
+zeros. A very important class of such matrices are *banded matrices*
+this is a type of *sparse matrices* containing a lot of zero elements,
+and the non-zero elements are confined to diagonal bands. In the
+following we will focus on one important type of sparse matrix the
+tridiagonal. In the next section we will show how it enters naturally
+in solving the heat equation. It turns out that solving banded
+matrices is quite simple, and can be coded quite efficiently. As with
+the Gauss-Jordan example, lets consider a concrete example:
+!bt
+\begin{align}
+&\left(
+\begin{array}{ccccc|c}
+b_0&c_0&0&0&0&r_0\\
+a_1&b_1&c_1&0&0&r_1\\
+0&a_2&b_2&c_2&0&r_2\\
+0& 0&a_3&b_3&c_3&r_3\\
+0& 0& 0&a_4&b_4&r_4
+\end{array}
+\right)
+\end{align}
+!et
+The right hand side is represented with $r_i$. The first Gauss-Jordan
+step is simply to divide by $b_0$, then we multiply with $-a_1$ and
+add to second row:
+!bt
+\begin{align}
+\to \left(
+\begin{array}{ccccc|c}
+1&c_0^\prime&0&0&0&r_0^\prime\\
+0&b_1-a_1c_0^\prime&c_1&0&0&r_1-a_0r_0^\prime\\
+0&a_2&b_2&c_2&0&r_2\\
+0& 0&a_3&b_3&c_3&r_3\\
+0& 0& 0&a_4&b_4&r_4
+\end{array}
+\right),
+\end{align}
+!et
+Note that we have introduced some new symbols to simplify the
+notation: $c_0^\prime=c_0/b_0$ and $r_0^\prime=r_0/b_0$. Then we
+divide by $b_1-a_1c_0^\prime$:
+!bt
+\begin{align}
+&\left(
+\begin{array}{ccccc|c}
+1&c_0^\prime&0&0&0&r_0^\prime\\
+0&1&c_1^\prime&0&0&r_1^\prime\\
+0&a_2&b_2&c_2&0&r_2\\
+0& 0&a_3&b_3&c_3&r_3\\
+0& 0& 0&a_4&b_4&r_4
+\end{array}
+\right),
+\end{align}
+!et
+where $c_1^\prime=c_1/(b_1-a_1c_0^\prime)$ and
+$r_1^\prime=(r_1-a_0r_0^\prime)/(b_1-a_1c_0^\prime)$. If you continue
+in this manner, you can easily convince yourself that to transform a
+tridiagonal matrix to the following form:
+!bt
+\begin{align}
+\to \left(
+\begin{array}{ccccc|c}
+1&c_0^\prime&0&0&0&r_0^\prime\\
+0&1&c_1^\prime&0&0&r_1^\prime\\
+0&0&1&c_2^\prime&0&r_2^\prime\\
+0& 0&0&1&c_3^\prime&r_3^\prime\\
+0& 0& 0&0&1&r_4^\prime
+\end{array}
+\right),
+\end{align}
+!et
+where:
+!bt
+\begin{align}
+c_0^\prime =\frac{c_0}{b_0} \qquad &r_0^\prime=\frac{r_0}{b_0}
+label{eq:lin:th0} \\
+c_i^\prime
+=\frac{c_i}{b_i-a_ic_{i-1}^\prime}\qquad
+&r_i^\prime=\frac{r_i-a_ir_{i-1}^\prime}{b_i-a_ic_{i-1}^\prime}
+\quad\text{, for }i=1,2,\ldots,N-1label{eq:lin:thi} 
+\end{align}
+!et
+Note that we where able to reduce the tridiagonal matrix to an *upper
+triangular* matrix in only *one* Gauss-Jordan step. This equation can
+readily be solved using back-substitution, which can also be
+simplified as there are a lot of zeros in the upper part. Let us
+denote the unknowns $x_i$ as we did for the Gauss-Jordan case, now we
+can find the solution as follows:
+!bt
+\begin{align}
+x_{N-1} & = r_{N-1}^\prime label{eq:lin:this0} \\
+x_i     & = r_i^\prime-x_{i+1}c_i^\prime\quad\text{, for } i=N-2,N-3,\ldots,0
+label{eq:lin:thisi}
+\end{align}
+!et
+Equation (ref{eq:lin:th0}), (ref{eq:lin:thi}), (ref{eq:lin:this0})
+and (ref{eq:lin:thisi}) is known as the Thomas algorithm after
+Llewellyn Thomas. 
+!bnotice
+Clearly tridiagonal matrices can be solved much more efficiently with
+the Thomas algorithm than
+using a standard library, such as LU-decomposition. This is
+because the solution method takes advantages of the *symmetry* of the
+problem. We will not show it here, but it can be shown that the Thomas
+algorithm is stable whenever $|b_i|\ge |a_i|+|c_i|$. If the algorithm
+fails, an advice is first to use the standard `solve` function in
+python. If this gives a solution, then *pivoting* combined with the
+Thomas algorithm might do the trick. 
+!enotice
+======= Example: Solving the heat equation using linear algebra =======
+# #include "heat.do.txt"
+
+# #include "co2.do.txt"
+
+###======= Singular Value Decomposition =======
+
+###======= QR factorization =======
+
+###======= Solving nonlinear equations =======
+###The purpose of this section is to introduce a handful of techniques for solving a nonlinear equation. In many cases a combination of methods must be used, and the algorithm must be adopted to your specific problem. 

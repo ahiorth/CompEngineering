@@ -1,0 +1,14 @@
+TITLE:  1, 2, 3D models and linear systems
+AUTHOR: Aksel Hiorth
+University of Stavanger
+DATE: today
+
+TOC: on
+
+<% book = False%>
+
+# #include "lin.do.txt"
+
+======= References =======
+
+BIBFILE: ../papers.pub

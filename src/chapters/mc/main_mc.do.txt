@@ -1,0 +1,14 @@
+TITLE:  Monte Carlo Methods
+AUTHOR: Aksel Hiorth
+University of Stavanger
+DATE: today
+
+TOC: on
+
+
+
+# #include "mc.do.txt"
+
+ ======= References =======
+
+BIBFILE: ../papers.pub

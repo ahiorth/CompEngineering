@@ -1,0 +1,14 @@
+TITLE:  Examples of algorithmic thinking: Numerical Integration
+AUTHOR: Aksel Hiorth
+University of Stavanger
+DATE: today
+
+TOC: on
+
+<% book = False%>
+
+# #include "numint.do.txt"
+
+======= References =======
+
+BIBFILE: ../papers.pub

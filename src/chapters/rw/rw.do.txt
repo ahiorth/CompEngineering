@@ -1,0 +1,4 @@
+In the previous chapter we talked about how we could use random numbers to solve problems. One of the conclusions from the last chapter was that  The problems we investigated related  solution to multidimensional problems In this chapter we are going to expand on this topic by investigate time dependent problems, and we are going to focus on random walk. Of course, not all time dependent problems can be describes as a random walk, but *if* they can, there is actually a lot you could learn about the nature of the problem 
+
+======= Random Walk =======
+

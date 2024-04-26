@@ -1,0 +1,470 @@
+===== Exercise: Conservation Equation or the Continuity Equation =====
+FIGURE: [fig-lin/heat.png, width=700 frac=.9] Conservation of energy and the continuity equation. label{fig:nlin:heat}
+
+In figure ref{fig:nlin:heat}, the continuity equation is derived for
+heat flow.
+=== Heat equation for solids ===
+As derived in the beginning of this chapter the heat equation for a solid is
+!bt
+\begin{equation}
+\frac{d^2T}{dx^2}+\frac{\dot{\sigma}}{k}=\frac{\rho c_p}{k}\frac{dT}{dt},
+label{eq:nlin:heateq}
+\end{equation}
+!et
+where $\dot{\sigma}$ is the rate of heat generation in the solid. This
+equation can be used as a starting point for many interesting
+models. In this exercise we will investigate the *steady state*
+solution, *steady state* is just a fancy way of expressing that we
+want the solution that *does not change with time*. This is achieved
+by ignoring the derivative with respect to time in equation
+(ref{eq:nlin:heateq}). We want to study a system with size $L$, and is
+it good practice to introduce a dimensionless variable: $y=x/L$. 
+<% counter  = 0 %>
+<% counter += 1 %>
+__Part ${counter}.__
+
+Show that equation (ref{eq:nlin:heateq}) now takes the following form:
+!bt
+\begin{equation}
+\frac{d^2T }{dy^2}+\frac{\dot{\sigma}L^2}{k}=0
+label{eq:nlin:heat2}
+\end{equation}
+!et
+
+# #ifdef SOLUTIONS
+
+!bsol
+<% scounter  = 0 %>
+<% scounter += 1 %>
+__Part ${scounter}.__
+Using $d/dx=d/dy dy/dx=1/Ld/dy$, hence $d^2/dx^2=1/L^2d/dy$, and at steady state there are no variation in the heat flow, i.e. $dq/dt=0$ we arrive at the equation above.  
+!esol
+
+# #endif
+
+
+===== Exercise: Curing of Concrete and Matrix Formulation =====
+Curing of concrete is one particular example that we can investigate
+with equation (ref{eq:nlin:heat2}). When concrete is curing, there are
+a lot of chemical reactions happening, these reactions generate
+heat. This is a known issue, and if the temperature rises too much 
+compared to the surroundings, the concrete may fracture.  In the
+following we will, for simplicity, assume that the rate of heat
+generated during curing is constant, $\dot{\sigma}=$100 W/m$^3$. The
+left end (at $x=0$) is insulated, meaning that there is no flow of
+heat over that boundary, hence $dT/dx=0$ at $x=0$. On the right hand
+side the temperature is kept constant, $x(L)=y(1)=T_1$, assumed to be
+equal to the ambient temperature of $T_1=25^\circ$C.  The concrete
+thermal conductivity is assumed to be $k=1.65$ W/m$^\circ$C.
+
+<% counter  = 0 %>
+<% counter += 1 %>
+__Part ${counter}.__
+
+Show that the solution to equation (ref{eq:nlin:heat2}) in this case is:
+!bt
+\begin{equation}
+T(y)=\frac{\dot{\sigma}L^2}{2k}(1-y^2)+T_1.
+label{eq:nlin:heatsol}
+\end{equation}
+!et
+
+# #ifdef SOLUTIONS
+
+!bsol
+<% scounter  = 0 %>
+<% scounter += 1 %>
+__Part ${scounter}.__
+
+Integrating equation (ref{eq:nlin:heat2}) we get
+!bt
+\begin{equation}
+\frac{dT}{dy}=-\beta y+C,
+label{eq:nlin:heatsols}
+\end{equation}
+!et
+where $\beta=\dot{\sigma}L^2/k$.
+$C$ is an integration constant, using the boundary condition $dT/dy|_{y=0}=0$, $C$ has to be zero. Integrating the left and right hand side of equation (ref{eq:nlin:heatsols}) gives us
+!bt
+\begin{equation}
+T(y)=-\frac{\beta}{2}y^2+D.
+label{eq:nlin:heatsolss}
+\end{equation}
+!et
+$D$ is a new integration constant, imposing the boundary condition $T(1)=T_1$, we find that $D=T_1+\beta/2$. Inserting this expression into equation (ref{eq:nlin:heatsolss}), we arrive at equation (ref{eq:nlin:heatsol}). 
+!esol
+
+# #endif
+<% counter += 1 %>
+__Part ${counter}.__
+In order to solve equation (ref{eq:nlin:heat2}) numerically, we need to discretize
+it. Show that equation (ref{eq:nlin:heat2}) now takes the following form:
+
+!bt
+\begin{equation}
+T_{i+1}+T_{i-1}-2T_i=-h^2\beta,
+label{eq:nlin:heat3}
+\end{equation}
+!et
+where $\beta=\dot{\sigma}L^2/k$.
+# #ifdef SOLUTIONS
+!bsol
+
+<% scounter += 1 %>
+__Part ${scounter}.__
+
+We replace the second derivative with
+$dT/dy^2=(T(y+dy)+T(y-dy)-2T(y))/dy^2=(T_{i+1}+T_{i-1}-2T_i)/h^2$, where we have used the short hand notation $T_i=T(y)$, and replaced $dy$ with $h$. 
+!esol
+# #endif
+FIGURE: [fig-lin/heat_grid.png, width=200 frac=.5] Finite difference
+grid for $N=4$. label{fig:nlin:hgrid}
+
+In figure ref{fig:nlin:hgrid}, the finite difference grid is shown for
+$N=4$.
+<% counter += 1 %>
+__Part ${counter}.__
+
+Show that equation (ref{eq:nlin:heat3}) including the boundary conditions for $N=4$ can be written as the following matrix equation
+!bt
+\begin{align}
+\left(
+\begin{array}{cccc}
+-\gamma&\gamma&0&0\\
+1&-2&1&0\\
+0&1&-2&1\\
+0&0&1&-2\\
+\end{array}
+\right)
+\left(
+\begin{array}{c}
+T_0\\
+T_1\\
+T_2\\
+T_3\\
+\end{array}
+\right)
+=
+\left(
+\begin{array}{c}
+-h^2\beta\\
+-h^2\beta\\
+-h^2\beta\\
+-h^2\beta-25
+\end{array}
+\right).
+\end{align}
+label{eq:lin:heats}
+!et
+where $\gamma=2$ for the central difference scheme and 1 for the forward difference scheme.
+
+# #ifdef SOLUTIONS
+!bsol
+
+<% scounter += 1 %>
+__Part ${scounter}.__
+
+Let us write down equation (ref{eq:nlin:heat3}) for each grid
+node to see how the implementation is done in practice:
+!bt
+\begin{align}
+T_{-1}+T_1-2T_0 &=-h^2\beta,\no\\
+T_{0}+T_2-2T_1 &=-h^2\beta,\no\\
+T_{1}+T_3-2T_2 &=-h^2\beta,\no\\
+T_{2}+T_4-2T_3 &=-h^2\beta.\no\\
+label{eq:nlin:heat4}
+\end{align}
+!et
+The tricky part is now to introduce the boundary conditions. The right
+hand side is easy, because here the temperature is $T_4=25$. However,
+we see that $T_{-1}$ enters and we have no value for this node. The
+boundary condition on the left hand side is $dT/dy=0$. We can choose to use the central difference term or the forward difference formulation 
+!bt
+\begin{align}
+\left.\frac{dT}{dy}\right|_{y=0}&=\frac{T_{1}-T_{-1}}{2h}-\frac{h^2}{6}T^{(3)}(\eta)=0,
+label{eq:nlin:bound1}\\
+\left.\frac{dT}{dy}\right|_{y=0}&=\frac{T_{0}-T_{-1}}{h}-\frac{h}{2}T^{\prime\prime}(\eta)=0.
+label{eq:nlin:bound1b}
+\end{align}
+!et
+We have kept the truncation error, hence $T_{-1}=T_1$ for the central difference scheme, and $T_{-1}=T_0$ for the forward difference scheme. Thus the final set of equations are:
+!bt
+\begin{align}
+\gamma T_1-\gamma T_0 &=-h^2\beta,\no\\
+T_{0}+T_2-2T_1 &=-h^2\beta,\no\\
+T_{1}+T_3-2T_2 &=-h^2\beta,\no\\
+T_{2}+25-2T_3 &=-h^2\beta,
+label{eq:nlin:heat5}
+\end{align}
+!et
+or in matrix form:
+!bt
+\begin{align}
+\left(
+\begin{array}{cccc}
+-\gamma&\gamma&0&0\\
+1&-2&1&0\\
+0&1&-2&1\\
+0&0&1&-2\\
+\end{array}
+\right)
+\left(
+\begin{array}{c}
+T_0\\
+T_1\\
+T_2\\
+T_3\\
+\end{array}
+\right)
+=
+\left(
+\begin{array}{c}
+-h^2\beta\\
+-h^2\beta\\
+-h^2\beta\\
+-h^2\beta-25
+\end{array}
+\right).
+\end{align}
+label{eq:lin:heatssol}
+!et
+$\gamma=2$ for the central difference scheme and 1 for the forward difference scheme.  
+Note that it is now easy to increase $N$ as it is only the boundaries
+that requires special attention.
+!esol
+# #endif
+<% counter += 1 %>
+__Part ${counter}.__
+* Solve the set of equations in equation (ref{eq:lin:heats}) using "`numpy.linalg.solve`":"https://numpy.org/doc/stable/reference/generated/numpy.linalg.solve.html".
+* Write the code so that you can easily switch between the central difference scheme and forward difference
+* Evaluate the numerical error as you change $h$, how does it scale? Is it what you expect?
+
+!bc pycod
+import numpy as np
+import scipy as sc
+import scipy.sparse.linalg
+from numpy.linalg import solve
+import matplotlib.pyplot as plt
+!ec
+
+!bc pycod
+
+central_difference=False
+# set simulation parameters
+h=0.25
+L=1.0
+n = int(round(L/h))
+Tb=25 #rhs
+sigma=100
+k=1.65 
+beta = sigma*L**2/k
+
+y = np.arange(n+1)*h
+
+def analytical(x):
+    return beta*(1-x*x)/2+Tb
+def tri_diag(a, b, c, k1=-1, k2=0, k3=1):
+    """ a,b,c diagonal terms
+        default k-values for 4x4 matrix:
+        | b0 c0 0  0 |
+        | a0 b1 c1 0 |
+        | 0  a1 b2 c2|
+        | 0  0  a2 b3|
+    """
+    return np.diag(a, k1) + np.diag(b, k2) + np.diag(c, k3)
+# defina a, b and c vector
+a=np.ones(n-1)
+b=..
+c=..
+
+##lhs boundary condition
+if central_difference:
+    c[0]= ...
+else:
+    b[0]=...
+
+A=tri_diag(a,b,c)
+print(A) # view matrix - compare with N=4 to make sure no bugs
+# define rhs vector
+d=...
+#rhs boundary condition
+d[-1]=...
+
+Tn=np.linalg.solve(A,d)
+print(Tn)
+!ec
+The correct solution for $L=1$ m, and $h=1/4$, is: $[T_0,T_1.T_2,T_3]$=[55.3030303 , 53.40909091, 47.72727273, 38.25757576] (central difference) and $[T_0,T_1.T_2,T_3]$=[62.87878788, 59.09090909, 51.51515152, 40.15151515] (forward difference)
+
+# #ifdef SOLUTIONS
+
+!bsol
+<% scounter += 1 %>
+__Part ${scounter}.__
+
+@@@CODE src-lin/heat4.py
+
+@@@CODE src-lin/heat5.py
+
+There are two sources to the numerical truncation error, one is from the discretization of the second derivative and one is from the boundary condition. The discretization of the second derivative introduces an error term of the order $h^4 T^{(4)}$. As we showed earlier the analytical solution is only second order in $y$, thus the fourth derivative $T^{(4)}=0$, hence there is *no numerical error from discretization of the second derivative*. The leading order numerical error is introduced at the boundary. 
+If we use the central difference scheme the numerical error is proportional to $h^3T^{(3)}$ (see equation (ref{eq:nlin:bound1b}), but this term is also zero as $T^{(3)}=0$. *Regardless of the number of grid points there are no numerical truncation errors when the central difference scheme is used for the boundary condition*. 
+
+For the forward difference scheme the numerical error scales as $h$ and *not* as $h^2$ as one naively would expect from equation (ref{eq:nlin:bound1b}) (because $T_{-1}=T_0+\frac{h^2}{2}T^{\prime\prime}(\eta)$) thus the first equation in (ref{eq:nlin:heat5}) takes the form
+!bt
+\begin{equation}
+T_1-T_0+\frac{1}{2}h^2 T^{\prime\prime}(\eta)=-\beta h^2.
+label{eq:lin:heatn}
+\end{equation}
+!et
+In this case we can quite easily solve the full system of equations (equation (ref{eq:lin:heatn}) and the three last equations in equation (ref{eq:nlin:heat5}))
+!bt
+\begin{align}
+T_0 &= T_1+10\beta h^2+4\left(\frac{1}{2}h^2 T^{\prime\prime}(\eta)\right),\no\\
+T_1 &= T_1+9\beta h^2+3\left(\frac{1}{2}h^2 T^{\prime\prime}(\eta)\right),\no\\
+T_2 &= T_1+7\beta h^2+2\left(\frac{1}{2}h^2 T^{\prime\prime}(\eta)\right),\no\\
+T_3 &= T_1+4\beta h^2+\left(\frac{1}{2}h^2 T^{\prime\prime}(\eta)\right).
+label{eq:lin:heatn2}
+\end{align}
+!et
+Notice that the numerical error *accumulates*, if we double the number of grid points the numerical factor in front of the numerical error term in equation (ref{eq:lin:heatn2}) doubles. Thus, the number in front of the numerical error *scales as $1/h$*, i.e $1/h=1/0.25=4$. The total numerical error scales as $h^2/h=h$.   
+!esol
+# #endif
+===== Exercise: Solve the full heat equation =====
+<% counter = 0 %>
+<% counter += 1 %>
+__Part ${counter}.__
+Replace the time derivative in equation (ref{eq:nlin:heateq}) with
+!bt
+\begin{equation}
+\frac{dT}{dt}\simeq\frac{T(t+\Delta t)-T(t)}{\Delta t}=\frac{T^{n+1}-T^n}{\Delta t}, 
+label{eq:lin:dt}
+\end{equation}
+!et
+and show that by using an *implicit formulation* (i.e. that the second derivative with respect to $x$ is to be evaluated at $T(t+\Delta t)\equiv T^{n+1}$) that equation (ref{eq:nlin:heateq}) can be written
+!bt
+\begin{equation}
+T_{i+1}^{n+1}+T_{i-1}^{n+1}-(2+\frac{\alpha h^2}{\Delta t})T_i^{n+1}=-h^2\beta-\frac{\alpha h^2 }{\Delta t}T_i^n,
+label{eq:lin:imp} 
+\end{equation}
+!et
+where $\alpha\equiv\rho c_p/k$.
+<% counter += 1 %>
+__Part ${counter}.__
+
+Use the central difference formulation for the boundary condition and show that for four nodes we can formulate equation (ref{eq:lin:imp}) as the following matrix equation
+!bt
+\begin{align}
+&\left(
+\begin{array}{cccc}
+-(2+\frac{\alpha h^2}{\Delta t})&2&0&0\\
+1&-(2+\frac{\alpha h^2}{\Delta t})&1&0\\
+0&1&-(2+\frac{\alpha h^2}{\Delta t})&1\\
+0&0&1&-(2+\frac{\alpha h^2}{\Delta t})\\
+\end{array}
+\right)
+\left(
+\begin{array}{c}
+T_0^{n+1}\\
+T_1^{n+1}\\
+T_2^{n+1}\\
+T_3^{n+1}\\
+\end{array}
+\right)\no\\
+&=
+\left(
+\begin{array}{c}
+-h^2\beta\\
+-h^2\beta\\
+-h^2\beta\\
+-h^2\beta-25
+\end{array}
+\right)
+-\frac{\alpha h^2 }{\Delta t}
+\left(
+\begin{array}{c}
+T_0^n\\
+T_1^n\\
+T_2^n\\
+T_3^n\\
+\end{array}
+\right)
+\end{align}
+label{eq:lin:heatfull}
+!et
+
+<% counter += 1 %>
+__Part ${counter}.__
+Assume that the initial temperature in the concrete is $25^\circ$C, $\rho$=2400 kg/m$^3$, a specific heat capacity $c_p=$ 1000 W/kg K, and a time step of $\Delta t=86400$ s (1 day). Solve equation (ref{eq:lin:heatfull}), plot the result each day and compare the result after 50 days with the steady state solution in equation (ref{eq:nlin:heatsol}).
+
+# #ifdef SOLUTIONS
+!bsol
+<% scounter = 0 %>
+<% scounter += 1 %>
+__Part ${scounter}.__
+
+!bt
+\begin{align}
+\frac{d^2T}{dx^2}+\frac{\dot{\sigma}}{k}&=\frac{\rho c_p}{k}\frac{dT}{dt}\no\\
+\frac{T_{i+1}^{n+1}+T_{i-1}^{n+1}-2T_i^{n+1}}{h^2}+\beta&=\alpha\frac{T_i^{n+1}-T_i^n}{\Delta t}\no\\
+T_{i+1}^{n+1}+T_{i-1}^{n+1}-(2+\frac{\alpha h^2}{\Delta t})T_i^{n+1}&=-h^2\beta-\frac{\alpha h^2 }{\Delta t}T_i^n,
+label{eq:nlin:heateqn1}
+\end{align}
+!et
+
+<% scounter += 1 %>
+__Part ${scounter}.__
+When using the central difference boundary condition, we only need to replace $T_{-1}=T_1$ for $i=0$, basically follow the same steps as in the previous exercise.
+
+<% scounter += 1 %>
+__Part ${scounter}.__
+Solving the full heat equation, the procedure is as follows
+o choose a value for the step size $h$, and $\Delta t$
+o set up the matrix on the left hand side in equation (ref{eq:lin:heatfull}), note that as long as $\Delta t$ and $h$ is constant it does not change
+o set $T_i^0=[25,255,\ldots,25]$ into the right hand side of equation (ref{eq:lin:heatfull})
+o solve the matrix equation (ref{eq:lin:heatfull}) to obtain $T_i^1$
+o advance clock by $\Delta t$ (and plot solution)
+o insert $T_i^1$ in the right hand side of equation (ref{eq:lin:heatfull})
+o solve equation (ref{eq:lin:heatfull}) to obtain $T_i^2$
+o advance clock, and repeat the last two steps 
+
+@@@CODE src-lin/heat6.py
+
+!esol
+
+# #endif
+===== Exercise: Using sparse matrices in python  =====
+In this part we are going to create a sparse matrix in python and use `scipy.sparse.linalg.spsolve` to solve it. The matrix is created using `scipy.sparse.spdiags`.
+<% counter = 0 %>
+<% counter += 1 %>
+__Part ${counter}.__
+Extend the code you developed in the last exercises to also be able to use sparse matrices, by e.g. a logical switch. Sparse matrices may be defined as follows
+!bc pypro
+import scipy.sparse.linalg
+
+#right hand side
+# rhs vector
+d=np.repeat(-h*h*beta,n)
+#rhs - constant temperature
+Tb=25
+d[-1]=d[-1]-Tb
+#Set up sparse matrix
+diagonals=np.zeros((3,n))
+diagonals[0,:]= 1
+diagonals[1,:]= -2  
+diagonals[2,:]= 1
+#No flux boundary condition
+diagonals[2,1]= 2
+A_sparse = sc.sparse.spdiags(diagonals, [-1,0,1], n, n,format='csc')
+# to view matrix - do this and check that it is correct!
+print(A_sparse.todense())
+# solve matrix
+Tb = sc.sparse.linalg.spsolve(A_sparse,d)
+
+# if you like you can use timeit to check the efficiency
+# %timeit sc.sparse.linalg.spsolve( ... )
+!ec
+
+* Compare the sparse solver with the standard Numpy solver using
+  `%timeit`, how large must the linear system be before an improvement
+  in speed is seen?
+
+

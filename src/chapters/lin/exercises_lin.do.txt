@@ -1,0 +1,18 @@
+TITLE: Finite difference, linear algebra, and tridiagonal matrices 
+AUTHOR: Prepared as part of MOD510 Computational Engineering and Modeling
+DATE: today
+
+======= Solving the heat equation =======
+
+Learning objectives:
+o Understand the origin of a conservation equation
+o Formulate a finite difference problem as a matrix inversion problem
+o Quantify the numerical error, investigate the scaling, and analyze the error using Taylors formula 
+o Use a sparse solver to speed up the calculation
+
+
+# #include "heat.do.txt"
+
+
+
+

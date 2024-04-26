@@ -1,0 +1,21 @@
+======= Section heading (h1) =======
+
+!bt
+\begin{equation}
+...
+label{}
+\end{equation}
+!et
+
+!bt
+\begin{align}
+... &=
+label{} \\
+... &=
+label{}
+\end{align}
+!et
+
+@@@CODE path fromto: start_regex@to_regex
+
+FIGURE: [path, width=400 frac=1.0] caption on one line. label{}

@@ -1,0 +1,14 @@
+TITLE:  Non linear systems
+AUTHOR: Aksel Hiorth
+University of Stavanger
+DATE: today
+
+TOC: on
+
+<% book = False%>
+
+# #include "nlin.do.txt"
+
+======= References =======
+
+BIBFILE: ../papers.pub

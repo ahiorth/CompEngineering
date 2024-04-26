@@ -1,0 +1,13 @@
+TITLE:  0D-systems and ordinary differential equations 
+AUTHOR: Aksel Hiorth
+University of Stavanger
+DATE: today
+
+TOC: on
+
+
+# #include "ode.do.txt"
+
+======= References =======
+
+BIBFILE: ../papers.pub

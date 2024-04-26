@@ -1,0 +1,5 @@
+o merge dataframes, e.g:
+!bc pypro
+df1=pd.read_excel('../../data/DISKOS/NORNE/gas_inj.xlsx')
+df2=pd.read_excel('../../data/DISKOS/NORNE/water_inj.xlsx')
+!ec

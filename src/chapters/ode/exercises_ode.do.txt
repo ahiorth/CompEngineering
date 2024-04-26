@@ -1,0 +1,665 @@
+TITLE: Ordinary Differential Equations (ODE)
+AUTHOR: Prepared as part of MOD510 Computational Engineering and Modeling
+DATE: today
+
+<%answer = False%>
+======= ODE Notebook =======
+Learning objectives:
+* being able to implement an ODE solver in python
+* quantify numerical uncertainty
+* test different methods and have basic understanding of the strength and weaknesses of each method
+
+===== Runge-Kutta Methods =====
+#FIGURE: [fig-ode/rk_fig, width=800] Illustration of the Euler algorithm, and a motivation for using the slope a distance from the $t_n$.label{fig:ode:rk}
+
+The 2. order Runge-Kutta method is accurate to $h^2$, with an error term of order $h^3$ 
+!bnotice The 2. order Runge-Kutta:
+!bt
+\begin{align}
+k_1&=hf(y_n,t_n)\nonumber\\
+k_2&=hf(y_n+\frac{1}{2}k_1,t_n+h/2)\nonumber\\
+y_{n+1}&=y_n+k_2\label{eq:ode:rk4}
+\end{align}
+!et
+!enotice
+The Runge-Kutta fourth order method is one of he most used methods, it is accurate to order $h^4$, and has an error of order $h^5$. 
+!bnotice The 4. order Runge-Kutta:
+!bt
+\begin{align}
+k_1&=hf(y_n,t_n)\nonumber\\
+k_2&=hf(y_n+\frac{1}{2}k_1,t_n+h/2)\nonumber\\
+k_3&=hf(y_n+\frac{1}{2}k_2,t_n+h/2)\nonumber\\
+k_4&=hf(y_n+k_3,t_n+h)\nonumber\\
+y_{n+1}&=y_n+\frac{1}{6}(k_1+2k_2+2k_3+k_4)\label{eq:ode:rk5}
+\end{align}
+!et
+!enotice
+======= Exercise: Implement the Runge-Kutta method =======
+In the following we are going to model a contaminated lake using a mixing tank. As an example we are going to use Norways largest lake, Mjosa, see figure ref{fig:eode:mjosa}. 
+
+FIGURE: [fig-ode/mjosa.png, width=400 frac=1.0] The location of Mjosa and a mixing tank. The mixing tank assumes that at all times the concentrations inside the tank is uniform.  label{fig:eode:mjosa}
+
+The volume of Mjosa is, $V=$56 km$^3$, and the discharge is $q=321$ m$^3$/s=27.734$\cdot10^6\text{m}^3/\text{day}$. We will assume that some contaminant are present *uniformly* in the lake, and fresh water is flowing into Mjosa. Applying mass balance to the system, and assuming that the flow pattern in Mjosa is such that the contaminant is distributed uniformly at all times, the following equation should hold
+!bt
+\begin{equation}
+V\frac{dC(t)}{dt} = q(t)\left[C_\text{in}(t) - C(t)\right].
+label{eq:eode:cstr}
+\end{equation}
+!et
+Assume that the initial concentration of the contaminant is $C_0=1$, and assume that water flowing into contains no contaminant, we have the boundary conditions $C_\text{in}(t)=0$, $C(0)=1$. In this case equation (ref{eq:eode:cstr}) is
+
+!bt
+\begin{equation}
+\frac{dC(t)}{dt} = -\frac{1}{\tau}C(t),
+label{eq:eode:cstr2}
+\end{equation}
+!et 
+where $\tau\equiv V/q$. The analytical solution is simply
+!bt
+\begin{equation}
+C(t)=e^{-t/\tau}.
+label{eq:eode:ana}
+\end{equation}
+!et
+<% counter  = 0 %>
+<% counter += 1 %>
+__Part ${counter}.__
+In the following you are going to first implement a *general* solver, then you are to test it on equation (ref{eq:eode:ana}). The solution of ODE equations are based on solving a generic equation of the form
+!bt
+\begin{equation}
+\frac{dy(t)}{dt}=f(y,t).
+label{eq:eode:gen}
+\end{equation}
+!et
+Thus the solver should take in *as argument*, the right hand side, $f(y,t)$, starting values $y_0$, the start time $t_0$ and end time $t_f$.
+
+Complete the code below
+!bc pycod
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+#global parameters
+c_in=0
+c0=1
+q=321*24*60*60*365 #m^3/year
+V=56*1000**3    #m^3
+tau=V/q        #day
+
+def func(y,t):
+    """
+    the right hand side of ode
+    """
+    return ...
+
+def rk4_step(func,y,t,dt):
+    """
+    t : time
+    dt : step size (dt=h)
+    func : the right hand side of the ode
+    """
+    ... 
+    return
+
+def rk2_step(func, y, t, dt):
+     """
+    t : time
+    dt : step size (dt=h)
+    func : the right hand side of the ode
+    """ 
+    return 
+
+def ode_solv(func,y0,dt,t0,t_final):
+    y=[];t=[]
+    ti=t0
+    y_old=y0
+    while(ti <= t_final):
+        t.append(ti); y.append(y_old)
+        y_new = y_old+rk4_step(func,y_old,ti,dt) # or rk2_step    
+        y_old = y_new
+        ti   += dt
+    return np.array(t),np.array(y)
+
+!ec
+
+# #ifdef SOLUTIONS
+===== Solution =====
+<% scounter  = 0 %>
+<% scounter += 1 %>
+__Part ${scounter}.__
+@@@CODE src-ode/rk4_sol.py fromto: import@plt.grid
+
+# #endif
+
+
+
+<% counter += 1 %>
+__Part ${counter}.__
+o How much time does it take for the contaminant to drop to 10$\%$ of its original value?
+o Is this model a good model for the cleaning of Mjosa?
+o Does the numerical error scales as expected
+
+# #ifdef SOLUTIONS
+===== Solution =====
+<% scounter += 1 %>
+__Part ${scounter}.__
+o From the figure we see that it takes about 12.7 years (can also be estimated analytically $t=-\tau\ln0.1\simeq12.73 $ years)
+o Most likely the model is to simplistic, but there is a good chance that to always assume that the mixing is uniformly will give an upper bound of the cleaning (assuming that the contaminant does not adsorb or is taken up by the living organism)
+o Yes, changing $dt$ from 1 to 0.1, reduces the error by a factor of 1000 in the case of `rk2_step` and 100000 in the case of `rk4_step`.
+
+# #endif
+
+===== Exercise: Adaptive step size - Runge-Kutta Method =====
+In this exercise you are going to improve the algorithms above by choosing a step size that is not too large or too small. This will serve two purposes i) *greatly* enhance the efficiency of the code, and ii) ensure that we find the correct numerical solution that is *close enough* to the true solution. We are going to use the following result from the compendium cite{hiorth} (to get a good understanding it is advised to derive them) 
+!bt
+\begin{align}
+|\epsilon|&=\frac{|\Delta|}{2^p-1}=\frac{|y_1^*-y_1|}{2^p-1},\\
+dt^\prime&=\beta dt\left|\frac{\epsilon^\prime}{\epsilon}\right|^{\frac{1}{p+1}},\\
+\hat{y_1}&=y_1-\epsilon=\frac{2^p y_1-y_1^*}{2^{p}-1},
+\end{align}
+!et
+where $\epsilon^\prime$ is the desired accuracy. $\beta$ is a safety factor $\beta\simeq0.8,0.9$, and you should always be careful that the step size do not become too large so that
+the method breaks down. This can happens when $\epsilon$ is very low, which may happen if $y_1^*\simeq y_1$ and/or if $y_1^*\simeq y_1\simeq 0$.  
+
+<% counter  = 0 %>
+<% counter += 1 %>
+__Part ${counter}.__
+
+Use the equations above, and implement an adaptive step size algorithm for the 4. order Runge-Kutta methods. Use the Mjosa example above to test your code. It might be a good idea to use a safety limit on the step size `min(dt*(tol/toli)**(0.2),dt_max)`, where `dt_max` is the maximum step size you allow. The tolerance should be calculated as $\epsilon^\prime = atol +|y|rtol$, where 'atol' is the absolute tolerance and 'rtol' is the relative tolerance. A sensible choice would be to set 'atol=rtol' (e.g. = $10^{-5}$).
+
+Below is some code to help you get started
+!bc pycod
+def rk_adpative(func,y0,t0,tf,rel_tol=1e-5,abs_tol=1e-5,p=4):
+    y=[]
+    t=[]
+    ti=t0
+    y.append(y0)
+    t.append(ti)
+    dt=1e-2 # start with a small step 
+    while(ti<=tf):
+        y_old=y[-1]
+        EPS=np.abs(y_old)*rel_tol+abs_tol
+        eps=10*EPS
+        while(eps>EPS): # continue while loop until correct dt
+            DT=dt
+            y_new =  ....  # one large step from t to t+dt
+            y1    =  ....  # and two small steps - from t -> t+dt/2
+            y2    =  ....  # and from t+dt/2 to t + dt
+            eps   =  ....  # estimate numerical error
+            dt    =  ....  # calculate new time step
+	    
+        y.append( ... )
+        ti=ti+DT # important to add DT not dt
+        t.append(ti)
+    return np.array(t),np.array(y) # cast to numpy arrays
+!ec
+<% counter += 1 %>
+__Part ${counter}.__
+o How many steps do you need to get a reasonable solution? 
+o Is the numerical error what you expect?
+
+# #ifdef SOLUTIONS
+===== Solution =====
+<% scounter  = 0 %>
+<% scounter += 1 %>
+__Part ${scounter}.__
+
+@@@CODE src-ode/rk4_sol.py fromto: def rk_ad@plt.plot
+
+<% scounter += 1 %>
+__Part ${scounter}.__
+
+o Only 7-8 steps are needed.
+o Changing setting `rel_tol=0`, and `abs_tol=1e-5` (or any other value) the numerical solution is closer to the analytical solution than the `abs_tol` value. This is partly due to the improved estimate of the solution where we use $\hat{y_1}=y_1-\epsilon=(2^p y_1-y_1^*)/(2^{p}-1$), and not $y_1$ as our final estimate.  
+
+# #endif
+
+
+===== Exercise: Solving a set of ODE equations =====
+What happens if we have more than one equation that needs to be solved? If we continue with our current example, we might be interested in what would happen 
+if we had multiple tanks in series. This could be a very simple model to describe the cleaning  of drinking water infiltrated by salt water (a typical challenge in many countries) by injecting fresh water into it. Assume that the lake was connected to two nearby fresh water lakes, as illustrated in figure ref{fig:ode:cstr3}. The weakest part of the model is the assumption about 
+complete mixing, in a practical situation we could enforce complete mixing with the salty water in the first tank by injecting fresh water at multiple point in the 
+lake. For the two next lakes, the degree of mixing is not obvious, but salt water is heavier than fresh water and therefore it would sink and mix with the fresh water. Thus
+if the discharge rate was slow, one might imaging that a more or less complete mixing could occur. Our model then could answer questions like, how long time would it take before most
+of the salt water is removed from the first lake, and how much time would it take before most of the salt water was cleared from the whole system? The answer to 
+these questions would give practical input on how much and how fast one should inject the fresh water to clean up the system. If we had 
+data from an actual system, we could compare our model predictions with data from the physical system, and investigate if our model description was correct. 
+
+FIGURE: [fig-ode/cstr3, width=800] A simple model for cleaning a salty lake that is connected to two lakes down stream. label{fig:ode:cstr3}
+
+For simplicity we will assume that all the lakes have the same volume, $V$. The governing equations follows
+as before, by assuming mass balance:
+!bt
+\begin{align}
+C_0(t+\Delta t)\cdot V - C_0(t)\cdot V &= q(t)\cdot C_\text{in}(t)\cdot \Delta t - q(t)\cdot C_0(t)\cdot \Delta t,\nonumber\\
+C_1(t+\Delta t)\cdot V - C_1(t)\cdot V &= q(t)\cdot C_0(t)\cdot \Delta t - q(t)\cdot C_1(t)\cdot \Delta t,\nonumber\\
+C_2(t+\Delta t)\cdot V - C_2(t)\cdot V &= q(t)\cdot C_1(t)\cdot \Delta t - q(t)\cdot C_2(t)\cdot \Delta t.\label{eq:ode:cstr3a}
+\end{align}
+!et
+Taking the limit $\Delta t\to 0$, we can write equation (ref{eq:ode:cstr3a}) as:
+!bt
+\begin{align}
+V\frac{dC_0(t)}{dt} &= q(t)\left[C_\text{in}(t) - C_0(t)\right],\label{eq:ode:cstr3b}\\
+V\frac{dC_1(t)}{dt} &= q(t)\left[C_0(t) - C_1(t)\right],\label{eq:ode:cstr3c}\\
+V\frac{dC_2(t)}{dt} &= q(t)\left[C_1(t) - C_2(t)\right].\label{eq:ode:cstr3d}
+\end{align}
+!et
+Show that the analytical solution is:
+!bt
+\begin{align}
+C_0(t)&=C_{0,0}e^{-t/\tau}\no\\
+C_1(t)&=C_{0,0}\frac{t}{\tau}e^{-t/\tau}\no\\
+C_2(t)&=\frac{C_{0,0}t^2}{2\tau^2}e^{-t/\tau}.\label{eq:ode:cstr3j}
+\end{align}
+!et
+The numerical solution follows the exact same pattern as before if we introduce a vector notation. 
+!bt
+\begin{align}
+\frac{d}{dt}
+\left(
+\begin{array}{c} 
+ C_0(t)\\
+ C_1(t)\\
+ C_2(t)
+ \end{array}
+ \right)
+&=\frac{1}{\tau}\left(
+\begin{array}{c} 
+ C_\text{in}(t) - C_0(t)\\
+ C_0(t) - C_1(t)\\
+ C_1(t) - C_2(t)
+ \end{array}
+ \right),\nonumber
+ \\
+ \frac{d\mathbf{C}(t)}{dt}&=\mathbf{f}(\mathbf{C},t).
+ label{eq:eode:vec}
+\end{align}
+!et
+<% counter  = 0 %>
+<% counter += 1 %>
+__Part ${counter}.__
+o Extend the code in the previous exercises to be able to handle vector equations - note that if you have consistently used Numpy arrays you should actually be able to run your code without any modifications! (not the Richardson extrapolation algorithm)
+o Solve the set of equations in equation (ref{eq:eode:vec}), and compare with the analytical solution
+
+# #ifdef SOLUTIONS
+===== Solution =====
+<% scounter  = 0 %>
+<% scounter += 1 %>
+__Part ${scounter}.__
+
+@@@CODE src-ode/rk4_sol.py fromto: def fm@plt.show
+# #endif 
+======= Exercise: Adaptive method for a general ODE =======
+<% counter  = 0 %>
+<% counter += 1 %>
+__Part ${counter}.__
+In this exercise we ask you to extend your implementation of the Richardson extrapolation to also be valid if the right hand side is a vector. We will not give the solution to this exercise, but rather tell you exactly how to do it and then you can try for yourself. The following recipe applies to the suggested solution (see separate pdf document)
+o There are only minor changes to the code, first we need to consider `EPS=np.abs(y_old)*rel_tol+abs_tol`. This expression is ambiguous, because `y_old` is a vector and `EPS` should be a single number. We suggest to simply replace the absolute value with the norm $\sqrt{y_0^2+y_1^2+\cdots}$, which can be achieved by `EPS=np.linalg.norm(y_old)*rel_tol+abs_tol`
+o The same also applies to the line `eps   = np.abs(y2-y_new)/(2**p-1)`, and this should be changed to `eps   = np.linalg.norm(y2-y_new)/(2**p-1)`
+
+o Make the suggested changes and test your code on equation (ref{eq:eode:vec})
+
+======= Exercise: Second order equations =======
+Test your solver on the following equation
+!bt
+\begin{equation}
+xy^{\prime\prime}(x)+2^\prime(x)+x=1,
+label{eq:eode:ss}
+\end{equation}
+!et
+where the initial conditions are $y(1)=2$, and $y^\prime(1)=1$. The analytical solution is
+!bt
+\begin{equation}
+y(x)=\frac{5}{2}-\frac{5}{6x}+\frac{x}{2}-\frac{x^2}{6}.
+\end{equation}
+!et
+
+# #ifdef SOLUTIONS
+===== Solution =====
+First we need to rewrite the equations to the general form
+!bt
+\begin{equation}
+\frac{d\mathbf{y}}{d\mathbf{x}}=\mathbf{f}(\mathbf{y},\mathbf{x}).
+\end{equation}
+!et
+We do this by defining $Z_0=y$, and $Z_1=y^\prime(x)=dZ_0/dx$, hence $dZ_1/dx=y^{\prime\prime}$. Then it follow from equation (ref{eq:eode:ss})
+!bt
+\begin{equation}
+\frac{dZ_1}{dx}=\frac{1-2y^\prime-x}{x}=\frac{1-2Z_1}{x}-1.
+\end{equation}
+!et
+We can then write the following equation on vector form
+!bt
+\begin{align}
+\frac{d}{dx}
+\left(
+\begin{array}{c} 
+ Z_0(x)\\
+ Z_1(x)
+ \end{array}
+ \right)
+&=\left(
+\begin{array}{c} 
+ Z_1\\
+ \frac{1-2Z_1}{x}-1.
+ \end{array}
+ \right).
+ label{eq:eode:ss2}
+\end{align}
+!et
+The initial condition is $\mathbf{Z}(1)=[Z_0(1),Z_1(1)]=[y(1),y^\prime(1)]=[2,1]$.
+Below is an implementation
+
+@@@CODE src-ode/rk4_sol.py fromto: def f2@t=
+# #endif 
+
+# #ifdef PROGRESS
+===== Exercise: Stiff sets of ODE  and implicit methods =====
+As already mentioned a couple of times, our system could be part of a much larger system. To illustrate this, let us now assume that we have two 
+tanks in series. The first tank is similar to our original tank, but the second tank is a sampling tank, 1000 times smaller.   
+
+FIGURE: [fig-ode/cstr2.png, width=800] A continuous stirred tank model with a sampling vessel. label{fig:ode:cstr2}
+
+The governing equations can be found by requiring mass balance for each of the tanks:
+!bt
+\begin{align}
+C_0(t+\Delta t)\cdot V_0 - C_0(t)\cdot V_0 &= q(t)\cdot C_\text{in}(t)\cdot \Delta t - q(t)\cdot C_0(t)\cdot \Delta t.\nonumber\\
+C_1(t+\Delta t)\cdot V_1 - C_1(t)\cdot V_1 &= q(t)\cdot C_0(t)\cdot \Delta t - q(t)\cdot C_1(t)\cdot \Delta t.
+\label{eq:ode:cstr2a}
+\end{align}
+!et 
+Taking the limit $\Delta t\to 0$, we can write equation (ref{eq:ode:cstr2a}) as:
+!bt
+\begin{align}
+V_0\frac{dC_0(t)}{dt} &= q(t)\left[C_\text{in}(t) - C_0(t)\right].\label{eq:ode:cstr2bb}\\
+V_1\frac{dC_1(t)}{dt} &= q(t)\left[C_0(t) - C_1(t)\right].\label{eq:ode:cstr2b}
+\end{align}
+!et
+Assume that the first tank is filled with seawater, $C_0(0)=C_{0,0}$, and fresh water is flooded into the tank, i.e. $C_\text{in}=0$. Before we start to consider a numerical
+solution, let us first find the analytical solution: As before the solution for the first tank (equation (ref{eq:ode:cstr2bb})) is:
+!bt
+\begin{equation}
+C_0(t)=C_{0,0}e^{-t/\tau_0},
+\end{equation}
+!et
+where $\tau_0\equiv V_0/q$. Inserting this equation into equation (ref{eq:ode:cstr2b}), we get:
+!bt
+\begin{align}
+\frac{dC_1(t)}{dt} &= \frac{1}{\tau_1}\left[C_{0,0}e^{-t/\tau_0} - C_1(t)\right],\nonumber\\
+\frac{d}{dt}\left[e^{t/\tau_2}C_1\right]&= \frac{C_{0,0}}{\tau_1}e^{-t(1/\tau_0-1/\tau_1)}\label{eq:ode:cstr2c},\\
+C_1(t)&=\frac{C_{0,0}}{1-\frac{\tau_1}{\tau_0}}\left[e^{-t/\tau_0}-e^{-t/\tau_1}\right],\label{eq:ode:cstr2d}
+\end{align}
+!et
+where $\tau_1\equiv V_1/q$.
+
+The methods we have considered so far are known as *explicit*, whenever we replace the solution in the right hand side of our algorithm with $y(t+\Delta t)$
+or ($y_{n+1}$),
+the method is known as *implicit*. Implicit methods are always stable, meaning that we can take as large a time step that we would like, without
+getting oscillating solution. 
+
+* Show that:
+!bt
+\begin{align}
+{C_0}_{n+1}&=\frac{{C_0}_n + \frac{\Delta t}{\tau_0}{C_\text{in}}_{n+1}}{1+\frac{\Delta t}{\tau_0}},\nonumber\\
+{C_2}_{n+1}&=\frac{{C_1}_n + \frac{\Delta t}{\tau_1}{C_0}_{n+1}}{1+\frac{\Delta t}{\tau_1}}.\label{eq:ode:cstri1}
+\end{align}
+!et
+* Finnish the implementation below
+!bc pycod
+import matplotlib.pyplot as plt
+import numpy as np
+
+def fm(c_old,c_in,tau,h):
+    return ....
+
+def euler_step(c_old, c_in, tau, h):
+    c_next=[]
+    for i in range(len(c_old)):
+        if(i>0): c_in[i]=c_next[i-1] # c_new in next tank
+        c_next.append(fm(c_old[i],c_in[i],tau[i],h))
+    return c_next
+
+def ode_solv(c_into,c_init,t_final,tau,h):
+    f=[];t=[]
+    c_in  = c_into #freshwater into first tank
+    c_old = c_init #seawater present 
+    ti=0.
+    while(ti <= t_final):
+        t.append(ti); f.append(c_old)
+        c_new = euler_step(c_old,c_in,tau,h)     
+        c_old = c_new
+        # put concentration of tank 0 into tank 1 etc.
+        # ...
+        ti   += h
+    return np.array(t),np.array(f)
+h = 0.01
+# initial values
+vol=1;q=1;c_into = [0,0]; c_init = [1,0]
+tau=[1,1e-3];t_final=10 # end of simulation 
+t,f = ode_solv(c_into,c_init,t_final,tau,h)
+# rest of code is to make a figure
+
+f_an = [];t_an=np.arange(0,t_final,0.01)
+f_an.append(c_init[0]*np.exp(-t_an))
+f_an.append(c_init[0]*(1-tau[1]/tau[0])*(np.exp(-t_an/tau[0])-np.exp(-t_an/tau[1])))
+symb = ['-p','-v','-*','-s']
+fig = plt.figure(dpi=150)
+for i in range(0,len(c_init)):
+    legi = '$\hat{C}_'+str(i)+'(\\tau)$'
+    plt.plot(t, f[:,i], '-', label=legi,lw=4)
+    plt.plot(t_an, f_an[i], '--', color='k')
+plt.plot(0,0 , '--', color='k',label='analytical')
+plt.legend(loc='upper right', ncol=1)
+#plt.ylim([0,50])
+plt.grid()
+plt.xlabel('Time')
+plt.ylabel('Concentration')
+plt.show()
+!ec
+
+* Do you need more or less step to reach the same accuracy with the implicit method, compared to Eulers (explicit) method?
+%if answer:
+!bans
+@@@CODE src-ode/euler_imp_2.py  
+!eans
+%endif 
+
+===== Exercise: Truncation Error in Eulers Method =====
+We know that Eulers algorithm is accurate to second order. Our estimate of the new value, $y_1^*$  
+(where we have used a$\,{}^*$ to indicate that we have used a step size of size $h$), should then be related to the true solution $y(t_1)$ in the following way:
+!bt
+\begin{align}
+y^*_1=y(t_1)+ch^2.\label{eq:ode:aeb0}
+\end{align}
+!et
+The constant $c$ is unknown, but it can be found by taking two smaller steps of size $h/2$. If the steps are not too large, our new estimate
+of the value $y_1$ will be related to the true solution as:
+!bt
+\begin{align}
+y_1=y(t_1)+2c\left(\frac{h}{2}\right)^2.\label{eq:ode:aeb1}
+\end{align}
+!et
+In the following we will take a closer look at the adaptive Eulers algorithm and show that the 
+constant $c$ is indeed the same in equation (ref{eq:ode:aeb0}) and (ref{eq:ode:aeb1}). 
+The true solution $y(t)$, obeys the following equation:
+!bt
+\begin{align}
+\frac{dy}{dt}&=f(y,t),\label{eq:ode:ay}
+\end{align}
+!et
+and Eulers method to get from $y_0$ to $y_1$ by taking one (large) step, $h$ is:
+!bt
+\begin{align}
+y^*_1&=y_0+hf(y_0,t_0),\label{eq:ode:ae0}
+\end{align}
+!et
+We will also assume (for simplicity) that in our starting point $t=t_0$, the numerical solution, $y_0$, is equal to the true solution, $y(t_0)$, hence $y(t_0)=y_0$.
+!bsubex
+Show that when we take one step of size $h$ from $t_0$ to $t_1=t_0+h$, $c=y^{\prime\prime}(t_0)/2$ in equation (ref{eq:ode:aeb0}).
+!bans 
+The local error, is the difference between the numerical solution and the true solution:
+!bt
+\begin{align}
+\epsilon^*&=y(t_0+h)-y_{1}^*=y(t_0)+y^{\prime}(t_0)h+\frac{1}{2}y^{\prime\prime}(t_0)h^2+\mathcal{O}(h^3)\nonumber\\
+&-\left[y_0+hf(y_0,t_0+h)\right],
+\end{align}
+!et
+where we have used Taylor expansion to expand the true solution around $t_0$, and equation (ref{eq:ode:ae0}).
+Using equation (ref{eq:ode:ay}) to replace $y^\prime(t_0)$ with $f(y_0,t_0)$, we find:
+!bt
+\begin{align}
+\epsilon^*=&y(t_0+h)-y_{1}^*=\frac{1}{2}y^{\prime\prime}(t_0)h^2\equiv ch^2,
+\end{align}
+!et
+hence $c=y^{\prime\prime}(t_0)/2$.
+!eans
+!esubex
+!bsubex
+Show that when we take two steps of size $h/2$ from $t_0$ to $t_1=t_0+h$, Eulers algorithm is:
+!bt
+\begin{align}
+y_{1}&=y_{0}+\frac{h}{2}f(y_0,t_0)+\frac{h}{2}f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2).
+\end{align}
+!et
+!bans
+!bt
+\begin{align}
+y_{1/2}&=y_0+\frac{h}{2}f(y_0,t_0),\label{eq:ode:ae1b}\\
+y_{1}&=y_{1/2}+\frac{h}{2}f(y_{1/2},t_0+h/2),\label{eq:ode:ae2b}\\
+y_{1}&=y_{0}+\frac{h}{2}f(y_0,t_0)+\frac{h}{2}f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2).\label{eq:ode:ae3b}
+\end{align}
+!et
+Note that we have inserted
+equation (ref{eq:ode:ae1b}) into equation (ref{eq:ode:ae2b}) to arrive at equation (ref{eq:ode:ae3b}). 
+!eans
+!esubex
+!bsubex
+Find an expression for the local error when using two steps of size $h/2$, and show that the local error is: $\frac{1}{2}ch^2$
+!bans
+!bt
+\begin{align}
+\epsilon&=y(t_0+h)-y_{1}=y(t_0)+y^{\prime}(t_0)h+\frac{1}{2}y^{\prime\prime}(t_0)h^2+\mathcal{O}(h^3)\nonumber\\
+&-\left[y_{0}+\frac{h}{2}f(y_0,t_0)+\frac{h}{2}f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2)\right].\label{eq:ode:ay5b}
+\end{align}
+!et
+This equation is slightly more complicated, due to the term involving $f$ inside the last parenthesis, we can use Taylor expansion to expand it about $(y_0,t_0)$:
+!bt
+\begin{align}
+&f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2)=f(y_0,t_0)\nonumber\\
+&+\frac{h}{2}\left[f(y_0,t_0)\left.\frac{\partial f}{\partial y}\right|_{y=y_0,t=t_0}
++\frac{h}{2}\left.\frac{\partial f}{\partial t}\right|_{y=y_0,t=t_0}\right]+\mathcal{O}(h^2).\label{eq:ode:ay2b}
+\end{align}
+!et
+It turns out that this equation is related to $y^{\prime\prime}(t_0,y_0)$, which can be seen by differentiating equation (ref{eq:ode:ay}):
+!bt
+\begin{align}
+\frac{d^2y}{dt^2}&=\frac{df(y,t)}{dt}=\frac{\partial f(y,t)}{\partial y}\frac{dy}{dt}+\frac{\partial f(y,t)}{\partial t}
+=\frac{\partial f(y,t)}{\partial y}f(y,t)+\frac{\partial f(y,t)}{\partial t}.\label{eq:ode:ay3b}
+\end{align}
+!et
+Hence, equation (ref{eq:ode:ay2b}) can be written:
+!bt
+\begin{align}
+f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2)=f(y_0,t_0)+\frac{h}{2}y^{\prime\prime}(t_0,y_0),\label{eq:ode:ay4b}
+\end{align}
+!et
+hence the truncation error in equation (ref{eq:ode:ay5b}) can finally be written:
+!bt
+\begin{align}
+\epsilon=&y(t_1)-y_{1}=\frac{h^2}{4} y^{\prime\prime}(y_0,t_0)=\frac{1}{2}ch^2,\label{eq:ode:ae4b}
+\end{align}
+!et
+!eans
+!esubex
+!bsol
+The local error, is the difference between the numerical solution and the true solution:
+!bt
+\begin{align}
+\epsilon^*&=y(t_0+h)-y_{1}^*=y(t_0)+y^{\prime}(t_0)h+\frac{1}{2}y^{\prime\prime}(t_0)h^2+\mathcal{O}(h^3)\nonumber\\
+&-\left[y_0+hf(y_0,t_0+h)\right],
+\end{align}
+!et
+where we have used Taylor expansion to expand the true solution around $t_0$, and equation (ref{eq:ode:ae0}).
+Using equation (ref{eq:ode:ay}) to replace $y^\prime(t_0)$ with $f(y_0,t_0)$, we find:
+!bt
+\begin{align}
+\epsilon^*=&y(t_0+h)-y_{1}^*=\frac{1}{2}y^{\prime\prime}(t_0)h^2\equiv ch^2,
+\end{align}
+!et
+where we have ignored terms of higher order than $h^2$, and defined $c$ as $c=y^{\prime\prime}(t_0)/2$. Next we take two steps of size $h/2$ to
+reach $y_1$:  
+!bt
+\begin{align}
+y_{1/2}&=y_0+\frac{h}{2}f(y_0,t_0),\label{eq:ode:ae1}\\
+y_{1}&=y_{1/2}+\frac{h}{2}f(y_{1/2},t_0+h/2),\label{eq:ode:ae2}\\
+y_{1}&=y_{0}+\frac{h}{2}f(y_0,t_0)+\frac{h}{2}f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2).\label{eq:ode:ae3}
+\end{align}
+!et
+Note that we have inserted
+equation (ref{eq:ode:ae1}) into equation (ref{eq:ode:ae2}) to arrive at equation (ref{eq:ode:ae3}). The truncation error in this case is, as before:
+!bt
+\begin{align}
+\epsilon&=y(t_0+h)-y_{1}=y(t_0)+y^{\prime}(t_0)h+\frac{1}{2}y^{\prime\prime}(t_0)h^2+\mathcal{O}(h^3)\nonumber\\
+&-\left[y_{0}+\frac{h}{2}f(y_0,t_0)+\frac{h}{2}f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2)\right].\label{eq:ode:ay5}
+\end{align}
+!et
+This equation is slightly more complicated, due to the term involving $f$ inside the last parenthesis, we can use Taylor expansion to expand it about $(y_0,t_0)$:
+!bt
+\begin{align}
+&f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2)=f(y_0,t_0)\nonumber\\
+&+\frac{h}{2}\left[f(y_0,t_0)\left.\frac{\partial f}{\partial y}\right|_{y=y_0,t=t_0}
++\left.\frac{\partial f}{\partial t}\right|_{y=y_0,t=t_0}\right]+\mathcal{O}(h^2).\label{eq:ode:ay2}
+\end{align}
+!et
+It turns out that this equation is related to $y^{\prime\prime}(t_0,y_0)$, which can be seen by differentiating equation (ref{eq:ode:ay}):
+!bt
+\begin{align}
+\frac{d^2y}{dt^2}&=\frac{df(y,t)}{dt}=\frac{\partial f(y,t)}{\partial y}\frac{dy}{dt}+\frac{\partial f(y,t)}{\partial t}
+=\frac{\partial f(y,t)}{\partial y}f(y,t)+\frac{\partial f(y,t)}{\partial t}.\label{eq:ode:ay3}
+\end{align}
+!et
+Hence, equation (ref{eq:ode:ay2}) can be written:
+!bt
+\begin{align}
+f(y_0+\frac{h}{2}f(y_0,t_0),t_0+h/2)=f(y_0,t_0)+\frac{h}{2}y^{\prime\prime}(t_0,y_0),\label{eq:ode:ay4}
+\end{align}
+!et
+hence the truncation error in equation (ref{eq:ode:ay5}) can finally be written:
+!bt
+\begin{align}
+\epsilon=&y(t_1)-y_{1}=\frac{h^2}{4} y^{\prime\prime}(y_0,t_0)=\frac{1}{2}ch^2,\label{eq:ode:ae4}
+\end{align}
+!et
+!esol
+##!bhint
+##"Wolframalpha": "http://wolframalpha.com" can perhaps
+##compute the integral.
+##!ehint
+
+##!bsubex
+##Subexercises are numbered a), b), etc.
+##!esubex
+##!bans 
+##Short answer to subexercise a).
+##!eans
+
+##!bremarks
+##At the very end of the exercise it may be appropriate to summarize
+##and give some perspectives. The text inside the `!bremarks` and `!eremarks`
+##directives is always typeset at the end of the exercise.
+##!eremarks
+
+
+## By default, answers, solutions, and hints are typeset as paragraphs. The command-line arguments --without_answers and 
+## --without_solutions turn off output of answers and solutions, respectively, except for examples.
+## Publish (https://bitbucket.org/logg/publish is used to
+## handle references. The line below specifies the name of
+## the Publish database file (see the doconce manual for details).
+
+##BIBFILE: ../papers.pub
+
+# #endif
+
+===== References =====
+
+BIBFILE: ../papers.pub

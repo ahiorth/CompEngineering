@@ -1,0 +1,48 @@
+
+As stated earlier many models are described by differential equations. Differential equations contains derivatives, and we need to tell the computer how to calculate those. By using a simple transformation, $x\to x+h$ and $c\to x$ (hence $x-c\to h$), Taylors formula in equation (ref{eq:taylor:taylor}) can be written
+!bt
+\begin{equation}
+f(x+h)=f(x)+f^\prime(x)h+\frac{1}{2}f^{\prime\prime}(x)h^2+\cdots.
+label{eq:taylor:t}
+\end{equation}
+!et
+This is useful because this equation contains the derivative of $f(x)$ on the right hand side. To be even more explicit let us truncate the series to a certain power. Remember that you can always do this but we need to replace $x$ with $\eta$ in the last term we choose to keep
+!bt
+\begin{equation}
+f(x+h)=f(x)+f^\prime(x)h+\frac{1}{2}f^{\prime\prime}(\eta)h^2
+label{eq:taylor:t3}
+\end{equation}
+!et
+where $\eta\in[x,x+h]$. Solving this equation with respect to $f^\prime(x)$ gives us
+!bt
+\begin{equation}
+f^\prime(x)=\frac{f(x+h)-f(x)}{h}-\frac{1}{2}f^{\prime\prime}(\eta)h.
+label{eq:taylor:fd}
+\end{equation}
+!et
+Note that if $h\to0$, this expression is equal to the definition of the derivative. The beauty of equation (ref{eq:taylor:fd}) is that it contains an expression for the error we make *when $h$ is not zero*. Equation (ref{eq:taylor:fd}) is usually called the *forward difference* idx{forward difference}. As you might guess, we can also choose to use the *backward difference* idx{backward difference} by simply replacing $h\to-h$. Is equation (ref{eq:taylor:fd}) the only formula for the derivative? The answer is no, and we are going to derive the formula for the *central difference* idx{central difference}, by writing Taylors formula for $x+h$ and $x-h$ up to the third order
+
+!bt
+\begin{align}
+f(x+h)&=f(x)+f^\prime(x)h+\frac{1}{2}f^{\prime\prime}(x)h^2+\frac{1}{3!}f^{(3)}(\eta_1)h^3,   
+label{eq:taylor:c1}\\
+f(x-h)&=f(x)-f^\prime(x)h+\frac{1}{2}f^{\prime\prime}(x)h^2-\frac{1}{3!}f^{(3)}(\eta_2)h^3.
+label{eq:taylor:c2}
+\end{align}
+!et
+where $\eta_1\in[x,x+h]$, and $\eta_2\in[x-h,x]$. Subtracting  equation (ref{eq:taylor:c1}) and (ref{eq:taylor:c2}), we get the following expression for the central difference idx{central difference}
+##!bt WHY IS THIS WRONG????????
+##\begin{equation}
+##f^\prime(x)=\frac{f(x+h)-f(x-h)}{2h} -\frac{h^2}{6}f^{(3)}(\eta),label{eq:taylor:cd}
+##\end{equation}
+##!et
+
+!bt
+\begin{equation}
+f^\prime(x)=\frac{f(x+h)-f(x-h)}{2h} -\frac{h^2}{6}f^{(3)}(\eta),label{eq:taylor:cd}
+\end{equation}
+!et
+
+where $\eta\in[x-h,x+h]$. Note that the error term in this equation is *one order higher* than in equation (ref{eq:taylor:fd}), meaning that it is expected to be more accurate. In figure ref{fig:taylor:fd} there is a graphical interpretation of the finite difference approximations to the derivative. 
+
+FIGURE: [fig-taylor/fd.png, width=400 frac=1.0] A graphical interpretation of the forward and central difference formula. label{fig:taylor:fd}

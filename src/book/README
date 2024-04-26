@@ -1,0 +1,6 @@
+book.do.txt: the entire book (inclusion of individual chapters)
+make.sh: compile book.do.txt to LaTeX/PDF
+make_errata.sh: compile errata document
+pack_Springer.sh: pack all book files for uploading to Springer ftp site
+scripts.py: Python library with many useful scripts (clean, spellcheck, etc.)
+svmonodo.cls, t2do.sty: Springer T2 style files customized for DocOnce

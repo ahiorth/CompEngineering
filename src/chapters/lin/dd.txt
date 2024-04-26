@@ -1,0 +1,9 @@
+!bt
+\begin{align}
+\frac{C_i^{n+1}-C_i^n}{\Delta t}&=\frac{\theta}{h}\left[K_{i+1/2}
+\frac{C^n_{i+1}-C^n_{i}}{h}-K_{i-1/2}\frac{C^n_{i}-C^n_{i-1}}{h}\right]\\
+&\frac{\theta-1}{h}\left[K_{i+1/2}
+\frac{C_{i+1}^{n+1}-C_{i}^{n+1}}{h}-K_{i-1/2}\frac{ C_{i}^{n+1}-C_{i-1}^{n+1}}{h}\right],
+label{eq:lin:co2fv23}
+\end{align}
+!et

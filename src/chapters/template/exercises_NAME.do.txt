@@ -1,0 +1,19 @@
+TITLE: Exercises NAME
+AUTHOR: Aksel Hiorth, Institute for Energy Resources,University of Stavanger
+DATE: today
+
+__Learning objectives__:
+
+o number one
+o number two
+
+======= Exercise: First problem =======
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,20 @@
+TITLE: NAME
+AUTHOR: Aksel Hiorth
+University of Stavanger
+DATE: today
+
+TOC: on
+
+
+# Common Mako variables and functions
+# #include "../mako_code.txt"
+
+# #include "NAME.do.txt"
+
+======= Bibliography =======
+
+## Publish (https://bitbucket.org/logg/publish is used to
+## handle references. The line below specifies the name of
+## the Publish database file (see the doconce manual for details).
+
+BIBFILE: ../papers.pub

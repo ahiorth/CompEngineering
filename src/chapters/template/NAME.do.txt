@@ -1,0 +1,3 @@
+# Here goes the main text.
+# The text may be split into several files and included here
+# via preprocess: # #include "file1.do.txt" etc
