@@ -407,7 +407,7 @@ MathJax.Hub.Config({
 <!-- newcommands_keep.tex -->
 $$
 \newcommand{\no}{\nonumber}
-\newcommand{\co}{\text{CO$_{2}$}}
+\newcommand{\co}{CO$_2$}
 $$
 
 
@@ -648,7 +648,7 @@ therefore we choose the convention of having the first element to start at \( k=
     <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>sin(x)
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">midpoint</span>(f,a,b,N):
-    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #bbbbbb">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
 <span style="color: #BA2121; font-style: italic">    f : function to be integrated on the domain [a,b]</span>
 <span style="color: #BA2121; font-style: italic">    N : number of integration points</span>
 <span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
@@ -752,7 +752,7 @@ Below is a python implementation:
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">trapezoidal</span>(f,a,b,N):
-    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #bbbbbb">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
 <span style="color: #BA2121; font-style: italic">    f : function to be integrated on the domain [a,b]</span>
 <span style="color: #BA2121; font-style: italic">    N : number of integration points</span>
 <span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
@@ -982,7 +982,7 @@ A possible algorithm is then:
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">int_adaptive_trapez2</span>(lower_limit, upper_limit,func,tol):
-    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #bbbbbb">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
 <span style="color: #BA2121; font-style: italic">    adaptive quadrature, integrate a function from lower_limit</span>
 <span style="color: #BA2121; font-style: italic">    to upper_limit within tol*(upper_limit-lower_limit)</span>
 
@@ -1123,7 +1123,7 @@ Below is a Python implementation:
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">int_romberg</span>(func,a, b,tol,show<span style="color: #666666">=</span><span style="color: #008000; font-weight: bold">False</span>):
-    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot; calculates the area of func on the domain [a,b]</span>
+<span style="color: #bbbbbb">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot; calculates the area of func on the domain [a,b]</span>
 <span style="color: #BA2121; font-style: italic">        for the given tol, if show=True the triangular</span>
 <span style="color: #BA2121; font-style: italic">        array of intermediate results are printed &quot;&quot;&quot;</span>
     Nmax <span style="color: #666666">=</span> <span style="color: #666666">100</span>
@@ -1223,7 +1223,7 @@ section uses 20480 and 9069 function evaluations, respectively.
     <span style="color: #008000; font-weight: bold">return</span> (b<span style="color: #666666">-</span>a)<span style="color: #666666">/6*</span>(func(a)<span style="color: #666666">+</span>func(b)<span style="color: #666666">+4*</span>func(m))
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">int_adaptive_simpson</span>(func,a, b,tol):
-    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #bbbbbb">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
 <span style="color: #BA2121; font-style: italic">    adaptive quadrature, integrate a function from a</span>
 <span style="color: #BA2121; font-style: italic">    to b within tol*(b-a) uses simpsons rule</span>
 <span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>

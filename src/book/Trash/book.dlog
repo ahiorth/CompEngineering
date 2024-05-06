@@ -119,44 +119,424 @@ copying from regex "def No" until "def BP"
 copying from regex "def BP" until "def /N"
      file: src-mc/rd.py,lines 33-40 (format: pycod)
 found info about 14 exercises
-figure file fig-ode/rk4_2:
-    can use fig-ode/rk4_2.png for format html
-figure file fig-taylor/func_plot:
-    can use fig-taylor/func_plot.png for format html
-figure file fig-mc/mcint:
-    can use fig-mc/mcint.png for format html
-figure file fig-mc/coin:
-    can use fig-mc/coin.png for format html
-figure file fig-lin/bbc:
-    can use fig-lin/bbc.png for format html
-figure file fig-ode/cstr3:
-    can use fig-ode/cstr3.png for format html
-figure file fig-mc/mci:
-    can use fig-mc/mci.png for format html
-figure file fig-ode/rk4:
-    can use fig-ode/rk4.png for format html
-figure file fig-ode/euler_imp:
-    can use fig-ode/euler_imp.png for format html
-figure file fig-ode/adaptive_euler:
-    can use fig-ode/adaptive_euler.png for format html
-figure file fig-ode/rk2:
-    can use fig-ode/rk2.png for format html
-figure file fig-mc/2Dint:
-    can use fig-mc/2Dint.png for format html
-figure file fig-ode/rk_fig:
-    can use fig-ode/rk_fig.png for format html
 figure file fig-ode/cstr:
     can use fig-ode/cstr.png for format html
-figure file fig-ode/adaptive_rk4:
-    can use fig-ode/adaptive_rk4.png for format html
-figure file fig-python/plt_loop:
-    can use fig-python/plt_loop.png for format html
 figure file fig-ode/euler:
     can use fig-ode/euler.png for format html
-figure file fig-taylor/mac_sin:
-    can use fig-taylor/mac_sin.png for format html
+figure file fig-ode/rk2:
+    can use fig-ode/rk2.png for format html
+figure file fig-ode/rk_fig:
+    can use fig-ode/rk_fig.png for format html
+figure file fig-ode/rk4_2:
+    can use fig-ode/rk4_2.png for format html
+figure file fig-ode/rk4:
+    can use fig-ode/rk4.png for format html
+figure file fig-mc/2Dint:
+    can use fig-mc/2Dint.png for format html
 figure file fig-ode/cstr2:
     can use fig-ode/cstr2.png for format html
+figure file fig-mc/coin:
+    can use fig-mc/coin.png for format html
+figure file fig-taylor/func_plot:
+    can use fig-taylor/func_plot.png for format html
+figure file fig-python/plt_loop:
+    can use fig-python/plt_loop.png for format html
+figure file fig-mc/mcint:
+    can use fig-mc/mcint.png for format html
+figure file fig-ode/adaptive_rk4:
+    can use fig-ode/adaptive_rk4.png for format html
+figure file fig-ode/cstr3:
+    can use fig-ode/cstr3.png for format html
+figure file fig-ode/euler_imp:
+    can use fig-ode/euler_imp.png for format html
+figure file fig-lin/bbc:
+    can use fig-lin/bbc.png for format html
+figure file fig-ode/adaptive_euler:
+    can use fig-ode/adaptive_euler.png for format html
+figure file fig-mc/mci:
+    can use fig-mc/mci.png for format html
+figure file fig-taylor/mac_sin:
+    can use fig-taylor/mac_sin.png for format html
+*** warning: inline math in HTML must have space around <:
+    |a-b|<\epsilon  ->  |a-b| < \epsilon
+*** warning: inline math in HTML must have space around <:
+    |1-b/a|<\epsilon  ->  |1-b/a| < \epsilon
+*** warning: inline math in HTML must have space around <:
+    |\lambda|<1  ->  |\lambda| < 1
+*** warning: inline math in HTML must have space around <:
+    \rho(\mathbf{P})<1  ->  \rho(\mathbf{P}) < 1
+*** warning: inline math in HTML must have space around <:
+    \hat{T}<1  ->  \hat{T} < 1
+*** warning: inline math in HTML must have space around <:
+    T<T_c  ->  T < T_c
+*** warning: inline math in HTML must have space around <:
+    T<T_c  ->  T < T_c
+*** warning: inline math in HTML must have space around <:
+    \mu\in<0,1>  ->  \mu\in < 0,1>
+*** warning: inline math in HTML must have space around <:
+    f(a)\cdot f(b)<0  ->  f(a)\cdot f(b) < 0
+*** warning: inline math in HTML must have space around <:
+    f(a)\cdot f(b)<0  ->  f(a)\cdot f(b) < 0
+*** warning: inline math in HTML must have space around <:
+    f(a)\cdot f(c)<0  ->  f(a)\cdot f(c) < 0
+*** warning: inline math in HTML must have space around <:
+    |I_1-I_2|<15|b-a|\cdot tol  ->  |I_1-I_2| < 15|b-a|\cdot tol
+*** warning: inline math in HTML must have space around <:
+    \Delta t/\tau <1  ->  \Delta t/\tau < 1
+*** warning: math block in HTML must have space around <:
+\begin{equation}
+|g^\prime(x^*)|<1. 
+label{eq:nlin:fpi}
+\end{equation}
+
+    changed to
+\begin{equation}
+|g^\prime(x^*)| < 1. 
+label{eq:nlin:fpi}
+\end{equation}
+
+*** warning: math block in HTML must have space around <:
+\begin{equation}
+U(x)=\begin{cases} \frac{1}{b-a}, \text{ for }x\in[a,b]\\ 
+0, \text{ for } x<a \text{ or }x>b,
+\end{cases}
+label{eq:mc:pdfu}
+\end{equation}
+
+    changed to
+\begin{equation}
+U(x)=\begin{cases} \frac{1}{b-a}, \text{ for }x\in[a,b]\\ 
+0, \text{ for } x < a \text{ or }x>b,
+\end{cases}
+label{eq:mc:pdfu}
+\end{equation}
+
+output in book.html
+running preprocess -DFORMAT=sphinx -DDEVICE=screen -DCHAPTER="chapter" -DBOOK="book" -DAPPENDIX="appendix" book.do.txt > tmp_preprocess__book.do.txt
+running mako on tmp_preprocess__book.do.txt to make tmp_mako__book.do.txt
+mako variables: {'FORMAT': 'sphinx', 'DEVICE': 'screen', 'CHAPTER': 'chapter', 'BOOK': 'book', 'APPENDIX': 'appendix'}
+Translating doconce text in tmp_mako__book.do.txt to sphinx
+
+*** warning: found multi-line caption for fig-lin/heat_grid.png
+
+ Finite difference
+grid for $N=4$. label{fig:nlin:hgrid}
+
+    fix: collected this text to one single line (right?)
+
+*** warning: the total of 1 fixes above should be manually edited in the file!
+    (also note: some of these automatic fixes may not be what you want)
+
+*** warning: found ` (backtick) inside something that looks like emphasize:
+    *Aksel Hiorth, September 2022
+
+TOC: on
+
+!split
+========= Introduction to Python  =========
+label{ch:pyt}
+
+There are plenty of online resources if you want get an overview of Python syntax, such as cite{vanderplas2016whirlwind}, for which the full book is available on "github":"https://github.com/jakevdp/WhirlwindTourOfPython".
+
+In this chapter I will try to focus on the key part of Python that you will need in this book, and maybe more importantly, give some advice on how to write good, reusable, Python code. As you might have discovered tasks can be solved in many different ways in Python. This is clearly a strength because you would most likely be able to solve any task thrown at you. On the other hand it is a weakness, because code can get messy and hard to follow, especially if you solve the same task in different parts of your code using different libraries or syntax.
+
+In this chapter, I will explain how I tend to solve some common tasks, in the process we will also cover some stuff that you should know. If you need more information on each topic below, there are plenty of online sources. 
+
+The code examples are meant as an inspiration, and maybe you do not agree and have solutions that you think are much better. If that is the case, I would love to know, so that I can update this chapter.
+
+!bnotice Speed and readability
+Many people are concerned about speed or execution time. My advice is to focus on readable code, and get the job done. When the code is working, it is very easy to go back and change parts that are slow. Remember that you should test the code on big problems, sometimes the advantage of Numpy or Scipy is not seen before the system is large. You can use the magic commands `%timeit` to check performance of different functions. You can also use "Numba":"https://numba.pydata.org/", which translate python code into optimized machine code. 
+!enotice
+
+======= Personal guidelines  =======
+It is important to have some guidelines when coding, and for Python there are clear style guides called "PEP 8":"https://www.python.org/dev/peps/pep-0008/". Take a look at the official guidelines, and  make some specific rules for yourself, and stick to them. The reason for this is that if you make a large program or library, people will recognize your style and it is easier to understand the code. If you are working in a team, it is even more important - try to agree on some basic rules, for example:
+
+__Code Guidelines:__
+*
+    (backtick inside *...* emphasize is not allowed)
+*** warning: found ` (backtick) inside something that looks like emphasize:
+    *` could lead to conflicts between modules as functions could have the same name in two different modules.
+
+__Work Guidelines:__
+*
+    (backtick inside *...* emphasize is not allowed)
+*** error: heading "=== Higher order derivative ===" is subsubsection and
+    comes after section, but will be treated as subsection in sphinx
+*** error: heading "=== Boundary conditions ===" is subsubsection and
+    comes after section, but will be treated as subsection in sphinx
+*** error: heading "=== The case N=3 ===" is subsubsection and
+    comes after section, but will be treated as subsection in sphinx
+*** warning: missing . , : ) or ? after paragraph heading:
+__Solution__
+copy complete file src-taylor/mac_sin_eps.py (format: pypro)
+copying from regex "def" until "plt.save"
+     file: src-taylor/df2_mod.py,lines 4-40 (format: pycod)
+copying from regex "A = np.array" until "# Back"
+     file: src-lin/nlin_sym.py,lines 36-52 (format: pycod)
+copying from regex "# Back" until "# Back substitution - for loop"
+     file: src-lin/nlin_sym.py,lines 46-52 (format: pycod)
+copying from regex "# Back substitution - for loop" until "print"
+     file: src-lin/nlin_sym.py,lines 52-71 (format: pycod)
+copying from regex "from numpy.linalg" until "#end"
+     file: src-lin/nlin_sym.py,lines 73-75 (format: pycod)
+copying from regex "def OLS" until "def plot"
+     file: src-lin/regr.py,lines 5-32 (format: pycod)
+copying from regex "def OLSM" until "def main"
+     file: src-lin/regr.py,lines 54-66 (format: pycod)
+copying from regex "def iterative" until "#end"
+     file: src-nlin/iterative_simple.py,lines 27-49 (format: pycod)
+copying from regex "def dvdwEOS" until "def dCO2EOS"
+     file: src-nlin/vdw_simple.py,lines 22-35 (format: pycod)
+copying from regex "iterative" until "#end"
+     file: src-nlin/vdw_simple.py,lines 83-94 (format: pycod)
+copying from regex "def bisection" until "#end"
+     file: src-nlin/bisection.py,lines 11-47 (format: pycod)
+copying from regex "def newton" until "#end"
+     file: src-nlin/newton.py,lines 10-34 (format: pycod)
+copying from regex "def gradient_descent" until "#end"
+     file: src-nlin/gradient_descent_nD.py,lines 91-115 (format: pycod)
+copying from regex "x_obs_ = np.array" until "b=gradient_descent"
+     file: src-nlin/gradient_descent_nD.py,lines 14-136 (format: pycod)
+copying from regex "import" until "#%%"
+     file: src-numint/midpoint.py,lines 2-21 (format: pycod)
+copying from regex "def trap" until "N="
+     file: src-numint/trapez.py,lines 7-15 (format: pycod)
+copying from regex "def int_" until "prec"
+     file: src-numint/adaptive_trapez.py,lines 35-97 (format: pycod)
+copying from regex "def int_romberg" until "#end"
+     file: src-numint/romberg.py,lines 8-49 (format: pycod)
+copying from regex "simpson_step" until "Area ="
+     file: src-numint/adaptive_trapez.py,lines 63-90 (format: pycod)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad2.py,lines 6-14 (format: pycod)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad3.py,lines 6-24 (format: pycod)
+copying from regex "def analytical" until "# rest of"
+     file: src-ode/euler.py,lines 4-23 (format: pycod)
+copy complete file src-ode/euler_simple.py (format: pypro)
+copying from regex "def one_step" until "# rest of"
+     file: src-ode/adaptive_euler.py,lines 4-34 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk2.py,lines 4-23 (format: pycod)
+copying from regex "import" until "NN"
+     file: src-mc/pi.py,lines 1-20 (format: pycod)
+copying from regex "import" until "N="
+     file: src-mc/pi2.py,lines 1-18 (format: pycod)
+copying from regex "def mc_nballII" until "def mc_nball_sampling"
+     file: src-mc/hypersphere3.py,lines 69-85 (format: pycod)
+copying from regex "def dd_trapez" until "def mc_n"
+     file: src-mc/hypersphere4.py,lines 64-99 (format: pycod)
+copying from regex "def" until "def hist"
+     file: src-mc/clt.py,lines 4-30 (format: pycod)
+copying from regex "def hist" until "average3"
+     file: src-mc/clt.py,lines 21-22 (format: pycod)
+copying from regex "def average3" until "hist2"
+     file: src-mc/clt.py,lines 17-30 (format: pycod)
+copying from regex "from" until "def No"
+     file: src-mc/rd.py,lines 5-21 (format: pycod)
+copying from regex "def No" until "def BP"
+     file: src-mc/rd.py,lines 21-33 (format: pycod)
+copying from regex "def BP" until "def /N"
+     file: src-mc/rd.py,lines 33-40 (format: pycod)
+found info about 14 exercises
+figure file fig-ode/rk_fig:
+    can use fig-ode/rk_fig.png for format sphinx
+figure file fig-ode/adaptive_rk4:
+    can use fig-ode/adaptive_rk4.png for format sphinx
+figure file fig-ode/rk4:
+    can use fig-ode/rk4.png for format sphinx
+figure file fig-ode/euler:
+    can use fig-ode/euler.png for format sphinx
+figure file fig-ode/cstr:
+    can use fig-ode/cstr.png for format sphinx
+figure file fig-lin/bbc:
+    can use fig-lin/bbc.png for format sphinx
+figure file fig-ode/rk2:
+    can use fig-ode/rk2.png for format sphinx
+figure file fig-taylor/func_plot:
+    can use fig-taylor/func_plot.png for format sphinx
+figure file fig-taylor/mac_sin:
+    can use fig-taylor/mac_sin.png for format sphinx
+figure file fig-mc/coin:
+    can use fig-mc/coin.png for format sphinx
+figure file fig-ode/rk4_2:
+    can use fig-ode/rk4_2.png for format sphinx
+figure file fig-mc/mci:
+    can use fig-mc/mci.png for format sphinx
+figure file fig-ode/cstr2:
+    can use fig-ode/cstr2.png for format sphinx
+figure file fig-ode/euler_imp:
+    can use fig-ode/euler_imp.png for format sphinx
+figure file fig-python/plt_loop:
+    can use fig-python/plt_loop.png for format sphinx
+figure file fig-mc/2Dint:
+    can use fig-mc/2Dint.png for format sphinx
+figure file fig-mc/mcint:
+    can use fig-mc/mcint.png for format sphinx
+figure file fig-ode/cstr3:
+    can use fig-ode/cstr3.png for format sphinx
+figure file fig-ode/adaptive_euler:
+    can use fig-ode/adaptive_euler.png for format sphinx
+output in book.rst
+running preprocess -DFORMAT=html -DDEVICE=screen -DCHAPTER="chapter" -DBOOK="book" -DAPPENDIX="appendix" book.do.txt > tmp_preprocess__book.do.txt
+running mako on tmp_preprocess__book.do.txt to make tmp_mako__book.do.txt
+mako variables: {'FORMAT': 'html', 'DEVICE': 'screen', 'CHAPTER': 'chapter', 'BOOK': 'book', 'APPENDIX': 'appendix'}
+Translating doconce text in tmp_mako__book.do.txt to html
+
+*** warning: found multi-line caption for fig-lin/heat_grid.png
+
+ Finite difference
+grid for $N=4$. label{fig:nlin:hgrid}
+
+    fix: collected this text to one single line (right?)
+
+*** warning: the total of 1 fixes above should be manually edited in the file!
+    (also note: some of these automatic fixes may not be what you want)
+
+*** warning: found ` (backtick) inside something that looks like emphasize:
+    *Aksel Hiorth, September 2022
+
+TOC: on
+
+!split
+========= Introduction to Python  =========
+label{ch:pyt}
+
+There are plenty of online resources if you want get an overview of Python syntax, such as cite{vanderplas2016whirlwind}, for which the full book is available on "github":"https://github.com/jakevdp/WhirlwindTourOfPython".
+
+In this chapter I will try to focus on the key part of Python that you will need in this book, and maybe more importantly, give some advice on how to write good, reusable, Python code. As you might have discovered tasks can be solved in many different ways in Python. This is clearly a strength because you would most likely be able to solve any task thrown at you. On the other hand it is a weakness, because code can get messy and hard to follow, especially if you solve the same task in different parts of your code using different libraries or syntax.
+
+In this chapter, I will explain how I tend to solve some common tasks, in the process we will also cover some stuff that you should know. If you need more information on each topic below, there are plenty of online sources. 
+
+The code examples are meant as an inspiration, and maybe you do not agree and have solutions that you think are much better. If that is the case, I would love to know, so that I can update this chapter.
+
+!bnotice Speed and readability
+Many people are concerned about speed or execution time. My advice is to focus on readable code, and get the job done. When the code is working, it is very easy to go back and change parts that are slow. Remember that you should test the code on big problems, sometimes the advantage of Numpy or Scipy is not seen before the system is large. You can use the magic commands `%timeit` to check performance of different functions. You can also use "Numba":"https://numba.pydata.org/", which translate python code into optimized machine code. 
+!enotice
+
+======= Personal guidelines  =======
+It is important to have some guidelines when coding, and for Python there are clear style guides called "PEP 8":"https://www.python.org/dev/peps/pep-0008/". Take a look at the official guidelines, and  make some specific rules for yourself, and stick to them. The reason for this is that if you make a large program or library, people will recognize your style and it is easier to understand the code. If you are working in a team, it is even more important - try to agree on some basic rules, for example:
+
+__Code Guidelines:__
+*
+    (backtick inside *...* emphasize is not allowed)
+*** warning: found ` (backtick) inside something that looks like emphasize:
+    *` could lead to conflicts between modules as functions could have the same name in two different modules.
+
+__Work Guidelines:__
+*
+    (backtick inside *...* emphasize is not allowed)
+*** warning: missing . , : ) or ? after paragraph heading:
+__Solution__
+copy complete file src-taylor/mac_sin_eps.py (format: pypro)
+copying from regex "def" until "plt.save"
+     file: src-taylor/df2_mod.py,lines 4-40 (format: pycod)
+copying from regex "A = np.array" until "# Back"
+     file: src-lin/nlin_sym.py,lines 36-52 (format: pycod)
+copying from regex "# Back" until "# Back substitution - for loop"
+     file: src-lin/nlin_sym.py,lines 46-52 (format: pycod)
+copying from regex "# Back substitution - for loop" until "print"
+     file: src-lin/nlin_sym.py,lines 52-71 (format: pycod)
+copying from regex "from numpy.linalg" until "#end"
+     file: src-lin/nlin_sym.py,lines 73-75 (format: pycod)
+copying from regex "def OLS" until "def plot"
+     file: src-lin/regr.py,lines 5-32 (format: pycod)
+copying from regex "def OLSM" until "def main"
+     file: src-lin/regr.py,lines 54-66 (format: pycod)
+copying from regex "def iterative" until "#end"
+     file: src-nlin/iterative_simple.py,lines 27-49 (format: pycod)
+copying from regex "def dvdwEOS" until "def dCO2EOS"
+     file: src-nlin/vdw_simple.py,lines 22-35 (format: pycod)
+copying from regex "iterative" until "#end"
+     file: src-nlin/vdw_simple.py,lines 83-94 (format: pycod)
+copying from regex "def bisection" until "#end"
+     file: src-nlin/bisection.py,lines 11-47 (format: pycod)
+copying from regex "def newton" until "#end"
+     file: src-nlin/newton.py,lines 10-34 (format: pycod)
+copying from regex "def gradient_descent" until "#end"
+     file: src-nlin/gradient_descent_nD.py,lines 91-115 (format: pycod)
+copying from regex "x_obs_ = np.array" until "b=gradient_descent"
+     file: src-nlin/gradient_descent_nD.py,lines 14-136 (format: pycod)
+copying from regex "import" until "#%%"
+     file: src-numint/midpoint.py,lines 2-21 (format: pycod)
+copying from regex "def trap" until "N="
+     file: src-numint/trapez.py,lines 7-15 (format: pycod)
+copying from regex "def int_" until "prec"
+     file: src-numint/adaptive_trapez.py,lines 35-97 (format: pycod)
+copying from regex "def int_romberg" until "#end"
+     file: src-numint/romberg.py,lines 8-49 (format: pycod)
+copying from regex "simpson_step" until "Area ="
+     file: src-numint/adaptive_trapez.py,lines 63-90 (format: pycod)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad2.py,lines 6-14 (format: pycod)
+copying from regex "def int_" until "a=0"
+     file: src-numint/gaussquad3.py,lines 6-24 (format: pycod)
+copying from regex "def analytical" until "# rest of"
+     file: src-ode/euler.py,lines 4-23 (format: pycod)
+copy complete file src-ode/euler_simple.py (format: pypro)
+copying from regex "def one_step" until "# rest of"
+     file: src-ode/adaptive_euler.py,lines 4-34 (format: pycod)
+copying from regex "def fm" until "# rest"
+     file: src-ode/rk2.py,lines 4-23 (format: pycod)
+copying from regex "import" until "NN"
+     file: src-mc/pi.py,lines 1-20 (format: pycod)
+copying from regex "import" until "N="
+     file: src-mc/pi2.py,lines 1-18 (format: pycod)
+copying from regex "def mc_nballII" until "def mc_nball_sampling"
+     file: src-mc/hypersphere3.py,lines 69-85 (format: pycod)
+copying from regex "def dd_trapez" until "def mc_n"
+     file: src-mc/hypersphere4.py,lines 64-99 (format: pycod)
+copying from regex "def" until "def hist"
+     file: src-mc/clt.py,lines 4-30 (format: pycod)
+copying from regex "def hist" until "average3"
+     file: src-mc/clt.py,lines 21-22 (format: pycod)
+copying from regex "def average3" until "hist2"
+     file: src-mc/clt.py,lines 17-30 (format: pycod)
+copying from regex "from" until "def No"
+     file: src-mc/rd.py,lines 5-21 (format: pycod)
+copying from regex "def No" until "def BP"
+     file: src-mc/rd.py,lines 21-33 (format: pycod)
+copying from regex "def BP" until "def /N"
+     file: src-mc/rd.py,lines 33-40 (format: pycod)
+found info about 14 exercises
+figure file fig-ode/adaptive_rk4:
+    can use fig-ode/adaptive_rk4.png for format html
+figure file fig-lin/bbc:
+    can use fig-lin/bbc.png for format html
+figure file fig-taylor/mac_sin:
+    can use fig-taylor/mac_sin.png for format html
+figure file fig-ode/euler:
+    can use fig-ode/euler.png for format html
+figure file fig-ode/cstr:
+    can use fig-ode/cstr.png for format html
+figure file fig-mc/mcint:
+    can use fig-mc/mcint.png for format html
+figure file fig-mc/2Dint:
+    can use fig-mc/2Dint.png for format html
+figure file fig-python/plt_loop:
+    can use fig-python/plt_loop.png for format html
+figure file fig-ode/rk2:
+    can use fig-ode/rk2.png for format html
+figure file fig-ode/euler_imp:
+    can use fig-ode/euler_imp.png for format html
+figure file fig-mc/coin:
+    can use fig-mc/coin.png for format html
+figure file fig-taylor/func_plot:
+    can use fig-taylor/func_plot.png for format html
+figure file fig-ode/rk_fig:
+    can use fig-ode/rk_fig.png for format html
+figure file fig-ode/cstr3:
+    can use fig-ode/cstr3.png for format html
+figure file fig-ode/adaptive_euler:
+    can use fig-ode/adaptive_euler.png for format html
+figure file fig-ode/rk4:
+    can use fig-ode/rk4.png for format html
+figure file fig-ode/rk4_2:
+    can use fig-ode/rk4_2.png for format html
+figure file fig-ode/cstr2:
+    can use fig-ode/cstr2.png for format html
+figure file fig-mc/mci:
+    can use fig-mc/mci.png for format html
 *** warning: inline math in HTML must have space around <:
     |a-b|<\epsilon  ->  |a-b| < \epsilon
 *** warning: inline math in HTML must have space around <:
@@ -341,40 +721,40 @@ copying from regex "def BP" until "def /N"
 found info about 14 exercises
 figure file fig-ode/adaptive_rk4:
     can use fig-ode/adaptive_rk4.png for format sphinx
-figure file fig-taylor/func_plot:
-    can use fig-taylor/func_plot.png for format sphinx
-figure file fig-ode/cstr3:
-    can use fig-ode/cstr3.png for format sphinx
-figure file fig-ode/euler_imp:
-    can use fig-ode/euler_imp.png for format sphinx
-figure file fig-mc/mcint:
-    can use fig-mc/mcint.png for format sphinx
 figure file fig-ode/euler:
     can use fig-ode/euler.png for format sphinx
 figure file fig-ode/rk4:
     can use fig-ode/rk4.png for format sphinx
-figure file fig-lin/bbc:
-    can use fig-lin/bbc.png for format sphinx
-figure file fig-python/plt_loop:
-    can use fig-python/plt_loop.png for format sphinx
-figure file fig-ode/rk_fig:
-    can use fig-ode/rk_fig.png for format sphinx
 figure file fig-mc/coin:
     can use fig-mc/coin.png for format sphinx
-figure file fig-ode/cstr2:
-    can use fig-ode/cstr2.png for format sphinx
+figure file fig-ode/rk_fig:
+    can use fig-ode/rk_fig.png for format sphinx
+figure file fig-mc/mcint:
+    can use fig-mc/mcint.png for format sphinx
 figure file fig-taylor/mac_sin:
     can use fig-taylor/mac_sin.png for format sphinx
 figure file fig-ode/rk4_2:
     can use fig-ode/rk4_2.png for format sphinx
-figure file fig-mc/mci:
-    can use fig-mc/mci.png for format sphinx
+figure file fig-ode/rk2:
+    can use fig-ode/rk2.png for format sphinx
+figure file fig-ode/adaptive_euler:
+    can use fig-ode/adaptive_euler.png for format sphinx
+figure file fig-ode/cstr2:
+    can use fig-ode/cstr2.png for format sphinx
+figure file fig-python/plt_loop:
+    can use fig-python/plt_loop.png for format sphinx
+figure file fig-ode/cstr3:
+    can use fig-ode/cstr3.png for format sphinx
+figure file fig-ode/euler_imp:
+    can use fig-ode/euler_imp.png for format sphinx
 figure file fig-mc/2Dint:
     can use fig-mc/2Dint.png for format sphinx
 figure file fig-ode/cstr:
     can use fig-ode/cstr.png for format sphinx
-figure file fig-ode/adaptive_euler:
-    can use fig-ode/adaptive_euler.png for format sphinx
-figure file fig-ode/rk2:
-    can use fig-ode/rk2.png for format sphinx
+figure file fig-taylor/func_plot:
+    can use fig-taylor/func_plot.png for format sphinx
+figure file fig-lin/bbc:
+    can use fig-lin/bbc.png for format sphinx
+figure file fig-mc/mci:
+    can use fig-mc/mci.png for format sphinx
 output in book.rst

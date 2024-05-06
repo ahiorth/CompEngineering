@@ -407,7 +407,7 @@ MathJax.Hub.Config({
 <!-- newcommands_keep.tex -->
 $$
 \newcommand{\no}{\nonumber}
-\newcommand{\co}{\text{CO$_{2}$}}
+\newcommand{\co}{CO$_2$}
 $$
 
 
@@ -1340,7 +1340,7 @@ end up changing the function definitions as your program develops.
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">derivative_of_sine</span>(x,delta_x):
-    <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39; returns the derivative of sin x &#39;&#39;&#39;</span>
+<span style="color: #bbbbbb">    </span><span style="color: #BA2121; font-style: italic">&#39;&#39;&#39; returns the derivative of sin x &#39;&#39;&#39;</span>
     <span style="color: #008000; font-weight: bold">return</span> (np<span style="color: #666666">.</span>sin(x<span style="color: #666666">+</span>delta_x)<span style="color: #666666">-</span>np<span style="color: #666666">.</span>sin(x))<span style="color: #666666">/</span>delta_x
 
 <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;The derivative of sinx at x=0 is :&#39;</span>, derivative_of_sine(<span style="color: #666666">0</span>,<span style="color: #666666">1e-3</span>))
@@ -1398,7 +1398,7 @@ If we would like to calculate the derivative at multiple points, that is straigh
     <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>sin(x)
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">df</span>(x,f,delta_x<span style="color: #666666">=1e-3</span>):
-    <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39; returns the derivative of f &#39;&#39;&#39;</span>
+<span style="color: #bbbbbb">    </span><span style="color: #BA2121; font-style: italic">&#39;&#39;&#39; returns the derivative of f &#39;&#39;&#39;</span>
     <span style="color: #008000; font-weight: bold">return</span> (f(x<span style="color: #666666">+</span>delta_x)<span style="color: #666666">-</span>f(x))<span style="color: #666666">/</span>delta_x
 <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Derivative of sinx at x=0 is :&#39;</span>, df(<span style="color: #666666">0</span>,f))
 </pre>
@@ -1425,7 +1425,7 @@ If we would like to calculate the derivative at multiple points, that is straigh
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">s</span>(t,s0,v0,a):
-    <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;</span>
+<span style="color: #bbbbbb">    </span><span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;</span>
 <span style="color: #BA2121; font-style: italic">    t  : time</span>
 <span style="color: #BA2121; font-style: italic">    s0 : initial starting point</span>
 <span style="color: #BA2121; font-style: italic">    v0 : initial velocity</span>
@@ -1483,7 +1483,7 @@ If we would like to calculate the derivative at multiple points, that is straigh
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">df</span>(x,f,<span style="color: #666666">*</span>args,delta_x<span style="color: #666666">=1e-3</span>):
-    <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39; returns the derivative of f &#39;&#39;&#39;</span>
+<span style="color: #bbbbbb">    </span><span style="color: #BA2121; font-style: italic">&#39;&#39;&#39; returns the derivative of f &#39;&#39;&#39;</span>
     <span style="color: #008000; font-weight: bold">return</span> (f(x<span style="color: #666666">+</span>delta_x,<span style="color: #666666">*</span>args)<span style="color: #666666">-</span>f(x,<span style="color: #666666">*</span>args))<span style="color: #666666">/</span>delta_x
 </pre>
 </div>
@@ -3734,7 +3734,7 @@ So far we have just accessed the columns directly, but it is very quick to write
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">get_column_from_dataframe</span>(name,df):
-    <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;</span>
+<span style="color: #bbbbbb">    </span><span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;</span>
 <span style="color: #BA2121; font-style: italic">    name: name of column</span>
 <span style="color: #BA2121; font-style: italic">    df: Pandas DataFrame</span>
 <span style="color: #BA2121; font-style: italic">    returns: column if found, and empty otherwise </span>
@@ -3799,7 +3799,7 @@ get_column_from_dataframe(<span style="color: #BA2121">&#39;TIME&#39;</span>,df)
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">get_column_from_dataframe_v2</span>(name,df):
-    <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;</span>
+<span style="color: #bbbbbb">    </span><span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;</span>
 <span style="color: #BA2121; font-style: italic">    name: name of column</span>
 <span style="color: #BA2121; font-style: italic">    df: Pandas DataFrame</span>
 <span style="color: #BA2121; font-style: italic">    returns: column if found, and empty otherwise </span>
@@ -3838,7 +3838,7 @@ get_column_from_dataframe_v2(<span style="color: #BA2121">&#39;TIME2&#39;</span>
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">get_column_from_dataframe_v3</span>(name,df):
-    <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;</span>
+<span style="color: #bbbbbb">    </span><span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;</span>
 <span style="color: #BA2121; font-style: italic">    name: name of column (case insensitive)</span>
 <span style="color: #BA2121; font-style: italic">    df: Pandas DataFrame</span>
 <span style="color: #BA2121; font-style: italic">    returns: column if found, and empty otherwise </span>
@@ -3878,7 +3878,7 @@ get_column_from_dataframe_v3(<span style="color: #BA2121">&#39;time&#39;</span>,
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">get_col_index</span>(name,df):
-    <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;</span>
+<span style="color: #bbbbbb">    </span><span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;</span>
 <span style="color: #BA2121; font-style: italic">    name: name of column (case insensitive)</span>
 <span style="color: #BA2121; font-style: italic">    df: Pandas DataFrame</span>
 <span style="color: #BA2121; font-style: italic">    returns: pos if exists, and -1 otherwise </span>
@@ -3893,7 +3893,7 @@ get_column_from_dataframe_v3(<span style="color: #BA2121">&#39;time&#39;</span>,
         <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">-1</span>
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">get_column_from_dataframe_v4</span>(name,df):
-    <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;</span>
+<span style="color: #bbbbbb">    </span><span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;</span>
 <span style="color: #BA2121; font-style: italic">    name: name of column (case insensitive)</span>
 <span style="color: #BA2121; font-style: italic">    df: Pandas DataFrame</span>
 <span style="color: #BA2121; font-style: italic">    returns: column if found, and empty otherwise </span>
@@ -3905,7 +3905,7 @@ get_column_from_dataframe_v3(<span style="color: #BA2121">&#39;time&#39;</span>,
         <span style="color: #008000; font-weight: bold">return</span> pd<span style="color: #666666">.</span>Series(dtype<span style="color: #666666">=</span><span style="color: #008000">object</span>)
         
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">get_rows_from_dataframe</span>(name,df,col<span style="color: #666666">=</span><span style="color: #BA2121">&#39;LOCATION&#39;</span>):
-    <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;</span>
+<span style="color: #bbbbbb">    </span><span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;</span>
 <span style="color: #BA2121; font-style: italic">    name: name of rows (case insensitive)</span>
 <span style="color: #BA2121; font-style: italic">    df: Pandas DataFrame</span>
 <span style="color: #BA2121; font-style: italic">    col: name of column to use as logical test</span>

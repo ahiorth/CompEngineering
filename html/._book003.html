@@ -407,7 +407,7 @@ MathJax.Hub.Config({
 <!-- newcommands_keep.tex -->
 $$
 \newcommand{\no}{\nonumber}
-\newcommand{\co}{\text{CO$_{2}$}}
+\newcommand{\co}{CO$_2$}
 $$
 
 
@@ -872,23 +872,23 @@ The derivative of \( \sin x \) is \( \cos x \), we can calculate the numerical d
   <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
     <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>sin(x)
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">fd</span>(f,x,h):
-    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot; f&#39;(x) forward difference &quot;&quot;&quot;</span>
+<span style="color: #bbbbbb">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot; f&#39;(x) forward difference &quot;&quot;&quot;</span>
     <span style="color: #008000; font-weight: bold">return</span> (f(x<span style="color: #666666">+</span>h)<span style="color: #666666">-</span>f(x))<span style="color: #666666">/</span>h
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">fc</span>(f,x,h):
-    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot; f&#39;(x) central difference &quot;&quot;&quot;</span>
+<span style="color: #bbbbbb">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot; f&#39;(x) central difference &quot;&quot;&quot;</span>
     <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">0.5*</span>(f(x<span style="color: #666666">+</span>h)<span style="color: #666666">-</span>f(x<span style="color: #666666">-</span>h))<span style="color: #666666">/</span>h
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">fdd</span>(f,x,h):
-    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot; f&#39;&#39;(x) second order derivative &quot;&quot;&quot;</span>
+<span style="color: #bbbbbb">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot; f&#39;&#39;(x) second order derivative &quot;&quot;&quot;</span>
     <span style="color: #008000; font-weight: bold">return</span> (f(x<span style="color: #666666">+</span>h)<span style="color: #666666">+</span>f(x<span style="color: #666666">-</span>h)<span style="color: #666666">-2*</span>f(x))<span style="color: #666666">/</span>(h<span style="color: #666666">*</span>h)
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">fd3</span>(f,x,h):
-    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot; f&#39;&#39;&#39;(x) third order derivative &quot;&quot;&quot;</span>
+<span style="color: #bbbbbb">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot; f&#39;&#39;&#39;(x) third order derivative &quot;&quot;&quot;</span>
     <span style="color: #008000; font-weight: bold">return</span> (<span style="color: #666666">2*</span>f(x<span style="color: #666666">-</span>h)<span style="color: #666666">-2*</span>f(x<span style="color: #666666">+</span>h)<span style="color: #666666">-</span>f(x<span style="color: #666666">-2*</span>h)<span style="color: #666666">+</span>f(x<span style="color: #666666">+2*</span>h))<span style="color: #666666">/</span>(<span style="color: #666666">2*</span>h<span style="color: #666666">*</span>h<span style="color: #666666">*</span>h)
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">fd_4</span>(f,x,h):
-    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot; f&#39;(x) fourth order &quot;&quot;&quot;</span>
+<span style="color: #bbbbbb">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot; f&#39;(x) fourth order &quot;&quot;&quot;</span>
     <span style="color: #008000; font-weight: bold">return</span> (<span style="color: #666666">8*</span>f(x<span style="color: #666666">+</span>h)<span style="color: #666666">-8*</span>f(x<span style="color: #666666">-</span>h)<span style="color: #666666">-</span>f(x<span style="color: #666666">+2*</span>h)<span style="color: #666666">+</span>f(x<span style="color: #666666">-2*</span>h))<span style="color: #666666">/</span>(<span style="color: #666666">12*</span>h)
 x<span style="color: #666666">=1</span>
 h<span style="color: #666666">=</span>np<span style="color: #666666">.</span>logspace(<span style="color: #666666">-15</span>,<span style="color: #666666">0.1</span>,<span style="color: #666666">10</span>)

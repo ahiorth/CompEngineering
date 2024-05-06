@@ -40,7 +40,7 @@ theme=alabaster
 system doconce format sphinx $name $opt --sphinx_keep_splits
 system doconce replace 'width=400' 'width=800' $name.html
 system doconce split_rst $name
-system doconce  sphinx_dir theme=$theme dirname=sphinx-${theme} $name
+
 
 
 #system python my_automake_sphinx.py

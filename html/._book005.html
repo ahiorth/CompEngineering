@@ -407,7 +407,7 @@ MathJax.Hub.Config({
 <!-- newcommands_keep.tex -->
 $$
 \newcommand{\no}{\nonumber}
-\newcommand{\co}{\text{CO$_{2}$}}
+\newcommand{\co}{CO$_2$}
 $$
 
 
@@ -793,7 +793,7 @@ $$
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">iterative</span>(x,g,prec<span style="color: #666666">=1e-8</span>, MAXIT<span style="color: #666666">=1000</span>):
-    <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;Approximate solution of x=g(x) by fixed point iterations.</span>
+<span style="color: #bbbbbb">    </span><span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;Approximate solution of x=g(x) by fixed point iterations.</span>
 <span style="color: #BA2121; font-style: italic">    x : starting point for iterations </span>
 <span style="color: #BA2121; font-style: italic">    eps : desired precision</span>
 <span style="color: #BA2121; font-style: italic">    Returns x when x does not change more than prec</span>
@@ -1121,7 +1121,7 @@ Below is an implementation of the bisection method.
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">bisection</span>(f,a,b,PREC<span style="color: #666666">=1e-8</span>,MAXIT<span style="color: #666666">=100</span>):
-    <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;Approximate solution of f(x)=0 on interval [a,b] by bisection.</span>
+<span style="color: #bbbbbb">    </span><span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;Approximate solution of f(x)=0 on interval [a,b] by bisection.</span>
 
 <span style="color: #BA2121; font-style: italic">    f   : f(x)=0.</span>
 <span style="color: #BA2121; font-style: italic">    a,b : brackets the root f(a)*f(b) has to be negative </span>
@@ -1233,7 +1233,7 @@ $$
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">newton</span>(f,x, prec<span style="color: #666666">=1e-8</span>,MAXIT<span style="color: #666666">=500</span>):
-    <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;Approximate solution of f(x)=0 by Newtons method.</span>
+<span style="color: #bbbbbb">    </span><span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;Approximate solution of f(x)=0 by Newtons method.</span>
 <span style="color: #BA2121; font-style: italic">    The derivative of the function is calculated numerically</span>
 <span style="color: #BA2121; font-style: italic">    f   : f(x)=0.</span>
 <span style="color: #BA2121; font-style: italic">    x   : starting point  </span>
@@ -1566,7 +1566,7 @@ $$
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">gradient_descent</span>(f,x,df, g<span style="color: #666666">=.001</span>, prec<span style="color: #666666">=1e-8</span>,MAXIT<span style="color: #666666">=10</span>):
-    <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;Minimize f(x) by gradient descent.</span>
+<span style="color: #bbbbbb">    </span><span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;Minimize f(x) by gradient descent.</span>
 <span style="color: #BA2121; font-style: italic">    f   : min(f(x))</span>
 <span style="color: #BA2121; font-style: italic">    x   : starting point </span>
 <span style="color: #BA2121; font-style: italic">    df  : derivative of f(x)</span>
@@ -1658,7 +1658,7 @@ y_obs_ <span style="color: #666666">=</span> np<span style="color: #666666">.</s
 
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">newton_rapson</span>(x,f,J<span style="color: #666666">=</span><span style="color: #008000; font-weight: bold">None</span>, jacobian<span style="color: #666666">=</span><span style="color: #008000; font-weight: bold">False</span>, prec<span style="color: #666666">=1e-8</span>,MAXIT<span style="color: #666666">=100</span>):
-    <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;Approximate solution of f(x)=0 by Newtons method.</span>
+<span style="color: #bbbbbb">    </span><span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;Approximate solution of f(x)=0 by Newtons method.</span>
 <span style="color: #BA2121; font-style: italic">    The derivative of the function is calculated numerically</span>
 <span style="color: #BA2121; font-style: italic">    f   : f(x)=0.</span>
 <span style="color: #BA2121; font-style: italic">    J   : Jacobian</span>
@@ -1690,7 +1690,7 @@ y_obs_ <span style="color: #666666">=</span> np<span style="color: #666666">.</s
 
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">gradient_descent</span>(f,x,df, g<span style="color: #666666">=.001</span>, prec<span style="color: #666666">=1e-8</span>,MAXIT<span style="color: #666666">=10</span>):
-    <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;Minimize f(x) by gradient descent.</span>
+<span style="color: #bbbbbb">    </span><span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;Minimize f(x) by gradient descent.</span>
 <span style="color: #BA2121; font-style: italic">    f   : min(f(x))</span>
 <span style="color: #BA2121; font-style: italic">    x   : starting point </span>
 <span style="color: #BA2121; font-style: italic">    df  : derivative of f(x)</span>

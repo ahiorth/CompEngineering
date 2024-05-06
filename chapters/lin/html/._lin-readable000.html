@@ -124,7 +124,7 @@ MathJax.Hub.Config({
 <!-- newcommands_keep.tex -->
 $$
 \newcommand{\no}{\nonumber}
-\newcommand{\co}{\text{CO$_{2}$}}
+\newcommand{\co}{CO$_2$}
 $$
 
 
@@ -193,7 +193,7 @@ $$
 <br>
 <p>University of Stavanger
 <center>
-<h4>Aug 14, 2023</h4>
+<h4>May 6, 2024</h4>
 </center> <!-- date -->
 <br>
 </p>
@@ -227,8 +227,6 @@ $$
 <p><a href="#references"> References </a></p>
 </div>
 <br>
-
-<!-- Common Mako variables and functions -->
 
 <p>Most problems in nature are nonlinear. That means that the system response is not proportional to the system variables, e.g. doubling the CO$_2$ concentration in the atmosphere does not lead to a doubling of the earth surface temperature. Still, linear solvers lies at the heart of all grid based models describing e.g. the earths climate. The reason is that although the <em>global</em> model is nonlinear, the model can be formulated <em>locally</em> as a linear model. Typically the simulation code solves the nonlinear problem through a series of steps where each step is a solution of a linear problem. The topic of solving linear systems of equations have been extensively studied, and sophisticated linear equation solving packages have been developed. Python uses functions from the <a href="https://en.wikipedia.org/wiki/LAPACK" target="_self">LAPACK</a> library.</p>
 
@@ -996,7 +994,7 @@ $$
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">solve_jacobi</span>(A,b,x<span style="color: #666666">=-1</span>,w<span style="color: #666666">=1</span>,max_iter<span style="color: #666666">=1000</span>,EPS<span style="color: #666666">=1e-6</span>):
-    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #bbbbbb">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
 <span style="color: #BA2121; font-style: italic">    Solves the linear system Ax=b using the Jacobian method, stops if</span>
 <span style="color: #BA2121; font-style: italic">    solution is not found after max_iter or if solution changes less </span>
 <span style="color: #BA2121; font-style: italic">    than EPS</span>
@@ -1049,7 +1047,7 @@ $$
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">solve_GS</span>(A,b,x<span style="color: #666666">=-1</span>,max_iter<span style="color: #666666">=1000</span>,EPS<span style="color: #666666">=1e-6</span>):
-    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #bbbbbb">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
 <span style="color: #BA2121; font-style: italic">    Solves the linear system Ax=b using the Gauss-Seidel method, stops if</span>
 <span style="color: #BA2121; font-style: italic">    solution is not found after max_iter or if solution changes less </span>
 <span style="color: #BA2121; font-style: italic">    than EPS</span>
@@ -1653,7 +1651,7 @@ y <span style="color: #666666">=</span> np<span style="color: #666666">.</span>a
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">analytical</span>(x):
     <span style="color: #008000; font-weight: bold">return</span> beta<span style="color: #666666">*</span>(<span style="color: #666666">1-</span>x<span style="color: #666666">*</span>x)<span style="color: #666666">/2+</span>Tb
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">tri_diag</span>(a, b, c, k1<span style="color: #666666">=-1</span>, k2<span style="color: #666666">=0</span>, k3<span style="color: #666666">=1</span>):
-    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot; a,b,c diagonal terms</span>
+<span style="color: #bbbbbb">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot; a,b,c diagonal terms</span>
 <span style="color: #BA2121; font-style: italic">        default k-values for 4x4 matrix:</span>
 <span style="color: #BA2121; font-style: italic">        | b0 c0 0  0 |</span>
 <span style="color: #BA2121; font-style: italic">        | a0 b1 c1 0 |</span>

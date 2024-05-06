@@ -14,7 +14,7 @@ Modeling and Computational Engineering
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 :Authors: Aksel Hiorth, University of Stavanger
-:Date: Apr 23, 2024
+:Date: May 6, 2024
 
 *Summary.* (Work in Progress) The purpose of this document is to explain how computers solve mathematical models.
 Many of the most common numerical methods are presented, we show how to implement them in Python, and discuss their limitations.
