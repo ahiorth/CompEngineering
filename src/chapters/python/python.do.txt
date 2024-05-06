@@ -1,6 +1,6 @@
 There are plenty of online resources if you want get an overview of Python syntax, such as cite{vanderplas2016whirlwind}, for which the full book is available on "github":"https://github.com/jakevdp/WhirlwindTourOfPython".
 
-In this chapter I will try to focus on the key part of Python that you will need in this book, and maybe more importantly, give some advice on how to write good, reusable, Python code. As you might have discovered tasks can be solved in many different ways in Python. This is clearly a strength because you would most likely be able to solve any task thrown at you. On the other hand it is a weakness, because code can get messy and hard to follow, especially if you solve the same task in different parts of your code using different libraries or syntax.
+In this chapter I will try to focus on the key part of Python that you will need in this course, and maybe more importantly, give some advice on how to write good, reusable, Python code. As you might have discovered, tasks can be solved in many different ways in Python. This is clearly a strength because you would most likely be able to solve any task thrown at you. On the other hand it is a weakness, because code can get messy and hard to follow, especially if you solve the same task in different parts of your code using different libraries or syntax.
 
 In this chapter, I will explain how I tend to solve some common tasks, in the process we will also cover some stuff that you should know. If you need more information on each topic below, there are plenty of online sources. 
 
@@ -38,9 +38,9 @@ Currently my favorite editor is "vscode":"https://code.visualstudio.com/", it ca
 
 ======= Types in Python =======
 idx{types}
-In Python you do not need to define types as in a compiled language. In many ways one can say that Python only has *one* type.  To not define types is generally an advantage as it lets you write code with fewer lines, and it is easier to write functions that will work with any kind of type. As an example, in the programming language C, if you want to write a function that lets you add two numbers, you have to write one version if the arguments are integers and one version if the arguments are floats.
+In Python you do not need to define types as in a compiled language. In many ways one can say that Python works as if there is only *one* type.  To not define types is generally an advantage as it lets you write code with fewer lines, and it is easier to write functions that will work with any kind of type. As an example, in the programming language C, if you want to write a function that lets you add two numbers, you have to write one version if the arguments are integers and one version if the arguments are floats.
 
-The way that Python store and organize data is called a data model, and it is well described in the "official documentation":"https://docs.python.org/3/reference/datamodel.html". The important point is that all data in Python is an object or a relation between objects. The `is` operator can be used to check if two objects have the same identity, that means they are the same object. The `id` operator gives an unique integer value for the object, and if two objects have the same id number they are the same object, e.g.
+The way that Python store and organize data is called a data model, and it is well described in the "official documentation":"https://docs.python.org/3/reference/datamodel.html". The important point is that all data in Python is an object or a relation between objects. The `is` operator can be used to check if two objects have the same identity, that means they are the same object. The `id` method returns an unique integer value for the object, and if two objects have the same id number they are the same object, e.g.
 !bc pypro
 y=10
 x=y
@@ -48,13 +48,13 @@ x is y # gives true
 print(id(x))
 print(id(y)) # prints the same integer as id(x)
 !ec
-For those familiar with C or C++, one would first have to define `x` and `y` as the type `int` and then they would already have a different place in memory and they can *never* be the same (even if they contain the same number). We will return to this point in more detail discussing lists and arrays in Python, as it can lead to unexpected behavior.
+For those familiar with C or C++, one would first have to define `x` and `y` as the type `int` and then they would already have a different place in memory and they can *never* be the same (even if they contain the same number). We will return to this point in more detail when discussing lists and arrays in Python, as it can lead to unexpected behavior.
 
 Another thing you might have experienced during Python coding is that you get error messages that refer to pieces of code that you have no knowledge of. This can happen when you pass the wrong type (e.g. a string instead of a number). Since Python only has one type, the wrong type will not be discovered before it is actually used. This error could be deep into some other library that you have no knowledge of. 
 
 ===== Basic types =====
 idx{basic types}
-I will assume that you are familiar with the common types like floats (for real numbers), strings (text, lines, word, a character), integer (whole numbers), Boolean (True, False). What is sometimes useful is to be able to test what kind of type a variable is, this can be done with `type()`
+I will assume that you are familiar with the common types like floats (for real numbers), strings (text, lines, word, a character), integer (whole numbers), Boolean (True, False). What is sometimes useful is to be able to test what kind of type a variable is, this can be done with the method `type()`
 !bc pypro
 my_float = 2.0 
 my_int   = 3
@@ -84,7 +84,7 @@ my_list = ['one', 'two','three'] # a list of strings
 my_list = ['one']*10 # a list with 10 equal string elements 
 !ec
 !bnotice
-To get the first element in a list, we do e.g. `my_list[0]`. In a list with 10 elements the last element would be `my_list[9]`, the length of a list can be found by using the `len()` function, i.e. `len(my_list)=10`. Thus, the last element can also be found by doing `my_list[len(my_list)-1]`. However, in Python you can always get the last element by doing `my_list[-1]`, the second last element would be `my_list[-2]` and so on.
+To get the first element in a list, we do e.g. `my_list[0]`. In a list with 10 elements the last element would be `my_list[9]`. The length of a list can be found by using the `len()` function, i.e. `len(my_list)=10`. Thus, the last element can also be found by doing `my_list[len(my_list)-1]`. However, in Python you can always get the last element by doing `my_list[-1]`, the second last element would be `my_list[-2]` and so on.
 !enotice
 Sometimes you do not want to initialize the list with everything equal, and it can be tiresome to write everything out yourself. If that is the case you can use *list comprehension*
 !bc pypro
@@ -135,8 +135,9 @@ Use lists if you have mixed types, and as storage containers. Be careful when yo
 !enotice
 
 ===== Numpy arrays  =====
-Numpy arrays are awesome, and they should be your preferred choice when doing numerical operations. We import Numpy as `import numpy as np`, some examples of initialization
+Numpy arrays are awesome, and they should be your preferred choice when doing numerical operations. We import Numpy as `import numpy as np`. These are some examples of initialization
 !bc pypro
+import numpy as np
 my_array=np.array([0,1,2,3]) # initialized from list
 my_array=np.zeros(10) # array with 10 elements equal to zero
 my_array=np.ones(10)  # array with 10 elements equal to one
@@ -208,7 +209,7 @@ for key in my_dict:
 !ec
 
 ======= Looping =======
-There are basically two ways of iterating through lists or to do a series of computations, using a for-loop or a while-loop. In most cases a for loop can also be written as a while loops and vice versa. You would typically use a for-loop when you are iterating over a fixed number of elements, very typical example is when we are iterating in a numerical computation from time zero to the end time. A while-loop is typically used when we do not know before the run time when to stop, this could be that we are waiting for user input or to reach a certain numerical accuracy in our calculation before proceeding.
+There are basically two ways of iterating through lists or to do a series of computations, using a for-loop or a while-loop. In most cases a for loop can also be written as a while loops and vice versa. You would typically use a for-loop when you are iterating over a fixed number of elements. A good example is when we are iterating in a numerical computation from time zero to the end time. A while-loop is typically used when we do not know before the run time when to stop, this could be that we are waiting for user input or to reach a certain numerical accuracy in our calculation before proceeding.
 
 
 ===== For loops =====
@@ -247,11 +248,11 @@ In many cases you might be in a situation that you want to plot more than one fu
 import numpy as np
 import matplotlib.pyplot as plt
 x_val   = np.linspace(0,1,100) # 100 equal spaced points from 0 to 1
-y_vals  = [x_val,x_val*x_val]
+y_vals  = [x_val,x_val**2]
 labels  = [r'x', r'$x^2$']
 cols    = ['r','g']
 points  = ['-*','-^']
-for y_val,point,col,label in zip(y_vals,points,cols,labels):
+for y_val,label,col,point in zip(y_vals,labels,cols,points):
     plt.plot(x_val,y_val,point,c=col,label=label)
 plt.grid()
 plt.legend()
@@ -259,7 +260,7 @@ plt.show()
 !ec
 Output of code is shown in figure ref{fig:python:loop}.
 
-FIGURE: [fig-python/plt_loop, width=400 frac=1.0] Output of code. label{fig:python:loop}
+FIGURE: [fig-python/plt_loop.png, width=400 frac=1.0] Output of code. label{fig:python:loop}
 ===== While loops =====
 A while loop is used whenever you do not know before run time when to stop iterating. The syntax of the while loop is to do something while a condition is true
 !bc pypro
@@ -285,7 +286,7 @@ Short functions makes the code easier to read. Each function has a particular ta
 !enotice
 
 ===== Defining a mathematical function =====
-Throughout this course you will write many functions that do mathematical operations. In many cases, you would also pass a function to another function to make your code more modular. Lets say we want to calculate the derivative of $\sin x$, using the most basic definition of a derivative $f^\prime(x) = f(x+\Delta x)-f(x)/\Delta x$, we could do it as
+Throughout this course you will write many functions that do mathematical operations. In many cases, you would also pass a function to another function to make your code more modular. Lets say we want to calculate the derivative of $\sin x$, using the most basic definition of a derivative $f^\prime(x) = (f(x+\Delta x)-f(x))/\Delta x$, we could do it as
 !bc pypro
 def derivative_of_sine(x,delta_x):
     ''' returns the derivative of sin x '''
@@ -327,7 +328,7 @@ How can we calculate the derivative of this function? If we try to do `df(1,s)` 
 TypeError: s() missing 3 required positional
 	   arguments: 's0', 'v0', and 'a'
 !ec
-This happens because the `df` function expect that the function we send into the argument list has a call signature `f(x)`. What many people do to avoid this error is to use global variable, that is to define `s0, v0`, and `a` at the top of the code. This is not always the best solution. Python has a special variable `*args` which can be used to pass multiple arguments to your function, thus if we rewrite `df` like this
+This happens because the `df` function expect that the function we send into the argument list has a call signature `f(x)`. What many people do to avoid this error is to use a global variable, that is to define `s0, v0`, and `a` at the top of the code. This is not always the best solution. Python has a special variable `*args` which can be used to pass multiple arguments to your function, thus if we rewrite `df` like this
 !bc pypro
 def df(x,f,*args,delta_x=1e-3):
     ''' returns the derivative of f '''
@@ -382,7 +383,7 @@ Sometimes global variables can be very useful, and help you to make the code sim
 !enotice
 
 ===== Passing arrays and lists to functions =====
-In the previous section, we looked at some simple examples regarding the scope of variables, and what happened with that variable inside and outside a function. The examples used integer or floats. However in most applications you will pass an array or a list to a function, and then you need to be aware that the behavior is not always would you might expect.
+In the previous section, we looked at some simple examples regarding the scope of variables, and what happened with that variable inside and outside a function. The examples used integer or floats. However in most applications you will pass an array or a list to a function, and then you need to be aware that the behavior is not always what you might expect.
 !bnotice Unexpected behavior
 Sometimes functions do not do what you expect, this might be because the function does not treat  the arguments as you might think. The best advice is to make a very simple version of your function and test it for yourself. Is the behavior what you expect? Try to understand why or why not.
 !enotice
@@ -487,7 +488,7 @@ print(id(a)) #gives on my computer 140587667748656
 a += 1
 print(id(a)) #gives on my computer 140587667748400
 !ec
-Thus, after adding 1 to `a`, `a` is assigned *a new place in memory*. This is very different from C or C++, in C or C++ the variable, once it is created, *always has the same memory address*. In Python this is not the case, it works in the opposite way. The statement `a=10.0`, is executed so that *first* 10.0 is created in memory, secondly `x` is assigned the reference to 10.0. The assignment operator `=` indicates that `a` should point to whatever is on the right hand side. Another example is     
+Thus, after adding 1 to `a`, `a` is assigned *a new place in memory*. This is very different from C or C++, in C or C++ the variable, once it is created, *always has the same memory address*. In Python this is not the case, it works in the opposite way. The statement `a=10.0`, is executed so that *first* 10.0 is created in memory, secondly `a` is assigned the reference to 10.0. The assignment operator `=` indicates that `a` should point to whatever is on the right hand side. Another example is     
 !bc pypro
 a=10.0
 b=10.0
@@ -522,7 +523,7 @@ x.append(10)  # x is now [0,1,2,3,4,10]
 print(y)      # y=[0,1,2,3,4,10]
 print(x is y) # True
 !ec
-What happens here is that we create a box with the numbers 0, 1, 2, 3, 4, `x` is referenced that box. Next, we do `y=x` so that `y` is referenced the *same box* as `x`. Then, we add the number 10 to that box, and `x` and `y` still points to the same box.
+What happens here is that we create a box with the numbers 0, 1, 2, 3, 4, `x` is referenced to that box. Next, we do `y=x` so that `y` is referenced to the *same box* as `x`. Then, we add the number 10 to that box, and `x` and `y` still points to the same box.
 
 Numpy arrays behave differently, and that is basically because if we want to add a number to a Numpy array we have to do `x=np.array(x,10)`. Because of the assignment operator `=` , we take the content of the original box add 10 and put it into a *new* box
 !bc pypro

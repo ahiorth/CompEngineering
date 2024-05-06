@@ -1,0 +1,66 @@
+\indexentry{types|hyperpage}{4}
+\indexentry{basic types|hyperpage}{5}
+\indexentry{lists|hyperpage}{5}
+\indexentry{list comprehension|hyperpage}{5}
+\indexentry{numerical error|hyperpage}{44}
+\indexentry{Taylor polynomial|hyperpage}{46}
+\indexentry{truncation error|hyperpage}{47}
+\indexentry{Taylor polynomial, error term|hyperpage}{47}
+\indexentry{Maclaurin series|hyperpage}{49}
+\indexentry{forward difference|hyperpage}{50}
+\indexentry{backward difference|hyperpage}{50}
+\indexentry{central difference|hyperpage}{50}
+\indexentry{central difference|hyperpage}{51}
+\indexentry{roundoff erros|hyperpage}{54}
+\indexentry{machine precision|hyperpage}{54}
+\indexentry{IEEE 754-1985 standard|hyperpage}{58}
+\indexentry{roundoff errors|hyperpage}{60}
+\indexentry{continuity equation|hyperpage}{63}
+\indexentry{finite volume|hyperpage}{66}
+\indexentry{Gauss-Jordan elimination|hyperpage}{71}
+\indexentry{pivoting|hyperpage}{75}
+\indexentry{LU decomposition|hyperpage}{75}
+\indexentry{Jacobi method|hyperpage}{77}
+\indexentry{Gauss-Seidel method|hyperpage}{79}
+\indexentry{linear regression|hyperpage}{80}
+\indexentry{sparse matrix|hyperpage}{85}
+\indexentry{Thomas algorithm|hyperpage}{85}
+\indexentry{fixed-point iteration|hyperpage}{101}
+\indexentry{rate of convergence|hyperpage}{106}
+\indexentry{bisection method|hyperpage}{106}
+\indexentry{rate of convergence|hyperpage}{109}
+\indexentry{Newtons method|hyperpage}{109}
+\indexentry{Newtons method, rate of convergence|hyperpage}{111}
+\indexentry{secant method|hyperpage}{113}
+\indexentry{secant method, rate of convergence|hyperpage}{114}
+\indexentry{Newton Rapson method|hyperpage}{116}
+\indexentry{gradient descent|hyperpage}{116}
+\indexentry{midpoint method|hyperpage}{124}
+\indexentry{trapezoidal method|hyperpage}{125}
+\indexentry{numerical integrals, error|hyperpage}{127}
+\indexentry{Richardson extrapolation|hyperpage}{129}
+\indexentry{Romberg integration|hyperpage}{131}
+\indexentry{Gaussian quadrature|hyperpage}{136}
+\indexentry{Gaussian quadrature, error term|hyperpage}{140}
+\indexentry{numerical integral, infinite|hyperpage}{140}
+\indexentry{continuous stirred tank reactor (CSTR)|hyperpage}{144}
+\indexentry{Eulers method|hyperpage}{146}
+\indexentry{Eulers method, error analysis|hyperpage}{147}
+\indexentry{Eulers method, adaptive step size|hyperpage}{152}
+\indexentry{Runge-Kutta|hyperpage}{155}
+\indexentry{Runge-Kutta, adaptive step size|hyperpage}{158}
+\indexentry{adaptive step size|hyperpage}{160}
+\indexentry{stiff equations|hyperpage}{165}
+\indexentry{implicit method|hyperpage}{165}
+\indexentry{Monte Carlo integration|hyperpage}{173}
+\indexentry{random number generators|hyperpage}{175}
+\indexentry{Mersenne Twister|hyperpage}{175}
+\indexentry{encryption|hyperpage}{176}
+\indexentry{Monte Carlo Integration, error|hyperpage}{178}
+\indexentry{binomial distribution|hyperpage}{178}
+\indexentry{mean|hyperpage}{178}
+\indexentry{variance|hyperpage}{178}
+\indexentry{Monte Carlo integration, mean value|hyperpage}{181}
+\indexentry{recursive functions|hyperpage}{187}
+\indexentry{central limit theorem|hyperpage}{187}
+\indexentry{birthday paradox|hyperpage}{189}

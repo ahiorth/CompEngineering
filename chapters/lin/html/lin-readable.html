@@ -1,7 +1,6 @@
 <!--
-HTML file automatically generated from DocOnce source
-(https://github.com/doconce/doconce/)
-doconce format html main_lin.do.txt CHAPTER=document BOOK=document APPENDIX=document --html_style=bootswatch_readable --html_output=lin-readable --html_code_style=inherit
+File automatically generated using DocOnce (https://github.com/doconce/doconce/):
+doconce format html main_lin.do.txt CHAPTER=document BOOK=document APPENDIX=document --html_style=bootswatch_readable --html_output=lin-readable --html_code_style=inherit nospell
 -->
 <html>
 <head>
@@ -12,7 +11,7 @@ doconce format html main_lin.do.txt CHAPTER=document BOOK=document APPENDIX=docu
 <meta name="keywords" content="continuity equation,finite volume,Gauss-Jordan elimination,pivoting,LU decomposition,Jacobi method,Gauss-Seidel method,linear regression,sparse matrix,Thomas algorithm">
 <title>1, 2, 3D models and linear systems</title>
 <!-- Bootstrap style: bootswatch_readable -->
-<!-- doconce format html main_lin.do.txt CHAPTER=document BOOK=document APPENDIX=document --html_style=bootswatch_readable --html_output=lin-readable --html_code_style=inherit -->
+<!-- doconce format html main_lin.do.txt CHAPTER=document BOOK=document APPENDIX=document --html_style=bootswatch_readable --html_output=lin-readable --html_code_style=inherit nospell -->
 <link href="https://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
 <!-- not necessary
 <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
@@ -101,7 +100,7 @@ code { color: inherit; background-color: transparent; }
               ('CO$_2$ diffusion into aquifers',
                1,
                None,
-               'co-_2-diffusion-into-aquifers'),
+               'co-2-diffusion-into-aquifers'),
               ('References', 1, None, 'references')]}
 end of tocinfo -->
 
@@ -167,7 +166,7 @@ $$
      <!-- navigation toc: --> <li><a href="#exercise-2-curing-of-concrete-and-matrix-formulation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 2: Curing of Concrete and Matrix Formulation</a></li>
      <!-- navigation toc: --> <li><a href="#exercise-3-solve-the-full-heat-equation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 3: Solve the full heat equation</a></li>
      <!-- navigation toc: --> <li><a href="#exercise-4-using-sparse-matrices-in-python" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 4: Using sparse matrices in python</a></li>
-     <!-- navigation toc: --> <li><a href="#co-_2-diffusion-into-aquifers" style="font-size: 80%;"><b>CO$_2$ diffusion into aquifers</b></a></li>
+     <!-- navigation toc: --> <li><a href="#co-2-diffusion-into-aquifers" style="font-size: 80%;"><b>CO$_2$ diffusion into aquifers</b></a></li>
      <!-- navigation toc: --> <li><a href="#references" style="font-size: 80%;"><b>References</b></a></li>
 
         </ul>
@@ -223,7 +222,7 @@ $$
 <p><span class="tab"> <a href="#exercise-2-curing-of-concrete-and-matrix-formulation"> Exercise 2: Curing of Concrete and Matrix Formulation </a></p>
 <p><span class="tab"> <a href="#exercise-3-solve-the-full-heat-equation"> Exercise 3: Solve the full heat equation </a></p>
 <p><span class="tab"> <a href="#exercise-4-using-sparse-matrices-in-python"> Exercise 4: Using sparse matrices in python </a></p>
-<p><a href="#co-_2-diffusion-into-aquifers"> CO$_2$ diffusion into aquifers </a></p>
+<p><a href="#co-2-diffusion-into-aquifers"> CO$_2$ diffusion into aquifers </a></p>
 <p><a href="#references"> References </a></p>
 </div>
 <br>
@@ -237,9 +236,9 @@ $$
 <center> <!-- figure label: --> <div id="fig:lin:flux"></div> <!-- FIGURE -->
 <hr class="figure">
 <center>
-<p class="caption">Figure 1:  A closed volume, \( V(x)=A(x)dx \), where a quantity flows in and out (illustrated by the green lines), there is also a possibility for generation or loss of the same quantity inside the volume.  <!-- caption label: fig:lin:flux --> </p>
+<p class="caption">Figure 1: A closed volume, \( V(x)=A(x)dx \), where a quantity flows in and out (illustrated by the green lines), there is also a possibility for generation or loss of the same quantity inside the volume.  <!-- caption label: fig:lin:flux --></p>
 </center>
-<p><img src="fig-lin/flux.png" align="bottom" width=800></p>
+<p><img src="fig-lin/flux.png" width="400" align="bottom"></p>
 </center>
 
 $$
@@ -310,9 +309,9 @@ $$
 <center> <!-- figure label: --> <div id="fig:lin:grid"></div> <!-- FIGURE -->
 <hr class="figure">
 <center>
-<p class="caption">Figure 2:  Examples of discretization of a system with length \( L \) (left) the  boundaries lies exactly at the boundary nodes, (right) boundary nodes lies half-way between the grid nodes.  <!-- caption label: fig:lin:grid --> </p>
+<p class="caption">Figure 2: Examples of discretization of a system with length \( L \) (left) the  boundaries lies exactly at the boundary nodes, (right) boundary nodes lies half-way between the grid nodes.  <!-- caption label: fig:lin:grid --></p>
 </center>
-<p><img src="fig-lin/grid.png" align="bottom" width=800></p>
+<p><img src="fig-lin/grid.png" width="400" align="bottom"></p>
 </center>
 
 <p>There are many things to consider when discretizing equations, but perhaps the most important are</p>
@@ -410,9 +409,9 @@ $$
 <center> <!-- figure label: --> <div id="fig:lin:bbc"></div> <!-- FIGURE -->
 <hr class="figure">
 <center>
-<p class="caption">Figure 3:  Flux boundary condition (Neumann), and value boundary condition (Dirichlet). For the upper right boundary condition we use Taylors formula to interpolate, see equation \eqref{eq:lin:dd}.  <!-- caption label: fig:lin:bbc --> </p>
+<p class="caption">Figure 3: Flux boundary condition (Neumann), and value boundary condition (Dirichlet). For the upper right boundary condition we use Taylors formula to interpolate, see equation \eqref{eq:lin:dd}.  <!-- caption label: fig:lin:bbc --></p>
 </center>
-<p><img src="fig-lin/bbc.png" align="bottom" width=800></p>
+<p><img src="fig-lin/bbc.png" width="400" align="bottom"></p>
 </center>
 
 <div class="alert alert-block alert-success alert-text-normal"><b>Example: Steady state heat equation as a linear problem</b>
@@ -1087,9 +1086,9 @@ $$
 <center> <!-- figure label: --> <div id="fig:lin:reg"></div> <!-- FIGURE -->
 <hr class="figure">
 <center>
-<p class="caption">Figure 4:  Linear regression by minimizing the total distance to all the points.  <!-- caption label: fig:lin:reg --> </p>
+<p class="caption">Figure 4: Linear regression by minimizing the total distance to all the points.  <!-- caption label: fig:lin:reg --></p>
 </center>
-<p><img src="fig-lin/reg.png" align="bottom" width=800></p>
+<p><img src="fig-lin/reg.png" width="800" align="bottom"></p>
 </center>
 
 <p>Mathematically we can express the distance between a data point \( (x_i,y_i) \) and the line \( f(x) \) as \( y_i-f(x_i) \). Note that this difference can be negative or positive depending if the data point lies below or above the line. We can then take the absolute value of all the distances, and try to minimize them. When we minimize something we take the derivative of the expression and put it equal to zero.  As you might remember from Calculus it is extremely hard to work with the derivative of the absolute value, because it is discontinuous. A much better approach is to square each distance and sum them:</p>
@@ -1461,9 +1460,9 @@ Thomas algorithm might do the trick.
 <center> <!-- figure label: --> <div id="fig:nlin:heat"></div> <!-- FIGURE -->
 <hr class="figure">
 <center>
-<p class="caption">Figure 5:  Conservation of energy and the continuity equation.  <!-- caption label: fig:nlin:heat --> </p>
+<p class="caption">Figure 5: Conservation of energy and the continuity equation.  <!-- caption label: fig:nlin:heat --></p>
 </center>
-<p><img src="fig-lin/heat.png" align="bottom" width=700></p>
+<p><img src="fig-lin/heat.png" width="700" align="bottom"></p>
 </center>
 
 <p>In figure <a href="#fig:nlin:heat">5</a>, the continuity equation is derived for
@@ -1550,9 +1549,9 @@ $$
 <center> <!-- figure label: --> <div id="fig:nlin:hgrid"></div> <!-- FIGURE -->
 <hr class="figure">
 <center>
-<p class="caption">Figure 6:  Finite difference grid for \( N=4 \).  <!-- caption label: fig:nlin:hgrid --> </p>
+<p class="caption">Figure 6: Finite difference grid for \( N=4 \).  <!-- caption label: fig:nlin:hgrid --></p>
 </center>
-<p><img src="fig-lin/heat_grid.png" align="bottom" width=200></p>
+<p><img src="fig-lin/heat_grid.png" width="200" align="bottom"></p>
 </center>
 
 <p>In figure <a href="#fig:nlin:hgrid">6</a>, the finite difference grid is shown for
@@ -1833,7 +1832,7 @@ Tb <span style="color: #666666">=</span> sc<span style="color: #666666">.</span>
 <li> Compare the sparse solver with the standard Numpy solver using <code>%timeit</code>, how large must the linear system be before an improvement in speed is seen?</li>
 </ul>
 <!-- --- end exercise --- -->
-<h1 id="co-_2-diffusion-into-aquifers" class="anchor">CO$_2$ diffusion into aquifers </h1>
+<h1 id="co-2-diffusion-into-aquifers" class="anchor">CO$_2$ diffusion into aquifers </h1>
 <p>The transport of CO$_2$ into aquifers can be described according to the diffusion equation</p>
 $$
 \begin{equation}
@@ -1847,9 +1846,9 @@ $$
 <center> <!-- figure label: --> <div id="fig:lin:co2_diff"></div> <!-- FIGURE -->
 <hr class="figure">
 <center>
-<p class="caption">Figure 7:  Discretization for diffusion of \co\ into an aquifer, including boundary conditions.  <!-- caption label: fig:lin:co2_diff --> </p>
+<p class="caption">Figure 7: Discretization for diffusion of \co\ into an aquifer, including boundary conditions.  <!-- caption label: fig:lin:co2_diff --></p>
 </center>
-<p><img src="fig-lin/co2_diff.png" align="bottom" width=800></p>
+<p><img src="fig-lin/co2_diff.png" width="400" align="bottom"></p>
 </center>
 
 <p>In the following we will assume that there are only four nodes (\( i=0\ldots 3 \)) in the physical domain, and two ghost nodes \( i=-1 \), and \( i=4 \). There are many ways to attack this problem, but in the following we will borrow ideas from Finite Volume. Finite volume methods is a way of discretizing equations such that we <em>conserve mass</em>. The diffusion equation as it is derived in figure <a href="#fig:nlin:heat">5</a>, express that the flux of something (heat, particles, etc) leaving the box surface minus the flux entering the surface of the box is equal to the rate of change of something inside the box. We can formulate this mathematically as:</p>
@@ -1994,5 +1993,4 @@ $$
 -->
 </body>
 </html>
-    
 

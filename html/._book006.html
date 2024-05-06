@@ -1,6 +1,5 @@
 <!--
-HTML file automatically generated from DocOnce source
-(https://github.com/doconce/doconce/)
+File automatically generated using DocOnce (https://github.com/doconce/doconce/):
 doconce format html book.do.txt CHAPTER=chapter BOOK=book APPENDIX=appendix --exercise_numbering=chapter --html_style=bootswatch_journal --html_code_style=inherit --html_output=book
 -->
 <html>
@@ -232,7 +231,7 @@ code { color: inherit; background-color: transparent; }
               ('CO$_2$ diffusion into aquifers',
                1,
                None,
-               'co-_2-diffusion-into-aquifers'),
+               'co-2-diffusion-into-aquifers'),
               ('Optimization and nonlinear systems', 0, 'ch:nlin', 'ch:nlin'),
               ('Nonlinear equations', 1, None, 'nonlinear-equations'),
               ('Example: van der Waals equation of state',
@@ -242,7 +241,7 @@ code { color: inherit; background-color: transparent; }
               ('Exercise 5.1: van der Waal EOS and CO$_2$',
                2,
                None,
-               'exercise-5-1-van-der-waal-eos-and-co-_2'),
+               'exercise-5-1-van-der-waal-eos-and-co-2'),
               ('Fixed-point iteration', 1, None, 'fixed-point-iteration'),
               ('Exercise 5.2: Implement the fixed point iteration',
                2,
@@ -511,11 +510,11 @@ $$
      <!-- navigation toc: --> <li><a href="._book004.html#exercise-4-2-curing-of-concrete-and-matrix-formulation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.2: Curing of Concrete and Matrix Formulation</a></li>
      <!-- navigation toc: --> <li><a href="._book004.html#exercise-4-3-solve-the-full-heat-equation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.3: Solve the full heat equation</a></li>
      <!-- navigation toc: --> <li><a href="._book004.html#exercise-4-4-using-sparse-matrices-in-python" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.4: Using sparse matrices in python</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#co-_2-diffusion-into-aquifers" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;CO$_2$ diffusion into aquifers</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#co-2-diffusion-into-aquifers" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;CO$_2$ diffusion into aquifers</a></li>
      <!-- navigation toc: --> <li><a href="._book005.html#ch:nlin" style="font-size: 80%;"><b>Optimization and nonlinear systems</b></a></li>
      <!-- navigation toc: --> <li><a href="._book005.html#nonlinear-equations" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Nonlinear equations</a></li>
      <!-- navigation toc: --> <li><a href="._book005.html#example-van-der-waals-equation-of-state" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: van der Waals equation of state</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#exercise-5-1-van-der-waal-eos-and-co-_2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.1: van der Waal EOS and CO$_2$</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#exercise-5-1-van-der-waal-eos-and-co-2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.1: van der Waal EOS and CO$_2$</a></li>
      <!-- navigation toc: --> <li><a href="._book005.html#fixed-point-iteration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Fixed-point iteration</a></li>
      <!-- navigation toc: --> <li><a href="._book005.html#exercise-5-2-implement-the-fixed-point-iteration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.2: Implement the fixed point iteration</a></li>
      <!-- navigation toc: --> <li><a href="._book005.html#exercise-5-3-finding-the-molar-volume-from-the-van-der-waal-eos-by-fixed-point-iteration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.3: Finding the molar volume from the van der Waal EOS by fixed point iteration</a></li>
@@ -629,9 +628,9 @@ therefore we choose the convention of having the first element to start at \( k=
 <center> <!-- figure label: --> <div id="fig:numint:mid"></div> <!-- FIGURE -->
 <hr class="figure">
 <center>
-<p class="caption">Figure 32:  Integrating a function with the midpoint rule.  <!-- caption label: fig:numint:mid --> </p>
+<p class="caption">Figure 32: Integrating a function with the midpoint rule.  <!-- caption label: fig:numint:mid --></p>
 </center>
-<p><img src="fig-numint/func_sq.png" align="bottom" width=800></p>
+<p><img src="fig-numint/func_sq.png" width="800" align="bottom"></p>
 </center>
 
 <p>Below is a Python code, where this algorithm is implemented for \( \int_0^\pi\sin (x)dx \)</p>
@@ -715,9 +714,9 @@ see figure <a href="#fig:numint:trap">33</a>.
 <center> <!-- figure label: --> <div id="fig:numint:trap"></div> <!-- FIGURE -->
 <hr class="figure">
 <center>
-<p class="caption">Figure 33:  Integrating a function with the trapezoidal rule.  <!-- caption label: fig:numint:trap --> </p>
+<p class="caption">Figure 33: Integrating a function with the trapezoidal rule.  <!-- caption label: fig:numint:trap --></p>
 </center>
-<p><img src="fig-numint/func_tr.png" align="bottom" width=800></p>
+<p><img src="fig-numint/func_tr.png" width="800" align="bottom"></p>
 </center>
 
 <p>Earlier we approximated the area using the midpoint value: \( f(x_k+h/2)\cdot h \). Now we use \( A=A_1+A_2 \), where \( A_1=f(x_k)\cdot h \) 
@@ -778,7 +777,7 @@ Below is a python implementation:
 
 <div class="row">
   <div class="col-xs-5">
-    <table class="table table-striped table-hover table-condensed">
+    <table class="dotable table-striped table-hover table-condensed">
 <thead>
 <tr><td align="center">\( N \)</td> <td align="center">\( h \)</td> <td align="center"><b>Error Midpoint</b></td> <td align="center"><b>Error Trapezoidal</b></td> </tr>
 </thead>
@@ -1105,9 +1104,9 @@ $$
 <center> <!-- figure label: --> <div id="fig:numint:romberg"></div> <!-- FIGURE -->
 <hr class="figure">
 <center>
-<p class="caption">Figure 34:  Illustration of the Romberg algorithm. Note that for each new evaluation of the integral \( R_{i,0} \), all the correction terms \( R_{i,m} \) (for \( m>0 \)) must be evaluated again.  <!-- caption label: fig:numint:romberg --> </p>
+<p class="caption">Figure 34: Illustration of the Romberg algorithm. Note that for each new evaluation of the integral \( R_{i,0} \), all the correction terms \( R_{i,m} \) (for \( m>0 \)) must be evaluated again.  <!-- caption label: fig:numint:romberg --></p>
 </center>
-<p><img src="fig-numint/romberg.png" align="bottom" width=800></p>
+<p><img src="fig-numint/romberg.png" width="400" align="bottom"></p>
 </center>
 
 <p>Note that the tolerance term is not the correct one as it uses the error estimate for the current step, 
@@ -1512,16 +1511,26 @@ $$
 <!-- --- begin exercise --- -->
 <h2 id="exercise-6-1-numerical-integration" class="anchor">Exercise 6.1: Numerical Integration </h2>
 
+<!-- --- begin subexercise --- -->
+
 <p>
 <b>a)</b>
 Show that for a linear function, \( y=a\cdot x+b \) both the trapezoidal rule and the rectangular rule are exact
 </p>
+
+<!-- --- end subexercise --- -->
+
+<!-- --- begin subexercise --- -->
 
 <p>
 <b>b)</b>
 Consider \( I(a,b)=\int_a^bf(x)dx \) for \( f(x)=x^2 \). The analytical result is \( I(a,b)=\frac{b^3-a^3}{3} \). Use the Trapezoidal and 
   Midpoint rule to evaluate these integrals and show that the error for the Trapezoidal rule is exactly twice as big as the Midpoint rule.
 </p>
+
+<!-- --- end subexercise --- -->
+
+<!-- --- begin subexercise --- -->
 
 <p>
 <b>c)</b>
@@ -1587,6 +1596,10 @@ $$
 
 <!-- --- end solution of exercise --- -->
 
+<!-- --- end subexercise --- -->
+
+<!-- --- begin subexercise --- -->
+
 <p>
 <b>d)</b>
 Show that for \( N=2 \) (\( f(x)=1,x,x^3 \)), the points and Gaussian quadrature rule for \( \int_{0}^{1}x^{1/2}f(x)\,dx \)
@@ -1596,21 +1609,25 @@ and \( x_{0,1}=-2\sqrt{70}{63} + 5/9, 2\sqrt{70}{63} + 5/9 \)
 <ol>
 <li> Integrate \( \int_0^1x^{1/2}\cos x\,dx \) using the rule derived in the exercise above and compare with the standard Gaussian quadrature rule for (\( N=2 \), and \( N=3 \)).</li>
 </ol>
+<!-- --- end subexercise --- -->
+
+<!-- --- begin subexercise --- -->
+
 <p>
 <b>e)</b>
 Make a Python program that uses the Midpoint rule to integrate experimental data that are unevenly spaced and given in the form of two arrays.
 </p>
+
+<!-- --- end subexercise --- -->
 
 <!-- --- end exercise --- -->
 
 <p>
 <!-- navigation buttons at the bottom of the page -->
 <ul class="pager">
-
   <li class="previous">
     <a href="._book005.html">&larr; Prev</a>
   </li>
-
   <li class="next">
     <a href="._book007.html">Next &rarr;</a>
   </li>
@@ -1627,5 +1644,4 @@ Make a Python program that uses the Midpoint rule to integrate experimental data
 -->
 </body>
 </html>
-    
 

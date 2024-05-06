@@ -1,6 +1,5 @@
 <!--
-HTML file automatically generated from DocOnce source
-(https://github.com/doconce/doconce/)
+File automatically generated using DocOnce (https://github.com/doconce/doconce/):
 doconce format html book.do.txt CHAPTER=chapter BOOK=book APPENDIX=appendix --exercise_numbering=chapter --html_style=bootswatch_journal --html_code_style=inherit --html_output=book
 -->
 <html>
@@ -232,7 +231,7 @@ code { color: inherit; background-color: transparent; }
               ('CO$_2$ diffusion into aquifers',
                1,
                None,
-               'co-_2-diffusion-into-aquifers'),
+               'co-2-diffusion-into-aquifers'),
               ('Optimization and nonlinear systems', 0, 'ch:nlin', 'ch:nlin'),
               ('Nonlinear equations', 1, None, 'nonlinear-equations'),
               ('Example: van der Waals equation of state',
@@ -242,7 +241,7 @@ code { color: inherit; background-color: transparent; }
               ('Exercise 5.1: van der Waal EOS and CO$_2$',
                2,
                None,
-               'exercise-5-1-van-der-waal-eos-and-co-_2'),
+               'exercise-5-1-van-der-waal-eos-and-co-2'),
               ('Fixed-point iteration', 1, None, 'fixed-point-iteration'),
               ('Exercise 5.2: Implement the fixed point iteration',
                2,
@@ -511,11 +510,11 @@ $$
      <!-- navigation toc: --> <li><a href="._book004.html#exercise-4-2-curing-of-concrete-and-matrix-formulation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.2: Curing of Concrete and Matrix Formulation</a></li>
      <!-- navigation toc: --> <li><a href="._book004.html#exercise-4-3-solve-the-full-heat-equation" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.3: Solve the full heat equation</a></li>
      <!-- navigation toc: --> <li><a href="._book004.html#exercise-4-4-using-sparse-matrices-in-python" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.4: Using sparse matrices in python</a></li>
-     <!-- navigation toc: --> <li><a href="._book004.html#co-_2-diffusion-into-aquifers" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;CO$_2$ diffusion into aquifers</a></li>
+     <!-- navigation toc: --> <li><a href="._book004.html#co-2-diffusion-into-aquifers" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;CO$_2$ diffusion into aquifers</a></li>
      <!-- navigation toc: --> <li><a href="._book005.html#ch:nlin" style="font-size: 80%;"><b>Optimization and nonlinear systems</b></a></li>
      <!-- navigation toc: --> <li><a href="._book005.html#nonlinear-equations" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Nonlinear equations</a></li>
      <!-- navigation toc: --> <li><a href="._book005.html#example-van-der-waals-equation-of-state" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: van der Waals equation of state</a></li>
-     <!-- navigation toc: --> <li><a href="._book005.html#exercise-5-1-van-der-waal-eos-and-co-_2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.1: van der Waal EOS and CO$_2$</a></li>
+     <!-- navigation toc: --> <li><a href="._book005.html#exercise-5-1-van-der-waal-eos-and-co-2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.1: van der Waal EOS and CO$_2$</a></li>
      <!-- navigation toc: --> <li><a href="._book005.html#fixed-point-iteration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Fixed-point iteration</a></li>
      <!-- navigation toc: --> <li><a href="._book005.html#exercise-5-2-implement-the-fixed-point-iteration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.2: Implement the fixed point iteration</a></li>
      <!-- navigation toc: --> <li><a href="._book005.html#exercise-5-3-finding-the-molar-volume-from-the-van-der-waal-eos-by-fixed-point-iteration" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.3: Finding the molar volume from the van der Waal EOS by fixed point iteration</a></li>
@@ -591,7 +590,7 @@ $$
 
 <p>There are plenty of online resources if you want get an overview of Python syntax, such as <a href="._book009.html#vanderplas2016whirlwind">[1]</a>, for which the full book is available on <a href="https://github.com/jakevdp/WhirlwindTourOfPython" target="_self">github</a>.</p>
 
-<p>In this chapter I will try to focus on the key part of Python that you will need in this book, and maybe more importantly, give some advice on how to write good, reusable, Python code. As you might have discovered tasks can be solved in many different ways in Python. This is clearly a strength because you would most likely be able to solve any task thrown at you. On the other hand it is a weakness, because code can get messy and hard to follow, especially if you solve the same task in different parts of your code using different libraries or syntax.</p>
+<p>In this chapter I will try to focus on the key part of Python that you will need in this course, and maybe more importantly, give some advice on how to write good, reusable, Python code. As you might have discovered, tasks can be solved in many different ways in Python. This is clearly a strength because you would most likely be able to solve any task thrown at you. On the other hand it is a weakness, because code can get messy and hard to follow, especially if you solve the same task in different parts of your code using different libraries or syntax.</p>
 
 <p>In this chapter, I will explain how I tend to solve some common tasks, in the process we will also cover some stuff that you should know. If you need more information on each topic below, there are plenty of online sources. </p>
 
@@ -632,16 +631,16 @@ $$
 <center> <!-- figure label: --> <div id="fig:py:vscode"></div> <!-- FIGURE -->
 <hr class="figure">
 <center>
-<p class="caption">Figure 1:  A screenshot of vscode (left) the editor helps to identify which variable name you want, (right) the editor shows relevant information about the function you would like to call.  <!-- caption label: fig:py:vscode --> </p>
+<p class="caption">Figure 1: A screenshot of vscode (left) the editor helps to identify which variable name you want, (right) the editor shows relevant information about the function you would like to call.  <!-- caption label: fig:py:vscode --></p>
 </center>
-<p><img src="fig-python/vscode.png" align="bottom" width=800></p>
+<p><img src="fig-python/vscode.png" width="400" align="bottom"></p>
 </center>
 
 <p>Currently my favorite editor is <a href="https://code.visualstudio.com/" target="_self">vscode</a>, it can be used for any language, and there are a lot of add ins that can be installed to make the coding experience more pleasant. Spyder is also a very good alternative, but this editor is mainly for Python. It takes some time to learn how an editor works, so it is good if the editor can be used for multiple purposes.  However, always be open to new ideas and products, it will only make you more efficient. As an example, in some cases you will have a particular difficult error in the code, and then it could help to open and run that code in a different editor, you might get a slightly different error messages, which could help you locate the error.</p>
 <h1 id="types-in-python" class="anchor">Types in Python </h1>
-<p>In Python you do not need to define types as in a compiled language. In many ways one can say that Python only has <em>one</em> type.  To not define types is generally an advantage as it lets you write code with fewer lines, and it is easier to write functions that will work with any kind of type. As an example, in the programming language C, if you want to write a function that lets you add two numbers, you have to write one version if the arguments are integers and one version if the arguments are floats.</p>
+<p>In Python you do not need to define types as in a compiled language. In many ways one can say that Python works as if there is only <em>one</em> type.  To not define types is generally an advantage as it lets you write code with fewer lines, and it is easier to write functions that will work with any kind of type. As an example, in the programming language C, if you want to write a function that lets you add two numbers, you have to write one version if the arguments are integers and one version if the arguments are floats.</p>
 
-<p>The way that Python store and organize data is called a data model, and it is well described in the <a href="https://docs.python.org/3/reference/datamodel.html" target="_self">official documentation</a>. The important point is that all data in Python is an object or a relation between objects. The <code>is</code> operator can be used to check if two objects have the same identity, that means they are the same object. The <code>id</code> operator gives an unique integer value for the object, and if two objects have the same id number they are the same object, e.g.</p>
+<p>The way that Python store and organize data is called a data model, and it is well described in the <a href="https://docs.python.org/3/reference/datamodel.html" target="_self">official documentation</a>. The important point is that all data in Python is an object or a relation between objects. The <code>is</code> operator can be used to check if two objects have the same identity, that means they are the same object. The <code>id</code> method returns an unique integer value for the object, and if two objects have the same id number they are the same object, e.g.</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -669,11 +668,11 @@ x <span style="color: #AA22FF; font-weight: bold">is</span> y <span style="color
   </div>
 </div>
 
-<p>For those familiar with C or C++, one would first have to define <code>x</code> and <code>y</code> as the type <code>int</code> and then they would already have a different place in memory and they can <em>never</em> be the same (even if they contain the same number). We will return to this point in more detail discussing lists and arrays in Python, as it can lead to unexpected behavior.</p>
+<p>For those familiar with C or C++, one would first have to define <code>x</code> and <code>y</code> as the type <code>int</code> and then they would already have a different place in memory and they can <em>never</em> be the same (even if they contain the same number). We will return to this point in more detail when discussing lists and arrays in Python, as it can lead to unexpected behavior.</p>
 
 <p>Another thing you might have experienced during Python coding is that you get error messages that refer to pieces of code that you have no knowledge of. This can happen when you pass the wrong type (e.g. a string instead of a number). Since Python only has one type, the wrong type will not be discovered before it is actually used. This error could be deep into some other library that you have no knowledge of. </p>
 <h2 id="basic-types" class="anchor">Basic types </h2>
-<p>I will assume that you are familiar with the common types like floats (for real numbers), strings (text, lines, word, a character), integer (whole numbers), Boolean (True, False). What is sometimes useful is to be able to test what kind of type a variable is, this can be done with <code>type()</code></p>
+<p>I will assume that you are familiar with the common types like floats (for real numbers), strings (text, lines, word, a character), integer (whole numbers), Boolean (True, False). What is sometimes useful is to be able to test what kind of type a variable is, this can be done with the method <code>type()</code></p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -761,7 +760,7 @@ my_list <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39
 </div>
 
 <div class="alert alert-block alert-success alert-text-normal"><b>Notice</b>
-<p>To get the first element in a list, we do e.g. <code>my_list[0]</code>. In a list with 10 elements the last element would be <code>my_list[9]</code>, the length of a list can be found by using the <code>len()</code> function, i.e. <code>len(my_list)=10</code>. Thus, the last element can also be found by doing <code>my_list[len(my_list)-1]</code>. However, in Python you can always get the last element by doing <code>my_list[-1]</code>, the second last element would be <code>my_list[-2]</code> and so on.</p>
+<p>To get the first element in a list, we do e.g. <code>my_list[0]</code>. In a list with 10 elements the last element would be <code>my_list[9]</code>. The length of a list can be found by using the <code>len()</code> function, i.e. <code>len(my_list)=10</code>. Thus, the last element can also be found by doing <code>my_list[len(my_list)-1]</code>. However, in Python you can always get the last element by doing <code>my_list[-1]</code>, the second last element would be <code>my_list[-2]</code> and so on.</p>
 </div>
 
 <p>Sometimes you do not want to initialize the list with everything equal, and it can be tiresome to write everything out yourself. If that is the case you can use <em>list comprehension</em></p>
@@ -910,7 +909,7 @@ new_list2 <span style="color: #666666">=</span> [ <span style="color: #008000">l
 </div>
 
 <h2 id="numpy-arrays" class="anchor">Numpy arrays  </h2>
-<p>Numpy arrays are awesome, and they should be your preferred choice when doing numerical operations. We import Numpy as <code>import numpy as np</code>, some examples of initialization</p>
+<p>Numpy arrays are awesome, and they should be your preferred choice when doing numerical operations. We import Numpy as <code>import numpy as np</code>. These are some examples of initialization</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -918,7 +917,8 @@ new_list2 <span style="color: #666666">=</span> [ <span style="color: #008000">l
     <div class="inner_cell">
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
-  <pre style="line-height: 125%;">my_array<span style="color: #666666">=</span>np<span style="color: #666666">.</span>array([<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">2</span>,<span style="color: #666666">3</span>]) <span style="color: #3D7B7B; font-style: italic"># initialized from list</span>
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+my_array<span style="color: #666666">=</span>np<span style="color: #666666">.</span>array([<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">2</span>,<span style="color: #666666">3</span>]) <span style="color: #3D7B7B; font-style: italic"># initialized from list</span>
 my_array<span style="color: #666666">=</span>np<span style="color: #666666">.</span>zeros(<span style="color: #666666">10</span>) <span style="color: #3D7B7B; font-style: italic"># array with 10 elements equal to zero</span>
 my_array<span style="color: #666666">=</span>np<span style="color: #666666">.</span>ones(<span style="color: #666666">10</span>)  <span style="color: #3D7B7B; font-style: italic"># array with 10 elements equal to one</span>
 </pre>
@@ -1000,13 +1000,12 @@ my_array[::<span style="color: #666666">2</span>]    <span style="color: #3D7B7B
 
 <p>However, as opposed to lists all the basic mathematical operations addition, subtraction, multiplication are meaningful (<em>if the arrays have equal length, or shape</em>)</p>
 
-<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
   <div class="input">
     <div class="inner_cell">
       <div class="input_area">
-        <blockquote>
-<div class="highlight" style="background: #f8f8f8">
+        <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">my_array  = np.array([0,1,2])
 my_array2 = np.array([3,4,5])
 my_array+my_array2 # [3,5,7]
@@ -1014,7 +1013,7 @@ my_array*my_array2 # [0,4,10]
 my_array/my_array2 # [0,.25,.4]
 </pre>
 </div>
-</blockquote>      </div>
+      </div>
     </div>
   </div>
   <div class="output_wrapper">
@@ -1029,13 +1028,12 @@ my_array/my_array2 # [0,.25,.4]
 
 <p>Note that these operations do what you would expect them to do. If you have arrays of arrays, you can easily access elements in the arrays</p>
 
-<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
   <div class="input">
     <div class="inner_cell">
       <div class="input_area">
-        <blockquote>
-<div class="highlight" style="background: #f8f8f8">
+        <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">my_array  = np.array([[0,1,2],[3,4,5]]) # shape 2x3 matrix
 my_array[0,:] # [0,1,2] First row
 my_array[1,:] # [3,4,5] Second row
@@ -1043,7 +1041,7 @@ my_array[:,0] # [0,3] First column
 my_array[:,1] # [1,4] Second column
 </pre>
 </div>
-</blockquote>      </div>
+      </div>
     </div>
   </div>
   <div class="output_wrapper">
@@ -1086,7 +1084,7 @@ my_array<span style="color: #666666">.</span>shape <span style="color: #666666">
 
 <div class="row">
   <div class="col-xs-1">
-    <table class="table table-striped table-hover table-condensed">
+    <table class="dotable table-striped table-hover table-condensed">
 <thead>
 <tr><td align="center"><b> A </b></td> <td align="center"><b> B </b></td> <td align="center"><b> C </b></td> </tr>
 </thead>
@@ -1148,7 +1146,7 @@ my_array<span style="color: #666666">.</span>shape <span style="color: #666666">
   </div>
 </div>
 <h1 id="looping" class="anchor">Looping </h1>
-<p>There are basically two ways of iterating through lists or to do a series of computations, using a for-loop or a while-loop. In most cases a for loop can also be written as a while loops and vice versa. You would typically use a for-loop when you are iterating over a fixed number of elements, very typical example is when we are iterating in a numerical computation from time zero to the end time. A while-loop is typically used when we do not know before the run time when to stop, this could be that we are waiting for user input or to reach a certain numerical accuracy in our calculation before proceeding.</p>
+<p>There are basically two ways of iterating through lists or to do a series of computations, using a for-loop or a while-loop. In most cases a for loop can also be written as a while loops and vice versa. You would typically use a for-loop when you are iterating over a fixed number of elements. A good example is when we are iterating in a numerical computation from time zero to the end time. A while-loop is typically used when we do not know before the run time when to stop, this could be that we are waiting for user input or to reach a certain numerical accuracy in our calculation before proceeding.</p>
 <h2 id="for-loops" class="anchor">For loops </h2>
 <p>A typical example of a for loop is to loop over a list and do something, and maybe during the execution store the results in a list</p>
 
@@ -1251,11 +1249,11 @@ result<span style="color: #666666">=</span>[] <span style="color: #3D7B7B; font-
   <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
 <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
 x_val   <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">100</span>) <span style="color: #3D7B7B; font-style: italic"># 100 equal spaced points from 0 to 1</span>
-y_vals  <span style="color: #666666">=</span> [x_val,x_val<span style="color: #666666">*</span>x_val]
+y_vals  <span style="color: #666666">=</span> [x_val,x_val<span style="color: #666666">**2</span>]
 labels  <span style="color: #666666">=</span> [<span style="color: #BA2121">r&#39;x&#39;</span>, <span style="color: #BA2121">r&#39;$x^2$&#39;</span>]
 cols    <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;r&#39;</span>,<span style="color: #BA2121">&#39;g&#39;</span>]
 points  <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;-*&#39;</span>,<span style="color: #BA2121">&#39;-^&#39;</span>]
-<span style="color: #008000; font-weight: bold">for</span> y_val,point,col,label <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">zip</span>(y_vals,points,cols,labels):
+<span style="color: #008000; font-weight: bold">for</span> y_val,label,col,point <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">zip</span>(y_vals,labels,cols,points):
     plt<span style="color: #666666">.</span>plot(x_val,y_val,point,c<span style="color: #666666">=</span>col,label<span style="color: #666666">=</span>label)
 plt<span style="color: #666666">.</span>grid()
 plt<span style="color: #666666">.</span>legend()
@@ -1280,9 +1278,9 @@ plt<span style="color: #666666">.</span>show()
 <center> <!-- figure label: --> <div id="fig:python:loop"></div> <!-- FIGURE -->
 <hr class="figure">
 <center>
-<p class="caption">Figure 2:  Output of code.  <!-- caption label: fig:python:loop --> </p>
+<p class="caption">Figure 2: Output of code.  <!-- caption label: fig:python:loop --></p>
 </center>
-<p><img src="fig-python/plt_loop.png" align="bottom" width=800></p>
+<p><img src="fig-python/plt_loop.png" width="400" align="bottom"></p>
 </center>
 
 <h2 id="while-loops" class="anchor">While loops </h2>
@@ -1331,7 +1329,7 @@ end up changing the function definitions as your program develops.
 </div>
 
 <h2 id="defining-a-mathematical-function" class="anchor">Defining a mathematical function </h2>
-<p>Throughout this course you will write many functions that do mathematical operations. In many cases, you would also pass a function to another function to make your code more modular. Lets say we want to calculate the derivative of \( \sin x \), using the most basic definition of a derivative \( f^\prime(x) = f(x+\Delta x)-f(x)/\Delta x \), we could do it as</p>
+<p>Throughout this course you will write many functions that do mathematical operations. In many cases, you would also pass a function to another function to make your code more modular. Lets say we want to calculate the derivative of \( \sin x \), using the most basic definition of a derivative \( f^\prime(x) = (f(x+\Delta x)-f(x))/\Delta x \), we could do it as</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -1474,7 +1472,7 @@ If we would like to calculate the derivative at multiple points, that is straigh
   </div>
 </div>
 
-<p>This happens because the <code>df</code> function expect that the function we send into the argument list has a call signature <code>f(x)</code>. What many people do to avoid this error is to use global variable, that is to define <code>s0, v0</code>, and <code>a</code> at the top of the code. This is not always the best solution. Python has a special variable <code>*args</code> which can be used to pass multiple arguments to your function, thus if we rewrite <code>df</code> like this</p>
+<p>This happens because the <code>df</code> function expect that the function we send into the argument list has a call signature <code>f(x)</code>. What many people do to avoid this error is to use a global variable, that is to define <code>s0, v0</code>, and <code>a</code> at the top of the code. This is not always the best solution. Python has a special variable <code>*args</code> which can be used to pass multiple arguments to your function, thus if we rewrite <code>df</code> like this</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -1630,7 +1628,7 @@ a<span style="color: #666666">=2</span>
 </div>
 
 <h2 id="passing-arrays-and-lists-to-functions" class="anchor">Passing arrays and lists to functions </h2>
-<p>In the previous section, we looked at some simple examples regarding the scope of variables, and what happened with that variable inside and outside a function. The examples used integer or floats. However in most applications you will pass an array or a list to a function, and then you need to be aware that the behavior is not always would you might expect.</p>
+<p>In the previous section, we looked at some simple examples regarding the scope of variables, and what happened with that variable inside and outside a function. The examples used integer or floats. However in most applications you will pass an array or a list to a function, and then you need to be aware that the behavior is not always what you might expect.</p>
 <div class="alert alert-block alert-success alert-text-normal"><b>Unexpected behavior</b>
 <p>Sometimes functions do not do what you expect, this might be because the function does not treat  the arguments as you might think. The best advice is to make a very simple version of your function and test it for yourself. Is the behavior what you expect? Try to understand why or why not.</p>
 </div>
@@ -1937,7 +1935,7 @@ a <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
   </div>
 </div>
 
-<p>Thus, after adding 1 to <code>a</code>, <code>a</code> is assigned <em>a new place in memory</em>. This is very different from C or C++, in C or C++ the variable, once it is created, <em>always has the same memory address</em>. In Python this is not the case, it works in the opposite way. The statement <code>a=10.0</code>, is executed so that <em>first</em> 10.0 is created in memory, secondly <code>x</code> is assigned the reference to 10.0. The assignment operator <code>=</code> indicates that <code>a</code> should point to whatever is on the right hand side. Another example is     </p>
+<p>Thus, after adding 1 to <code>a</code>, <code>a</code> is assigned <em>a new place in memory</em>. This is very different from C or C++, in C or C++ the variable, once it is created, <em>always has the same memory address</em>. In Python this is not the case, it works in the opposite way. The statement <code>a=10.0</code>, is executed so that <em>first</em> 10.0 is created in memory, secondly <code>a</code> is assigned the reference to 10.0. The assignment operator <code>=</code> indicates that <code>a</code> should point to whatever is on the right hand side. Another example is     </p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -2051,7 +2049,7 @@ x<span style="color: #666666">.</span>append(<span style="color: #666666">10</sp
   </div>
 </div>
 
-<p>What happens here is that we create a box with the numbers 0, 1, 2, 3, 4, <code>x</code> is referenced that box. Next, we do <code>y=x</code> so that <code>y</code> is referenced the <em>same box</em> as <code>x</code>. Then, we add the number 10 to that box, and <code>x</code> and <code>y</code> still points to the same box.</p>
+<p>What happens here is that we create a box with the numbers 0, 1, 2, 3, 4, <code>x</code> is referenced to that box. Next, we do <code>y=x</code> so that <code>y</code> is referenced to the <em>same box</em> as <code>x</code>. Then, we add the number 10 to that box, and <code>x</code> and <code>y</code> still points to the same box.</p>
 
 <p>Numpy arrays behave differently, and that is basically because if we want to add a number to a Numpy array we have to do <code>x=np.array(x,10)</code>. Because of the assignment operator <code>=</code> , we take the content of the original box add 10 and put it into a <em>new</em> box</p>
 
@@ -2311,9 +2309,9 @@ df<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>Da
 <center> <!-- figure label: --> <div id="fig:file"></div> <!-- FIGURE -->
 <hr class="figure">
 <center>
-<p class="caption">Figure 3:  Official Covid-19 data, and example of files (left) tab separated (right) excel file.  <!-- caption label: fig:file --> </p>
+<p class="caption">Figure 3: Official Covid-19 data, and example of files (left) tab separated (right) excel file.  <!-- caption label: fig:file --></p>
 </center>
-<p><img src="fig-pandas/covid_comb.png" align="bottom" width=800></p>
+<p><img src="fig-pandas/covid_comb.png" width="400" align="bottom"></p>
 </center>
 
 
@@ -3072,9 +3070,9 @@ df<span style="color: #666666">.</span>groupby(<span style="color: #BA2121">&#39
 <center> <!-- figure label: --> <div id="fig:pandas:group"></div> <!-- FIGURE -->
 <hr class="figure">
 <center>
-<p class="caption">Figure 4:  The results of <code>df.groupby('LOCATION').sum()</code>.  <!-- caption label: fig:pandas:group --> </p>
+<p class="caption">Figure 4: The results of <code>df.groupby('LOCATION').sum()</code>.  <!-- caption label: fig:pandas:group --></p>
 </center>
-<p><img src="fig-pandas/group.png" align="bottom" width=800></p>
+<p><img src="fig-pandas/group.png" width="400" align="bottom"></p>
 </center>
 
 <h2 id="simple-statistics-in-pandas" class="anchor">Simple statistics in Pandas </h2>
@@ -3107,9 +3105,9 @@ df<span style="color: #666666">.</span>groupby(<span style="color: #BA2121">&#39
 <center> <!-- figure label: --> <div id="fig:pandas:desc"></div> <!-- FIGURE -->
 <hr class="figure">
 <center>
-<p class="caption">Figure 5:  Output from the describe command.  <!-- caption label: fig:pandas:desc --> </p>
+<p class="caption">Figure 5: Output from the describe command.  <!-- caption label: fig:pandas:desc --></p>
 </center>
-<p><img src="fig-pandas/describe.png" align="bottom" width=800></p>
+<p><img src="fig-pandas/describe.png" width="400" align="bottom"></p>
 </center>
 
 <h2 id="joining-two-dataframes" class="anchor">Joining two DataFrames </h2>
@@ -3184,9 +3182,9 @@ df2<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>D
 <center> <!-- figure label: --> <div id="fig:pandas:concat"></div> <!-- FIGURE -->
 <hr class="figure">
 <center>
-<p class="caption">Figure 6:  The result of <code>concat()</code>.  <!-- caption label: fig:pandas:concat --> </p>
+<p class="caption">Figure 6: The result of <code>concat()</code>.  <!-- caption label: fig:pandas:concat --></p>
 </center>
-<p><img src="fig-pandas/concat.png" align="bottom" width=800></p>
+<p><img src="fig-pandas/concat.png" width="400" align="bottom"></p>
 </center>
 
 <p>If you compare this DataFrame with the previous one, you will see that the index column is different. This is because when joining two DataFrames Pandas does not reset the index by default, doing <code>df=pd.concat([df1,df2],ignore_index=True)</code> resets the index. It is also possible to join DataFrames column wise:</p>
@@ -3256,9 +3254,9 @@ df2<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>D
 <center> <!-- figure label: --> <div id="fig:pandas:join"></div> <!-- FIGURE -->
 <hr class="figure">
 <center>
-<p class="caption">Figure 7:  The result of using <code>how=outer, inner, left</code>, or <code>right</code> in <code>pd.DataFrame.merge()</code>.  <!-- caption label: fig:pandas:join --> </p>
+<p class="caption">Figure 7: The result of using <code>how=outer, inner, left</code>, or <code>right</code> in <code>pd.DataFrame.merge()</code>.  <!-- caption label: fig:pandas:join --></p>
 </center>
-<p><img src="fig-pandas/fig_join.png" align="bottom" width=800></p>
+<p><img src="fig-pandas/fig_join.png" width="400" align="bottom"></p>
 </center>
 
 <p>To be even more specific, after performing the commands</p>
@@ -3291,9 +3289,9 @@ df1<span style="color: #666666">.</span>merge(df2,on<span style="color: #666666"
 <center> <!-- figure label: --> <div id="fig:pd:merge"></div> <!-- FIGURE -->
 <hr class="figure">
 <center>
-<p class="caption">Figure 8:  Merging to dataframes using <code>outer</code> (top) and <code>inner</code> (bottom).  <!-- caption label: fig:pd:merge --> </p>
+<p class="caption">Figure 8: Merging to dataframes using <code>outer</code> (top) and <code>inner</code> (bottom).  <!-- caption label: fig:pd:merge --></p>
 </center>
-<p><img src="fig-pandas/merge.png" align="bottom" width=800></p>
+<p><img src="fig-pandas/merge.png" width="400" align="bottom"></p>
 </center>
 
 <p>Clearly in this case we need to choose <code>outer</code>. In the merge process pandas adds an extra subscript <code>_x</code> and <code>_y</code> on columns that contain the same header name. We also need to sum those, which can be done as follows
@@ -3334,9 +3332,9 @@ df<span style="color: #666666">=</span>df<span style="color: #666666">.</span>dr
 <center> <!-- figure label: --> <div id="fig:pandas:merge3"></div> <!-- FIGURE -->
 <hr class="figure">
 <center>
-<p class="caption">Figure 9:  Result of outer merging and summing.  <!-- caption label: fig:pandas:merge3 --> </p>
+<p class="caption">Figure 9: Result of outer merging and summing.  <!-- caption label: fig:pandas:merge3 --></p>
 </center>
-<p><img src="fig-pandas/merge3.png" align="bottom" width=800></p>
+<p><img src="fig-pandas/merge3.png" width="400" align="bottom"></p>
 </center>
 
 <h2 id="working-with-folders-and-files" class="anchor">Working with folders and files </h2>
@@ -3947,11 +3945,9 @@ get_rows_from_dataframe(<span style="color: #BA2121">&#39;afGhaniStan&#39;</span
 <p>
 <!-- navigation buttons at the bottom of the page -->
 <ul class="pager">
-
   <li class="previous">
     <a href="._book001.html">&larr; Prev</a>
   </li>
-
   <li class="next">
     <a href="._book003.html">Next &rarr;</a>
   </li>
@@ -3968,5 +3964,4 @@ get_rows_from_dataframe(<span style="color: #BA2121">&#39;afGhaniStan&#39;</span
 -->
 </body>
 </html>
-    
 

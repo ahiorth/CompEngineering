@@ -1,0 +1,190 @@
+\contentsline {chapter}{Preface}{vii}{chapter*.1}
+\contentsline {chapter}{\numberline {1}Introduction to Python}{1}{chapter.1}
+\contentsline {section}{\numberline {1.1}Personal guidelines}{2}{section.1.1}
+\contentsline {paragraph}{Code Guidelines:}{2}{section*.3}
+\contentsline {paragraph}{Work Guidelines:}{3}{section*.4}
+\contentsline {subsection}{\numberline {1.1.1}Code editor}{3}{subsection.1.1.1}
+\contentsline {section}{\numberline {1.2}Types in Python}{4}{section.1.2}
+\contentsline {subsection}{\numberline {1.2.1}Basic types}{5}{subsection.1.2.1}
+\contentsline {subsection}{\numberline {1.2.2}Lists}{5}{subsection.1.2.2}
+\contentsline {paragraph}{List arithmetic.}{6}{section*.6}
+\contentsline {paragraph}{List slicing.}{7}{section*.7}
+\contentsline {subsection}{\numberline {1.2.3}Numpy arrays}{7}{subsection.1.2.3}
+\contentsline {paragraph}{Array slicing.}{8}{section*.8}
+\contentsline {subsection}{\numberline {1.2.4}Dictionaries}{9}{subsection.1.2.4}
+\contentsline {section}{\numberline {1.3}Looping}{10}{section.1.3}
+\contentsline {subsection}{\numberline {1.3.1}For loops}{10}{subsection.1.3.1}
+\contentsline {subsection}{\numberline {1.3.2}While loops}{12}{subsection.1.3.2}
+\contentsline {subsection}{\numberline {1.3.3}Functions in Python}{12}{subsection.1.3.3}
+\contentsline {subsection}{\numberline {1.3.4}Defining a mathematical function}{13}{subsection.1.3.4}
+\contentsline {subsection}{\numberline {1.3.5}Scope of variables}{14}{subsection.1.3.5}
+\contentsline {paragraph}{A variable created inside a function is only available within the function:}{14}{section*.10}
+\contentsline {paragraph}{The \texttt {global} keyword can be used to pass and access variables in functions:}{15}{section*.11}
+\contentsline {subsection}{\numberline {1.3.6}Passing arrays and lists to functions}{15}{subsection.1.3.6}
+\contentsline {subsection}{\numberline {1.3.7}Call by value or call by reference}{18}{subsection.1.3.7}
+\contentsline {paragraph}{Floats and integers.}{18}{section*.12}
+\contentsline {paragraph}{Lists and arrays.}{19}{section*.13}
+\contentsline {subsection}{\numberline {1.3.8}Mutable and immutable objects}{20}{subsection.1.3.8}
+\contentsline {chapter}{\numberline {2}Introduction to Pandas}{23}{chapter.2}
+\contentsline {section}{\numberline {2.1}What is Pandas?}{23}{section.2.1}
+\contentsline {section}{\numberline {2.2}Creating a data frame}{23}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}From an empty DataFrame}{24}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Create DataFrame from dictionary}{24}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.2.3}From a file}{25}{subsection.2.2.3}
+\contentsline {subsection}{\numberline {2.2.4}Accessing data in DataFrames}{26}{subsection.2.2.4}
+\contentsline {paragraph}{Selecting columns.}{26}{section*.15}
+\contentsline {paragraph}{Selecting rows.}{26}{section*.16}
+\contentsline {paragraph}{Challenges when accessing columns or rows.}{27}{section*.17}
+\contentsline {paragraph}{Time columns not parsed properly.}{27}{section*.18}
+\contentsline {subsection}{\numberline {2.2.5}Filtering and visualizing data}{29}{subsection.2.2.5}
+\contentsline {paragraph}{Boolean masking.}{29}{section*.19}
+\contentsline {paragraph}{Plotting a DataFrame.}{29}{section*.20}
+\contentsline {subsection}{\numberline {2.2.6}Performing mathematical operations on DataFrames}{29}{subsection.2.2.6}
+\contentsline {paragraph}{Example: mathematical operations on DataFrames.}{30}{section*.21}
+\contentsline {paragraph}{Solution.}{30}{section*.22}
+\contentsline {paragraph}{Matplotlib:}{31}{section*.23}
+\contentsline {paragraph}{Pandas plotting:}{31}{section*.24}
+\contentsline {subsection}{\numberline {2.2.7}Grouping, filtering and aggregating data}{31}{subsection.2.2.7}
+\contentsline {subsection}{\numberline {2.2.8}Simple statistics in Pandas}{32}{subsection.2.2.8}
+\contentsline {subsection}{\numberline {2.2.9}Joining two DataFrames}{33}{subsection.2.2.9}
+\contentsline {paragraph}{Appending DataFrames.}{33}{section*.27}
+\contentsline {paragraph}{Merging DataFrames.}{34}{section*.29}
+\contentsline {subsection}{\numberline {2.2.10}Working with folders and files}{36}{subsection.2.2.10}
+\contentsline {paragraph}{Basic use of Pathlib.}{36}{section*.33}
+\contentsline {paragraph}{List all sub directories and files:}{36}{section*.34}
+\contentsline {paragraph}{List all files of a type:}{37}{section*.35}
+\contentsline {paragraph}{Create a directory:}{37}{section*.36}
+\contentsline {paragraph}{Print current directory:}{37}{section*.37}
+\contentsline {paragraph}{Joining paths:}{37}{section*.38}
+\contentsline {paragraph}{Basic use of \texttt {os}.}{37}{section*.39}
+\contentsline {paragraph}{Creating a directory:}{37}{section*.40}
+\contentsline {paragraph}{Moving into a directory:}{37}{section*.41}
+\contentsline {paragraph}{Splitting data into different folders and files.}{37}{section*.42}
+\contentsline {paragraph}{Using the Pathlib library:}{37}{section*.43}
+\contentsline {paragraph}{Using the \texttt {os} library:}{38}{section*.44}
+\contentsline {subsection}{\numberline {2.2.11}Writing more robust code}{38}{subsection.2.2.11}
+\contentsline {paragraph}{Accessing columns in Pandas:}{39}{section*.45}
+\contentsline {paragraph}{To summarize:}{42}{section*.46}
+\contentsline {chapter}{\numberline {3}Finite differences}{43}{chapter.3}
+\contentsline {section}{\numberline {3.1}Why are gradients important?}{43}{section.3.1}
+\contentsline {section}{\numberline {3.2}Continuous functions and finite representation: numerical errors}{44}{section.3.2}
+\contentsline {section}{\numberline {3.3}Taylor polynomial approximation}{46}{section.3.3}
+\contentsline {paragraph}{Solution}{49}{section*.49}
+\contentsline {section}{\numberline {3.4}Calculating Numerical Derivatives of Functions}{50}{section.3.4}
+\contentsline {paragraph}{Higher order derivative.}{51}{section*.51}
+\contentsline {paragraph}{Solution:}{52}{section*.52}
+\contentsline {subsection}{\numberline {3.4.1}Roundoff Errors}{54}{subsection.3.4.1}
+\contentsline {paragraph}{Binary numbers.}{56}{section*.54}
+\contentsline {paragraph}{Floating point numbers and the IEEE 754-1985 standard.}{58}{section*.55}
+\contentsline {paragraph}{Roundoff error and truncation error in numerical derivatives.}{59}{section*.57}
+\contentsline {chapter}{\numberline {4}Partial differential equations and linear systems}{63}{chapter.4}
+\contentsline {section}{\numberline {4.1}The continuity equation}{63}{section.4.1}
+\contentsline {section}{\numberline {4.2}Continuity equation as a linear problem}{65}{section.4.2}
+\contentsline {paragraph}{Boundary conditions.}{68}{section*.60}
+\contentsline {paragraph}{Solution:}{69}{section*.62}
+\contentsline {section}{\numberline {4.3}Solving linear equations}{70}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}Gauss-Jordan elimination}{71}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.2}Pivoting}{75}{subsection.4.3.2}
+\contentsline {subsection}{\numberline {4.3.3}LU decomposition}{75}{subsection.4.3.3}
+\contentsline {section}{\numberline {4.4}Iterative methods}{76}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}Iterative improvement}{77}{subsection.4.4.1}
+\contentsline {subsection}{\numberline {4.4.2}The Jacobi method}{77}{subsection.4.4.2}
+\contentsline {subsection}{\numberline {4.4.3}The Gauss-Seidel method}{79}{subsection.4.4.3}
+\contentsline {section}{\numberline {4.5}Example: Linear regression}{80}{section.4.5}
+\contentsline {subsection}{\numberline {4.5.1}Solving least square, using algebraic equations}{81}{subsection.4.5.1}
+\contentsline {subsection}{\numberline {4.5.2}Least square as a linear algebra problem}{83}{subsection.4.5.2}
+\contentsline {subsection}{\numberline {4.5.3}Working with matrices on component form}{84}{subsection.4.5.3}
+\contentsline {section}{\numberline {4.6}Sparse matrices and Thomas algorithm}{85}{section.4.6}
+\contentsline {section}{\numberline {4.7}Example: Solving the heat equation using linear algebra}{87}{section.4.7}
+\contentsline {paragraph}{Heat equation for solids.}{87}{section*.66}
+\contentsline {paragraph}{Part 1.}{87}{section*.67}
+\contentsline {paragraph}{Part 1.}{88}{section*.69}
+\contentsline {paragraph}{Part 2.}{88}{section*.70}
+\contentsline {paragraph}{Part 3.}{89}{section*.72}
+\contentsline {paragraph}{Part 4.}{89}{section*.73}
+\contentsline {paragraph}{Part 1.}{90}{section*.75}
+\contentsline {paragraph}{Part 2.}{91}{section*.76}
+\contentsline {paragraph}{Part 3.}{91}{section*.77}
+\contentsline {paragraph}{Part 1.}{91}{section*.79}
+\contentsline {section}{\numberline {4.8}CO$_2$ diffusion into aquifers}{92}{section.4.8}
+\contentsline {chapter}{\numberline {5}Optimization and nonlinear systems}{97}{chapter.5}
+\contentsline {section}{\numberline {5.1}Nonlinear equations}{98}{section.5.1}
+\contentsline {section}{\numberline {5.2}Example: van der Waals equation of state}{99}{section.5.2}
+\contentsline {paragraph}{Solution.}{101}{section*.84}
+\contentsline {section}{\numberline {5.3}Fixed-point iteration}{101}{section.5.3}
+\contentsline {paragraph}{Solution.}{102}{section*.87}
+\contentsline {paragraph}{Solution.}{103}{section*.89}
+\contentsline {subsection}{\numberline {5.3.1}When does the fixed point method fail?}{104}{subsection.5.3.1}
+\contentsline {subsection}{\numberline {5.3.2}What to do when the fixed point method fails}{105}{subsection.5.3.2}
+\contentsline {paragraph}{Solution.}{105}{section*.91}
+\contentsline {section}{\numberline {5.4}Rate of convergence}{106}{section.5.4}
+\contentsline {section}{\numberline {5.5}The bisection method}{106}{section.5.5}
+\contentsline {subsection}{\numberline {5.5.1}Rate of convergence}{109}{subsection.5.5.1}
+\contentsline {section}{\numberline {5.6}Newton's method}{109}{section.5.6}
+\contentsline {subsection}{\numberline {5.6.1}Rate of convergence}{111}{subsection.5.6.1}
+\contentsline {paragraph}{Solution.}{112}{section*.96}
+\contentsline {section}{\numberline {5.7}Secant method}{113}{section.5.7}
+\contentsline {subsection}{\numberline {5.7.1}Rate of convergence}{114}{subsection.5.7.1}
+\contentsline {section}{\numberline {5.8}Newton Rapson method}{116}{section.5.8}
+\contentsline {section}{\numberline {5.9}Gradient descent}{116}{section.5.9}
+\contentsline {paragraph}{Solution.}{118}{section*.101}
+\contentsline {section}{\numberline {5.10}Other useful methods}{121}{section.5.10}
+\contentsline {chapter}{\numberline {6}Numerical integration}{123}{chapter.6}
+\contentsline {section}{\numberline {6.1}Algorithmic thinking}{123}{section.6.1}
+\contentsline {subsection}{\numberline {6.1.1}The midpoint rule}{124}{subsection.6.1.1}
+\contentsline {subsection}{\numberline {6.1.2}The trapezoidal rule}{125}{subsection.6.1.2}
+\contentsline {subsection}{\numberline {6.1.3}Numerical errors on integrals}{127}{subsection.6.1.3}
+\contentsline {subsection}{\numberline {6.1.4}Practical estimation of errors on integrals (Richardson extrapolation)}{129}{subsection.6.1.4}
+\contentsline {section}{\numberline {6.2}Romberg integration}{131}{section.6.2}
+\contentsline {subsection}{\numberline {6.2.1}Alternative implementation of adaptive integration}{134}{subsection.6.2.1}
+\contentsline {section}{\numberline {6.3}Gaussian quadrature}{136}{section.6.3}
+\contentsline {paragraph}{The case N=3.}{138}{section*.106}
+\contentsline {subsection}{\numberline {6.3.1}Error term on Gaussian integration}{140}{subsection.6.3.1}
+\contentsline {subsection}{\numberline {6.3.2}Common weight functions for classical Gaussian quadratures}{140}{subsection.6.3.2}
+\contentsline {section}{\numberline {6.4}Integrating functions over an infinite range}{140}{section.6.4}
+\contentsline {paragraph}{a)}{141}{section*.108}
+\contentsline {paragraph}{b)}{141}{section*.109}
+\contentsline {paragraph}{c)}{141}{section*.110}
+\contentsline {paragraph}{Solution.}{141}{section*.111}
+\contentsline {paragraph}{d)}{142}{section*.112}
+\contentsline {paragraph}{e)}{142}{section*.113}
+\contentsline {chapter}{\numberline {7}Ordinary differential equations}{143}{chapter.7}
+\contentsline {section}{\numberline {7.1}0D models}{143}{section.7.1}
+\contentsline {section}{\numberline {7.2}Ordinary differential equations}{143}{section.7.2}
+\contentsline {section}{\numberline {7.3}A simple model for fluid flow}{144}{section.7.3}
+\contentsline {section}{\numberline {7.4}Euler's method}{146}{section.7.4}
+\contentsline {subsection}{\numberline {7.4.1}Error analysis - Euler's method}{147}{subsection.7.4.1}
+\contentsline {subsection}{\numberline {7.4.2}Adaptive step size - Euler's method}{152}{subsection.7.4.2}
+\contentsline {section}{\numberline {7.5}Runge-Kutta methods}{155}{section.7.5}
+\contentsline {subsection}{\numberline {7.5.1}Adaptive step size - Runge-Kutta method}{158}{subsection.7.5.1}
+\contentsline {subsection}{\numberline {7.5.2}Conservation of mass}{161}{subsection.7.5.2}
+\contentsline {section}{\numberline {7.6}Solving a set of ODE equations}{162}{section.7.6}
+\contentsline {section}{\numberline {7.7}Stiff sets of ODE and implicit methods}{165}{section.7.7}
+\contentsline {paragraph}{Solution.}{169}{section*.126}
+\contentsline {paragraph}{a)}{171}{section*.127}
+\contentsline {paragraph}{Answer.}{171}{section*.128}
+\contentsline {paragraph}{b)}{171}{section*.129}
+\contentsline {paragraph}{Answer.}{171}{section*.130}
+\contentsline {paragraph}{c)}{171}{section*.131}
+\contentsline {paragraph}{Answer.}{171}{section*.132}
+\contentsline {chapter}{\numberline {8}Monte Carlo Methods}{173}{chapter.8}
+\contentsline {section}{\numberline {8.1}Monte Carlo methods}{173}{section.8.1}
+\contentsline {section}{\numberline {8.2}Monte Carlo integration ''hit and miss''}{173}{section.8.2}
+\contentsline {subsection}{\numberline {8.2.1}Random number generators}{175}{subsection.8.2.1}
+\contentsline {subsection}{\numberline {8.2.2}Encryption}{176}{subsection.8.2.2}
+\contentsline {subsection}{\numberline {8.2.3}Errors on Monte Carlo integration and the binomial distribution}{178}{subsection.8.2.3}
+\contentsline {subsection}{\numberline {8.2.4}The mean value method}{181}{subsection.8.2.4}
+\contentsline {subsection}{\numberline {8.2.5}Basic properties of probability distributions}{183}{subsection.8.2.5}
+\contentsline {subsection}{\numberline {8.2.6}Example: Monte Carlo integration of a hyper sphere}{184}{subsection.8.2.6}
+\contentsline {paragraph}{a)}{188}{section*.138}
+\contentsline {paragraph}{b)}{188}{section*.140}
+\contentsline {paragraph}{c)}{188}{section*.142}
+\contentsline {paragraph}{Remarks.}{188}{section*.144}
+\contentsline {paragraph}{a)}{189}{section*.146}
+\contentsline {paragraph}{Solution.}{189}{section*.147}
+\contentsline {paragraph}{b)}{189}{section*.148}
+\contentsline {paragraph}{Solution.}{189}{section*.149}
+\contentsline {paragraph}{c)}{190}{section*.150}
+\contentsline {paragraph}{Solution.}{190}{section*.151}
+\contentsline {chapter}{References}{191}{chapter*.152}
+\contentsline {chapter}{Index}{193}{section*.153}

@@ -8,7 +8,7 @@ However, it is not easy to learn modeling and it is even harder if one use model
 
 Modeling can be broken down into several parts: 
 o Identify important physical phenomena. This involves abstraction, formulate the key physical mechanisms as mathematical equations. In this process, it is important to interact with people who have domain knowledge.
-o Implement the model, solve and validate it against known analytical solutions. Analytical solutions exists when one simplify the system.
+o Implement the model, solve and validate it against known analytical solutions. Analytical solutions exists when one simplifies the system.
 o Calibrate model parameters against data. A simple model would have much less parameters than a complicated model, hence it is much harder to match data. After this step, one usually needs to identify effects missing or remove effects that might not be important.
 
 
