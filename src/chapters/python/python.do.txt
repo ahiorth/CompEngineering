@@ -1,26 +1,26 @@
 There are plenty of online resources if you want get an overview of Python syntax, such as cite{vanderplas2016whirlwind}, for which the full book is available on "github":"https://github.com/jakevdp/WhirlwindTourOfPython".
 
-In this chapter I will try to focus on the key part of Python that you will need in this course, and maybe more importantly, give some advice on how to write good, reusable, Python code. As you might have discovered, tasks can be solved in many different ways in Python. This is clearly a strength because you would most likely be able to solve any task thrown at you. On the other hand it is a weakness, because code can get messy and hard to follow, especially if you solve the same task in different parts of your code using different libraries or syntax.
+In this chapter I will try to focus on the key part of Python that you will need in this course, and maybe more importantly, give some advice on how to write good, reusable code. As you may have discovered, tasks can be solved in many different ways in Python. This is clearly a strength because you would most likely be able to solve any task. On the other hand it is a weakness, because code can get messy and hard to follow, especially if you solve the same task in different parts of your code using different libraries or syntax.
 
 In this chapter, I will explain how I tend to solve some common tasks, in the process we will also cover some stuff that you should know. If you need more information on each topic below, there are plenty of online sources. 
 
-The code examples are meant as an inspiration, and maybe you do not agree and have solutions that you think are much better. If that is the case, I would love to know, so that I can update this chapter.
+The code examples are meant as an inspiration, and you may not agree and have solutions that you think are better. If that is the case, I would love to know, so that I can update this chapter.
 
 !bnotice Speed and readability
-Many people are concerned about speed or execution time. My advice is to focus on readable code, and get the job done. When the code is working, it is very easy to go back and change parts that are slow. Remember that you should test the code on big problems, sometimes the advantage of Numpy or Scipy is not seen before the system is large. You can use the magic commands `%timeit` to check performance of different functions. You can also use "Numba":"https://numba.pydata.org/", which translate python code into optimized machine code. 
+Many people are concerned about speed or execution time. My advice is to focus on readable code, and get the job done. When the code is working, it is very easy to go back and change parts that are slow. Remember that you should test the code on big problems; sometimes the advantage of Numpy or Scipy is not seen before the system is large. You can use the command `%timeit` to check the performance of different functions. You can also use "Numba":"https://numba.pydata.org/", which translates Python code into optimized machine code. 
 !enotice
 
 ======= Personal guidelines  =======
-It is important to have some guidelines when coding, and for Python there are clear style guides called "PEP 8":"https://www.python.org/dev/peps/pep-0008/". Take a look at the official guidelines, and  make some specific rules for yourself, and stick to them. The reason for this is that if you make a large program or library, people will recognize your style and it is easier to understand the code. If you are working in a team, it is even more important - try to agree on some basic rules, for example:
+It is important to have some guidelines when coding, and for Python there are clear style guides called "PEP 8":"https://www.python.org/dev/peps/pep-0008/". Take a look at the official guidelines, and  make some specific rules for yourself, and stick to them. The reason for this is that if you make a large program or library, people will recognize your style and it will be easier to understand your code. If you are working in a team, it is even more important - try to agree on some basic rules, for example:
 
 __Code Guidelines:__
 * Variable names should be meaningful.
-* Naming of variables and functions. Should you write `def my_function(...):` or `def MyFunction(..)`, i.e are words separated by an underscore or a capital letter? Personally I use capital letters for class definition, and underscore for function definitions.
+* Naming of variables and functions. Should you write `def my_function(...):` or `def MyFunction(..)`, i.e. are words separated by an underscore or a capital letter? Personally I use capital letters for class definition, and underscore for function definition.
 * (Almost) always use doc strings, you would be amazed how easy it is to forget what a function does. Shorter (private) functions usually do not need comments or doc strings, if you use good variable names - it should be easy to understand what is happening by just looking at the code.
 * Inline comments should be used sparingly, only where strictly necessary.
 * Strive to make code general, in particular not type specific, e.g. in Python it is easy to make functions that will work if a list (array) or a single value is passed.
 * Use exception handling, in particular for larger projects.
-* DRY - Do not Repeat Yourself cite{thomas2019pragmatic}. If you need to change the code in more than one place to extend it, you may forget to change everywhere and introduce bugs.
+* DRY - Do not Repeat Yourself cite{thomas2019pragmatic}. If you need to change the code in more than one place to extend it, you may forget to change it everywhere and introduce bugs.
 * The DRY principle also applies to *knowledge sharing*, it is not only about copy and paste code, but knowledge should only be represented in one place. 
 * Import libraries using the syntax `import library as ..`, Numpy would typically be `import numpy as np`. The syntax `from numpy import *` could lead to conflicts between modules as functions could have the same name in two different modules.
 
@@ -30,11 +30,11 @@ __Work Guidelines:__
 * Unexpected behavior of functions. Functions should be able to discover if something is wrong with arguments, and give warnings.
 
 ===== Code editor =====
-You would like to use an editor that gives you some help. This is particularly useful when you do not remember a variable or function name, you can guess  the name and a drop down list will appear which will let you pick the name or function you want. If you enter  a function name, the editor will write some useful information about the function, some screenshots are shown in figure ref{fig:py:vscode}.
+You would like to use an editor that gives some help. This is particularly useful when you do not remember a variable or function name, you can start typing the name and a drop down list will appear which will let you pick the variable or function you want. If you enter  a function name, the editor will write some useful information about the function, some screenshots are shown in figure ref{fig:py:vscode}.
 
 FIGURE: [fig-python/vscode.png, width=400 frac=1.0] A screenshot of vscode (left) the editor helps to identify which variable name you want, (right) the editor shows relevant information about the function you would like to call. label{fig:py:vscode}
 
-Currently my favorite editor is "vscode":"https://code.visualstudio.com/", it can be used for any language, and there are a lot of add ins that can be installed to make the coding experience more pleasant. Spyder is also a very good alternative, but this editor is mainly for Python. It takes some time to learn how an editor works, so it is good if the editor can be used for multiple purposes.  However, always be open to new ideas and products, it will only make you more efficient. As an example, in some cases you will have a particular difficult error in the code, and then it could help to open and run that code in a different editor, you might get a slightly different error messages, which could help you locate the error.
+Currently my favorite editor is "vscode":"https://code.visualstudio.com/", it can be used for any language, and there are a lot of add-ins that can be installed to make the coding experience more pleasant. Spyder is also a very good alternative, but this editor is mainly for Python. It takes some time to learn how an editor works, so it is good if the editor can be used for multiple purposes.  However, always be open to new ideas and products, it will make you more efficient. As an example, in some cases you will have a particular error in the code that is difficult to find. It can help to open and run that code in a different editor, you might get slightly different error messages, which could help you locate the error.
 
 ======= Types in Python =======
 idx{types}
@@ -50,7 +50,7 @@ print(id(y)) # prints the same integer as id(x)
 !ec
 For those familiar with C or C++, one would first have to define `x` and `y` as the type `int` and then they would already have a different place in memory and they can *never* be the same (even if they contain the same number). We will return to this point in more detail when discussing lists and arrays in Python, as it can lead to unexpected behavior.
 
-Another thing you might have experienced during Python coding is that you get error messages that refer to pieces of code that you have no knowledge of. This can happen when you pass the wrong type (e.g. a string instead of a number). Since Python only has one type, the wrong type will not be discovered before it is actually used. This error could be deep into some other library that you have no knowledge of. 
+Another thing you might have experienced during Python coding is that you get error messages that refer to pieces of code that you have no knowledge of. This can happen when you pass the wrong type (e.g. a string instead of a number). Since Python only has one type, the wrong type will not be discovered before it is used. This error could be deep into some other library that you have no knowledge of. 
 
 ===== Basic types =====
 idx{basic types}
@@ -84,14 +84,14 @@ my_list = ['one', 'two','three'] # a list of strings
 my_list = ['one']*10 # a list with 10 equal string elements 
 !ec
 !bnotice
-To get the first element in a list, we do e.g. `my_list[0]`. In a list with 10 elements the last element would be `my_list[9]`. The length of a list can be found by using the `len()` function, i.e. `len(my_list)=10`. Thus, the last element can also be found by doing `my_list[len(my_list)-1]`. However, in Python you can always get the last element by doing `my_list[-1]`, the second last element would be `my_list[-2]` and so on.
+To get the first element in a list, we do e.g. `my_list[0]`. In a list with 10 elements the last element would be `my_list[9]`. The length of a list can be found using the `len()` function, i.e. `len(my_list)=10`. Thus, the last element can also be found by doing `my_list[len(my_list)-1]`. However, in Python you can always get the last element by doing `my_list[-1]`, the second last element would be `my_list[-2]` and so on.
 !enotice
 Sometimes you do not want to initialize the list with everything equal, and it can be tiresome to write everything out yourself. If that is the case you can use *list comprehension*
 !bc pypro
 my_list = [i for i in range(10)] # a list from 0,1,..,9
 my_list = [i**3 for i in range(10)] # a list with elements 0,1,8, ..,729
 !ec
-We will cover the for loop below, but basically what is done is that the statement `i in range(10)`, gives `i` the value 0, 1, $\ldots$, 9 and the first `i` inside the list tells python to use that value as the element in the list. Using this syntax, there are plenty of opportunities to initialize. Maybe you want to pick from a list words that contain a particular subset of characters
+We will cover the for-loop below, but basically what is done is that the statement `i in range(10)`, gives `i` the value 0, 1, $\ldots$, 9 and the first `i` inside the list tells Python to use that value as the element in the list. Using this syntax, there are plenty of opportunities to initialize a list. Maybe you want to pick from a list words that contain a particular subset of characters
 !bc pypro
 my_list  = ['hammer', 'nail','saw','lipstick','shirt']
 new_list = [i for i in my_list if 'a' in i]
@@ -120,7 +120,7 @@ my_list[::1]    # ['hammer', 'saw', 'screw', 'nail', 'glue']
 my_list[::2]    # ['hammer', 'screw', 'glue']
 !ec
 
-Sometimes you have lists of lists, if you want to get e.g. the first element of each list you cannot access those elements using list slicing, you have to use a for loop or list comprehension
+Sometimes you may have a list of lists. If you want to get e.g. the first element of each list, you cannot do this using list slicing. Instead, you will need to use a for-loop or list comprehension
 !bc pypro
 my_list  = ['hammer','saw']
 my_list2 = ['screw','nail','glue']
@@ -131,7 +131,7 @@ new_list2 = [ list[0] for list in new_list]
 `new_list2=['hammer','screw']`
 
 !bnotice When to use lists
-Use lists if you have mixed types, and as storage containers. Be careful when you do numerical computation not to mix lists and Numpy arrays. Adding two lists e.g. `[1,2]+[1,1]`, will give you `[1,2,1,1]`, whereas adding two Numpy arrays will give you `[2,3]`.
+Use lists if you have mixed types, and as storage containers. Be careful when you do numerical computations not to mix lists and Numpy arrays. Adding two lists e.g. `[1,2]+[1,1]`, will give you `[1,2,1,1]`, whereas adding the same two Numpy arrays will give you `[2,3]`.
 !enotice
 
 ===== Numpy arrays  =====
@@ -164,7 +164,7 @@ my_array[1:-1]   # [1,2,3,4]
 my_array[1:-1:2] # [1,3]
 my_array[::2]    # [0,2,4]
 !ec
-However, as opposed to lists all the basic mathematical operations addition, subtraction, multiplication are meaningful (*if the arrays have equal length, or shape*)
+However, as opposed to lists all the basic mathematical operations addition, subtraction, multiplication are meaningful with arrays (*if they have equal length, or shape*)
 !bc
 my_array  = np.array([0,1,2])
 my_array2 = np.array([3,4,5])
@@ -188,7 +188,7 @@ my_array.shape = (3,2) # [[0,1],[2,3],[4,5]] 3 rows and 2 columns
 !ec
 
 ===== Dictionaries =====
-If you have not used dictionaries before they might feel unnecessary, but if you get used to them and their syntax, they can make your code much more flexible and easier to expand. You should use dictionaries, when you have data sets that you want to access fast. A very good mental image to have is an excel sheet where data are organized in columns. Each column has a header name, or a *key*. Assume we have the following table
+If you have not used dictionaries before they might look unnecessary, but if you get used to them and their syntax, they can make your code much more flexible and easier to expand. You should use dictionaries when you have data sets that you want to access fast. A very good mental image to have is an excel sheet where data are organized in columns. Each column has a header name, or a *key*. Assume we have the following table
 
 |-----------------------------------|
 | A        | B           | C        |
@@ -198,22 +198,22 @@ If you have not used dictionaries before they might feel unnecessary, but if you
 |  6.0     | 7.0         |          |
 |-----------------------------------|
 
-This could be represented as a dictionary as
+This could be represented as a dictionary
 !bc pypro
 my_dict={'A':[1.0,4.0,6.0],'B':[2.0,5.0,7.0],'C':[3.0]}
 !ec
-The syntax is `{key1:values, key2:values2, ...}`. We access the values in the dictionary by the key i.e. `print(my_dict['A'])` would print `[1.0,4.0,6.0]`. If you want to print out all the elements in a dictionary, you can use a for loop (see next section for more details about for loops)
+The syntax is `{key1:values, key2:values2, ...}`. We access the values in the dictionary by the key i.e. `print(my_dict['A'])` would print `[1.0,4.0,6.0]`. If you want to print out all the elements in a dictionary, you can use a for-loop (see next section for more details about for-loops)
 !bc pypro
 for key in my_dict:
     print(key, my_dict[key])
 !ec
 
 ======= Looping =======
-There are basically two ways of iterating through lists or to do a series of computations, using a for-loop or a while-loop. In most cases a for loop can also be written as a while loops and vice versa. You would typically use a for-loop when you are iterating over a fixed number of elements. A good example is when we are iterating in a numerical computation from time zero to the end time. A while-loop is typically used when we do not know before the run time when to stop, this could be that we are waiting for user input or to reach a certain numerical accuracy in our calculation before proceeding.
+There are basically two ways of iterating through lists or to do a series of computations: a for-loop and a while-loop. In most cases a for-loop can also be written as a while-loop and vice versa. You would typically use a for-loop when you are iterating over a fixed number of elements. A good example is when we are iterating in a numerical computation from time zero to the end time. A while-loop is typically used when we do not know before the run time when to stop, this could be that we are waiting for user input or to reach a certain numerical accuracy in our calculation before proceeding.
 
 
-===== For loops =====
-A typical example of a for loop is to loop over a list and do something, and maybe during the execution store the results in a list
+===== For-loops =====
+A typical example of a for-loop is to loop over a list and do something, and maybe during the execution store the results in another list
 !bc pypro
 numbers=['one','two','three','one','two']
 result=[] # has to be declared as empty
@@ -221,7 +221,7 @@ for number in numbers:
     if number == 'one':
        result.append(1) 
 !ec
-The result of this code is `result=[1, 1]`. The `number` variable changes during the iteration, and takes the value of each element in the list. Note that I use `numbers` for the list and `number` as the iterator, this makes it quite easy to read and understand the code. In many cases you want to have the index, not only the element in the list
+The result of this code is `result=[1, 1]`. The `number` variable changes during the iteration and takes the value of each element in the list. Note that I use `numbers` for the list and `number` as the iterator, this makes it easy to read and understand the code. In many cases you want to have the index, not only the element in the list
 !bc pypro
 numbers  = ['one','two','three','one','two']
 numerics = [  1  ,  2  ,   3   , 1   , 2   ]
@@ -232,7 +232,7 @@ for idx,number in enumerate(numbers):
 !ec
 The result of this code is `result=[1, 1]`. In this case the function `enumerate(numbers)` returns two values: the index, which is stored in `idx`, and the value of the list element, which is stored in `number`.
 
-A more elegant way to achieve the same results without using the `enumerate()` function is to use `zip`
+A more elegant way to achieve the same results without using the `enumerate()` function is to use the `zip()` function
 !bc pypro
 numbers  = ['one','two','three','one','two']
 numerics = [  1  ,  2  ,   3   , 1   , 2   ]
@@ -241,9 +241,9 @@ for numeric,number in zip(numerics,numbers):
     if number == 'one':
        result.append(numeric) 
 !ec
-The `zip` function can be used with several lists of same length.
+The `zip()` function can be used with several lists of the same length.
 
-In many cases you might be in a situation that you want to plot more than one function in a plot. It is then very tempting to copy and paste the previous code, but it is more elegant to use a for loop and lists
+In some cases you may want to plot more than one function in a plot, with different characteristics for each function curve. It is then tempting to copy and paste the previous code, but it is more elegant to use a for loop and lists
 !bc pypro
 import numpy as np
 import matplotlib.pyplot as plt
@@ -258,11 +258,11 @@ plt.grid()
 plt.legend()
 plt.show()
 !ec
-Output of code is shown in figure ref{fig:python:loop}.
+The output of this code is shown in figure ref{fig:python:loop}.
 
-FIGURE: [fig-python/plt_loop.png, width=400 frac=1.0] Output of code. label{fig:python:loop}
-===== While loops =====
-A while loop is used whenever you do not know before run time when to stop iterating. The syntax of the while loop is to do something while a condition is true
+FIGURE: [fig-python/plt_loop.png, width=400 frac=1.0] Output of code above. label{fig:python:loop}
+===== While-loops =====
+A while-loop is used whenever you do not know before run time when to stop iterating. The while-loop does something while a condition is true
 !bc pypro
 import numpy as np
 finished = False
@@ -272,7 +272,7 @@ while not finished:
       if sum >= 10.:
       	 finished = True
 !ec
-In some cases we are iterating from $t_0$, $t_1$, etc. to a final time $t_f$, if we use a fixed time step, $\Delta t$, we can calculate the number of steps i.e $N= \text{int} ((t_f-t_0)/\Delta t)$, and use a for loop. On the other hand, in a more fancy algorithms we can change the time step as the simulation proceeds and then we need to choose a while loop, e.g. `while t0 <= tf:`. 
+In some cases we are iterating from $t_0$, $t_1$, etc. to a final time $t_f$. If we use a fixed time step, $\Delta t$, we can calculate the number of steps i.e $N= \text{int} ((t_f-t_0)/\Delta t)$, and use a for-loop. However, in a more fancy algorithm we can change the time step as the simulation proceeds and then we need to use a while-loop, e.g. `while t0 <= tf:`. 
 ===== Functions in Python =====
 When to use functions? There is no particular rule, *but whenever you
 start to copy and paste code from one place to another, you should
@@ -328,7 +328,7 @@ How can we calculate the derivative of this function? If we try to do `df(1,s)` 
 TypeError: s() missing 3 required positional
 	   arguments: 's0', 'v0', and 'a'
 !ec
-This happens because the `df` function expect that the function we send into the argument list has a call signature `f(x)`. What many people do to avoid this error is to use a global variable, that is to define `s0, v0`, and `a` at the top of the code. This is not always the best solution. Python has a special variable `*args` which can be used to pass multiple arguments to your function, thus if we rewrite `df` like this
+This happens because the `df` function expect that the function we send into the argument list has a call signature `f(x)`. What many people do to avoid this error is to use global variables, that is to define `s0, v0`, and `a` at the top of the code. This is not always the best solution. Python has a special variable `*args` which can be used to pass multiple arguments to your function, thus if we rewrite `df` like this
 !bc pypro
 def df(x,f,*args,delta_x=1e-3):
     ''' returns the derivative of f '''
@@ -397,7 +397,7 @@ print('x =',x)
 print('f(x) returns ', f(x))
 print('x is now ', x)
 !ec
-In the example above we can use `x=3`, `x=[3]`, `x=np.array([3])`, and after execution `x` is unchanged (i.e. same value as before `f(x)`) was called. Based on what we have discussed before, this is maybe what you would expect, but if we now do
+In the example above we can use `x=3`, `x=[3]`, `x=np.array([3])`, and after execution `x` is unchanged (i.e. same value as before `f(x)` was called). Based on what we have discussed before, this is maybe what you would expect, but if we now do
 !bc pypro
 x=[3]
 def append_to_list(x):
@@ -406,7 +406,7 @@ print('x = ',x)
 print('append_to_list(x) returns ', append_to_list(x))
 print('x is now ', x)
 !ec
-(Clearly this function will only work for lists, due to the append command.) After execution, we get the result
+Clearly this function will only work for lists, due to the append command. After execution, we get the result
 !bc pypro
 x = [3]
 append_to_list(x) #returns  [3 1], x is now  [3, 1]
@@ -476,7 +476,7 @@ The examples in this section are meant to show you that if you pass an array to 
 ===== Call by value or call by reference  =====
 For anyone that has programmed in C or C++ call by reference or value is something one need to think about constantly. When we pass a variable to a function there are two choices, should we pass a copy of the variable or should we pass information about where the variable is stored in memory?
 !bnotice Value and reference
-In C and C++ pass by value means that we are making a copy in the memory of the variable we are sending to the function, and pass by reference means that we are sending the actual parameter or more specific the address to the memory location of the parameter. In Python all variables are passed by object reference.
+In C and C++ pass by value means that we are making a copy in the memory of the variable we are sending to the function, and pass by reference means that we are sending the actual parameter or more specific the address to the memory location of the parameter. In Python all variables are passed by (object) reference.
 !enotice
 In C and C++ you always tell in the function definition if the variables are passed by value or reference. Thus if you would like a change in a variable outside the function definition, you pass the variable by reference, otherwise by value. In Python we always pass by (object) reference.
 
@@ -507,7 +507,7 @@ print(a is b) # False
 When we add 2 to `a`, we actually add 2 to the value of 10, the number 12 is assigned a new place in memory and `a` will be assigned that object, whereas `b` would still points the old object 10.
 
 === Lists and arrays ===
-Yous should think of lists and arrays as containers (or a box). If we do
+You should think of lists and arrays as containers (or a box). If we do
 !bc pypro
 x=[0,1,2,3,4]
 print(id(x))
@@ -626,7 +626,7 @@ plt.grid()
 
 If you want to reach the variable inside the function  
 Note that you also has define 
-Tips for python programming
+Tips for Python programming
 ## o use of __main__ if __name__ == '__main__':
 o "Use of underscore":"https://hackernoon.com/understanding-the-underscore-of-python-309d1a029edc"
 o get index in loop: for idx,item in enumerate(list):

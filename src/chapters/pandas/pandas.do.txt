@@ -1,5 +1,5 @@
 ======= What is Pandas? =======
-Pandas is a Python package that among many things is used to handle data, and perform operations on groups of data. It is built on top of Numpy, which makes it easy to perform vectorized operations. Pandas is written by Wes McKinney, and one of it objectives is according to the official website " '' providing fast, flexible, and expressive data structures designed to make working with ''relational'' or ''labeled'' data both easy and intuitive. It aims to be the fundamental high-level building block for doing practical, real-world data analysis in Python''":"https://pandas.pydata.org/". Pandas also has excellent functions for reading and writing excel and csv files.  An excel file is read directly into memory in what is called a `DataFrame`. A DataFrame is a two dimensional object where data are typically stored in column or row format. Pandas has a lot of functions that can be used to calculate statistical properties of the data frame as a whole. In this chapter, we will focus on basic data manipulation, stuff you might do in excel, but can be done much faster in Python and Pandas.
+Pandas is a Python package that among many things is used to handle data, and perform operations on groups of data. It is built on top of Numpy, which makes it easy to perform vectorized operations. Pandas is written by Wes McKinney, and one of it objectives is according to the official website " '' providing fast, flexible, and expressive data structures designed to make working with ''relational'' or ''labeled'' data both easy and intuitive. It aims to be the fundamental high-level building block for doing practical, real-world data analysis in Python''":"https://pandas.pydata.org/". Pandas also has excellent functions for reading and writing excel and csv files.  An excel file is read directly into memory in what is called a `DataFrame`. A DataFrame is a two dimensional object where data are typically stored in column and row format. Pandas has a lot of functions that can be used to calculate statistical properties of the data frame as a whole. In this chapter, we will focus on basic data manipulation, stuff you might do in excel, but can be done much faster in Python and Pandas.
 
 
 ======= Creating a data frame =======
@@ -14,7 +14,7 @@ This is perhaps the most basic way of creating a DataFrame, first we create an e
 df = pd.DataFrame()
 !ec
 !bnotice Variable name
-Note that we often use `df` as a variable name for a DataFrame, this is a choice, but it is a good choice as someone else reading the code could infer from a name that `df` is a DataFrame. If you need more than one DataFrame variable you could use `df1`, `df2`, etc. or even better, use a descriptive name, `df_sales_data`.
+Note that we often use `df` as a variable name for a DataFrame. This is a good choice as someone else reading the code could infer from the variable name that `df` is a DataFrame. If you need more than one DataFrame variable you could use `df1`, `df2`, etc. or even better, use a descriptive name, `df_sales_data`.
 !enotice
 Next, we can add columns to the DataFrame:
 !bc pypro
@@ -27,7 +27,7 @@ print(df) # to view data frame
 Note that all columns need to have the same size.
 
 !bnotice `pd.Series()`
-Even if we initialize the DataFrame column with a list, the command `type(df['a'])` will tell you that the column in the DataFrame are of type `pd.Series()`. Thus the fundamental objects in Pandas are of type `Series`. Series are more flexible, and it is possible to calculate `df['a']/df['b']`, whereas `[0,1,2,3]/[4,5,6,7]` is not possible.  
+Even if we initialize the DataFrame column with a list, the command `type(df['a'])` will tell you that the column in the DataFrame is of type `pd.Series()`. Thus the fundamental objects in Pandas are of type `Series`. Series are more flexible, and it is possible to calculate `df['a']/df['b']`, whereas `[0,1,2,3]/[4,5,6,7]` is not possible.  
 !enotice
 
 ===== Create DataFrame from dictionary =====
@@ -46,7 +46,7 @@ print(df) # to view
 ##Note that all columns must have the same length to create the DataFrame.
 
 ===== From a file =====
-Assume you have some data organized in excel or in a csv file. The csv file could just be a file with column data, they could be separated by a comma or tab.
+Assume you have some data organized in an excel or csv file. The csv file could just be a file with column data, and the entries could be separated by a comma or tab.
 
 FIGURE: [fig-pandas/covid_comb.png, width=400 frac=1.0] Official Covid-19 data, and example of files (left) tab separated (right) excel file. label{fig:file}
 
@@ -57,7 +57,7 @@ df2=pd.read_csv('../data/corona_data.dat',sep='\t') # csv tab separated file
 If the excel file has several sheets, you can give the sheet name directly, e.g. `df=pd.read_excel('file.xlsx',sheet_name='Sheet1')`, for more information see the "documentation":"https://pandas.pydata.org/docs/reference/api/pandas.read_excel.html". 
 
 !bnotice Accessing files
-Accessing files from python can be painful. If excel files are open in excel, Windows will not allow a different program to access it - always remember to close the file before opening it. Sometimes we are not in the right directory, to check which directory you are in, you can always do the following
+Accessing files from Python can be painful. If excel files are open in excel, Windows will not allow a different program to access them - always remember to close the file before opening it. Sometimes we may not be in the right directory; to check which directory you are in, you can do the following
 !bc pypro
 import os
 print(os.getcwd()) # prints current working directory
@@ -70,7 +70,7 @@ df.to_excel('covid19.xlsx', index=False) # what happens if index=True?
 !ec
 
 !bnotice Index column
-Whenever you create a DataFrame, Pandas by default create an index column, it contains an integer for each row starting at zero. It can be accessed by `df.index`, and it is also possible to define another column as index column. 
+Whenever you create a DataFrame, Pandas by default create an index column. This column contains an integer for each row starting at zero. The index column can be accessed by `df.index`, and it is also possible to define another column as index column. 
 !enotice
 
 ===== Accessing data in  DataFrames =====
@@ -87,7 +87,7 @@ time=df[df.columns[1]]
 time=df.loc[:,['TIME']] # by loc[] if we use name
 time=df.iloc[:,1] # by iloc, pick column number 1
 !ec
-The `loc[]` and `iloc[]` functions also allow list slicing, one can then pick e.g. every second element in the column by `time=df.iloc[::2,1]` etc. The difference is that `loc[]` uses the name, and `iloc[]` the index (usually an integer). 
+The `loc[]` and `iloc[]` functions also allow list slicing; one can then pick e.g. every second element in the column by `time=df.iloc[::2,1]` etc. The difference is that `loc[]` uses the name, and `iloc[]` the index (usually an integer). 
 
 Why do we have several ways of doing the same operation? It turns out that although we are able to extract what we want with these operations, they are of different type:
 !bc pypro
@@ -103,13 +103,13 @@ time=df.iloc[0:2,:] # by iloc
 !ec
 
 !bnotice `pandas.DataFrame.loc` vs `pandas.DataFrame.iloc`
-When selecting rows `loc` and `iloc` behave differently, `loc` includes the endpoints (in the example above both row 0 and 1), whereas `iloc` includes the starting point and up to the endpoint. 
+When selecting rows `loc` and `iloc` behave differently, `loc` includes the endpoints (in the example above both row 0 and 1), whereas `iloc` includes the starting point up to the endpoint-1. 
 !enotice
 
 === Challenges when accessing columns or rows ===
 
 !bnotice Special characters 
-Sometimes when reading files from excel, headers may contains invisible characters like newline `\n` or tab `\t` or maybe Norwegian special letters that have not been read in properly. If you have problems accessing a column by name do `print(df.columns)` and check if the name matches what you would expect.  
+Sometimes when reading files from excel, headers may contains invisible characters like newline `\n` or tab `\t` or maybe Norwegian special letters that are not read properly. If you have problems accessing a column by name do `print(df.columns)` and check if the name of the column matches what you would expect.  
 !enotice
 
 If the header names have unwanted white space, one can do:
@@ -132,7 +132,7 @@ df['LOCATION']=df['LOCATION'].str.strip()
 If you have dates in the file (as in our case for the `TIME` column), you should check if they are in the `datetime` format and not read as `str`.
 
 !bnotice `datetime`
-The `datetime` library is very useful for working with dates. Data types of the type `datetime` (or equivalently `timestamp` used by Pandas) contain both date and time in the format `YYYY-MM-DD hh:mm:ss`. We can initialize a variable, `a`, by `a=datetime.datetime(2022,8,30,10,14,1)`, to access the hour we do `a.hour`, the year by `a.year` etc. It is also easy to increase e.g. the day by one by doing `a+datetime.timedelta(days=1)`. 
+The `datetime` library is very useful for working with dates. Variables of the type `datetime` (or equivalently `timestamp` used by Pandas) contain both date and time in the format `YYYY-MM-DD hh:mm:ss`. We can initialize a variable, `a`, by `a=datetime.datetime(2022,8,30,10,14,1)`. To access the hour we do `a.hour`, the year `a.year`, etc. It is also easy to increase e.g. the day by one by doing `a+datetime.timedelta(days=1)`. 
 !enotice
 
 !bc pypro
@@ -144,7 +144,7 @@ print(time[0])
 print(time[0]+dt.timedelta(days=1))
 !ec
 
-The code above might work fine or in some cases a date is parsed as a string by Pandas, then we need to convert that column to the correct format. If not, we get into problems if you want to plot data vs the time column.
+The code above might work fine or in some cases a date is parsed as a string by Pandas, then we need to convert that column to the correct format. If not, we get into problems if we want to plot the data vs the time column.
 
 Below are two ways of converting the `TIME` column:
 !bc pypro
@@ -159,27 +159,27 @@ Another possibility is to do the conversion when reading the data:
 !bc pypro
 df2=pd.read_csv('../data/corona_data.dat',sep='\t',parse_dates=['TIME']) 
 !ec
-If you have a need to specify all data types, to avoid potential problems down the line this can also be done. First create a dictionary, with column names and data types:
+If you need to specify all data types, to avoid potential problems create a dictionary, with column names and data types:
 !bc pypro
 types_dict={"LOCATION":str,"TIME":str,"ELAPSED_TIME_SINCE_OUTBREAK":int,
 	"CONFIRMED":int,"DEATHS":int,"RECOVERED":int}
 df2=pd.read_csv('../data/corona_data.dat',sep='\t',dtype=types_dict,
 	parse_dates=['TIME']) # set data types explicit
 !ec
-Note that the time data type is `str`, but we explicitly tell Pandas to convert those to `datetime`.
+Note that the time data type is `str`, but we explicitly tell Pandas to convert the time data to `datetime`.
 
 ===== Filtering and visualizing data =====
 === Boolean masking ===
-Typically you would select rows based on a criterion, the syntax in Pandas is that you enter a series containing `True` and `False` for the rows you want to pick out, e.g. to pick out all entries with Afghanistan we can do:
+Typically you would select rows based on a criterion. The syntax in Pandas is that you enter a series containing `True` and `False` for the rows you want to pick out, e.g. to pick out all entries with Afghanistan we can do:
 !bc pypro
 df[df['LOCATION'] == 'Afghanistan']
 !ec
-The innermost statement `df['LOCATION'] == 'Afghanistan'` gives a logical vector with the value `True` for the five last elements and `False` for the rest. Then we pass this to the DataFrame, and in one go the unwanted elements are removed. It is also possible to use several criteria, e.g. only extracting data after a specific time
+The innermost statement `df['LOCATION'] == 'Afghanistan'` gives a boolean array with the value `True` for the five last elements and `False` for the rest. Then we pass this array to the DataFrame, and in one go the unwanted elements are removed. It is also possible to use several criteria, e.g. only extracting data after a specific time
 !bc pypro
 df[(df['LOCATION'] == 'Afghanistan') &
 		   (df['ELAPSED_TIME_SINCE_OUTBREAK'] > 2)]
 !ec
-Note that the parenthesis are necessary, otherwise the logical operation would fail.
+Note that the parentheses are necessary, otherwise the logical operation would fail.
 
 === Plotting a DataFrame ===
 Pandas has built in plotting, by calling "`pandas.DataFrame.plot`":"https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.plot.html".
@@ -197,13 +197,13 @@ When performing mathematical operations on DataFrames there are at least two str
 * To operate directly on the data in the DataFrame using the Pandas library
 
 !bnotice Speed and performance
-Using Pandas or Numpy should in principle be equally fast. Do not worry about performance before it is necessary. Use the methods you are confident with, and try to be consistent. By consistent, we mean that if you have found one way of doing a certain operation stick to that one and try not to implement many different ways of doing the same thing. 
+Using Pandas or Numpy should in principle be equally fast. Do not worry about performance before it is necessary. Use the methods you are confident with, and try to be consistent. By consistent, we mean that if you have found one way of doing a certain operation stick to this and try not to implement many different ways of doing the same thing. 
 !enotice
 
 We can always access the individual columns in a DataFrame by the syntax `df['column_name']`. 
 === Example: mathematical operations on DataFrames ===
 o Create a DataFrame with one column (`a`) containing ten thousand random uniformly distributed numbers between 0 and 1 (checkout "`np.random.uniform`":"https://numpy.org/doc/stable/reference/random/generated/numpy.random.uniform.html")
-o Add two new columns: one which all elements of `a` is squared and one where the sine function is applied to column `a`
+o Add two new columns: one in which all elements of `a` are squared, and one where the sine function is applied to the column `a`
 o Calculate the inverse of all the numbers in the DataFrame
 o Make a plot of the results (i.e. `a` vs `a*a`, and `a` vs `sin(a)`)
 
@@ -229,7 +229,7 @@ o The inverse of all the numbers in the DataFrame can be calculated by simply do
 !ec
 Note: you can also do `df+df` and many other operations on the whole DataFrame.
 
-o To make plots there are several possibilities. Personally, I tend most of the time to use the  "`matplotlib`":"https://matplotlib.org/" library, simply because I know it quite well, but Pandas has a great deal of very simple methods you can use to generate nice plots with very few commands.
+o To make plots there are several possibilities. Personally, I tend most of the time to use the  "`matplotlib`":"https://matplotlib.org/" library, simply because I know it well, but Pandas has a great deal of simple methods you can use to generate nice plots with few commands.
 
 __Matplotlib:__
 ``
@@ -286,7 +286,7 @@ FIGURE: [fig-pandas/group.png, width=400 frac=1.0] The results of `df.groupby('L
 # #endif
 
 ===== Simple statistics in Pandas =====
-Finally, it is worth mentioning the built in methods `pd.DataFrame.mean`, `pd.DataFrame.median`, `pd.DataFrame.std` which calculate the mean, median and standard deviation on the columns in the DataFrame where it make sense (i.e. avoid strings and dates). To get all these values in one go (and a few more) on can also use `pd.DataFrame.describe()`
+Finally, it is worth mentioning the built in methods `pd.DataFrame.mean`, `pd.DataFrame.median`, `pd.DataFrame.std` which calculate the mean, median and standard deviation of the columns in the DataFrame where it makes sense (i.e. it avoids strings and dates). To get all these values in one go (and a few more) on can also use `pd.DataFrame.describe()`
 !bc pypro
 df.describe()
 !ec
