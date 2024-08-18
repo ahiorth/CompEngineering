@@ -1,6 +1,5 @@
 <!--
-HTML file automatically generated from DocOnce source
-(https://github.com/doconce/doconce/)
+File automatically generated using DocOnce (https://github.com/doconce/doconce/):
 doconce format html main_python.do.txt CHAPTER=document BOOK=document APPENDIX=document --html_style=bootswatch_readable --html_output=python-readable --html_code_style=inherit
 -->
 <html>
@@ -54,8 +53,8 @@ code { color: inherit; background-color: transparent; }
               ('Array slicing', 3, None, 'array-slicing'),
               ('Dictionaries', 2, None, 'dictionaries'),
               ('Looping', 1, None, 'looping'),
-              ('For loops', 2, None, 'for-loops'),
-              ('While loops', 2, None, 'while-loops'),
+              ('For-loops', 2, None, 'for-loops'),
+              ('While-loops', 2, None, 'while-loops'),
               ('Functions in Python', 2, None, 'functions-in-python'),
               ('Defining a mathematical function',
                2,
@@ -123,8 +122,8 @@ MathJax.Hub.Config({
      <!-- navigation toc: --> <li><a href="#array-slicing" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Array slicing</a></li>
      <!-- navigation toc: --> <li><a href="#dictionaries" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Dictionaries</a></li>
      <!-- navigation toc: --> <li><a href="#looping" style="font-size: 80%;"><b>Looping</b></a></li>
-     <!-- navigation toc: --> <li><a href="#for-loops" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;For loops</a></li>
-     <!-- navigation toc: --> <li><a href="#while-loops" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;While loops</a></li>
+     <!-- navigation toc: --> <li><a href="#for-loops" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;For-loops</a></li>
+     <!-- navigation toc: --> <li><a href="#while-loops" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;While-loops</a></li>
      <!-- navigation toc: --> <li><a href="#functions-in-python" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Functions in Python</a></li>
      <!-- navigation toc: --> <li><a href="#defining-a-mathematical-function" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Defining a mathematical function</a></li>
      <!-- navigation toc: --> <li><a href="#scope-of-variables" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Scope of variables</a></li>
@@ -158,7 +157,7 @@ MathJax.Hub.Config({
 <br>
 <p>University of Stavanger
 <center>
-<h4>Aug 14, 2023</h4>
+<h4>Aug 9, 2024</h4>
 </center> <!-- date -->
 <br>
 </p>
@@ -176,8 +175,8 @@ MathJax.Hub.Config({
 <p><span class="tab"> <a href="#numpy-arrays"> Numpy arrays  </a></p>
 <p><span class="tab"> <a href="#dictionaries"> Dictionaries </a></p>
 <p><a href="#looping"> Looping </a></p>
-<p><span class="tab"> <a href="#for-loops"> For loops </a></p>
-<p><span class="tab"> <a href="#while-loops"> While loops </a></p>
+<p><span class="tab"> <a href="#for-loops"> For-loops </a></p>
+<p><span class="tab"> <a href="#while-loops"> While-loops </a></p>
 <p><span class="tab"> <a href="#functions-in-python"> Functions in Python </a></p>
 <p><span class="tab"> <a href="#defining-a-mathematical-function"> Defining a mathematical function </a></p>
 <p><span class="tab"> <a href="#scope-of-variables"> Scope of variables  </a></p>
@@ -190,30 +189,30 @@ MathJax.Hub.Config({
 
 <p>There are plenty of online resources if you want get an overview of Python syntax, such as <a href="#vanderplas2016whirlwind">[1]</a>, for which the full book is available on <a href="https://github.com/jakevdp/WhirlwindTourOfPython" target="_self">github</a>.</p>
 
-<p>In this chapter I will try to focus on the key part of Python that you will need in this book, and maybe more importantly, give some advice on how to write good, reusable, Python code. As you might have discovered tasks can be solved in many different ways in Python. This is clearly a strength because you would most likely be able to solve any task thrown at you. On the other hand it is a weakness, because code can get messy and hard to follow, especially if you solve the same task in different parts of your code using different libraries or syntax.</p>
+<p>In this chapter I will try to focus on the key part of Python that you will need in this course, and maybe more importantly, give some advice on how to write good, reusable code. As you may have discovered, tasks can be solved in many different ways in Python. This is clearly a strength because you would most likely be able to solve any task. On the other hand it is a weakness, because code can get messy and hard to follow, especially if you solve the same task in different parts of your code using different libraries or syntax.</p>
 
 <p>In this chapter, I will explain how I tend to solve some common tasks, in the process we will also cover some stuff that you should know. If you need more information on each topic below, there are plenty of online sources. </p>
 
-<p>The code examples are meant as an inspiration, and maybe you do not agree and have solutions that you think are much better. If that is the case, I would love to know, so that I can update this chapter.</p>
+<p>The code examples are meant as an inspiration, and you may not agree and have solutions that you think are better. If that is the case, I would love to know, so that I can update this chapter.</p>
 
 <div class="alert alert-block alert-success alert-text-normal"><b>Speed and readability</b>
-<p>Many people are concerned about speed or execution time. My advice is to focus on readable code, and get the job done. When the code is working, it is very easy to go back and change parts that are slow. Remember that you should test the code on big problems, sometimes the advantage of Numpy or Scipy is not seen before the system is large. You can use the magic commands <code>%timeit</code> to check performance of different functions. You can also use <a href="https://numba.pydata.org/" target="_self">Numba</a>, which translate python code into optimized machine code. </p>
+<p>Many people are concerned about speed or execution time. My advice is to focus on readable code, and get the job done. When the code is working, it is very easy to go back and change parts that are slow. Remember that you should test the code on big problems; sometimes the advantage of Numpy or Scipy is not seen before the system is large. You can use the command <code>%timeit</code> to check the performance of different functions. You can also use <a href="https://numba.pydata.org/" target="_self">Numba</a>, which translates Python code into optimized machine code. </p>
 </div>
 
 <h1 id="personal-guidelines" class="anchor">Personal guidelines  </h1>
-<p>It is important to have some guidelines when coding, and for Python there are clear style guides called <a href="https://www.python.org/dev/peps/pep-0008/" target="_self">PEP 8</a>. Take a look at the official guidelines, and  make some specific rules for yourself, and stick to them. The reason for this is that if you make a large program or library, people will recognize your style and it is easier to understand the code. If you are working in a team, it is even more important - try to agree on some basic rules, for example:</p>
+<p>It is important to have some guidelines when coding, and for Python there are clear style guides called <a href="https://www.python.org/dev/peps/pep-0008/" target="_self">PEP 8</a>. Take a look at the official guidelines, and  make some specific rules for yourself, and stick to them. The reason for this is that if you make a large program or library, people will recognize your style and it will be easier to understand your code. If you are working in a team, it is even more important - try to agree on some basic rules, for example:</p>
 
 <p>
 <b>Code Guidelines:</b>
 </p>
 <ul>
 <li> Variable names should be meaningful.</li>
-<li> Naming of variables and functions. Should you write <code>def my_function(...):</code> or <code>def MyFunction(..)</code>, i.e are words separated by an underscore or a capital letter? Personally I use capital letters for class definition, and underscore for function definitions.</li>
+<li> Naming of variables and functions. Should you write <code>def my_function(...):</code> or <code>def MyFunction(..)</code>, i.e. are words separated by an underscore or a capital letter? Personally I use capital letters for class definition, and underscore for function definition.</li>
 <li> (Almost) always use doc strings, you would be amazed how easy it is to forget what a function does. Shorter (private) functions usually do not need comments or doc strings, if you use good variable names - it should be easy to understand what is happening by just looking at the code.</li>
 <li> Inline comments should be used sparingly, only where strictly necessary.</li>
 <li> Strive to make code general, in particular not type specific, e.g. in Python it is easy to make functions that will work if a list (array) or a single value is passed.</li>
 <li> Use exception handling, in particular for larger projects.</li>
-<li> DRY - Do not Repeat Yourself <a href="#thomas2019pragmatic">[2]</a>. If you need to change the code in more than one place to extend it, you may forget to change everywhere and introduce bugs.</li>
+<li> DRY - Do not Repeat Yourself <a href="#thomas2019pragmatic">[2]</a>. If you need to change the code in more than one place to extend it, you may forget to change it everywhere and introduce bugs.</li>
 <li> The DRY principle also applies to <em>knowledge sharing</em>, it is not only about copy and paste code, but knowledge should only be represented in one place.</li> 
 <li> Import libraries using the syntax <code>import library as ..</code>, Numpy would typically be <code>import numpy as np</code>. The syntax <code>from numpy import *</code> could lead to conflicts between modules as functions could have the same name in two different modules.</li>
 </ul>
@@ -226,21 +225,21 @@ MathJax.Hub.Config({
 <li> Unexpected behavior of functions. Functions should be able to discover if something is wrong with arguments, and give warnings.</li>
 </ul>
 <h2 id="code-editor" class="anchor">Code editor </h2>
-<p>You would like to use an editor that gives you some help. This is particularly useful when you do not remember a variable or function name, you can guess  the name and a drop down list will appear which will let you pick the name or function you want. If you enter  a function name, the editor will write some useful information about the function, some screenshots are shown in figure <a href="#fig:py:vscode">1</a>.</p>
+<p>You would like to use an editor that gives some help. This is particularly useful when you do not remember a variable or function name, you can start typing the name and a drop down list will appear which will let you pick the variable or function you want. If you enter  a function name, the editor will write some useful information about the function, some screenshots are shown in figure <a href="#fig:py:vscode">1</a>.</p>
 
 <center> <!-- figure label: --> <div id="fig:py:vscode"></div> <!-- FIGURE -->
 <hr class="figure">
 <center>
-<p class="caption">Figure 1:  A screenshot of vscode (left) the editor helps to identify which variable name you want, (right) the editor shows relevant information about the function you would like to call.  <!-- caption label: fig:py:vscode --> </p>
+<p class="caption">Figure 1: A screenshot of vscode (left) the editor helps to identify which variable name you want, (right) the editor shows relevant information about the function you would like to call.  <!-- caption label: fig:py:vscode --></p>
 </center>
-<p><img src="fig-python/vscode.png" align="bottom" width=800></p>
+<p><img src="fig-python/vscode.png" width="400" align="bottom"></p>
 </center>
 
-<p>Currently my favorite editor is <a href="https://code.visualstudio.com/" target="_self">vscode</a>, it can be used for any language, and there are a lot of add ins that can be installed to make the coding experience more pleasant. Spyder is also a very good alternative, but this editor is mainly for Python. It takes some time to learn how an editor works, so it is good if the editor can be used for multiple purposes.  However, always be open to new ideas and products, it will only make you more efficient. As an example, in some cases you will have a particular difficult error in the code, and then it could help to open and run that code in a different editor, you might get a slightly different error messages, which could help you locate the error.</p>
+<p>Currently my favorite editor is <a href="https://code.visualstudio.com/" target="_self">vscode</a>, it can be used for any language, and there are a lot of add-ins that can be installed to make the coding experience more pleasant. Spyder is also a very good alternative, but this editor is mainly for Python. It takes some time to learn how an editor works, so it is good if the editor can be used for multiple purposes.  However, always be open to new ideas and products, it will make you more efficient. As an example, in some cases you will have a particular error in the code that is difficult to find. It can help to open and run that code in a different editor, you might get slightly different error messages, which could help you locate the error.</p>
 <h1 id="types-in-python" class="anchor">Types in Python </h1>
-<p>In Python you do not need to define types as in a compiled language. In many ways one can say that Python only has <em>one</em> type.  To not define types is generally an advantage as it lets you write code with fewer lines, and it is easier to write functions that will work with any kind of type. As an example, in the programming language C, if you want to write a function that lets you add two numbers, you have to write one version if the arguments are integers and one version if the arguments are floats.</p>
+<p>In Python you do not need to define types as in a compiled language. In many ways one can say that Python works as if there is only <em>one</em> type.  To not define types is generally an advantage as it lets you write code with fewer lines, and it is easier to write functions that will work with any kind of type. As an example, in the programming language C, if you want to write a function that lets you add two numbers, you have to write one version if the arguments are integers and one version if the arguments are floats.</p>
 
-<p>The way that Python store and organize data is called a data model, and it is well described in the <a href="https://docs.python.org/3/reference/datamodel.html" target="_self">official documentation</a>. The important point is that all data in Python is an object or a relation between objects. The <code>is</code> operator can be used to check if two objects have the same identity, that means they are the same object. The <code>id</code> operator gives an unique integer value for the object, and if two objects have the same id number they are the same object, e.g.</p>
+<p>The way that Python store and organize data is called a data model, and it is well described in the <a href="https://docs.python.org/3/reference/datamodel.html" target="_self">official documentation</a>. The important point is that all data in Python is an object or a relation between objects. The <code>is</code> operator can be used to check if two objects have the same identity, that means they are the same object. The <code>id</code> method returns an unique integer value for the object, and if two objects have the same id number they are the same object, e.g.</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -268,11 +267,11 @@ x <span style="color: #AA22FF; font-weight: bold">is</span> y <span style="color
   </div>
 </div>
 
-<p>For those familiar with C or C++, one would first have to define <code>x</code> and <code>y</code> as the type <code>int</code> and then they would already have a different place in memory and they can <em>never</em> be the same (even if they contain the same number). We will return to this point in more detail discussing lists and arrays in Python, as it can lead to unexpected behavior.</p>
+<p>For those familiar with C or C++, one would first have to define <code>x</code> and <code>y</code> as the type <code>int</code> and then they would already have a different place in memory and they can <em>never</em> be the same (even if they contain the same number). We will return to this point in more detail when discussing lists and arrays in Python, as it can lead to unexpected behavior.</p>
 
-<p>Another thing you might have experienced during Python coding is that you get error messages that refer to pieces of code that you have no knowledge of. This can happen when you pass the wrong type (e.g. a string instead of a number). Since Python only has one type, the wrong type will not be discovered before it is actually used. This error could be deep into some other library that you have no knowledge of. </p>
+<p>Another thing you might have experienced during Python coding is that you get error messages that refer to pieces of code that you have no knowledge of. This can happen when you pass the wrong type (e.g. a string instead of a number). Since Python only has one type, the wrong type will not be discovered before it is used. This error could be deep into some other library that you have no knowledge of. </p>
 <h2 id="basic-types" class="anchor">Basic types </h2>
-<p>I will assume that you are familiar with the common types like floats (for real numbers), strings (text, lines, word, a character), integer (whole numbers), Boolean (True, False). What is sometimes useful is to be able to test what kind of type a variable is, this can be done with <code>type()</code></p>
+<p>I will assume that you are familiar with the common types like floats (for real numbers), strings (text, lines, word, a character), integer (whole numbers), Boolean (True, False). What is sometimes useful is to be able to test what kind of type a variable is, this can be done with the method <code>type()</code></p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -360,7 +359,7 @@ my_list <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39
 </div>
 
 <div class="alert alert-block alert-success alert-text-normal"><b>Notice</b>
-<p>To get the first element in a list, we do e.g. <code>my_list[0]</code>. In a list with 10 elements the last element would be <code>my_list[9]</code>, the length of a list can be found by using the <code>len()</code> function, i.e. <code>len(my_list)=10</code>. Thus, the last element can also be found by doing <code>my_list[len(my_list)-1]</code>. However, in Python you can always get the last element by doing <code>my_list[-1]</code>, the second last element would be <code>my_list[-2]</code> and so on.</p>
+<p>To get the first element in a list, we do e.g. <code>my_list[0]</code>. In a list with 10 elements the last element would be <code>my_list[9]</code>. The length of a list can be found using the <code>len()</code> function, i.e. <code>len(my_list)=10</code>. Thus, the last element can also be found by doing <code>my_list[len(my_list)-1]</code>. However, in Python you can always get the last element by doing <code>my_list[-1]</code>, the second last element would be <code>my_list[-2]</code> and so on.</p>
 </div>
 
 <p>Sometimes you do not want to initialize the list with everything equal, and it can be tiresome to write everything out yourself. If that is the case you can use <em>list comprehension</em></p>
@@ -388,7 +387,7 @@ my_list <span style="color: #666666">=</span> [i<span style="color: #666666">**3
   </div>
 </div>
 
-<p>We will cover the for loop below, but basically what is done is that the statement <code>i in range(10)</code>, gives <code>i</code> the value 0, 1, \( \ldots \), 9 and the first <code>i</code> inside the list tells python to use that value as the element in the list. Using this syntax, there are plenty of opportunities to initialize. Maybe you want to pick from a list words that contain a particular subset of characters</p>
+<p>We will cover the for-loop below, but basically what is done is that the statement <code>i in range(10)</code>, gives <code>i</code> the value 0, 1, \( \ldots \), 9 and the first <code>i</code> inside the list tells Python to use that value as the element in the list. Using this syntax, there are plenty of opportunities to initialize a list. Maybe you want to pick from a list words that contain a particular subset of characters</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -474,7 +473,7 @@ my_list[::<span style="color: #666666">2</span>]    <span style="color: #3D7B7B;
   </div>
 </div>
 
-<p>Sometimes you have lists of lists, if you want to get e.g. the first element of each list you cannot access those elements using list slicing, you have to use a for loop or list comprehension</p>
+<p>Sometimes you may have a list of lists. If you want to get e.g. the first element of each list, you cannot do this using list slicing. Instead, you will need to use a for-loop or list comprehension</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -505,11 +504,11 @@ new_list2 <span style="color: #666666">=</span> [ <span style="color: #008000">l
 <code>new_list2=['hammer','screw']</code>
 
 <div class="alert alert-block alert-success alert-text-normal"><b>When to use lists</b>
-<p>Use lists if you have mixed types, and as storage containers. Be careful when you do numerical computation not to mix lists and Numpy arrays. Adding two lists e.g. <code>[1,2]+[1,1]</code>, will give you <code>[1,2,1,1]</code>, whereas adding two Numpy arrays will give you <code>[2,3]</code>.</p>
+<p>Use lists if you have mixed types, and as storage containers. Be careful when you do numerical computations not to mix lists and Numpy arrays. Adding two lists e.g. <code>[1,2]+[1,1]</code>, will give you <code>[1,2,1,1]</code>, whereas adding the same two Numpy arrays will give you <code>[2,3]</code>.</p>
 </div>
 
 <h2 id="numpy-arrays" class="anchor">Numpy arrays  </h2>
-<p>Numpy arrays are awesome, and they should be your preferred choice when doing numerical operations. We import Numpy as <code>import numpy as np</code>, some examples of initialization</p>
+<p>Numpy arrays are awesome, and they should be your preferred choice when doing numerical operations. We import Numpy as <code>import numpy as np</code>. These are some examples of initialization</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -517,7 +516,8 @@ new_list2 <span style="color: #666666">=</span> [ <span style="color: #008000">l
     <div class="inner_cell">
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
-  <pre style="line-height: 125%;">my_array<span style="color: #666666">=</span>np<span style="color: #666666">.</span>array([<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">2</span>,<span style="color: #666666">3</span>]) <span style="color: #3D7B7B; font-style: italic"># initialized from list</span>
+  <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+my_array<span style="color: #666666">=</span>np<span style="color: #666666">.</span>array([<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">2</span>,<span style="color: #666666">3</span>]) <span style="color: #3D7B7B; font-style: italic"># initialized from list</span>
 my_array<span style="color: #666666">=</span>np<span style="color: #666666">.</span>zeros(<span style="color: #666666">10</span>) <span style="color: #3D7B7B; font-style: italic"># array with 10 elements equal to zero</span>
 my_array<span style="color: #666666">=</span>np<span style="color: #666666">.</span>ones(<span style="color: #666666">10</span>)  <span style="color: #3D7B7B; font-style: italic"># array with 10 elements equal to one</span>
 </pre>
@@ -597,15 +597,14 @@ my_array[::<span style="color: #666666">2</span>]    <span style="color: #3D7B7B
   </div>
 </div>
 
-<p>However, as opposed to lists all the basic mathematical operations addition, subtraction, multiplication are meaningful (<em>if the arrays have equal length, or shape</em>)</p>
+<p>However, as opposed to lists all the basic mathematical operations addition, subtraction, multiplication are meaningful with arrays (<em>if they have equal length, or shape</em>)</p>
 
-<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
   <div class="input">
     <div class="inner_cell">
       <div class="input_area">
-        <blockquote>
-<div class="highlight" style="background: #f8f8f8">
+        <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">my_array  = np.array([0,1,2])
 my_array2 = np.array([3,4,5])
 my_array+my_array2 # [3,5,7]
@@ -613,7 +612,7 @@ my_array*my_array2 # [0,4,10]
 my_array/my_array2 # [0,.25,.4]
 </pre>
 </div>
-</blockquote>      </div>
+      </div>
     </div>
   </div>
   <div class="output_wrapper">
@@ -628,13 +627,12 @@ my_array/my_array2 # [0,.25,.4]
 
 <p>Note that these operations do what you would expect them to do. If you have arrays of arrays, you can easily access elements in the arrays</p>
 
-<!-- code=text (!bc ccq) typeset with pygments style "default" -->
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
   <div class="input">
     <div class="inner_cell">
       <div class="input_area">
-        <blockquote>
-<div class="highlight" style="background: #f8f8f8">
+        <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;">my_array  = np.array([[0,1,2],[3,4,5]]) # shape 2x3 matrix
 my_array[0,:] # [0,1,2] First row
 my_array[1,:] # [3,4,5] Second row
@@ -642,7 +640,7 @@ my_array[:,0] # [0,3] First column
 my_array[:,1] # [1,4] Second column
 </pre>
 </div>
-</blockquote>      </div>
+      </div>
     </div>
   </div>
   <div class="output_wrapper">
@@ -681,11 +679,11 @@ my_array<span style="color: #666666">.</span>shape <span style="color: #666666">
   </div>
 </div>
 <h2 id="dictionaries" class="anchor">Dictionaries </h2>
-<p>If you have not used dictionaries before they might feel unnecessary, but if you get used to them and their syntax, they can make your code much more flexible and easier to expand. You should use dictionaries, when you have data sets that you want to access fast. A very good mental image to have is an excel sheet where data are organized in columns. Each column has a header name, or a <em>key</em>. Assume we have the following table</p>
+<p>If you have not used dictionaries before they might look unnecessary, but if you get used to them and their syntax, they can make your code much more flexible and easier to expand. You should use dictionaries when you have data sets that you want to access fast. A very good mental image to have is an excel sheet where data are organized in columns. Each column has a header name, or a <em>key</em>. Assume we have the following table</p>
 
 <div class="row">
   <div class="col-xs-1">
-    <table class="table table-striped table-hover table-condensed">
+    <table class="dotable table-striped table-hover table-condensed">
 <thead>
 <tr><td align="center"><b> A </b></td> <td align="center"><b> B </b></td> <td align="center"><b> C </b></td> </tr>
 </thead>
@@ -698,7 +696,7 @@ my_array<span style="color: #666666">.</span>shape <span style="color: #666666">
   </div> <!-- col-xs-1 -->
 </div> <!-- cell row -->
 
-<p>This could be represented as a dictionary as</p>
+<p>This could be represented as a dictionary</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -722,7 +720,7 @@ my_array<span style="color: #666666">.</span>shape <span style="color: #666666">
   </div>
 </div>
 
-<p>The syntax is <code>{key1:values, key2:values2, ...}</code>. We access the values in the dictionary by the key i.e. <code>print(my_dict['A'])</code> would print <code>[1.0,4.0,6.0]</code>. If you want to print out all the elements in a dictionary, you can use a for loop (see next section for more details about for loops)</p>
+<p>The syntax is <code>{key1:values, key2:values2, ...}</code>. We access the values in the dictionary by the key i.e. <code>print(my_dict['A'])</code> would print <code>[1.0,4.0,6.0]</code>. If you want to print out all the elements in a dictionary, you can use a for-loop (see next section for more details about for-loops)</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -747,9 +745,9 @@ my_array<span style="color: #666666">.</span>shape <span style="color: #666666">
   </div>
 </div>
 <h1 id="looping" class="anchor">Looping </h1>
-<p>There are basically two ways of iterating through lists or to do a series of computations, using a for-loop or a while-loop. In most cases a for loop can also be written as a while loops and vice versa. You would typically use a for-loop when you are iterating over a fixed number of elements, very typical example is when we are iterating in a numerical computation from time zero to the end time. A while-loop is typically used when we do not know before the run time when to stop, this could be that we are waiting for user input or to reach a certain numerical accuracy in our calculation before proceeding.</p>
-<h2 id="for-loops" class="anchor">For loops </h2>
-<p>A typical example of a for loop is to loop over a list and do something, and maybe during the execution store the results in a list</p>
+<p>There are basically two ways of iterating through lists or to do a series of computations: a for-loop and a while-loop. In most cases a for-loop can also be written as a while-loop and vice versa. You would typically use a for-loop when you are iterating over a fixed number of elements. A good example is when we are iterating in a numerical computation from time zero to the end time. A while-loop is typically used when we do not know before the run time when to stop, this could be that we are waiting for user input or to reach a certain numerical accuracy in our calculation before proceeding.</p>
+<h2 id="for-loops" class="anchor">For-loops </h2>
+<p>A typical example of a for-loop is to loop over a list and do something, and maybe during the execution store the results in another list</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -777,7 +775,7 @@ result<span style="color: #666666">=</span>[] <span style="color: #3D7B7B; font-
   </div>
 </div>
 
-<p>The result of this code is <code>result=[1, 1]</code>. The <code>number</code> variable changes during the iteration, and takes the value of each element in the list. Note that I use <code>numbers</code> for the list and <code>number</code> as the iterator, this makes it quite easy to read and understand the code. In many cases you want to have the index, not only the element in the list</p>
+<p>The result of this code is <code>result=[1, 1]</code>. The <code>number</code> variable changes during the iteration and takes the value of each element in the list. Note that I use <code>numbers</code> for the list and <code>number</code> as the iterator, this makes it easy to read and understand the code. In many cases you want to have the index, not only the element in the list</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -808,7 +806,7 @@ result<span style="color: #666666">=</span>[] <span style="color: #3D7B7B; font-
 
 <p>The result of this code is <code>result=[1, 1]</code>. In this case the function <code>enumerate(numbers)</code> returns two values: the index, which is stored in <code>idx</code>, and the value of the list element, which is stored in <code>number</code>.</p>
 
-<p>A more elegant way to achieve the same results without using the <code>enumerate()</code> function is to use <code>zip</code></p>
+<p>A more elegant way to achieve the same results without using the <code>enumerate()</code> function is to use the <code>zip()</code> function</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -837,9 +835,9 @@ result<span style="color: #666666">=</span>[] <span style="color: #3D7B7B; font-
   </div>
 </div>
 
-<p>The <code>zip</code> function can be used with several lists of same length.</p>
+<p>The <code>zip()</code> function can be used with several lists of the same length.</p>
 
-<p>In many cases you might be in a situation that you want to plot more than one function in a plot. It is then very tempting to copy and paste the previous code, but it is more elegant to use a for loop and lists</p>
+<p>In some cases you may want to plot more than one function in a plot, with different characteristics for each function curve. It is then tempting to copy and paste the previous code, but it is more elegant to use a for loop and lists</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -850,11 +848,11 @@ result<span style="color: #666666">=</span>[] <span style="color: #3D7B7B; font-
   <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
 <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
 x_val   <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">100</span>) <span style="color: #3D7B7B; font-style: italic"># 100 equal spaced points from 0 to 1</span>
-y_vals  <span style="color: #666666">=</span> [x_val,x_val<span style="color: #666666">*</span>x_val]
+y_vals  <span style="color: #666666">=</span> [x_val,x_val<span style="color: #666666">**2</span>]
 labels  <span style="color: #666666">=</span> [<span style="color: #BA2121">r&#39;x&#39;</span>, <span style="color: #BA2121">r&#39;$x^2$&#39;</span>]
 cols    <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;r&#39;</span>,<span style="color: #BA2121">&#39;g&#39;</span>]
 points  <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;-*&#39;</span>,<span style="color: #BA2121">&#39;-^&#39;</span>]
-<span style="color: #008000; font-weight: bold">for</span> y_val,point,col,label <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">zip</span>(y_vals,points,cols,labels):
+<span style="color: #008000; font-weight: bold">for</span> y_val,label,col,point <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">zip</span>(y_vals,labels,cols,points):
     plt<span style="color: #666666">.</span>plot(x_val,y_val,point,c<span style="color: #666666">=</span>col,label<span style="color: #666666">=</span>label)
 plt<span style="color: #666666">.</span>grid()
 plt<span style="color: #666666">.</span>legend()
@@ -874,18 +872,18 @@ plt<span style="color: #666666">.</span>show()
   </div>
 </div>
 
-<p>Output of code is shown in figure <a href="#fig:python:loop">2</a>.</p>
+<p>The output of this code is shown in figure <a href="#fig:python:loop">2</a>.</p>
 
 <center> <!-- figure label: --> <div id="fig:python:loop"></div> <!-- FIGURE -->
 <hr class="figure">
 <center>
-<p class="caption">Figure 2:  Output of code.  <!-- caption label: fig:python:loop --> </p>
+<p class="caption">Figure 2: Output of code above.  <!-- caption label: fig:python:loop --></p>
 </center>
-<p><img src="fig-python/plt_loop.png" align="bottom" width=800></p>
+<p><img src="fig-python/plt_loop.png" width="400" align="bottom"></p>
 </center>
 
-<h2 id="while-loops" class="anchor">While loops </h2>
-<p>A while loop is used whenever you do not know before run time when to stop iterating. The syntax of the while loop is to do something while a condition is true</p>
+<h2 id="while-loops" class="anchor">While-loops </h2>
+<p>A while-loop is used whenever you do not know before run time when to stop iterating. The while-loop does something while a condition is true</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -915,7 +913,7 @@ finished <span style="color: #666666">=</span> <span style="color: #008000; font
   </div>
 </div>
 
-<p>In some cases we are iterating from \( t_0 \), \( t_1 \), etc. to a final time \( t_f \), if we use a fixed time step, \( \Delta t \), we can calculate the number of steps i.e \( N= \text{int} ((t_f-t_0)/\Delta t) \), and use a for loop. On the other hand, in a more fancy algorithms we can change the time step as the simulation proceeds and then we need to choose a while loop, e.g. <code>while t0 &lt;= tf:</code>.
+<p>In some cases we are iterating from \( t_0 \), \( t_1 \), etc. to a final time \( t_f \). If we use a fixed time step, \( \Delta t \), we can calculate the number of steps i.e \( N= \text{int} ((t_f-t_0)/\Delta t) \), and use a for-loop. However, in a more fancy algorithm we can change the time step as the simulation proceeds and then we need to use a while-loop, e.g. <code>while t0 &lt;= tf:</code>.
 <h2 id="functions-in-python" class="anchor">Functions in Python </h2>
 When to use functions? There is no particular rule, <em>but whenever you
 start to copy and paste code from one place to another, you should
@@ -930,7 +928,7 @@ end up changing the function definitions as your program develops.
 </div>
 
 <h2 id="defining-a-mathematical-function" class="anchor">Defining a mathematical function </h2>
-<p>Throughout this course you will write many functions that do mathematical operations. In many cases, you would also pass a function to another function to make your code more modular. Lets say we want to calculate the derivative of \( \sin x \), using the most basic definition of a derivative \( f^\prime(x) = f(x+\Delta x)-f(x)/\Delta x \), we could do it as</p>
+<p>Throughout this course you will write many functions that do mathematical operations. In many cases, you would also pass a function to another function to make your code more modular. Lets say we want to calculate the derivative of \( \sin x \), using the most basic definition of a derivative \( f^\prime(x) = (f(x+\Delta x)-f(x))/\Delta x \), we could do it as</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -939,7 +937,7 @@ end up changing the function definitions as your program develops.
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">derivative_of_sine</span>(x,delta_x):
-    <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39; returns the derivative of sin x &#39;&#39;&#39;</span>
+<span style="color: #bbbbbb">    </span><span style="color: #BA2121; font-style: italic">&#39;&#39;&#39; returns the derivative of sin x &#39;&#39;&#39;</span>
     <span style="color: #008000; font-weight: bold">return</span> (np<span style="color: #666666">.</span>sin(x<span style="color: #666666">+</span>delta_x)<span style="color: #666666">-</span>np<span style="color: #666666">.</span>sin(x))<span style="color: #666666">/</span>delta_x
 
 <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;The derivative of sinx at x=0 is :&#39;</span>, derivative_of_sine(<span style="color: #666666">0</span>,<span style="color: #666666">1e-3</span>))
@@ -997,7 +995,7 @@ If we would like to calculate the derivative at multiple points, that is straigh
     <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>sin(x)
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">df</span>(x,f,delta_x<span style="color: #666666">=1e-3</span>):
-    <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39; returns the derivative of f &#39;&#39;&#39;</span>
+<span style="color: #bbbbbb">    </span><span style="color: #BA2121; font-style: italic">&#39;&#39;&#39; returns the derivative of f &#39;&#39;&#39;</span>
     <span style="color: #008000; font-weight: bold">return</span> (f(x<span style="color: #666666">+</span>delta_x)<span style="color: #666666">-</span>f(x))<span style="color: #666666">/</span>delta_x
 <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;Derivative of sinx at x=0 is :&#39;</span>, df(<span style="color: #666666">0</span>,f))
 </pre>
@@ -1024,7 +1022,7 @@ If we would like to calculate the derivative at multiple points, that is straigh
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">s</span>(t,s0,v0,a):
-    <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;</span>
+<span style="color: #bbbbbb">    </span><span style="color: #BA2121; font-style: italic">&#39;&#39;&#39;</span>
 <span style="color: #BA2121; font-style: italic">    t  : time</span>
 <span style="color: #BA2121; font-style: italic">    s0 : initial starting point</span>
 <span style="color: #BA2121; font-style: italic">    v0 : initial velocity</span>
@@ -1073,7 +1071,7 @@ If we would like to calculate the derivative at multiple points, that is straigh
   </div>
 </div>
 
-<p>This happens because the <code>df</code> function expect that the function we send into the argument list has a call signature <code>f(x)</code>. What many people do to avoid this error is to use global variable, that is to define <code>s0, v0</code>, and <code>a</code> at the top of the code. This is not always the best solution. Python has a special variable <code>*args</code> which can be used to pass multiple arguments to your function, thus if we rewrite <code>df</code> like this</p>
+<p>This happens because the <code>df</code> function expect that the function we send into the argument list has a call signature <code>f(x)</code>. What many people do to avoid this error is to use global variables, that is to define <code>s0, v0</code>, and <code>a</code> at the top of the code. This is not always the best solution. Python has a special variable <code>*args</code> which can be used to pass multiple arguments to your function, thus if we rewrite <code>df</code> like this</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -1082,7 +1080,7 @@ If we would like to calculate the derivative at multiple points, that is straigh
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
   <pre style="line-height: 125%;"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">df</span>(x,f,<span style="color: #666666">*</span>args,delta_x<span style="color: #666666">=1e-3</span>):
-    <span style="color: #BA2121; font-style: italic">&#39;&#39;&#39; returns the derivative of f &#39;&#39;&#39;</span>
+<span style="color: #bbbbbb">    </span><span style="color: #BA2121; font-style: italic">&#39;&#39;&#39; returns the derivative of f &#39;&#39;&#39;</span>
     <span style="color: #008000; font-weight: bold">return</span> (f(x<span style="color: #666666">+</span>delta_x,<span style="color: #666666">*</span>args)<span style="color: #666666">-</span>f(x,<span style="color: #666666">*</span>args))<span style="color: #666666">/</span>delta_x
 </pre>
 </div>
@@ -1229,7 +1227,7 @@ a<span style="color: #666666">=2</span>
 </div>
 
 <h2 id="passing-arrays-and-lists-to-functions" class="anchor">Passing arrays and lists to functions </h2>
-<p>In the previous section, we looked at some simple examples regarding the scope of variables, and what happened with that variable inside and outside a function. The examples used integer or floats. However in most applications you will pass an array or a list to a function, and then you need to be aware that the behavior is not always would you might expect.</p>
+<p>In the previous section, we looked at some simple examples regarding the scope of variables, and what happened with that variable inside and outside a function. The examples used integer or floats. However in most applications you will pass an array or a list to a function, and then you need to be aware that the behavior is not always what you might expect.</p>
 <div class="alert alert-block alert-success alert-text-normal"><b>Unexpected behavior</b>
 <p>Sometimes functions do not do what you expect, this might be because the function does not treat  the arguments as you might think. The best advice is to make a very simple version of your function and test it for yourself. Is the behavior what you expect? Try to understand why or why not.</p>
 </div>
@@ -1264,7 +1262,7 @@ a<span style="color: #666666">=2</span>
   </div>
 </div>
 
-<p>In the example above we can use <code>x=3</code>, <code>x=[3]</code>, <code>x=np.array([3])</code>, and after execution <code>x</code> is unchanged (i.e. same value as before <code>f(x)</code>) was called. Based on what we have discussed before, this is maybe what you would expect, but if we now do</p>
+<p>In the example above we can use <code>x=3</code>, <code>x=[3]</code>, <code>x=np.array([3])</code>, and after execution <code>x</code> is unchanged (i.e. same value as before <code>f(x)</code> was called). Based on what we have discussed before, this is maybe what you would expect, but if we now do</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -1293,7 +1291,7 @@ a<span style="color: #666666">=2</span>
   </div>
 </div>
 
-<p>(Clearly this function will only work for lists, due to the append command.) After execution, we get the result</p>
+<p>Clearly this function will only work for lists, due to the append command. After execution, we get the result</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -1504,7 +1502,7 @@ x<span style="color: #666666">=</span>np<span style="color: #666666">.</span>arr
 <h2 id="call-by-value-or-call-by-reference" class="anchor">Call by value or call by reference  </h2>
 <p>For anyone that has programmed in C or C++ call by reference or value is something one need to think about constantly. When we pass a variable to a function there are two choices, should we pass a copy of the variable or should we pass information about where the variable is stored in memory?</p>
 <div class="alert alert-block alert-success alert-text-normal"><b>Value and reference</b>
-<p>In C and C++ pass by value means that we are making a copy in the memory of the variable we are sending to the function, and pass by reference means that we are sending the actual parameter or more specific the address to the memory location of the parameter. In Python all variables are passed by object reference.</p>
+<p>In C and C++ pass by value means that we are making a copy in the memory of the variable we are sending to the function, and pass by reference means that we are sending the actual parameter or more specific the address to the memory location of the parameter. In Python all variables are passed by (object) reference.</p>
 </div>
 
 <p>In C and C++ you always tell in the function definition if the variables are passed by value or reference. Thus if you would like a change in a variable outside the function definition, you pass the variable by reference, otherwise by value. In Python we always pass by (object) reference.</p>
@@ -1536,7 +1534,7 @@ a <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
   </div>
 </div>
 
-<p>Thus, after adding 1 to <code>a</code>, <code>a</code> is assigned <em>a new place in memory</em>. This is very different from C or C++, in C or C++ the variable, once it is created, <em>always has the same memory address</em>. In Python this is not the case, it works in the opposite way. The statement <code>a=10.0</code>, is executed so that <em>first</em> 10.0 is created in memory, secondly <code>x</code> is assigned the reference to 10.0. The assignment operator <code>=</code> indicates that <code>a</code> should point to whatever is on the right hand side. Another example is     </p>
+<p>Thus, after adding 1 to <code>a</code>, <code>a</code> is assigned <em>a new place in memory</em>. This is very different from C or C++, in C or C++ the variable, once it is created, <em>always has the same memory address</em>. In Python this is not the case, it works in the opposite way. The statement <code>a=10.0</code>, is executed so that <em>first</em> 10.0 is created in memory, secondly <code>a</code> is assigned the reference to 10.0. The assignment operator <code>=</code> indicates that <code>a</code> should point to whatever is on the right hand side. Another example is     </p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -1594,7 +1592,7 @@ a<span style="color: #666666">+=2</span>
 
 <p>When we add 2 to <code>a</code>, we actually add 2 to the value of 10, the number 12 is assigned a new place in memory and <code>a</code> will be assigned that object, whereas <code>b</code> would still points the old object 10.</p>
 <h3 id="lists-and-arrays" class="anchor">Lists and arrays </h3>
-<p>Yous should think of lists and arrays as containers (or a box). If we do</p>
+<p>You should think of lists and arrays as containers (or a box). If we do</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -1650,7 +1648,7 @@ x<span style="color: #666666">.</span>append(<span style="color: #666666">10</sp
   </div>
 </div>
 
-<p>What happens here is that we create a box with the numbers 0, 1, 2, 3, 4, <code>x</code> is referenced that box. Next, we do <code>y=x</code> so that <code>y</code> is referenced the <em>same box</em> as <code>x</code>. Then, we add the number 10 to that box, and <code>x</code> and <code>y</code> still points to the same box.</p>
+<p>What happens here is that we create a box with the numbers 0, 1, 2, 3, 4, <code>x</code> is referenced to that box. Next, we do <code>y=x</code> so that <code>y</code> is referenced to the <em>same box</em> as <code>x</code>. Then, we add the number 10 to that box, and <code>x</code> and <code>y</code> still points to the same box.</p>
 
 <p>Numpy arrays behave differently, and that is basically because if we want to add a number to a Numpy array we have to do <code>x=np.array(x,10)</code>. Because of the assignment operator <code>=</code> , we take the content of the original box add 10 and put it into a <em>new</em> box</p>
 
@@ -1806,5 +1804,4 @@ y <span style="color: #666666">+=</span> [<span style="color: #666666">1</span>]
 -->
 </body>
 </html>
-    
 

@@ -2186,7 +2186,7 @@ y <span style="color: #666666">+=</span> [<span style="color: #666666">1</span>]
 <h1 id="ch:pan" class="anchor">Introduction to Pandas</h1>
 </center> <!-- chapter heading -->
 <h1 id="what-is-pandas" class="anchor">What is Pandas? </h1>
-<p>Pandas is a Python package that among many things is used to handle data, and perform operations on groups of data. It is built on top of Numpy, which makes it easy to perform vectorized operations. Pandas is written by Wes McKinney, and one of it objectives is according to the official website <a href="https://pandas.pydata.org/" target="_self"> '' providing fast, flexible, and expressive data structures designed to make working with ''relational'' or ''labeled'' data both easy and intuitive. It aims to be the fundamental high-level building block for doing practical, real-world data analysis in Python''</a>. Pandas also has excellent functions for reading and writing excel and csv files.  An excel file is read directly into memory in what is called a <code>DataFrame</code>. A DataFrame is a two dimensional object where data are typically stored in column and row format. Pandas has a lot of functions that can be used to calculate statistical properties of the data frame as a whole. In this chapter, we will focus on basic data manipulation, stuff you might do in excel, but can be done much faster in Python and Pandas.</p>
+<p>Pandas is a Python package that among many things is used to handle data, and perform operations on groups of data. It is built on top of Numpy, which makes it easy to perform vectorized operations. Pandas is written by Wes McKinney, and one of it objectives is according to the official website <a href="https://pandas.pydata.org/" target="_self"> '' providing fast, flexible, and expressive data structures designed to make working with ''relational'' or ''labeled'' data both easy and intuitive. It aims to be the fundamental high-level building block for doing practical, real-world data analysis in Python''</a>. Pandas also has Excellent functions for reading and writing Excel and csv files.  An Excel file is read directly into memory in what is called a <code>DataFrame</code>. A DataFrame is a two dimensional object where data are typically stored in column and row format. Pandas has a lot of functions that can be used to calculate statistical properties of the data frame as a whole. In this chapter, we will focus on basic data manipulation, stuff you might do in Excel, but can be done much faster in Python and Pandas.</p>
 <h1 id="creating-a-data-frame" class="anchor">Creating a data frame </h1>
 <p>In the following we will assume that you have imported pandas, like this:</p>
 
@@ -2304,12 +2304,12 @@ df<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>Da
   </div>
 </div>
 <h2 id="from-a-file" class="anchor">From a file </h2>
-<p>Assume you have some data organized in an excel or csv file. The csv file could just be a file with column data, and the entries could be separated by a comma or tab.</p>
+<p>Assume you have some data organized in an Excel or csv file. The csv file could just be a file with column data, and the entries could be separated by a comma or tab.</p>
 
 <center> <!-- figure label: --> <div id="fig:file"></div> <!-- FIGURE -->
 <hr class="figure">
 <center>
-<p class="caption">Figure 3: Official Covid-19 data, and example of files (left) tab separated (right) excel file.  <!-- caption label: fig:file --></p>
+<p class="caption">Figure 3: Official Covid-19 data, and example of files (left) tab separated (right) Excel file.  <!-- caption label: fig:file --></p>
 </center>
 <p><img src="fig-pandas/covid_comb.png" width="400" align="bottom"></p>
 </center>
@@ -2321,7 +2321,7 @@ df<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>Da
     <div class="inner_cell">
       <div class="input_area">
         <div class="highlight" style="background: #f8f8f8">
-  <pre style="line-height: 125%;">df<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>read_excel(<span style="color: #BA2121">&#39;../data/corona_data.xlsx&#39;</span>) <span style="color: #3D7B7B; font-style: italic"># excel file</span>
+  <pre style="line-height: 125%;">df<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>read_excel(<span style="color: #BA2121">&#39;../data/corona_data.xlsx&#39;</span>) <span style="color: #3D7B7B; font-style: italic"># Excel file</span>
 df2<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>read_csv(<span style="color: #BA2121">&#39;../data/corona_data.dat&#39;</span>,sep<span style="color: #666666">=</span><span style="color: #BA2121">&#39;</span><span style="color: #AA5D1F; font-weight: bold">\t</span><span style="color: #BA2121">&#39;</span>) <span style="color: #3D7B7B; font-style: italic"># csv tab separated file</span>
 </pre>
 </div>
@@ -2338,10 +2338,10 @@ df2<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>r
   </div>
 </div>
 
-<p>If the excel file has several sheets, you can give the sheet name directly, e.g. <code>df=pd.read_excel('file.xlsx',sheet_name='Sheet1')</code>, for more information see the <a href="https://pandas.pydata.org/docs/reference/api/pandas.read_excel.html" target="_self">documentation</a>. </p>
+<p>If the Excel file has several sheets, you can give the sheet name directly, e.g. <code>df=pd.read_excel('file.xlsx',sheet_name='Sheet1')</code>, for more information see the <a href="https://pandas.pydata.org/docs/reference/api/pandas.read_excel.html" target="_self">documentation</a>. </p>
 
 <div class="alert alert-block alert-success alert-text-normal"><b>Accessing files</b>
-<p>Accessing files from Python can be painful. If excel files are open in excel, Windows will not allow a different program to access them - always remember to close the file before opening it. Sometimes we may not be in the right directory; to check which directory you are in, you can do the following</p>
+<p>Accessing files from Python can be painful. If Excel files are open in Excel, Windows will not allow a different program to access them - always remember to close the file before opening it. Sometimes we may not be in the right directory; to check which directory you are in, you can do the following</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -2368,7 +2368,7 @@ df2<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>r
 </div>
 
 
-<p>We can easily save the data frame to excel format and open it in Excel</p>
+<p>We can easily save the data frame to Excel format and open it in Excel</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -2491,7 +2491,7 @@ time<span style="color: #666666">=</span>df<span style="color: #666666">.</span>
 <h3 id="challenges-when-accessing-columns-or-rows" class="anchor">Challenges when accessing columns or rows </h3>
 
 <div class="alert alert-block alert-success alert-text-normal"><b>Special characters</b>
-<p>Sometimes when reading files from excel, headers may contains invisible characters like newline <code>\n</code> or tab <code>\t</code> or maybe Norwegian special letters that are not read properly. If you have problems accessing a column by name do <code>print(df.columns)</code> and check if the name of the column matches what you would expect.  </p>
+<p>Sometimes when reading files from Excel, headers may contains invisible characters like newline <code>\n</code> or tab <code>\t</code> or maybe Norwegian special letters that are not read properly. If you have problems accessing a column by name do <code>print(df.columns)</code> and check if the name of the column matches what you would expect.  </p>
 </div>
 
 
@@ -3187,7 +3187,7 @@ df2<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>D
 <p><img src="fig-pandas/concat.png" width="400" align="bottom"></p>
 </center>
 
-<p>If you compare this DataFrame with the previous one, you will see that the index column is different. This is because when joining two DataFrames Pandas does not reset the index by default, doing <code>df=pd.concat([df1,df2],ignore_index=True)</code> resets the index. It is also possible to join DataFrames column wise:</p>
+<p>If you compare this DataFrame with the previous one, you will see that the index column is different. This is because when joining two DataFrames, Pandas does not reset the index by default. Doing <code>df=pd.concat([df1,df2],ignore_index=True)</code> resets the index. It is also possible to join DataFrames column wise:</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -3212,7 +3212,7 @@ df2<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>D
 </div>
 <h3 id="merging-dataframes" class="anchor">Merging DataFrames </h3>
 
-<p>In the previous example we had two non overlapping DataFrames (separate countries and times). It could also be the case that some of the data was overlapping e.g. continuing with the Covid-19 data, one could assume that there was one data set from one region and one from another region in the same country:</p>
+<p>In the previous example we had two non overlapping DataFrames (separate countries and times). It could also be the case that some of the data were overlapping. For example, continuing with the Covid-19 data, one could assume that there was one data set from one region and one from another region in the same country:</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -3249,7 +3249,7 @@ df2<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>D
   </div>
 </div>
 
-<p>If we do <code>pd.concat([df1,df2])</code> we will simply add all values after each other. What we want to do is to sum the number of confirmed, recovered and deaths for the same date. This can be done in several ways, but one way is to use <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.merge.html" target="_self"><tt>pd.DataFrame.merge()</tt></a>.You can specify the columns to merge on, and choose <code>outer</code> which is union (all data from both frames) or <code>inner</code> which means the intersect (only data which you merge on that exists in both frames), see figure <a href="#fig:pandas:join">7</a> for a visual image.</p>
+<p>If we do <code>pd.concat([df1,df2])</code>, we will simply add all values after each other. What we want to do is to sum the number of confirmed, recovered and deaths for the same date. This can be done in several ways, but one way is to use <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.merge.html" target="_self"><tt>pd.DataFrame.merge()</tt></a>.You can specify the columns to merge, and choose <code>outer</code> which is union (all data from both frames) or <code>inner</code> which means the intersect (only data that exist in both DataFrames are merged). See figure <a href="#fig:pandas:join">7</a> for a visual representation.</p>
 
 <center> <!-- figure label: --> <div id="fig:pandas:join"></div> <!-- FIGURE -->
 <hr class="figure">
@@ -3294,7 +3294,7 @@ df1<span style="color: #666666">.</span>merge(df2,on<span style="color: #666666"
 <p><img src="fig-pandas/merge.png" width="400" align="bottom"></p>
 </center>
 
-<p>Clearly in this case we need to choose <code>outer</code>. In the merge process pandas adds an extra subscript <code>_x</code> and <code>_y</code> on columns that contain the same header name. We also need to sum those, which can be done as follows
+<p>Clearly in this case we need to choose <code>outer</code>. In the merge process, pandas adds an extra subscript <code>_x</code> and <code>_y</code> on columns that contain the same header name. We also need to sum these columns, which can be done as follows
 (see figure <a href="#fig:pandas:merge3">9</a> for the final result):
 </p>
 
@@ -3338,7 +3338,7 @@ df<span style="color: #666666">=</span>df<span style="color: #666666">.</span>dr
 </center>
 
 <h2 id="working-with-folders-and-files" class="anchor">Working with folders and files </h2>
-<p>When working with big data sets you might want to split data into smaller sets, and also write them to different folders (or files) to view each individually in excel. Working with files and folders in a way that will work on any kind of platform has always been a challenge, but it is greatly simplified by the <a href="https://docs.python.org/3/library/pathlib.html" target="_self">Pathlib library</a>.</p>
+<p>When working with big data sets you might want to split data into smaller sets, and also write them to different files (and folders) to view each individually in Excel. Working with files and folders in a way that will work on any kind of platform has always been a challenge, but it is greatly simplified by the <a href="https://docs.python.org/3/library/pathlib.html" target="_self">Pathlib library</a>.</p>
 <h3 id="basic-use-of-pathlib" class="anchor">Basic use of Pathlib </h3>
 
 <p>
@@ -3432,7 +3432,7 @@ p<span style="color: #666666">=</span>Path(<span style="color: #BA2121">&#39;.&#
   </div>
 </div>
 
-<p>If you run the code twice it will produce an error, because the directory exists, then we can simply do <code>Path('tmp_dir').mkdir(exist_ok=True)</code>.</p>
+<p>If you run this code twice, it will produce an error because the directory already exists, then we can simply do <code>Path('tmp_dir').mkdir(exist_ok=True)</code>.</p>
 
 <p>
 <b>Print current directory:</b>
@@ -3587,7 +3587,7 @@ data_folder<span style="color: #666666">.</span>mkdir()
   </div>
 </div>
 
-<p>If you run the code twice, it will fail, but that can be resolved by e.g. <code>data_folder.mkdir(exist_ok=True)</code>.  </p>
+<p>If you run this code twice, it will fail, but that can be resolved by e.g. <code>data_folder.mkdir(exist_ok=True)</code>.  </p>
 
 <p>
 <b>Using the <code>os</code> library:</b>
@@ -3626,7 +3626,7 @@ os<span style="color: #666666">.</span>chdir(<span style="color: #BA2121">&#39;.
   </div>
 </div>
 
-<p>More robust way of creating a directory:</p>
+<p>This is a more robust way of creating a directory:</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -3686,7 +3686,7 @@ data_folder<span style="color: #666666">=</span>Path(<span style="color: #BA2121
   </div>
 </div>
 <h2 id="writing-more-robust-code" class="anchor">Writing more robust code </h2>
-<p>Most likely in the last sections you have encountered long error messages from Python. Errors could be</p>
+<p>Most likely in the last sections you have encountered long error messages from Python. Errors could be:</p>
 <ul>
 <li> syntax errors, grammatically incorrect code e.g. calling functions that do not exist, using variables that are not defined or writing lines with missing instructions, indentation errors.</li> 
 <li> exceptions e.g. open a file that does not exist, accessing a Pandas header with the wrong name, performing wrong mathematical operations (1/0).</li>
@@ -3761,7 +3761,7 @@ get_column_from_dataframe(<span style="color: #BA2121">&#39;TIME&#39;</span>,df)
   </div>
 </div>
 
-<p>Note the use of doc string in the beginning, the doc string will be printed in advanced editors once you write the name of the function. It also helps you to remember what the function does. It is a good practice to return something of the same type, because then the rest of the code can execute. If it is critical that you find the name of the column, you can always test from the outside:</p>
+<p>Note the use of doc string in the beginning, the doc string will be printed in advanced editors once you write the name of the function. It also helps you to remember what the function does. It is a good practice to return a variable of the same type, because then the rest of the code can execute. If it is critical that you find the name of the column, you can always test from the outside:</p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="cell border-box-sizing code_cell rendered">
@@ -3937,7 +3937,7 @@ get_rows_from_dataframe(<span style="color: #BA2121">&#39;afGhaniStan&#39;</span
 
 <ol>
 <li> We want to catch errors before they occur, this is most efficiently done by wrapping simple operations in functions.</li>
-<li> Functions should be as small as possible, that would increase their reusability.</li>
+<li> Functions should be as small as possible, that increases their reusability.</li>
 <li> Almost all exceptions can be caught by using the <code>try</code> and <code>except</code> functionality in Python</li>
 <li> Write doc strings in functions to increase user friendliness.</li>
 <li> Write meaningful error messages, if possible also print out some additional information to help the user.</li>

@@ -1,5 +1,5 @@
 ======= What is Pandas? =======
-Pandas is a Python package that among many things is used to handle data, and perform operations on groups of data. It is built on top of Numpy, which makes it easy to perform vectorized operations. Pandas is written by Wes McKinney, and one of it objectives is according to the official website " '' providing fast, flexible, and expressive data structures designed to make working with ''relational'' or ''labeled'' data both easy and intuitive. It aims to be the fundamental high-level building block for doing practical, real-world data analysis in Python''":"https://pandas.pydata.org/". Pandas also has excellent functions for reading and writing excel and csv files.  An excel file is read directly into memory in what is called a `DataFrame`. A DataFrame is a two dimensional object where data are typically stored in column and row format. Pandas has a lot of functions that can be used to calculate statistical properties of the data frame as a whole. In this chapter, we will focus on basic data manipulation, stuff you might do in excel, but can be done much faster in Python and Pandas.
+Pandas is a Python package that among many things is used to handle data, and perform operations on groups of data. It is built on top of Numpy, which makes it easy to perform vectorized operations. Pandas is written by Wes McKinney, and one of it objectives is according to the official website " '' providing fast, flexible, and expressive data structures designed to make working with ''relational'' or ''labeled'' data both easy and intuitive. It aims to be the fundamental high-level building block for doing practical, real-world data analysis in Python''":"https://pandas.pydata.org/". Pandas also has Excellent functions for reading and writing Excel and csv files.  An Excel file is read directly into memory in what is called a `DataFrame`. A DataFrame is a two dimensional object where data are typically stored in column and row format. Pandas has a lot of functions that can be used to calculate statistical properties of the data frame as a whole. In this chapter, we will focus on basic data manipulation, stuff you might do in Excel, but can be done much faster in Python and Pandas.
 
 
 ======= Creating a data frame =======
@@ -32,7 +32,7 @@ Even if we initialize the DataFrame column with a list, the command `type(df['a'
 
 ===== Create DataFrame from dictionary =====
 A DataFrame can be easily generated from a dictionary. A dictionary is a special data structure, where an unique key is associated with a data type (key:value pair). In this case, the key would be the title of the column, and the value would be the data in the columns.
-##To generate the excel file in figure ref{fig:file}, we can do (see figure ref{fig:pandas:cc} for the final result)
+##To generate the Excel file in figure ref{fig:file}, we can do (see figure ref{fig:pandas:cc} for the final result)
 
 !bc pypro
 my_dict={'ints':[0,1,2,3], 'floats':[4.,5.,6.,7.],
@@ -46,25 +46,25 @@ print(df) # to view
 ##Note that all columns must have the same length to create the DataFrame.
 
 ===== From a file =====
-Assume you have some data organized in an excel or csv file. The csv file could just be a file with column data, and the entries could be separated by a comma or tab.
+Assume you have some data organized in an Excel or csv file. The csv file could just be a file with column data, and the entries could be separated by a comma or tab.
 
-FIGURE: [fig-pandas/covid_comb.png, width=400 frac=1.0] Official Covid-19 data, and example of files (left) tab separated (right) excel file. label{fig:file}
+FIGURE: [fig-pandas/covid_comb.png, width=400 frac=1.0] Official Covid-19 data, and example of files (left) tab separated (right) Excel file. label{fig:file}
 
 !bc pypro
-df=pd.read_excel('../data/corona_data.xlsx') # excel file
+df=pd.read_excel('../data/corona_data.xlsx') # Excel file
 df2=pd.read_csv('../data/corona_data.dat',sep='\t') # csv tab separated file
 !ec
-If the excel file has several sheets, you can give the sheet name directly, e.g. `df=pd.read_excel('file.xlsx',sheet_name='Sheet1')`, for more information see the "documentation":"https://pandas.pydata.org/docs/reference/api/pandas.read_excel.html". 
+If the Excel file has several sheets, you can give the sheet name directly, e.g. `df=pd.read_excel('file.xlsx',sheet_name='Sheet1')`, for more information see the "documentation":"https://pandas.pydata.org/docs/reference/api/pandas.read_excel.html". 
 
 !bnotice Accessing files
-Accessing files from Python can be painful. If excel files are open in excel, Windows will not allow a different program to access them - always remember to close the file before opening it. Sometimes we may not be in the right directory; to check which directory you are in, you can do the following
+Accessing files from Python can be painful. If Excel files are open in Excel, Windows will not allow a different program to access them - always remember to close the file before opening it. Sometimes we may not be in the right directory; to check which directory you are in, you can do the following
 !bc pypro
 import os
 print(os.getcwd()) # prints current working directory
 !ec
 !enotice
 
-We can easily save the data frame to excel format and open it in Excel
+We can easily save the data frame to Excel format and open it in Excel
 !bc pypro
 df.to_excel('covid19.xlsx', index=False) # what happens if index=True?
 !ec
@@ -109,7 +109,7 @@ When selecting rows `loc` and `iloc` behave differently, `loc` includes the endp
 === Challenges when accessing columns or rows ===
 
 !bnotice Special characters 
-Sometimes when reading files from excel, headers may contains invisible characters like newline `\n` or tab `\t` or maybe Norwegian special letters that are not read properly. If you have problems accessing a column by name do `print(df.columns)` and check if the name of the column matches what you would expect.  
+Sometimes when reading files from Excel, headers may contains invisible characters like newline `\n` or tab `\t` or maybe Norwegian special letters that are not read properly. If you have problems accessing a column by name do `print(df.columns)` and check if the name of the column matches what you would expect.  
 !enotice
 
 If the header names have unwanted white space, one can do:
@@ -331,14 +331,14 @@ print(df) # to view
 FIGURE: [fig-pandas/concat.png, width=400 frac=1.0] The result of `concat()`. label{fig:pandas:concat}
 # #endif
 
-If you compare this DataFrame with the previous one, you will see that the index column is different. This is because when joining two DataFrames Pandas does not reset the index by default, doing `df=pd.concat([df1,df2],ignore_index=True)` resets the index. It is also possible to join DataFrames column wise:
+If you compare this DataFrame with the previous one, you will see that the index column is different. This is because when joining two DataFrames, Pandas does not reset the index by default. Doing `df=pd.concat([df1,df2],ignore_index=True)` resets the index. It is also possible to join DataFrames column wise:
 !bc pypro
 pd.concat([df1,df2],axis=1)
 !ec
 
 === Merging DataFrames ===
 
-In the previous example we had two non overlapping DataFrames (separate countries and times). It could also be the case that some of the data was overlapping e.g. continuing with the Covid-19 data, one could assume that there was one data set from one region and one from another region in the same country:
+In the previous example we had two non overlapping DataFrames (separate countries and times). It could also be the case that some of the data were overlapping. For example, continuing with the Covid-19 data, one could assume that there was one data set from one region and one from another region in the same country:
 !bc pypro
 my_dict1={'LOCATION':7*['Diamond Princess'], 
 'TIME':[b+dt.timedelta(days=i) for i in range(7)],
@@ -355,7 +355,7 @@ my_dict2={'LOCATION':2*['Diamond Princess'],
 df1=pd.DataFrame(my_dict1)
 df2=pd.DataFrame(my_dict2)
 !ec
-If we do `pd.concat([df1,df2])` we will simply add all values after each other. What we want to do is to sum the number of confirmed, recovered and deaths for the same date. This can be done in several ways, but one way is to use "`pd.DataFrame.merge()`":"https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.merge.html".You can specify the columns to merge on, and choose `outer` which is union (all data from both frames) or `inner` which means the intersect (only data which you merge on that exists in both frames), see figure ref{fig:pandas:join} for a visual image.
+If we do `pd.concat([df1,df2])`, we will simply add all values after each other. What we want to do is to sum the number of confirmed, recovered and deaths for the same date. This can be done in several ways, but one way is to use "`pd.DataFrame.merge()`":"https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.merge.html".You can specify the columns to merge, and choose `outer` which is union (all data from both frames) or `inner` which means the intersect (only data that exist in both DataFrames are merged). See figure ref{fig:pandas:join} for a visual representation.
 
 FIGURE: [fig-pandas/fig_join.png, width=400 frac=1.0] The result of using `how=outer, inner, left`, or `right` in `pd.DataFrame.merge()`. label{fig:pandas:join}
 
@@ -371,7 +371,7 @@ we get the results in figure ref{fig:pd:merge}
 FIGURE: [fig-pandas/merge.png, width=400 frac=1.0] Merging to dataframes using `outer` (top) and `inner` (bottom). label{fig:pd:merge}
 
 # #endif
-Clearly in this case we need to choose `outer`. In the merge process pandas adds an extra subscript `_x` and `_y` on columns that contain the same header name. We also need to sum those, which can be done as follows
+Clearly in this case we need to choose `outer`. In the merge process, pandas adds an extra subscript `_x` and `_y` on columns that contain the same header name. We also need to sum these columns, which can be done as follows
 # #if FORMAT not in ("ipynb")
 (see figure ref{fig:pandas:merge3} for the final result):
 # #endif
@@ -392,7 +392,7 @@ FIGURE: [fig-pandas/merge3.png, width=400 frac=1.0] Result of outer merging and 
 # #endif
 
 ===== Working with folders and files =====
-When working with big data sets you might want to split data into smaller sets, and also write them to different folders (or files) to view each individually in excel. Working with files and folders in a way that will work on any kind of platform has always been a challenge, but it is greatly simplified by the "Pathlib library":"https://docs.python.org/3/library/pathlib.html".
+When working with big data sets you might want to split data into smaller sets, and also write them to different files (and folders) to view each individually in Excel. Working with files and folders in a way that will work on any kind of platform has always been a challenge, but it is greatly simplified by the "Pathlib library":"https://docs.python.org/3/library/pathlib.html".
 
 === Basic use of Pathlib ===
 
@@ -422,7 +422,7 @@ __Create a directory:__
 !bc pypro
 Path('tmp_dir').mkdir()
 !ec
-If you run the code twice it will produce an error, because the directory exists, then we can simply do `Path('tmp_dir').mkdir(exist_ok=True)`.
+If you run this code twice, it will produce an error because the directory already exists, then we can simply do `Path('tmp_dir').mkdir(exist_ok=True)`.
 
 __Print current directory:__
 ``
@@ -472,7 +472,7 @@ for country in countries:
     df2=df[df['LOCATION']==country]
     df2.to_excel(new_path/excel_file,index=False)
 !ec
-If you run the code twice, it will fail, but that can be resolved by e.g. `data_folder.mkdir(exist_ok=True)`.  
+If you run this code twice, it will fail, but that can be resolved by e.g. `data_folder.mkdir(exist_ok=True)`.  
 
 __Using the `os` library:__
 ``
@@ -490,7 +490,7 @@ for country in countries:
     os.chdir('..') # move up
 !ec
 
-More robust way of creating a directory:
+This is a more robust way of creating a directory:
 !bc pypro
 def my_mkdir(name):
     if os.path.isdir(name):
@@ -513,7 +513,7 @@ for dir in data_folder.iterdir():
 !ec
 
 ===== Writing more robust code =====
-Most likely in the last sections you have encountered long error messages from Python. Errors could be
+Most likely in the last sections you have encountered long error messages from Python. Errors could be:
 * syntax errors, grammatically incorrect code e.g. calling functions that do not exist, using variables that are not defined or writing lines with missing instructions, indentation errors. 
 * exceptions e.g. open a file that does not exist, accessing a Pandas header with the wrong name, performing wrong mathematical operations (1/0).
 * logical errors (bugs), code that runs but produces wrong results. These errors are of course some of the most difficult errors to find and can only be discovered by comparing the output of the code to known answers. In many cases errors are introduced when extending the code, and unit tests can be extremely helpful.
@@ -545,7 +545,7 @@ def get_column_from_dataframe(name,df):
 get_column_from_dataframe('TIME2',df)
 get_column_from_dataframe('TIME',df)
 !ec
-Note the use of doc string in the beginning, the doc string will be printed in advanced editors once you write the name of the function. It also helps you to remember what the function does. It is a good practice to return something of the same type, because then the rest of the code can execute. If it is critical that you find the name of the column, you can always test from the outside:
+Note the use of doc string in the beginning, the doc string will be printed in advanced editors once you write the name of the function. It also helps you to remember what the function does. It is a good practice to return a variable of the same type, because then the rest of the code can execute. If it is critical that you find the name of the column, you can always test from the outside:
 !bc pypro
 s=get_column_from_dataframe('TIME2',df)
 if s.empty:
@@ -639,7 +639,7 @@ get_rows_from_dataframe('afGhaniStan',df)
 __To summarize:__
 
 o We want to catch errors before they occur, this is most efficiently done by wrapping simple operations in functions.
-o Functions should be as small as possible, that would increase their reusability.
+o Functions should be as small as possible, that increases their reusability.
 o Almost all exceptions can be caught by using the `try` and `except` functionality in Python
 o Write doc strings in functions to increase user friendliness.
 o Write meaningful error messages, if possible also print out some additional information to help the user.
@@ -647,14 +647,14 @@ o Write meaningful error messages, if possible also print out some additional in
 
 # #ifdef PROGRESS
 ======= Cleaning data =======
-When working with real data sets, a big problem can be that special characters exists in the excel sheet or that Norwegian characters are not read correctly. The advise is to
+When working with real data sets, a big problem can be that special characters exists in the Excel sheet or that Norwegian characters are not read correctly. The advise is to
 o Avoid using white space in headers or entries in the DataFrame
 o Replace Norwegian characters with suitable replacements
 o Try to avoid case sensitive searches
 o Excel sheets may contain spelling mistakes, always try to make some checks
 o ...
 
-The list can be quite long, but the strategy is to read the original excel file and replace names, remove white spaces etc. Since you have to 
+The list can be quite long, but the strategy is to read the original Excel file and replace names, remove white spaces etc. Since you have to 
 
 The advice is to replace special characters. For the column headers, you can easily inspect them by doing `print(df.columns)`. 
 # #endif
