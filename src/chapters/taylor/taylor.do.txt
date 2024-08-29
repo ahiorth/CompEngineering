@@ -277,7 +277,7 @@ This is very similar to our usual scientific notation where we represent large (
 Most modern computers use 64-bits (8 bytes) processors. We are not going into all the details, the most important message is that the units handled by the processor are *finite*. Thus we cannot, in general, store numbers in a computer with infinite accuracy.
 !bnotice Machine Precision
 idx{machine precision}
-Machine precision, $\epsilon_M$ is the smallest number we can add to one and get something different than one, i.e. $1+\epsilon_M>1$. For a 64-bits computer this value is $\epsilon_M=2^{-52}\simeq3.5527\times10^{-16}$.
+Machine precision, $\epsilon_M$ is the smallest number we can add to one and get something different than one, i.e. $1+\epsilon_M>1$. For a 64-bits computer this value is $\epsilon_M=2^{-52}\simeq2.2204\times10^{-16}$.
 !enotice
 In the next section we explain why the machine precision has this value, but if you just accept this for a moment, we can demonstrate why the machine precision is important and you need to care about it. First, just to convince you that the machine precision has the value of $2^{-52}$, you can do the following in Python:
 !bc pypro
