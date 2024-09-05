@@ -1,0 +1,1487 @@
+# Information about all exercises in the file book.do.txt.
+# The information can be loaded into a Python list of dicts by
+#
+# f = open('.book.exerinfo', 'r')
+# exer = eval(f.read())
+#
+[{'ans_docend': '',
+  'answer': '',
+  'chapter_exercise': 1,
+  'chapter_no': 4,
+  'chapter_title': 'Partial differential equations and linear systems',
+  'chapter_type': 'Chapter',
+  'closing_remarks': '',
+  'file': None,
+  'heading': '=====',
+  'hints': [],
+  'keywords': None,
+  'label': None,
+  'no': 1,
+  'sol_docend': '',
+  'solution': '',
+  'solution_file': None,
+  'subex': [],
+  'text': 'FIGURE: [fig-lin/heat.png, width=700 frac=.9] Conservation of '
+          'energy and the continuity equation. label{fig:nlin:heat}\n'
+          '\n'
+          'In figure ref{fig:nlin:heat}, the continuity equation is derived '
+          'for\n'
+          'heat flow.\n'
+          '=== Heat equation for solids ===\n'
+          'As derived in the beginning of this chapter the heat equation for a '
+          'solid is\n'
+          '!bt\n'
+          '\\begin{equation}\n'
+          '\\frac{d^2T}{dx^2}+\\frac{\\dot{\\sigma}}{k}=\\frac{\\rho '
+          'c_p}{k}\\frac{dT}{dt},\n'
+          'label{eq:nlin:heateq}\n'
+          '\\end{equation}\n'
+          '\n'
+          '!et\n'
+          'where $\\dot{\\sigma}$ is the rate of heat generation in the solid. '
+          'This\n'
+          'equation can be used as a starting point for many interesting\n'
+          'models. In this exercise we will investigate the *steady state*\n'
+          'solution, *steady state* is just a fancy way of expressing that we\n'
+          'want the solution that *does not change with time*. This is '
+          'achieved\n'
+          'by ignoring the derivative with respect to time in equation\n'
+          '(ref{eq:nlin:heateq}). We want to study a system with size $L$, and '
+          'is\n'
+          'it good practice to introduce a dimensionless variable: $y=x/L$. \n'
+          '\n'
+          '\n'
+          '__Part 1.__\n'
+          '\n'
+          'Show that equation (ref{eq:nlin:heateq}) now takes the following '
+          'form:\n'
+          '!bt\n'
+          '\\begin{equation}\n'
+          '\\frac{d^2T }{dy^2}+\\frac{\\dot{\\sigma}L^2}{k}=0\n'
+          'label{eq:nlin:heat2}\n'
+          '\\end{equation}\n'
+          '\n'
+          '!et',
+  'title': 'Conservation Equation or the Continuity Equation',
+  'type': 'Exercise',
+  'type_visible': True},
+ {'ans_docend': '',
+  'answer': '',
+  'chapter_exercise': 2,
+  'chapter_no': 4,
+  'chapter_title': 'Partial differential equations and linear systems',
+  'chapter_type': 'Chapter',
+  'closing_remarks': '',
+  'file': None,
+  'heading': '=====',
+  'hints': [],
+  'keywords': None,
+  'label': None,
+  'no': 2,
+  'sol_docend': '',
+  'solution': '',
+  'solution_file': None,
+  'subex': [],
+  'text': 'Curing of concrete is one particular example that we can '
+          'investigate\n'
+          'with equation (ref{eq:nlin:heat2}). When concrete is curing, there '
+          'are\n'
+          'a lot of chemical reactions happening, these reactions generate\n'
+          'heat. This is a known issue, and if the temperature rises too '
+          'much \n'
+          'compared to the surroundings, the concrete may fracture.  In the\n'
+          'following we will, for simplicity, assume that the rate of heat\n'
+          'generated during curing is constant, $\\dot{\\sigma}=$100 W/m$^3$. '
+          'The\n'
+          'left end (at $x=0$) is insulated, meaning that there is no flow of\n'
+          'heat over that boundary, hence $dT/dx=0$ at $x=0$. On the right '
+          'hand\n'
+          'side the temperature is kept constant, $x(L)=y(1)=T_1$, assumed to '
+          'be\n'
+          'equal to the ambient temperature of $T_1=25^\\circ$C.  The '
+          'concrete\n'
+          'thermal conductivity is assumed to be $k=1.65$ W/m$^\\circ$C.\n'
+          '\n'
+          '\n'
+          '\n'
+          '__Part 1.__\n'
+          '\n'
+          'Show that the solution to equation (ref{eq:nlin:heat2}) in this '
+          'case is:\n'
+          '!bt\n'
+          '\\begin{equation}\n'
+          'T(y)=\\frac{\\dot{\\sigma}L^2}{2k}(1-y^2)+T_1.\n'
+          'label{eq:nlin:heatsol}\n'
+          '\\end{equation}\n'
+          '\n'
+          '!et\n'
+          '\n'
+          '\n'
+          '__Part 2.__\n'
+          'In order to solve equation (ref{eq:nlin:heat2}) numerically, we '
+          'need to discretize\n'
+          'it. Show that equation (ref{eq:nlin:heat2}) now takes the following '
+          'form:\n'
+          '\n'
+          '!bt\n'
+          '\\begin{equation}\n'
+          'T_{i+1}+T_{i-1}-2T_i=-h^2\\beta,\n'
+          'label{eq:nlin:heat3}\n'
+          '\\end{equation}\n'
+          '\n'
+          '!et\n'
+          'where $\\beta=\\dot{\\sigma}L^2/k$.\n'
+          'FIGURE: [fig-lin/heat_grid.png, width=200 frac=.5] Finite '
+          'difference grid for $N=4$. label{fig:nlin:hgrid} \n'
+          '\n'
+          'In figure ref{fig:nlin:hgrid}, the finite difference grid is shown '
+          'for\n'
+          '$N=4$.\n'
+          '\n'
+          '__Part 3.__\n'
+          '\n'
+          'Show that equation (ref{eq:nlin:heat3}) including the boundary '
+          'conditions for $N=4$ can be written as the following matrix '
+          'equation\n'
+          '!bt\n'
+          '\\begin{align}\n'
+          '\\left(\n'
+          '\\begin{array}{cccc}\n'
+          '-\\gamma&\\gamma&0&0\\\\ \n'
+          '1&-2&1&0\\\\ \n'
+          '0&1&-2&1\\\\ \n'
+          '0&0&1&-2\\\\ \n'
+          '\\end{array}\n'
+          '\\right)\n'
+          '\\left(\n'
+          '\\begin{array}{c}\n'
+          'T_0\\\\ \n'
+          'T_1\\\\ \n'
+          'T_2\\\\ \n'
+          'T_3\\\\ \n'
+          '\\end{array}\n'
+          '\\right)\n'
+          '=\n'
+          '\\left(\n'
+          '\\begin{array}{c}\n'
+          '-h^2\\beta\\\\ \n'
+          '-h^2\\beta\\\\ \n'
+          '-h^2\\beta\\\\ \n'
+          '-h^2\\beta-25\n'
+          '\\end{array}\n'
+          '\\right).\n'
+          '\\end{align}\n'
+          'label{eq:lin:heats}\n'
+          '\n'
+          '!et\n'
+          'where $\\gamma=2$ for the central difference scheme and 1 for the '
+          'forward difference scheme.\n'
+          '\n'
+          '\n'
+          '__Part 4.__\n'
+          '* Solve the set of equations in equation (ref{eq:lin:heats}) using '
+          '"`numpy.linalg.solve`":"https://numpy.org/doc/stable/reference/generated/numpy.linalg.solve.html".\n'
+          '* Write the code so that you can easily switch between the central '
+          'difference scheme and forward difference\n'
+          '* Evaluate the numerical error as you change $h$, how does it '
+          'scale? Is it what you expect?\n'
+          '\n'
+          '!bc pycod\n'
+          'import numpy as np\n'
+          'import scipy as sc\n'
+          'import scipy.sparse.linalg\n'
+          'from numpy.linalg import solve\n'
+          'import matplotlib.pyplot as plt\n'
+          '\n'
+          '!ec\n'
+          '\n'
+          '!bc pycod\n'
+          '\n'
+          'central_difference=False\n'
+          '# set simulation parameters\n'
+          'h=0.25\n'
+          'L=1.0\n'
+          'n = int(round(L/h))\n'
+          'Tb=25 #rhs\n'
+          'sigma=100\n'
+          'k=1.65 \n'
+          'beta = sigma*L**2/k\n'
+          '\n'
+          'y = np.arange(n+1)*h\n'
+          '\n'
+          'def analytical(x):\n'
+          '    return beta*(1-x*x)/2+Tb\n'
+          'def tri_diag(a, b, c, k1=-1, k2=0, k3=1):\n'
+          '    """ a,b,c diagonal terms\n'
+          '        default k-values for 4x4 matrix:\n'
+          '        | b0 c0 0  0 |\n'
+          '        | a0 b1 c1 0 |\n'
+          '        | 0  a1 b2 c2|\n'
+          '        | 0  0  a2 b3|\n'
+          '    """\n'
+          '    return np.diag(a, k1) + np.diag(b, k2) + np.diag(c, k3)\n'
+          '# defina a, b and c vector\n'
+          'a=np.ones(n-1)\n'
+          'b=..\n'
+          'c=..\n'
+          '\n'
+          'if central_difference:\n'
+          '    c[0]= ...\n'
+          'else:\n'
+          '    b[0]=...\n'
+          '\n'
+          'A=tri_diag(a,b,c)\n'
+          'print(A) # view matrix - compare with N=4 to make sure no bugs\n'
+          '# define rhs vector\n'
+          'd=...\n'
+          '#rhs boundary condition\n'
+          'd[-1]=...\n'
+          '\n'
+          'Tn=np.linalg.solve(A,d)\n'
+          'print(Tn)\n'
+          '\n'
+          '!ec\n'
+          'The correct solution for $L=1$ m, and $h=1/4$, is: '
+          '$[T_0,T_1.T_2,T_3]$=[55.3030303 , 53.40909091, 47.72727273, '
+          '38.25757576] (central difference) and '
+          '$[T_0,T_1.T_2,T_3]$=[62.87878788, 59.09090909, 51.51515152, '
+          '40.15151515] (forward difference)',
+  'title': 'Curing of Concrete and Matrix Formulation',
+  'type': 'Exercise',
+  'type_visible': True},
+ {'ans_docend': '',
+  'answer': '',
+  'chapter_exercise': 3,
+  'chapter_no': 4,
+  'chapter_title': 'Partial differential equations and linear systems',
+  'chapter_type': 'Chapter',
+  'closing_remarks': '',
+  'file': None,
+  'heading': '=====',
+  'hints': [],
+  'keywords': None,
+  'label': None,
+  'no': 3,
+  'sol_docend': '',
+  'solution': '',
+  'solution_file': None,
+  'subex': [],
+  'text': '__Part 1.__\n'
+          'Replace the time derivative in equation (ref{eq:nlin:heateq}) with\n'
+          '!bt\n'
+          '\\begin{equation}\n'
+          '\\frac{dT}{dt}\\simeq\\frac{T(t+\\Delta t)-T(t)}{\\Delta '
+          't}=\\frac{T^{n+1}-T^n}{\\Delta t}, \n'
+          'label{eq:lin:dt}\n'
+          '\\end{equation}\n'
+          '\n'
+          '!et\n'
+          'and show that by using an *implicit formulation* (i.e. that the '
+          'second derivative with respect to $x$ is to be evaluated at '
+          '$T(t+\\Delta t)\\equiv T^{n+1}$) that equation '
+          '(ref{eq:nlin:heateq}) can be written\n'
+          '!bt\n'
+          '\\begin{equation}\n'
+          'T_{i+1}^{n+1}+T_{i-1}^{n+1}-(2+\\frac{\\alpha h^2}{\\Delta '
+          't})T_i^{n+1}=-h^2\\beta-\\frac{\\alpha h^2 }{\\Delta t}T_i^n,\n'
+          'label{eq:lin:imp} \n'
+          '\\end{equation}\n'
+          '\n'
+          '!et\n'
+          'where $\\alpha\\equiv\\rho c_p/k$.\n'
+          '\n'
+          '__Part 2.__\n'
+          '\n'
+          'Use the central difference formulation for the boundary condition '
+          'and show that for four nodes we can formulate equation '
+          '(ref{eq:lin:imp}) as the following matrix equation\n'
+          '!bt\n'
+          '\\begin{align}\n'
+          '&\\left(\n'
+          '\\begin{array}{cccc}\n'
+          '-(2+\\frac{\\alpha h^2}{\\Delta t})&2&0&0\\\\ \n'
+          '1&-(2+\\frac{\\alpha h^2}{\\Delta t})&1&0\\\\ \n'
+          '0&1&-(2+\\frac{\\alpha h^2}{\\Delta t})&1\\\\ \n'
+          '0&0&1&-(2+\\frac{\\alpha h^2}{\\Delta t})\\\\ \n'
+          '\\end{array}\n'
+          '\\right)\n'
+          '\\left(\n'
+          '\\begin{array}{c}\n'
+          'T_0^{n+1}\\\\ \n'
+          'T_1^{n+1}\\\\ \n'
+          'T_2^{n+1}\\\\ \n'
+          'T_3^{n+1}\\\\ \n'
+          '\\end{array}\n'
+          '\\right)\\no\\\\ \n'
+          '&=\n'
+          '\\left(\n'
+          '\\begin{array}{c}\n'
+          '-h^2\\beta\\\\ \n'
+          '-h^2\\beta\\\\ \n'
+          '-h^2\\beta\\\\ \n'
+          '-h^2\\beta-25\n'
+          '\\end{array}\n'
+          '\\right)\n'
+          '-\\frac{\\alpha h^2 }{\\Delta t}\n'
+          '\\left(\n'
+          '\\begin{array}{c}\n'
+          'T_0^n\\\\ \n'
+          'T_1^n\\\\ \n'
+          'T_2^n\\\\ \n'
+          'T_3^n\\\\ \n'
+          '\\end{array}\n'
+          '\\right)\n'
+          '\\end{align}\n'
+          'label{eq:lin:heatfull}\n'
+          '\n'
+          '!et\n'
+          '\n'
+          '\n'
+          '__Part 3.__\n'
+          'Assume that the initial temperature in the concrete is '
+          '$25^\\circ$C, $\\rho$=2400 kg/m$^3$, a specific heat capacity '
+          '$c_p=$ 1000 W/kg K, and a time step of $\\Delta t=86400$ s (1 day). '
+          'Solve equation (ref{eq:lin:heatfull}), plot the result each day and '
+          'compare the result after 50 days with the steady state solution in '
+          'equation (ref{eq:nlin:heatsol}).',
+  'title': 'Solve the full heat equation',
+  'type': 'Exercise',
+  'type_visible': True},
+ {'ans_docend': '',
+  'answer': '',
+  'chapter_exercise': 4,
+  'chapter_no': 4,
+  'chapter_title': 'Partial differential equations and linear systems',
+  'chapter_type': 'Chapter',
+  'closing_remarks': '',
+  'file': None,
+  'heading': '=====',
+  'hints': [],
+  'keywords': None,
+  'label': None,
+  'no': 4,
+  'sol_docend': '',
+  'solution': '',
+  'solution_file': None,
+  'subex': [],
+  'text': 'In this part we are going to create a sparse matrix in python and '
+          'use `scipy.sparse.linalg.spsolve` to solve it. The matrix is '
+          'created using `scipy.sparse.spdiags`.\n'
+          '\n'
+          '\n'
+          '__Part 1.__\n'
+          'Extend the code you developed in the last exercises to also be able '
+          'to use sparse matrices, by e.g. a logical switch. Sparse matrices '
+          'may be defined as follows\n'
+          '!bc pypro\n'
+          'import scipy.sparse.linalg\n'
+          '\n'
+          '#right hand side\n'
+          '# rhs vector\n'
+          'd=np.repeat(-h*h*beta,n)\n'
+          '#rhs - constant temperature\n'
+          'Tb=25\n'
+          'd[-1]=d[-1]-Tb\n'
+          '#Set up sparse matrix\n'
+          'diagonals=np.zeros((3,n))\n'
+          'diagonals[0,:]= 1\n'
+          'diagonals[1,:]= -2  \n'
+          'diagonals[2,:]= 1\n'
+          '#No flux boundary condition\n'
+          'diagonals[2,1]= 2\n'
+          'A_sparse = sc.sparse.spdiags(diagonals, [-1,0,1], n, '
+          "n,format='csc')\n"
+          '# to view matrix - do this and check that it is correct!\n'
+          'print(A_sparse.todense())\n'
+          '# solve matrix\n'
+          'Tb = sc.sparse.linalg.spsolve(A_sparse,d)\n'
+          '\n'
+          '# if you like you can use timeit to check the efficiency\n'
+          '# %timeit sc.sparse.linalg.spsolve( ... )\n'
+          '\n'
+          '!ec\n'
+          '\n'
+          '* Compare the sparse solver with the standard Numpy solver using\n'
+          '  `%timeit`, how large must the linear system be before an '
+          'improvement\n'
+          '  in speed is seen?',
+  'title': 'Using sparse matrices in python',
+  'type': 'Exercise',
+  'type_visible': True},
+ {'ans_docend': '',
+  'answer': '',
+  'chapter_exercise': 1,
+  'chapter_no': 5,
+  'chapter_title': 'Optimization and nonlinear systems',
+  'chapter_type': 'Chapter',
+  'closing_remarks': '',
+  'file': None,
+  'heading': '=====',
+  'hints': [],
+  'keywords': None,
+  'label': None,
+  'no': 5,
+  'sol_docend': '',
+  'solution': 'The calculation is straight forward, but it is easy to get an '
+              'error due to units. We will use SI units: a=0.3640 m$^6$Pa/mol, '
+              'b=4.267$\\cdot10^{-5}$ m$^3$/mol, $R$=8.314J/mol K.  The molar '
+              'volume is obtained by multiplying by the molar weight of '
+              'CO$_2$: $M_w$ = 44 g/mol, hence '
+              '$\\nu=1.478\\cdot10^{-3}$m$^3$/mol. Using '
+              '$P=RT/(\\nu-b)-a/\\nu^2=1.993$ MPa, or an error of $0.3\\%$.',
+  'solution_file': None,
+  'subex': [],
+  'text': 'Use equation (ref{eq:nlin:vdw}), and the parameters for CO$_2$: '
+          'a=3.640 L$^2$bar/mol, and b=0.04267 L/mol, to test the van der Waal '
+          'EOS in equation (ref{eq:nlin:vdw}). Use that at 2 MPa and 100 '
+          '$^\\circ$C, CO$_2$ has a specific volume of 0.033586 m$^3$/kg.',
+  'title': 'van der Waal EOS and CO$_2$',
+  'type': 'Exercise',
+  'type_visible': True},
+ {'ans_docend': '',
+  'answer': '',
+  'chapter_exercise': 2,
+  'chapter_no': 5,
+  'chapter_title': 'Optimization and nonlinear systems',
+  'chapter_type': 'Chapter',
+  'closing_remarks': '',
+  'file': None,
+  'heading': '=====',
+  'hints': [],
+  'keywords': None,
+  'label': None,
+  'no': 6,
+  'sol_docend': '',
+  'solution': 'Below is a straight forward (vanilla) implementation:\n'
+              '!bc pycod\n'
+              'def iterative(x,g,prec=1e-8, MAXIT=1000):\n'
+              "    '''Approximate solution of x=g(x) by fixed point "
+              'iterations.\n'
+              '    x : starting point for iterations \n'
+              '    eps : desired precision\n'
+              '    Returns x when x does not change more than prec\n'
+              '    and number of iterations MAXIT are not exceeded\n'
+              "    '''\n"
+              '    eps = 1\n'
+              '    n=0\n'
+              '    while eps>prec and n < MAXIT:\n'
+              '        x_next = g(x)\n'
+              '        eps = np.abs(x-x_next)\n'
+              '        x = x_next\n'
+              '        n += 1\n'
+              '        if(np.isinf(x)):\n'
+              "            print('Quitting .. maybe bad starting point?')\n"
+              '            return x\n'
+              '    if (n<MAXIT):\n'
+              "        print('Found solution: ', x, ' After ', n, "
+              "'iterations')\n"
+              '    else:\n'
+              "        print('Max number of iterations exceeded')\n"
+              '    return x\n'
+              '\n'
+              '!ec\n'
+              'If we start at $x=0$, it will take 174 iterations using '
+              '$x-x^2+e^{-x}$ ($g(x)$) and only 19 for $e^{-x/2}$ ($h(x)$), '
+              'the root is $x$=0.70346742.',
+  'solution_file': None,
+  'subex': [],
+  'text': 'Write a Python function that utilizes the fixed point algorithm in '
+          'the previous section, find the root of $f(x)=x^2-e^{-x}$. In one '
+          'case use $g(x)=e^{-x/2}$, and in the other case use '
+          '$g(x)=x-x^2+e^{-x}$. How many iterations does it take in each case?',
+  'title': 'Implement the fixed point iteration',
+  'type': 'Exercise',
+  'type_visible': True},
+ {'ans_docend': '',
+  'answer': '',
+  'chapter_exercise': 3,
+  'chapter_no': 5,
+  'chapter_title': 'Optimization and nonlinear systems',
+  'chapter_type': 'Chapter',
+  'closing_remarks': '',
+  'file': None,
+  'heading': '=====',
+  'hints': [],
+  'keywords': None,
+  'label': None,
+  'no': 7,
+  'sol_docend': '',
+  'solution': 'First we rewrite equation (ref{eq:nlin:vdwr}) in a more useful '
+              'form\n'
+              '!bt\n'
+              '\\begin{equation}\n'
+              '\\hat{\\nu}=\\frac{1}{3}(1+\\frac{8\\hat{T}}{\\hat{P}+3/\\hat{\\nu}^2})\n'
+              'label{eq:nlin:sp}\n'
+              '\\end{equation}\n'
+              '\n'
+              '!et\n'
+              'The right hand side will play the same role as $g(x)$ above, '
+              'where $x$ now is the reduced molar volume, and can be '
+              'implemented in Python as:\n'
+              '!bc pycod\n'
+              'def dvdwEOS(nu,t,p):\n'
+              '    return (1+8*t/(p+3/nu**2))/3\n'
+              '\n'
+              '!ec\n'
+              'Note that this function requires the values of $\\hat{P}$ and '
+              '$\\hat{T}$, in addition to $\\hat{\\nu}$ to return a value. '
+              'Thus in order to use the fixed point iteration method '
+              'implemented above, we need to pass arguments to our function. '
+              'This can easily be achieved by taking advantage of Pythons '
+              '`*args` functionality. By simply rewriting our implementation '
+              'slightly:\n'
+              '!bc pycod\n'
+              'def iterative(x,g,*args,prec=1e-8):\n'
+              '    MAX_ITER=1000\n'
+              '    eps = 1\n'
+              '    n=0\n'
+              '    while eps>prec and n < MAX_ITER:\n'
+              '        x_next = g(x,*args)\n'
+              '        eps = np.abs(x-x_next)\n'
+              '        x = x_next\n'
+              '        n += 1\n'
+              "    print('Number of iterations: ', n)\n"
+              '    return x\n'
+              '\n'
+              '!ec\n'
+              'We can find the root by calling the function as:\n'
+              '!bc pypro\n'
+              'iterative(1,dvdwEOS,1.2,1.5)\n'
+              '\n'
+              '!ec\n'
+              'The program returns the correct solution after 71 iterations.',
+  'solution_file': None,
+  'subex': [],
+  'text': 'Extend the code above to take as argument the van der Waal EOS. For '
+          'simplicity we will use the rescaled EOS in equation '
+          '(ref{eq:nlin:vdwr}). Show that for the reduced temperature, '
+          '$\\hat{T}$=1.2, and pressure, $\\hat{P}$=1.5, the reduced molar '
+          'volume $\\hat{nu}$ is 1.3522091.',
+  'title': 'Finding the molar volume from the van der Waal EOS by fixed point '
+           'iteration',
+  'type': 'Exercise',
+  'type_visible': True},
+ {'ans_docend': '',
+  'answer': '',
+  'chapter_exercise': 4,
+  'chapter_no': 5,
+  'chapter_title': 'Optimization and nonlinear systems',
+  'chapter_type': 'Chapter',
+  'closing_remarks': '',
+  'file': None,
+  'heading': '=====',
+  'hints': [],
+  'keywords': None,
+  'label': None,
+  'no': 8,
+  'sol_docend': '',
+  'solution': 'First, we calculate the derivative of $g(x)$, '
+              '$g^\\prime(x)=-2xe^{1-x^2}$, hence $g^\\prime(x^*)=-2$ and '
+              '$|g^\\prime(x^*)|>1$. This is an unstable fixed point, and if '
+              'we start a little bit off from this point we will spiral away '
+              'from it.\n'
+              '\n'
+              'Inverting $y=g(x)$ gives us $ g^{-1} (y)=\\sqrt{1-\\ln y}$. '
+              'Note that $y^*=x^*=1$ is a solution to this equation as it '
+              'should be. The derivative is\n'
+              '!bt\n'
+              '\\begin{equation}\n'
+              '{g^{-1}}^\\prime(y)=-\\frac{1}{2\\sqrt{1-\\ln y}},\n'
+              '\\end{equation}\n'
+              '\n'
+              '!et\n'
+              'and $ {g^{-1}}^\\prime(y^*)=-1/2 $.\n'
+              'It takes about 30 iterations to reach the correct solution '
+              '$y^*=1$, when the starting point is $y=0$.',
+  'solution_file': None,
+  'subex': [],
+  'text': 'The solution to $x=e^{1-x^2}$ is clearly $x=1$.\n'
+          '\n'
+          '* First try the fixed point method using $g(x)=e^{1-x^2}$ to find '
+          'the root $x=1$. Try to start very close to the true solution $x=1$. '
+          'What is the value of $g^\\prime(x^*)$?\n'
+          '* Next, invert $g(x)$, what is the derivative of $g^{-1}(x^*)$? Try '
+          'the fixed point method using $g^{-1}(x^*)$',
+  'title': 'Solve $x=e^{1-x^2}$ using fixed point iteration',
+  'type': 'Exercise',
+  'type_visible': True},
+ {'ans_docend': '',
+  'answer': '',
+  'chapter_exercise': 5,
+  'chapter_no': 5,
+  'chapter_title': 'Optimization and nonlinear systems',
+  'chapter_type': 'Chapter',
+  'closing_remarks': '',
+  'file': None,
+  'heading': '=====',
+  'hints': [],
+  'keywords': None,
+  'label': None,
+  'no': 9,
+  'sol_docend': '',
+  'solution': 'The root is located at $x^*=0.70346742$.\n'
+              '* Fixed point method: we saw earlier that using $g(x)=x-f(x)$ '
+              'used 174 iterations, and $g(x)=\\sqrt{x^2-f(x)}$ used 19 '
+              'iterations. If we start at $x=-100$, $g(x)=x-f(x)$ fails, and  '
+              '$g(x)=\\sqrt{x^2-f(x)}$ uses only 21 iterations, and at $x=100$ '
+              'we use 20 iterations.\n'
+              '* Bisection method: it use 25 iterations for $a=0$, and $b=1$ '
+              '(implementation shown earlier in the chapter). Choosing '
+              '$a=-b=-100$ we use 33 iterations.\n'
+              '* Newtons method: it use only 5 function evaluations '
+              '(implementation above) starting at  $x=0$. Starting at '
+              '$x=-100$, it uses 106 iterations. Newtons method is slow in '
+              'this case because the function is very steep around the '
+              'starting point, see figure ref{fig:nlin:newton_bad}. Starting '
+              'at $x=100$, we only use 10 iterations.\n'
+              '\n'
+              'FIGURE: [fig-nlin/newton_bad.png, width=400 frac=1.0] Newtons '
+              'method performs poorly far away due to the shape of the '
+              'function close to $x=-100$, bisection performs much better '
+              'while the fixed point method fails. label{fig:nlin:newton_bad}\n'
+              '\n'
+              '!bnotice A good starting point is crucial\n'
+              'Note that it is not given which method is best, but if we are '
+              "''close'' to the root Newtons method is usually superior. If we "
+              'are far away, other methods might work better. In many cases '
+              'one uses a more stable method far away from the root, and then '
+              "''polish up'' the root by a couple of Newton iterations "
+              'cite{press2001}. See also Brents method which combines '
+              'bisection and linear interpolation (secant method) '
+              'cite{press2001}.  \n'
+              '!enotice',
+  'solution_file': None,
+  'subex': [],
+  'text': 'Find the root of $f(x)=x^2-e^{-x}$ using bisection, fixed point,  '
+          'and Newtons method, start at $x=0$. How many iterations do you need '
+          'to use reach a precision of $10^{-8}$? What happens if you widen '
+          'the search domain or start further away from the root?',
+  'title': 'Compare Newtons, Bisection and the Fixed Point method',
+  'type': 'Exercise',
+  'type_visible': True},
+ {'ans_docend': '',
+  'answer': '',
+  'chapter_exercise': 6,
+  'chapter_no': 5,
+  'chapter_title': 'Optimization and nonlinear systems',
+  'chapter_type': 'Chapter',
+  'closing_remarks': '',
+  'file': None,
+  'heading': '=====',
+  'hints': [],
+  'keywords': None,
+  'label': None,
+  'no': 10,
+  'sol_docend': '',
+  'solution': 'Below is an implementation of the gradient descent method with '
+              'a constant learning rate\n'
+              '!bc pycod\n'
+              'def gradient_descent(f,x,df, g=.001, prec=1e-8,MAXIT=10):\n'
+              "    '''Minimize f(x) by gradient descent.\n"
+              '    f   : min(f(x))\n'
+              '    x   : starting point \n'
+              '    df  : derivative of f(x)\n'
+              '    g   : learning rate\n'
+              '    prec: desired precision\n'
+              '    \n'
+              '    Returns x when it is closer than eps to the root, \n'
+              '    unless MAXIT are not exceeded\n'
+              "    '''\n"
+              '    x_old = x\n'
+              '    for n in range(MAXIT):\n'
+              '        plot_regression_line(x_old)  \n'
+              '        x_new = x_old - g*df(x_old)\n'
+              '        if(abs(np.max(x_new-x_old))<prec):\n'
+              "            print('Found solution:', x_new, \n"
+              "                  ', after:', n, 'iterations.' )\n"
+              '            return x_new\n'
+              '        x_old=x_new\n'
+              "    print('Max number of iterations: ', MAXIT, ' reached.') \n"
+              "    print('Try to increase MAXIT or decrease prec')\n"
+              "    print('Returning best guess, value of function is: ', "
+              'f(x_new))\n'
+              '    return x_new\n'
+              '\n'
+              '!ec\n'
+              '\n'
+              'The linear regression is implemented as below\n'
+              '!bc pycod\n'
+              'x_obs_ = np.array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]) \n'
+              'y_obs_ = np.array([1, 3, 2, 5, 7, 8, 8, 9, 10, 12]) \n'
+              'def plot_regression_line(b,x=x_obs_, y=y_obs_): \n'
+              '    global N_\n'
+              '    # plotting the actual points as scatter plot \n'
+              '    plt.scatter(x, y, color = "m", \n'
+              '               marker = "o", s = 30,label="data") \n'
+              '  \n'
+              '    # predicted response vector \n'
+              '    y_pred = b[0] + b[1]*x\n'
+              '  \n'
+              '    # plotting the regression line\n'
+              '    if(len(b)>1):\n'
+              '#        plt.plot(x, y_pred, color = "g", label = "R-squared = '
+              '{0:.3f}".format(b[2]))\n'
+              '        plt.plot(x, y_pred, color = "g", label = "iteration:" + '
+              'str(N_) +", (b[0],b[1])= ({0:.3f}".format(b[0]) + ", '
+              '{0:.3f})".format(b[1]))\n'
+              '        plt.legend()\n'
+              '    else:\n'
+              '        plt.plot(x, y_pred, color = "g")\n'
+              '  \n'
+              '    # putting labels \n'
+              "    plt.xlabel('x') \n"
+              "    plt.ylabel('y') \n"
+              '    plt.grid()\n'
+              '    plt.legend()\n'
+              "#    plt.savefig('../fig-nlin/stdec'+str(N_)+'.png', "
+              "bbox_inches='tight',transparent=True)\n"
+              '    N_=N_+1  \n'
+              '    # function to show plot \n'
+              '    plt.show() \n'
+              '\n'
+              '\n'
+              'def Jacobian(x,f,dx=1e-5):\n'
+              '    N=len(x)\n'
+              '    x0=np.copy(x)\n'
+              '    f0=f(x)\n'
+              '    J=np.zeros(shape=(N,N))\n'
+              '    for j in range(N):\n'
+              '        x[j] = x[j] +  dx\n'
+              '        for i in range(N):   \n'
+              '            J[i][j] = (f(x)[i]-f0[i])/dx\n'
+              '        x[j] = x[j] -  dx\n'
+              '    return J\n'
+              '\n'
+              '\n'
+              '\n'
+              '\n'
+              'def newton_rapson(x,f,J=None, jacobian=False, '
+              'prec=1e-8,MAXIT=100):\n'
+              "    '''Approximate solution of f(x)=0 by Newtons method.\n"
+              '    The derivative of the function is calculated numerically\n'
+              '    f   : f(x)=0.\n'
+              '    J   : Jacobian\n'
+              '    x   : starting point  \n'
+              '    eps : desired precision\n'
+              '    \n'
+              '    Returns x when it is closer than eps to the root, \n'
+              '    unless MAX_ITERATIONS are not exceeded\n'
+              "    '''\n"
+              '    MAX_ITERATIONS=MAXIT\n'
+              '    x_old = np.copy(x)\n'
+              '    for n in range(MAX_ITERATIONS):\n'
+              '        plot_regression_line(x_old) \n'
+              '        if not jacobian:\n'
+              '            J_=Jacobian(x_old,f)\n'
+              '        else:\n'
+              '            J_=J(x_old)\n'
+              '        z=np.linalg.solve(J_,-f(x_old))\n'
+              '        x_new=x_old+z\n'
+              '        if(np.sum(abs(x_new-x_old))<prec):\n'
+              "            print('Found solution:', x_new, \n"
+              "                  ', after:', n, 'iterations.' )\n"
+              '            return x_new\n'
+              '        x_old=np.copy(x_new)\n'
+              "    print('Max number of iterations: ', MAXIT, ' reached.') \n"
+              "    print('Try to increase MAXIT or decrease prec')\n"
+              "    print('Returning best guess, value of function is: ', "
+              'f(x_new))\n'
+              '    return x_new\n'
+              '\n'
+              '\n'
+              'def gradient_descent(f,x,df, g=.001, prec=1e-8,MAXIT=10):\n'
+              "    '''Minimize f(x) by gradient descent.\n"
+              '    f   : min(f(x))\n'
+              '    x   : starting point \n'
+              '    df  : derivative of f(x)\n'
+              '    g   : learning rate\n'
+              '    prec: desired precision\n'
+              '    \n'
+              '    Returns x when it is closer than eps to the root, \n'
+              '    unless MAXIT are not exceeded\n'
+              "    '''\n"
+              '    x_old = x\n'
+              '    for n in range(MAXIT):\n'
+              '        plot_regression_line(x_old)  \n'
+              '        x_new = x_old - g*df(x_old)\n'
+              '        if(abs(np.max(x_new-x_old))<prec):\n'
+              "            print('Found solution:', x_new, \n"
+              "                  ', after:', n, 'iterations.' )\n"
+              '            return x_new\n'
+              '        x_old=x_new\n'
+              "    print('Max number of iterations: ', MAXIT, ' reached.') \n"
+              "    print('Try to increase MAXIT or decrease prec')\n"
+              "    print('Returning best guess, value of function is: ', "
+              'f(x_new))\n'
+              '    return x_new\n'
+              '#end\n'
+              '\n'
+              'def S(b,x=x_obs_,y=y_obs_):\n'
+              '    return np.sum((y-b[0]-b[1]*x)**2)\n'
+              '\n'
+              'def dS(b,x=x_obs_,y=y_obs_):\n'
+              '    return np.array([-2*np.sum(y-b[0]-b[1]*x),\n'
+              '                     -2*np.sum((y-b[0]-b[1]*x)*x)])\n'
+              '\n'
+              'def J(b,x=x_obs_,y=y_obs_):\n'
+              '    N=len(b)\n'
+              '    J=np.zeros(shape=(N,N))\n'
+              '    xs=np.sum(x)\n'
+              '    J[0][0]=2*len(x)\n'
+              '    J[0][1]=2*xs\n'
+              '    J[1][0]=2*xs\n'
+              '    J[1][1]=2*np.sum(x*x)\n'
+              '    return J\n'
+              'N_=0\n'
+              "print('Gradient ')\n"
+              'b=np.array([0,0])\n'
+              '\n'
+              '!ec\n'
+              'The first four iterations are shown in figure '
+              'ref{fig:nlin:grsc}. If we choose a learning rate that is too '
+              'high, we will move past the minimum, and the solution will '
+              'oscillate. This can be avoided by lowering the learning rate as '
+              'we iterate, by e.g. replacing `g` with `g/(n+1)` in the '
+              'implementation above.\n'
+              '\n'
+              'FIGURE: [fig-nlin/stdec_comb.png, width=400 frac=1.0] First '
+              'four iterations of the gradient descent solution of linear '
+              'regression. label{fig:nlin:grsc}',
+  'solution_file': None,
+  'subex': [],
+  'text': 'A very typical example is if we have a model and we would like to '
+          'fit some parameters of the model to a data set (e.g. linear '
+          'regression). Assume that we have observations $(x_i,y_i)$ and model '
+          'predictions $f(x_i,\\mathbf{\\beta})$, the model parameters are '
+          'contained in the vector $\\mathbf{\\beta}$. The *least square*, '
+          '$S$, is the square of the sum of all the *residuals*, i.e. the '
+          'difference between the observations and model predictions \n'
+          '!bt\n'
+          '\\begin{equation}\n'
+          'S=\\sum_i(y_i-f(x_i,\\mathbf{\\beta}))^2.\n'
+          'label{eq:nlin:lsq}\n'
+          '\\end{equation}\n'
+          '\n'
+          '!et\n'
+          '\n'
+          'Specializing to linear regression, we choose the model to be '
+          'linear\n'
+          '!bt\n'
+          '\\begin{equation}\n'
+          'f(x_i,\\mathbf{\\beta})=b_0+b_1x_i.\n'
+          'label{eq:nlin:lin}\n'
+          '\\end{equation}\n'
+          '\n'
+          '!et\n'
+          'Equation (ref{eq:nlin:lsq}) now takes the form\n'
+          '!bt\n'
+          '\\begin{equation}\n'
+          'S=\\sum_i(y_i-b_0+b_1x_i)^2.\n'
+          'label{eq:nlin:lsq2}\n'
+          '\\end{equation}\n'
+          '\n'
+          '!et\n'
+          'The gradients are:\n'
+          '!bt\n'
+          '\\begin{align}\n'
+          '\\frac{\\partial S}{\\partial '
+          'b_0}&=-2\\sum_i(y_i-b_0+b_1x_i),\\no\\\\ \n'
+          '\\frac{\\partial S}{\\partial b_1}&=-2\\sum_i(y_i-b_0+b_1x_i)x_i,.\n'
+          'label{eq:nlin:dlsq}\n'
+          '\\end{align}\n'
+          '\n'
+          '!et\n'
+          '\n'
+          '* Implement the gradient descent method using a constant learning '
+          'rate of $10^{-3}$, to minimize the least square function\n'
+          '* Test the linear regression on the data set $x_i=[0, 1, 2, 3, 4, '
+          '5, 6, 7, 8, 9]$, and $y=[1, 3, 2, 5, 7, 8, 8, 9, 10, 12]$, choose a '
+          'starting value $(b_0,b_1)=(0,0)$. What happens if you increase the '
+          'learning rate?',
+  'title': 'Gradient descent solution of linear regression',
+  'type': 'Exercise',
+  'type_visible': True},
+ {'ans_docend': '',
+  'answer': '',
+  'chapter_exercise': 1,
+  'chapter_no': 6,
+  'chapter_title': 'Numerical integration',
+  'chapter_type': 'Chapter',
+  'closing_remarks': '',
+  'file': None,
+  'heading': '=====',
+  'hints': [],
+  'keywords': None,
+  'label': None,
+  'no': 11,
+  'sol_docend': '',
+  'solution': '',
+  'solution_file': None,
+  'subex': [{'ans_docend': '',
+             'answer': '',
+             'file': None,
+             'hints': [],
+             'sol_docend': '',
+             'solution': '',
+             'text': 'Show that for a linear function, $y=a\\cdot x+b$ both '
+                     'the trapezoidal rule and the rectangular rule are exact'},
+            {'ans_docend': '',
+             'answer': '',
+             'file': None,
+             'hints': [],
+             'sol_docend': '',
+             'solution': '',
+             'text': 'Consider $I(a,b)=\\int_a^bf(x)dx$ for $f(x)=x^2$. The '
+                     'analytical result is $I(a,b)=\\frac{b^3-a^3}{3}$. Use '
+                     'the Trapezoidal and \n'
+                     '  Midpoint rule to evaluate these integrals and show '
+                     'that the error for the Trapezoidal rule is exactly twice '
+                     'as big as the Midpoint rule.'},
+            {'ans_docend': '',
+             'answer': '',
+             'file': None,
+             'hints': [],
+             'sol_docend': '',
+             'solution': 'Simpsons rule is an improvement over the midpoint '
+                         'and trapezoidal rule. It can be derived in different '
+                         'ways, we will make use of \n'
+                         'the results in the previous section. If we assume '
+                         'that the second derivative is reasonably well '
+                         'behaved on the interval $x_k$ \n'
+                         'and $x_k+h$ and fairly constant we can assume that '
+                         '$f^{\\prime\\prime}(\\eta)\\simeq '
+                         'f^{\\prime\\prime}(\\overline{\\eta})$, hence '
+                         '$E_T=-2E_M$.\n'
+                         '!bt\n'
+                         '\\begin{align}\n'
+                         'I(x_k,x_k+h)&=M(x_k,x_k+h)+E_M\\text{ (midpoint '
+                         'rule)}\\\\ \n'
+                         'I(x_k,x_k+h)&=T(x_k,x_k+h)+E_T\\nonumber\\\\ \n'
+                         '&=T(x_k,x_k+h)-2E_M\\text{ (trapezoidal rule)},\n'
+                         '\\end{align}\n'
+                         '\n'
+                         '!et\n'
+                         'we can now cancel out the error term by multiplying '
+                         'the first equation with 2 and adding the equations:\n'
+                         '!bt\n'
+                         '\\begin{align}\n'
+                         '3I(x_k,x_k+h)&=2M(x_k,x_k+h)+T(x_k,x_k+h)\\\\ \n'
+                         '&=2f(x_k+\\frac{h}{2}) '
+                         'h+\\left[f(x_k+h)+f(x_k)\\right] \\frac{h}{2}\\\\ \n'
+                         'I(x_k,x_k+h)&=\\frac{h}{6}\\left[f(x_k)+4f(x_k+\\frac{h}{2})+f(x_k+h)\\right].\n'
+                         '\\end{align}\n'
+                         '\n'
+                         '!et\n'
+                         'Now we can do as we did in the case of the '
+                         'trapezoidal rule, sum over all the elements:\n'
+                         '!bt\n'
+                         '\\begin{align}\n'
+                         'I(a,b)&=\\sum_{k=0}^{N-1}I(x_k,x_k+h)\\nonumber\\\\ \n'
+                         '&=\\frac{h}{6}\\left[f(a)+ '
+                         '4f(a+\\frac{h}{2})+2f(a+h)+4f(a+3\\frac{h}{2})\\right.\\nonumber\\\\ \n'
+                         '&\\left.\\qquad+2f(a+2h)+\\cdots+f(b)\\right]\\\\ \n'
+                         '&=\\frac{h^\\prime}{3}\\left[f(a)+ f(b) + 4\\sum_{k= '
+                         '\\text{odd}}^{N-2}f(a+k h^\\prime)+2\\sum_{k= '
+                         '\\text{even}}^{N-2}f(a+k h^\\prime)\\right],\n'
+                         '\\end{align}\n'
+                         '\n'
+                         '!et\n'
+                         'note that in the last equation we have changed the '
+                         'step size $h=2h^\\prime$.',
+             'text': 'Use the fact that the error term on the trapezoidal rule '
+                     'is twice as big as the midpoint rule to derive Simpsons '
+                     'formula: '
+                     '$I(a,b)=\\sum_{k=0}^{N-1}I(x_k,x_k+h)=\\frac{h}{6}\\left[f(a)+ '
+                     '4f(a+\\frac{h}{2})+2f(a+h)+4f(a+3\\frac{h}{2})+2f(a+2h)+\\cdots+f(b)\\right]$ '
+                     'Hint: $I(x_k,x_k+h)=M(x_k,x_k+h)+E_M$ (midpoint rule) '
+                     'and $I(x_k,x_k+h)=T(x_k,x_k+h)+E_T=T(x_k,x_k+h)-2E_M$ '
+                     '(trapezoidal rule).'},
+            {'ans_docend': '',
+             'answer': '',
+             'file': None,
+             'hints': [],
+             'sol_docend': '',
+             'solution': '',
+             'text': 'Show that for $N=2$ ($f(x)=1,x,x^3$), the points and '
+                     'Gaussian quadrature rule for '
+                     '$\\int_{0}^{1}x^{1/2}f(x)\\,dx$\n'
+                     'is $\\omega_{0,1}=-\\sqrt{70}{150} + 1/3, '
+                     '\\sqrt{70}{150} + 1/3$\n'
+                     'and $x_{0,1}=-2\\sqrt{70}{63} + 5/9, 2\\sqrt{70}{63} + '
+                     '5/9$\n'
+                     'o Integrate $\\int_0^1x^{1/2}\\cos x\\,dx$ using the '
+                     'rule derived in the exercise above and compare with the '
+                     'standard Gaussian quadrature rule for ($N=2$, and '
+                     '$N=3$).'},
+            {'aftertext': '\n',
+             'ans_docend': '',
+             'answer': '',
+             'file': None,
+             'hints': [],
+             'sol_docend': '',
+             'solution': '',
+             'text': 'Make a Python program that uses the Midpoint rule to '
+                     'integrate experimental data that are unevenly spaced and '
+                     'given in the form of two arrays.'}],
+  'text': '',
+  'title': 'Numerical Integration',
+  'type': 'Exercise',
+  'type_visible': True},
+ {'ans_docend': '',
+  'answer': '',
+  'chapter_exercise': 1,
+  'chapter_no': 7,
+  'chapter_title': 'Ordinary differential equations',
+  'chapter_type': 'Chapter',
+  'closing_remarks': '',
+  'file': None,
+  'heading': '=====',
+  'hints': [],
+  'keywords': None,
+  'label': None,
+  'no': 12,
+  'sol_docend': '',
+  'solution': 'The local error, is the difference between the numerical '
+              'solution and the true solution:\n'
+              '!bt\n'
+              '\\begin{align}\n'
+              '\\epsilon^*&=y(t_0+h)-y_{1}^*=y(t_0)+y^{\\prime}(t_0)h+\\frac{1}{2}y^{\\prime\\prime}(t_0)h^2+\\mathcal{O}(h^3)\\nonumber\\\\ \n'
+              '&-\\left[y_0+hf(y_0,t_0+h)\\right],\n'
+              '\\end{align}\n'
+              '\n'
+              '!et\n'
+              'where we have used Taylor expansion to expand the true solution '
+              'around $t_0$, and equation (ref{eq:ode:ae0}).\n'
+              'Using equation (ref{eq:ode:ay}) to replace $y^\\prime(t_0)$ '
+              'with $f(y_0,t_0)$, we find:\n'
+              '!bt\n'
+              '\\begin{align}\n'
+              '\\epsilon^*=&y(t_0+h)-y_{1}^*=\\frac{1}{2}y^{\\prime\\prime}(t_0)h^2\\equiv '
+              'ch^2,\n'
+              '\\end{align}\n'
+              '\n'
+              '!et\n'
+              'where we have ignored terms of higher order than $h^2$, and '
+              'defined $c$ as $c=y^{\\prime\\prime}(t_0)/2$. Next we take two '
+              'steps of size $h/2$ to\n'
+              'reach $y_1$:  \n'
+              '!bt\n'
+              '\\begin{align}\n'
+              'y_{1/2}&=y_0+\\frac{h}{2}f(y_0,t_0),\\label{eq:ode:ae1}\\\\ \n'
+              'y_{1}&=y_{1/2}+\\frac{h}{2}f(y_{1/2},t_0+h/2),\\label{eq:ode:ae2}\\\\ \n'
+              'y_{1}&=y_{0}+\\frac{h}{2}f(y_0,t_0)+\\frac{h}{2}f(y_0+\\frac{h}{2}f(y_0,t_0),t_0+h/2).\\label{eq:ode:ae3}\n'
+              '\\end{align}\n'
+              '\n'
+              '!et\n'
+              'Note that we have inserted\n'
+              'equation (ref{eq:ode:ae1}) into equation (ref{eq:ode:ae2}) to '
+              'arrive at equation (ref{eq:ode:ae3}). The truncation error in '
+              'this case is, as before:\n'
+              '!bt\n'
+              '\\begin{align}\n'
+              '\\epsilon&=y(t_0+h)-y_{1}=y(t_0)+y^{\\prime}(t_0)h+\\frac{1}{2}y^{\\prime\\prime}(t_0)h^2+\\mathcal{O}(h^3)\\nonumber\\\\ \n'
+              '&-\\left[y_{0}+\\frac{h}{2}f(y_0,t_0)+\\frac{h}{2}f(y_0+\\frac{h}{2}f(y_0,t_0),t_0+h/2)\\right].\\label{eq:ode:ay5}\n'
+              '\\end{align}\n'
+              '\n'
+              '!et\n'
+              'This equation is slightly more complicated, due to the term '
+              'involving $f$ inside the last parenthesis, we can use Taylor '
+              'expansion to expand it about $(y_0,t_0)$:\n'
+              '!bt\n'
+              '\\begin{align}\n'
+              '&f(y_0+\\frac{h}{2}f(y_0,t_0),t_0+h/2)=f(y_0,t_0)\\nonumber\\\\ \n'
+              '&+\\frac{h}{2}\\left[f(y_0,t_0)\\left.\\frac{\\partial '
+              'f}{\\partial y}\\right|_{y=y_0,t=t_0}\n'
+              '+\\left.\\frac{\\partial f}{\\partial '
+              't}\\right|_{y=y_0,t=t_0}\\right]+\\mathcal{O}(h^2).\\label{eq:ode:ay2}\n'
+              '\\end{align}\n'
+              '\n'
+              '!et\n'
+              'It turns out that this equation is related to '
+              '$y^{\\prime\\prime}(t_0,y_0)$, which can be seen by '
+              'differentiating equation (ref{eq:ode:ay}):\n'
+              '!bt\n'
+              '\\begin{align}\n'
+              '\\frac{d^2y}{dt^2}&=\\frac{df(y,t)}{dt}=\\frac{\\partial '
+              'f(y,t)}{\\partial y}\\frac{dy}{dt}+\\frac{\\partial '
+              'f(y,t)}{\\partial t}\n'
+              '=\\frac{\\partial f(y,t)}{\\partial y}f(y,t)+\\frac{\\partial '
+              'f(y,t)}{\\partial t}.\\label{eq:ode:ay3}\n'
+              '\\end{align}\n'
+              '\n'
+              '!et\n'
+              'Hence, equation (ref{eq:ode:ay2}) can be written:\n'
+              '!bt\n'
+              '\\begin{align}\n'
+              'f(y_0+\\frac{h}{2}f(y_0,t_0),t_0+h/2)=f(y_0,t_0)+\\frac{h}{2}y^{\\prime\\prime}(t_0,y_0),\\label{eq:ode:ay4}\n'
+              '\\end{align}\n'
+              '\n'
+              '!et\n'
+              'hence the truncation error in equation (ref{eq:ode:ay5}) can '
+              'finally be written:\n'
+              '!bt\n'
+              '\\begin{align}\n'
+              '\\epsilon=&y(t_1)-y_{1}=\\frac{h^2}{4} '
+              'y^{\\prime\\prime}(y_0,t_0)=\\frac{1}{2}ch^2,\\label{eq:ode:ae4}\n'
+              '\\end{align}\n'
+              '\n'
+              '!et',
+  'solution_file': None,
+  'subex': [{'ans_docend': '',
+             'answer': 'The local error, is the difference between the '
+                       'numerical solution and the true solution:\n'
+                       '!bt\n'
+                       '\\begin{align}\n'
+                       '\\epsilon^*&=y(t_0+h)-y_{1}^*=y(t_0)+y^{\\prime}(t_0)h+\\frac{1}{2}y^{\\prime\\prime}(t_0)h^2+\\mathcal{O}(h^3)\\nonumber\\\\ \n'
+                       '&-\\left[y_0+hf(y_0,t_0+h)\\right],\n'
+                       '\\end{align}\n'
+                       '\n'
+                       '!et\n'
+                       'where we have used Taylor expansion to expand the true '
+                       'solution around $t_0$, and equation '
+                       '(ref{eq:ode:ae0}).\n'
+                       'Using equation (ref{eq:ode:ay}) to replace '
+                       '$y^\\prime(t_0)$ with $f(y_0,t_0)$, we find:\n'
+                       '!bt\n'
+                       '\\begin{align}\n'
+                       '\\epsilon^*=&y(t_0+h)-y_{1}^*=\\frac{1}{2}y^{\\prime\\prime}(t_0)h^2\\equiv '
+                       'ch^2,\n'
+                       '\\end{align}\n'
+                       '\n'
+                       '!et\n'
+                       'hence $c=y^{\\prime\\prime}(t_0)/2$.',
+             'file': None,
+             'hints': [],
+             'sol_docend': '',
+             'solution': '',
+             'text': 'Show that when we take one step of size $h$ from $t_0$ '
+                     'to $t_1=t_0+h$, $c=y^{\\prime\\prime}(t_0)/2$ in '
+                     'equation (ref{eq:ode:aeb0}).'},
+            {'ans_docend': '',
+             'answer': '!bt\n'
+                       '\\begin{align}\n'
+                       'y_{1/2}&=y_0+\\frac{h}{2}f(y_0,t_0),\\label{eq:ode:ae1b}\\\\ \n'
+                       'y_{1}&=y_{1/2}+\\frac{h}{2}f(y_{1/2},t_0+h/2),\\label{eq:ode:ae2b}\\\\ \n'
+                       'y_{1}&=y_{0}+\\frac{h}{2}f(y_0,t_0)+\\frac{h}{2}f(y_0+\\frac{h}{2}f(y_0,t_0),t_0+h/2).\\label{eq:ode:ae3b}\n'
+                       '\\end{align}\n'
+                       '\n'
+                       '!et\n'
+                       'Note that we have inserted\n'
+                       'equation (ref{eq:ode:ae1b}) into equation '
+                       '(ref{eq:ode:ae2b}) to arrive at equation '
+                       '(ref{eq:ode:ae3b}).',
+             'file': None,
+             'hints': [],
+             'sol_docend': '',
+             'solution': '',
+             'text': 'Show that when we take two steps of size $h/2$ from '
+                     '$t_0$ to $t_1=t_0+h$, Eulers algorithm is:\n'
+                     '!bt\n'
+                     '\\begin{align}\n'
+                     'y_{1}&=y_{0}+\\frac{h}{2}f(y_0,t_0)+\\frac{h}{2}f(y_0+\\frac{h}{2}f(y_0,t_0),t_0+h/2).\n'
+                     '\\end{align}\n'
+                     '\n'
+                     '!et'},
+            {'aftertext': '\n\n\n\n\n\n',
+             'ans_docend': '',
+             'answer': '!bt\n'
+                       '\\begin{align}\n'
+                       '\\epsilon&=y(t_0+h)-y_{1}=y(t_0)+y^{\\prime}(t_0)h+\\frac{1}{2}y^{\\prime\\prime}(t_0)h^2+\\mathcal{O}(h^3)\\nonumber\\\\ \n'
+                       '&-\\left[y_{0}+\\frac{h}{2}f(y_0,t_0)+\\frac{h}{2}f(y_0+\\frac{h}{2}f(y_0,t_0),t_0+h/2)\\right].\\label{eq:ode:ay5b}\n'
+                       '\\end{align}\n'
+                       '\n'
+                       '!et\n'
+                       'This equation is slightly more complicated, due to the '
+                       'term involving $f$ inside the last parenthesis, we can '
+                       'use Taylor expansion to expand it about $(y_0,t_0)$:\n'
+                       '!bt\n'
+                       '\\begin{align}\n'
+                       '&f(y_0+\\frac{h}{2}f(y_0,t_0),t_0+h/2)=f(y_0,t_0)\\nonumber\\\\ \n'
+                       '&+\\frac{h}{2}\\left[f(y_0,t_0)\\left.\\frac{\\partial '
+                       'f}{\\partial y}\\right|_{y=y_0,t=t_0}\n'
+                       '+\\frac{h}{2}\\left.\\frac{\\partial f}{\\partial '
+                       't}\\right|_{y=y_0,t=t_0}\\right]+\\mathcal{O}(h^2).\\label{eq:ode:ay2b}\n'
+                       '\\end{align}\n'
+                       '\n'
+                       '!et\n'
+                       'It turns out that this equation is related to '
+                       '$y^{\\prime\\prime}(t_0,y_0)$, which can be seen by '
+                       'differentiating equation (ref{eq:ode:ay}):\n'
+                       '!bt\n'
+                       '\\begin{align}\n'
+                       '\\frac{d^2y}{dt^2}&=\\frac{df(y,t)}{dt}=\\frac{\\partial '
+                       'f(y,t)}{\\partial y}\\frac{dy}{dt}+\\frac{\\partial '
+                       'f(y,t)}{\\partial t}\n'
+                       '=\\frac{\\partial f(y,t)}{\\partial '
+                       'y}f(y,t)+\\frac{\\partial f(y,t)}{\\partial '
+                       't}.\\label{eq:ode:ay3b}\n'
+                       '\\end{align}\n'
+                       '\n'
+                       '!et\n'
+                       'Hence, equation (ref{eq:ode:ay2b}) can be written:\n'
+                       '!bt\n'
+                       '\\begin{align}\n'
+                       'f(y_0+\\frac{h}{2}f(y_0,t_0),t_0+h/2)=f(y_0,t_0)+\\frac{h}{2}y^{\\prime\\prime}(t_0,y_0),\\label{eq:ode:ay4b}\n'
+                       '\\end{align}\n'
+                       '\n'
+                       '!et\n'
+                       'hence the truncation error in equation '
+                       '(ref{eq:ode:ay5b}) can finally be written:\n'
+                       '!bt\n'
+                       '\\begin{align}\n'
+                       '\\epsilon=&y(t_1)-y_{1}=\\frac{h^2}{4} '
+                       'y^{\\prime\\prime}(y_0,t_0)=\\frac{1}{2}ch^2,\\label{eq:ode:ae4b}\n'
+                       '\\end{align}\n'
+                       '\n'
+                       '!et',
+             'file': None,
+             'hints': [],
+             'sol_docend': '',
+             'solution': '',
+             'text': 'Find an expression for the local error when using two '
+                     'steps of size $h/2$, and show that the local error is: '
+                     '$\\frac{1}{2}ch^2$'}],
+  'text': 'In the following we will take a closer look at the adaptive Eulers '
+          'algorithm and show that the \n'
+          'constant $c$ is indeed the same in equation (ref{eq:ode:aeb0}) and '
+          '(ref{eq:ode:aeb1}). \n'
+          'The true solution $y(t)$, obeys the following equation:\n'
+          '!bt\n'
+          '\\begin{align}\n'
+          '\\frac{dy}{dt}&=f(y,t),\\label{eq:ode:ay}\n'
+          '\\end{align}\n'
+          '\n'
+          '!et\n'
+          'and Eulers method to get from $y_0$ to $y_1$ by taking one (large) '
+          'step, $h$ is:\n'
+          '!bt\n'
+          '\\begin{align}\n'
+          'y^*_1&=y_0+hf(y_0,t_0),\\label{eq:ode:ae0}\n'
+          '\\end{align}\n'
+          '\n'
+          '!et\n'
+          'We will also assume (for simplicity) that in our starting point '
+          '$t=t_0$, the numerical solution, $y_0$, is equal to the true '
+          'solution, $y(t_0)$, hence $y(t_0)=y_0$.',
+  'title': "Truncation error in Euler's method",
+  'type': 'Exercise',
+  'type_visible': True},
+ {'ans_docend': '',
+  'answer': '',
+  'chapter_exercise': 1,
+  'chapter_no': 8,
+  'chapter_title': 'Monte Carlo Methods',
+  'chapter_type': 'Chapter',
+  'closing_remarks': 'It is quite remarkable that the distribution of the '
+                     'average values\n'
+                     'from both a uniform and Poisson distribution follows a '
+                     'normal\n'
+                     'distribution. The general\n'
+                     '"proof":"https://en.wikipedia.org/wiki/Central_limit_theorem"\n'
+                     'is not that complicated, but the ramifications are '
+                     'large. The central\n'
+                     'limit theorem explains why it makes sense to use the '
+                     'standard\n'
+                     'deviation as a measure of confidence for the mean value.',
+  'file': None,
+  'heading': '=====',
+  'hints': [],
+  'keywords': None,
+  'label': 'ex:mc:norm',
+  'no': 13,
+  'sol_docend': '',
+  'solution': '',
+  'solution_file': None,
+  'subex': [{'ans_docend': '',
+             'answer': '',
+             'file': None,
+             'hints': [],
+             'sol_docend': '',
+             'solution': '!bc pycod\n'
+                         'def average(N):\n'
+                         '    x=[np.random.uniform() for _ in range(N)]\n'
+                         '    return np.mean(x)\n'
+                         '\n'
+                         '# or alternatively, and equally fast\n'
+                         '\n'
+                         'def average2(N):\n'
+                         '    x=0\n'
+                         '    for i in range(N):\n'
+                         '        x+=np.random.uniform()\n'
+                         '    return x/N\n'
+                         '\n'
+                         '# or much faster:\n'
+                         'def average3(N):\n'
+                         '    x=np.random.uniform(size=N)\n'
+                         '    return np.mean(x)\n'
+                         '\n'
+                         '!ec',
+             'text': 'First we will investigate a random variable that follows '
+                     'a *uniform\n'
+                     'distribution*. Write a Python function that returns the '
+                     'average of\n'
+                     '$N$ uniformly distributed numbers in $[0,1]$.'},
+            {'ans_docend': '',
+             'answer': '',
+             'file': None,
+             'hints': [],
+             'sol_docend': '',
+             'solution': '!bc pycod\ndef hist(M,N=100):\n\n!ec',
+             'text': 'Calculate the average $M$ times and make a histogram of '
+                     'the values.'},
+            {'ans_docend': '',
+             'answer': '',
+             'file': None,
+             'hints': [],
+             'sol_docend': '',
+             'solution': '!bc pycod\n'
+                         'def average3(N):\n'
+                         '    x=np.random.uniform(size=N)\n'
+                         '    return np.mean(x)\n'
+                         '    \n'
+                         'def hist(M,N=100):\n'
+                         '    y=[average3(N) for _ in range(M)]\n'
+                         "    plt.hist(x=y, bins='auto', "
+                         "color='#0504aa',alpha=0.7, rwidth=0.85)\n"
+                         '    plt.show()\n'
+                         '\n'
+                         'def average4(N):\n'
+                         '    x=[np.random.poisson() for _ in range(N)]\n'
+                         '    return np.mean(x)\n'
+                         '\n'
+                         '!ec',
+             'text': 'Repeat the above exercise for a Poisson distribution.'}],
+  'text': 'idx{central limit theorem}\n'
+          'The central limit theorem is a corner stone in statistics, and it '
+          'is\n'
+          'the reason for why the normal distribution is so widely used. The\n'
+          'central limit theorem states that if we calculate the average of '
+          'an\n'
+          'independent random variable, the *average will be distributed\n'
+          'according to a normal distribution*. Not that the central limit\n'
+          'theorem does not state anything about the distribution of the '
+          'original\n'
+          'variable. We will not prove the central limit theorem, but '
+          'illustrate\n'
+          'it with two examples. \n'
+          '\n'
+          '# !bsol\n'
+          '# !esol',
+  'title': 'The central limit theorem',
+  'type': 'Exercise',
+  'type_visible': True},
+ {'ans_docend': '',
+  'answer': '',
+  'chapter_exercise': 2,
+  'chapter_no': 8,
+  'chapter_title': 'Monte Carlo Methods',
+  'chapter_type': 'Chapter',
+  'closing_remarks': '',
+  'file': None,
+  'heading': '=====',
+  'hints': [],
+  'keywords': None,
+  'label': 'ex:mc:BP',
+  'no': 14,
+  'sol_docend': '',
+  'solution': '',
+  'solution_file': None,
+  'subex': [{'ans_docend': '',
+             'answer': '',
+             'file': None,
+             'hints': [],
+             'sol_docend': '',
+             'solution': 'Below are two examples, the first one picks a date, '
+                         'while the second\n'
+                         'one just picks a random day at year.  \n'
+                         '!bc pycod\n'
+                         '#from datetime import date\n'
+                         '#%%\n'
+                         'import numpy as np\n'
+                         '\n'
+                         '#def get_date():\n'
+                         '#    """ return a random date in the current year '
+                         '"""\n'
+                         '#    start_dt = date.today().replace(day=1, '
+                         'month=1).toordinal()\n'
+                         '#    end_dt = date.today().replace(day=31, '
+                         'month=12).toordinal()\n'
+                         '#    random_day = '
+                         'date.fromordinal(np.random.randint(start_dt, '
+                         'end_dt))\n'
+                         '#    return random_day\n'
+                         '\n'
+                         '\n'
+                         'def get_day():\n'
+                         '    """ return a random day in a year """\n'
+                         '    return np.random.randint(1,365)\n'
+                         '\n'
+                         '!ec',
+             'text': 'Write a Python function that pick a random date\n'
+                     '# subexercise...'},
+            {'ans_docend': '',
+             'answer': '',
+             'file': None,
+             'hints': [],
+             'sol_docend': '',
+             'solution': '. \n'
+                         '!bc pycod\n'
+                         'def NoPeople(p):\n'
+                         '    """ pick random dates in a year, return 1 if '
+                         'two\n'
+                         '        is in the same date before p is reached """\n'
+                         '    dates=[]\n'
+                         '    for n in range(p):\n'
+                         '        date=get_day()\n'
+                         '        if date in dates:\n'
+                         '            return 1\n'
+                         '        else:\n'
+                         '            dates.append(date)\n'
+                         '    return 0\n'
+                         '\n'
+                         '!ec',
+             'text': 'Write a function that takes as argument, number of '
+                     'persons in a group,\n'
+                     'and returns 1 if two of them has birthday on the same '
+                     'date and 0\n'
+                     'otherwise.'},
+            {'ans_docend': '',
+             'answer': '',
+             'file': None,
+             'hints': [],
+             'sol_docend': '',
+             'solution': 'In order to get some statistics, we need to sample '
+                         '$N$ groups and\n'
+                         'return the fraction of groups that had two persons '
+                         'with the same birthday.\n'
+                         '!bc pycod\n'
+                         'def BP(p, N):\n'
+                         '    prob=0.\n'
+                         '    for i in range(N):\n'
+                         '        prob += NoPeople(p)\n'
+                         '    return prob/N\n'
+                         'print(BP(200,1000))\n'
+                         '\n'
+                         '!ec\n'
+                         'By trial an error, we find that 23 persons is needed '
+                         'in order to have\n'
+                         'a probability of',
+             'text': 'Write a function that returns the probability that two '
+                     'people in a\n'
+                     'group of $p$ persons have birthday on the same day, and '
+                     'determine how\n'
+                     'many people we need to have a probability of 50\\%.'}],
+  'text': 'idx{birthday paradox}\n'
+          'The human mind is not good at logical thinking, and if we use our\n'
+          'intuition we often get into trouble. A well known example is the\n'
+          "''Birthday Paradox'', it is simply to answer the following "
+          'question:\n'
+          "''How many randomly selected people do we need in order that there "
+          'is\n'
+          "a 50\\% chance that two of them have birthday on the same date?'' \n"
+          '\n'
+          '# !bsol\n'
+          '# !esol',
+  'title': 'Birthday Paradox',
+  'type': 'Exercise',
+  'type_visible': True}]

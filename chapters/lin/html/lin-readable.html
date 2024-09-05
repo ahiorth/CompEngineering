@@ -1,6 +1,6 @@
 <!--
 File automatically generated using DocOnce (https://github.com/doconce/doconce/):
-doconce format html main_lin.do.txt CHAPTER=document BOOK=document APPENDIX=document --html_style=bootswatch_readable --html_output=lin-readable --html_code_style=inherit nospell
+doconce format html main_lin.do.txt CHAPTER=document BOOK=document APPENDIX=document --html_style=bootswatch_readable --html_output=lin-readable --html_code_style=inherit
 -->
 <html>
 <head>
@@ -11,7 +11,7 @@ doconce format html main_lin.do.txt CHAPTER=document BOOK=document APPENDIX=docu
 <meta name="keywords" content="continuity equation,finite volume,Gauss-Jordan elimination,pivoting,LU decomposition,Jacobi method,Gauss-Seidel method,linear regression,sparse matrix,Thomas algorithm">
 <title>1, 2, 3D models and linear systems</title>
 <!-- Bootstrap style: bootswatch_readable -->
-<!-- doconce format html main_lin.do.txt CHAPTER=document BOOK=document APPENDIX=document --html_style=bootswatch_readable --html_output=lin-readable --html_code_style=inherit nospell -->
+<!-- doconce format html main_lin.do.txt CHAPTER=document BOOK=document APPENDIX=document --html_style=bootswatch_readable --html_output=lin-readable --html_code_style=inherit -->
 <link href="https://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
 <!-- not necessary
 <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
@@ -192,7 +192,7 @@ $$
 <br>
 <p>University of Stavanger
 <center>
-<h4>Aug 5, 2024</h4>
+<h4>Sep 5, 2024</h4>
 </center> <!-- date -->
 <br>
 </p>
@@ -481,9 +481,6 @@ T_3\\
 \tag{23}$$
 </div>
 
-<p>In principle, to discretize an equation is straight forward, but there are some </p>
-
-<p>First, we are going to consider a <em>steady state</em> solution. Steady state means that the solution does no longer change as a function of time, i.e. \( dq/dt=0 \) in equation <a href="#mjx-eqn-8">(8)</a>. We are also going to assume that the area is constant \( A(x)=A \), thus the equation we want to solve is</p>
 <h1 id="solving-linear-equations" class="anchor">Solving linear equations </h1>
 <p>There are a number of excellent books covering this topic, see e.g. <a href="#press2007">[2]</a> <a href="#trefethen1997">[3]</a> <a href="#stoer2013">[4]</a> <a href="#strang2019">[5]</a>.
 In most of the examples covered in this course we will encounter problems where we have a set of <em>linearly independent</em> equations and one equation for each unknown. For these type of problems there are a number of methods that can be used, and they will find a solution in a finite number of steps. If a solution cannot be found it is usually because the equations are not linearly independent, and our formulation of the physical problem is wrong.
