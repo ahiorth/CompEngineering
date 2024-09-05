@@ -11,8 +11,17 @@ Thumbs.db
 # Doconce Stuff #
 #################
 .ipynb_checkpoints
-Trash/
+Trash
+tmp_*
+automake*
+__pycache__
 # Word files #
 ##############
 *.doc
 *.docx
+
+# vscode     #
+##############
+
+.vscode
+.vscode/
