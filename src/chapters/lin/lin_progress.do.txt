@@ -147,6 +147,4 @@ label{eq:lin:exx4}
 
 
 !enotice
-In principle, to discretize an equation is straight forward, but there are some 
 
-First, we are going to consider a *steady state* solution. Steady state means that the solution does no longer change as a function of time, i.e. $dq/dt=0$ in equation (ref{eq:lin:cont4}). We are also going to assume that the area is constant $A(x)=A$, thus the equation we want to solve is
