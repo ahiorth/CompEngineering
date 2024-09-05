@@ -1,0 +1,330 @@
+<!--
+File automatically generated using DocOnce (https://github.com/doconce/doconce/):
+doconce format html main_taylor.do.txt CHAPTER=document BOOK=document APPENDIX=document --html_style=bootswatch_readable --html_output=taylor-readable --html_code_style=inherit
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/doconce/doconce/" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="A basic ingredient in modeling: gradients">
+<meta name="keywords" content="numerical error,Taylor polynomial,truncation error,Taylor polynomial, error term,Maclaurin series,forward difference,backward difference,central difference,central difference,roundoff erros,machine precision,IEEE 754-1985 standard,roundoff errors">
+<title>A basic ingredient in modeling: gradients</title>
+<!-- Bootstrap style: bootswatch_readable -->
+<!-- doconce format html main_taylor.do.txt CHAPTER=document BOOK=document APPENDIX=document --html_style=bootswatch_readable --html_output=taylor-readable --html_code_style=inherit -->
+<link href="https://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:64px;      /* fixed header height for style bootswatch_readable */
+  margin:-64px 0 0; /* negative fixed header height */
+}
+</style>
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Table of contents',
+               1,
+               'table_of_contents',
+               'table_of_contents'),
+              ('Why are gradients important?',
+               1,
+               None,
+               'why-are-gradients-important'),
+              ('Continuous functions and finite representation: numerical '
+               'errors',
+               1,
+               None,
+               'continuous-functions-and-finite-representation-numerical-errors'),
+              ('Taylor polynomial approximation',
+               1,
+               None,
+               'taylor-polynomial-approximation'),
+              ('Calculating Numerical Derivatives of Functions',
+               1,
+               None,
+               'calculating-numerical-derivatives-of-functions'),
+              ('Higher order derivative',
+               3,
+               'sec:taylor:hhd',
+               'sec:taylor:hhd'),
+              ('Roundoff Errors', 2, None, 'roundoff-errors'),
+              ('Binary numbers', 1, None, 'binary-numbers'),
+              ('Floating point numbers and the IEEE 754-1985 standard',
+               2,
+               None,
+               'floating-point-numbers-and-the-ieee-754-1985-standard'),
+              ('Roundoff error and truncation error in numerical derivatives',
+               3,
+               None,
+               'roundoff-error-and-truncation-error-in-numerical-derivatives'),
+              ('Bibliography', 1, None, 'bibliography')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript" async
+ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\no}{\nonumber}
+$$
+
+
+
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="aylor-readable.html">A basic ingredient in modeling: gradients</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._taylor-readable000.html#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
+     <!-- navigation toc: --> <li><a href="._taylor-readable000.html#why-are-gradients-important" style="font-size: 80%;"><b>Why are gradients important?</b></a></li>
+     <!-- navigation toc: --> <li><a href="._taylor-readable000.html#continuous-functions-and-finite-representation-numerical-errors" style="font-size: 80%;"><b>Continuous functions and finite representation: numerical errors</b></a></li>
+     <!-- navigation toc: --> <li><a href="._taylor-readable000.html#taylor-polynomial-approximation" style="font-size: 80%;"><b>Taylor polynomial approximation</b></a></li>
+     <!-- navigation toc: --> <li><a href="._taylor-readable000.html#calculating-numerical-derivatives-of-functions" style="font-size: 80%;"><b>Calculating Numerical Derivatives of Functions</b></a></li>
+     <!-- navigation toc: --> <li><a href="._taylor-readable000.html#sec:taylor:hhd" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Higher order derivative</a></li>
+     <!-- navigation toc: --> <li><a href="#roundoff-errors" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Roundoff Errors</a></li>
+     <!-- navigation toc: --> <li><a href="._taylor-readable002.html#binary-numbers" style="font-size: 80%;"><b>Binary numbers</b></a></li>
+     <!-- navigation toc: --> <li><a href="._taylor-readable003.html#floating-point-numbers-and-the-ieee-754-1985-standard" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Floating point numbers and the IEEE 754-1985 standard</a></li>
+     <!-- navigation toc: --> <li><a href="._taylor-readable003.html#roundoff-error-and-truncation-error-in-numerical-derivatives" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Roundoff error and truncation error in numerical derivatives</a></li>
+     <!-- navigation toc: --> <li><a href="._taylor-readable003.html#bibliography" style="font-size: 80%;"><b>Bibliography</b></a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+<div class="container">
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+<a name="part0001"></a>
+<!-- !split -->
+<h2 id="roundoff-errors" class="anchor">Roundoff Errors </h2>
+<p>In a computer a floating point number, \( x \), is represented as:</p>
+$$
+\begin{align}
+x=\pm q2^m.
+\tag{16}
+\end{align}
+$$
+
+<p>This is very similar to our usual scientific notation where we represent large (or small numbers) as \( \pm q E m=\pm q 10^{m} \). The processor in a computer handles a chunk of bits at one time, this chunk of bits is usually called a <em>word</em>. The number of bits (or bytes which almost always means a group of eight bits) in a word is handled as a unit by a processor.   
+Most modern computers use 64-bits (8 bytes) processors. We are not going into all the details, the most important message is that the units handled by the processor are <em>finite</em>. Thus we cannot, in general, store numbers in a computer with infinite accuracy.
+</p>
+<div class="alert alert-block alert-success alert-text-normal"><b>Machine Precision</b>
+<!-- Machine precision, \( \epsilon_M \) is the smallest number we can add to one and get something different than one, i.e. \( 1+\epsilon_M>1 \). For a 64-bits computer this value is \( \epsilon_M=2^{-52}\simeq3.5527\times10^{-16} \). -->
+</div>
+
+<p>In the next section we explain why the machine precision has this value, but if you just accept this for a moment, we can demonstrate why the machine precision is important and you need to care about it. First, just to convince you that the machine precision has the value of \( 2^{-52} \), you can do the following in Python:</p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;"><span style="color: #008000">print</span>(<span style="color: #666666">1+2**-52</span>) <span style="color: #3D7B7B; font-style: italic"># prints a value larger than 1</span>
+<span style="color: #008000">print</span>(<span style="color: #666666">1+2**-53</span>) <span style="color: #3D7B7B; font-style: italic"># prints 1.0</span>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>Next, consider the simple calculation</p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">a<span style="color: #666666">=0.1+0.2</span>
+b<span style="color: #666666">=0.3</span>
+<span style="color: #008000">print</span>(a<span style="color: #666666">==</span>b) <span style="color: #3D7B7B; font-style: italic"># gives False</span>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>Why is <code>a==b</code> false if this calculation involves only numbers with one decimal? The reason is that the computer uses the binary system, and in the binary system there is no way of representing 0.2 and 0.3 with a finite number of bits. As an example 0.2 in the binary system is:</p>
+$$
+\begin{equation}
+0.2_{10}=0.0011001100\ldots_2 (=2^{-3}+2^{-4}+2^{-7}+2^{-8}+2^{-11}+\cdots)
+\tag{17}
+\end{equation}
+$$
+
+<p>Note that we use the subscript \( _{10} \) and \( _2 \) to represent the decimal and binary system respectively.
+Thus in the computer 0.2 will be represented as \( 0.1999\ldots \) and when we add 0.1 we will get a number really close to 0.3 but not equal to 0.3. Some floats have an exact binary representation e.g. \( 0.125_{10}=2^{-3}_{10}=0.001_2 \). Thus the following code will produce the expected result
+</p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">a<span style="color: #666666">=0.125+0.25</span>
+b<span style="color: #666666">=0.375</span>
+<span style="color: #008000">print</span>(a<span style="color: #666666">==</span>b) <span style="color: #3D7B7B; font-style: italic"># gives True</span>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="alert alert-block alert-success alert-text-normal"><b>Comparing two floats</b>
+<p>Whenever you want to compare if two floats, \( a \) and \( b \), are equal in a computer program, you should never do \( a==b \) because of roundoff errors. Rather you should choose a variant of \( |a-b| < \epsilon \), where you check if the numbers are <em>close enough</em>. In practice, you may also want to normalize the values and do \( |1-b/a| < \epsilon \). </p>
+</div>
+
+<p>Roundoff errors can play a big role in calculations. This is particularly apparent when subtracting two numbers of similar magnitude as illustrated in the following code:</p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">h<span style="color: #666666">=2**-53</span>
+a<span style="color: #666666">=1+</span>h
+b<span style="color: #666666">=1-</span>h
+<span style="color: #008000">print</span>((a<span style="color: #666666">-</span>b)<span style="color: #666666">/</span>h) <span style="color: #3D7B7B; font-style: italic"># analytical result is 2</span>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>The calculation above is very similar to the calculation performed when evaluating derivatives, and if you run the code you will see that Python does not give the expected value of 2.</p>
+<div class="alert alert-block alert-success alert-text-normal"><b>Choosing the right step size</b>
+<p>A step size that is too low will give higher numerical error because roundoff errors dominate the numerical error. </p>
+</div>
+
+<p>There is a simple trick you can use sometimes to avoid roundoff errors <a href="._taylor-readable003.html#flannery1992numerical">[1]</a>. In practice, we can never get rid of roundoff errors in the calculation \( f(x+h) \), but since we can choose the step size \( h \), we can choose values such that \( x \) and \( x+h \) differ by an exact binary number</p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="cell border-box-sizing code_cell rendered">
+  <div class="input">
+    <div class="inner_cell">
+      <div class="input_area">
+        <div class="highlight" style="background: #f8f8f8">
+  <pre style="line-height: 125%;">x<span style="color: #666666">=1</span>
+h<span style="color: #666666">=0.0002</span> 
+temp <span style="color: #666666">=</span> x<span style="color: #666666">+</span>h
+h<span style="color: #666666">=</span>temp<span style="color: #666666">-</span>x
+<span style="color: #008000">print</span>(h) <span style="color: #3D7B7B; font-style: italic"># improved value of h with exact binary representation</span>
+</pre>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output">
+      <div class="output_area">
+        <div class="output_subarea output_stream output_stdout output_text">          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>In the next sections we will show why \( \epsilon_M=2^{-52} \), and why a finite word size implies a maximum and minimum number.  </p>
+
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._taylor-readable000.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._taylor-readable002.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<!-- Bootstrap footer
+<footer>
+<a href="https://..."><img width="250" align=right src="https://..."></a>
+</footer>
+-->
+</body>
+</html>
+

@@ -1,0 +1,266 @@
+<!--
+File automatically generated using DocOnce (https://github.com/doconce/doconce/):
+doconce format html main_taylor.do.txt CHAPTER=document BOOK=document APPENDIX=document --html_style=bootswatch_readable --html_output=taylor-readable --html_code_style=inherit
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/doconce/doconce/" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="A basic ingredient in modeling: gradients">
+<meta name="keywords" content="numerical error,Taylor polynomial,truncation error,Taylor polynomial, error term,Maclaurin series,forward difference,backward difference,central difference,central difference,roundoff erros,machine precision,IEEE 754-1985 standard,roundoff errors">
+<title>A basic ingredient in modeling: gradients</title>
+<!-- Bootstrap style: bootswatch_readable -->
+<!-- doconce format html main_taylor.do.txt CHAPTER=document BOOK=document APPENDIX=document --html_style=bootswatch_readable --html_output=taylor-readable --html_code_style=inherit -->
+<link href="https://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:64px;      /* fixed header height for style bootswatch_readable */
+  margin:-64px 0 0; /* negative fixed header height */
+}
+</style>
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Table of contents',
+               1,
+               'table_of_contents',
+               'table_of_contents'),
+              ('Why are gradients important?',
+               1,
+               None,
+               'why-are-gradients-important'),
+              ('Continuous functions and finite representation: numerical '
+               'errors',
+               1,
+               None,
+               'continuous-functions-and-finite-representation-numerical-errors'),
+              ('Taylor polynomial approximation',
+               1,
+               None,
+               'taylor-polynomial-approximation'),
+              ('Calculating Numerical Derivatives of Functions',
+               1,
+               None,
+               'calculating-numerical-derivatives-of-functions'),
+              ('Higher order derivative',
+               3,
+               'sec:taylor:hhd',
+               'sec:taylor:hhd'),
+              ('Roundoff Errors', 2, None, 'roundoff-errors'),
+              ('Binary numbers', 1, None, 'binary-numbers'),
+              ('Floating point numbers and the IEEE 754-1985 standard',
+               2,
+               None,
+               'floating-point-numbers-and-the-ieee-754-1985-standard'),
+              ('Roundoff error and truncation error in numerical derivatives',
+               3,
+               None,
+               'roundoff-error-and-truncation-error-in-numerical-derivatives'),
+              ('Bibliography', 1, None, 'bibliography')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript" async
+ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\no}{\nonumber}
+$$
+
+
+
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="aylor-readable.html">A basic ingredient in modeling: gradients</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._taylor-readable000.html#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
+     <!-- navigation toc: --> <li><a href="._taylor-readable000.html#why-are-gradients-important" style="font-size: 80%;"><b>Why are gradients important?</b></a></li>
+     <!-- navigation toc: --> <li><a href="._taylor-readable000.html#continuous-functions-and-finite-representation-numerical-errors" style="font-size: 80%;"><b>Continuous functions and finite representation: numerical errors</b></a></li>
+     <!-- navigation toc: --> <li><a href="._taylor-readable000.html#taylor-polynomial-approximation" style="font-size: 80%;"><b>Taylor polynomial approximation</b></a></li>
+     <!-- navigation toc: --> <li><a href="._taylor-readable000.html#calculating-numerical-derivatives-of-functions" style="font-size: 80%;"><b>Calculating Numerical Derivatives of Functions</b></a></li>
+     <!-- navigation toc: --> <li><a href="._taylor-readable000.html#sec:taylor:hhd" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Higher order derivative</a></li>
+     <!-- navigation toc: --> <li><a href="._taylor-readable001.html#roundoff-errors" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Roundoff Errors</a></li>
+     <!-- navigation toc: --> <li><a href="._taylor-readable002.html#binary-numbers" style="font-size: 80%;"><b>Binary numbers</b></a></li>
+     <!-- navigation toc: --> <li><a href="#floating-point-numbers-and-the-ieee-754-1985-standard" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Floating point numbers and the IEEE 754-1985 standard</a></li>
+     <!-- navigation toc: --> <li><a href="#roundoff-error-and-truncation-error-in-numerical-derivatives" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Roundoff error and truncation error in numerical derivatives</a></li>
+     <!-- navigation toc: --> <li><a href="#bibliography" style="font-size: 80%;"><b>Bibliography</b></a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+<div class="container">
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+<a name="part0003"></a>
+<!-- !split -->
+<h2 id="floating-point-numbers-and-the-ieee-754-1985-standard" class="anchor">Floating point numbers and the IEEE 754-1985 standard </h2>
+<p>A 64 bits word size is commonly referred to as <em>double precision</em>, whereas a 32 bits word size is termed <em>single precision</em>. In the following, we will consider a 64 bits word size. We would like to know: what is the roundoff error, what is the largest number, and what is the smallest number that can be represented in the computer? Almost all floating point numbers are represented in <em>normalized</em> form. In normalized form, the mantissa is written as \( M=1.F \), and it is only \( F \) that is stored,   \( F \) is termed the <em>fraction</em>. We will return to the special case of some of the unnormalized numbers later. In the IEEE standard one bit is reserved for the sign, 52 for the fraction (\( F \)), and 11 for the exponent (\( m \)), see figure <a href="#fig:taylor:64bit">5</a> for an illustration.</p>
+
+<center> <!-- figure label: --> <div id="fig:taylor:64bit"></div> <!-- FIGURE -->
+<hr class="figure">
+<center>
+<p class="caption">Figure 5: Representation of a 64 bits floating point number according to the IEEE 754-1985 standard. For a 32 bits floating point number, 8 bits are reserved for the exponent and 23 for the fraction.  <!-- caption label: fig:taylor:64bit --></p>
+</center>
+<p><img src="fig-taylor/64bit.png" width="400" align="bottom"></p>
+</center>
+
+<p>The exponent must be positive to represent numbers with absolute value larger than one, and negative to represent numbers with absolute value less than one.  To make this more explicit the simple formula in equation <a href="._taylor-readable001.html#mjx-eqn-16">(16)</a> is rewritten as:</p>
+$$
+\begin{equation}
+\pm q 2^{E-e}.
+\tag{20}
+\end{equation}
+$$
+
+<p>The number \( e \) is called the <em>bias</em> and has a fixed value. For 64 bits it is \( 2^{11-1}-1=1023 \) (32-bits: \( e=2^{8-1}-1=127 \)). The number \( E \) is represented by 11 bits and can thus take values from 0 to \( 2^{11}-1=2047 \). If we have an exponent of e.g. -3, the computer adds 1023 to that number and store the number 1020. Two numbers are special numbers and they are reserved to represent infinity and zero, \( E=0 \) and \( E=2047 \). Thus <em>the largest and smallest possible numerical value of the exponent is: 2046-1023=1023, and 1-1023=-1022, respectively</em>. The fraction of a normalized floating point number takes on values from \( 1.000\ldots 00 \) to \( 1.111\ldots 11 \). Thus the lowest normalized number is:</p>
+$$
+\begin{align}
+1.000 + \text{ (49 more zeros)}\cdot 2^{-1022}&=2^0\cdot2^{-1022}\no
+\tag{21}\\ 
+&=2.2250738585072014\cdot 10^{-308}.
+\label{}
+\end{align}
+$$
+
+<p>It is possible to represent smaller numbers than \( 2.22\cdot10^{-308} \), by allowing <em>unnormalized</em> values. If the exponent is -1022, then the mantissa can take on values from \( 1.000\ldots 00 \) to \( 0.000\ldots 01 \), but then accuracy is lost. So the smallest possible number is \( 2^{-52}\cdot{2^-1022}\simeq4.94\cdot10^{-324} \). 
+The highest normalized number is
+</p>
+$$
+\begin{align}
+1.111 + &\text{ (49 more ones)}\cdot2^{1023}=(2^0+2^{-1}+2^{-2}+\cdots+2^{-52})\cdot2^{1023}\no
+\tag{22}\\=(2-2^{-52})\cdot2^{1023}
+&=1.7976931348623157\cdot 10^{308}.
+\label{}
+\end{align}
+$$
+
+<p>If you enter <code>print(1.8*10**(308))</code> in Python, the answer will be <code>Inf</code>. If you enter <code>print(2*10**(308))</code>, Python will (normally) give an answer. This is because 
+the number \( 1.8\cdot10^{308} \) is floating point number, whereas \( 2\cdot 10^{308} \) is an <em>integer</em>, and Python does something clever when it comes to representing integers. 
+Python has a third numeric type called long int, which can use the available memory to represent an integer.
+</p>
+
+<p>What about the machine precision? The machine precision, \( \epsilon_M \), is the <em>smallest possible number that can be added to one, and get a number larger than one</em>, i.e. \( 1+\epsilon_M>1 \).  The smallest possible value of the mantissa is \( 0.000\ldots 01=2^{-52} \), thus the lowest number must be of the form \( 2^{-52}\cdot 2^{m} \). If the exponent , \( m \), is lower than 0 then when we add this number to 1, we will only get 1. Thus the machine precision is \( \epsilon_M=2^{-52}=2.22\cdot10^{-16} \) (for 32 bits \( 2^{-23}=1.19\cdot10^{-7} \)). In practical terms this means that e.g. the value of \( \pi \) is \( 3.14159265358979323846264338\ldots \), but in Python it can only be represented by 16 digits: \( 3.141592653589793 \).</p>
+<h3 id="roundoff-error-and-truncation-error-in-numerical-derivatives" class="anchor">Roundoff error and truncation error in numerical derivatives </h3>
+<div class="alert alert-block alert-success alert-text-normal"><b>Roundoff Errors</b>
+<p>All numerical floating point operations introduce roundoff errors at each step in the calculation due to finite word size. These errors accumulate in long simulations and introduce random errors in the final results. After \( N \) operations, the error is at least \( \sqrt{N}\epsilon_M \) (the square root is a random walk estimate, and we assume that the errors are randomly distributed). The roundoff errors can be much, much higher when numbers of equal magnitude are subtracted. You might be so unlucky that after one operation the answer is completely dominated by roundoff errors.   </p>
+</div>
+
+
+<p>The roundoff error when we represent a floating point number \( x \) in the 
+machine will be of the order \( x/10^{16} \) (<em>not</em> \( 10^{-16} \)). In general, when we evaluate a function, the error will be of the order 
+\( \epsilon|f(x)| \), where \( \epsilon\sim10^{-16} \). Thus equation <a href="._taylor-readable000.html#mjx-eqn-9">(9)</a> is modified in the following way when we take into account the roundoff errors:
+</p>
+$$
+\begin{align}
+f^\prime(x)=\frac{f(x+h)-f(x)}{h}\pm\frac{2\epsilon|f(x)|}{h}-\frac{h}{2}f^{\prime\prime}(\eta),\tag{23}
+\end{align}
+$$
+
+<p>we do not know the sign of the roundoff error, so the total error \( R_2 \) is:</p>
+$$
+\begin{align}
+R_2=\frac{2\epsilon|f(x)|}{h}+\frac{h}{2}|f^{\prime\prime}(\eta)|.\tag{24}
+\end{align}
+$$
+
+<p>We have put absolute values around the function and its derivative to get the maximal error, it might be the case that the roundoff error cancel part of the 
+truncation error. However, the roundoff error is random in nature and will change from machine to machine, and each time we run the program. 
+Note that the roundoff error increases when \( h \) decreases, and the approximation error decreases when \( h \) decreases. This is exactly what we saw in figure <a href="._taylor-readable000.html#fig:taylor:df2">4</a>. We can find the 
+best step size, by differentiating \( R_2 \) and put it equal to zero:
+</p>
+$$
+\begin{align}
+\frac{dR_2}{dh}&=-\frac{2\epsilon|f(x)|}{h^2}+\frac{1}{2}f^{\prime\prime}(\eta)=0\nonumber\\ 
+h&=2\sqrt{\epsilon\left|\frac{f(x)}{f^{\prime\prime}(\eta)}\right|}\simeq 2\cdot10^{-8},\tag{25}
+\end{align}
+$$
+
+<p>In the last equation we have assumed that \( f(x) \) and its derivative is \( ~1 \). This step size corresponds to an error of order \( R_2\sim10^{-8} \). 
+Inspecting figure <a href="._taylor-readable000.html#fig:taylor:df2">4</a> we see that the minimum is located at \( h\sim10^{-8} \).      
+</p>
+
+<p>We can perform a similar error analysis as we did before, and then we find for equation \eqref{eq:taylor:cd} and <a href="._taylor-readable000.html#mjx-eqn-12">(12)</a> that the total
+numerical error is:
+</p>
+$$
+\begin{align}
+R_3&=\frac{\epsilon|f(x)|}{h}+\frac{h^2}{6}f^{(3)}(\eta),\tag{26}\\ 
+R_4&=\frac{4\epsilon|f(x)|}{h^2}+\frac{h^2}{12}f^{(4)}(\eta),\tag{27}
+\end{align}
+$$
+
+<p>respectively. Differentiating these two equations with respect to \( h \), and setting the equations equal to zero, we find an optimal step size of
+\( h\sim10^{-5} \) for equation <a href="#mjx-eqn-26">(26)</a>, which gives an error of \( R_2\sim 10^{-16}/10^{-5}+(10^{-5})^2/6\simeq10^{-10} \), and \( h\sim10^{-4} \) for equation
+<a href="#mjx-eqn-27">(27)</a>, which gives an error of \( R_4\sim 4\cdot10^{-16}/(10^{-4})^2+(10^{-4})^2/12\simeq10^{-8} \). Note that we get the surprising result for the first order 
+derivative in equation \eqref{eq:taylor:cd}, that a higher step size gives a more accurate result. 
+</p>
+<h1 id="bibliography" class="anchor">Bibliography </h1>
+
+<!-- begin bibliography -->
+<ol>
+ <li> <div id="flannery1992numerical"></div> <b>B. P. Flannery, W. H. Press, S. A. Teukolsky and W. Vetterling</b>.  Numerical Recipes in C, <em>Press Syndicate of the University of Cambridge, New York</em>, 24(78), pp. 36, 1992.</li>
+</ol>
+<!-- end bibliography -->
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._taylor-readable002.html">&larr; Prev</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<!-- Bootstrap footer
+<footer>
+<a href="https://..."><img width="250" align=right src="https://..."></a>
+</footer>
+-->
+</body>
+</html>
+

@@ -1,0 +1,201 @@
+<!--
+File automatically generated using DocOnce (https://github.com/doconce/doconce/):
+doconce format html main_taylor.do.txt CHAPTER=document BOOK=document APPENDIX=document --html_style=bootswatch_readable --html_output=taylor-readable --html_code_style=inherit
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/doconce/doconce/" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="A basic ingredient in modeling: gradients">
+<meta name="keywords" content="numerical error,Taylor polynomial,truncation error,Taylor polynomial, error term,Maclaurin series,forward difference,backward difference,central difference,central difference,roundoff erros,machine precision,IEEE 754-1985 standard,roundoff errors">
+<title>A basic ingredient in modeling: gradients</title>
+<!-- Bootstrap style: bootswatch_readable -->
+<!-- doconce format html main_taylor.do.txt CHAPTER=document BOOK=document APPENDIX=document --html_style=bootswatch_readable --html_output=taylor-readable --html_code_style=inherit -->
+<link href="https://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:64px;      /* fixed header height for style bootswatch_readable */
+  margin:-64px 0 0; /* negative fixed header height */
+}
+</style>
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Table of contents',
+               1,
+               'table_of_contents',
+               'table_of_contents'),
+              ('Why are gradients important?',
+               1,
+               None,
+               'why-are-gradients-important'),
+              ('Continuous functions and finite representation: numerical '
+               'errors',
+               1,
+               None,
+               'continuous-functions-and-finite-representation-numerical-errors'),
+              ('Taylor polynomial approximation',
+               1,
+               None,
+               'taylor-polynomial-approximation'),
+              ('Calculating Numerical Derivatives of Functions',
+               1,
+               None,
+               'calculating-numerical-derivatives-of-functions'),
+              ('Higher order derivative',
+               3,
+               'sec:taylor:hhd',
+               'sec:taylor:hhd'),
+              ('Roundoff Errors', 2, None, 'roundoff-errors'),
+              ('Binary numbers', 1, None, 'binary-numbers'),
+              ('Floating point numbers and the IEEE 754-1985 standard',
+               2,
+               None,
+               'floating-point-numbers-and-the-ieee-754-1985-standard'),
+              ('Roundoff error and truncation error in numerical derivatives',
+               3,
+               None,
+               'roundoff-error-and-truncation-error-in-numerical-derivatives'),
+              ('Bibliography', 1, None, 'bibliography')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript" async
+ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\no}{\nonumber}
+$$
+
+
+
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="aylor-readable.html">A basic ingredient in modeling: gradients</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._taylor-readable000.html#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
+     <!-- navigation toc: --> <li><a href="._taylor-readable000.html#why-are-gradients-important" style="font-size: 80%;"><b>Why are gradients important?</b></a></li>
+     <!-- navigation toc: --> <li><a href="._taylor-readable000.html#continuous-functions-and-finite-representation-numerical-errors" style="font-size: 80%;"><b>Continuous functions and finite representation: numerical errors</b></a></li>
+     <!-- navigation toc: --> <li><a href="._taylor-readable000.html#taylor-polynomial-approximation" style="font-size: 80%;"><b>Taylor polynomial approximation</b></a></li>
+     <!-- navigation toc: --> <li><a href="._taylor-readable000.html#calculating-numerical-derivatives-of-functions" style="font-size: 80%;"><b>Calculating Numerical Derivatives of Functions</b></a></li>
+     <!-- navigation toc: --> <li><a href="._taylor-readable000.html#sec:taylor:hhd" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Higher order derivative</a></li>
+     <!-- navigation toc: --> <li><a href="._taylor-readable001.html#roundoff-errors" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Roundoff Errors</a></li>
+     <!-- navigation toc: --> <li><a href="#binary-numbers" style="font-size: 80%;"><b>Binary numbers</b></a></li>
+     <!-- navigation toc: --> <li><a href="._taylor-readable003.html#floating-point-numbers-and-the-ieee-754-1985-standard" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Floating point numbers and the IEEE 754-1985 standard</a></li>
+     <!-- navigation toc: --> <li><a href="._taylor-readable003.html#roundoff-error-and-truncation-error-in-numerical-derivatives" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Roundoff error and truncation error in numerical derivatives</a></li>
+     <!-- navigation toc: --> <li><a href="._taylor-readable003.html#bibliography" style="font-size: 80%;"><b>Bibliography</b></a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+<div class="container">
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+<a name="part0002"></a>
+<!-- !split -->
+<h1 id="binary-numbers" class="anchor">Binary numbers  </h1>
+<p>Binary numbers are used in computers because processors are made of billions of transistors, the end states of a transistor are off or on, representing a 0 or 1 in the binary system. Assume, for simplicity, that we have a processor that uses a word size of 4 bits (instead of 64 bits). How many <em>unsigned</em> (positive) integers can we represent in such processor? Lets write down all the possible combinations of ones and zeros and also do the translation from the base 2 numerical system to the base 10 numerical system:</p>
+
+$$
+\begin{equation}
+\begin{matrix}
+0&0&0&0=0\cdot 2^3+0\cdot 2^2+0\cdot 2^1+0\cdot 2^0=0\\ 
+0&0&0&1=0\cdot 2^3+0\cdot 2^2+0\cdot 2^1+1\cdot 2^0=1\\ 
+0&0&1&0=0\cdot 2^3+0\cdot 2^2+1\cdot 2^1+0\cdot 2^0=2\\ 
+0&0&1&1=0\cdot 2^3+0\cdot 2^2+1\cdot 2^1+1\cdot 2^0=3\\ 
+0&1&0&0=0\cdot 2^3+1\cdot 2^2+0\cdot 2^1+0\cdot 2^0=4\\ 
+0&1&0&1=0\cdot 2^3+1\cdot 2^2+0\cdot 2^1+1\cdot 2^0=5\\ 
+0&1&1&0=0\cdot 2^3+1\cdot 2^2+1\cdot 2^1+0\cdot 2^0=6\\ 
+0&1&1&1=0\cdot 2^3+1\cdot 2^2+1\cdot 2^1+1\cdot 2^0=7\\ 
+1&0&0&0=1\cdot 2^3+0\cdot 2^2+0\cdot 2^1+0\cdot 2^0=8\\ 
+1&0&0&1=1\cdot 2^3+0\cdot 2^2+0\cdot 2^1+1\cdot 2^0=9\\ 
+1&0&1&0=1\cdot 2^3+0\cdot 2^2+1\cdot 2^1+0\cdot 2^0=10\\ 
+1&0&1&1=1\cdot 2^3+0\cdot 2^2+1\cdot 2^1+1\cdot 2^0=11\\ 
+1&1&0&0=1\cdot 2^3+1\cdot 2^2+0\cdot 2^1+0\cdot 2^0=12\\ 
+1&1&0&1=1\cdot 2^3+1\cdot 2^2+0\cdot 2^1+1\cdot 2^0=13\\ 
+1&1&1&0=1\cdot 2^3+1\cdot 2^2+1\cdot 2^1+0\cdot 2^0=14\\ 
+1&1&1&1=1\cdot 2^3+1\cdot 2^2+1\cdot 2^1+1\cdot 2^0=15
+\end{matrix}
+.
+\tag{18}
+\end{equation}
+$$
+
+<p>Hence, with a 4 bits word size, we can represent \( 2^4=16 \) integers. The largest number is \( 2^4-1=15 \), and the smallest is zero. What about negative numbers? If we use a 4 bits word size, there are still \( 2^4=16 \) numbers, but they are distributed differently. The common way to do this is to reserve the first bit to be a <em>sign</em> bit, a "0" is positive and "1" is negative, i.e. \( (-1)^0 = 1 \), and \( (-1)^1=-1 \). Replacing the first bit with a sign bit in equation <a href="#mjx-eqn-18">(18)</a>, we get the following sequence of numbers 0,1,2,3,4,5,6,7,-0,-1,-2,-3,-4,-5,-6,-7. The "-0" might seem strange but is used in the computer to extend the real number line \( 1/0=\infty \), whereas \( 1/-0=-\infty \). In general when there are \( m \) bits, we have a total of \( 2^m \) numbers. If we include negative numbers, we can choose to have \( 2^{m-1}-1 \) negative and \( 2^{m-1}-1 \) positive numbers, and negative and positive zero, i.e. \( 2^{m-1}-1+2^{m-1}-1+1+1=2^m \).</p>
+
+<p>What about real numbers? As stated earlier we use the scientific notation as in equation <a href="._taylor-readable001.html#mjx-eqn-16">(16)</a>, but still the scientific notation might have a real number in front, e.g. \( 1.25\cdot 10^{-3} \). To represent the number \( 1.25 \) in binary format we use a decimal separator, just as with base 10. In this case 1.25 is 1.01 in binary format</p>
+$$
+\begin{equation}
+1.01=1\cdot 2^0 + 0\cdot 2^{-1}+1\cdot 2^{-2}=1 + 0 + 0.25=1.25.
+\tag{19}
+\end{equation}
+$$
+
+<p>The scientific notation is commonly referred to as a <em>floating point representation</em>. The term "floating point" is used because the decimal point is not in the same place, in contrast to the fixed point where the decimal point is always in the same place. To store the number 1e-8=0.00000001 in floating point format, we only need to store 1 and -8 (and possibly the sign), whereas in fixed point format we need to store all 9 numbers.  In equation <a href="#mjx-eqn-18">(18)</a>, we need to use one bit to store the sign, leaving (in the case of 4 bits word size) three bits to be distributed among the <em>mantissa</em>, \( q \), and the exponent, \( m \). It is not given how many bits should be used for the mantissa and the exponent. Thus there are choices to be made, and all modern processors use the same standard, the <a href="https://standards.ieee.org/standard/754-1985.html" target="_self">IEEE Standard 754-1985</a>. </p>
+
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._taylor-readable001.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._taylor-readable003.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<!-- Bootstrap footer
+<footer>
+<a href="https://..."><img width="250" align=right src="https://..."></a>
+</footer>
+-->
+</body>
+</html>
+

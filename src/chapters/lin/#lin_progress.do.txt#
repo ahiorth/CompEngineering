@@ -1,0 +1,150 @@
+How can a differential equation be formulated as a matrix problem? To see this we need to discretize equation (ref{eq:lin:cont4}). We will discretize the equation in one dimension, and we will use a regular grid, where we keep the same distance, $h$, between the points. Assume our system has dimension $L$, in figure ref{fig:lin:grid}, there are two examples of discretization.  
+
+FIGURE: [fig-lin/grid.png, width=400 frac=1.0] Examples of discretization of a system with length $L$ (left) the  boundaries lies exactly at the boundary nodes, (right) boundary nodes lies half-way between the grid nodes. label{fig:lin:grid}
+
+There are many things to consider when discretizing equations, but perhaps the most important are
+o Treat the boundary nodes correctly. In most cases the dominating numerical errors are introduced through the boundaries. Always draw a picture of the system, if the boundaries lies exactly at the grid nodes it is usually easier to find a good numerical representation. If the boundaries lies a distance from the nodes, e.g. to the right in figure ref{fig:lin:grid}, then one usually need to do some interpolation.
+o Should finite volume or finite difference approach be used? A finite volume approach is especially attractive for conservation equations.
+
+!bnotice Finite difference and finite volume
+idx{finite volume}
+We have already encountered finite difference discretization in the last chapter where we used various approximations to calculate derivatives, i.e. we calculate derivatives by calculating the *difference* between $f(x+h)$ and $f(x)$ (or $f(x+h)$ and $f(x-h)$). The finite volume formulation is also a finite difference scheme, but it is formulated such that we always ensure that the quantity we are simulating is conserved (regardless of numerical errors). Formally, one transforms the divergence term (the term that contains the flux $\nabla \mathbf{J}$) into a surface integral using the Gauss (divergence) theorem
+!bt
+\begin{equation}
+\int_V\nabla\cdot \mathbf{J}=\int_S\mathbf{J}\cdot \hat{\mathbf{n}}
+label{eq:lin:dgau}
+\end{equation}
+!et
+!enotice
+There are excellent books written on the finite volume method, see e.g. cite{leveque2002finite}. Here we will mainly focus on the key idea, which is to formulate a scheme that conserves the flux.
+The process of formulating a finite volume scheme is very close to the derivation of the continuum equation we did in the beginning of the chapter. We consider our numerical discretization as several boxes (exactly like the dotted lines in figure ref{fig:lin:grid}), the continuum equation is written down for each box an therefore we are ensured that the quantities are conserved *regardless of the size of the boxes*.
+
+!bnotice Example: Finite difference and volume discretization of the heat equation
+Let us consider the heat equation, where the heat flux is given as
+!bt
+\begin{equation}
+J=-k\frac{dT}{dx},
+label{eq:lin:e1}
+\end{equation}
+!et
+where $k$ describes the thermal conductivity of the solid. We will further assume that there is a constant source term $d\sigma/dt=\kappa=const$, and steady state $dq/dt=0$. Then equation (ref{eq:lin:cont4}) can be written
+!bt
+\begin{equation}
+k\frac{d^2T}{dx^2}+\kappa=0,
+label{eq:lin:e2}
+\end{equation}
+!et
+The finite difference discretization is now straight forward, just replace the term $d^2T/dx^2$ with a suitable finite difference formula for the second derivative, e.g.
+!bt
+\begin{align}
+k\frac{T(x+h)+T(x-h)-2T(x)}{h^2}+\kappa&=0,\no\\
+k\frac{T_{i+1}+T_{i-1}-2T_i}{h^2}+\kappa&=0.
+label{eq:lin:e3}
+\end{align}
+!et
+Note that in the last equations we have introduced the short hand notation $T(x)\equiv T_i$, and $T(x\pm h)=T_{i\pm 1}$. 
+
+The finite volume discretization approach is slightly different, we then operate with *cell averaged values*. The heat in the box is the volume averaged heat. Since the divergence term is replaced with a surface integral, equation (ref{eq:lin:dgau}), we calculate the flow of heat into the boundary $x-h/2$ and out of the boundary $x+h/2$ as
+!bt
+\begin{equation}
+\frac{J_{x+h/2}
+-J_{x-h/2}}{h}+\kappa=0.
+label{eq:lin:e4}
+\end{equation}
+!et
+Note that this equation is exactly the same as equation (ref{eq:lin:cont1}), with the only exception that the point $x$ is placed in the center of the box.
+The diffusive flux is $-kdT/dx$, and in order to be consistent with this law we have to write the flux between two cells as proportional to the difference between the cell average values
+!bt
+\begin{align}
+-\frac{k}{h}\left(\frac{T_{i+1}-T_i}{h}-\frac{T_{i}-T_{i-1}}{h}\right)+\kappa&=0\nonumber,\\
+k\frac{T_{i+1}+T_{i-1}-2T_i}{h^2}+\kappa&=0.
+label{eq:lin:e5}
+\end{align}
+!et
+In this case we actually recover the same equation as we did for the finite difference approach equation (ref{eq:lin:e3}). 
+!enotice
+
+=== Boundary conditions ===
+Basically there are two types of boundary conditions i) the flux is known at the edges of the computational domain and/or ii) the physical quantity we are solving for is known. To be more specific, and to see how all connects, we will continue with the example above on the heat equation. Consider the outline of nodes as in figure ref{fig:lin:grid}, we will consider two possibilities i) where the physical boundary lies exactly between nodes, and ii) where the physical boundary is exactly at the grid nodes. In the finite volume scheme, we need to make sure that the flux over the surface is calculated correctly, and then we have to use the formulas in figure ref{fig:lin:bbc}
+!bt
+\begin{equation}
+\left.\frac{dT}{dx}\right|_{x=0}=\frac{T_{-1}-T_0}{h}+{\cal O}(h^2).
+label{eq:lin:nn}
+\end{equation}
+!et
+Note that if the boundary node lies exactly at $x=0$, we have to replace $T_0$ with $T_{1}$. A flux boundary condition is usually called Neumann boundary condition after Carl Neumann (1832–1925) a German mathematician, and the constant value boundary condition is called Dirichlet boundary condition after another German mathematician, Peter Gustav Lejeune Dirichlet (1805–1859). If the boundary nodes lies exactly at the physical boundary, it is trivial to implement, just replace $T_N=T_b$ i.e. with the boundary value. On the other hand if the physical boundary lies a distance from the node, we have to interpolate the value from the physical coordinate to the simulation node.
+!bt
+\begin{align}
+T_N&=T(x+h)=T(x+h/2+h/2)\no\\
+&=T_{N+1/2}+\left.\frac{dT}{dx}\right|_{x+h/2}+{\cal O}(h^2)=T_b+\frac{T_N-T_{N-1}}{h}\frac{h}{2}+{\cal O}(h^2),\text{ hence:}\nonumber\\
+T_N&=2T_b-T_{N-1}+{\cal O}(h^2).label{eq:lin:dd}
+\end{align}
+!et
+Notice that the result make sense, $T_b=(T_N+T_{N-1})/2$, i.e. the value midway is the average of the values at the neighboring nodes.
+
+FIGURE: [fig-lin/bbc, width=400 frac=1.0] Flux boundary condition (Neumann), and value boundary condition (Dirichlet). For the upper right boundary condition we use Taylors formula to interpolate, see equation (ref{eq:lin:dd}). label{fig:lin:bbc}
+
+!bnotice Example: Steady state heat equation as a linear problem
+Consider the case where we have 4 grid nodes and the outline of the simulation nodes are as in figure ref{fig:lin:grid} to the left, i.e. nodes at the physical  boundaries. Assume a zero flux boundary condition to the left, and a constant temperature,$T_b$, to the right. Write the heat equation
+!bt
+\begin{equation}
+k\frac{d^2T}{dx^2}+\kappa=0,
+label{eq:lin:exx1}
+\end{equation}
+!et
+as a matrix equation.
+
+__Solution:__
+First, we use the discrete version of equation (ref{eq:lin:exx1}) in equation (ref{eq:lin:e3}) for $i=0, 1, 2, 3$
+!bt
+\begin{align}
+T_{-1}+T_1-2T_0 &=-h^2\kappa/k,\nonumber \\
+T_{0}+T_2-2T_1 &=-h^2\kappa/k\nonumber \\
+T_{1}+T_3-2T_2 &=-h^2\kappa/k\nonumber \\
+T_{2}+T_4-2T_3 &=-h^2\kappa/k.
+label{eq:lin:exx2}
+\end{align}
+!et
+Now, we have four equations, but six unknowns ($T_{-1}, T_0, T_1, T_2, T_3, T_4$). $T_{-1}$, and $T_4$ can be found from the boundary conditions. Using the formulas in figure ref{fig:lin:bbc} at the lower left and lower right, we get $dT/dx=0$, and $T_{-1}=T_1$, and $T_4=T_b$. Thus the first and last equation in equation (ref{eq:lin:exx2}), can be written
+!bt
+\begin{align}
+2T_1-2T_0 &=-h^2\kappa/k,\nonumber \\
+T_{2}-2T_3 &=-h^2\kappa/k-T_b.
+label{eq:lin:2b}
+\end{align}
+!et
+Now, we can formulate equation (ref{eq:lin:exx2}) as a matrix problem, with the unknowns on the left side and the unknown on the right hand side.
+!bt
+\begin{align}
+\left(
+\begin{array}{cccc}
+-2&2&0&0\\
+1&-2&1&0\\
+0&1&-2&1\\
+0&0&1&-2\\
+\end{array}
+\right)
+\left(
+\begin{array}{c}
+T_0\\
+T_1\\
+T_2\\
+T_3\\
+\end{array}
+\right)
+=
+\left(
+\begin{array}{c}
+-h^2\kappa/k\\
+-h^2\kappa/k\\
+-h^2\kappa/k\\
+-h^2\kappa/k-T_b
+\end{array}
+\right).
+\end{align}
+label{eq:lin:exx4}
+!et
+
+
+!enotice
+

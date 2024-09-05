@@ -18,7 +18,7 @@ If we are only considering a single variable, height as a function of time or po
 
 Another example where gradients are important is the flow of heat. Heat flows from hot to cold places, and the amount of heat is proportional to the temperature difference, i.e. a gradient in temperature. The flow of air is also from points of high pressure to low pressure, i.e. a gradient in pressure. 
 
-A primary task of a modeler is to predict something. If there are no gradients in a system, nothing will happen and there is no reason to model anything. Hence, an extremely important task when we model something is to analyse gradients carefully. If gradients are not represented correctly, the output of the simulation will introduce errors that can be so large that one cannot trust the results.
+A primary task of a modeler is to predict something. If there are no gradients in a system, nothing will happen and there is no reason to model anything. Hence, an extremely important task when we model something is to analyze gradients carefully. If gradients are not represented correctly, the output of the simulation will introduce errors that can be so large that one cannot trust the results.
 
 
 
@@ -264,6 +264,7 @@ o At a certain step size the numerical error starts to *increase*. For the forwa
 
 The numerical error has a minimum, *it does not continue to decrease when $h$ decreases*. The explanation for this behavior are two competing errors: *truncation errors* and *roundoff errors*. The truncation errors have already been discussed in great detail, in the next section we will look at roundoff errors.
 
+!split
 ===== Roundoff Errors =====
 idx{roundoff erros}
 In a computer a floating point number, $x$, is represented as:
@@ -327,7 +328,9 @@ h=temp-x
 print(h) # improved value of h with exact binary representation
 !ec
 In the next sections we will show why $\epsilon_M=2^{-52}$, and why a finite word size implies a maximum and minimum number.  
-=== Binary numbers ===
+
+!split
+======= Binary numbers  =======
 Binary numbers are used in computers because processors are made of billions of transistors, the end states of a transistor are off or on, representing a 0 or 1 in the binary system. Assume, for simplicity, that we have a processor that uses a word size of 4 bits (instead of 64 bits). How many *unsigned* (positive) integers can we represent in such processor? Lets write down all the possible combinations of ones and zeros and also do the translation from the base 2 numerical system to the base 10 numerical system:
 
 !bt
@@ -365,7 +368,8 @@ label{eq:taylor:b2fr}
 !et
 The scientific notation is commonly referred to as a *floating point representation*. The term "floating point" is used because the decimal point is not in the same place, in contrast to the fixed point where the decimal point is always in the same place. To store the number 1e-8=0.00000001 in floating point format, we only need to store 1 and -8 (and possibly the sign), whereas in fixed point format we need to store all 9 numbers.  In equation (ref{eq:taylor:bin4}), we need to use one bit to store the sign, leaving (in the case of 4 bits word size) three bits to be distributed among the *mantissa*, $q$, and the exponent, $m$. It is not given how many bits should be used for the mantissa and the exponent. Thus there are choices to be made, and all modern processors use the same standard, the "IEEE Standard 754-1985":"https://standards.ieee.org/standard/754-1985.html". 
 
-=== Floating point numbers and the IEEE 754-1985 standard ===
+!split
+===== Floating point numbers and the IEEE 754-1985 standard =====
 idx{IEEE 754-1985 standard}
 A 64 bits word size is commonly referred to as *double precision*, whereas a 32 bits word size is termed *single precision*. In the following, we will consider a 64 bits word size. We would like to know: what is the roundoff error, what is the largest number, and what is the smallest number that can be represented in the computer? Almost all floating point numbers are represented in *normalized* form. In normalized form, the mantissa is written as $M=1.F$, and it is only $F$ that is stored,   $F$ is termed the *fraction*. We will return to the special case of some of the unnormalized numbers later. In the IEEE standard one bit is reserved for the sign, 52 for the fraction ($F$), and 11 for the exponent ($m$), see figure ref{fig:taylor:64bit} for an illustration.
 
