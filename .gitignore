@@ -11,7 +11,7 @@ Thumbs.db
 # Doconce Stuff #
 #################
 .ipynb_checkpoints
-
+Trash/
 # Word files #
 ##############
 *.doc
