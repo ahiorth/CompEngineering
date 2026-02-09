@@ -14,7 +14,7 @@ After reading modules 1, 2, (potentially 3) and 4 below, you have the knowledge 
 
 ## Full book
 
-[Book](https://github.com/ahiorth/CompEngineering/blob/master/html/book.html)
+[Book](https://ahiorth.github.io/CompEngineering/html/book.html)
 
 ## Index
 1. [Preface](https://github.com/ahiorth/CompEngineering/blob/master/chapters/preface/notebook/preface.ipynb)
