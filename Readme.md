@@ -12,8 +12,11 @@ All documents have been prepared using [doconce](https://github.com/doconce/doco
 
 After reading modules 1, 2, (potentially 3) and 4 below, you have the knowledge to start on any of the other modules below.
 
-## Index
+## Full book
 
+[Book](https://github.com/ahiorth/CompEngineering/blob/master/html/book.html)
+
+## Index
 1. [Preface](https://github.com/ahiorth/CompEngineering/blob/master/chapters/preface/notebook/preface.ipynb)
 2. [Introduction to Python](https://github.com/ahiorth/CompEngineering/blob/master/chapters/python/notebook/main_python.ipynb)
 3. [Organizing data: pandas](https://github.com/ahiorth/CompEngineering/blob/master/chapters/pandas/notebook/main_pandas.ipynb)
